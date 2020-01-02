@@ -13,7 +13,7 @@ Page({
     seach: '',
     loading: false,
     val: 0,
-    title:"工程接受签证单",
+    top:"工程接受签证单",
     InfoList: [],
     item: [],
     pages: 1,

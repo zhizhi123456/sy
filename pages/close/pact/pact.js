@@ -13,7 +13,7 @@ Page({
     seach: '',
     loading: false,
     val: 0,
-    title:'工程结算签证明细',
+    top:'工程结算签证明细',
     InfoList: [],
     item: [],
     pages: 1,

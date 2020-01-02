@@ -14,7 +14,7 @@ Page({
     seach: '',
     loading: false,
     val: 0,
-    title:'领料单',
+    top:'领料单',
     InfoList: [],
     show_0: false,
     currentDate: new Date().getTime(),

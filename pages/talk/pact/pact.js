@@ -12,7 +12,7 @@ Page({
   data: {
     seach: '',
     loading: false,
-    title:'通话记录',
+    top:'通话记录',
     InfoList: [],
     item: [],
     pages: 1,

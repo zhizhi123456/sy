@@ -12,7 +12,7 @@ Page({
   data: {
     seach: '',
     loading: false,
-    title:'工程变更',
+    top:'工程变更',
     InfoList: [],
     item: [],
     pages: 1,

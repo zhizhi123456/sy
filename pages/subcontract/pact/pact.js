@@ -13,7 +13,7 @@ Page({
   data: {
     seach: '',
     loading: false,
-    title: '分包项目',
+    top: '分包项目',
     InfoList: [],
     show_0: false,
     currentDate: new Date().getTime(),
@@ -103,7 +103,7 @@ Page({
       info.departmentID = options.dep;
       info.chargemanName = options.userid;
       this.setData({
-        title: options.title + '的分包项目',
+        top: options.caption + '的分包项目',
         hadNew: 0,
         info,
         departmenttext: options.deptxt,

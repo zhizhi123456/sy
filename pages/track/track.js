@@ -19,7 +19,7 @@ Page({
     currentDate: new Date().getTime(),
     show_time: false,
     show_endtime: false,
-    title: '我的轨迹',
+    top: '我的轨迹',
   },
 
   /**
@@ -32,8 +32,8 @@ Page({
     })
     if (options.userid) {
       this.setData({
-        title: options.title + "的轨迹",
-        person: options.title
+        top: options.caption + "的轨迹",
+        person: options.caption
       })
       userID({
         UserName: options.userid

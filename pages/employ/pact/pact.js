@@ -17,7 +17,7 @@ Page({
     show: false,
     show_0: false,
     currentDate: new Date().getTime(),
-    title:"材料使用查询",
+    top:"材料使用查询",
     InfoList: [],
     MainSubproject: [],
     info: {},

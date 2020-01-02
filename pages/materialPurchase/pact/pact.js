@@ -16,7 +16,7 @@ Page({
     show: false,
     val: 0,
     currentDate: new Date().getTime(),
-    title: '材料采购查询',
+    top: '材料采购查询',
     InfoList: [],
     Supplier: [],
     info: {},

@@ -14,7 +14,7 @@ Page({
     seach: '',
     loading: false,
     val: 0,
-    title: "费用",
+    top: "费用",
     show_0: false,
     currentDate: new Date().getTime(),
     InfoList: [],
@@ -100,7 +100,7 @@ Page({
       info.departmentID = options.dep;
       info.chargemanName = options.userid;
       this.setData({
-        title: options.title + '的分包项目',
+        top: options.caption + '的分包项目',
         hadNew: 0,
         info,
         departmenttext: options.deptxt,

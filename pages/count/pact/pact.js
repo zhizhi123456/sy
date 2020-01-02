@@ -16,7 +16,7 @@ Page({
     seach: '',
     loading: false,
     val: 0,
-    title:'工程统计',
+    top:'工程统计',
     InfoList: [],
     show_0: false,
     currentDate: new Date().getTime(),

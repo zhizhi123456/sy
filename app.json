@@ -1,11 +1,6 @@
 {
   "pages": [
-      "pages/contracts/contracts",
-      "pages/aamenu/index1",
- 
-  
-   
-   
+    "pages/contracts/contracts",
     "pages/section/section",
     "pages/subcontract/pact/pact",
     "pages/section/section2",

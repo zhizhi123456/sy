@@ -13,7 +13,7 @@ Page({
     seach: '',
     loading: false,
     val: 0,
-    title: '框架协议',
+    top: '框架协议',
     InfoList: [],
     item: [],
     pages: 1,

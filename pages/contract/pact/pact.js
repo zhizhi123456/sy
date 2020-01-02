@@ -14,7 +14,7 @@ Page({
     seach: '',
     loading: false,
     val: 0,
-    title: '分包合同',
+    top: '分包合同',
     InfoList: [],
     show_0: false,
     currentDate: new Date().getTime(),
@@ -101,7 +101,7 @@ Page({
       info.departmentID = options.dep;
       info.createman = options.userid;
       this.setData({
-        title: options.title + '的分包合同',
+        top: options.caption + '的分包合同',
         hadNew: 0,
         info,
         departmenttext: options.deptxt,

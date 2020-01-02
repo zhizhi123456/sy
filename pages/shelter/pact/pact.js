@@ -12,7 +12,7 @@ Page({
   data: {
     seach: '',
     loading: false,
-    title: "隐蔽工程",
+    top: "隐蔽工程",
     currentDate: new Date().getTime(),
     InfoList: [],
     item: [],

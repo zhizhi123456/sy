@@ -12,7 +12,7 @@ Page({
   data: {
     seach: '',
     loading: false,
-    title:"工程管道验收",
+    top:"工程管道验收",
     InfoList: [],
     item: [],
     pages: 1,

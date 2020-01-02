@@ -2,13 +2,13 @@
 <view class="wraper">
     <view class="header d_header">
         <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
-        <view class="apply">{{title}}</view>
+        <view class="apply">{{caption}}</view>
     </view>
     <view class="m_main">
         <view class="m_column">
             <block wx:for="{{menu}}" wx:key="index">
                 <view class="m_listitem">
-                    <navigator url="{{item.path+'?userid=' + userid + '&title=' + title}}&dep={{dep}}&deptxt={{deptxt}}" hover-class="none">
+                    <navigator url="{{item.path+'?userid=' + userid + '&caption=' + caption}}&dep={{dep}}&deptxt={{deptxt}}" hover-class="none">
                         <icon wx:if="{{item.icon}}" class="iconfont {{item.icon}}"></icon>
                         <icon wx:else class="iconfont {{menuicon[index]}}"></icon>
                         <view>{{item.name}}</view>

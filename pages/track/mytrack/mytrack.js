@@ -47,7 +47,7 @@ Page({
             }],
             marker: [{
               id: 0,
-              height: 30,
+              height: 50,
               iconPath: '../../../img/begin.png',
               latitude: item[0].latitude,
               longitude: item[0].longitude,

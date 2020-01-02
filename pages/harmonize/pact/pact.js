@@ -14,7 +14,7 @@ Page({
     seach: '',
     loading: false,
     val: 0,
-    title: '工程协调',
+    top: '工程协调',
     InfoList: [],
     item: [],
     pages: 1,

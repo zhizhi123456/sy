@@ -13,7 +13,7 @@ Page({
   data: {
     seach: '',
     loading: false,
-    title:'工程进度',
+    top:'工程进度',
     show: false,
     show_1: false,
     show_2: false,

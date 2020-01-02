@@ -71,7 +71,7 @@ Page({
                     width: 20,
                     height: 20,
                     callout: { //在markers上展示地址名称
-                      content: options.title + '的位置:\n' + item[item.length - 1].addres,
+                      content: options.caption + '的位置:\n' + item[item.length - 1].addres,
                       color: '#fff',
                       display: 'ALWAYS',
                       padding: 5,

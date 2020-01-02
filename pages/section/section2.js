@@ -46,7 +46,7 @@ Page({
     ]
   },
   return () {
-    if (this.data.title == "我") {
+    if (this.data.caption == "我") {
       util.returnMenu();
     } else {
       wx.redirectTo({
@@ -61,7 +61,7 @@ Page({
     // console.log(options)
     if (options) {
       this.setData({
-        title: options.name,
+        caption: options.name,
         userid: options.userid,
         dep: options.dep,
         deptxt: options.deptxt
