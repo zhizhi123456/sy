@@ -151,6 +151,8 @@ Page({
         // console.log(res)
         if (res.code == 10000) {
           // app.globalData.userInfo = res.Item;
+          wx.setStorageSync("username",this.data.username)
+          wx.setStorageSync("password",this.data.password)
           wx.setStorageSync("myInfo", res.Item)
           // 跳转到个人中心
           wx.reLaunch({

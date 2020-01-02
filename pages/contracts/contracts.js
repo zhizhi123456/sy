@@ -194,7 +194,7 @@ Page({
 
         nametext: "部门管理",
         img: "icon-bumen.green4",
-        path: "/pages/management/people/people",
+        path: "/pages/section/section",
         control: true, //权限
         three: true
       },
