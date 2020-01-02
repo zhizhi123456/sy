@@ -13,14 +13,14 @@ Page({
     seach: '',
     loading: false,
     val: 0,
-    title:"工程接受签证单",
+    top:"工程接受签证单",
     InfoList: [],
     item: [],
     pages: 1,
   },
   // 返回
   return () {
-    util.returnMenu();
+    util.returnMenu2(this.data.options.id, this.data.options.title);
   },
   setSeach(e) {
     // console.log(e)
@@ -57,6 +57,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (options.id) {
+      this.setData({
+        options: options
+      })
+    }
     list = [];
     wx.showLoading({
       title: '加载中',

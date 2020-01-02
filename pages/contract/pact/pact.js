@@ -14,7 +14,7 @@ Page({
     seach: '',
     loading: false,
     val: 0,
-    title: '分包合同',
+    top: '分包合同',
     InfoList: [],
     show_0: false,
     currentDate: new Date().getTime(),
@@ -31,7 +31,7 @@ Page({
   // 返回
   return () {
     if (this.data.hadNew) {
-      util.returnMenu();
+      util.returnMenu2(this.data.options.id, this.data.options.title);
     } else {
       util.backprev();
     }
@@ -92,6 +92,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (options.id) {
+      this.setData({
+        options: options
+      })
+    }
     list = [];
     wx.showLoading({
       title: '加载中',
@@ -101,7 +106,7 @@ Page({
       info.departmentID = options.dep;
       info.createman = options.userid;
       this.setData({
-        title: options.title + '的分包合同',
+        top: options.caption + '的分包合同',
         hadNew: 0,
         info,
         departmenttext: options.deptxt,

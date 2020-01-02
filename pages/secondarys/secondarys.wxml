@@ -6,10 +6,10 @@
 <view class="list">
   <view class="box" wx:for="{{smalls}}" wx:key="index" bind:tap="showPopup" data-show="{{item.control}}">
     <view class="{{'blue2 masked'+ (item.control ? '':' show')+ (item.path?'':' show')}}">
-       <icon class="iconfont icon-mima"></icon>
+      <icon class="iconfont icon-mima"></icon>
     </view>
     <icon class="{{' icon iconfont '+ item.img + (item.control ?'':' c') }}"></icon>
     <text class="{{item.control ?'':'c'}}">{{item.nametext}}</text>
-    <navigator url="{{ item.control ?(item.path+'?menuId='+ item.menuId) : '#'}}"></navigator>
+    <navigator url="{{ item.control ?(item.path+'?menuId='+ item.menuId+'&id='+chuancan+'&title='+title) : '#'}}"></navigator>
   </view>
 </view>

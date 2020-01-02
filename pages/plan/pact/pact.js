@@ -13,7 +13,7 @@ Page({
   data: {
     seach: '',
     loading: false,
-    title:'工程进度',
+    top:'工程进度',
     show: false,
     show_1: false,
     show_2: false,
@@ -27,7 +27,7 @@ Page({
   },
   // 返回
   return () {
-    util.returnMenu();
+    util.returnMenu2(this.data.options.id, this.data.options.title);
   },
   setSeach(e) {
     // console.log(e)
@@ -64,6 +64,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (options.id) {
+      this.setData({
+        options: options
+      })
+    }
     if (app.globalData.CountItem) {
       this.setData({
         EngineerClass: app.globalData.EngineerClass,

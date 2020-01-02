@@ -16,7 +16,7 @@ Page({
     show: false,
     val: 0,
     currentDate: new Date().getTime(),
-    title: '材料采购查询',
+    top: '材料采购查询',
     InfoList: [],
     Supplier: [],
     info: {},
@@ -27,7 +27,7 @@ Page({
   },
   // 返回
   return () {
-    util.returnMenu();
+    util.returnMenu2(this.data.options.id, this.data.options.title);
   },
   setSeach(e) {
     // console.log(e)
@@ -64,6 +64,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (options.id) {
+      this.setData({
+        options: options
+      })
+    }
     list = [];
     if (app.globalData.CountItem) {
       this.setData({

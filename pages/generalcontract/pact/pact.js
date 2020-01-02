@@ -14,7 +14,7 @@ Page({
     seach: '',
     loading: false,
     val: 0,
-    title: '总包合同',
+    top: '总包合同',
     InfoList: [],
     show_0: false,
     currentDate: new Date().getTime(),
@@ -32,7 +32,7 @@ Page({
   },
   // 返回
   return () {
-    util.returnMenu();
+    util.returnMenu(1001);
   },
   setSeach(e) {
     // console.log(e)

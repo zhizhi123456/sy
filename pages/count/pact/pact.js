@@ -16,7 +16,7 @@ Page({
     seach: '',
     loading: false,
     val: 0,
-    title:'工程统计',
+    top:'工程统计',
     InfoList: [],
     show_0: false,
     currentDate: new Date().getTime(),
@@ -31,7 +31,7 @@ Page({
   },
   // 返回
   return () {
-    util.returnMenu();
+    util.returnMenu2(this.data.options.id, this.data.options.title);
   },
   setSeach(e) {
     // console.log(e)
@@ -144,6 +144,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (options.id) {
+      this.setData({
+        options: options
+      })
+    }
     list = [];
     if (app.globalData.CountItem) {
       this.setData({

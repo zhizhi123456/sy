@@ -14,7 +14,7 @@ Page({
     seach: '',
     loading: false,
     val: 0,
-    title:'领料单',
+    top:'领料单',
     InfoList: [],
     show_0: false,
     currentDate: new Date().getTime(),
@@ -28,7 +28,7 @@ Page({
   },
   // 返回
   return (e) {
-    util.returnMenu();
+    util.returnMenu2(this.data.options.id, this.data.options.title);
   },
   setSeach(e) {
     // console.log(e)
@@ -65,6 +65,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (options.id) {
+      this.setData({
+        options: options
+      })
+    }
     if (app.globalData.CountItem) {
       this.setData({
         totals: app.globalData.MainProject

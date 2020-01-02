@@ -7,7 +7,7 @@
             <navigator url="/pages/adopt/new/new" hover-class="none" class="fr newCreate">
                 新建
             </navigator>
-            <view class="apply">{{title}}</view>
+            <view class="apply">{{top}}</view>
         </view>
         <view class="seach">
             <icon class="iconfont icon-chaxun1 fl s-sort"></icon>

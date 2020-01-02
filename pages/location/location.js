@@ -36,12 +36,17 @@ Page({
     showmap: true
   },
   return () {
-    util.returnMenu();
+    util.returnMenu2(this.data.options.id, this.data.options.title);
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (options.id) {
+      this.setData({
+        options: options
+      })
+    }
     if (options.userid) {
       this.setData({
         hadNew: 0
@@ -71,7 +76,7 @@ Page({
                     width: 20,
                     height: 20,
                     callout: { //在markers上展示地址名称
-                      content: options.title + '的位置:\n' + item[item.length - 1].addres,
+                      content: options.caption + '的位置:\n' + item[item.length - 1].addres,
                       color: '#fff',
                       display: 'ALWAYS',
                       padding: 5,

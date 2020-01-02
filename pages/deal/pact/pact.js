@@ -13,14 +13,14 @@ Page({
     seach: '',
     loading: false,
     val: 0,
-    title: '框架协议',
+    top: '框架协议',
     InfoList: [],
     item: [],
     pages: 1,
   },
   // 返回
   return () {
-    util.returnMenu();
+    util.returnMenu(1001);
   },
   setSeach(e) {
     // console.log(e)

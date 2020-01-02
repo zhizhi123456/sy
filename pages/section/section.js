@@ -16,7 +16,7 @@ Page({
     activeKey: 0,
   },
   return () {
-    util.returnMenu();
+    util.returnMenu(1002);
   },
   onChange(e) {
     this.setData({

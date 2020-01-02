@@ -4,7 +4,7 @@
     <view class="header">
         <view class="title">
             <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
-            <view class="apply">{{title}}</view>
+            <view class="apply">{{top}}</view>
         </view>
         <view class="seach">
             <icon class="iconfont icon-sousuo fr" bindtap="seachInfo"></icon>

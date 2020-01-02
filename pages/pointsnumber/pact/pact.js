@@ -14,7 +14,7 @@ Page({
     item: [],
     seach: '',
     loading: false,
-    title: '分包编号申请',
+    top: '分包编号申请',
     currentDate: new Date().getTime(),
     pages: 1,
     InfoList: [],
@@ -27,7 +27,7 @@ Page({
   },
   // 返回
   return () {
-    util.returnMenu();
+    util.returnMenu(1001);
   },
   setSeach(e) {
     // console.log(e)

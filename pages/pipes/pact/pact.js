@@ -12,14 +12,14 @@ Page({
   data: {
     seach: '',
     loading: false,
-    title:"工程管道验收",
+    top:"工程管道验收",
     InfoList: [],
     item: [],
     pages: 1,
   },
   // 返回
   return () {
-    util.returnMenu();
+    util.returnMenu2(this.data.options.id, this.data.options.title);
   },
   setSeach(e) {
     // console.log(e)
@@ -56,6 +56,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (options.id) {
+      this.setData({
+        options: options
+      })
+    }
     list = [];
     wx.showLoading({
       title: '加载中',
