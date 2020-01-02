@@ -1,0 +1,87 @@
+<!-- pages/new/new.wxml -->
+<view class="wraper">
+    <view class="header d_header" wx:if="{{info.ID}}">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="editreturn"></icon>
+        <text class="fr newCreate" bindtap="editconfirm">确定</text>
+        <view class="apply">编辑月度考评</view>
+    </view>
+    <view class="header d_header" wx:else>
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="confirm">确定</text>
+        <view class="apply">新建月度考评</view>
+    </view>
+    <view class="main n_main">
+        <van-toast id="van-toast" />
+        <view class="check_item">
+            <view class="kind require">
+                <text>分包项目编号</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.subprojectcode?info.subprojectcode:'请选择'}}" bind:click="showPopup">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show }}" round position="bottom" bind:close="onClose">
+                <van-picker data-name="subprojectcode" show-toolbar columns="{{ sections }}" bind:cancel="onClose" bind:confirm="onConfirm" />
+            </van-popup>
+        </view>
+          <view class="check_item">
+            <view class="kind require">
+                <text>负责人</text>
+            </view>
+            <van-cell title="{{info.chargeman?info.chargeman:'请选择'}}" bind:click="showPopup1">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show1 }}" round position="bottom" bind:close="onClose1">
+                <van-picker data-name="chargeman" show-toolbar columns="{{ section1 }}" bind:cancel="onClose1" bind:confirm="onConfirm1" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <text class="kind">评分月份</text>
+            <van-cell title="{{info.scoremonth?info.scoremonth:'请选择'}}" is-link bind:click="showPopup_time" />
+            <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
+                <van-datetime-picker data-name="scoremonth" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <text class="kind">质量评分</text>
+            <van-cell-group>
+                <van-field data-name="qualityscore" value="{{info.qualityscore}}" placeholder="请输入" bind:blur="meetplaceblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">进度评分</text>
+            <van-cell-group>
+                <van-field data-name="progressscore" value="{{info.progressscore}}" placeholder="请输入" bind:blur="meetplaceblur" />
+            </van-cell-group>
+        </view> <view class="check_item">
+            <text class="kind">安全评分</text>
+            <van-cell-group>
+                <van-field data-name="safetyscore" value="{{info.safetyscore}}" placeholder="请输入" bind:blur="meetplaceblur" />
+            </van-cell-group>
+        </view> <view class="check_item">
+            <text class="kind">管理评分</text>
+            <van-cell-group>
+                <van-field data-name="managescore" value="{{info.managescore}}" placeholder="请输入" bind:blur="meetplaceblur" />
+            </van-cell-group>
+        </view> <view class="check_item">
+            <text class="kind">材料使用评分</text>
+            <van-cell-group>
+                <van-field data-name="materialusescore" value="{{info.materialusescore}}" placeholder="请输入" bind:blur="meetplaceblur" />
+            </van-cell-group>
+        </view>
+       
+        <!-- <view class="check_item">
+            <text class="kind">资料图片</text>
+            <van-cell title="请选择" is-link bind:click="showPopup_photo" />
+            <van-action-sheet show="{{ show_photo }}" actions="{{ check_photo }}" bind:cancel="onClose_photo" bind:click-overlay="onClose_photo" bind:select="onSelect_photo" cancel-text="取消" />
+            <view wx:if="{{upimg}}" class="datumimgbox">
+                <block wx:for="{{info.picurl}}" wx:key="{{index}}">
+                    <view class="upimgbox">
+                        <image src="{{item}}" bindtap="tap_pic" data-index="{{index}}" />
+                        <icon class="iconfont icon-jianhao-tianchong delimg" data-i="{{index}}" bindtap="delimg" />
+                    </view>
+                </block>
+            </view>
+        </view> -->
+    </view>
+</view>

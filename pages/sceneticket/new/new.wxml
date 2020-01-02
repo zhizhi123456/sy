@@ -1,0 +1,93 @@
+<!-- pages/new/new.wxml -->
+<view class="wraper">
+    <view class="header d_header" wx:if="{{info.ID}}">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="editreturn"></icon>
+        <text class="fr newCreate" bindtap="editconfirm">确定</text>
+        <view class="apply">编辑现场罚单</view>
+    </view>
+    <view class="header d_header" wx:else>
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="confirm">确定</text>
+        <view class="apply">新建现场罚单</view>
+    </view>
+    <view class="main n_main">
+        <van-toast id="van-toast" />
+        <view class="check_item">
+            <view class="kind require">
+                <text>项目id</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.ProjectID?info.ProjectID:'请选择'}}" bind:click="showPopup">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show }}" round position="bottom" bind:close="onClose">
+                <van-picker data-name="ProjectID" show-toolbar columns="{{section2}}" bind:cancel="onClose" bind:confirm="onConfirm" />
+           <!-- //firms  -->
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>检查人</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="Checkman" value="{{info.Checkman}}" placeholder="请填写检查人" bind:blur="subprojcectCodeblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">职位职称</text>
+            <van-cell title="{{info.Ranks?info.Ranks:'请选择'}}" is-link bind:click="showPopup_o" />
+            <van-popup show="{{show_o}}" round position="bottom" bind:close="onClose_o">
+                <van-picker data-name="Ranks" show-toolbar columns="{{ section1 }}" bind:cancel="onClose_o" bind:confirm="onConfirm_o" />
+            </van-popup>
+        </view>
+        
+        <view class="check_item">
+          <text class="kind">工地地址</text>
+            <van-cell-group>
+                <van-field data-name="Address" value="{{info.Address}}" placeholder="请输入" bind:blur="subprojcectCodeblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+          <text class="kind">当事人/单位</text>
+            <van-cell-group>
+                <van-field data-name="ClientManUnit" value="{{info.ClientManUnit}}" placeholder="请输入" bind:blur="subprojcectCodeblur" />
+            </van-cell-group>
+        </view>
+       
+        <view class="check_item">
+           <text class="kind">违规情况描述</text>
+            <van-cell-group>
+                <van-field data-name="Getoutofline" value="{{info.Getoutofline}}" placeholder="请输入" bind:blur="subprojcectCodeblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+           <text class="kind">罚款金额</text>
+            <van-cell-group>
+                <van-field data-name="FineAmount" value="{{info.FineAmount}}" placeholder="请输入" bind:blur="subprojcectCodeblur" />
+            </van-cell-group>
+        </view>
+      
+        <view class="check_item">
+            <text class="kind">罚款依据</text>
+            <van-cell-group>
+                <van-field data-name="FineAccording" value="{{info.FineAccording}}" placeholder="请输入" bind:blur="subprojcectCodeblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">资料图片</text>
+            <van-cell title="请选择" is-link bind:click="showPopup_photo" />
+            <van-action-sheet show="{{ show_photo }}" actions="{{ check_photo }}" bind:cancel="onClose_photo" bind:click-overlay="onClose_photo" bind:select="onSelect_photo" cancel-text="取消" />
+            <view wx:if="{{upimg}}" class="datumimgbox">
+                <block wx:for="{{info.API_Picurl}}" wx:key="index">
+                    <view class="upimgbox">
+                        <image src="{{item}}" bindtap="tap_pic" data-index="{{index}}"/>
+                        <icon class="iconfont icon-jianhao-tianchong delimg" data-i="{{index}}" bindtap="delimg"/>
+                    </view>
+                </block>
+            </view>
+        </view>
+    
+       
+    </view>
+</view>

@@ -1,0 +1,151 @@
+<!-- pages/new/new.wxml -->
+<view class="wraper">
+    <view class="header d_header" wx:if="{{info.ID}}">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="editreturn"></icon>
+        <text class="fr newCreate" bindtap="editconfirm">确定</text>
+        <view class="apply">编辑送货单</view>
+    </view>
+    <view class="header d_header" wx:else>
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="confirm">确定</text>
+        <view class="apply">新建送货单</view>
+    </view>
+    <view class="main n_main">
+        <van-toast id="van-toast" />
+        <view class="check_item">
+            <view class="kind require">
+                <text>对方公司</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.Company?info.Company:'请选择' }}" bind:click="showPopup">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show }}" round position="bottom" bind:close="onClose">
+                <van-picker data-name="Company" show-toolbar columns="{{ firms }}" bind:cancel="onClose" bind:confirm="onConfirm" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>送货单号</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="delievrycode" value="{{info.delievrycode}}" placeholder="请输入" bind:blur="receivemanphoneblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <view class="kind">
+                <text>项目或合同编号</text>
+            </view>
+            <van-cell title="{{info.projectcode?info.projectcode:'请选择'}}" is-link bind:click="showPopup_o" />
+            <van-popup show="{{show_o}}" round position="bottom" bind:close="onClose_o">
+                <van-picker data-name="projectcode" show-toolbar columns="{{ sections }}" bind:cancel="onClose_o" bind:confirm="onConfirm_o" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <view class="kind">
+                <text>送货地址</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="delieveryaddress" value="{{info.delieveryaddress}}" placeholder="请输入" bind:blur="receivemanphoneblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <view class="kind ">
+                <text>收货人手机号</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="receivemanphone" value="{{info.receivemanphone }}" placeholder="请输入" bind:blur="receivemanphoneblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <view class="kind ">
+                <text>备注</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="remark" value="{{info.remark }}" placeholder="请输入" bind:blur="receivemanphoneblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">图片</text>
+            <van-cell title="请选择" is-link bind:click="showPopup_photo" />
+            <van-action-sheet show="{{ show_photo }}" actions="{{ check_photo }}" bind:cancel="onClose_photo" bind:click-overlay="onClose_photo" bind:select="onSelect_photo" cancel-text="取消" />
+            <view wx:if="{{upimg}}" class="datumimgbox">
+                <block wx:for="{{info.API_Picurl}}" wx:key="index">
+                    <view class="upimgbox">
+                        <image src="{{item}}" bindtap="tap_pic" data-index="{{index}}" />
+                        <icon class="iconfont icon-jianhao-tianchong delimg" data-i="{{index}}" bindtap="delimg" />
+                    </view>
+                </block>
+            </view>
+        </view>
+        <block wx:if="{{!info.ID}}">
+            <view class="add_detail add_title">
+                <van-cell title="送货明细" icon="records" />
+                <icon class="iconfont icon-jia" bindtap="add_more"></icon>
+            </view>
+            <block wx:for="{{materials}}" wx:key="{{index}}" wx:if="{{materials.length}}">
+                <view class="add_detail detail_title">
+                    <van-cell title="送货明细{{item.num}}" icon="close" data-i="{{index}}" bindtap="reduce_detail" />
+                </view>
+                 <view class="check_item">
+                    <view class="kind require">
+                        <text>商品编号</text>
+                        <text class="required">*</text>
+                    </view>
+                    <van-cell title="{{item.goodscode?item.goodscode:'请选择'}}" bind:click="showPopup1">
+                        <icon class="iconfont icon-jiantou" />
+                    </van-cell>
+                    <van-popup show="{{ show1 }}" round position="bottom" bind:close="onClose1">
+                        <van-picker data-name="goodscode" show-toolbar columns="{{ section1 }}" bind:cancel="onClose1" bind:confirm="onConfirm1" data-name='goodscode'data-i='{{index}}' />
+                    </van-popup>
+                </view>
+                <view class="check_item">
+                    <view class="kind require">
+                        <text>商品名称</text>
+                        <text class="required">*</text>
+                    </view>
+                    <van-cell-group>
+                        <van-field value="{{item.goodsname}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' data-name='goodsname' disabled  />
+                    </van-cell-group>
+                </view>
+                <view class="check_item">
+                    <view class="kind require">
+                        <text>规格</text>
+                        <text class="required">*</text>
+                    </view>
+                    <van-cell-group>
+                        <van-field value="{{item.specifications}}" placeholder="请输入" bind:blur="getSize" data-i='{{index}}' data-name='specifications' disabled />
+                    </van-cell-group>
+                </view>
+                <view class="check_item">
+                    <view class="kind require">
+                        <text>单位</text>
+                        <text class="required">*</text>
+                    </view>
+                    <van-cell-group>
+                        <van-field value="{{item.unit}}" placeholder="请输入" bind:blur="getUnit" data-i='{{index}}' data-name='unit' />
+                    </van-cell-group>
+                </view>
+                <view class="check_item">
+                    <view class="kind require">
+                        <text>数量</text>
+                        <text class="required">*</text>
+                    </view>
+                    <van-cell-group>
+                        <van-field type="number" value="{{item.quantity}}" placeholder="请输入数字" bind:blur="getQuantity" data-i='{{index}}' data-name='quantity' />
+                    </van-cell-group>
+                </view>
+                <view class="check_item">
+                    <view class="kind require">
+                        <text>备注</text>
+                        <text class="required">*</text>
+                    </view>
+                    <van-cell-group>
+                        <van-field value="{{item.demo}}" placeholder="请输入" bind:blur="getRecord" data-i='{{index}}' data-name='demo' />
+                    </van-cell-group>
+                </view>
+            </block>
+        </block>
+    </view>
+</view>

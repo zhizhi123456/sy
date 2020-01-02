@@ -1,0 +1,296 @@
+<!-- pages/detail/detail.wxml -->
+<view wx:if="{{info}}">
+    <view class="header d_header">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="delete">删除</text>
+        <view class="apply">资料详情</view>
+    </view>
+    <view class="card">
+        <van-card title="{{info.projectcode}}" tag="资料详情" />
+    </view>
+    <view class="main_nav">
+        <van-tabs active="{{table}}">
+            <van-tab title="详细资料" name="a">
+                <view class="content">
+                    <view class="c_item">
+                        <view class="kind">工程名称</view>
+                        <view class="check">{{info.projectcode}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">结构类型</view>
+                        <view class="check">{{info.structureType}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">层数</view>
+                        <view class="check">{{info.numberOfPlies}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">施工单位</view>
+                        <view class="check">{{info.constructionOrganization}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">技术部门负责人</view>
+                        <view class="check">{{info.skillCheckMan}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">质量部门负责人</view>
+                        <view class="check">{{info.qualityCheckMan}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">分包单位</view>
+                        <view class="check">{{info.subcontractor }}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">分包单位负责人</view>
+                        <view class="check">{{info.subcontractorCheckMan}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">分包技术负责人</view>
+                        <view class="check">{{info.subskillCheckMan}}</view>
+                    </view>
+                    <van-divider contentPosition="center">验收意见</van-divider>
+                    <view class="c_item">
+                        <view class="kind">智能建筑分部工程验收结论汇总</view>
+                        <view class="check">{{info.acceptanceOfWorksIdea}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">智能建筑工程性能检测评分表</view>
+                        <view class="check">{{info.performanceTestIdea}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">智能建筑工程质量记录评分表</view>
+                        <view class="check">{{info.qualityRecordsIdea }}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">智能建筑工程尺寸偏差及限值实测评分表</view>
+                        <view class="check">{{info.offSizeIdea}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">智能建筑工程观感质量评分表</view>
+                        <view class="check">{{info.appearanceQualityIdea}}</view>
+                    </view>
+                    <van-divider contentPosition="center">验收单位</van-divider>
+                    <view class="c_item">
+                        <view class="kind">分包单位</view>
+                        <view class="check">{{info.subcontractorsShall}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">项目经理</view>
+                        <view class="check">{{info.subcontractorsShallCheckMan}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">时间</view>
+                        <view class="check">{{info.subcontractorsShallDate}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">施工单位</view>
+                        <view class="check">{{info.Constructionunit }}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">项目经理</view>
+                        <view class="check">{{info.ConstructionunitCheckMan}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">时间</view>
+                        <view class="check">{{info.ConstructionunitDate}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">建设单位</view>
+                        <view class="check">{{info.Developerunit}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">项目负责人</view>
+                        <view class="check">{{info.DeveloperunitCheckMan}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">时间</view>
+                        <view class="check">{{info.DeveloperunitDate}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">设计单位</view>
+                        <view class="check">{{info.architect }}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">项目负责人</view>
+                        <view class="check">{{info.architectCheckMan}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">时间</view>
+                        <view class="check">{{info.Date}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">监理单位</view>
+                        <view class="check">{{info.supervisionunit}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">总监理工程师</view>
+                        <view class="check">{{info.supervisionunitCheckMan}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">时间</view>
+                        <view class="check">{{info.supervisionunitDate}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">创建人</view>
+                        <view class="check">{{info.createman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">创建时间</view>
+                        <view class="check">{{info.createtime}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">修改人</view>
+                        <view class="check">{{info.updateman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">修改时间</view>
+                        <view class="check">{{info.updatetime}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">当前步骤名称</view>
+                        <view class="check">{{info.CurStepName}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">当前处理人</view>
+                        <view class="check">{{info.CurDealer}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">步骤是否完成</view>
+                        <view class="check">{{info.IfWfComplete}}</view>
+                    </view>
+                    <!-- <view class="c_item">
+                        <view class="kind">图片</view>
+                        <view wx:if="{{info.picurl}}" class="detpic_show">
+                            <block wx:for="{{info.picurl}}" wx:key="index">
+                                <image src="{{item}}" bindtap="tap_pic" data-index="{{index}}" binderror="defaultimg" />
+                            </block>
+                        </view>
+                    </view> -->
+                </view>
+            </van-tab>
+            <van-tab title="动态" name="b">
+                <block wx:if="{{info.formid}}">
+                    <van-cell title="动态({{Workstate}})" />
+                    <van-steps steps="{{ steps }}" active="{{ active }}" direction="vertical" />
+                </block>
+                <view class="dynamic_state" wx:else>暂无动态</view>
+            </van-tab>
+            <van-tab title="分项工程" name="c">
+                <!-- <van-cell title="聚合搜索">
+                    <icon class="iconfont icon-sousuo" bindtap="change"></icon>
+                </van-cell> -->
+                <van-cell title="分项工程({{material_list.length}})" bindtap="addndlink">
+                    <icon class="iconfont icon-icon-test"></icon>
+                </van-cell>
+                <block wx:for="{{material_list}}" wx:key="index">
+                    <view class="material">
+                        <navigator url="/pages/building/detaillink/detaillink?detailid={{item.ID}}" hover-class="none">
+                            <!-- <view>
+                                <text class="m_caption">{{item.losematerialid}}</text>
+                            </view> -->
+                            <view class="m_item">
+                                <text class="m_info">分项工程名称</text>
+                                <text>{{item.name}}</text>
+                            </view>
+                            <view class="m_item">
+                                <text class="m_info">检验批数</text>
+                                <text>{{item.checkoutNum}}</text>
+                            </view>
+                            <view class="m_item">
+                                <text class="m_info">验收意见</text>
+                                <text>{{item.Idea}}</text>
+                            </view>
+                        </navigator>
+                    </view>
+                </block>
+            </van-tab>
+        </van-tabs>
+    </view>
+    <view class="footer">
+        <view bindtap="sendback" wx:if="{{info.formid}}">
+            <icon class="iconfont icon-wj-thwj"></icon>
+            <text>退回上步</text>
+        </view>
+        <view>
+            <navigator url="/pages/building/new/new?id={{info.ID}}" hover-class="none">
+                <icon class="iconfont icon-bianji"></icon>
+                <text>编辑</text>
+            </navigator>
+        </view>
+        <view bindtap="putin" wx:if="{{isnext}}">
+            <icon class="iconfont icon-tijiao"></icon>
+            <text>提交下步</text>
+        </view>
+    </view>
+    <van-popup show="{{ show }}" bind:close="onClose" position="right" overlay="{{ true }}" custom-class="pullpo" bind:click-overlay="onClose">
+        <van-toast id="van-toast" />
+        <view class="seachif scroll-view" scroll-y="true">
+            <view class="main n_main check">
+                <!-- <view class="check_item">
+                        <text class="kind">送货单ID</text>
+                        <van-cell-group>
+                            <van-field data-name="buildingAcceptanceId" value="{{small.buildingAcceptanceId}}" placeholder="请输入" bind:blur="meetplaceblur" />
+                        </van-cell-group>
+                    </view> -->
+                <view class="check_item">
+                    <text class="kind">商品编号</text>
+                    <van-cell-group>
+                        <van-field data-name="goodscode" value="{{small.goodscode}}" placeholder="请输入" bind:blur="meetplaceblur" />
+                    </van-cell-group>
+                </view>
+                <view class="check_item">
+                    <text class="kind">商品名称</text>
+                    <van-cell-group>
+                        <van-field data-name="goodsname" value="{{small.goodsname}}" placeholder="请输入" bind:blur="meetplaceblur" />
+                    </van-cell-group>
+                </view>
+                <view class="check_item">
+                    <text class="kind">规格</text>
+                    <van-cell-group>
+                        <van-field data-name="specifications" value="{{small.specifications}}" placeholder="请输入" bind:blur="meetplaceblur" />
+                    </van-cell-group>
+                </view>
+                <view class="check_item">
+                    <text class="kind">单位</text>
+                    <van-cell-group>
+                        <van-field data-name="unit" value="{{small.unit}}" placeholder="请输入" bind:blur="meetplaceblur" />
+                    </van-cell-group>
+                </view>
+                <view class="check_item">
+                    <text class="kind">数量</text>
+                    <van-cell-group>
+                        <van-field data-name="quantity" value="{{small.quantity}}" placeholder="请输入" bind:blur="meetplaceblur" />
+                    </van-cell-group>
+                </view>
+                <view class="check_item">
+                    <text class="kind">备注</text>
+                    <van-cell-group>
+                        <van-field data-name="demo" value="{{small.demo}}" placeholder="请输入" bind:blur="meetplaceblur" />
+                    </van-cell-group>
+                </view>
+                <view class="check_item">
+                    <view class="kind">
+                        <text>开始时间</text>
+                    </view>
+                    <van-cell title="{{small.createtime}}" is-link bind:click="showPopup_time" class="time1" />
+                    <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
+                        <van-datetime-picker data-name="createtime" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
+                    </van-popup>
+                </view>
+                <view class="check_item">
+                    <view class="kind">
+                        <text>结束时间</text>
+                    </view>
+                    <van-cell title="{{small.updatetime?small.updatetime:'请选择'}}" is-link bind:click="showPopup_endtime" class="time1" />
+                    <van-popup show="{{ show_endtime }}" round position="bottom" bind:close="onClose_endtime">
+                        <van-datetime-picker data-name="updatetime" value="{{ currentDate1 }}" bind:cancel="onClose_endtime" bind:confirm="onConfirm_endtime" />
+                    </van-popup>
+                </view>
+                <view class="check_item check2">
+                    <text bind:tap="seachqur">确认</text>
+                    <text bind:tap="onClose">取消</text>
+                </view>
+            </view>
+        </view>
+    </van-popup>
+</view>

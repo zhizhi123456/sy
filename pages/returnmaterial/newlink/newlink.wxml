@@ -1,0 +1,79 @@
+<!-- pages/bill/newlink/newlink.wxml -->
+<view class="wraper">
+    <view class="header d_header" wx:if="{{materials[0].ID}}">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="linkreturn"></icon>
+        <text class="fr newCreate" bindtap="linkconfirm">确定</text>
+        <view class="apply">编辑退料单材料明细</view>
+    </view>
+    <view class="header d_header" wx:else>
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="confirm">确定</text>
+        <view class="apply">新建退料单材料明细</view>
+    </view>
+    <view class="main n_main">
+         <van-toast id="van-toast" />
+        <!-- <view class="check_item">
+            <text class="kind">退料单名称</text>
+            <van-cell-group>
+                <van-field value="{{materials[0].losematerialid}}" placeholder="请输入" bind:blur="getgcode" data-name='goodscode' />
+            </van-cell-group>
+        </view> -->
+        <!-- <view class="check_item">
+            <view class="kind require">
+                <text>商品编号</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field value="{{materials[0].goodscode}}" placeholder="请输入" bind:blur="getgcode" data-name='goodscode' />
+            </van-cell-group>
+        </view> -->
+          <view class="check_item">
+                    <view class="kind require">
+                        <text>商品编号</text>
+                        <text class="required">*</text>
+                    </view>
+                    <van-cell title="{{materials[0].goodscode?materials[0].goodscode:'请选择'}}" bind:click="showPopup1">
+                        <icon class="iconfont icon-jiantou" />
+                    </van-cell>
+                    <van-popup show="{{ show1 }}" round position="bottom" bind:close="onClose1">
+                        <van-picker data-name="goodscode" show-toolbar columns="{{ section1 }}" bind:cancel="onClose1" bind:confirm="onConfirm1" data-name='goodscode'data-i='{{index}}' />
+                    </van-popup>
+                </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>商品名称</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field value="{{materials[0].goodsname}}" placeholder="请输入" bind:blur="getgname" data-name='goodsname' disabled />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">规格</text>
+            <van-cell-group>
+                <van-field value="{{materials[0].specifications}}" placeholder="请输入" bind:blur="getSize" data-name='specifications' disabled />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">单位</text>
+            <van-cell-group>
+                <van-field value="{{materials[0].unit}}" placeholder="请输入" bind:blur="getUnit" data-name='unit' />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>数量</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field type="number" value="{{materials[0].quantity}}" placeholder="请输入数字" bind:blur="getQuantity" data-name='quantity' />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">备注</text>
+            <van-cell-group>
+                <van-field value="{{materials[0].demo}}" placeholder="请输入" bind:blur="getRecord" data-name='demo' />
+            </van-cell-group>
+        </view>
+    </view>
+</view>

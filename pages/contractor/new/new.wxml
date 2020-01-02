@@ -1,0 +1,59 @@
+<!-- pages/new/new.wxml -->
+<view class="wraper">
+    <view class="header d_header" wx:if="{{info.ID}}">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="editreturn"></icon>
+        <text class="fr newCreate" bindtap="editconfirm">确定</text>
+        <view class="apply">编辑工程队</view>
+    </view>
+    <view class="header d_header" wx:else>
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="confirm">确定</text>
+        <view class="apply">新建工程队</view>
+    </view>
+    <view class="main n_main">
+        <van-toast id="van-toast" />
+           <view class="check_item">
+            <text class="kind">施工队名称</text>
+            <van-cell-group>
+                <van-field data-name="ConstructionName" value="{{info.ConstructionName}}" placeholder="请输入" bind:blur="projectcodelur" />
+            </van-cell-group>
+        </view>
+          <view class="check_item">
+            <view class="kind require">
+                <text>所属公司</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.Companytitle?info.Companytitle:'请选择'}}" bind:click="showPopup1">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show_nature1 }}" round position="bottom" bind:close="onClose1">
+                <van-picker data-name="Companytitle" show-toolbar columns="{{section2}}" bind:cancel="onClose1" bind:confirm="onConfirm1" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <text class="kind">公司地址</text>
+            <van-cell-group>
+                <van-field data-name="Address" value="{{info.Address}}" placeholder="请输入" bind:blur="projectcodelur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">主要联系人</text>
+            <van-cell-group>
+                <van-field data-name="chiefcontactman" value="{{info.chiefcontactman}}" placeholder="请输入" bind:blur="projectcodelur" />
+            </van-cell-group>
+        </view>
+      
+        <view class="check_item">
+            <text class="kind">联系方式</text>
+            <van-cell-group>
+                <van-field data-name="contactway" value="{{info.contactway}}" placeholder="请输入" bind:blur="projectcodelur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">简介</text>
+            <van-cell-group>
+                <van-field data-name="intro" value="{{info.intro}}" placeholder="请输入" bind:blur="projectcodelur" />
+            </van-cell-group>
+        </view>
+    </view>
+</view>

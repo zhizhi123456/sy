@@ -1,0 +1,100 @@
+<!-- textages/textact/textact.wxml -->
+<view class="wraper">
+    <!-- 头部 -->
+    <view class="header">
+        <view class="title">
+            <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
+            <navigator url="/pages/security/new/new" hover-class="none" class="fr newCreate">
+                新建
+            </navigator>
+            <view class="apply">
+                <van-dropdown-menu active-color="#339AFF">
+                    <van-dropdown-item value="{{val}}" options="{{pact}}" />
+                </van-dropdown-menu>
+            </view>
+        </view>
+        <view class="seach">
+            <icon class="iconfont icon-fuxuananniu fl s-sort" bindtap="showgroup"></icon>
+            <icon class="iconfont icon-sousuo fr" bindtap="seachInfo"></icon>
+            <view class="data_list">
+                <input value="{{seach}}" bindblur="setSeach" />
+                <view class="number" wx:if="{{!seach}}">
+                    <icon class="iconfont icon-sousuo"></icon>
+                    <text wx:if="{{InfoList.length}}">共{{InfoList.length}}条</text>
+                    <text wx:else>搜索</text>
+                </view>
+            </view>
+            <!-- <van-popup show="{{ show }}" bind:close="onClose" position="right" custom-style="height: 100vh;color:#333">
+                <view class="seach_item">
+                    <van-cell-group>
+                        <van-field value="{{info.makecontactdate}}" placeholder="请选择" bind:focus="showPopup_time" label="签订日期" />
+                    </van-cell-group>
+                    <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
+                        <van-picker data-name="makecontactdate" show-toolbar columns="{{ Times }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
+                    </van-popup>
+                </view>
+                <view class="seach_item">
+                    <van-cell-group>
+                        <van-field value="{{info.supplier}}" placeholder="请选择" bind:focus="showPopup_0" label="供应商" />
+                    </van-cell-group>
+                    <van-popup show="{{ show_0 }}" round position="bottom" bind:close="onClose_0">
+                        <van-picker data-name="supplier" show-toolbar columns="{{ Supplier }}" bind:cancel="onClose_0" bind:confirm="onConfirm_0" />
+                    </van-popup>
+                </view>
+                <view class="seach_item">
+                    <van-cell-group>
+                        <van-field data-name="purchasecontactCode" value="{{info.purchasecontactCode}}" placeholder="请输入" bind:blur="purchasecontactCodeblur" label="材料采购编号" />
+                    </van-cell-group>
+                </view>
+                <view class="checkkind">
+                    <text bindtap="onClose">取消</text>
+                    <text bindtap="onConfirm_seach">确定</text>
+                </view>
+            </van-popup> -->
+        </view>
+    </view>
+    <view class="main">
+        <view class="list" wx:for="{{InfoList}}" wx:key="{{index}}">
+            <navigator url="/pages/security/detail/detail?id={{item.ID}}" hover-class="none">
+                <!-- <view>
+                    <text class="caption">{{item.purchasecontactCode}}</text>
+                </view> -->
+                <view>
+                    <text class="info">工程名称</text>
+                    <text>{{item.projectName}}</text>
+                </view>
+                <view>
+                    <text class="info">分项工程名称</text>
+                    <text>{{item.subentryProjectName}}</text>
+                </view>
+                <view>
+                    <text class="info">项目经理</text>
+                    <text>{{item.itemManage}}</text>
+                </view>
+                <view>
+                    <text class="info">施工单位</text>
+                    <text>{{item.constructCompany}}</text>
+                </view>
+                <view>
+                    <text class="info">验收部位</text>
+                    <text>{{item.checkPart}}</text>
+                </view>
+                <view>
+                    <text class="info">施工执行标准</text>
+                    <text>{{item.number}}</text>
+                </view>
+                <view>
+                    <text class="info">创建人</text>
+                    <text>{{item.createman}}</text>
+                </view>
+                <view>
+                    <text class="info">创建时间</text>
+                    <text>{{item.createtime}}</text>
+                </view>
+            </navigator>
+        </view>
+        <view wx:if="{{loading&&InfoList.length}}" class="end">加载中...</view>
+        <view wx:if="{{!loading&&InfoList.length}}" class="end">已经到底了</view>
+        <view class="no_more" wx:if="{{!InfoList.length}}">暂无内容</view>
+    </view>
+</view>

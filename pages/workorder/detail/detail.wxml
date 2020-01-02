@@ -1,0 +1,100 @@
+<!-- pages/detail/detail.wxml -->
+<view wx:if="{{info}}">
+    <view class="header d_header">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="delete">删除</text>
+        <view class="apply">资料详情</view>
+    </view>
+    <view class="card">
+        <van-card title="{{info.meetname}}" tag="资料详情" />
+    </view>
+    <view class="main_nav">
+        <van-tabs active="a">
+            <van-tab title="详细资料" name="a">
+                <view class="content">
+                    <view class="c_item">
+                        <view class="kind">工程编号及名称</view>
+                        <view class="check">{{info.projectcode}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">工程建设地点</view>
+                        <view class="check">{{info.site}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">建设单位</view>
+                        <view class="check">{{info.Developerunit}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">施工单位</view>
+                        <view class="check">{{info.Constructionunit}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">计划停(复)工日期</view>
+                        <view class="check">{{info.planDate}}</view>
+                    </view>
+                      <view class="c_item">
+                        <view class="kind">实际停(复)工日期</view>
+                        <view class="check">{{info.practicalDate}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">停(复)工的主要问题</view>
+                        <view class="check">{{info.issue}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">拟采取的措施和建议</view>
+                        <view class="check">{{info.suggest}}</view>
+                    </view>
+                     <view class="c_item">
+                        <view class="kind">主送人</view>
+                        <view class="check">{{info.readpeople}}</view>
+                    </view>
+                     <view class="c_item">
+                        <view class="kind">抄送人</view>
+                        <view class="check">{{info.copypeople}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">填报单位</view>
+                        <view class="check">{{info.Companytitle}}</view>
+                    </view>
+                       <view class="c_item">
+                        <view class="kind">创建人</view>
+                        <view class="check">{{info.createman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">创建时间</view>
+                        <view class="check">{{info.createtime}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">修改人</view>
+                        <view class="check">{{info.updateman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">修改时间</view>
+                        <view class="check">{{info.updatetime}}</view>
+                    </view>
+
+<!-- 
+                    <view class="c_item">
+                        <view class="kind">资料图片</view>
+                        <view wx:if="{{info.picurl}}" class="detpic_show">
+                            <block wx:for="{{info.picurl}}" wx:key="index">
+                                <image src="{{item}}" bindtap="tap_pic" data-index="{{index}}" binderror="defaultimg" />
+                            </block>
+                        </view>
+                    </view> -->
+                </view>
+            </van-tab>
+            <van-tab title="附件" name="c">
+                <van-cell title="文件" is-link bind:click="up_photo" />
+            </van-tab>
+        </van-tabs>
+    </view>
+    <view class="footer">
+        <view>
+            <navigator url="/pages/workorder/new/new?id={{info.ID}}" hover-class="none">
+                <icon class="iconfont icon-bianji"></icon>
+                <text>编辑</text>
+            </navigator>
+        </view>
+    </view>
+</view>

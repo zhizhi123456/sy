@@ -1,0 +1,66 @@
+<!-- pages/detail/detail.wxml -->
+<view wx:if="{{info}}">
+    <view class="header d_header">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="delete">删除</text>
+        <view class="apply">资料详情</view>
+    </view>
+    <view class="card">
+        <van-card title="{{info.meetname}}" tag="资料详情" />
+    </view>
+    <view class="main_nav">
+        <van-tabs active="a">
+            <van-tab title="详细资料" name="a">
+                <view class="content">
+                    <view class="c_item">
+                        <view class="kind">存货编码</view>
+                        <view class="check">{{info.goodscode}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">存货代码</view>
+                        <view class="check">{{info.goodsothercode}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">存货名称</view>
+                        <view class="check">{{info.goodsname}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">规格型号</view>
+                        <view class="check">{{info.specifications}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">所属分类码</view>
+                        <view class="check">{{info.goodsclasscode}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">数量</view>
+                        <view class="check">{{info.quantity}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">单价</view>
+                        <view class="check">{{info.unitprice}}</view>
+                    </view>
+                    <!-- <view class="c_item">
+                        <view class="kind">资料图片</view>
+                        <view wx:if="{{info.picurl}}" class="detpic_show">
+                            <block wx:for="{{info.picurl}}" wx:key="index">
+                                <image src="{{item}}" bindtap="tap_pic" data-index="{{index}}" binderror="defaultimg" />
+                            </block>
+                        </view>
+                    </view> -->
+                </view>
+            </van-tab>
+            <van-tab title="附件" name="c">
+                <van-cell title="文件" is-link bind:click="up_photo" />
+            </van-tab>
+        </van-tabs>
+    </view>
+    <view class="footer">
+        <view>
+            <navigator url="/pages/material/new/new?id={{info.ID}}" hover-class="none">
+                <icon class="iconfont icon-bianji"></icon>
+                <text>编辑</text>
+            </navigator>
+        </view>
+    </view>
+</view>

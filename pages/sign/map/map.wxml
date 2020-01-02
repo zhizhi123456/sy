@@ -1,0 +1,15 @@
+<view class="anew">
+     <icon class="iconfont icon-map" ></icon>
+     <text class="">{{address}}</text>
+     <van-button type="default" size="mini" class="btn fr" custom-class="btn"bind:tap="anew">重新定位</van-button> 
+</view>
+<map id="myMap" style="width: 100%; height: 400rpx;" 
+longitude="{{longitude}}" 
+latitude="{{latitude}}"
+ scale='16' 
+ subkey="EL5BZ-FNQK4-KPBUO-XSOS5-K2P5J-URF7O"
+ markers="{{markers}}"
+  show-location="true"></map>
+  <view class="box" bind:tap="qiandao">
+ 签到
+  </view>

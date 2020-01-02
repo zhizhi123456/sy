@@ -1,0 +1,218 @@
+<!-- pages/detail/detail.wxml -->
+<view wx:if="{{info}}">
+    <view class="header d_header">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="delete">删除</text>
+        <view class="apply">资料详情</view>
+    </view>
+    <view class="card">
+        <van-card title="{{info.projectname}}" tag="资料详情" />
+    </view>
+    <view class="main_nav">
+        <van-tabs active="a">
+            <van-tab title="详细资料" name="a">
+                <view class="content">
+                    <view class="c_item">
+                        <view class="kind">报建编号</view>
+                        <view class="check">{{info.reportbuildnumber}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">任务单编号</view>
+                        <view class="check">{{info.tasknumber}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">项目名称</view>
+                        <view class="check">{{info.projectname}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">运营商</view>
+                        <view class="check">{{info.operators}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">综合协调单位</view>
+                        <view class="check">{{info.intecoordinationunit}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">线缆实施单位</view>
+                        <view class="check">{{info.cableputintounit}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">监理单位</view>
+                        <view class="check">{{info.supervisorunit}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">所属区</view>
+                        <view class="check">{{info.area}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">建筑面积</view>
+                        <view class="check">{{info.buildarea}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">任务单下发时间</view>
+                        <view class="check">{{info.orderissueddate}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">计划开工时间</view>
+                        <view class="check">{{info.planstartdate}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">计划完工时间</view>
+                        <view class="check">{{info.planenddate}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">施工状态</view>
+                        <view class="check">{{info.contructstate}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">设计状态</view>
+                        <view class="check">{{info.designstate}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">设计人员</view>
+                        <view class="check">{{info.designman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">现场初步勘察时间</view>
+                        <view class="check">{{info.onsiteinitialcheckdate}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">设计委托时间</view>
+                        <view class="check">{{info.designentrustdate}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">设计会审时间</view>
+                        <view class="check">{{info.designjointhearingdate}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">会审提交日期</view>
+                        <view class="check">{{info.jointhearsubdate}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">管道设计出版日期</view>
+                        <view class="check">{{info.pipedesignpublishdate}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">线路设计出版日期</view>
+                        <view class="check">{{info.linedesignpublishdate}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">设计计划备注</view>
+                        <view class="check">{{info.designplanmark}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">室内管道完成比例</view>
+                        <view class="check">{{info.indoorpipefinishratio}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">室外管道完成比例</view>
+                        <view class="check">{{info.outdoorpipefinishratio}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">项目联系人</view>
+                        <view class="check">{{info.projectcontactman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">线路查勘完成时间</view>
+                        <view class="check">{{info.circuitcheckfinishdate}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">管道设计评审时间</view>
+                        <view class="check">{{info.pipedesignreviewdate}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">管道设计完成时间</view>
+                        <view class="check">{{info.pipedesignfinishdate}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">管道开工时间</view>
+                        <view class="check">{{info.pipestartdate}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">管道完工时间</view>
+                        <view class="check">{{info.pipefinishdate}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">管道初检时间</view>
+                        <view class="check">{{info.pipefirstcheck}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">验收单盖章时间</view>
+                        <view class="check">{{info.checkstampdate}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">平移会召开时间</view>
+                        <view class="check">{{info.panmeetingstartdate}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">平移工作联系人</view>
+                        <view class="check">{{info.panworkcontactman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">平移完成率</view>
+                        <view class="check">{{info.pancompletionrate}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">平移报备日期</view>
+                        <view class="check">{{info.panreportdate}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">线路完成率</view>
+                        <view class="check">{{info.linefinrate}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">东方有线完成率</view>
+                        <view class="check">{{info.easterncablefinishrate}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">线路设计完成时间</view>
+                        <view class="check">{{info.linedesignfindate}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">线路开工时间</view>
+                        <view class="check">{{info.linestartdate}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">地址</view>
+                        <view class="check">{{info.address}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">当面需解决问题</view>
+                        <view class="check">{{info.currentquestion}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">线路拆除时间</view>
+                        <view class="check">{{info.lineteardown}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">创建人</view>
+                        <view class="check">{{info.createman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">创建时间</view>
+                        <view class="check">{{info.createtime}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">修改人</view>
+                        <view class="check">{{info.updateman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">修改时间</view>
+                        <view class="check">{{info.updatetime}}</view>
+                    </view>
+                </view>
+            </van-tab>
+            <van-tab title="附件" name="c">
+                <van-cell title="文件" is-link bind:click="up_photo" />
+            </van-tab>
+        </van-tabs>
+    </view>
+    <view class="footer">
+        <view>
+            <navigator url="/pages/ledger/new/new?id={{info.ID}}" hover-class="none">
+                <icon class="iconfont icon-bianji"></icon>
+                <text>编辑</text>
+            </navigator>
+        </view>
+    </view>
+</view>

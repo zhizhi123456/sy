@@ -1,0 +1,101 @@
+<!-- pages/sceneticket.wxml -->
+<view wx:if="{{info}}">
+    <view class="header d_header">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="delete">删除</text>
+        <view class="apply">资料详情</view>
+    </view>
+    <view class="card">
+        <van-card title="{{info.ProjectID}}" tag="资料详情" />
+    </view>
+    <view class="main_nav">
+        <van-tabs active="a">
+            <van-tab title="详细资料" name="a">
+                <view class="content">
+                    <view class="c_item">
+                        <view class="kind">项目id</view>
+                        <view class="check">{{info.ProjectID}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">检查人</view>
+                        <view class="check">{{info.Checkman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">职位职称</view>
+                        <view class="check">{{info.Ranks}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">工地地址</view>
+                        <view class="check">{{info.Address}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">当事人/单位</view>
+                        <view class="check">{{info.ClientManUnit}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">违规情况描述</view>
+                        <view class="check">{{info.Getoutofline}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">罚款金额</view>
+                        <view class="check">{{info.FineAmount}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">罚款依据</view>
+                        <view class="check">{{info.FineAccording}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">资料图片</view>
+                        <view wx:if="{{info.API_Picurl}}" class="detpic_show">
+                            <block wx:for="{{info.API_Picurl}}" wx:key="index">
+                                <image src="{{item}}" bindtap="tap_pic" data-index="{{index}}" binderror="defaultimg" />
+                            </block>
+                        </view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">创建人</view>
+                        <view class="check">{{info.createman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">创建时间</view>
+                        <view class="check">{{info.createtime}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">修改人</view>
+                        <view class="check">{{info.updateman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">修改时间</view>
+                        <view class="check">{{info.updatetime}}</view>
+                    </view>
+                </view>
+            </van-tab>
+            <!-- <van-tab title="动态" name="b">
+                <block wx:if="{{info.formid}}">
+                    <van-cell title="动态" />
+                    <van-steps steps="{{ steps }}" active="{{ active }}" direction="vertical" />
+                </block>
+                <view class="dynamic_state" wx:else>暂无动态</view>
+            </van-tab> -->
+            <van-tab title="附件" name="c">
+                <van-cell title="文件" is-link bind:click="up_photo" />
+            </van-tab>
+        </van-tabs>
+    </view>
+    <view class="footer">
+        <!-- <view bindtap="sendback" wx:if="{{info.formid}}">
+            <icon class="iconfont icon-wj-thwj"></icon>
+            <text>退回上步</text>
+        </view> -->
+        <view>
+            <navigator url="/pages/sceneticket/new/new?id={{info.ID}}" hover-class="none">
+                <icon class="iconfont icon-bianji"></icon>
+                <text>编辑</text>
+            </navigator>
+        </view>
+        <!-- <view bindtap="putin">
+            <icon class="iconfont icon-tijiao"></icon>
+            <text>提交下步</text>
+        </view> -->
+    </view>
+</view>

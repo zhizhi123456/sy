@@ -1,9 +1,12 @@
 import {
   record,
   flow,
+  Projecttype,
   valid,
   returned,
+  querysign
 } from "../service/getData";
+var app = getApp();
 const formatTime = date => {
   const year = date.getFullYear();
   const month = date.getMonth() + 1 >= 10 ? date.getMonth() + 1 : "0" + (date.getMonth() + 1);
@@ -84,6 +87,7 @@ const checkContent = (value, key) => {
       value[i] = ""
     }
   }
+  // console.log("0")
   value.createtime = format(new Date());
   let user = wx.getStorageSync("myInfo");
   if (user) {
@@ -97,7 +101,7 @@ const checkContent = (value, key) => {
     })
     value.API_Picurl = value.API_Picurl.join(",")
   }
-  var app = getApp();
+   var app = getApp();
   //公司
   app.globalData.Companytitle.forEach(res => {
     if (value.Companytitle == res.text) {
@@ -242,34 +246,34 @@ const checkContent = (value, key) => {
       value.HoleFirePrevInstQty = res.value;
     }
   })
-  //合同签订情况
-  app.globalData.Ifmakecontactlist.forEach(res => {
-    if (value.contactbookstate == res.text) {
-      value.contactbookstate = res.value;
-    }
-  })
-  //材料编码
-  app.globalData.Goodsname.forEach(res => {
-    if (value.goodscode == res.text) {
-      value.goodscode = res.value;
-    }
-  })
-  // 项目类型
-  if (value.mainprojecttype) {
-    var kinds = [];
-    value.mainprojecttype.split(",").forEach(res => {
-      app.globalData.Projecttype.forEach(depart => {
-        if (res == depart.text.substr(-1)) {
-          if (kinds.indexOf(depart.value.substr(-1)) == -1) {
-            kinds.push(depart.value.substr(-1))
-          }
-        }
-      })
+    //合同签订情况
+    app.globalData.Ifmakecontactlist.forEach(res => {
+      if (value.contactbookstate == res.text) {
+        value.contactbookstate = res.value;
+      }
     })
-    value.mainprojecttype = kinds.join(",");
-  }
-};
-
+    //材料编码
+    app.globalData.Goodsname.forEach(res => {
+      if (value.goodscode == res.text) {
+        value.goodscode = res.value;
+      }
+    })
+    // 项目类型
+    if (value.mainprojecttype) {
+      var kinds = [];
+      value.mainprojecttype.split(",").forEach(res => {
+        app.globalData.Projecttype.forEach(depart => {
+          if (res == depart.text.substr(-1)) {
+            if (kinds.indexOf(depart.value.substr(-1)) == -1) {
+              kinds.push(depart.value.substr(-1))
+            }
+          }
+        })
+      })
+      value.mainprojecttype = kinds.join(",");
+    }
+  };
+  
 // 判断更改内容...
 const checkChange = (value, key, dep) => {
   for (let i in value) {
@@ -484,8 +488,8 @@ const handleData = (data, key, dep) => {
     if (data[i] == null || data[i] == "null" || !data[i]) {
       data[i] = ""
     }
-  }
-  // 部门
+  } 
+   // 部门
   app.globalData.department.forEach(depart => {
     if (data.departmentId == depart.value || data.department == depart.value) {
       data.department = depart.text;
@@ -494,7 +498,7 @@ const handleData = (data, key, dep) => {
         departmenttext: depart.text
       })
     }
-  })
+  })  
   // 公司
   app.globalData.Companytitle.forEach(depart => {
     if (data.Companytitle == depart.value) {
@@ -509,7 +513,7 @@ const handleData = (data, key, dep) => {
     if (data.SentFileCompany == depart.value) {
       data.SentFileCompany = depart.text
     }
-    if (data.bulidcompanyname == depart.value) {
+     if (data.bulidcompanyname == depart.value) {
       data.bulidcompanyname = depart.text
     }
   })
@@ -652,6 +656,43 @@ const handleData = (data, key, dep) => {
     }
   })
   //类型
+  app.globalData.quality.forEach(depart => {
+    if (data.AppearCheckInstQty == depart.value) {
+      data.AppearCheckInstQty = depart.text
+    }
+    if (data.CivilTechInstQty == depart.value) {
+      data.CivilTechInstQty = depart.text
+    }
+    if (data.CivilWorkInstQty == depart.value) {
+      data.CivilWorkInstQty = depart.text
+    }
+    if (data.ConstruPowerInstQty == depart.value) {
+      data.ConstruPowerInstQty = depart.text
+    }
+    if (data.DangerGoodInstQty == depart.value) {
+      data.DangerGoodInstQty = depart.text
+    }
+    if (data.ElectPropInstQty == depart.value) {
+      data.ElectPropInstQty = depart.text
+    }
+    if (data.EquipiInstaInstQty == depart.value) {
+      data.EquipiInstaInstQty = depart.text
+    }
+    if (data.FireFitEquInstQty == depart.value) {
+      data.FireFitEquInstQty = depart.text
+    }
+    if (data.FloorLayInstQty == depart.value) {
+      data.FloorLayInstQty = depart.text
+    }
+    if (data.HoleFirePrevInstQty == depart.value) {
+      data.HoleFirePrevInstQty = depart.text
+    }
+  })
+  app.globalData.nature.forEach(res => {
+    if (data.mainprojectprop == res.value) {
+      data.mainprojectprop = res.text
+    }
+  })
   if (data.mainprojecttype) {
     var kinds = [];
     data.mainprojecttype.split(",").forEach(res => {
@@ -703,8 +744,8 @@ const listData = (data, dep, page, list) => {
       if (value.department == depart.value) {
         value.department = depart.text
       }
-    })
-    //公司
+    })   
+     //公司
     app.globalData.Companytitle.forEach(res => {
       if (value.Companytitle == res.value) {
         value.Companytitle = res.text;
@@ -721,8 +762,8 @@ const listData = (data, dep, page, list) => {
       if (value.ConstructCompany == res.value) {
         value.ConstructCompany = res.text;
       }
-    })
-    // //总包项目
+    })   
+     // //总包项目
     // app.globalData.MainProject.forEach(res => {
     //   if (value.projectcode == res.value) {
     //     value.projectcode = res.text;
@@ -745,23 +786,23 @@ const listData = (data, dep, page, list) => {
       if (value.projectcode == res.value) {
         value.projectcode = res.text;
       }
-    })
-    if (value.amountPlan && value.amountQuantity) {
-      data[index].offset = ((value.amountPlan - value.amountQuantity) / value.amountPlan * 100).toFixed(2) + "%";
+   })
+   if (value.amountPlan && value.amountQuantity) {
+    data[index].offset = ((value.amountPlan - value.amountQuantity) / value.amountPlan * 100).toFixed(2) + "%";
+  }
+  value.materialcost = value.materialcost ? value.materialcost : 0;
+  value.projectcost = value.projectcost ? value.projectcost : 0;
+  value.harmonizecost = value.harmonizecost ? value.harmonizecost : 0;
+  value.installcost = value.installcost ? value.installcost : 0;
+  value.totalCost = value.materialcost + value.projectcost + value.harmonizecost + value.installcost;
+  value.profit = value.contcactamount - value.totalCost;
+  value.rate = (value.profit / value.contcactamount * 100).toFixed(2) + "%";
+  app.globalData.Companytitle.forEach(depart => {
+    if (value.Companytitle == depart.value) {
+      value.Companytitle = depart.text
     }
-    value.materialcost = value.materialcost ? value.materialcost : 0;
-    value.projectcost = value.projectcost ? value.projectcost : 0;
-    value.harmonizecost = value.harmonizecost ? value.harmonizecost : 0;
-    value.installcost = value.installcost ? value.installcost : 0;
-    value.totalCost = value.materialcost + value.projectcost + value.harmonizecost + value.installcost;
-    value.profit = value.contcactamount - value.totalCost;
-    value.rate = (value.profit / value.contcactamount * 100).toFixed(2) + "%";
-    app.globalData.Companytitle.forEach(depart => {
-      if (value.Companytitle == depart.value) {
-        value.Companytitle = depart.text
-      }
-    })
-    if (value.mainprojecttype) {
+  })
+  if (value.mainprojecttype) {
       var kinds = [];
       value.mainprojecttype.split(",").forEach(res => {
         app.globalData.Projecttype.forEach(depart => {
@@ -777,15 +818,15 @@ const listData = (data, dep, page, list) => {
       }
       value.mainprojecttype = kinds.join(",");
     }
-  });
-  if (page) {
-    let num = Math.ceil(data.length / 5);
-    if (page && num >= page) {
-      let addArr = data.slice((page - 1) * 5, ((page - 1) * 5) + 5);
-      list.push(...addArr);
-    }
-    return list;
+  }); 
+   if (page) {
+  let num = Math.ceil(data.length / 5);
+  if (page && num >= page) {
+    let addArr = data.slice((page - 1) * 5, ((page - 1) * 5) + 5);
+    list.push(...addArr);
   }
+  return list;
+}
 }
 // 页面滚动到底部
 const pageScrollToBottom = () => {
@@ -793,6 +834,15 @@ const pageScrollToBottom = () => {
     // 使页面滚动到底部
     wx.pageScrollTo({
       scrollTop: rect.bottom
+    })
+  }).exec()
+};
+// 页面滚动到底部
+const pageScrollToBottom1 = () => {
+  wx.createSelectorQuery().select('.wraper').boundingClientRect(function (rect) {
+    // 使页面滚动到底部
+    wx.pageScrollTo({
+      scrollTop: rect.height
     })
   }).exec()
 };
@@ -937,17 +987,26 @@ const defaultimg = (e, key) => {
   return info;
 }
 //返回菜单页面
-const returnMenu = () => {
-  wx.redirectTo({
-    url: "/pages/aamenu/index1"
+// 1000  工程管理
+// 1001  项目合同
+// 1002  我的
+const returnMenu = (id) => {
+  wx.reLaunch({
+    url: `/pages/contracts/contracts?grading=${id}`
   })
 }
-// 工作流列表
+// 返回三级菜单
+const returnMenu2 = (id, title) => {
+  wx.reLaunch({
+    url: `/pages/secondarys/secondarys?id=${id}&title=${title}`
+  })
+}
 const workList = (key, id) => {
   record({
     formid: id
   }).then(res => {
     if (res.code == 10000) {
+      // console.log(res)
       let step = res.list;
       step.forEach(item => {
         if (item.nextstepid == 0 && !item.nextstepname && !item.nextdealrole && !item.nextdealuser) {
@@ -991,6 +1050,7 @@ const checkState = (key, id, chart, bh) => {
       userName: userinfo.UserName,
       formid: id
     }).then(res => {
+      // console.log(res)
       if (res.code == 10000) {
         key.setData({
           Workstate: res.Isvalidtime.True || res.Isvalidtime.False
@@ -1097,7 +1157,722 @@ const sumup = (port, key, value, text, val) => {
     back(key, result);
   })
 }
+// 图片的删除
+const deleteImg1 = (key, e) => {
+  let info = key.data.info,
+    i = e.currentTarget.dataset.i;
+  info.Picurl.splice(i, 1);
+  key.setData({
+    info
+  })
+}
+// 图片的放大预览
+const preview1 = (key, e) => {
+  let imgUrl = key.data.info.Picurl,
+    index = e.currentTarget.dataset.index;
+  wx.previewImage({
+    urls: imgUrl, //需要预览的图片http链接列表，注意是数组
+    current: imgUrl[index], // 当前显示图片的http链接，默认是第一个
+    success: function (res) {},
+    fail: function (res) {},
+    complete: function (res) {},
+  })
+}
+// 图片加载失败时显示的默认图片
+const defaultimg1 = (e, key) => {
+  let i = e.currentTarget.dataset.index,
+    info = key.data.info;
+  info.Picurl[i] = "../img/default-pic.png";
+  return info;
+}
+
+// 上传图片  key  img = this.data.info.picurl
+const upImages = (key, img) => {
+  // 图片请求-最多上传9张图
+  if (img.length < 9) {
+    wx.chooseImage({
+      count: 9,
+      sizeType: ['original'],
+      sourceType: ['camera', "album"],
+      success: res => {
+        let tempFilePaths = res.tempFilePaths,
+          info = key.data.info,
+          that = key;
+        wx.showToast({
+          title: '正在上传...',
+          icon: 'loading',
+          mask: true,
+          duration: 10000
+        })
+        var uploadImgCount = 0;
+        for (let i = 0; i < tempFilePaths.length; i++) {
+          wx.uploadFile({
+            url: 'http://192.168.2.148:88/api/image/Get_photo',
+            filePath: tempFilePaths[i],
+            name: 'img_data',
+            success(res) {
+              uploadImgCount++;
+              // console.log(res)
+              if (res.statusCode == 200) {
+                img.push("http://192.168.2.148:88" + res.data.replace(/"/g, ""))
+                that.setData({
+                  upimg: true,
+                  show_photo: false,
+                  info
+                })
+              }
+              //如果是最后一张,则隐藏等待中  
+              if (uploadImgCount == tempFilePaths.length) {
+                wx.hideToast();
+              }
+            },
+            fail: err => {
+              console.log(err)
+            }
+          })
+        }
+      }
+    })
+  }
+}
+// 图片的删除 img = this.data.info.picurl
+const deleteImgs = (key, e, img) => {
+  let info = key.data.info,
+    i = e.currentTarget.dataset.i;
+  img.splice(i, 1);
+  key.setData({
+    info
+  })
+}
+// 图片的放大预览
+const previews = (key, e, img) => {
+  let imgUrl = img,
+    index = e.currentTarget.dataset.index;
+  wx.previewImage({
+    urls: imgUrl, //需要预览的图片http链接列表，注意是数组
+    current: imgUrl[index], // 当前显示图片的http链接，默认是第一个
+    success: function (res) {},
+    fail: function (res) {},
+    complete: function (res) {},
+  })
+}
+// 图片加载失败时显示的默认图片
+const defaultimgs = (e, key, img) => {
+  let i = e.currentTarget.dataset.index,
+    info = key.data.info;
+  img[i] = "../img/default-pic.png";
+  return info;
+}
+// 是否
+
+const whether = (content) => {
+  console.log(content)
+  if (content == "是") {
+    var c = true
+    return c
+  }
+  if (content == "否") {
+    var c = false
+    return c
+  }
+  
+  if (content == "已完成") {
+    var c = true
+    return c
+  }
+  if (content == "未完成") {
+    var c = false
+    return c
+  }
+  if (content === null) {
+    console.log("1")
+    var c = ''
+    return c
+  }
+  
+}
+const whethercontent = (content) => {
+  if (content === true) {
+    var c = "是"
+    return c
+  }
+  if (content === false) {
+    var c = "否"
+    return c
+  }
+  if (content === "") {
+    var c = ''
+    return c
+  }
+
+}
+const whethercontent1 = (content) => {
+  if (content === "") {
+    var c = "未完成"
+    return c
+  }
+  if (content === true) {
+    var c = "已完成"
+    return c
+  }
+
+
+}
+// 对项目类型传入时做修改
+const itemtype = (content) => {
+  Projecttype().then(res => {
+    var w = JSON.parse(res)
+    w.forEach(s => {
+      if (s.Key == content) {
+        return s.Value
+      }
+    })
+  })
+}
+// 对项目类型传出时做修改
+const itemtypeto = (content) => {
+  Projecttype().then(res => {
+    var w = JSON.parse(res)
+    w.forEach(s => {
+      if (s.Value == content) {
+        return s.Key
+      }
+    })
+  })
+}
+// //// 对传入的数据 根据 key值 得到 Value值  
+// // funcname 函数名 须在之前页面引入  content key值 适用于有key和value的
+// const intro = (funcname, content) => {
+//   return new Promise(function (resolve, reject) {
+//     funcname().then(res => {
+//       // console.log(res)
+//       var w = JSON.parse(res)
+//       w.forEach(s => {
+//         // console.log(s.Key == content)
+//         if (s.Key == content) {
+//           resolve(s.Value);
+//         } else {
+//           reject("");
+//         }
+//       })
+//     })
+//   })
+// }
+// //  传出 
+// const outflow = (funcname, content) => {
+//   return new Promise(function (resolve, reject) {
+//     funcname().then(res => {
+//       console.log(res)
+//       var w = JSON.parse(res)
+//       w.forEach(s => {
+//         if (s.Value == content) {
+//           resolve(s.Key);
+//         } else {
+//           reject("");
+//         }
+//       })
+//     })
+//   })
+// }
+// 
+const intro = (data, that) => {
+  // 合同签订情况
+  var app = getApp()
+  app.globalData.department.forEach((s) => {
+    if (s.text == data.department) {
+      data.department = s.value
+    }
+  })
+
+  app.globalData.Projecttype.forEach((s) => {
+    if (s.text == data.projectType) {
+      data.projectType = s.value
+    }
+  })
+  app.globalData.Ifmakecontactlist.forEach((s) => {
+    if (s.text == data.Ifmakecontact) {
+      data.Ifmakecontact = s.value
+    }
+    if (s.text == data.contactbookstate) {
+      data.contactbookstate = s.value
+    }
+
+  })
+  app.globalData.Projectprop.forEach(s => {
+    if (s.text == data.projectprop) {
+      data.projectprop = s.value
+    }
+    if (s.text == data.Type) {
+      data.Type = s.value
+    }
+    if (s.text == data.mainprojectprop) {
+      data.mainprojectprop = s.value
+    }
+    
+
+  })
+  app.globalData.Progress1.forEach(s => {
+    if (s.text == data.progress1) {
+      data.progress1 = s.value
+    }
+  })
+  app.globalData.Progress2.forEach(s => {
+    if (s.text == data.progress2) {
+      data.progress2 = s.value
+    }
+  })
+  app.globalData.Progress3.forEach(s => {
+    if (s.text == data.progress3) {
+      data.progress3 = s.value
+    }
+  })
+  // accident
+  // console.log(app.globalData.Companytitle)
+  app.globalData.Companytitle.forEach(s => {
+    if (s.text == data.architect) {
+      data.architect = s.value
+    }
+    if (s.text == data.Constructionunit) {
+      data.Constructionunit = s.value
+    }
+    if (s.text == data.Companytitle) {
+      data.Companytitle = s.value
+    }
+    if (s.text == data.ConstructCompany) {
+      data.ConstructCompany = s.value
+    }
+    if (s.text == data.Type) {
+      data.Type = s.value
+    }
+    // budding
+    if (s.text == data.constructionOrganization) {
+      data.constructionOrganization = s.value
+    }
+    if (s.text == data.subcontractor) {
+      data.subcontractor = s.value
+    }
+    if (s.text == data.subcontractorsShall) {
+      data.subcontractorsShall = s.value
+    }
+    if (s.text == data.Constructionunit) {
+      data.Constructionunit = s.value
+    }
+    if (s.text == data.Developerunit) {
+      data.Developerunit = s.value
+    }
+    if (s.text == data.supervisionunit) {
+      data.supervisionunit = s.value
+    }
+    // cable
+    if (s.text == data.constructCompany) {
+      data.constructCompany = s.value
+    }
+    // quality
+    if (s.text == data.commpanytitle) {
+      data.commpanytitle = s.value
+    }
+    //startup
+    if (s.text == data.Companytitle) {
+      data.Companytitle = s.value
+    }
+    if (s.text == data.ratifyunit) {
+      data.ratifyunit = s.value
+    }
+    // task  
+    if (s.text == data.bulidcompanyname) {
+      data.bulidcompanyname = s.value
+    }
+  })
+  // console.log("2")
+  app.globalData.IntentionClass.forEach(s => {
+    if (s.text == data.TellIntentionClass) {
+      data.TellIntentionClass = s.value
+    }
+    if (s.text == data.Type) {
+      data.Type = s.value
+    }
+
+  })
+  // 职位职称
+  app.globalData.Role.forEach(s => {
+    if (s.text == data.Type) {
+      data.Type = s.value
+    }
+    if (s.text == data.Ranks) {
+      data.Ranks = s.value
+    }
+    if (s.text == data.chargemanName) {
+      data.chargemanName = s.value
+    }
+  })
+  app.globalData.Principal.forEach(s => {
+    if (s.text == data.readpeople) {
+      data.readpeople = s.value
+    }
+    if (s.text == data.chargemanName) {
+      data.chargemanName = s.value
+    }
+    if (s.text == data.itemManage) {
+      data.itemManage = s.value
+    }
+  })
+  app.globalData.Ifwinbidlist.forEach(s => {
+    if (s.text == data.ifwinbid) {
+      data.ifwinbid = s.value
+    }
+  })
+}
+const outflow = (data, that) => {
+  // 合同签订情况
+  // console.log(data)
+  var app = getApp()
+  app.globalData.department.forEach((s) => {
+    if (s.value == data.department) {
+      data.department = s.text
+    }
+  })
+  // 项目类型
+  app.globalData.Projecttype.forEach((s) => {
+    if (s.value == data.projectType) {
+      data.projectType = s.text
+    }
+  })
+  app.globalData.Ifmakecontactlist.forEach((s) => {
+    if (s.value == data.Ifmakecontact) {
+      data.Ifmakecontact = s.text
+    }
+    if (s.value == data.contactbookstate) {
+      data.contactbookstate = s.text
+    }
+
+  })
+  app.globalData.Projectprop.forEach(s => {
+    if (s.value == data.projectprop) {
+      data.projectprop = s.text
+    }
+    if (s.value == data.Type) {
+      data.Type = s.text
+    }
+    if (s.value == data.mainprojectprop) {
+      data.mainprojectprop = s.text
+    }
+
+  })
+  app.globalData.Progress1.forEach(s => {
+    if (s.value == data.progress1) {
+      data.progress1 = s.text
+    }
+  })
+  app.globalData.Progress2.forEach(s => {
+    if (s.value == data.progress2) {
+      data.progress2 = s.text
+    }
+  })
+  app.globalData.Progress3.forEach(s => {
+    if (s.value == data.progress3) {
+      data.progress3 = s.text
+    }
+  })
+  // accident
+  app.globalData.Companytitle.forEach(s => {
+    if (s.value == data.architect) {
+      data.architect = s.text
+    }
+    if (s.value == data.Constructionunit) {
+      data.Constructionunit = s.text
+    }
+    if (s.value == data.Companytitle) {
+      data.Companytitle = s.text
+    }
+    if (s.value == data.ConstructCompany) {
+      data.ConstructCompany = s.text
+    }
+    if (s.value == data.Type) {
+      data.Type = s.text
+    }
+    // budding
+    if (s.value == data.constructionOrganization) {
+      data.constructionOrganization = s.text
+    }
+    if (s.value == data.subcontractor) {
+      data.subcontractor = s.text
+    }
+    if (s.value == data.subcontractorsShall) {
+      data.subcontractorsShall = s.text
+    }
+    if (s.value == data.Constructionunit) {
+      data.Constructionunit = s.text
+    }
+    if (s.value == data.Developerunit) {
+      data.Developerunit = s.text
+    }
+    if (s.value == data.supervisionunit) {
+      data.supervisionunit = s.text
+    }
+    // cable
+    if (s.value == data.constructCompany) {
+      data.constructCompany = s.text
+    }
+    // quality
+    if (s.value == data.commpanytitle) {
+      data.commpanytitle = s.text
+    }
+    //startup
+    if (s.value == data.Companytitle) {
+      data.Companytitle = s.text
+    }
+    if (s.value == data.ratifyunit) {
+      data.ratifyunit = s.text
+    }
+    //task 
+    if (s.value == data.bulidcompanyname) {
+      data.bulidcompanyname = s.text
+    }
+   
+  })
+  app.globalData.IntentionClass.forEach(s => {
+    if (s.value == data.TellIntentionClass) {
+      data.TellIntentionClass = s.text
+    }
+    if (s.value == data.Type) {
+      data.Type = s.text
+    }
+  })
+  // 职位职称
+  app.globalData.Role.forEach(s => {
+    if (s.value == data.Type) {
+      data.Type = s.text
+    }
+    if (s.value == data.Ranks) {
+      data.Ranks = s.text
+    }
+
+    if (s.value == data.chargemanName) {
+      data.chargemanName = s.text
+    }
+  })
+  app.globalData.Principal.forEach(s => {
+    if (s.value == data.readpeople) {
+      data.readpeople = s.text
+    }
+    if (s.value == data.chargemanName) {
+      data.chargemanName = s.text
+    }
+    if (s.value == data.itemManage) {
+      data.itemManage = s.text
+    }
+  })
+  app.globalData.Ifwinbidlist.forEach(s => {
+    if (s.value == data.ifwinbid) {
+      data.ifwinbid = s.text
+    }
+  })
+  //工程队
+  app.globalData.ConstructionTeam.forEach(s => {
+    if (s.value == data.ConstructionTeamID) {
+      data.ConstructionTeamID = s.text
+    }
+  })
+ 
+}
+const outflowlist = (list, that) => {
+  // 合同签订情况
+  var that = this
+  if (list) {
+    list.forEach(data => {
+      // console.log(data)
+      outflow(data)
+      // 
+    })
+  }
+}
+const introlist = (list, that) => {
+  // 合同签订情况
+  var that = this
+  if (list) {
+    list.forEach(data => {
+      // console.log(data)
+      intro(data)
+      // 
+    })
+  }
+}
+// 组合查询
+const qgroupdeliver = (funcname, that) => {
+  var app = getApp();
+  let info = that.data.info;
+  wx.getStorage({
+    key: 'myInfo',
+    success(res) {
+      info.UserName = res.data.UserName
+    }
+  })
+  intro(info, this)
+  console.log(info)
+
+  for (let i in info) {
+    if (info[i] == "请选择" || !info[i] || info[i] == "") {
+      info[i] = null
+    }
+  }
+  if (info.quantity) {
+    info.quantity = Number(info.quantity)
+  }
+  if (info.departmentID) {
+    app.globalData.department.forEach(depart => {
+      if (info.departmentID == depart.text) {
+        info.departmentID = depart.value
+      }
+    })
+  }
+  if (info.department) {
+    app.globalData.department.forEach(depart => {
+      if (info.department == depart.text) {
+        info.department = depart.value
+      }
+    })
+  }
+  that.setData({
+    info
+  })
+  let infodata = {
+    Timestamp: app.globalData.time,
+    ...that.data.info
+  }
+  funcname(
+    infodata
+  ).then(res => {
+    console.log(res)
+    wx.showLoading({
+      title: '加载中',
+    });
+    if (res.code == 10000) {
+      wx.showToast({
+        title: '搜索成功',
+        icon: 'success',
+        duration: 3000
+      })
+      that.onClose()
+      let item
+      if (funcname == querysign) {
+        item = res.Lists;
+      } else {
+        item = res.List;
+      }
+      outflowlist(item, this)
+      for (let k of item) {
+        for (let i in k) {
+          if (k[i] == null || k[i] == "null" || !k[i]) {
+            k[i] = " "
+          }
+        }
+      }
+      item.forEach(value => {
+        app.globalData.department.forEach(depart => {
+          if (value.department == depart.value) {
+            value.department = depart.text
+          }
+        })
+        if (value.checkindate || value.condition) {
+          value.checkindate = value.checkindate.substring(0, 10)
+          // value.Checkintime = value.Checkintime.substring(10)
+          value.condition == "忘打卡" ? value.Checkintime = '' : value.condition
+        }
+      });
+      that.setData({
+        InfoList: item.reverse()
+      })
+    
+      wx.hideLoading();
+    } else {
+      let info = that.data.info;
+      info.picurl = [];
+      that.setData({
+        info
+      })
+    }
+  })
+
+  const dispose = () => {
+
+  }
+}
+// 组合查询
+const qgroupsmall = (funcname, that) => {
+  var app = getApp();
+  // console.log(that.data.small)
+  let small = that.data.small;
+  for (let i in small) {
+    if (small[i] == "请选择" || !small[i] || small[i] == "") {
+      small[i] = null
+    }
+  }
+
+  if (small.quantity) {
+    small.quantity = Number(small.quantity)
+  }
+  that.setData({
+    small
+  })
+  console.log(that.data.small)
+  let infodata = {
+    Timestamp: app.globalData.time,
+    ...that.data.small
+  }
+  funcname(
+    infodata
+  ).then(res => {
+    // console.log(res)
+    wx.showLoading({
+      title: '加载中',
+    });
+    if (res.code == 10000) {
+      wx.showToast({
+        title: '搜索成功',
+        icon: 'success',
+        duration: 3000
+      })
+      that.onClose()
+      let item = res.List;
+      for (let k of item) {
+        for (let i in k) {
+          if (k[i] == null || k[i] == "null" || !k[i]) {
+            k[i] = " "
+          }
+        }
+      }
+      item.forEach(value => {
+        app.globalData.department.forEach(depart => {
+          if (value.department == depart.value) {
+            value.department = depart.text
+          }
+        })
+      });
+      that.setData({
+        material_list: item.reverse()
+      })
+      wx.hideLoading();
+    } else {
+      let small = that.data.small;
+      small.picurl = [];
+      that.setData({
+        small
+      })
+    }
+  })
+}
+const title = (() => {
+  Companytitle().then(res => {
+    console.log(res)
+  })
+})
 module.exports = {
+  title,
+  qgroupsmall,
+  qgroupdeliver,
+  outflow,
+  intro,
+  whethercontent,
   formatTime,
   datefomate,
   checkContent,
@@ -1108,6 +1883,13 @@ module.exports = {
   editInfo,
   returnPrev,
   upImage,
+  upImages,
+  handleData,
+  checkChange,
+  preview,
+  deleteImg,
+  deleteImg1,
+  deleteImgs,
   handleData,
   checkChange,
   preview,
@@ -1118,9 +1900,17 @@ module.exports = {
   Triggerflow,
   updateCode,
   defaultimg,
+  defaultimg1,
+  defaultimgs,
+  whether,
   formatday,
   datefom,
   checkState,
+  pageScrollToBottom1,
+  returnMenu2,
+  outflowlist,
+  introlist,
+  whethercontent1,
   getBase,
   back,
   sumup,

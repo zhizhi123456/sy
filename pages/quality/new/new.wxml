@@ -1,0 +1,145 @@
+<!-- pages/new/new.wxml -->
+<view class="wraper">
+    <view class="header d_header" wx:if="{{info.ID}}">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="editreturn"></icon>
+        <text class="fr newCreate" bindtap="editconfirm">确定</text>
+        <view class="apply">编辑工程质量报告</view>
+    </view>
+    <view class="header d_header" wx:else>
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="confirm">确定</text>
+        <view class="apply">新建工程质量报告</view>
+    </view>
+    <view class="main n_main">
+        <van-toast id="van-toast" />
+          <view class="check_item">
+            <view class="kind require">
+                <text>分包项目属性</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.projectcode?info.projectcode:'请选择'}}" bind:click="showPopup_4">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show_nature }}" round position="bottom" bind:close="onClose_4">
+                <van-picker data-name="projectcode" show-toolbar columns="{{section1}}" bind:cancel="onClose_4" bind:confirm="onConfirm_4" />
+            </van-popup>
+        </view>
+          <view class="check_item">
+            <view class="kind require">
+                <text>单位</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.commpanytitle?info.commpanytitle:'请选择'}}" bind:click="showPopup1">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show_nature1 }}" round position="bottom" bind:close="onClose1">
+                <van-picker data-name="commpanytitle" show-toolbar columns="{{section2}}" bind:cancel="onClose1" bind:confirm="onConfirm1" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+         <view class="kind require">
+                <text>分部分项工程名称</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="subprojectname" value="{{info.subprojectname}}" placeholder="请输入" bind:blur="projectnameblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">事故性质</text>
+            <van-cell-group>
+                <van-field data-name="characterAccident" value="{{info.characterAccident}}" placeholder="请输入" bind:blur="projectcodelur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">部位</text>
+            <van-cell-group>
+                <van-field data-name="part" value="{{info.part}}" placeholder="请输入" bind:blur="subprojectnameblur" />
+            </van-cell-group>
+        </view>
+           <view class="check_item">
+            <view class="kind">
+                <text>发生日期</text>
+            </view>
+            <van-cell title="{{info.dateString?info.dateString:'请选择'}}" is-link bind:click="showPopup_time" />
+            <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
+                <van-datetime-picker data-name="dateString" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+          <view class="kind require">
+                <text>事故情况</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="accconditions" value="{{info.accconditions}}" placeholder="请输入" bind:blur="subcompanynameblur" />
+            </van-cell-group>
+        </view>
+      
+        <view class="check_item">
+            <text class="kind">事故原因</text>
+            <van-cell-group>
+                <van-field data-name="acccause" value="{{info.acccause}}" placeholder="请输入" bind:blur="bulidareasblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">事故处理</text>
+            <van-cell-group>
+                <van-field data-name="acctrouble" value="{{info.acctrouble}}" placeholder="请输入" bind:blur="contractamountblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">事故工程量</text>
+            <van-cell-group>
+                <van-field data-name="accquantity" value="{{info.accquantity}}" placeholder="请输入" bind:blur="mainprojectcontextblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">材料费</text>
+            <van-cell-group>
+                <van-field data-name="materialsExpenses" value="{{info.materialsExpenses}}" placeholder="请输入" bind:blur="remarkblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">人工费</text>
+            <van-cell-group>
+                <van-field data-name="costOfLabor" value="{{info.costOfLabor}}" placeholder="请输入" bind:blur="verifysubprocodeblur" />
+            </van-cell-group>
+        </view>
+          <view class="check_item">
+            <text class="kind">其他费用</text>
+            <van-cell-group>
+                <van-field data-name="otherCharges" value="{{info.otherCharges}}" placeholder="请输入" bind:blur="verifysubprocodeblur" />
+            </van-cell-group>
+        </view>  <view class="check_item">
+            <text class="kind">耽误工作日</text>
+            <van-cell-group>
+                <van-field data-name="lateWorkingDay" value="{{info.lateWorkingDay}}" placeholder="请输入" bind:blur="verifysubprocodeblur" />
+            </van-cell-group>
+        </view>  <view class="check_item">
+            <text class="kind">备注</text>
+            <van-cell-group>
+                <van-field data-name="remark" value="{{info.remark}}" placeholder="请输入" bind:blur="verifysubprocodeblur" />
+            </van-cell-group>
+        </view>
+          <view class="check_item">
+             <view class="kind require">
+                <text>施工单位负责人</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="ConstructionunitCheckMan" value="{{info.ConstructionunitCheckMan}}" placeholder="请输入" bind:blur="verifysubprocodeblur" />
+            </van-cell-group>
+        </view> 
+        
+         <view class="check_item">
+             <view class="kind require">
+                <text>监理单位</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="supervisionunit" value="{{info.supervisionunit}}" placeholder="请输入" bind:blur="verifysubprocodeblur" />
+            </van-cell-group>
+        </view>
+    </view>
+</view>

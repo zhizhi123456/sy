@@ -447,6 +447,14 @@
     padding: 5rpx 10rpx;
 }
 
+/* 合同项目中的费用明细表 */
+.costlist {
+    margin: 20rpx 40rpx;
+    background-color: #fafafa;
+    border-radius: 10rpx;
+    padding: 0 20rpx;
+}
+
 /* 多选框 */
 van-checkbox-group {
     display: flex;
@@ -490,6 +498,72 @@ van-checkbox {
 
 .seach .checkkind text:first-child {
     background-color: #999;
+}
+/* 组合查询 */
+
+.pullpo .check{
+    padding: 0rpx;
+    margin: 0rpx;
+    height: 100%;
+    background-color: white;
+}
+.pullpo .check .kind{
+    margin: 0;
+}
+.pullpo{
+    width: 90%;
+    height: 100%;
+}
+.pullpo .check .check_item{
+    display: flex; 
+    align-items: center;
+    margin: 0;
+    border-bottom: 1px solid #F5F6F7;
+    width: 90%;
+    margin-left: 20rpx;
+}
+.pullpo .check .check_item .kind{
+    width: 200rpx;
+}
+.pullpo .check2{
+    height: 100rpx;
+    color: #58C2FF;
+    display: flex;
+    justify-content:space-between
+}
+.pullpo .check2 text{
+    width: 125rpx;
+    display: inline-block;
+    text-align: center;
+    font-size: 31rpx;
+}
+.pullpo .time1{
+    width: 100rpx;
+    font-size: 30rpx;
+}
+/* 多选搜索框 */
+.checkro{
+    width:280rpx;
+    float: left;
+    margin-left: 55rpx;
+    margin-top: 40rpx;
+}
+/* .checkro2 .checkro1{ */
+    /* display: flex;
+    justify-content: space-around; */
+/* } */
+.checkro8 .checkro10{
+    width: 77%;
+    display: flex;
+    justify-content:space-between;
+    margin-top: 30rpx;
+    margin-left: 90rpx;
+    color: #4EA4FB;
+
+}
+.checkro9{
+    height: 50rpx;
+    width: 100%;
 }
 
 .list .depthdetail {
@@ -592,3 +666,4 @@ van-checkbox {
 .seach .van-field__input--disabled {
     color: #333;
 }
+

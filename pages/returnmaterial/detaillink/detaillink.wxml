@@ -1,0 +1,68 @@
+<!-- pages/bill/detaillink/detaillink.wxml -->
+<view wx:if="{{info}}">
+    <view class="header d_header">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="delete">删除</text>
+        <view class="apply">资料详情</view>
+    </view>
+    <view class="card">
+        <van-card title="{{info.goodsname}}" tag="资料详情" />
+    </view>
+    <view class="main_nav">
+        <view class="content">
+            <view class="c_item">
+                <view class="kind">商品名称</view>
+                <view class="check">{{info.goodsname}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">规格</view>
+                <view class="check">{{info.specifications}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">商品编号</view>
+                <view class="check">{{info.goodscode}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">单位</view>
+                <view class="check">{{info.unit}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">数量</view>
+                <view class="check">{{info.quantity}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">备注</view>
+                <view class="check">{{info.demo}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">退料单名称</view>
+                <view class="check">{{bill.losematerialName }}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">创建人</view>
+                <view class="check">{{bill.createman}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">创建时间</view>
+                <view class="check">{{bill.createtime}}</view>
+            </view>
+            <!-- <view class="speak">
+                        <van-cell title="评论" is-link bind:click="add_speak" />
+                        <van-dialog use-slot title="评论" show="{{ show }}" show-cancel-button>
+                            <van-cell-group>
+                                <van-field value="" placeholder="请输入评论内容" bind:blur="onChange" />
+                            </van-cell-group>
+                        </van-dialog>
+                        <view class="speak_list" wx:if="{{speak}}">{{speak}}</view>
+                    </view> -->
+        </view>
+    </view>
+    <view class="footer">
+        <view>
+            <navigator url="/pages/returnmaterial/newlink/newlink?detailid={{info.ID}}" hover-class="none">
+                <icon class="iconfont icon-bianji"></icon>
+                <text>编辑</text>
+            </navigator>
+        </view>
+    </view>
+</view>

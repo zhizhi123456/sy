@@ -1,0 +1,26 @@
+<!-- pages/management/management.wxml -->
+<view class="wraper">
+    <view class="header">
+        <view class="title">
+            <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
+            <view class="apply">
+                <text>人员管理</text>
+            </view>
+        </view>
+    </view>
+    <view class="title"></view>
+    <view class="check_item">
+        <van-cell title="{{info.ID?info.ID:'请选择部门'}}" is-link bind:click="showPopup10" arrow-direction="down" />
+        <van-popup show="{{show11}}" round position="bottom" bind:close="onClose10">
+            <van-picker data-name="ID" show-toolbar columns="{{ section10 }}" bind:cancel="onClose10" bind:confirm="onConfirm10" />
+        </van-popup>
+    </view>
+    <block  wx:if="{{staff.length}}">
+        <view wx:for="{{staff}}" wx:key="index">
+            <van-cell title="{{item.name}}" is-link url="{{'/pages/management/message/message?name='+item.name +'&userId='+item.userId}} " />
+        </view>
+    </block>
+    <block wx:else >
+        <van-cell  title="暂无数据" />
+    </block>
+</view>

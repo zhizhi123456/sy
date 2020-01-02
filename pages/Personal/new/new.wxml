@@ -1,0 +1,101 @@
+<!-- pages/new/new.wxml -->
+<view class="wraper">
+    <view class="header d_header" >
+        <icon class="iconfont icon-jiantou2 fl" bindtap="editreturn"></icon>
+        <text class="fr newCreate" bindtap="editconfirm">确定</text>
+        <view class="apply">编辑个人信息</view>
+    </view>
+    <view class="main n_main">
+        <van-toast id="van-toast" />
+        
+        <view class="check_item">
+            <text class="kind">用户名</text>
+            <van-cell-group>
+                <van-field data-name="UserName" value="{{info.UserName}}" placeholder="请输入" bind:blur="projectcodelur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">密码</text>
+            <van-cell-group>
+                <van-field data-name="Password" value="{{info.Password}}" placeholder="请输入" bind:blur="projectcodelur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">邮箱</text>
+            <van-cell-group>
+                <van-field data-name="Email" value="{{info.Email}}" placeholder="请输入" bind:blur="projectcodelur" />
+            </van-cell-group>
+        </view>
+        <!-- <view class="check_item">
+            <text class="kind">工号</text>
+            <van-cell-group>
+                <van-field data-name="EmpCode" value="{{info.EmpCode}}" placeholder="请输入" bind:blur="projectcodelur" />
+            </van-cell-group>
+        </view>
+          <view class="check_item">
+            <text class="kind">职位</text>
+            <van-cell-group>
+                <van-field data-name="EmpName" value="{{info.EmpName}}" placeholder="请输入" bind:blur="projectcodelur" />
+            </van-cell-group>
+        </view> -->
+        
+        <view class="check_item">
+            <text class="kind">电话</text>
+            <van-cell-group>
+                <van-field data-name="MobilePIN" value="{{info.MobilePIN}}" placeholder="请输入" bind:blur="projectcodelur" />
+            </van-cell-group>
+        </view>
+         <view class="check_item">
+            <text class="kind">密码问题</text>
+            <van-cell-group>
+                <van-field data-name="PasswordQuestion" value="{{info.PasswordQuestion}}" placeholder="请输入" bind:blur="projectcodelur" />
+            </van-cell-group>
+        </view>
+
+         <view class="check_item">
+            <text class="kind">密码答案</text>
+            <van-cell-group>
+                <van-field data-name="PasswordAnswer" value="{{info.PasswordAnswer}}" placeholder="请输入" bind:blur="projectcodelur" />
+            </van-cell-group>
+        </view>
+          <view class="check_item">
+            <view class="kind require">
+                <text>锁定</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.IslockedOut?info.IslockedOut:'请选择'}}" bind:click="showPopup1">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show_nature1 }}" round position="bottom" bind:close="onClose1">
+                <van-picker data-name="IslockedOut" show-toolbar columns="{{section2}}" bind:cancel="onClose1" bind:confirm="onConfirm1" />
+            </van-popup>
+        </view>
+       
+        <!-- <view class="check_item">
+            <text class="kind">备注</text>
+            <van-cell-group>
+                <van-field data-name="Memo" value="{{info.Memo}}" placeholder="请输入" bind:blur="projectcodelur" />
+            </van-cell-group>
+        </view> -->
+
+         <!-- <view class="check_item">
+            <text class="kind">报告视图权限</text>
+            <van-cell-group>
+                <van-field data-name="ReportViewPermissions" value="{{info.ReportViewPermissions}}" placeholder="请输入" bind:blur="projectcodelur" />
+            </van-cell-group>
+        </view> -->
+        <!-- <view class="check_item">
+            <text class="kind">相关图片</text>
+            <van-cell title="请选择" is-link bind:click="showPopup_photo" />
+            <van-action-sheet show="{{ show_photo }}" actions="{{ check_photo }}" bind:cancel="onClose_photo" bind:click-overlay="onClose_photo" bind:select="onSelect_photo" cancel-text="取消" />
+            <view wx:if="{{upimg}}" class="datumimgbox">
+                <block wx:for="{{info.API_Picurl}}" wx:key="index">
+                    <view class="upimgbox">
+                        <image src="{{info}}" bindtap="tap_pic" data-index="{{index}}" />
+                        <icon class="iconfont icon-jianhao-tianchong delimg" data-i="{{index}}" bindtap="delimg" />
+                    </view>
+                </block>
+            </view>
+        </view> -->
+    </view>
+</view>

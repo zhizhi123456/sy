@@ -1,0 +1,14 @@
+<!-- pages/current/current/current.wxml -->
+<view class="wraper">
+    <view class="header">
+        <view class="title">
+            <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
+            <view class="apply">
+                <text>当前任务</text>
+            </view>
+        </view>
+    </view>
+     <view wx:for="{{task}}" wx:key="index">
+        <van-cell title="{{item}}" is-link url="" />
+    </view>
+</view>

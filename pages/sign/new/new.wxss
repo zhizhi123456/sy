@@ -1,0 +1,51 @@
+/* pages/map/map.wxss */
+.anew{
+    font-size: 30rpx;
+    height: 100rpx;
+}
+.anew .btn{
+    width: 150rpx;
+    margin-right: 10rpx;
+    font-size: 30rpx;
+    line-height: 80rpx;
+    height: 50rpx;
+}
+/* fl */
+.anew icon{
+    vertical-align:center;
+    color: orangered;
+    font-size: 50rpx;
+    margin: 0 10rpx;
+}
+.anew text{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.box{
+    width: 300rpx;
+    height: 300rpx;
+    background-color: #008080;
+    margin: 80rpx auto;
+    border-radius: 50%;
+    text-align: center;
+    color: white;
+    font-size: 30rpx;
+}
+.box view:first-child{
+    margin-top: 100rpx;
+    margin-bottom: 15rpx;
+}
+.n_main{
+    margin-top: 24rpx;
+}
+.main .check_item{
+    margin-bottom: 0rpx;
+}
+.reach {
+ font-size: 30rpx;
+ text-align: center;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+}

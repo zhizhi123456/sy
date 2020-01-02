@@ -1,0 +1,28 @@
+<!-- pages/contracts/contracts.wxml -->
+<!-- pages/contract/contract.wxml -->
+<view>
+  <view class="header">
+    <text>{{title}}</text>
+    <van-icon name="orders-o" info="9" class="icon1" bind:click="task"/>
+  </view>
+  <view class="list">
+    <view class="box" wx:for="{{lists}}" wx:key="index">
+      <view class="{{'masked'+ (item.control ? '':' show')}}">
+        <icon class="iconfont icon-mima"></icon>
+      </view>
+      <icon class="{{' red  icon iconfont '+ item.img + (item.control ?'':' c') }}"></icon>
+      <text class="{{item.control ?'':'c'}}">{{item.nametext}}</text>
+      <!-- <navigator url="{{ item.three?item.path +'?menuId='+ item.menuId:(item.control ? '/pages/secondarys/secondarys?id='+item.ID+'&title='+item.nametext :'#')}}"></navigator> -->
+      <navigator url="{{(!item.control)?'':(item.three?(item.path +'?menuId='+ item.menuId):('/pages/secondarys/secondarys?id='+item.ID+'&title='+item.nametext))}}"></navigator>
+    </view>
+  </view>
+  <!-- tabar -->
+  <view class="tabarcontent">
+    <view class="tabar">
+      <view class="{{'box'+ (num==item.ID?' active':'')}}" wx:for="{{tags}}" wx:key='*this' catchtap="change" data-change="{{item.ID}}">
+        <icon class="{{'tab iconfont '+ item.img+(num==item.ID?' active':'') }}"></icon>
+        <text>{{item.nametext}}</text>
+      </view>
+    </view>
+  </view>
+</view>

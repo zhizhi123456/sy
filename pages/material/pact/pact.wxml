@@ -1,0 +1,103 @@
+<!-- textages/textact/textact.wxml -->
+<view class="wraper">
+    <!-- 头部 -->
+    <view class="header">
+        <view class="title">
+            <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
+            <navigator url="/pages/material/new/new" hover-class="none" class="fr newCreate">
+                新建
+            </navigator>
+            <view class="apply">
+                <van-dropdown-menu active-color="red">
+                    <van-dropdown-item value="{{val}}" options="{{pact}}" />
+                </van-dropdown-menu>
+            </view>
+        </view>
+        <view class="seach">
+            <icon class="iconfont icon-fuxuananniu fl s-sort" bindtap="change"></icon>
+            <icon class="iconfont icon-sousuo fr" bindtap="seachInfo"></icon>
+            <view class="data_list">
+                <input value="{{seach}}" bindblur="setSeach" />
+                <view class="number" wx:if="{{!seach}}">
+                    <text wx:if="{{InfoList.length}}">共{{InfoList.length}}条</text>
+                    <text wx:else>搜索</text>
+                </view>
+            </view>
+            <van-popup show="{{ show }}" bind:close="onClose" position="right" overlay="{{ true }}" custom-style="height: 100vh;color:#333" bind:click-overlay="onClose">
+                <van-toast id="van-toast" />
+                <view>
+                    <view>
+                        <view class="seach_item">
+                            <!-- <text class="kind">存货名称关键字</text> -->
+                            <van-cell-group>
+                                <van-field data-name="goodsname" value="{{info.goodsname}}" placeholder="请输入" bind:blur="meetplaceblur" label='存货名称关键字' />
+                            </van-cell-group>
+                        </view>
+                        <view class="seach_item">
+                            <!-- <text class="kind">所属分类码关键字</text> -->
+                            <van-cell-group>
+                                <van-field data-name="goodsclasscode" value="{{info.goodsclasscode}}" placeholder="请输入" bind:blur="meetplaceblur" label='所属分类码关键字' />
+                            </van-cell-group>
+                        </view>
+                        <view class="checkkind">
+                            <text bind:tap="onClose">取消</text>
+                            <text bind:tap="seachqur">确认</text>
+                        </view>
+                    </view>
+                </view>
+            </van-popup>
+        </view>
+    </view>
+    <view class="main">
+        <view class="list" wx:for="{{InfoList}}" wx:key="index">
+            <navigator url="/pages/material/detail/detail?id={{item.ID}}" hover-class="none">
+                <view>
+                    <text class="info">存货编码</text>
+                    <text>{{item.goodscode}}</text>
+                </view>
+                <view>
+                    <text class="info">存货代码</text>
+                    <text>{{item.goodsothercode}}</text>
+                </view>
+                <view>
+                    <text class="info">存货名称</text>
+                    <text>{{item.goodsname}}</text>
+                </view>
+                <view>
+                    <text class="info">规格型号</text>
+                    <text>{{item.specifications}}</text>
+                </view>
+                <view>
+                    <text class="info">所属分类码</text>
+                    <text>{{item.goodsclasscode}}</text>
+                </view>
+            </navigator>
+        </view>
+        <view wx:if="{{loading&&InfoList.length}}" class="end">加载中...</view>
+        <view wx:if="{{!loading&&InfoList.length}}" class="end">已经到底了</view>
+        <view class="no_more" wx:if="{{!InfoList.length}}">暂无内容</view>
+        <!-- <van-popup show="{{ show }}" bind:close="onClose" position="right" overlay="{{ true }}" custom-class="pullpo" bind:click-overlay="onClose">
+            <van-toast id="van-toast" />
+            <view class="seachif scroll-view" scroll-y="true">
+                <view class="main n_main check">
+                    <view class="check_item">
+                        <text class="kind">存货名称关键字</text>
+                        <van-cell-group>
+                            <van-field data-name="goodsname" value="{{info.goodsname}}" placeholder="请输入" bind:blur="meetplaceblur" />
+                        </van-cell-group>
+                    </view>
+                    <view class="check_item">
+                        <text class="kind">所属分类码关键字</text>
+                        <van-cell-group>
+                            <van-field data-name="goodsclasscode" value="{{info.goodsclasscode}}" placeholder="请输入" bind:blur="meetplaceblur" />
+                        </van-cell-group>
+                    </view>
+                    <view class="check_item check2">
+                        <text bind:tap="seachqur">确认</text>
+                        <text bind:tap="onClose">取消</text>
+                    </view>
+                </view>
+            </view>
+        </van-popup> -->
+    </view>
+</view>

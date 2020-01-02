@@ -1,0 +1,49 @@
+<!-- pages/bill/newlink/newlink.wxml -->
+<view class="wraper">
+    <view class="header d_header" wx:if="{{materials[0].ID}}">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="linkreturn"></icon>
+        <text class="fr newCreate" bindtap="linkconfirm">确定</text>
+        <view class="apply">编辑项目选择</view>
+    </view>
+    <view class="header d_header" wx:else>
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="confirm">确定</text>
+        <view class="apply">新建项目选择</view>
+    </view>
+    <view class="main n_main">
+        <view class="check_item">
+            <view class="kind">
+                <text>项目类型</text>
+            </view>
+            <van-cell title="{{materials[0].projectType?materials[0].projectType:'请选择'}}" data-i='{{index}}' is-link data-name='projectType' bind:click="showPopup6" />
+            <van-popup show="{{show6}}" round position="bottom" bind:close="onClose6">
+                <van-picker data-name="projectType" show-toolbar columns="{{ section2 }}" bind:cancel="onClose6" bind:confirm="onConfirm6" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <text class="kind">质量验收规范的规定</text>
+            <van-cell-group>
+                <van-field value="{{materials[0].stipulateContent}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' data-name='stipulateContent' />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <view class="kind">
+                <text>施工单位自检记录</text>
+            </view>
+            <van-cell title="{{materials[0].selfInspectionRecord?materials[0].selfInspectionRecord:'请选择'}}" data-i='{{index}}' is-link data-name='selfInspectionRecord' bind:click="showPopup7" />
+            <van-popup show="{{show5}}" round position="bottom" bind:close="onClose7">
+                <van-picker data-name="selfInspectionRecord" show-toolbar columns="{{ section3 }}" bind:cancel="onClose7" bind:confirm="onConfirm7" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <view class="kind">
+                <text>监理单位验收记录</text>
+            </view>
+            <van-cell title="{{materials[0].checkRecord?materials[0].checkRecord:'请选择'}}" data-i='{{index}}' is-link data-name='checkRecord' bind:click="showPopup8" />
+            <van-popup show="{{show4}}" round position="bottom" bind:close="onClose8">
+                <van-picker data-name="checkRecord" show-toolbar columns="{{ section4 }}" bind:cancel="onClose8" bind:confirm="onConfirm8" />
+            </van-popup>
+        </view>
+     
+    </view>
+</view>

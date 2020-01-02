@@ -1,0 +1,141 @@
+<!-- pages/new/new.wxml -->
+<view class="wraper">
+    <view class="header d_header" wx:if="{{info.ID}}">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="editreturn"></icon>
+        <text class="fr newCreate" bindtap="editconfirm">确定</text>
+        <view class="apply">编辑开工报告</view>
+    </view>
+    <view class="header d_header" wx:else>
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="confirm">确定</text>
+        <view class="apply">新建开工报告</view>
+    </view>
+    <view class="main n_main">
+        <van-toast id="van-toast" />
+          <view class="check_item">
+            <view class="kind require">
+                <text>工程编号</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.projectcode?info.projectcode:'请选择'}}" bind:click="showPopup1">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show1 }}" round position="bottom" bind:close="onClose1">
+                <van-picker data-name="projectcode" show-toolbar columns="{{section1}}" bind:cancel="onClose1" bind:confirm="onConfirm1" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <text class="kind">工程主要内容</text>
+            <van-cell-group>
+                <van-field data-name="mainContent" value="{{info.mainContent}}" placeholder="请输入" bind:blur="projectnameblur" />
+            </van-cell-group>
+        </view>
+         <view class="check_item">
+            <view class="kind require">
+                <text>施工单位</text>
+              
+            </view>
+            <van-cell title="{{info.Constructionunit?info.Constructionunit:'请选择'}}" bind:click="showPopup2">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show2 }}" round position="bottom" bind:close="onClose2">
+                <van-picker data-name="Constructionunit" show-toolbar columns="{{section2}}" bind:cancel="onClose2" bind:confirm="onConfirm2" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <text class="kind">工程施工负责人</text>
+            <van-cell-group>
+                <van-field data-name="principal" value="{{info.principal}}" placeholder="请输入" bind:blur="projectcodelur" />
+            </van-cell-group>
+        </view>
+         <view class="check_item">
+            <text class="kind">联系电话</text>
+            <van-cell-group>
+                <van-field data-name="phone" value="{{info.phone}}" placeholder="请输入" bind:blur="projectcodelur" />
+            </van-cell-group>
+        </view>
+          <view class="check_item">
+            <view class="kind require">
+                <text>计划开工日期</text>
+            </view>
+            <van-cell title="{{info.startwork?info.startwork:'请选择'}}" is-link bind:click="showPopup_time" />
+            <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
+                <van-datetime-picker data-name="startwork" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>计划完工时间</text>
+            </view>
+            <van-cell title="{{info.accomplish?info.accomplish:'请选择'}}" is-link bind:click="showPopup_endtime" />
+            <van-popup show="{{ show_endtime }}" round position="bottom" bind:close="onClose_endtime">
+                <van-datetime-picker data-name="accomplish" value="{{ currentDate }}" bind:cancel="onClose_endtime" bind:confirm="onConfirm_endtime" />
+            </van-popup>
+        </view>
+          <view class="check_item">
+            <view class="kind require">
+                <text>维护部门意见</text>
+                 <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.opinion?info.opinion:'请选择'}}" bind:click="showPopup3">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show3 }}" round position="bottom" bind:close="onClose3">
+                <van-picker data-name="opinion" show-toolbar columns="{{section3}}" bind:cancel="onClose3" bind:confirm="onConfirm3" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>维护部门盖章日期</text>
+            </view>
+            <van-cell title="{{info.stampDate?info.stampDate:'请选择'}}" is-link bind:click="showPopup_endtime1" />
+            <van-popup show="{{ show_endtime1 }}" round position="bottom" bind:close="onClose_endtime1">
+                <van-datetime-picker data-name="stampDate" value="{{ currentDate1 }}" bind:cancel="onClose_endtime1" bind:confirm="onConfirm_endtime1" />
+            </van-popup>
+        </view>
+         <view class="check_item">
+            <view class="kind require">
+                <text>填表单位</text>
+            </view>
+            <van-cell title="{{info.Companytitle?info.Companytitle:'请选择'}}" bind:click="showPopup5">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show5 }}" round position="bottom" bind:close="onClose5">
+                <van-picker data-name="Companytitle" show-toolbar columns="{{section2}}" bind:cancel="onClose5" bind:confirm="onConfirm5" />
+            </van-popup>
+        </view>
+         <view class="check_item">
+            <view class="kind require">
+                <text>批准单位</text>
+            </view>
+            <van-cell title="{{info.ratifyunit?info.ratifyunit:'请选择'}}" bind:click="showPopup6">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show6 }}" round position="bottom" bind:close="onClose6">
+                <van-picker data-name="ratifyunit" show-toolbar columns="{{section2}}" bind:cancel="onClose6" bind:confirm="onConfirm6" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <text class="kind">批准人</text>
+            <van-cell-group>
+                <van-field data-name="ratifypeople" value="{{info.ratifypeople}}" placeholder="请输入" bind:blur="subprojectnameblur" />
+            </van-cell-group>
+        </view>
+       <view class="check_item">
+            <view class="kind require">
+                <text>批准日期</text>
+            </view>
+            <van-cell title="{{info.ratifyDate?info.ratifyDate:'请选择'}}" is-link bind:click="showPopup_endtime2" />
+            <van-popup show="{{ show_endtime2 }}" round position="bottom" bind:close="onClose_endtime2">
+                <van-datetime-picker data-name="ratifyDate" value="{{ currentDate2 }}" bind:cancel="onClose_endtime2" bind:confirm="onConfirm_endtime2" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <text class="kind">备注</text>
+            <van-cell-group>
+                <van-field data-name="remark" value="{{info.remark}}" placeholder="请输入" bind:blur="remarkblur" />
+            </van-cell-group>
+        </view>
+      
+    </view>
+</view>

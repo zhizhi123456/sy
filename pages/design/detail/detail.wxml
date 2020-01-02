@@ -1,0 +1,82 @@
+<!-- pages/detail/detail.wxml -->
+<view wx:if="{{info}}">
+    <view class="header d_header">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="delete">删除</text>
+        <view class="apply">资料详情</view>
+    </view>
+    <view class="card">
+        <van-card title="{{info.designtaskname}}" tag="资料详情" />
+    </view>
+    <view class="main_nav">
+        <van-tabs active="a">
+            <van-tab title="详细资料" name="a">
+                <view class="content">
+                    <view class="c_item">
+                        <view class="kind">设计人员</view>
+                        <view class="check">{{info.designman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">任务名称</view>
+                        <view class="check">{{info.designtaskname}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">描述</view>
+                        <view class="check">{{info.descire}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">预期难度系数</view>
+                        <view class="check">{{info.difficulevel}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">开始时间</view>
+                        <view class="check">{{info.begindate}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">结束时间</view>
+                        <view class="check">{{info.enddate}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">工期天数</view>
+                        <view class="check">{{info.taskdays}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">是否完成</view>
+                        <view class="check">{{info.ifcomplete}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">完成综合评分</view>
+                        <view class="check">{{info.score}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">创建人</view>
+                        <view class="check">{{info.createman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">创建时间</view>
+                        <view class="check">{{info.createtime}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">修改人</view>
+                        <view class="check">{{info.updateman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">修改时间</view>
+                        <view class="check">{{info.updatetime}}</view>
+                    </view>
+                </view>
+            </van-tab>
+            <van-tab title="附件" name="c">
+                <van-cell title="文件" is-link bind:click="up_photo" />
+            </van-tab>
+        </van-tabs>
+    </view>
+    <view class="footer">
+        <view>
+            <navigator url="/pages/design/new/new?id={{info.ID}}" hover-class="none">
+                <icon class="iconfont icon-bianji"></icon>
+                <text>编辑</text>
+            </navigator>
+        </view>
+    </view>
+</view>

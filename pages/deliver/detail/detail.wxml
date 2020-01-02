@@ -1,0 +1,163 @@
+<!-- pages/detail/detail.wxml -->
+<view wx:if="{{info}}">
+    <view class="header d_header">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="delete">删除</text>
+        <view class="apply">资料详情</view>
+    </view>
+    <view class="card">
+        <van-card title="{{info.delievrycode}}" tag="资料详情" />
+    </view>
+    <view class="main_nav">
+        <van-tabs active="{{table}}">
+            <van-tab title="详细资料" name="a">
+                <view class="content">
+                    <view class="c_item">
+                        <view class="kind">对方公司</view>
+                        <view class="check">{{info.Company}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">送货单号</view>
+                        <view class="check">{{info.delievrycode}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">项目或合同编号</view>
+                        <view class="check">{{info.projectcode}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">送货地址</view>
+                        <view class="check">{{info.delieveryaddress}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">收货人手机号</view>
+                        <view class="check">{{info.receivemanphone}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">备注</view>
+                        <view class="check">{{info.remark}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">图片</view>
+                        <view wx:if="{{info.API_Picurl}}" class="detpic_show">
+                            <block wx:for="{{info.API_Picurl}}" wx:key="index">
+                                <image src="{{item}}" bindtap="tap_pic" data-index="{{index}}" binderror="defaultimg" />
+                            </block>
+                        </view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">创建人</view>
+                        <view class="check">{{info.createman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">创建时间</view>
+                        <view class="check">{{info.createtime}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">修改人</view>
+                        <view class="check">{{info.updateman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">修改时间</view>
+                        <view class="check">{{info.updatetime}}</view>
+                    </view>
+                </view>
+            </van-tab>
+            <!-- <van-tab title="动态" name="b">
+                <block wx:if="{{info.formid}}">
+                    <van-cell title="动态" />
+                    <van-steps steps="{{ steps }}" active="{{ active }}" direction="vertical" />
+                </block>
+                <view class="dynamic_state" wx:else>暂无动态</view>
+            </van-tab> -->
+            <van-tab title="材料明细" name="c">
+                <van-cell title="聚合搜索">
+                    <icon class="iconfont icon-sousuo" bindtap="change"></icon>
+                </van-cell>
+                <van-cell title="材料明细({{material_list.length}})" bindtap="addndlink">
+                    <icon class="iconfont icon-icon-test"></icon>
+                </van-cell>
+                <block wx:for="{{material_list}}" wx:key="index">
+                    <view class="material">
+                        <navigator url="/pages/deliver/detaillink/detaillink?detailid={{item.ID}}" hover-class="none">
+                            <!-- <view>
+                                <text class="m_caption">{{item.losematerialid}}</text>
+                            </view> -->
+                            <view class="m_item">
+                                <text class="m_info">商品名称</text>
+                                <text>{{item.goodsname}}</text>
+                            </view>
+                            <view class="m_item">
+                                <text class="m_info">规格</text>
+                                <text>{{item.specifications}}</text>
+                            </view>
+                            <view class="m_item">
+                                <text class="m_info">商品编号</text>
+                                <text>{{item.goodscode}}</text>
+                            </view>
+                        </navigator>
+                    </view>
+                </block>
+            </van-tab>
+        </van-tabs>
+    </view>
+    <view class="footer">
+        <!-- <view bindtap="sendback" wx:if="{{info.formid}}">
+            <icon class="iconfont icon-wj-thwj"></icon>
+            <text>退回上步</text>
+        </view> -->
+        <view>
+            <navigator url="/pages/deliver/new/new?id={{info.ID}}" hover-class="none">
+                <icon class="iconfont icon-bianji"></icon>
+                <text>编辑</text>
+            </navigator>
+        </view>
+        <!-- <view bindtap="putin">
+            <icon class="iconfont icon-tijiao"></icon>
+            <text>提交下步</text>
+        </view> -->
+    </view>
+    <view class="seach">
+        <van-popup show="{{ show }}" bind:close="onClose" position="right" overlay="{{ true }}" custom-class="pullpo" bind:click-overlay="onClose">
+            <van-toast id="van-toast" />
+            <view scroll-y="true">
+                <view>
+                    <view class="seach_item">
+                        <van-cell-group>
+                            <van-field data-name="goodscode" value="{{small.goodscode}}" placeholder="请输入" bind:blur="meetplaceblur" label="商品编号"/>
+                        </van-cell-group>
+                    </view>
+                    <view class="seach_item">
+                        <van-cell-group>
+                            <van-field data-name="goodsname" value="{{small.goodsname}}" placeholder="请输入" bind:blur="meetplaceblur" label="商品名称" />
+                        </van-cell-group>
+                    </view>
+                    <view class="seach_item">
+                        <van-cell-group>
+                            <van-field data-name="specifications" value="{{small.specifications}}" placeholder="请输入" bind:blur="meetplaceblur"  label="规格"  />
+                        </van-cell-group>
+                    </view>
+                    <view class="seach_item">
+                        <van-cell-group>
+                            <van-field data-name="unit" value="{{small.unit}}" placeholder="请输入" bind:blur="meetplaceblur" label="单位"   />
+                        </van-cell-group>
+                    </view>
+                    <view class="seach_item">
+                        <van-cell-group>
+                            <van-field data-name="quantity" value="{{small.quantity}}" placeholder="请输入" bind:blur="meetplaceblur" label="数量"  />
+                        </van-cell-group>
+                    </view>
+                    <view class="seach_item">
+                        <van-cell-group>
+                            <van-field data-name="demo" value="{{small.demo}}" placeholder="请输入" bind:blur="meetplaceblur" label="备注" />
+                        </van-cell-group>
+                    </view>
+                    <view class="checkkind">
+                       
+                        <text bind:tap="onClose">取消</text>
+                         <text bind:tap="seachqur">确认</text>
+                    </view>
+                </view>
+            </view>
+        </van-popup>
+    </view>
+</view>

@@ -1,0 +1,139 @@
+<!-- textages/textact/textact.wxml -->
+<view class="wraper">
+    <!-- 头部 -->
+    <view class="header">
+        <view class="title">
+            <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
+            <navigator url="/pages/returnmaterial/new/new" class="fr newCreate">新建</navigator>
+            <view class="apply">
+                <van-dropdown-menu active-color="red">
+                    <van-dropdown-item value="{{val}}" options="{{pact}}" />
+                </van-dropdown-menu>
+            </view>
+        </view>
+        <view class="seach">
+            <icon class="iconfont icon-fuxuananniu fl s-sort" bindtap="change"></icon>
+            <icon class="iconfont icon-sousuo fr" bindtap="seachItem"></icon>
+            <view class="data_list">
+                <input value="{{seach}}" bindblur="setSeach" />
+                <view class="number" wx:if="{{!seach}}">
+                    <icon class="iconfont icon-sousuo"></icon>
+                    <text>共{{InfoList.length}}条</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="main">
+        <view class="list" wx:for="{{InfoList}}" wx:key="index">
+            <navigator url="/pages/returnmaterial/detail/detail?id={{item.ID}}" hover-class="none">
+                <view>
+                    <text class="caption">{{item.losematerialName}}</text>
+                </view>
+                <view>
+                    <text class="info">申请人</text>
+                    <text>{{item.applyman}}</text>
+                </view>
+                <view>
+                    <text class="info">公司抬头</text>
+                    <text>{{item.Companytitle}}</text>
+                </view>
+                <view>
+                    <text class="info">部门</text>
+                    <text>{{item.department}}</text>
+                </view>
+                <view>
+                    <text class="info">审批状态</text>
+                    <text>{{item.ApprovalStatusint}}</text>
+                </view>
+                <view>
+                    <text class="info">项目编号</text>
+                    <text>{{item.projectcode}}</text>
+                </view>
+                <view>
+                    <text class="info">送货地址</text>
+                    <text>{{item.delieveryaddress}}</text>
+                </view>
+                <view>
+                    <text class="info">收货人手机号</text>
+                    <text>{{item.receivemanphone}}</text>
+                </view>
+                <view>
+                    <text class="info">创建人</text>
+                    <text>{{item.createman}}</text>
+                </view>
+                <view>
+                    <text class="info">创建时间</text>
+                    <text>{{item.createtime}}</text>
+                </view>
+            </navigator>
+        </view>
+         <view wx:if="{{loading&&InfoList.length}}" class="end">加载中...</view>
+        <view wx:if="{{!loading&&InfoList.length}}" class="end">已经到底了</view>
+        <view class="no_more" wx:if="{{!InfoList.length}}">暂无内容</view>
+          <van-popup show="{{ show }}" bind:close="onClose" position="right" overlay="{{ true }}" custom-class="pullpo" bind:click-overlay="onClose">
+            <van-toast id="van-toast" />
+            <view class="seachif scroll-view" scroll-y="true">
+                <view class="main n_main check">
+                    <view class="check_item">
+                        <text class="kind">对方公司</text>
+                        <van-cell-group>
+                            <van-field data-name="Company" value="{{info.Company}}" placeholder="请输入" bind:blur="meetplaceblur" />
+                        </van-cell-group>
+                    </view>
+                    <view class="check_item">
+                        <text class="kind">送货单号</text>
+                        <van-cell-group>
+                            <van-field data-name="delievrycode" value="{{info.delievrycode}}" placeholder="请输入" bind:blur="meetplaceblur" />
+                        </van-cell-group>
+                    </view>
+                    <view class="check_item">
+                        <text class="kind">项目或合同编号</text>
+                        <van-cell-group>
+                            <van-field data-name="projectcode" value="{{info.projectcode}}" placeholder="请输入" bind:blur="meetplaceblur" />
+                        </van-cell-group>
+                    </view>
+                    <view class="check_item">
+                        <text class="kind">送货地址</text>
+                        <van-cell-group>
+                            <van-field data-name="delieveryaddress" value="{{info.delieveryaddress}}" placeholder="请输入" bind:blur="meetplaceblur" />
+                        </van-cell-group>
+                    </view>
+                    <view class="check_item">
+                        <text class="kind">收货人手机号</text>
+                        <van-cell-group>
+                            <van-field data-name="receivemanphone" value="{{info.receivemanphone}}" placeholder="请输入" bind:blur="meetplaceblur" />
+                        </van-cell-group>
+                    </view>
+                    <view class="check_item">
+                        <text class="kind">备注</text>
+                        <van-cell-group>
+                            <van-field data-name="remark" value="{{info.remark}}" placeholder="请输入" bind:blur="meetplaceblur" />
+                        </van-cell-group>
+                    </view>
+                    <view class="check_item">
+                        <view class="kind">
+                            <text>开始时间</text>
+                        </view>
+                        <van-cell title="{{info.createtime}}" is-link bind:click="showPopup_time" class="time1"/>
+                        <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
+                            <van-datetime-picker data-name="createtime" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
+                        </van-popup>
+                    </view>
+                    <view class="check_item">
+                        <view class="kind">
+                            <text>结束时间</text>
+                        </view>
+                        <van-cell title="{{info.updatetime?info.updatetime:'请选择'}}" is-link bind:click="showPopup_endtime" class="time1"/>
+                        <van-popup show="{{ show_endtime }}" round position="bottom" bind:close="onClose_endtime">
+                            <van-datetime-picker data-name="updatetime" value="{{ currentDate1 }}" bind:cancel="onClose_endtime" bind:confirm="onConfirm_endtime" />
+                        </van-popup>
+                    </view>
+                    <view class="check_item check2">
+                        <text bind:tap="seachqur">确认</text>
+                        <text bind:tap="onClose">取消</text>
+                    </view>
+                </view>
+            </view>
+        </van-popup>
+    </view>
+</view>

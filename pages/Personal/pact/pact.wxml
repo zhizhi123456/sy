@@ -1,0 +1,41 @@
+<!-- textages/textact/textact.wxml -->
+<view class="wraper">
+    <!-- 头部 -->
+    <view class="header">
+        <view class="title">
+            <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
+            <navigator url="/pages/Personal/new/new" hover-class="none" class="fr newCreate">
+                编辑
+            </navigator>
+            <view class="apply">
+                <text>我的信息</text>
+            </view>
+        </view>
+    </view>
+    <view>
+        <view class="list">
+            <van-cell-group>
+                <van-cell title="用户名" label="{{item.UserName}}" border="{{ true }}" />
+                <!-- <van-cell title="密码" label="{{item.Password}}" border="{{ true}}" /> -->
+                <van-cell title="密码" label="*********" border="{{ true}}" />
+                <van-cell title="邮箱" label="{{item.Email}}" border="{{ true }}" />
+                <van-cell title="工号" label="{{item.EmpCode}}" border="{{ true }}" />
+                <van-cell title="职位" label="{{item.EmpName}}" border="{{ true }}" />
+                <van-cell title="电话" label="{{item.MobilePIN}}" border="{{ true }}" />
+                <van-cell title="密码问题" label="{{item.PasswordQuestion}}" border="{{ true }}" />
+                 <van-cell title="密码答案" label="{{item.PasswordAnswer}}" border="{{ true }}" />
+                <van-cell title="锁定" label="{{item.IslockedOut}}" border="{{ true }}" />
+                <van-cell title="最后登录时间" label="{{item.LastLoginDate}}" border="{{ true }}" />
+                <van-cell title="最后密码修改时间" label="{{item.LastPasswordChangedDate}}" border="{{ true }}" />
+                <van-cell title="最后锁定日期" label="{{item.LastLockoutDate}}" border="{{ true }}" />
+                <van-cell title="备注" label="{{item.Memo}}" border="{{ true }}" />
+                <van-cell title="报告视图权限" label="{{item.ReportViewPermissions}}" border="{{ true }}" />
+                <van-cell title="创建日期" label="{{item.FCD}}" border="{{ true }}" />
+                <van-cell title="修改日期" label="{{item.LUD}}" border="{{ true }}" />
+            </van-cell-group>
+        </view>
+        <!-- <view wx:if="{{loading&&InfoList.length}}" class="end">加载中...</view>
+        <view wx:if="{{!loading&&InfoList.length}}" class="end">已经到底了</view> -->
+        <view class="no_more" wx:if="{{!item}}">暂无内容</view>
+    </view>
+</view>

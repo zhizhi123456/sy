@@ -1,0 +1,74 @@
+<!-- textages/textact/textact.wxml -->
+<view class="wraper">
+    <!-- 头部 -->
+    <view class="header">
+        <view class="title">
+            <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
+            <navigator url="/pages/check/new/new" hover-class="none" class="fr newCreate">
+                新建
+            </navigator>
+            <view class="apply">
+                <van-dropdown-menu active-color="red">
+                    <van-dropdown-item value="{{val}}" options="{{pact}}" />
+                </van-dropdown-menu>
+            </view>
+        </view>
+        <view class="seach">
+            <icon class="iconfont icon-fuxuananniu fl s-sort"></icon>
+            <icon class="iconfont icon-sousuo fr" bindtap="seachInfo"></icon>
+            <view class="data_list">
+                <input value="{{seach}}" bindblur="setSeach" />
+                <view class="number" wx:if="{{!seach}}">
+                    <icon class="iconfont icon-sousuo"></icon>
+                    <text wx:if="{{InfoList.length}}">共{{InfoList.length}}条</text>
+                    <text wx:else>搜索</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="main">
+        <view class="list" wx:for="{{InfoList}}" wx:key="{{index}}">
+            <navigator url="/pages/check/detail/detail?id={{item.ID}}" hover-class="none">
+                <!-- <view>
+                    <text class="caption">{{item.proassignbookcode}}</text>
+                </view> -->
+                <view>
+                    <text class="info">分包项目编号</text>
+                    <text>{{item.subprojectcode}}</text>
+                </view>
+                <view>
+                    <text class="info">负责人</text>
+                    <text>{{item.chargeman}}</text>
+                </view>
+                <view>
+                    <text class="info">评分月份</text>
+                    <text>{{item.scoremonth}}</text>
+                </view>
+                <view>
+                    <text class="info">质量评分</text>
+                    <text>{{item.qualityscore}}</text>
+                </view>
+                <view>
+                    <text class="info">进度评分</text>
+                    <text>{{item.progressscore}}</text>
+                </view>
+                <view>
+                    <text class="info">安全评分</text>
+                    <text>{{item.safetyscore}}</text>
+                </view>
+                <view>
+                    <text class="info">管理评分</text>
+                    <text>{{item.managescore}}</text>
+                </view>
+                <view>
+                    <text class="info">材料使用评分</text>
+                    <text>{{item.materialusescore}}</text>
+                </view>
+ 
+            </navigator>
+        </view>
+        <view wx:if="{{loading&&InfoList.length}}" class="end">加载中...</view>
+        <view wx:if="{{!loading&&InfoList.length}}" class="end">已经到底了</view>
+        <view class="no_more" wx:if="{{!InfoList.length}}">暂无内容</view>
+    </view>
+</view>

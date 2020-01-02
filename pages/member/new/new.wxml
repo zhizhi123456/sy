@@ -1,0 +1,85 @@
+<!-- pages/new/new.wxml -->
+<view class="wraper">
+    <view class="header d_header" wx:if="{{info.ID}}">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="editreturn"></icon>
+        <text class="fr newCreate" bindtap="editconfirm">确定</text>
+        <view class="apply">编辑工程队成员</view>
+    </view>
+    <view class="header d_header" wx:else>
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="confirm">确定</text>
+        <view class="apply">新建工程队成员</view>
+    </view>
+    <view class="main n_main">
+        <van-toast id="van-toast" />
+          <view class="check_item">
+            <view class="kind require">
+                <text>施工队编号</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{ConstructionTeamIDtext?ConstructionTeamIDtext:'请选择'}}" bind:click="showPopup1">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show_nature1 }}" round position="bottom" bind:close="onClose1">
+                <van-picker data-name="ConstructionTeamID" show-toolbar columns="{{section2}}" bind:cancel="onClose1" bind:confirm="onConfirm1" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <text class="kind">成员姓名</text>
+            <van-cell-group>
+                <van-field data-name="MemberName" value="{{info.MemberName}}" placeholder="请输入" bind:blur="projectcodelur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">年龄</text>
+            <van-cell-group>
+                <van-field data-name="Age" value="{{info.Age}}" placeholder="请输入" bind:blur="projectcodelur" />
+            </van-cell-group>
+        </view>
+      
+        <view class="check_item">
+            <text class="kind">民族</text>
+            <van-cell-group>
+                <van-field data-name="nation" value="{{info.nation}}" placeholder="请输入" bind:blur="projectcodelur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">籍贯</text>
+            <van-cell-group>
+                <van-field data-name="nativePlace" value="{{info.nativePlace}}" placeholder="请输入" bind:blur="projectcodelur" />
+            </van-cell-group>
+        </view>
+         <view class="check_item">
+            <text class="kind">住址</text>
+            <van-cell-group>
+                <van-field data-name="Address" value="{{info.Address}}" placeholder="请输入" bind:blur="projectcodelur" />
+            </van-cell-group>
+        </view>
+
+         <view class="check_item">
+            <text class="kind">联系方式</text>
+            <van-cell-group>
+                <van-field data-name="contactway" value="{{info.contactway}}" placeholder="请输入" bind:blur="projectcodelur" />
+            </van-cell-group>
+        </view>
+         <view class="check_item">
+            <text class="kind">职务</text>
+            <van-cell-group>
+                <van-field data-name="duty" value="{{info.duty}}" placeholder="请输入" bind:blur="projectcodelur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">相关图片</text>
+            <van-cell title="请选择" is-link bind:click="showPopup_photo" />
+            <van-action-sheet show="{{ show_photo }}" actions="{{ check_photo }}" bind:cancel="onClose_photo" bind:click-overlay="onClose_photo" bind:select="onSelect_photo" cancel-text="取消" />
+            <view wx:if="{{upimg}}" class="datumimgbox">
+                <block wx:for="{{info.API_Picurl}}" wx:key="index">
+                    <view class="upimgbox">
+                        <image src="{{item}}" bindtap="tap_pic" data-index="{{index}}" />
+                        <icon class="iconfont icon-jianhao-tianchong delimg" data-i="{{index}}" bindtap="delimg" />
+                    </view>
+                </block>
+            </view>
+        </view>
+    </view>
+</view>

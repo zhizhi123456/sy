@@ -1,0 +1,118 @@
+<!-- pages/new/new.wxml -->
+<view class="wraper">
+    <view class="header d_header" wx:if="{{info.ID}}">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="editreturn"></icon>
+        <text class="fr newCreate" bindtap="editconfirm">确定</text>
+        <view class="apply">编辑安全交底</view>
+    </view>
+    <view class="header d_header" wx:else>
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="confirm">确定</text>
+        <view class="apply">新建安全交底</view>
+    </view>
+    <view class="main n_main">
+        <van-toast id="van-toast" />
+        <view class="check_item">
+            <view class="kind require">
+                <text>工程编号名称</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.ProjectIDName?info.ProjectIDName:'请选择'}}" bind:click="showPopup_4">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show_nature }}" round position="bottom" bind:close="onClose_4">
+                <van-picker data-name="ProjectIDName" show-toolbar columns="{{nature}}" bind:cancel="onClose_4" bind:confirm="onConfirm_4" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>记录编号</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="RecID" value="{{info.RecID}}" placeholder="请输入" bind:blur="projectnameblur" />
+            </van-cell-group>
+        </view>
+       
+        <view class="check_item">
+            <view class="kind require">
+                <text>分部分项工程名称</text>
+            </view>
+            <van-cell title="{{info.SubProjectIDName?info.SubProjectIDName:'请选择'}}" bind:click="showPopup1">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show1 }}" round position="bottom" bind:close="onClose1">
+                <van-picker data-name="SubProjectIDName" show-toolbar columns="{{sections}}" bind:cancel="onClose1" bind:confirm="onConfirm1" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <text class="kind">作业部位</text>
+            <van-cell-group>
+                <van-field data-name="WorkPosition" value="{{info.WorkPosition}}" placeholder="请输入" bind:blur="projectnameblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">作业内容</text>
+            <van-cell-group>
+                <van-field data-name="WorkContext" value="{{info.WorkContext}}" placeholder="请输入" bind:blur="projectnameblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>交底类别</text>
+            </view>
+            <van-cell title="{{info.TellIntentionClass?info.TellIntentionClass:'请选择'}}" bind:click="showPopup2">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show2 }}" round position="bottom" bind:close="onClose2">
+                <van-picker data-name="TellIntentionClass" show-toolbar columns="{{section1}}" bind:cancel="onClose2" bind:confirm="onConfirm2" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>交底日期</text>
+            </view>
+            <van-cell title="{{info.TellIntentionDate?info.TellIntentionDate:'请选择'}}" is-link bind:click="showPopup_time" />
+            <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
+                <van-datetime-picker data-name="TellIntentionDate" value="{{ currentDate3 }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <text class="kind">交底内容</text>
+            <van-cell-group>
+                <van-field data-name="TellIntentionContext" value="{{info.TellIntentionContext}}" placeholder="请输入" bind:blur="projectnameblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">交底技术人签名</text>
+            <van-cell-group>
+                <van-field data-name="TellIntenTechSign" value="{{info.TellIntenTechSign}}" placeholder="请输入" bind:blur="projectnameblur" />
+            </van-cell-group>
+        </view>
+          <view class="check_item">
+            <text class="kind">专职安全人签名</text>
+            <van-cell-group>
+                <van-field data-name="SpeciSafemanSign" value="{{info.SpeciSafemanSign}}" placeholder="请输入" bind:blur="projectnameblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">接受交底负责人签名</text>
+            <van-cell-group>
+                <van-field data-name="AcceptIntentChargeSign" value="{{info.AcceptIntentChargeSign}}" placeholder="请输入" bind:blur="projectnameblur" />
+            </van-cell-group>
+        </view>
+            <view class="check_item">
+            <text class="kind">作业人员签名</text>
+            <van-cell-group>
+                <van-field data-name="WorkManSign" value="{{info.WorkManSign}}" placeholder="请输入" bind:blur="projectnameblur" />
+            </van-cell-group>
+        </view>
+            <view class="check_item">
+            <text class="kind">备注</text>
+            <van-cell-group>
+                <van-field data-name="Remark" value="{{info.Remark}}" placeholder="请输入" bind:blur="projectnameblur" />
+            </van-cell-group>
+        </view>
+
+    </view>
+</view>

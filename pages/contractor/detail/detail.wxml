@@ -1,0 +1,72 @@
+<!-- pages/detail/detail.wxml -->
+<view wx:if="{{info}}">
+    <view class="header d_header">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="delete">删除</text>
+        <view class="apply">资料详情</view>
+    </view>
+    <view class="card">
+        <van-card title="{{info.ConstructionName}}" tag="资料详情" />
+    </view>
+    <view class="main_nav">
+        <van-tabs active="a">
+            <van-tab title="详细资料" name="a">
+                <view class="content">
+                    <view class="c_item">
+                        <view class="kind">施工队名称</view>
+                        <view class="check">{{info.ConstructionName}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">所属公司</view>
+                        <view class="check">{{info.Companytitle}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">公司地址</view>
+                        <view class="check">{{info.Address}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">主要联系人</view>
+                        <view class="check">{{info.chiefcontactman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">联系方式</view>
+                        <view class="check">{{info.contactway}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">简介</view>
+                        <view class="check">{{info.intro}}</view>
+                    </view>
+                  
+                    <view class="c_item">
+                        <view class="kind">创建人</view>
+                        <view class="check">{{info.createman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">创建时间</view>
+                        <view class="check">{{info.createtime}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">修改人</view>
+                        <view class="check">{{info.updateman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">修改时间</view>
+                        <view class="check">{{info.updatetime}}</view>
+                    </view>
+                </view>
+            </van-tab>
+            <van-tab title="附件" name="c">
+                <van-cell title="文件" is-link bind:click="up_photo" />
+            </van-tab>
+        </van-tabs>
+    </view>
+    <view class="footer">
+     
+        <view>
+            <navigator url="/pages/contractor/new/new?id={{info.ID}}" hover-class="none">
+                <icon class="iconfont icon-bianji"></icon>
+                <text>编辑</text>
+            </navigator>
+        </view>
+    </view>
+</view>

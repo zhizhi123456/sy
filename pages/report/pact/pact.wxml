@@ -1,0 +1,131 @@
+<!-- textages/textact/textact.wxml -->
+<view class="wraper">
+    <!-- 头部 -->
+    <view class="header">
+        <view class="title">
+            <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
+            <view class="apply">
+                <van-dropdown-menu active-color="red">
+                    <van-dropdown-item value="{{val}}" options="{{pact}}" />
+                </van-dropdown-menu>
+            </view>
+        </view>
+        <view class="seach">
+            <icon class="iconfont icon-fuxuananniu fl s-sort" bindtap="change"></icon>
+            <icon class="iconfont icon-sousuo fr" bindtap="seachInfo"></icon>
+            <view class="data_list">
+                <input value="{{seach}}" bindblur="setSeach" />
+                <view class="number" wx:if="{{!seach}}">
+                    <icon class="iconfont icon-sousuo"></icon>
+                    <text wx:if="{{InfoList.length}}">共{{InfoList.length}}条</text>
+                    <text wx:else>搜索</text>
+                </view>
+            </view>
+            <van-popup show="{{ show }}" bind:close="onClose" position="right" overlay="{{ true }}" custom-style="height: 100vh;color:#333" custom-class="pullpo" bind:click-overlay="onClose">
+                <van-toast id="van-toast" />
+                <view class="seachif scroll-view" scroll-y="true">
+                    <view>
+                       <view class="seach_item">
+                            <van-field value="{{info.Companytitle}}" bind:focus="showPopup1" class="time1" title-class="time1" label="公司" placeholder="请选择" />
+                            <van-popup show="{{show1}}" round position="bottom" bind:close="onClose1">
+                                <van-picker data-name="Companytitle" show-toolbar columns="{{ section1 }}" bind:cancel="onClose1" bind:confirm="onConfirm1" />
+                            </van-popup>
+                        </view>
+                        <!-- <view class="seach_item">
+                            <van-cell-group>
+                                <van-field data-name="keyword" value="{{info.keyword}}" placeholder="请输入" bind:blur="meetplaceblur" label="关键字" />
+                            </van-cell-group>
+                        </view> -->
+                        <view class="seach_item">
+                            <van-field value="{{info.department}}" bind:focus="showPopup_o" class="time1" title-class="time1" label="所属部门" placeholder="请选择" />
+                            <van-popup show="{{show_o}}" round position="bottom" bind:close="onClose_o">
+                                <van-picker data-name="department" show-toolbar columns="{{ sections }}" bind:cancel="onClose_o" bind:confirm="onConfirm_o" />
+                            </van-popup>
+                        </view>
+                        <view class="seach_item">
+                            <van-field value="{{info.subprojectname}}" bind:focus="showPopup2" class="time1" title-class="time1" label="分包项目" placeholder="请选择" />
+                            <van-popup show="{{show2}}" round position="bottom" bind:close="onClose2">
+                                <van-picker data-name="subprojectname" show-toolbar columns="{{ section2 }}" bind:cancel="onClose2" bind:confirm="onConfirm2" />
+                            </van-popup>
+                        </view>
+                        <view class="seach_item">
+                            <van-field value="{{info.subcontactname}}" bind:focus="showPopup3" class="time1" title-class="time1" label="分包合同" placeholder="请选择" />
+                            <van-popup show="{{show3}}" round position="bottom" bind:close="onClose3">
+                                <van-picker data-name="subcontactname" show-toolbar columns="{{ section3 }}" bind:cancel="onClose3" bind:confirm="onConfirm3" />
+                            </van-popup>
+                        </view>
+                        <view class="seach_item">
+                            <van-cell-group>
+                                <van-field data-name="chargeman" value="{{info.chargeman}}" placeholder="请输入" bind:blur="meetplaceblur" label="负责人" />
+                            </van-cell-group>
+                        </view>
+                        <view class="seach_item">
+                            <van-field value="{{info.begintime}}" bind:focus="showPopup_time" class="time1" label="开始时间" placeholder="请选择" />
+                            <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
+                                <van-datetime-picker data-name="begintime" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
+                            </van-popup>
+                        </view>
+                        <view class="seach_item">
+                            <van-field value="{{info.endtime}}" bind:focus="showPopup_endtime" class="time1" label="结束时间" placeholder="请选择" />
+                            <van-popup show="{{ show_endtime }}" round position="bottom" bind:close="onClose_endtime">
+                                <van-datetime-picker data-name="endtime" value="{{ currentDate1 }}" bind:cancel="onClose_endtime" bind:confirm="onConfirm_endtime" />
+                            </van-popup>
+                        </view>
+                        <view class="checkkind">
+                            <text bind:tap="onClose">取消</text>
+                            <text bind:tap="seachqur">确认</text>
+                        </view>
+                    </view>
+                </view>
+            </van-popup>
+        </view>
+    </view>
+    <view class="main">
+        <view class="list" wx:for="{{InfoList}}" wx:key="index">
+            <navigator url="/pages/report/detail/detail?id={{item.ID}}" hover-class="none">
+                <!-- <view>
+                    <text class="caption">{{item.projectname}}</text>
+                </view> -->
+                <view>
+                    <text class="info">员工名称</text>
+                    <text>{{item.chargeman}}</text>
+                </view>
+                <view>
+                    <text class="info">管理项目数</text>
+                    <text>{{item.projectnum}}</text>
+                </view>
+                <view>
+                    <text class="info">管理项目金额</text>
+                    <text>{{item.projectsum}}</text>
+                </view>
+                <view>
+                    <text class="info">质量评分</text>
+                    <text>{{item.qualityscore}}</text>
+                </view>
+                <view>
+                    <text class="info">进度评分</text>
+                    <text>{{item.progressscore}}</text>
+                </view>
+                <view>
+                    <text class="info">安全评分</text>
+                    <text>{{item.safetyscore}}</text>
+                </view>
+                <view>
+                    <text class="info">管理评分</text>
+                    <text>{{item.managescore}}</text>
+                </view>
+                <view>
+                    <text class="info">材料使用评分</text>
+                    <text>{{item.materialusescore}}</text>
+                </view>
+                <view>
+                    <text class="info">总平均得分</text>
+                    <text>{{item.averagescore}}</text>
+                </view>
+            </navigator>
+        </view>
+        <view wx:if="{{loading&&InfoList.length}}" class="end">加载中...</view>
+        <view wx:if="{{!loading&&InfoList.length}}" class="end">已经到底了</view>
+        <view class="no_more" wx:if="{{!InfoList.length}}">暂无内容</view>
+    </view>
+</view>
