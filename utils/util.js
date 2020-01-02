@@ -101,7 +101,7 @@ const checkContent = (value, key) => {
     })
     value.API_Picurl = value.API_Picurl.join(",")
   }
-   var app = getApp();
+  var app = getApp();
   //公司
   app.globalData.Companytitle.forEach(res => {
     if (value.Companytitle == res.text) {
@@ -246,34 +246,34 @@ const checkContent = (value, key) => {
       value.HoleFirePrevInstQty = res.value;
     }
   })
-    //合同签订情况
-    app.globalData.Ifmakecontactlist.forEach(res => {
-      if (value.contactbookstate == res.text) {
-        value.contactbookstate = res.value;
-      }
-    })
-    //材料编码
-    app.globalData.Goodsname.forEach(res => {
-      if (value.goodscode == res.text) {
-        value.goodscode = res.value;
-      }
-    })
-    // 项目类型
-    if (value.mainprojecttype) {
-      var kinds = [];
-      value.mainprojecttype.split(",").forEach(res => {
-        app.globalData.Projecttype.forEach(depart => {
-          if (res == depart.text.substr(-1)) {
-            if (kinds.indexOf(depart.value.substr(-1)) == -1) {
-              kinds.push(depart.value.substr(-1))
-            }
-          }
-        })
-      })
-      value.mainprojecttype = kinds.join(",");
+  //合同签订情况
+  app.globalData.Ifmakecontactlist.forEach(res => {
+    if (value.contactbookstate == res.text) {
+      value.contactbookstate = res.value;
     }
-  };
-  
+  })
+  //材料编码
+  app.globalData.Goodsname.forEach(res => {
+    if (value.goodscode == res.text) {
+      value.goodscode = res.value;
+    }
+  })
+  // 项目类型
+  if (value.mainprojecttype) {
+    var kinds = [];
+    value.mainprojecttype.split(",").forEach(res => {
+      app.globalData.Projecttype.forEach(depart => {
+        if (res == depart.text.substr(-1)) {
+          if (kinds.indexOf(depart.value.substr(-1)) == -1) {
+            kinds.push(depart.value.substr(-1))
+          }
+        }
+      })
+    })
+    value.mainprojecttype = kinds.join(",");
+  }
+};
+
 // 判断更改内容...
 const checkChange = (value, key, dep) => {
   for (let i in value) {
@@ -488,8 +488,8 @@ const handleData = (data, key, dep) => {
     if (data[i] == null || data[i] == "null" || !data[i]) {
       data[i] = ""
     }
-  } 
-   // 部门
+  }
+  // 部门
   app.globalData.department.forEach(depart => {
     if (data.departmentId == depart.value || data.department == depart.value) {
       data.department = depart.text;
@@ -498,7 +498,7 @@ const handleData = (data, key, dep) => {
         departmenttext: depart.text
       })
     }
-  })  
+  })
   // 公司
   app.globalData.Companytitle.forEach(depart => {
     if (data.Companytitle == depart.value) {
@@ -513,7 +513,7 @@ const handleData = (data, key, dep) => {
     if (data.SentFileCompany == depart.value) {
       data.SentFileCompany = depart.text
     }
-     if (data.bulidcompanyname == depart.value) {
+    if (data.bulidcompanyname == depart.value) {
       data.bulidcompanyname = depart.text
     }
   })
@@ -744,8 +744,8 @@ const listData = (data, dep, page, list) => {
       if (value.department == depart.value) {
         value.department = depart.text
       }
-    })   
-     //公司
+    })
+    //公司
     app.globalData.Companytitle.forEach(res => {
       if (value.Companytitle == res.value) {
         value.Companytitle = res.text;
@@ -762,8 +762,8 @@ const listData = (data, dep, page, list) => {
       if (value.ConstructCompany == res.value) {
         value.ConstructCompany = res.text;
       }
-    })   
-     // //总包项目
+    })
+    // //总包项目
     // app.globalData.MainProject.forEach(res => {
     //   if (value.projectcode == res.value) {
     //     value.projectcode = res.text;
@@ -786,23 +786,23 @@ const listData = (data, dep, page, list) => {
       if (value.projectcode == res.value) {
         value.projectcode = res.text;
       }
-   })
-   if (value.amountPlan && value.amountQuantity) {
-    data[index].offset = ((value.amountPlan - value.amountQuantity) / value.amountPlan * 100).toFixed(2) + "%";
-  }
-  value.materialcost = value.materialcost ? value.materialcost : 0;
-  value.projectcost = value.projectcost ? value.projectcost : 0;
-  value.harmonizecost = value.harmonizecost ? value.harmonizecost : 0;
-  value.installcost = value.installcost ? value.installcost : 0;
-  value.totalCost = value.materialcost + value.projectcost + value.harmonizecost + value.installcost;
-  value.profit = value.contcactamount - value.totalCost;
-  value.rate = (value.profit / value.contcactamount * 100).toFixed(2) + "%";
-  app.globalData.Companytitle.forEach(depart => {
-    if (value.Companytitle == depart.value) {
-      value.Companytitle = depart.text
+    })
+    if (value.amountPlan && value.amountQuantity) {
+      data[index].offset = ((value.amountPlan - value.amountQuantity) / value.amountPlan * 100).toFixed(2) + "%";
     }
-  })
-  if (value.mainprojecttype) {
+    value.materialcost = value.materialcost ? value.materialcost : 0;
+    value.projectcost = value.projectcost ? value.projectcost : 0;
+    value.harmonizecost = value.harmonizecost ? value.harmonizecost : 0;
+    value.installcost = value.installcost ? value.installcost : 0;
+    value.totalCost = value.materialcost + value.projectcost + value.harmonizecost + value.installcost;
+    value.profit = value.contcactamount - value.totalCost;
+    value.rate = (value.profit / value.contcactamount * 100).toFixed(2) + "%";
+    app.globalData.Companytitle.forEach(depart => {
+      if (value.Companytitle == depart.value) {
+        value.Companytitle = depart.text
+      }
+    })
+    if (value.mainprojecttype) {
       var kinds = [];
       value.mainprojecttype.split(",").forEach(res => {
         app.globalData.Projecttype.forEach(depart => {
@@ -818,15 +818,15 @@ const listData = (data, dep, page, list) => {
       }
       value.mainprojecttype = kinds.join(",");
     }
-  }); 
-   if (page) {
-  let num = Math.ceil(data.length / 5);
-  if (page && num >= page) {
-    let addArr = data.slice((page - 1) * 5, ((page - 1) * 5) + 5);
-    list.push(...addArr);
+  });
+  if (page) {
+    let num = Math.ceil(data.length / 5);
+    if (page && num >= page) {
+      let addArr = data.slice((page - 1) * 5, ((page - 1) * 5) + 5);
+      list.push(...addArr);
+    }
+    return list;
   }
-  return list;
-}
 }
 // 页面滚动到底部
 const pageScrollToBottom = () => {
@@ -1275,7 +1275,7 @@ const whether = (content) => {
     var c = false
     return c
   }
-  
+
   if (content == "已完成") {
     var c = true
     return c
@@ -1289,7 +1289,7 @@ const whether = (content) => {
     var c = ''
     return c
   }
-  
+
 }
 const whethercontent = (content) => {
   if (content === true) {
@@ -1408,7 +1408,7 @@ const intro = (data, that) => {
     if (s.text == data.mainprojectprop) {
       data.mainprojectprop = s.value
     }
-    
+
 
   })
   app.globalData.Progress1.forEach(s => {
@@ -1628,7 +1628,7 @@ const outflow = (data, that) => {
     if (s.value == data.bulidcompanyname) {
       data.bulidcompanyname = s.text
     }
-   
+
   })
   app.globalData.IntentionClass.forEach(s => {
     if (s.value == data.TellIntentionClass) {
@@ -1673,7 +1673,7 @@ const outflow = (data, that) => {
       data.ConstructionTeamID = s.text
     }
   })
- 
+
 }
 const outflowlist = (list, that) => {
   // 合同签订情况
@@ -1700,102 +1700,133 @@ const introlist = (list, that) => {
 // 组合查询
 const qgroupdeliver = (funcname, that) => {
   var app = getApp();
+  var zhen = []
   let info = that.data.info;
-  wx.getStorage({
-    key: 'myInfo',
-    success(res) {
-      info.UserName = res.data.UserName
-    }
-  })
-  intro(info, this)
-  console.log(info)
-
-  for (let i in info) {
-    if (info[i] == "请选择" || !info[i] || info[i] == "") {
-      info[i] = null
-    }
-  }
-  if (info.quantity) {
-    info.quantity = Number(info.quantity)
-  }
-  if (info.departmentID) {
-    app.globalData.department.forEach(depart => {
-      if (info.departmentID == depart.text) {
-        info.departmentID = depart.value
-      }
-    })
-  }
-  if (info.department) {
-    app.globalData.department.forEach(depart => {
-      if (info.department == depart.text) {
-        info.department = depart.value
-      }
-    })
-  }
-  that.setData({
-    info
-  })
-  let infodata = {
-    Timestamp: app.globalData.time,
-    ...that.data.info
-  }
-  funcname(
-    infodata
-  ).then(res => {
-    console.log(res)
-    wx.showLoading({
-      title: '加载中',
-    });
-    if (res.code == 10000) {
-      wx.showToast({
-        title: '搜索成功',
-        icon: 'success',
-        duration: 3000
-      })
-      that.onClose()
-      let item
-      if (funcname == querysign) {
-        item = res.Lists;
-      } else {
-        item = res.List;
-      }
-      outflowlist(item, this)
-      for (let k of item) {
-        for (let i in k) {
-          if (k[i] == null || k[i] == "null" || !k[i]) {
-            k[i] = " "
-          }
-        }
-      }
-      item.forEach(value => {
-        app.globalData.department.forEach(depart => {
-          if (value.department == depart.value) {
-            value.department = depart.text
-          }
-        })
-        if (value.checkindate || value.condition) {
-          value.checkindate = value.checkindate.substring(0, 10)
-          // value.Checkintime = value.Checkintime.substring(10)
-          value.condition == "忘打卡" ? value.Checkintime = '' : value.condition
-        }
-      });
-      that.setData({
-        InfoList: item.reverse()
-      })
-    
-      wx.hideLoading();
+  for (var t in info) {
+    if (info[t]) {
+      zhen.push(true)
     } else {
-      let info = that.data.info;
-      info.picurl = [];
-      that.setData({
-        info
+      zhen.push(false)
+    }
+  }
+  // console.log(zhen)
+  var t = zhen.some(s => {
+    return s == true
+  })
+  // console.log(t)
+  if (!t) {
+    wx.showToast({
+      title: '请至少输入一项',
+      icon: 'none',
+      duration: 2000
+    })
+  } else {
+    wx.getStorage({
+      key: 'myInfo',
+      success(res) {
+        info.UserName = res.data.UserName
+      }
+    })
+    intro(info, this)
+    console.log(info)
+
+    for (let i in info) {
+      if (info[i] == "请选择" || !info[i] || info[i] == "") {
+        info[i] = null
+      }
+    }
+    if (info.quantity) {
+      info.quantity = Number(info.quantity)
+    }
+    if (info.departmentID) {
+      app.globalData.department.forEach(depart => {
+        if (info.departmentID == depart.text) {
+          info.departmentID = depart.value
+        }
       })
     }
-  })
+    if (info.department) {
+      app.globalData.department.forEach(depart => {
+        if (info.department == depart.text) {
+          info.department = depart.value
+        }
+      })
+    }
+    that.setData({
+      info
+    })
+    let infodata = {
+      Timestamp: app.globalData.time,
+      ...that.data.info
+    }
+    funcname(
+      infodata
+    ).then(res => {
+      console.log(res)
+      wx.showLoading({
+        title: '加载中',
+      });
+      if (res.code == 10000) {
+        wx.showToast({
+          title: '搜索成功',
+          icon: 'success',
+          duration: 3000
+        })
+        that.onClose()
+        let item
+        if (funcname == querysign) {
+          item = res.Lists;
+        } else {
+          item = res.List;
+        }
+        outflowlist(item, this)
+        for (let k of item) {
+          for (let i in k) {
+            if (k[i] == null || k[i] == "null" || !k[i]) {
+              k[i] = " "
+            }
+          }
+        }
+        item.forEach(value => {
+          app.globalData.department.forEach(depart => {
+            if (value.department == depart.value) {
+              value.department = depart.text
+            }
+          })
+          if (value.checkindate || value.condition) {
+            value.checkindate = value.checkindate.substring(0, 10)
+            // value.Checkintime = value.Checkintime.substring(10)
+            value.condition == "忘打卡" ? value.Checkintime = '' : value.condition
+          }
+        });
+        that.setData({
+          InfoList: item.reverse()
+        })
 
-  const dispose = () => {
+        wx.hideLoading();
+        for (var key in info) {
+          info[key] = ''
+        }
+        that.setData({
+          info
+        })
+      } else {
+        let info = that.data.info;
+        for (var key in info) {
+          info[key] = ''
+        }
+        info.picurl = [];
+        that.setData({
+          info
+        })
+      }
+    })
 
+    const dispose = () => {
+
+    }
   }
+
 }
 // 组合查询
 const qgroupsmall = (funcname, that) => {

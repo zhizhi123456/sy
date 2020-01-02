@@ -1,6 +1,8 @@
 {
   "pages": [
     "pages/contracts/contracts",
+    
+      "pages/sign/pact/pact",
     "pages/section/section",
     "pages/subcontract/pact/pact",
     "pages/section/section2",

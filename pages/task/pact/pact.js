@@ -63,25 +63,32 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     list = [];
     wx.showLoading({
       title: '加载中',
     });
+    if (options.userid) {
+      let info = this.data.info;
+      info.departmentID = options.dep;
+      info.chargemanName = options.userid;
+      this.setData({
+        top: options.caption + '的分包项目',
+        hadNew: 0,
+        info,
+        departmenttext: options.deptxt,
+        userid: options.userid,
+        deptxt: options.deptxt,
+      })
+    }
     // 调用查询
-    getTask().then(res => {
-      // console.log(res.List)
-      if (res.code == 10000) {
-        item = res.List;
-        list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list);
-        this.setData({
-          InfoList: list,
-          item
-        })
-        wx.hideLoading();
-      }
-    }).catch(err => {
-      console.log(err)
+    this.setData({
+      seach: '',
+      chargemanName: this.data.info.chargemanName
     })
+
+
+    this.seachInfo()
     if (app.globalData.CountItem) {
       this.setData({
         props: app.globalData.Projectprop,

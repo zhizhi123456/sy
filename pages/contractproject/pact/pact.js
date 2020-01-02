@@ -32,8 +32,8 @@ Page({
     info: {
       projectname: "",
       department: "",
-      planbegindate: "请选择",
-      planenddate: "请选择",
+      planbegindate: "",
+      planenddate: "",
     },
     pull: false,
     show: false,

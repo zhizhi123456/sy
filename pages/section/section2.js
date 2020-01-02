@@ -41,7 +41,19 @@ Page({
         name: "轨迹",
         menuId: null,
         icon: 'icon-guiji1',
-        path: '/pages/track/track'
+        path: '/pages/track/task'
+      },
+      {
+        name: "任务书",
+        menuId: null,
+        icon: 'icon-guiji1',
+        path: '/pages/task/pact/pact'
+      },
+      {
+        name: "设计任务",
+        menuId: null,
+        icon: 'icon-guiji1',
+        path: '/pages/design/pact/pact'
       }
     ]
   },

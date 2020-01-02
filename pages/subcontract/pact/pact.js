@@ -97,7 +97,7 @@ Page({
     wx.showLoading({
       title: '加载中',
     });
-    // console.log(options)
+    console.log(options)
     if (options.userid) {
       let info = this.data.info;
       info.departmentID = options.dep;
