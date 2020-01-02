@@ -20,7 +20,7 @@ Page({
   },
   // 返回
   return () {
-    util.returnMenu();
+    util.returnMenu(1001);
   },
   setSeach(e) {
     // console.log(e)

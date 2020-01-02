@@ -26,6 +26,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (options.id) {
+      this.setData({
+        options: options
+      })
+    }
     let that = this;
     wx.showLoading({
       title: "加载中"
@@ -99,8 +104,8 @@ Page({
     }
   },
   // 返回
-  return (e) {
-    util.returnMenu();
+  return () {
+    util.returnMenu2(this.data.options.id, this.data.options.title);
   },
   // 开始时间
   showPopup_time() {

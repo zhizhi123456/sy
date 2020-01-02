@@ -12,14 +12,14 @@ Page({
   data: {
     seach: '',
     loading: false,
-    top:'工程变更',
+    top: '工程变更',
     InfoList: [],
     item: [],
     pages: 1,
   },
   // 返回
   return () {
-    util.returnMenu();
+    util.returnMenu2(this.data.options.id, this.data.options.title);
   },
   setSeach(e) {
     // console.log(e)
@@ -29,7 +29,7 @@ Page({
   },
   // 模糊查询
   seachInfo() {
-    list=[];
+    list = [];
     wx.showLoading({
       title: '加载中',
     });
@@ -46,7 +46,7 @@ Page({
         this.setData({
           InfoList: list,
           item,
-          seach:''
+          seach: ''
         })
         wx.hideLoading();
       }
@@ -56,6 +56,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (options.id) {
+      this.setData({
+        options: options
+      })
+    }
     list = [];
     wx.showLoading({
       title: '加载中',

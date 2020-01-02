@@ -32,7 +32,7 @@ Page({
   // 返回
   return () {
     if (this.data.hadNew) {
-      util.returnMenu();
+      util.returnMenu(1001);
     } else {
       util.backprev();
     }

@@ -1,11 +1,6 @@
 {
   "pages": [
-<<<<<<< HEAD
     "pages/contracts/contracts",
-=======
-      "pages/contracts/contracts",
-   
->>>>>>> 523099f404d6bc841b9bc903efbf167ac0ac1915
     "pages/section/section",
     "pages/subcontract/pact/pact",
     "pages/section/section2",
