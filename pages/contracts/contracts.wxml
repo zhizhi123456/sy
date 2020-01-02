@@ -7,7 +7,7 @@
   </view>
   <view class="list">
     <view class="box" wx:for="{{lists}}" wx:key="index">
-      <view class="{{'masked'+ (item.control ? '':' show')}}">
+      <view class="{{'masked'+ (item.control ? '':' show') + (item.path?'':' show')}}">
         <icon class="iconfont icon-mima"></icon>
       </view>
       <icon class="{{' red  icon iconfont '+ item.img + (item.control ?'':' c') }}"></icon>
