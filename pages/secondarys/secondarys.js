@@ -34,7 +34,7 @@ Page({
       {
         nametext: "技术交底",
         img: "icon-jishuziliao .blue2",
-        path: "",
+        path: "/pages/disclosure/pact/pact",
         control: true //权限
       },
       {
@@ -81,19 +81,19 @@ Page({
       {
         nametext: "开停工通知",
         img: "icon-tongzhi .blue7",
-        path: "",
+        path: "/pages/workorder/pact/pact",
         control: true //权限
       },
       {
         nametext: "开工报告",
         img: "icon-baogao1 .blue7",
-        path: "",
+        path: "/pages/startUp/pact/pact",
         control: true //权限
       },
       {
         nametext: "完工报告",
         img: "icon-baogao3 .blue7",
-        path: "",
+        path: "/pages/complete/pact/pact",
         control: true //权限
       },
 
@@ -141,7 +141,7 @@ Page({
       {
         nametext: "通话记录",
         img: "icon-tonghuajilu .green3",
-        path: "",
+        path: "/pages/talk/pact/pact",
         control: true //权限
       },
       {
@@ -177,14 +177,14 @@ Page({
 
         nametext: "项目月度考评",
         img: "icon-kaohe .red4",
-        path: "",
+        path: "/pages/check/pact/pact",
         control: true //权限
       },
       {
 
         nametext: "项目月度报表",
         img: "icon-baobiao2 .yellow1",
-        path: "",
+        path: "/pages/report/pact/pact",
         control: true //权限
       },
       {
@@ -204,7 +204,7 @@ Page({
       {
         nametext: "设计管理",
         img: "icon-lunkuodasan- .green4",
-        path: "",
+        path: "/pages/design/pact/pact",
         control: true //权限
       },
       // {
@@ -225,56 +225,56 @@ Page({
 
         nametext: "安防质量验收",
         img: "icon-anfang .red3",
-        path: "/pages/accident/pact/pact",
+        path: "/pages/security/pact/pact",
         control: true //权限
       },
       {
 
         nametext: "建筑分部验收",
         img: "icon-jianzhu .red3",
-        path: "/pages/accident/pact/pact",
+        path: "/pages/building/pact/pact",
         control: true //权限
       },
       {
 
         nametext: "工程质量报告",
         img: "icon-zhiliangjiance .red3",
-        path: "/pages/accident/pact/pact",
+        path: "/pages/quality/pact/pact",
         control: true //权限
       },
       {
 
         nametext: "线缆质量验收",
         img: "icon-xianlan .red3",
-        path: "/pages/accident/pact/pact",
+        path: "/pages/cable/pact/pact",
         control: true //权限
       },
       {
 
         nametext: "项目成本利润统计",
         img: "icon-chengbenfenxi- .blue10",
-        path: "",
+        path: "/pages/count/pact/pact",
         control: true //权限
       },
       {
 
         nametext: "项目费用统计",
         img: "icon-shouzhimingxi .yellow2",
-        path: "",
+        path: "/pages/count/pact/pact",
         control: true //权限
       },
       {
 
         nametext: "项目工程量统计",
         img: "icon-report .green2",
-        path: "",
+        path: "/pages/quantity/pact/pact",
         control: true //权限
       },
       {
 
         nametext: "项目工程材料统计",
         img: "icon-yuancailiao .green2",
-        path: "",
+        path: "/pages/unify/pact/pact",
         control: true //权限
       },
 
@@ -455,7 +455,7 @@ Page({
       {
         nametext: "个人信息",
         img: "icon-gerenxinxi green",
-        path: "",
+        path: "/pages/Personal/pact/pact",
         control: true,
       },
       {
@@ -479,7 +479,7 @@ Page({
       {
         nametext: "我的考勤",
         img: "icon-kaoqin1 red2",
-        path: "",
+        path: "/pages/sign/pact/pact",
         control: true,
       },
       {
