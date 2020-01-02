@@ -6,7 +6,7 @@ import {
 } from "../../../service/getData";
 var util = require("../../../utils/util");
 var app = getApp();
-var QQMapWX = require('../../../utils/qqmap-wx-jssdk.js');
+var QQMapWX = require('../../../utils/qqmap-wx-jssdk.min.js');
 var qqmapsdk;
 Page({
   /**

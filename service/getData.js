@@ -356,22 +356,7 @@ export const amendCost = (params) => http.post("http://192.168.2.125:88/api/char
 // 删除
 export const cancelCost = (params) => http.post("http://192.168.2.148:88/api/charge/Delete", params);
 // 从总包项目中查询费用
-export const selectCost = (params) => http.post("http://192.168.2.125:88/api/charge/LookCharge", params);// 删除
-export const cancelCost = (params) => http.post("http://192.168.2.125:88/api/charge/Delete", params);
-
-// 从总包项目/合同中查询费用
 export const selectCost = (params) => http.post("http://192.168.2.125:88/api/charge/LookCharge", params);
-// 台账
-// 查询
-export const getLedger = (params) => http.post("http://192.168.2.125:88/api/standingbook/Query", params);
-// 根据id查询
-export const referLedger = (params) => http.post("http://192.168.2.125:88/api/standingbook/Edit", params);
-// 添加
-export const addLedger = (params) => http.post("http://192.168.2.125:88/api/standingbook/Insert", params);
-// 修改
-export const amendLedger = (params) => http.post("http://192.168.2.125:88/api/standingbook/EditInfo", params);
-// 删除
-export const cancelLedger = (params) => http.post("http://192.168.2.125:88/api/standingbook/Delete", params);
 // 材料采购
 // 查询P
 export const getPurchase = (params) => http.post("http://192.168.2.148:88/api/purchasecontact/Query", params);
@@ -819,5 +804,3 @@ export const addPlan = (params) => http.post("http://192.168.2.148:88/api/Commun
 export const amendPlan = (params) => http.post("http://192.168.2.148:88/api/CommunEnginProgress/Update", params);
 // 删除
 export const cancelPlan = (params) => http.post("http://192.168.2.148:88/api/CommunEnginProgress/Delete", params);
-// 获取菜单数据
-export const queryMenu = (params) => http.post("http://192.168.2.148:88/api/MenuApp/Query", params);

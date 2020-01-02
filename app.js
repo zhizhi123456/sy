@@ -46,7 +46,6 @@ import {
   ConstructionTeam,
   costkind,
   costobj,
-  IntentionClass,
   CountYear,
   Engineer,
   CountItem,
@@ -383,8 +382,6 @@ App({
       let ConstructionTeam = JSON.parse(res.replace(/ID/g, 'value').replace(/ConstructionName/g, 'text'));
       this.globalData.ConstructionTeam = ConstructionTeam;
     })
-
-
   },
   globalData: {
     mapadress: "",
@@ -753,6 +750,5 @@ App({
       text: '已超时'
     }]
   }
-  
-  
+   
 })
