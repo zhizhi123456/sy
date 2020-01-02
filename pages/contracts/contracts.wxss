@@ -6,12 +6,14 @@
   background-color: teal;
   /* position: relative; */
 }
-.icon1{
+
+.icon1 {
   font-size: 50rpx;
   position: absolute;
   right: 26rpx;
-  top:30rpx;
+  top: 30rpx;
 }
+
 .list {
   margin: 100rpx 0 120rpx 0;
   display: flex;
@@ -41,6 +43,7 @@
   display: inline-block;
   width: 100%;
 }
+
 .list>.box navigator {
   position: absolute;
   top: 0;
@@ -78,7 +81,7 @@
   justify-content: space-around;
   font-size: 30rpx;
   background-color: white;
-  
+
 }
 
 .tabar>.box {
@@ -144,80 +147,6 @@
   background-color: #4e8dcc;
 }
 
-
-
-/* .blue {
-  background-color: rgb(255, 168, 82);
-}
-
-.blue1 {
-  background-color: #336699;
-}
-
-.green {
-  background-color: rgb(23, 160, 123);
-}
-
-.red1 {
-  background-color: #F15A4A;
-}
-
-.blue2 {
-  background-color: #22D0FF;
-}
-
-.orange {
-  background-color: #F7D11E;
-}
-
-.green1 {
-  background-color: #377C37;
-}
-
-.green2 {
-  background-color: rgb(82, 179, 119);
-}
-
-.blue3 {
-  background-color: #F0DBA6;
-}
-
-.green3 {
-  background-color: #22C67F;
-}
-
-.yellow {
-  background-color: #E2B33F;
-}
-
-.red3 {
-  background-color: #F56C6C;
-}
-
-.blue4 {
-  background-color: #819FF3;
-}
-
-.yellow1 {
-  background-color: #FFCA3A;
-}
-
-.green4 {
-  background-color: #8AD96A;
-}
-
-.green5 {
-  background-color: #4E8CEE;
-}
-
-.green6 {
-  background-color: #E3C8AB;
-}
-
-.green7 {
-  background-color: #0071BC;
-} */
-
 .list .masked {
   position: absolute;
   top: 0;
@@ -231,17 +160,13 @@
   /* border: 1rpx solid #ddd; */
 }
 
- .list .show {
-   display: block; 
- } 
-
-/* .list>.box:hover .show {
+.list .show {
   display: block;
-  transition: all 1s;
-} */
+}
 
-.masked .iconfont {
+.list .box .masked .iconfont {
   font-size: 56rpx;
   color: rgb(146, 146, 146);
   margin-top: 55rpx;
+  background-color: transparent;
 }
