@@ -176,13 +176,13 @@ Page({
 
         nametext: "登录/注册",
         img: "icon-zhuce blue4",
-        path: "",
+        path: "/pages/login/login",
         control: true, //权限
         three: true
       }, {
         nametext: "我的信息",
         img: "icon-gerenzhongxinyewodexinxi  yellow1",
-        path: "",
+        path: "pages/Personal/pact/pact",
         control: true //权限
       }, {
 
@@ -206,7 +206,8 @@ Page({
         three: true
       }
     ],
-    login: true
+    login: true,
+    exist:''
 
   },
   deal() {
@@ -236,6 +237,7 @@ Page({
       this.setData({
         tags: s
       })
+      console.log(this.data.tags)
       this.log()
       wx.hideLoading()
 
@@ -315,6 +317,47 @@ Page({
             })
           }
         }
+        var that = this
+        console.log(that.data.tags)
+        wx.getStorage({
+          key: 'myInfo',
+          success(res) {
+            if (res.data.ID) {
+              that.setData({
+                exist:res.data.ID
+              })
+              var s = that.data.tags
+            
+              var d = s.findIndex(a => {
+                console.log(a)
+                return a.nametext == '我的/登录'
+              })
+              console.log(d)
+              if(d>-1){
+                s[d].nametext = '我的'
+                that.setData({
+                   tags:s
+                })
+              }
+             
+              
+            }
+          },
+          fail(res){
+            var s = that.data.tags
+            var d = s.findIndex(a => {
+              return a.nametext == '我的/登录'
+            })
+            if(d>-1){
+              s[d].nametext = '登录'
+              that.setData({
+                tags:s
+             })
+            }
+           
+          }
+    
+        })
         wx.hideLoading()
 
       })
@@ -350,13 +393,7 @@ Page({
 
     })
 
-    // //没登陆 所有模块变灰色
-    // if (!this.data.login) {
-    //   console.log("没登陆")
-    //   wx.redirectTo({
-    //     url: '/pages/mine/mine'
-    //   })
-    // }
+    
   },
   // 90
   /**
@@ -366,7 +403,7 @@ Page({
     // console.log(options)
     this.log() //判断是否登录
     // console.log(options.grading)
-    if (options.grading !== undefined && options.grading !== "undefined" ) {
+    if (options.grading !== undefined && options.grading !== "undefined") {
       this.setData({
         num: options.grading
       })
@@ -380,6 +417,8 @@ Page({
     //渲染数据
     this.deal()
     this.screen()
+
+ 
   }
 
 })
