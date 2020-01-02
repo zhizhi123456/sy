@@ -86,10 +86,6 @@
   margin: 0 auto;
 }
 
-.list>.box .c {
-  /* color: #cccccc; */
-}
-
 .tan {
   text-align: center;
   line-height: 20%；
