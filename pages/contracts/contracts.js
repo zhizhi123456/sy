@@ -318,7 +318,7 @@ Page({
           }
         }
         var that = this
-        console.log(that.data.tags)
+        // console.log(that.data.tags)
         wx.getStorage({
           key: 'myInfo',
           success(res) {
@@ -329,10 +329,10 @@ Page({
               var s = that.data.tags
             
               var d = s.findIndex(a => {
-                console.log(a)
+                // console.log(a)
                 return a.nametext == '我的/登录'
               })
-              console.log(d)
+              // console.log(d)
               if(d>-1){
                 s[d].nametext = '我的'
                 that.setData({
