@@ -1,0 +1,47 @@
+/* pages/aamenu/index1.wxss */
+.tabfoot {
+    line-height: 1.8em;
+}
+
+.tabfoot view {
+    padding: 0 65rpx;
+}
+
+.tabfoot .active text {
+    color: #005925;
+    font-weight: bold;
+}
+
+.tabfoot text {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #666;
+}
+
+.tabfoot .iconfont {
+    font-size: 48rpx;
+    margin-top: 10rpx;
+}
+
+.newinfo {
+    font-size: 56rpx;
+    padding: 0 35rpx;
+    position: relative;
+}
+
+.newinfo text {
+    font-size: 20rpx;
+    position: absolute;
+    top: 10rpx;
+    right: 10rpx;
+    background-color: #E21918;
+    height: 40rpx;
+    width: 40rpx;
+    line-height: 40rpx;
+    border-radius: 50%;
+    text-align: center;
+    border: 1rpx solid white;
+}

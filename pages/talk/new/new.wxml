@@ -1,0 +1,71 @@
+<!-- pages/new/new.wxml -->
+<view class="wraper">
+    <view class="header d_header" wx:if="{{info.ID}}">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="editreturn"></icon>
+        <text class="fr newCreate" bindtap="editconfirm">确定</text>
+        <view class="apply">编辑通话记录</view>
+    </view>
+    <view class="header d_header" wx:else>
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="confirm">确定</text>
+        <view class="apply">新建通话记录</view>
+    </view>
+    <view class="main n_main">
+        <van-toast id="van-toast" />
+        <view class="check_item">
+            <view class="kind require">
+                <text>通讯主题</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="commTopic" value="{{info.commTopic}}" placeholder="请输入" bind:blur="commTopiclur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>公司标识</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="companyId" value="{{info.companyId}}" placeholder="请输入" bind:blur="companyIdlur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>交易用户</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="dealuser" value="{{info.dealuser}}" placeholder="请输入" bind:blur="dealuserlur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">通讯记录</text>
+            <van-cell-group>
+                <van-field data-name="commRecord" value="{{info.commRecord}}" placeholder="请输入" bind:blur="commRecordlur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>通讯时间</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.commTime?info.commTime:'请选择'}}" is-link bind:click="showPopup_time" />
+            <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
+                <van-datetime-picker data-name="commTime" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <text class="kind">重要级别</text>
+            <van-cell-group>
+                <van-field data-name="Importlevel" value="{{info.Importlevel}}" placeholder="请输入" bind:blur="Importleveldlur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">内容描述</text>
+            <van-cell-group>
+                <van-field data-name="contentdesc" value="{{info.contentdesc}}" placeholder="请输入" bind:blur="contentdesclur" type="textarea" autosize/>
+            </van-cell-group>
+        </view>
+    </view>
+</view>

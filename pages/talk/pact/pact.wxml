@@ -1,0 +1,65 @@
+<!-- textages/textact/textact.wxml -->
+<view class="wraper">
+    <!-- 头部 -->
+    <view class="header">
+        <view class="title">
+            <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
+            <navigator url="/pages/talk/new/new" hover-class="none" class="fr newCreate">
+                新建
+            </navigator>
+            <view class="apply">{{title}}</view>
+        </view>
+        <view class="seach">
+            <icon class="iconfont icon-guanyu fl s-sort"></icon>
+            <icon class="iconfont icon-sousuo fr" bindtap="seachInfo"></icon>
+            <view class="data_list">
+                <input value="{{seach}}" bindblur="setSeach" />
+                <view class="number" wx:if="{{!seach}}">
+                    <icon class="iconfont icon-sousuo"></icon>
+                    <text wx:if="{{InfoList.length}}">共{{item.length}}条</text>
+                    <text wx:else>搜索</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="main">
+        <view class="list" wx:for="{{InfoList}}" wx:key="index">
+            <navigator url="/pages/talk/detail/detail?id={{item.ID}}" hover-class="none">
+                <view>
+                    <text class="caption">{{item.commTopic}}</text>
+                </view>
+                <view>
+                    <text class="info">通讯主题</text>
+                    <text>{{item.commTopic}}</text>
+                </view>
+                <view>
+                    <text class="info">公司</text>
+                    <text>{{item.companyId}}</text>
+                </view>
+                <view>
+                    <text class="info">交易用户</text>
+                    <text>{{item.dealuser}}</text>
+                </view>
+                <view>
+                    <text class="info">重要级别</text>
+                    <text>{{item.Importlevel}}</text>
+                </view>
+                <view>
+                    <text class="info">通讯时间</text>
+                    <text>{{item.commTime}}</text>
+                </view>
+                <view>
+                    <text class="info">通讯记录</text>
+                    <text>{{item.commRecord}}</text>
+                </view>
+                <view>
+                    <text class="info">内容描述</text>
+                    <text>{{item.contentdesc}}</text>
+                </view>
+            </navigator>
+        </view>
+        <view wx:if="{{loading&&InfoList.length}}" class="end">加载中...</view>
+        <view wx:if="{{!loading&&InfoList.length}}" class="end">已经到底了</view>
+        <view class="no_more" wx:if="{{!InfoList.length}}">暂无内容</view>
+    </view>
+</view>

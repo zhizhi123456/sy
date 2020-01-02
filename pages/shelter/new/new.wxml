@@ -1,0 +1,310 @@
+<!-- pages/new/new.wxml -->
+<view class="wraper">
+    <view class="header d_header" wx:if="{{info.ID}}">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="editreturn"></icon>
+        <text class="fr newCreate" bindtap="editconfirm">确定</text>
+        <view class="apply">编辑隐蔽工程</view>
+    </view>
+    <view class="header d_header" wx:else>
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="confirm">确定</text>
+        <view class="apply">新建隐蔽工程</view>
+    </view>
+    <view class="main n_main">
+        <van-toast id="van-toast" />
+        <view class="check_item">
+            <view class="kind require">
+                <text>工程名称</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="projectname" value="{{info.projectname}}" placeholder="请输入" bind:blur="projectnamelur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>工程编号</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.projectcode?info.projectcode:'请选择'}}" bind:click="showPopup">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show }}" round position="bottom" bind:close="onClose">
+                <van-picker data-name="projectcode" show-toolbar columns="{{ totals }}" bind:cancel="onClose" bind:confirm="onConfirm" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <text class="kind">施工单位</text>
+            <van-cell-group>
+                <van-field data-name="constructionunit" value="{{info.constructionunit}}" placeholder="请输入" bind:blur="constructionunitblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">监理单位</text>
+            <van-cell-group>
+                <van-field data-name="supervisionunit" value="{{info.supervisionunit}}" placeholder="请输入" bind:blur="supervisionunitblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">建设单位</text>
+            <van-cell-group>
+                <van-field data-name="developerunit" value="{{info.developerunit}}" placeholder="请输入" bind:blur="developerunitblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">土建安装质量</text>
+            <van-cell title="{{info.CivilWorkInstQty?info.CivilWorkInstQty:'请选择'}}" bind:click="showPopup_0">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show_0 }}" round position="bottom" bind:close="onClose_0">
+                <van-picker data-name="CivilWorkInstQty" show-toolbar columns="{{ quality }}" bind:cancel="onClose_0" bind:confirm="onConfirm_0" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <text class="kind">土建楼层部位</text>
+            <van-cell-group>
+                <van-field data-name="CivilWorkFlorPosi" value="{{info.CivilWorkFlorPosi}}" placeholder="请输入" bind:blur="CivilWorkFlorPosiblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">土建图号</text>
+            <van-cell-group>
+                <van-field data-name="CivilWorkDrawNo" value="{{info.CivilWorkDrawNo}}" placeholder="请输入" bind:blur="CivilWorkDrawNoblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">土建工艺安装质量</text>
+            <van-cell title="{{info.CivilTechInstQty?info.CivilTechInstQty:'请选择'}}" bind:click="showPopup_1">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show_1 }}" round position="bottom" bind:close="onClose_1">
+                <van-picker data-name="CivilTechInstQty" show-toolbar columns="{{ quality }}" bind:cancel="onClose_1" bind:confirm="onConfirm_1" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <text class="kind">土建工艺楼层部位</text>
+            <van-cell-group>
+                <van-field data-name="CivilTechFlorPosi" value="{{info.CivilTechFlorPosi}}" placeholder="请输入" bind:blur="CivilTechFlorPosiblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">土建工艺图号</text>
+            <van-cell-group>
+                <van-field data-name="CivilTechDrawNo" value="{{info.CivilTechDrawNo}}" placeholder="请输入" bind:blur="CivilTechDrawNoblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">施工电源安装质量</text>
+            <van-cell title="{{info.ConstruPowerInstQty?info.ConstruPowerInstQty:'请选择'}}" bind:click="showPopup_2">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show_2 }}" round position="bottom" bind:close="onClose_2">
+                <van-picker data-name="ConstruPowerInstQty" show-toolbar columns="{{ quality }}" bind:cancel="onClose_2" bind:confirm="onConfirm_2" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <text class="kind">施工电源楼层部位</text>
+            <van-cell-group>
+                <van-field data-name="ConstruPowerFlorPosi" value="{{info.ConstruPowerFlorPosi}}" placeholder="请输入" bind:blur="ConstruPowerFlorPosiblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">施工电源图号</text>
+            <van-cell-group>
+                <van-field data-name="ConstruPowerDrawNo" value="{{info.ConstruPowerDrawNo}}" placeholder="请输入" bind:blur="ConstruPowerDrawNoblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">地板铺设安装质量</text>
+            <van-cell title="{{info.FloorLayInstQty?info.FloorLayInstQty:'请选择'}}" bind:click="showPopup_3">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show_3 }}" round position="bottom" bind:close="onClose_3">
+                <van-picker data-name="FloorLayInstQty" show-toolbar columns="{{ quality }}" bind:cancel="onClose_3" bind:confirm="onConfirm_3" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <text class="kind">地板铺设楼层部位</text>
+            <van-cell-group>
+                <van-field data-name="FloorLayFlorPosi" value="{{info.FloorLayFlorPosi}}" placeholder="请输入" bind:blur="FloorLayFlorPosiblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">地板铺设图号</text>
+            <van-cell-group>
+                <van-field data-name="FloorLayDrawNo" value="{{info.FloorLayDrawNo}}" placeholder="请输入" bind:blur="FloorLayDrawNoblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">外观检查安装质量</text>
+            <van-cell title="{{info.AppearCheckInstQty?info.AppearCheckInstQty:'请选择'}}" bind:click="showPopup_4">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show_4 }}" round position="bottom" bind:close="onClose_4">
+                <van-picker data-name="AppearCheckInstQty" show-toolbar columns="{{ quality }}" bind:cancel="onClose_4" bind:confirm="onConfirm_4" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <text class="kind">外观检查楼层部位</text>
+            <van-cell-group>
+                <van-field data-name="AppearCheckFlorPosi" value="{{info.AppearCheckFlorPosi}}" placeholder="请输入" bind:blur="AppearCheckFlorPosiblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">外观检查图号</text>
+            <van-cell-group>
+                <van-field data-name="AppearCheckDrawNo" value="{{info.AppearCheckDrawNo}}" placeholder="请输入" bind:blur="AppearCheckDrawNoblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">设备安装质量</text>
+            <van-cell title="{{info.EquipiInstaInstQty?info.EquipiInstaInstQty:'请选择'}}" bind:click="showPopup_5">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show_5 }}" round position="bottom" bind:close="onClose_5">
+                <van-picker data-name="EquipiInstaInstQty" show-toolbar columns="{{ quality }}" bind:cancel="onClose_5" bind:confirm="onConfirm_5" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <text class="kind">设备安装楼层部位</text>
+            <van-cell-group>
+                <van-field data-name="EquipiInstaFlorPosi" value="{{info.EquipiInstaFlorPosi}}" placeholder="请输入" bind:blur="EquipiInstaFlorPosiblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">设备安装图号</text>
+            <van-cell-group>
+                <van-field data-name="EquipiInstaDrawNo" value="{{info.EquipiInstaDrawNo}}" placeholder="请输入" bind:blur="EquipiInstaDrawNoblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">电气性能安装质量</text>
+            <van-cell title="{{info.ElectPropInstQty?info.ElectPropInstQty:'请选择'}}" bind:click="showPopup_6">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show_6 }}" round position="bottom" bind:close="onClose_6">
+                <van-picker data-name="ElectPropInstQty" show-toolbar columns="{{ quality }}" bind:cancel="onClose_6" bind:confirm="onConfirm_6" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <text class="kind">电气性能楼层部位</text>
+            <van-cell-group>
+                <van-field data-name="ElectPropFlorPosi" value="{{info.ElectPropFlorPosi}}" placeholder="请输入" bind:blur="ElectPropFlorPosiblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">电气性能图号</text>
+            <van-cell-group>
+                <van-field data-name="ElectPropDrawNo" value="{{info.ElectPropDrawNo}}" placeholder="请输入" bind:blur="ElectPropDrawNoblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">消防器材安装质量</text>
+            <van-cell title="{{info.FireFitEquInstQty?info.FireFitEquInstQty:'请选择'}}" bind:click="showPopup_7">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show_7 }}" round position="bottom" bind:close="onClose_7">
+                <van-picker data-name="FireFitEquInstQty" show-toolbar columns="{{ quality }}" bind:cancel="onClose_7" bind:confirm="onConfirm_7" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <text class="kind">消防器材楼层部位</text>
+            <van-cell-group>
+                <van-field data-name="FireFitEquFlorPosi" value="{{info.FireFitEquFlorPosi}}" placeholder="请输入" bind:blur="FireFitEquFlorPosiblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">消防器材图号</text>
+            <van-cell-group>
+                <van-field data-name="FireFitEquDrawNo" value="{{info.FireFitEquDrawNo}}" placeholder="请输入" bind:blur="FireFitEquDrawNoblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">危险物品安装质量</text>
+            <van-cell title="{{info.DangerGoodInstQty?info.DangerGoodInstQty:'请选择'}}" bind:click="showPopup_8">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show_8 }}" round position="bottom" bind:close="onClose_8">
+                <van-picker data-name="DangerGoodInstQty" show-toolbar columns="{{ quality }}" bind:cancel="onClose_8" bind:confirm="onConfirm_8" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <text class="kind">危险物品楼层部位</text>
+            <van-cell-group>
+                <van-field data-name="DangerGoodFlorPosi" value="{{info.DangerGoodFlorPosi}}" placeholder="请输入" bind:blur="DangerGoodFlorPosiblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">危险物品图号</text>
+            <van-cell-group>
+                <van-field data-name="DangerGoodDrawNo" value="{{info.DangerGoodDrawNo}}" placeholder="请输入" bind:blur="DangerGoodDrawNoblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">孔洞防火安装质量</text>
+            <van-cell title="{{info.HoleFirePrevInstQty?info.HoleFirePrevInstQty:'请选择'}}" bind:click="showPopup_9">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show_9 }}" round position="bottom" bind:close="onClose_9">
+                <van-picker data-name="HoleFirePrevInstQty" show-toolbar columns="{{ quality }}" bind:cancel="onClose_9" bind:confirm="onConfirm_9" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <text class="kind">孔洞防火楼层部位</text>
+            <van-cell-group>
+                <van-field data-name="HoleFirePrevFlorPosi" value="{{info.HoleFirePrevFlorPosi}}" placeholder="请输入" bind:blur="HoleFirePrevFlorPosiblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">孔洞防火图号</text>
+            <van-cell-group>
+                <van-field data-name="HoleFirePrevDrawNo" value="{{info.HoleFirePrevDrawNo}}" placeholder="请输入" bind:blur="HoleFirePrevDrawNoblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">验收意见</text>
+            <van-cell-group>
+                <van-field data-name="AcceptanceComments" value="{{info.AcceptanceComments}}" placeholder="请输入" bind:blur="AcceptanceCommentsblur" type="textarea" autosize />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">建设单位验收人</text>
+            <van-cell-group>
+                <van-field data-name="DeveloperunitCheckMan" value="{{info.DeveloperunitCheckMan}}" placeholder="请输入" bind:blur="DeveloperunitCheckManblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">建设单位验收日期</text>
+            <van-cell title="{{info.DeveloperunitCheckDate?info.DeveloperunitCheckDate:'请选择'}}" is-link bind:click="showPopup_time1" />
+            <van-popup show="{{ show_time1 }}" round position="bottom" bind:close="onClose_time1">
+                <van-datetime-picker data-name="DeveloperunitCheckDate" value="{{ currentDate }}" bind:cancel="onClose_time1" bind:confirm="onConfirm_time1" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <text class="kind">施工单位验收人</text>
+            <van-cell-group>
+                <van-field data-name="ConstructionunitCheckMan" value="{{info.ConstructionunitCheckMan}}" placeholder="请输入" bind:blur="ConstructionunitCheckManblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">施工单位验收日期</text>
+            <van-cell title="{{info.ConstructionunitCheckDate?info.ConstructionunitCheckDate:'请选择'}}" is-link bind:click="showPopup_time2" />
+            <van-popup show="{{ show_time2 }}" round position="bottom" bind:close="onClose_time2">
+                <van-datetime-picker data-name="ConstructionunitCheckDate" value="{{ currentDate }}" bind:cancel="onClose_time2" bind:confirm="onConfirm_time2" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <text class="kind">监理单位验收人</text>
+            <van-cell-group>
+                <van-field data-name="SafetyscoreCheckMan" value="{{info.SafetyscoreCheckMan}}" placeholder="请输入" bind:blur="SafetyscoreCheckManblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">监理单位验收日期</text>
+            <van-cell title="{{info.SafetyscoreCheckDate?info.SafetyscoreCheckDate:'请选择'}}" is-link bind:click="showPopup_time3" />
+            <van-popup show="{{ show_time3 }}" round position="bottom" bind:close="onClose_time3">
+                <van-datetime-picker data-name="SafetyscoreCheckDate" value="{{ currentDate }}" bind:cancel="onClose_time3" bind:confirm="onConfirm_time3" />
+            </van-popup>
+        </view>
+    </view>
+</view>

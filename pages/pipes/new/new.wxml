@@ -1,0 +1,124 @@
+<!-- pages/new/new.wxml -->
+<view class="wraper">
+    <view class="header d_header" wx:if="{{info.ID}}">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="editreturn"></icon>
+        <text class="fr newCreate" bindtap="editconfirm">确定</text>
+        <view class="apply">编辑工程管道验收单</view>
+    </view>
+    <view class="header d_header" wx:else>
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="confirm">确定</text>
+        <view class="apply">新建工程管道验收单</view>
+    </view>
+    <view class="main n_main">
+        <van-toast id="van-toast" />
+        <view class="check_item">
+            <view class="kind require">
+                <text>项目名称</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="projectname" value="{{info.projectname}}" placeholder="请输入" bind:blur="projectnameblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">项目地址</text>
+            <van-cell-group>
+                <van-field data-name="projectaddress" value="{{info.projectaddress}}" placeholder="请输入" bind:blur="projectaddressblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">综合协调单位</text>
+            <van-cell title="{{info.companytitle?info.companytitle:'请选择'}}" bind:click="showPopup">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show }}" round position="bottom" bind:close="onClose">
+                <van-picker data-name="companytitle" show-toolbar columns="{{ units }}" bind:cancel="onClose" bind:confirm="onConfirm" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <text class="kind">线路实施单位</text>
+            <van-cell title="{{info.lineputintounit?info.lineputintounit:'请选择'}}" bind:click="showPopup2">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show2 }}" round position="bottom" bind:close="onClose2">
+                <van-picker data-name="lineputintounit" show-toolbar columns="{{ units }}" bind:cancel="onClose2" bind:confirm="onConfirm2" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <text class="kind">管道实施单位</text>
+            <van-cell title="{{info.pipeputintounit?info.pipeputintounit:'请选择'}}" bind:click="showPopup3">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show3 }}" round position="bottom" bind:close="onClose3">
+                <van-picker data-name="pipeputintounit" show-toolbar columns="{{ units }}" bind:cancel="onClose3" bind:confirm="onConfirm3" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <text class="kind">涉及经营商</text>
+            <van-cell-group>
+                <van-field data-name="Involvedoperator" value="{{info.Involvedoperator}}" placeholder="请输入" bind:blur="Involvedoperatorblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">完工内容</text>
+            <van-cell-group>
+                <van-field data-name="finishcontent" value="{{info.finishcontent}}" placeholder="请输入" bind:blur="finishcontentblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">验收意见</text>
+            <van-cell-group>
+                <van-field data-name="checkidea" value="{{info.checkidea}}" placeholder="请输入" bind:blur="checkideablur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">需修改内容</text>
+            <van-cell-group>
+                <van-field data-name="needupdatecontent" value="{{info.needupdatecontent}}" placeholder="请输入" bind:blur="needupdatecontentblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">综合协调单位签字</text>
+            <van-cell-group>
+                <van-field data-name="intecoordinationunitsign" value="{{info.intecoordinationunitsign}}" placeholder="请输入" bind:blur="intecoordinationunitsignblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">线路实施单位签字</text>
+            <van-cell-group>
+                <van-field data-name="lineputintounitsign" value="{{info.lineputintounitsign}}" placeholder="请输入" bind:blur="lineputintounitsignblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">中国电信签字</text>
+            <van-cell-group>
+                <van-field data-name="ctsign" value="{{info.ctsign}}" placeholder="请输入" bind:blur="ctsignblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">中国移动签字</text>
+            <van-cell-group>
+                <van-field data-name="cmsign" value="{{info.cmsign}}" placeholder="请输入" bind:blur="cmsignblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">中国联通签字</text>
+            <van-cell-group>
+                <van-field data-name="cusign" value="{{info.cusign}}" placeholder="请输入" bind:blur="cusignblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">长城宽带签字</text>
+            <van-cell-group>
+                <van-field data-name="gwsign" value="{{info.gwsign}}" placeholder="请输入" bind:blur="gwsignyblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">东方有线签字</text>
+            <van-cell-group>
+                <van-field data-name="ocsign" value="{{info.ocsign}}" placeholder="请输入" bind:blur="ocsignyblur" />
+            </van-cell-group>
+        </view>
+    </view>
+</view>

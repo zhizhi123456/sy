@@ -1,0 +1,71 @@
+<!-- pages/oa/oa.wxml -->
+<map id="myMap" markers="{{markers}}" style="width:100%;height:100vh;" longitude="{{poi.longitude}}" latitude="{{poi.latitude}}" show-location show-compass polyline="{{polyline}}" wx:if="{{showmap}}">
+    <cover-view class="return" bindtap="return">
+        <cover-view class="iconfont fl icon-jiantou2" />
+    </cover-view>
+    <cover-view class='cover-tip-wrapper' wx:if="{{!distance}}" bindtap="againlocaltion">
+        <cover-view class="iconfont fl icon-genzongdingwei"></cover-view>
+        <cover-view class='tip-text fl'>{{markers[0].title}}</cover-view>
+    </cover-view>
+    <cover-view class='process' wx:else>
+        <cover-view class="p_text">行车路线规划(距离:约{{distance}}公里)</cover-view>
+        <block wx:for="{{steps}}" wx:key="index">
+            <cover-view class="p_text p_hint">{{item.instruction}}</cover-view>
+        </block>
+        <cover-view class="p_text p_hint">到达目的地</cover-view>
+    </cover-view>
+    <cover-view class="cover-view">
+        <cover-view class="iconfont icon-didian"></cover-view>
+    </cover-view>
+    <cover-view class="operation">
+        <!-- <cover-view class="path_box">
+            <cover-view class="location location_start" bindtap="start"></cover-view>
+            <cover-view class="location location_end" bindtap="end">停止记录</cover-view>
+        </cover-view> -->
+    </cover-view>
+    <cover-view class="path" bindtap='showNewMarkerClick' wx:if="{{hadNew}}">
+        <cover-view class="iconfont icon-guiji" />
+        <cover-view>路线</cover-view>
+    </cover-view>
+    <cover-view wx:if="{{ show }}" bindtap="onClose" class="p_shade" />
+    <cover-view class="placelist" wx:if="{{ show }}">
+        <cover-view class='search-address-container'>
+            <cover-view class='input-address-wrapper' id='input-address-layout'>
+                <cover-view class="iconfont icon-map" bindtap="showinput" />
+                <cover-view class='cover-input' bindtap="showinput">
+                    <input class='input-address gray-text' value='{{inputAddress}}' placeholder='搜索地点' focus='{{inputFocus}}' bindblur="bindAddressInput" bindinput='bindAddressInput'></input>
+                </cover-view>
+                <cover-view class='cancel-wrapper' bindtap='deleteInput' wx:if='{{inputAddress}}'>
+                    <cover-view class="iconfont icon-jianhao-tianchong" />
+                </cover-view>
+                <cover-view class='line'></cover-view>
+            </cover-view>
+            <cover-view class='search-layout'>
+                <!-- 搜索结果列表 -->
+                <block class='search-scroll' scroll-y='true' wx:if='{{resultList.length}}'>
+                    <cover-view class='address-item-wrapper' wx:for='{{resultList}}' wx:for-item='item' wx:key='index'>
+                        <cover-view class='address-item' bindtap='itemAddressClick' id='{{index}}'>
+                            <cover-view class='item-address'>
+                                <cover-view class="iconfont icon-renyuandingwei" />
+                                <cover-view class='item-address-layout'>
+                                    <cover-view class='item-title'>{{item.title}}</cover-view>
+                                    <cover-view class='item-detail-address'>
+                                        {{item.address}}
+                                    </cover-view>
+                                </cover-view>
+                            </cover-view>
+                            <cover-view class='line-item'></cover-view>
+                        </cover-view>
+                    </cover-view>
+                </block>
+                <cover-view class='empty-layout' wx:else>
+                    <cover-view class="iconfont icon-renyuandingwei" />
+                    <cover-view class='empty-text'>暂无结果，请输入目的地~</cover-view>
+                </cover-view>
+            </cover-view>
+        </cover-view>
+    </cover-view>
+</map>
+<view class="return" wx:else>
+    <icon class="iconfont icon-jiantou2" bindtap="return" />
+</view>

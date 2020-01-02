@@ -1,0 +1,46 @@
+<!-- pages/aamenu/index1.wxml -->
+<view class="wraper" wx:if="{{tabBar.length}}">
+    <view class="header d_header">
+        <icon class="iconfont fr icon-xiaoxi1 newinfo">
+            <text wx:if="{{newinfo}}">{{newinfo>99?'99+':newinfo}}</text>
+        </icon>
+        <view class="apply">{{title}}</view>
+    </view>
+    <view class="m_main">
+        <view class="m_column">
+            <block wx:for="{{menu}}" wx:key="index">
+                <view class="m_listitem">
+                    <view class="m_shade" wx:if="{{item.PID!=1000&&!(plance[tab-1][index])}}">
+                        <icon class="iconfont icon-mima" />
+                    </view>
+                    <navigator url="{{(item.PID==1000)?'/pages/aamenu/index2?tab='+index+'&id='+item.ID+'&name='+item.name:'/pages/'+plance[tab-1][index]+'/pact/pact'}}" hover-class="none">
+                        <icon wx:if="{{item.icon}}" class="iconfont {{item.icon}}"></icon>
+                        <icon wx:else class="iconfont {{menuicon[tab][index]}}"></icon>
+                        <view>{{item.name}}</view>
+                    </navigator>
+                </view>
+            </block>
+            <view class="m_listitem" wx:if="{{tab==2}}">
+                <navigator url="/pages/section/section" hover-class="none">
+                    <icon class="iconfont icon-bumen"></icon>
+                    <view>部门管理</view>
+                </navigator>
+            </view>
+            <view class="m_listitem" wx:if="{{tab==2}}">
+                <navigator url="/pages/section/section2?name=我&userid={{userinfo.UserName}}&dep={{dep}}&deptxt={{deptxt}}" hover-class="none">
+                    <icon class="iconfont icon-guanyu"></icon>
+                    <view>我的相关</view>
+                </navigator>
+            </view>
+        </view>
+    </view>
+    <view class="footer tabfoot">
+        <block wx:for="{{tabBar}}" wx:key="index">
+            <view data-index="{{index}}" class="{{tab==index?'active':'default'}}" bindtap="cut">
+                <text wx:if="{{item.icon}}" class="iconfont {{item.icon}}"></text>
+                <text wx:else class="iconfont {{icon[index]}}"></text>
+                <text>{{item.name}}</text>
+            </view>
+        </block>
+    </view>
+</view>

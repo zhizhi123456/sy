@@ -1,0 +1,38 @@
+<!-- pages/login/login.wxml -->
+<view class="wraper">
+    <view class="logo_box" bindtap="return">
+        <image src="/img/logo.png" mode="widthFix"/>
+        <view>上海尚雍电子技术工程有限公司</view>
+    </view>
+    <form>
+        <view class="import">
+            <input name="username" value="{{username}}" placeholder="请输入用户名" placeholder-class="setplace" bindblur="setUser" />
+            <icon class="iconfont icon-wode"></icon>
+        </view>
+        <view class="import">
+            <input type="password" value="{{password}}" name="password" placeholder="请输入密码" bindblur="setpwd" />
+            <icon class="iconfont icon-yewu"></icon>
+        </view>
+        <view wx:if="{{!ifenter}}">
+            <view class="import">
+                <input type="password" value="{{confirmpwd}}" name="password" placeholder="请再次输入密码" bindblur="setconfirmpwd" />
+                <icon class="iconfont icon-yewu"></icon>
+            </view>
+            <view class="import">
+                <input name="number" value="{{MobilePIN}}" placeholder="请输入手机号码" bindblur="setphone" maxlength="11" />
+                <icon class="iconfont icon-bangdingshouji"></icon>
+            </view>
+            <view class="import">
+                <input name="password" value="{{Email}}" placeholder="请输入邮箱" bindblur="setemail" />
+                <icon class="iconfont icon-youxiang"></icon>
+            </view>
+        </view>
+        <view class="forgetpwd" wx:if="{{ifenter}}">忘记密码？</view>
+        <button type="button" class="btn" wx:if="{{ifenter}}" bindtap="enter">登录</button>
+        <button type="button" class="btn" bindtap="enroll">注册</button>
+        <view class="returnlogin" wx:if="{{!ifenter}}" bindtap="returnlogin">
+            返回登录
+            <icon class="iconfont icon-ai207" />
+        </view>
+    </form>
+</view>

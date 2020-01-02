@@ -1,0 +1,81 @@
+<!-- textages/textact/textact.wxml -->
+<view class="wraper">
+    <!-- 头部 -->
+    <view class="header">
+        <view class="title">
+            <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
+            <navigator url="/pages/close/new/new" hover-class="none" class="fr newCreate">
+                新建
+            </navigator>
+            <view class="apply">{{title}} </view>
+        </view>
+        <view class="seach">
+            <icon class="iconfont icon-guanyu fl s-sort"></icon>
+            <icon class="iconfont icon-sousuo fr" bindtap="seachInfo"></icon>
+            <view class="data_list">
+                <input value="{{seach}}" bindblur="setSeach" />
+                <view class="number" wx:if="{{!seach}}">
+                    <icon class="iconfont icon-sousuo"></icon>
+                    <text wx:if="{{InfoList.length}}">共{{item.length}}条</text>
+                    <text wx:else>搜索</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="main">
+        <view class="list" wx:for="{{InfoList}}" wx:key="index">
+            <navigator url="/pages/close/detail/detail?id={{item.ID}}" hover-class="none">
+                <view>
+                    <text class="caption">{{item.name}}</text>
+                </view>
+                <view>
+                    <text class="info">名称</text>
+                    <text>{{item.name}}</text>
+                </view>
+                <view>
+                    <text class="info">工程编号</text>
+                    <text>{{item.projectcode}}</text>
+                </view>
+                <view>
+                    <text class="info">单位</text>
+                    <text>{{item.unit}}</text>
+                </view>
+                <view>
+                    <text class="info">计算式</text>
+                    <text>{{item.calculatedMode}}</text>
+                </view>
+                <view>
+                    <text class="info">工程量</text>
+                    <text>{{item.quantity}}</text>
+                </view>
+                <view>
+                    <text class="info">监理确认数</text>
+                    <text>{{item.confirmTheData}}</text>
+                </view>
+                <view>
+                    <text class="info">当前步骤名称</text>
+                    <text>{{item.CurStepName}}</text>
+                </view>
+                <view>
+                    <text class="info">创建人</text>
+                    <text>{{item.createman}}</text>
+                </view>
+                <view>
+                    <text class="info">创建时间</text>
+                    <text>{{item.createtime}}</text>
+                </view>
+                <view>
+                    <text class="info">修改人</text>
+                    <text>{{item.updateman}}</text>
+                </view>
+                <view>
+                    <text class="info">修改时间</text>
+                    <text>{{item.updatetime}}</text>
+                </view>
+            </navigator>
+        </view>
+        <view wx:if="{{loading&&InfoList.length}}" class="end">加载中...</view>
+        <view wx:if="{{!loading&&InfoList.length}}" class="end">已经到底了</view>
+        <view class="no_more" wx:if="{{!InfoList.length}}">暂无内容</view>
+    </view>
+</view>

@@ -1,0 +1,138 @@
+<!-- pages/detail/detail.wxml -->
+<view wx:if="{{info}}">
+    <view class="header d_header">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="delete">删除</text>
+        <view class="apply">资料详情</view>
+    </view>
+    <view class="card">
+        <van-card title="{{info.proassignbookcode}}" tag="资料详情" />
+    </view>
+    <view class="main_nav">
+        <van-tabs active="{{tab}}">
+            <van-tab title="详细资料" name="a">
+                <view class="content">
+                    <view class="c_item">
+                        <view class="kind">项目名称</view>
+                        <view class="check">{{info.projectname}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">任务书编号</view>
+                        <view class="check">{{info.proassignbookcode}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">建设单位名称</view>
+                        <view class="check">{{info.bulidcompanyname}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">总包项目属性</view>
+                        <view class="check">{{info.mainprojectprop}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">总包项目类型</view>
+                        <view class="check">{{info.mainprojecttype}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">我公司项目编号</view>
+                        <view class="check">{{info.mycompanyprocode}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">甲方报建编号</view>
+                        <view class="check">{{info.firstrptprjcode}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">项目地址以及建筑面积</view>
+                        <view class="check">{{info.prjaddresssquare}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">主要施工内容</view>
+                        <view class="check">{{info.projectcontext}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">合同签订情况</view>
+                        <view class="check">{{info.contactbookstate}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">项目联系人</view>
+                        <view class="check">{{info.procontactman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">联系方式</view>
+                        <view class="check">{{info.contactway}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">计划开工日期</view>
+                        <view class="check">{{info.planbegindate}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">计划完工日期</view>
+                        <view class="check">{{info.planenddate}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">附件内容情况说明</view>
+                        <view class="check">{{info.attactfileexplain}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">备注</view>
+                        <view class="check">{{info.remark}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">当前处理人</view>
+                        <view class="check">{{info.CurDealer}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">当前步骤名称</view>
+                        <view class="check">{{info.CurStepName}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">当前步骤编号</view>
+                        <view class="check">{{info.CurStepbh}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">步骤是否完成</view>
+                        <view class="check">{{info.IfWfComplete?'是':'否'}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">创建人</view>
+                        <view class="check">{{info.createman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">创建时间</view>
+                        <view class="check">{{info.createtime}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">修改人</view>
+                        <view class="check">{{info.updateman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">修改时间</view>
+                        <view class="check">{{info.updatetime}}</view>
+                    </view>
+                </view>
+            </van-tab>
+            <van-tab title="动态" name="b">
+                <van-cell title="动态({{Workstate}})" />
+                <block wx:if="{{info.formid}}">
+                    <van-steps steps="{{ steps }}" active="{{ active }}" direction="vertical" />
+                </block>
+                <view class="dynamic_state" wx:else>暂无动态</view>
+            </van-tab>
+        </van-tabs>
+    </view>
+    <view class="footer">
+        <view bindtap="sendback" wx:if="{{info.formid&&isnext&&returned&&isreturn}}">
+            <icon class="iconfont icon-wj-thwj"></icon>
+            <text>退回上步</text>
+        </view>
+        <view>
+            <navigator url="/pages/task/new/new?id={{info.ID}}" hover-class="none">
+                <icon class="iconfont icon-bianji"></icon>
+                <text>编辑</text>
+            </navigator>
+        </view>
+        <view bindtap="putin" wx:if="{{isnext&&returned}}">
+            <icon class="iconfont icon-tijiao"></icon>
+            <text>提交下步</text>
+        </view>
+    </view>
+</view>

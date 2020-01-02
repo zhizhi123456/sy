@@ -1,0 +1,34 @@
+<!-- pages/mine/mine.wxml -->
+<view class="wraper">
+    <view class="d_header m_header">
+        <text class="fl">我的</text>
+        <icon class="iconfont icon-ai207 fr" bindtap="return"/>
+    </view>
+    <view class="mine" bindtap="show_info">
+        <van-cell>
+            <view slot="title">
+                <view class="photobox">
+                    <!-- 用户头像上传添加字段 -->
+                    <image src="/img/timg.png" />
+                </view>
+                <text wx:if="{{userinfo.ID}}">{{userinfo.UserName}}</text>
+                <text wx:else bindtap="goenter">登录/注册</text>
+            </view>
+            <icon class="iconfont icon-jiantou ph_icon" />
+        </van-cell>
+    </view>
+    <view class="main">
+        <van-cell title="信息变更" is-link class="m_cell" bindtap="changeuserinfo">
+            <icon slot="icon" class="iconfont icon-wodedangxuan" />
+        </van-cell>
+        <van-cell title="我的动态" is-link class="m_cell">
+            <icon slot="icon" class="iconfont icon-caogaoxiang" />
+        </van-cell>
+        <van-cell title="关于" is-link class="m_cell">
+            <icon slot="icon" class="iconfont icon-guanyu" />
+        </van-cell>
+        <van-cell title="注销登录" is-link class="m_cell" bindtap="quit">
+            <icon slot="icon" class="iconfont icon-jianhao-tianchong" />
+        </van-cell>
+    </view>
+</view>

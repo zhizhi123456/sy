@@ -1,0 +1,87 @@
+<!-- pages/detail/detail.wxml -->
+<view wx:if="{{info}}">
+    <view class="header d_header">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="delete">删除</text>
+        <view class="apply">资料详情</view>
+    </view>
+    <view class="card">
+        <van-card title="{{info.FileNumber}}" tag="资料详情" />
+    </view>
+    <view class="main_nav">
+        <view class="content">
+            <view class="c_item">
+                <view class="kind">收文单位</view>
+                <view class="check">{{info.ReceiveFileCompany}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">文号</view>
+                <view class="check">{{info.FileNumber}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">收件人</view>
+                <view class="check">{{info.ReceiveFileMan}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">发文日期</view>
+                <view class="check">{{info.SentFileDate}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">发文单位</view>
+                <view class="check">{{info.SentFileCompany}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">抄送</view>
+                <view class="check">{{info.SendDuplicateTo}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">主题</view>
+                <view class="check">{{info.Subject}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">附件数</view>
+                <view class="check">{{info.FileAttachNum}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">内容</view>
+                <view class="check">{{info.Context}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">签收人</view>
+                <view class="check">{{info.Signman}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">日期</view>
+                <view class="check">{{info.Date}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">备注</view>
+                <view class="check">{{info.Remark}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">创建人</view>
+                <view class="check">{{info.createman}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">创建时间</view>
+                <view class="check">{{info.createtime}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">修改人</view>
+                <view class="check">{{info.updateman}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">修改时间</view>
+                <view class="check">{{info.updatetime}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="footer">
+        <view>
+            <navigator url="/pages/harmonize/new/new?id={{info.ID}}" hover-class="none">
+                <icon class="iconfont icon-bianji"></icon>
+                <text>编辑</text>
+            </navigator>
+        </view>
+    </view>
+</view>

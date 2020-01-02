@@ -1,0 +1,81 @@
+<!-- pages/new/new.wxml -->
+<view class="wraper">
+    <view class="header d_header" wx:if="{{info.ID}}">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="editreturn"></icon>
+        <text class="fr newCreate" bindtap="editconfirm">确定</text>
+        <view class="apply">编辑框架协议</view>
+    </view>
+    <view class="header d_header" wx:else>
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="confirm">确定</text>
+        <view class="apply">新建框架协议</view>
+    </view>
+    <view class="main n_main">
+        <van-toast id="van-toast" />
+        <view class="check_item">
+            <view class="kind require">
+                <text>框架协议编号</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="frameProtocolCode" value="{{info.frameProtocolCode}}" placeholder="请输入" bind:blur="frameProtocolCodeblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>框架协议名称</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="frameProtocolname" value="{{info.frameProtocolname}}" placeholder="请输入" bind:blur="frameProtocolnameblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">所属类别</text>
+            <van-cell-group>
+                <van-field data-name="classname" value="{{info.classname}}" placeholder="请输入" bind:blur="classnameblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">公司抬头</text>
+            <van-cell title="{{info.Companytitle?info.Companytitle:'请选择'}}" bind:click="showPopup">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show }}" round position="bottom" bind:close="onClose">
+                <van-picker data-name="Companytitle" show-toolbar columns="{{ firms }}" bind:cancel="onClose" bind:confirm="onConfirm" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <text class="kind">对方单位</text>
+            <van-cell-group>
+                <van-field data-name="CompanyID" value="{{info.CompanyID}}" placeholder="请输入" bind:blur="CompanyIDblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">签订时间</text>
+            <van-cell title="{{info.signdate?info.signdate:'请选择'}}" is-link bind:click="showPopup_time" />
+            <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
+                <van-datetime-picker data-name="signdate" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <text class="kind">相关附件</text>
+            <van-cell-group>
+                <van-field data-name="attachfile" value="{{info.attachfile}}" placeholder="请输入" bind:blur="attachfileblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">资料图片</text>
+            <van-cell title="请选择" is-link bind:click="showPopup_photo" />
+            <van-action-sheet show="{{ show_photo }}" actions="{{ check_photo }}" bind:cancel="onClose_photo" bind:click-overlay="onClose_photo" bind:select="onSelect_photo" cancel-text="取消" />
+            <view wx:if="{{upimg}}" class="datumimgbox">
+                <block wx:for="{{info.API_Picurl}}" wx:key="index">
+                    <view class="upimgbox">
+                        <image src="{{item}}" bindtap="tap_pic" data-index="{{index}}" />
+                        <icon class="iconfont icon-jianhao-tianchong delimg" data-i="{{index}}" bindtap="delimg" />
+                    </view>
+                </block>
+            </view>
+        </view>
+    </view>
+</view>

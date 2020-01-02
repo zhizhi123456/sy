@@ -1,0 +1,34 @@
+<!-- pages/personaldetails/personaldetails.wxml -->
+<view class="wraper">
+    <view class="header d_header">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text wx:if="{{!NOedit}}" class="fr newCreate" bindtap="edituserconfirm">确定</text>
+        <view class="apply" wx:if="{{NOedit}}">个人信息</view>
+        <view class="apply" wx:else>更改个人信息</view>
+    </view>
+    <view class="main">
+        <view>
+            <view class="headimgbox">
+                <image src="/img/timg.png" mode="widthFix" />
+            </view>
+            <van-cell-group>
+                <van-field value="{{info.UserName}}" label="用户名" disabled="{{NOedit}}" />
+            </van-cell-group>
+            <van-cell-group>
+                <van-field value="{{info.MobilePIN}}" label="联系电话" disabled="{{NOedit}}" />
+            </van-cell-group>
+            <van-cell-group>
+                <van-field value="{{info.Email}}" label="邮箱" disabled="{{NOedit}}" />
+            </van-cell-group>
+            <van-cell-group>
+                <van-field value="{{info.Memo}}" label="所属部门" disabled="{{NOedit}}" />
+            </van-cell-group>
+            <van-cell-group>
+                <van-field value="{{info.EmpName}}" label="职位" disabled="{{NOedit}}" />
+            </van-cell-group>
+            <van-cell-group>
+                <van-field value="{{info.EmpCode}}" label="工号" disabled="{{NOedit}}" />
+            </van-cell-group>
+        </view>
+    </view>
+</view>

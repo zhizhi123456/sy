@@ -1,0 +1,102 @@
+<!-- pages/new/new.wxml -->
+<view class="wraper">
+    <view class="header d_header" wx:if="{{info.ID}}">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="editreturn"></icon>
+        <text class="fr newCreate" bindtap="editconfirm">确定</text>
+        <view class="apply">编辑工程协调单</view>
+    </view>
+    <view class="header d_header" wx:else>
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="confirm">确定</text>
+        <view class="apply">新建工程协调单</view>
+    </view>
+    <view class="main n_main">
+        <van-toast id="van-toast" />
+        <view class="check_item">
+            <view class="kind require">
+                <text>收文单位</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.ReceiveFileCompany?info.ReceiveFileCompany:'请选择'}}" bind:click="showPopup">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show }}" round position="bottom" bind:close="onClose">
+                <van-picker data-name="ReceiveFileCompany" show-toolbar columns="{{ firms }}" bind:cancel="onClose" bind:confirm="onConfirm" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>文号</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="FileNumber" value="{{info.FileNumber}}" placeholder="请输入" bind:blur="FileNumberlur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">收件人</text>
+            <van-cell-group>
+                <van-field data-name="ReceiveFileMan" value="{{info.ReceiveFileMan}}" placeholder="请输入" bind:blur="ReceiveFileManblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">发文日期</text>
+            <van-cell title="{{info.SentFileDate?info.SentFileDate:'请选择'}}" is-link bind:click="showPopup_time" />
+            <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
+                <van-datetime-picker data-name="SentFileDate" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <text class="kind">发文单位</text>
+            <van-cell title="{{info.SentFileCompany?info.SentFileCompany:'请选择'}}" bind:click="showPopup_o">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show_o }}" round position="bottom" bind:close="onClose_o">
+                <van-picker data-name="SentFileCompany" show-toolbar columns="{{firms}}" bind:cancel="onClose_o" bind:confirm="onConfirm_o" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <text class="kind">抄送</text>
+            <van-cell-group>
+                <van-field data-name="SendDuplicateTo" value="{{info.SendDuplicateTo}}" placeholder="请输入" bind:blur="SendDuplicateToblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">主题</text>
+            <van-cell-group>
+                <van-field data-name="Subject" value="{{info.Subject}}" placeholder="请输入" bind:blur="Subjectlur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">附件数</text>
+            <van-cell-group>
+                <van-field data-name="FileAttachNum" value="{{info.FileAttachNum}}" placeholder="请输入数字" bind:blur="FileAttachNumblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">内容</text>
+            <van-cell-group>
+                <van-field data-name="Context" value="{{info.Context}}" placeholder="请输入" bind:blur="Contextblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">签收</text>
+            <van-cell-group>
+                <van-field data-name="Signman" value="{{info.Signman}}" placeholder="请输入" bind:blur="Signmanblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">日期</text>
+            <van-cell title="{{info.Date?info.Date:'请选择'}}" is-link bind:click="showPopup_endtime" />
+            <van-popup show="{{ show_endtime }}" round position="bottom" bind:close="onClose_endtime">
+                <van-datetime-picker data-name="Date" value="{{ currentDate }}" bind:cancel="onClose_endtime" bind:confirm="onConfirm_endtime" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <text class="kind">备注</text>
+            <van-cell-group>
+                <van-field data-name="Remark" value="{{info.Remark}}" placeholder="请输入" bind:blur="Remarkblur" />
+            </van-cell-group>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,94 @@
+<!-- pages/new/new.wxml -->
+<view class="wraper">
+    <view class="header d_header" wx:if="{{info.ID}}">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="editreturn"></icon>
+        <text class="fr newCreate" bindtap="editconfirm">确定</text>
+        <view class="apply">编辑工程变更</view>
+    </view>
+    <view class="header d_header" wx:else>
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="confirm">确定</text>
+        <view class="apply">新建工程变更</view>
+    </view>
+    <view class="main n_main">
+        <van-toast id="van-toast" />
+        <view class="check_item">
+            <view class="kind require">
+                <text>工程编号名称</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.EngineerName?info.EngineerName:'请选择'}}" bind:click="showPopup_6">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show_6 }}" round position="bottom" bind:close="onClose_6">
+                <van-picker data-name="EngineerName" show-toolbar columns="{{totals}}" bind:cancel="onClose_6" bind:confirm="onConfirm_6" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>记录编号</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="RecordCode" value="{{info.RecordCode}}" placeholder="请输入" bind:blur="RecordCodelur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">设计单位</text>
+            <van-cell-group>
+                <van-field data-name="DesignCompany" value="{{info.DesignCompany}}" placeholder="请输入" bind:blur="DesignCompanylur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">设计人员</text>
+            <van-cell-group>
+                <van-field data-name="DesignMan" value="{{info.DesignMan}}" placeholder="请输入" bind:blur="DesignManlur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">施工单位</text>
+            <van-cell title="{{info.ConstructCompany?info.ConstructCompany:'请选择'}}" bind:click="showPopup">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show }}" round position="bottom" bind:close="onClose">
+                <van-picker data-name="ConstructCompany" show-toolbar columns="{{ firms }}" bind:cancel="onClose" bind:confirm="onConfirm" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <text class="kind">工程变更原因说明</text>
+            <van-cell-group>
+                <van-field data-name="EngineerAlertReason" value="{{info.EngineerAlertReason}}" placeholder="请输入" bind:blur="EngineerAlertReasonblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">变更图号</text>
+            <van-cell-group>
+                <van-field data-name="AlterFigureNumber" value="{{info.AlterFigureNumber}}" placeholder="请输入数字" bind:blur="AlterFigureNumberblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">原设计工程量</text>
+            <van-cell-group>
+                <van-field data-name="OldEngineerQty" value="{{info.OldEngineerQty}}" placeholder="请输入" bind:blur="OldEngineerQtyblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">变更后的工程量</text>
+            <van-cell-group>
+                <van-field data-name="AlterEngineerQty" value="{{info.AlterEngineerQty}}" placeholder="请输入" bind:blur="AlterEngineerQtyblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">原设计预（概）算数</text>
+            <van-cell-group>
+                <van-field data-name="OldEngineerbudget" value="{{info.OldEngineerbudget}}" placeholder="请输入" bind:blur="OldEngineerbudgetblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">变更后的预（概）算数</text>
+            <van-cell-group>
+                <van-field data-name="AlterEngineerbudget" value="{{info.AlterEngineerbudget}}" placeholder="请输入" bind:blur="AlterEngineerbudgetblur" />
+            </van-cell-group>
+        </view>
+    </view>
+</view>

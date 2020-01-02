@@ -1,0 +1,51 @@
+<!-- pages/detail/detail.wxml -->
+<view wx:if="{{info}}">
+    <view class="header d_header">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="delete">删除</text>
+        <view class="apply">资料详情</view>
+    </view>
+    <view class="card">
+        <van-card title="{{info.commTopic}}" tag="资料详情" />
+    </view>
+    <view class="main_nav">
+        <view class="content">
+            <view class="c_item">
+                <view class="kind">通讯主题</view>
+                <view class="check">{{info.commTopic}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">公司</view>
+                <view class="check">{{info.companyId}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">交易用户</view>
+                <view class="check">{{info.dealuser}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">重要级别</view>
+                <view class="check">{{info.Importlevel}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">通讯时间</view>
+                <view class="check">{{info.commTime}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">通讯记录</view>
+                <view class="check">{{info.commRecord}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">内容描述</view>
+                <view class="check">{{info.contentdesc}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="footer">
+        <view>
+            <navigator url="/pages/talk/new/new?id={{info.ID}}" hover-class="none">
+                <icon class="iconfont icon-bianji"></icon>
+                <text>编辑</text>
+            </navigator>
+        </view>
+    </view>
+</view>

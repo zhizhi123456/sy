@@ -1,0 +1,207 @@
+<!-- pages/detail/detail.wxml -->
+<view wx:if="{{info}}">
+    <view class="header d_header">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="delete">删除</text>
+        <view class="apply">资料详情</view>
+    </view>
+    <view class="card">
+        <van-card title="{{info.projectname}}" tag="资料详情" />
+    </view>
+    <view class="main_nav">
+        <view class="content">
+            <view class="c_item">
+                <view class="kind">工程名称</view>
+                <view class="check">{{info.projectname}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">工程编号</view>
+                <view class="check">{{info.projectcode}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">建设单位</view>
+                <view class="check">{{info.developerunit}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">施工单位</view>
+                <view class="check">{{info.constructionunit}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">监理单位</view>
+                <view class="check">{{info.supervisionunit}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">土建安装质量</view>
+                <view class="check">{{info.CivilWorkInstQty}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">土建楼层部位</view>
+                <view class="check">{{info.CivilWorkFlorPosi}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">土建图号</view>
+                <view class="check">{{info.CivilWorkDrawNo}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">土建工艺安装质量</view>
+                <view class="check">{{info.CivilTechInstQty}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">土建工艺楼层</view>
+                <view class="check">{{info.CivilTechFlorPosi}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">土建工艺图号</view>
+                <view class="check">{{info.CivilTechDrawNo}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">施工电源安装质量</view>
+                <view class="check">{{info.ConstruPowerInstQty}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">施工电源楼层部位</view>
+                <view class="check">{{info.ConstruPowerFlorPosi}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">施工电源图号</view>
+                <view class="check">{{info.ConstruPowerDrawNo}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">地板铺设安装质量</view>
+                <view class="check">{{info.FloorLayInstQty}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">地板铺设楼层</view>
+                <view class="check">{{info.FloorLayFlorPosi}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">地板铺设图号</view>
+                <view class="check">{{info.FloorLayDrawNo}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">外观检查安装质量</view>
+                <view class="check">{{info.AppearCheckInstQty}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">外观检查楼层部位</view>
+                <view class="check">{{info.AppearCheckFlorPosi}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">外观检查图号</view>
+                <view class="check">{{info.AppearCheckDrawNo}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">设备安装质量</view>
+                <view class="check">{{info.EquipiInstaInstQty}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">设备安装楼层部位</view>
+                <view class="check">{{info.EquipiInstaFlorPosi}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">设备安装图号</view>
+                <view class="check">{{info.EquipiInstaDrawNo}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">电气性能安装质量</view>
+                <view class="check">{{info.ElectPropInstQty}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">电气性能楼层部位</view>
+                <view class="check">{{info.ElectPropFlorPosi}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">电气性能图号</view>
+                <view class="check">{{info.ElectPropDrawNo}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">消防器材安装质量</view>
+                <view class="check">{{info.FireFitEquInstQty}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">消防器材楼层部位</view>
+                <view class="check">{{info.FireFitEquFlorPosi}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">消防器材图号</view>
+                <view class="check">{{info.FireFitEquDrawNo}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">危险物品堆放安装质量</view>
+                <view class="check">{{info.DangerGoodInstQty}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">危险物品楼层部位</view>
+                <view class="check">{{info.DangerGoodFlorPosi}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">危险物品图号</view>
+                <view class="check">{{info.DangerGoodDrawNo}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">孔洞防火安装质量</view>
+                <view class="check">{{info.HoleFirePrevInstQty}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">孔洞防火楼层</view>
+                <view class="check">{{info.HoleFirePrevFlorPosi}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">孔洞防火图号</view>
+                <view class="check">{{info.HoleFirePrevDrawNo}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">验收意见</view>
+                <view class="check">{{info.AcceptanceComments}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">建设单位验收人</view>
+                <view class="check">{{info.DeveloperunitCheckMan}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">施工单位验收人</view>
+                <view class="check">{{info.ConstructionunitCheckMan}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">监理单位验收人</view>
+                <view class="check">{{info.SafetyscoreCheckMan}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">建设单位验收日期</view>
+                <view class="check">{{info.DeveloperunitCheckDate}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">施工单位验收日期</view>
+                <view class="check">{{info.ConstructionunitCheckDate}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">监理单位验收日期</view>
+                <view class="check">{{info.SafetyscoreCheckDate}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">创建人</view>
+                <view class="check">{{info.createman}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">创建时间</view>
+                <view class="check">{{info.createtime}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">修改人</view>
+                <view class="check">{{info.updateman}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">修改时间</view>
+                <view class="check">{{info.updatetime}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="footer">
+        <view>
+            <navigator url="/pages/shelter/new/new?id={{info.ID}}" hover-class="none">
+                <icon class="iconfont icon-bianji"></icon>
+                <text>编辑</text>
+            </navigator>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,110 @@
+<!-- pages/detail/detail.wxml -->
+<view wx:if="{{info}}">
+    <view class="header d_header">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="delete">删除</text>
+        <view class="apply">资料详情</view>
+    </view>
+    <view class="card">
+        <van-card title="{{info.frameProtocolname}}" tag="资料详情" />
+    </view>
+    <view class="main_nav">
+        <van-tabs active="{{tab}}">
+            <van-tab title="详细资料" name="a">
+                <view class="content">
+                    <view class="c_item">
+                        <view class="kind">框架协议编号</view>
+                        <view class="check">{{info.frameProtocolCode}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">框架协议名称</view>
+                        <view class="check">{{info.frameProtocolname}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">所属类别</view>
+                        <view class="check">{{info.classname}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">公司抬头</view>
+                        <view class="check">{{info.Companytitle}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">对方单位</view>
+                        <view class="check">{{info.CompanyID}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">签订时间</view>
+                        <view class="check">{{info.signdate}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">当前处理人</view>
+                        <view class="check">{{info.CurDealer}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">当前步骤名称</view>
+                        <view class="check">{{info.CurStepName}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">当前步骤编号</view>
+                        <view class="check">{{info.CurStepbh}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">步骤是否完成</view>
+                        <view class="check">{{info.IfWfComplete?'是':'否'}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">相关附件</view>
+                        <view class="check">{{info.attachfile}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">资料图片</view>
+                        <view wx:if="{{info.API_Picurl}}" class="detpic_show">
+                            <block wx:for="{{info.API_Picurl}}" wx:key="index">
+                                <image src="{{item}}" bindtap="tap_pic" data-index="{{index}}" binderror="defaultimg" />
+                            </block>
+                        </view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">创建人</view>
+                        <view class="check">{{info.createman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">创建时间</view>
+                        <view class="check">{{info.createtime}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">修改人</view>
+                        <view class="check">{{info.updateman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">修改时间</view>
+                        <view class="check">{{info.updatetime}}</view>
+                    </view>
+                </view>
+            </van-tab>
+            <van-tab title="动态" name="b">
+                <van-cell title="动态({{Workstate}})" />
+                <block wx:if="{{info.formid}}">
+                    <van-steps steps="{{ steps }}" active="{{ active }}" direction="vertical" />
+                </block>
+                <view class="dynamic_state" wx:else>暂无动态</view>
+            </van-tab>
+        </van-tabs>
+    </view>
+    <view class="footer">
+        <view bindtap="sendback" wx:if="{{info.formid&&isnext&&returned&&isreturn}}">
+            <icon class="iconfont icon-wj-thwj"></icon>
+            <text>退回上步</text>
+        </view>
+        <view>
+            <navigator url="/pages/deal/new/new?id={{info.ID}}" hover-class="none">
+                <icon class="iconfont icon-bianji"></icon>
+                <text>编辑</text>
+            </navigator>
+        </view>
+        <view bindtap="putin" wx:if="{{isnext&&returned}}">
+            <icon class="iconfont icon-tijiao"></icon>
+            <text>提交下步</text>
+        </view>
+    </view>
+</view>

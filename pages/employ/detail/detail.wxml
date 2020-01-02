@@ -1,0 +1,79 @@
+<!-- pages/detail/detail.wxml -->
+<view wx:if="{{info}}">
+    <view class="header d_header">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="delete">删除</text>
+        <view class="apply">资料详情</view>
+    </view>
+    <view class="card">
+        <van-card title="{{info.goodscode}}" tag="资料详情" />
+    </view>
+    <view class="main_nav">
+        <view class="content">
+            <view class="c_item">
+                <view class="kind">材料名称</view>
+                <view class="check">{{info.goodsname}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">材料编码</view>
+                <view class="check">{{info.goodscode}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">分包项目</view>
+                <view class="check">{{info.InoutwarehouseID}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">施工名称</view>
+                <view class="check">{{info.direct}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">材料总金额</view>
+                <view class="check">{{info.amount}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">消耗数量</view>
+                <view class="check">{{info.quantity}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">规格型号</view>
+                <view class="check">{{info.specifications}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">单位</view>
+                <view class="check">{{info.unit}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">单价</view>
+                <view class="check">{{info.price}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">使用日期</view>
+                <view class="check">{{info.usedate}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">创建人</view>
+                <view class="check">{{info.createman}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">创建时间</view>
+                <view class="check">{{info.createtime}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">修改人</view>
+                <view class="check">{{info.updateman}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">修改时间</view>
+                <view class="check">{{info.updatetime}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="footer">
+        <view>
+            <navigator url="/pages/employ/new/new?id={{info.ID}}" hover-class="none">
+                <icon class="iconfont icon-bianji"></icon>
+                <text>编辑</text>
+            </navigator>
+        </view>
+    </view>
+</view>

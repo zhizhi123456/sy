@@ -1,0 +1,9 @@
+<!-- pages/project/project.wxml -->
+<map id="myMap" style="width: 100%; height: 100vh;" longitude="{{track[0].longitude}}" latitude="{{track[0].latitude}}" polyline="{{polyline}}" show-location markers="{{marker}}">
+    <cover-view class='cover-tip-wrapper' wx:if="{{!distance}}" bindtap="againlocaltion">
+        <cover-view class="return">
+            <cover-view class="iconfont icon-jiantou2" bindtap="return" />
+        </cover-view>
+        <cover-view class='tip-text'>{{track[0].Todaydate}}行动轨迹</cover-view>
+    </cover-view>
+</map>

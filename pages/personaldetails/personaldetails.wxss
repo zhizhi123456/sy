@@ -1,0 +1,27 @@
+/* pages/personaldetails/personaldetails.wxss */
+.main {
+    margin-top: 100rpx;
+    padding: 0;
+}
+
+.headimgbox {
+    width: 150rpx;
+    height: 150rpx;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 50rpx auto;
+    border: 20rpx solid white;
+}
+
+.headimgbox image {
+    width: 100%;
+}
+.main .van-cell__title{
+    color: #999;
+    font-size: 12px;
+}
+.main .van-field__input {
+    text-align: right;
+    color: #333;
+    font-size: 16px;
+}

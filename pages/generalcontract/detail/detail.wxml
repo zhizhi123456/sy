@@ -1,0 +1,161 @@
+<!-- pages/detail/detail.wxml -->
+<view wx:if="{{info}}">
+    <view class="header d_header">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="delete">删除</text>
+        <view class="apply">资料详情</view>
+    </view>
+    <view class="card">
+        <van-card desc="{{info.contcactamount?info.contcactamount+'元':''}} | {{info.createman}}" title="{{info.maincontactname}}" tag="资料详情" />
+    </view>
+    <view class="main_nav">
+        <van-tabs active="{{tab}}">
+            <van-tab title="详细资料" name="a">
+                <view class="content">
+                    <view class="c_item">
+                        <view class="kind">部门</view>
+                        <view class="check">{{info.department}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">公司抬头</view>
+                        <view class="check">{{info.Companytitle}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">总包合同名称</view>
+                        <view class="check">{{info.maincontactname}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">总包合同金额</view>
+                        <view class="check">{{info.contcactamount}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">备注</view>
+                        <view class="check">{{info.demo}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">材料</view>
+                        <view class="check">{{info.material}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">签订时间</view>
+                        <view class="check">{{info.signtime}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">照片</view>
+                        <view wx:if="{{info.API_Picurl}}" class="detpic_show">
+                            <block wx:for="{{info.API_Picurl}}" wx:key="index">
+                                <image src="{{item}}" bindtap="tap_pic" data-index="{{index}}" binderror="defaultimg" />
+                            </block>
+                        </view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">当前处理人</view>
+                        <view class="check">{{info.CurDealer}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">当前步骤名称</view>
+                        <view class="check">{{info.CurStepName}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">当前步骤编号</view>
+                        <view class="check">{{info.CurStepbh}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">步骤是否完成</view>
+                        <view class="check">{{info.IfWfComplete?'是':'否'}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">创建人</view>
+                        <view class="check">{{info.createman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">创建时间</view>
+                        <view class="check">{{info.createtime}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">修改人</view>
+                        <view class="check">{{info.updateman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">修改时间</view>
+                        <view class="check">{{info.updatetime}}</view>
+                    </view>
+                </view>
+            </van-tab>
+            <van-tab title="动态" name="b">
+                <van-cell title="动态({{Workstate}})" />
+                <block wx:if="{{info.formid}}">
+                    <van-steps steps="{{ steps }}" active="{{ active }}" direction="vertical" />
+                </block>
+                <view class="dynamic_state" wx:else>暂无动态</view>
+            </van-tab>
+            <van-tab title="费用单" name="c">
+                <block wx:if="{{InfoList.length}}">
+                    <view class="material" wx:for="{{InfoList}}" wx:key="{{index}}">
+                        <navigator url="/pages/cost/detail/detail?nape=generalcontract&returnid={{info.ID}}&id={{item.ID}}" hover-class="none">
+                            <view class="m_item">
+                                <text class="m_info">费用名称</text>
+                                <text>{{item.chargename}}</text>
+                            </view>
+                            <view class="m_item">
+                                <text class="m_info">所有人</text>
+                                <text>{{item.belongtoman}}</text>
+                            </view>
+                            <view class="m_item">
+                                <text class="m_info">总包项目编号</text>
+                                <text>{{item.mainprojcectCode}}</text>
+                            </view>
+                            <view class="m_item">
+                                <text class="m_info">总包合同编号</text>
+                                <text>{{item.maincontactcode}}</text>
+                            </view>
+                            <view class="m_item">
+                                <text class="m_info">费用金额</text>
+                                <text>{{item.chargeamount}}</text>
+                            </view>
+                            <view class="m_item">
+                                <text class="m_info">创建人</text>
+                                <text>{{item.createman}}</text>
+                            </view>
+                            <view class="m_item">
+                                <text class="m_info">创建时间</text>
+                                <text>{{item.createtime}}</text>
+                            </view>
+                            <view class="m_item">
+                                <text class="m_info">当前步骤名称</text>
+                                <text>{{item.CurStepName}}</text>
+                            </view>
+                            <view class="m_item">
+                                <text class="m_info">当前处理人</text>
+                                <text>{{item.CurDealer}}</text>
+                            </view>
+                            <view class="m_item">
+                                <text class="m_info">流程是否已结束</text>
+                                <text>{{item.IfWfComplete?'是':'否'}}</text>
+                            </view>
+                        </navigator>
+                    </view>
+                    <view wx:if="{{loading}}" class="end">加载中...</view>
+                    <view wx:if="{{!loading}}" class="end">已经到底了</view>
+                </block>
+                <view class="dynamic_state" wx:else>暂无内容</view>
+            </van-tab>
+        </van-tabs>
+    </view>
+    <view class="footer">
+        <view bindtap="sendback" wx:if="{{info.formid&&isnext&&returned&&isreturn}}">
+            <icon class="iconfont icon-wj-thwj"></icon>
+            <text>退回上步</text>
+        </view>
+        <view>
+            <navigator url="/pages/generalcontract/new/new?id={{info.ID}}" hover-class="none">
+                <icon class="iconfont icon-bianji"></icon>
+                <text>编辑</text>
+            </navigator>
+        </view>
+        <view bindtap="putin" wx:if="{{isnext&&returned}}">
+            <icon class="iconfont icon-tijiao"></icon>
+            <text>提交下步</text>
+        </view>
+    </view>
+</view>

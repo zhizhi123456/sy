@@ -1,0 +1,36 @@
+<!-- pages/count/money/money.wxml -->
+<view class="wraper">
+    <view class="header d_header">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <view class="apply">材料费明细</view>
+    </view>
+    <view class="material lookedit">
+        <block wx:for="{{InfoList}}" wx:key="index">
+            <view class="led_list">
+                <view class="m_item">
+                    <text class="m_info">领料单名称</text>
+                    <text>{{item.getmaterialName}}</text>
+                </view>
+                <view class="m_item">
+                    <text class="m_info">申请人</text>
+                    <text>{{item.applyman}}</text>
+                </view>
+                <view class="m_item">
+                    <text class="m_info">部门</text>
+                    <text>{{item.department}}</text>
+                </view>
+                <view class="m_item">
+                    <text class="m_info">项目编号</text>
+                    <text>{{item.projectcode}}</text>
+                </view>
+                <view class="m_item">
+                    <text class="m_info">总费用</text>
+                    <text>{{item.materialcost}}</text>
+                </view>
+            </view>
+        </block>
+        <view wx:if="{{loading&&InfoList.length}}" class="end">加载中...</view>
+        <view wx:if="{{!loading&&InfoList.length}}" class="end">已经到底了</view>
+        <view class="no_more" wx:if="{{!InfoList.length}}">暂无内容</view>
+    </view>
+</view>

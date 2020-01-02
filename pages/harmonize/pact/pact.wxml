@@ -1,0 +1,127 @@
+<!-- textages/textact/textact.wxml -->
+<view class="wraper">
+    <!-- 头部 -->
+    <view class="header">
+        <view class="title">
+            <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
+            <navigator url="/pages/harmonize/new/new" hover-class="none" class="fr newCreate">
+                新建
+            </navigator>
+            <view class="apply">{{title}}</view>
+        </view>
+        <view class="seach">
+            <icon class="iconfont icon-fuxuananniu fl s-sort" bindtap="showgroup"></icon>
+            <icon class="iconfont icon-sousuo fr" bindtap="seachInfo"></icon>
+            <view class="data_list">
+                <input value="{{seach}}" bindblur="setSeach" />
+                <view class="number" wx:if="{{!seach}}">
+                    <icon class="iconfont icon-sousuo"></icon>
+                    <text wx:if="{{InfoList.length}}">共{{item.length}}条</text>
+                    <text wx:else>搜索</text>
+                </view>
+                <van-popup show="{{ show }}" bind:close="onClose" position="right" custom-style="height: 100vh;color:#333">
+                    <view class="seach_item">
+                        <van-cell-group>
+                            <van-field value="{{info.ReceiveFileCompany}}" placeholder="请输入" bind:blur="ReceiveFileCompanyblur" data-name="ReceiveFileCompany" label="收文单位" />
+                        </van-cell-group>
+                    </view>
+                    <view class="seach_item">
+                        <van-cell-group>
+                            <van-field value="{{info.ReceiveFileMan}}" placeholder="请输入" bind:blur="ReceiveFileManblur" data-name="ReceiveFileMan" label="收件人" />
+                        </van-cell-group>
+                    </view>
+                    <view class="seach_item">
+                        <van-cell-group>
+                            <van-field value="{{info.SentFileCompany}}" placeholder="请输入" bind:blur="SentFileCompanyblur" data-name="SentFileCompany" label="发文单位" />
+                        </van-cell-group>
+                    </view>
+                    <view class="seach_item">
+                        <van-cell-group>
+                            <van-field value="{{info.Subject}}" placeholder="请输入" bind:blur="Subjectblur" data-name="Subject" label="主题" />
+                        </van-cell-group>
+                    </view>
+                    <view class="seach_item">
+                        <van-cell-group>
+                            <van-field value="{{info.begintime}}" placeholder="请选择" label="发文日期开始时间" bindtap="showPopup_time" disabled />
+                        </van-cell-group>
+                        <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
+                            <van-datetime-picker data-name="begintime" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
+                        </van-popup>
+                    </view>
+                    <view class="seach_item">
+                        <van-cell-group>
+                            <van-field value="{{info.endtime}}" placeholder="请选择" label="发文日期结束时间" bindtap="showPopup_endtime" disabled />
+                        </van-cell-group>
+                        <van-popup show="{{ show_endtime }}" round position="bottom" bind:close="onClose_endtime">
+                            <van-datetime-picker data-name="endtime" value="{{ currentDate }}" bind:cancel="onClose_endtime" bind:confirm="onConfirm_endtime" />
+                        </van-popup>
+                    </view>
+                    <view class="checkkind">
+                        <text bindtap="onClose">取消</text>
+                        <text bindtap="onConfirm_seach">查询</text>
+                    </view>
+                </van-popup>
+            </view>
+        </view>
+    </view>
+    <view class="main">
+        <view class="list" wx:for="{{InfoList}}" wx:key="index">
+            <navigator url="/pages/harmonize/detail/detail?id={{item.ID}}" hover-class="none">
+                <view>
+                    <text class="caption">{{item.FileNumber}}</text>
+                </view>
+                <view>
+                    <text class="info">收文单位</text>
+                    <text>{{item.ReceiveFileCompany}}</text>
+                </view>
+                <view>
+                    <text class="info">文号</text>
+                    <text>{{item.FileNumber}}</text>
+                </view>
+                <view>
+                    <text class="info">收件人</text>
+                    <text>{{item.ReceiveFileMan}}</text>
+                </view>
+                <view>
+                    <text class="info">发文日期</text>
+                    <text>{{item.SentFileDate}}</text>
+                </view>
+                <view>
+                    <text class="info">发文单位</text>
+                    <text>{{item.SentFileCompany}}</text>
+                </view>
+                <view>
+                    <text class="info">抄送</text>
+                    <text>{{item.SendDuplicateTo}}</text>
+                </view>
+                <view>
+                    <text class="info">主题</text>
+                    <text>{{item.Subject}}</text>
+                </view>
+                <view>
+                    <text class="info">附件数</text>
+                    <text>{{item.FileAttachNum}}</text>
+                </view>
+                <view>
+                    <text class="info">创建人</text>
+                    <text>{{item.createman}}</text>
+                </view>
+                <view>
+                    <text class="info">创建时间</text>
+                    <text>{{item.createtime}}</text>
+                </view>
+                <view>
+                    <text class="info">修改人</text>
+                    <text>{{item.updateman}}</text>
+                </view>
+                <view>
+                    <text class="info">修改时间</text>
+                    <text>{{item.updatetime}}</text>
+                </view>
+            </navigator>
+        </view>
+        <view wx:if="{{loading&&InfoList.length}}" class="end">加载中...</view>
+        <view wx:if="{{!loading&&InfoList.length}}" class="end">已经到底了</view>
+        <view class="no_more" wx:if="{{!InfoList.length}}">暂无内容</view>
+    </view>
+</view>

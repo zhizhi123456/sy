@@ -1,0 +1,51 @@
+<!-- pages/detail/detail.wxml -->
+<view wx:if="{{info}}">
+    <view class="header d_header">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="delete">删除</text>
+        <view class="apply">资料详情</view>
+    </view>
+    <view class="card">
+        <van-card title="{{info.meetname}}" tag="资料详情" />
+    </view>
+    <view class="main_nav">
+        <view class="content">
+            <view class="c_item">
+                <view class="kind">会议名称</view>
+                <view class="check">{{info.meetname}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">会议时间</view>
+                <view class="check">{{info.meetdate}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">会议地点</view>
+                <view class="check">{{info.meetplace}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">部门</view>
+                <view class="check">{{info.departmentId}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">会议纪要</view>
+                <view class="check">{{info.meetbriefcontext}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">资料图片</view>
+                <view wx:if="{{info.API_Picurl}}" class="detpic_show">
+                    <block wx:for="{{info.API_Picurl}}" wx:key="index">
+                        <image src="{{item}}" bindtap="tap_pic" data-index="{{index}}" binderror="defaultimg" />
+                    </block>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="footer">
+        <view>
+            <navigator url="/pages/projectmeet/new/new?id={{info.ID}}" hover-class="none">
+                <icon class="iconfont icon-bianji"></icon>
+                <text>编辑</text>
+            </navigator>
+        </view>
+    </view>
+</view>

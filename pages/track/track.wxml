@@ -1,0 +1,47 @@
+<!-- pages/project/project.wxml -->
+<view class="wraper">
+    <!-- 头部 -->
+    <view class="header">
+        <view class="title">
+            <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
+            <view class="apply">{{title}}</view>
+        </view>
+        <view class="seach">
+            <icon class="iconfont icon-sousuo fr" bindtap="seachInfo"></icon>
+            <view class="data_list seachTime">
+                <input value="{{info.stardate}}" bindtap="showPopup_time" placeholder="请选择开始时间" disabled />
+                <view>
+                    <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
+                        <van-datetime-picker data-name="stardate" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" type="date" />
+                    </van-popup>
+                </view>
+                <input value="{{info.enddate}}" bindtap="showPopup_endtime" placeholder="请选择结束时间" disabled />
+                <view>
+                    <van-popup show="{{ show_endtime }}" round position="bottom" bind:close="onClose_endtime">
+                        <van-datetime-picker data-name="enddate" value="{{ currentDate }}" bind:cancel="onClose_endtime" bind:confirm="onConfirm_endtime" type="date" />
+                    </van-popup>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="main" wx:if="{{InfoList[0]}}">
+        <view class="list" wx:for="{{InfoList}}" wx:key="index">
+            <navigator url="/pages/track/mytrack/mytrack?Todaydate={{item.Todaydate}}&UserID={{item.UserID}}&person={{person}}" hover-class="none">
+                <view>
+                    <text class="caption">{{item.Todaydate}}</text>
+                </view>
+                <view>
+                    <text class="info">轨迹起点</text>
+                    <text>{{item.origin}}</text>
+                </view>
+                <view>
+                    <text class="info">轨迹终点</text>
+                    <text>{{item.terminus}}</text>
+                </view>
+            </navigator>
+        </view>
+        <view wx:if="{{loading&&InfoList.length}}" class="end">加载中...</view>
+        <view wx:if="{{!loading&&InfoList.length}}" class="end">已经到底了</view>
+    </view>
+    <view class="no_more" wx:if="{{!InfoList.length}}">暂无内容</view>
+</view>

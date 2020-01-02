@@ -1,0 +1,8 @@
+/* pages/project/project.wxss */
+.seachTime {
+    margin: 0;
+}
+
+.seachTime input {
+    margin-left: 20rpx;
+}

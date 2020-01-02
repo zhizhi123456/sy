@@ -1,0 +1,63 @@
+<!-- pages/detail/detail.wxml -->
+<view wx:if="{{info}}">
+    <view class="header d_header">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="delete">删除</text>
+        <view class="apply">资料详情</view>
+    </view>
+    <view class="card">
+        <van-card title="{{info.EngineerName}}" tag="资料详情" />
+    </view>
+    <view class="main_nav">
+        <view class="content">
+            <view class="c_item">
+                <view class="kind">项目名称</view>
+                <view class="check">{{info.projectcode}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">工程小项名称</view>
+                <view class="check">{{info.projectSmallname}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">计划量</view>
+                <view class="check">{{info.amountPlan}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">实际量</view>
+                <view class="check">{{info.amountQuantity}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">偏差量</view>
+                <view class="check">{{info.amountPlan-info.amountQuantity}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">偏差率</view>
+                <view class="check">{{info.offset}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">创建人</view>
+                <view class="check">{{info.createman}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">创建时间</view>
+                <view class="check">{{info.createtime}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">修改人</view>
+                <view class="check">{{info.updateman}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">修改时间</view>
+                <view class="check">{{info.updatetime}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="footer">
+        <view>
+            <navigator url="/pages/quantity/new/new?id={{info.ID}}" hover-class="none">
+                <icon class="iconfont icon-bianji"></icon>
+                <text>编辑</text>
+            </navigator>
+        </view>
+    </view>
+</view>

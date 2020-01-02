@@ -1,0 +1,92 @@
+<!-- textages/textact/textact.wxml -->
+<view class="wraper">
+    <!-- 头部 -->
+    <view class="header">
+        <view class="title">
+            <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
+            <navigator url="/pages/projectmeet/new/new" hover-class="none" class="fr newCreate">
+                新建
+            </navigator>
+            <view class="apply">{{title}}</view>
+        </view>
+        <view class="seach">
+            <icon class="iconfont icon-fuxuananniu fl s-sort" bindtap="showgroup"></icon>
+            <icon class="iconfont icon-sousuo fr" bindtap="seachInfo"></icon>
+            <view class="data_list">
+                <input value="{{seach}}" bindblur="setSeach" />
+                <view class="number" wx:if="{{!seach}}">
+                    <icon class="iconfont icon-sousuo"></icon>
+                    <text wx:if="{{InfoList.length}}">共{{item.length}}条</text>
+                    <text wx:else>搜索</text>
+                </view>
+                <van-popup show="{{ show }}" bind:close="onClose" position="right" custom-style="height: 100vh;color:#333">
+                    <view class="seach_item">
+                        <van-cell-group>
+                            <van-field value="{{info.meetname}}" placeholder="请输入" bind:blur="meetnameblur" data-name="meetname" label="会议名称" />
+                        </van-cell-group>
+                    </view>
+                    <view class="seach_item">
+                        <van-cell-group>
+                            <van-field value="{{departmenttext}}" placeholder="请选择" bindtap="showPopup_0" label="部门" disabled />
+                        </van-cell-group>
+                        <van-popup show="{{ show_0 }}" round position="bottom" bind:close="onClose_0">
+                            <van-picker data-name="departmentId" show-toolbar columns="{{ sections }}" bind:cancel="onClose_0" bind:confirm="onConfirm_0" />
+                        </van-popup>
+                    </view>
+                    <view class="seach_item">
+                        <van-cell-group>
+                            <van-field value="{{info.begintime}}" placeholder="请选择" label="开会时间开始时间" bindtap="showPopup_time" disabled />
+                        </van-cell-group>
+                        <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
+                            <van-datetime-picker data-name="begintime" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
+                        </van-popup>
+                    </view>
+                    <view class="seach_item">
+                        <van-cell-group>
+                            <van-field value="{{info.endtime}}" placeholder="请选择" label="开会时间结束时间" bindtap="showPopup_endtime" disabled />
+                        </van-cell-group>
+                        <van-popup show="{{ show_endtime }}" round position="bottom" bind:close="onClose_endtime">
+                            <van-datetime-picker data-name="endtime" value="{{ currentDate }}" bind:cancel="onClose_endtime" bind:confirm="onConfirm_endtime" />
+                        </van-popup>
+                    </view>
+                    <view class="checkkind">
+                        <text bindtap="onClose">取消</text>
+                        <text bindtap="onConfirm_seach">查询</text>
+                    </view>
+                </van-popup>
+            </view>
+        </view>
+    </view>
+    <view class="main">
+        <view class="list" wx:for="{{InfoList}}" wx:key="index">
+            <navigator url="/pages/projectmeet/detail/detail?id={{item.ID}}" hover-class="none">
+                <view>
+                    <text class="caption">{{item.proassignbookcode}}</text>
+                </view>
+                <view>
+                    <text class="info">会议名称</text>
+                    <text>{{item.meetname}}</text>
+                </view>
+                <view>
+                    <text class="info">开会时间</text>
+                    <text>{{item.meetdate}}</text>
+                </view>
+                <view>
+                    <text class="info">会议地点</text>
+                    <text>{{item.meetplace}}</text>
+                </view>
+                <view>
+                    <text class="info">部门</text>
+                    <text>{{item.departmentId}}</text>
+                </view>
+                <view>
+                    <text class="info">会议纪要</text>
+                    <text>{{item.meetbriefcontext}}</text>
+                </view>
+            </navigator>
+        </view>
+        <view wx:if="{{loading&&InfoList.length}}" class="end">加载中...</view>
+        <view wx:if="{{!loading&&InfoList.length}}" class="end">已经到底了</view>
+        <view class="no_more" wx:if="{{!InfoList.length}}">暂无内容</view>
+    </view>
+</view>

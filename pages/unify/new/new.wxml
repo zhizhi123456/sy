@@ -1,0 +1,58 @@
+<!-- pages/new/new.wxml -->
+<view class="wraper">
+    <view class="header d_header" wx:if="{{info.ID}}">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="editreturn"></icon>
+        <text class="fr newCreate" bindtap="editconfirm">确定</text>
+        <view class="apply">编辑材料</view>
+    </view>
+    <view class="header d_header" wx:else>
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="confirm">确定</text>
+        <view class="apply">新建材料</view>
+    </view>
+    <view class="main n_main">
+        <van-toast id="van-toast" />
+        <view class="check_item">
+            <view class="kind require">
+                <text>项目名称</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.projectcode?info.projectcode:'请选择'}}" bind:click="showPopup_1">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show_1 }}" round position="bottom" bind:close="onClose_1">
+                <van-picker data-name="projectcode" show-toolbar columns="{{Main}}" bind:cancel="onClose_1" bind:confirm="onConfirm_1" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>材料编码</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.goodscode?info.goodscode:'请选择'}}" bind:click="showPopup">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show }}" round position="bottom" bind:close="onClose">
+                <van-picker data-name="goodscode" show-toolbar columns="{{ goods }}" bind:cancel="onClose" bind:confirm="onConfirm" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <text class="kind">材料名称</text>
+            <van-cell-group>
+                <van-field  value="{{info.goodsname}}" placeholder="请输入" disabled/>
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">计划量</text>
+            <van-cell-group>
+                <van-field data-name="amountPlan" value="{{info.amountPlan}}" placeholder="请输入数字" bind:blur="amountPlanlur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">实际量</text>
+            <van-cell-group>
+                <van-field data-name="amountQuantity" value="{{info.amountQuantity}}" placeholder="请输入数字" bind:blur="amountQuantitylur" />
+            </van-cell-group>
+        </view>
+    </view>
+</view>

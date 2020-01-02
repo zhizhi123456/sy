@@ -1,0 +1,128 @@
+<!-- pages/count/pact/pact.wxml -->
+<view class="wraper">
+    <!-- 头部 -->
+    <view class="header">
+        <view class="title">
+            <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
+            <!-- <navigator url="/pages/generalcontract/new/new" class="fr newCreate">新建</navigator> -->
+            <view class="apply">{{title}}</view>
+        </view>
+        <view class="seach">
+            <icon class="iconfont icon-fuxuananniu fl s-sort" bindtap="showgroup"></icon>
+            <icon class="iconfont icon-sousuo fr" bindtap="seachInfo"></icon>
+            <view class="data_list">
+                <input value="{{seach}}" bindblur="setSeach" />
+                <view class="number" wx:if="{{!seach}}">
+                    <icon class="iconfont icon-sousuo"></icon>
+                    <text wx:if="{{InfoList.length}}">共{{item.length}}条</text>
+                    <text wx:else>搜索</text>
+                </view>
+                <van-popup show="{{ show }}" bind:close="onClose" position="right" custom-style="height: 100vh;color:#333">
+                    <view class="seach_item">
+                        <van-cell-group>
+                            <van-field value="{{info.projectName}}" placeholder="请输入" bind:blur="projectNameblur" data-name="projectName" label="项目名称" />
+                        </van-cell-group>
+                    </view>
+                    <view class="seach_item">
+                        <van-cell-group>
+                            <van-field value="{{info.planbegindate}}" placeholder="请选择" label="开始时间" bindtap="showPopup_time" disabled />
+                        </van-cell-group>
+                        <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
+                            <van-datetime-picker data-name="planbegindate" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
+                        </van-popup>
+                    </view>
+                    <view class="seach_item">
+                        <van-cell-group>
+                            <van-field value="{{info.planenddate}}" placeholder="请选择" label="结束时间" bindtap="showPopup_endtime" disabled />
+                        </van-cell-group>
+                        <van-popup show="{{ show_endtime }}" round position="bottom" bind:close="onClose_endtime">
+                            <van-datetime-picker data-name="planenddate" value="{{ currentDate }}" bind:cancel="onClose_endtime" bind:confirm="onConfirm_endtime" />
+                        </van-popup>
+                    </view>
+                    <view class="checkkind">
+                        <text bindtap="onClose">取消</text>
+                        <text bindtap="onConfirm_seach">查询</text>
+                    </view>
+                </van-popup>
+            </view>
+        </view>
+    </view>
+    <view class="main">
+        <view class="list" wx:for="{{InfoList}}" wx:key="index">
+            <view>
+                <text class="caption">{{item.projectname}}</text>
+            </view>
+            <view>
+                <text class="info">项目编号</text>
+                <text>{{item.projcectCode}}</text>
+            </view>
+            <view>
+                <text class="info">项目名称</text>
+                <text>{{item.projectname}}</text>
+            </view>
+            <view>
+                <text class="info">项目总金额</text>
+                <text>{{item.contcactamount}}</text>
+            </view>
+            <view bindtap="lookCost" data-code="{{item.projcectCode}}">
+                <text class="info">材料费</text>
+                <text>
+                    <text class="depthdetail">查看相关明细</text>
+                    <text>{{item.materialcost}}</text>
+                </text>
+            </view>
+            <view bindtap="chargemore" data-code="{{item.projcectCode}}" data-i="{{index}}">
+                <text class="info">施工费</text>
+                <text>
+                    <text class="depthdetail">查看更多</text>
+                    <text>{{item.projectcost}}</text>
+                </text>
+            </view>
+            <view bindtap="chargemore1" data-code="{{item.projcectCode}}" data-i="{{index}}">
+                <text class="info">协调费</text>
+                <text>
+                    <text class="depthdetail">查看更多</text>
+                    <text>{{item.harmonizecost}}</text>
+                </text>
+            </view>
+            <view bindtap="chargemore2" data-code="{{item.projcectCode}}" data-i="{{index}}">
+                <text class="info">安装调试费</text>
+                <text>
+                    <text class="depthdetail">查看更多</text>
+                    <text>{{item.installcost}}</text>
+                </text>
+            </view>
+            <view>
+                <text class="info">总费用</text>
+                <text>{{item.totalCost}}</text>
+            </view>
+            <view>
+                <text class="info">总利润</text>
+                <text>{{item.profit}}</text>
+            </view>
+            <view>
+                <text class="info">利润率</text>
+                <text>{{item.rate}}</text>
+            </view>
+            <view>
+                <text class="info">负责人</text>
+                <text>{{item.chargeman}}</text>
+            </view>
+            <view>
+                <text class="info">公司抬头</text>
+                <text>{{item.Companytitle}}</text>
+            </view>
+            <view>
+                <text class="info">计划开始时间</text>
+                <text>{{item.planbegindate}}</text>
+            </view>
+            <view>
+                <text class="info">计划结束时间</text>
+                <text>{{item.planenddate}}</text>
+            </view>
+        </view>
+        <view wx:if="{{loading&&InfoList.length}}" class="end">加载中...</view>
+        <view wx:if="{{!loading&&InfoList.length}}" class="end">已经到底了</view>
+        <view class="no_more" wx:if="{{!InfoList.length}}">暂无内容</view>
+    </view>
+</view>

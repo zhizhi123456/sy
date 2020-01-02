@@ -1,0 +1,118 @@
+<!-- pages/detail/detail.wxml -->
+<view wx:if="{{info}}">
+    <view class="header d_header">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="delete">删除</text>
+        <view class="apply">资料详情</view>
+    </view>
+    <view class="card">
+        <van-card title="{{info.EngineerName}}" tag="资料详情" />
+    </view>
+    <view class="main_nav">
+        <van-tabs active="{{tab}}">
+            <van-tab title="详细资料" name="a">
+                <view class="content">
+                    <view class="c_item">
+                        <view class="kind">工程编号名称</view>
+                        <view class="check">{{info.EngineerName}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">记录编号</view>
+                        <view class="check">{{info.RecordCode}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">设计单位</view>
+                        <view class="check">{{info.DesignCompany}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">施工单位</view>
+                        <view class="check">{{info.ConstructCompany}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">设计人员</view>
+                        <view class="check">{{info.DesignMan}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">工程变更原因说明</view>
+                        <view class="check">{{info.EngineerAlertReason}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">变更图号</view>
+                        <view class="check">{{info.AlterFigureNumber}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">原设计工程量</view>
+                        <view class="check">{{info.OldEngineerQty}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">变更后的工程量</view>
+                        <view class="check">{{info.AlterEngineerQty}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">原设计预（概）算数</view>
+                        <view class="check">{{info.OldEngineerbudget}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">变更后的预（概）算数</view>
+                        <view class="check">{{info.AlterEngineerbudget}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">当前处理人</view>
+                        <view class="check">{{info.CurDealer}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">当前步骤名称</view>
+                        <view class="check">{{info.CurStepName}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">当前步骤编号</view>
+                        <view class="check">{{info.CurStepbh}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">步骤是否完成</view>
+                        <view class="check">{{info.IfWfComplete?'是':'否'}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">创建人</view>
+                        <view class="check">{{info.createman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">创建时间</view>
+                        <view class="check">{{info.createtime}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">修改人</view>
+                        <view class="check">{{info.updateman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">修改时间</view>
+                        <view class="check">{{info.updatetime}}</view>
+                    </view>
+                </view>
+            </van-tab>
+            <van-tab title="动态" name="b">
+                <van-cell title="动态({{Workstate}})" />
+                <block wx:if="{{info.Formid}}">
+                    <van-steps steps="{{ steps }}" active="{{ active }}" direction="vertical" />
+                </block>
+                <view class="dynamic_state" wx:else>暂无动态</view>
+            </van-tab>
+        </van-tabs>
+    </view>
+    <view class="footer">
+        <view bindtap="sendback" wx:if="{{info.Formid&&isnext&&returned&&isreturn}}">
+            <icon class="iconfont icon-wj-thwj"></icon>
+            <text>退回上步</text>
+        </view>
+        <view>
+            <navigator url="/pages/variation/new/new?id={{info.ID}}" hover-class="none">
+                <icon class="iconfont icon-bianji"></icon>
+                <text>编辑</text>
+            </navigator>
+        </view>
+        <view bindtap="putin" wx:if="{{isnext&&returned}}">
+            <icon class="iconfont icon-tijiao"></icon>
+            <text>提交下步</text>
+        </view>
+    </view>
+</view>
