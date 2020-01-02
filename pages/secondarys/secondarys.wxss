@@ -188,12 +188,12 @@
 }
 
 .list .show{
-  /* display: block; */
+  display: block;
 }
-.list>.box:hover .show{
+/* .list>.box:hover .show{
    display: block;
    transition: all 1s;
-}
+} */
 
 .masked .iconfont {
   font-size: 56rpx;

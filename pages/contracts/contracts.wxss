@@ -231,14 +231,14 @@
   /* border: 1rpx solid #ddd; */
 }
 
-/* .list .show {
-  /* display: block; */
-/* } */
+ .list .show {
+   display: block; 
+ } 
 
-.list>.box:hover .show {
+/* .list>.box:hover .show {
   display: block;
   transition: all 1s;
-}
+} */
 
 .masked .iconfont {
   font-size: 56rpx;

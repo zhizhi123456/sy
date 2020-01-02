@@ -28,19 +28,19 @@ Page({
       {
         nametext: "分包协议",
         img: "icon-yonghuxieyi .blue",
-        path: "#",
+        path: "",
         control: true //权限
       },
       {
         nametext: "技术交底",
         img: "icon-jishuziliao .blue2",
-        path: "#",
+        path: "",
         control: true //权限
       },
       {
         nametext: "施工设计交底",
         img: "icon-dashujukeshihuaico- .blue3 ",
-        path: "#",
+        path: "",
         control: true //权限
       },
       {
@@ -75,25 +75,25 @@ Page({
       }, {
         nametext: "项目进度（每周）",
         img: "icon-schedule .blue7",
-        path: "#",
+        path: "",
         control: true //权限
       },
       {
         nametext: "开停工通知",
         img: "icon-tongzhi .blue7",
-        path: "#",
+        path: "",
         control: true //权限
       },
       {
         nametext: "开工报告",
         img: "icon-baogao1 .blue7",
-        path: "#",
+        path: "",
         control: true //权限
       },
       {
         nametext: "完工报告",
         img: "icon-baogao3 .blue7",
-        path: "#",
+        path: "",
         control: true //权限
       },
 
@@ -118,7 +118,7 @@ Page({
 
         nametext: "材料领用查询 ",
         img: "icon-zaitu .red2",
-        path: "#",
+        path: "",
         control: true //权限
       }, {
         nametext: "采购送货查询",
@@ -135,13 +135,13 @@ Page({
       {
         nametext: "视频监控",
         img: "icon-shipinjiankong .blue8",
-        path: "#",
+        path: "",
         control: true //权限
       },
       {
         nametext: "通话记录",
         img: "icon-tonghuajilu .green3",
-        path: "#",
+        path: "",
         control: true //权限
       },
       {
@@ -162,7 +162,7 @@ Page({
 
         nametext: "项目主管随工记录",
         img: "icon-bianji .blue3",
-        path: "#",
+        path: "",
         control: true //权限
       },
       {
@@ -177,21 +177,21 @@ Page({
 
         nametext: "项目月度考评",
         img: "icon-kaohe .red4",
-        path: "#",
+        path: "",
         control: true //权限
       },
       {
 
         nametext: "项目月度报表",
         img: "icon-baobiao2 .yellow1",
-        path: "#",
+        path: "",
         control: true //权限
       },
       {
 
         nametext: "设计绩效",
         img: "icon-design .yellow1",
-        path: "#",
+        path: "",
         control: true //权限
       },
 
@@ -204,14 +204,14 @@ Page({
       {
         nametext: "设计管理",
         img: "icon-lunkuodasan- .green4",
-        path: "#",
+        path: "",
         control: true //权限
       },
       // {
 
       //   nametext: "技术交底",
       //   img: "icon-jishuziliao ",
-      //   path: "#",
+      //   path: "",
       //   control: true //权限
       // },
       {
@@ -253,28 +253,28 @@ Page({
 
         nametext: "项目成本利润统计",
         img: "icon-chengbenfenxi- .blue10",
-        path: "#",
+        path: "",
         control: true //权限
       },
       {
 
         nametext: "项目费用统计",
         img: "icon-shouzhimingxi .yellow2",
-        path: "#",
+        path: "",
         control: true //权限
       },
       {
 
         nametext: "项目工程量统计",
         img: "icon-report .green2",
-        path: "#",
+        path: "",
         control: true //权限
       },
       {
 
         nametext: "项目工程材料统计",
         img: "icon-yuancailiao .green2",
-        path: "#",
+        path: "",
         control: true //权限
       },
 
@@ -282,91 +282,91 @@ Page({
 
         nametext: "请假",
         img: "icon-qingjia .green",
-        path: "#",
+        path: "",
         control: true //权限
       },
       {
 
         nametext: "销假",
         img: "icon-xiaojiaguanli .pink",
-        path: "#",
+        path: "",
         control: true //权限
       },
       {
 
         nametext: "加班",
         img: "icon-jiaban .blue",
-        path: "#",
+        path: "",
         control: true //权限
       },
       {
 
         nametext: "考勤",
         img: "icon-kaoqin .blue2",
-        path: "#",
+        path: "",
         control: true //权限
       },
       {
 
         nametext: "公告",
         img: "icon-gonggao .blue3",
-        path: "#",
+        path: "",
         control: true //权限
       },
       {
 
         nametext: "办公费用",
         img: "icon-feiyong1 .blue4",
-        path: "#",
+        path: "",
         control: true //权限
       },
       {
 
         nametext: "申领",
         img: "icon-icon-test2 .red2",
-        path: "#",
+        path: "",
         control: true //权限
       },
       {
 
         nametext: "申购",
         img: "icon-shengou .blue5",
-        path: "#",
+        path: "",
         control: true //权限
       },
       {
 
         nametext: "项目费用",
         img: "icon-feiyong blue6",
-        path: "#",
+        path: "",
         control: true //权限
       },
       {
 
         nametext: "发票",
         img: "icon-ticket-fill .blue7",
-        path: "#",
+        path: "",
         control: true //权限
       },
       {
 
         nametext: "用章",
         img: "icon-yongzhangshenqing .green2",
-        path: "#",
+        path: "",
         control: true //权限
       },
       {
 
         nametext: "借条",
         img: "icon-huikuanjihua .blue8",
-        path: "#",
+        path: "",
         control: true //权限
       },
       {
 
         nametext: "采购合同",
         img: "icon-hetong1 .green3",
-        path: "#",
+        path: "",
         control: true //权限
       },
 
@@ -374,14 +374,14 @@ Page({
 
         nametext: "付款签报",
         img: "icon-fukuan .red3",
-        path: "#",
+        path: "",
         control: true //权限
       },
       {
 
         nametext: "业务预期",
         img: "icon-yewu .yellow",
-        path: "#",
+        path: "",
         control: true //权限
       },
 
@@ -389,42 +389,42 @@ Page({
 
         nametext: "市场设计计划",
         img: "icon-design .blue9",
-        path: "#",
+        path: "",
         control: true //权限
       },
       {
 
         nametext: "市场部计划",
         img: "icon-wj-jh .red4",
-        path: "#",
+        path: "",
         control: true //权限
       },
       {
 
         nametext: "成本核算计划",
         img: "icon-tubiaozhizuomoban .yellow1",
-        path: "#",
+        path: "",
         control: true //权限
       },
       {
 
         nametext: "工程部计划",
         img: "icon-wj-jh .green4",
-        path: "#",
+        path: "",
         control: true //权限
       },
       {
 
         nametext: "市场设计绩效",
         img: "icon-gerenjixiao .blue10",
-        path: "#",
+        path: "",
         control: true //权限
       },
       {
 
         nametext: "市场部绩效",
         img: "icon-jixiao .yellow2",
-        path: "#",
+        path: "",
         control: true //权限
       },
 
@@ -432,97 +432,97 @@ Page({
 
         nametext: "办公物品",
         img: "icon-bangong .red5",
-        path: "#",
+        path: "",
         control: true //权限
       }, {
 
         nametext: "耗材物品",
         img: "icon-haocai .blue7",
-        path: "#",
+        path: "",
         control: true //权限
       }, {
 
         nametext: "快递发货",
         img: "icon-fahuo .green2",
-        path: "#",
+        path: "",
         control: true //权限
       }, {
         nametext: "快递收货",
         img: "icon-shouhuoshou-- .red3",
-        path: "#",
+        path: "",
         control: true //权限
       },
       {
         nametext: "个人信息",
         img: "icon-gerenxinxi green",
-        path: "#",
+        path: "",
         control: true,
       },
       {
         nametext: "我的分包项目",
         img: "icon-xiangmu1 blue",
-        path: "#",
+        path: "",
         control: true,
       },
       {
         nametext: "我的分包合同",
         img: "icon-hetong2 blue2",
-        path: "#",
+        path: "",
         control: true,
       },
       {
         nametext: "我的费用",
         img: "icon-feiyong2 blue4",
-        path: "#",
+        path: "",
         control: true,
       },
       {
         nametext: "我的考勤",
         img: "icon-kaoqin1 red2",
-        path: "#",
+        path: "",
         control: true,
       },
       {
         nametext: "我的轨迹",
         img: "icon-guiji1 blue5",
-        path: "#",
+        path: "",
         control: true,
       },
       {
         nametext: "我的定位",
         img: "icon-duomeitiicon- green2",
-        path: "#",
+        path: "",
         control: true,
       },
       {
         nametext: "申请领料",
         img: "icon-yuancailiao blue8",
-        path: "#",
+        path: "",
         control: true,
       },
       {
         nametext: "申请费用",
         img: "icon-feiyong2 yellow",
-        path: "#",
+        path: "",
         control: true,
       },
       {
         nametext: "申请分包编号",
         img: "icon-bianhaonumbered5 red4",
-        path: "#",
+        path: "",
         control: true,
       },
       {
         nametext: "申请招投标",
         img: "icon-zhaotoubiao-daikaifang yellow1",
-        path: "#",
+        path: "",
         control: true,
       },
       
       {
         nametext: "申请任务书",
         img: "icon-lunkuodasan- blue10",
-        path: "#",
+        path: "",
         control: true,
       },
 

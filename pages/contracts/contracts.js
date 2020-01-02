@@ -114,7 +114,7 @@ Page({
 
         nametext: "招投标",
         img: "icon-zhaotoubiao red1",
-        path: "#",
+        path: "",
         control: true, //权限,
         three: true
       }, {
@@ -144,7 +144,7 @@ Page({
 
         nametext: "项目统计",
         img: "icon-icon-test1 yellow",
-        path: "#",
+        path: "",
         control: true, //权限
         three: true
       }, {
@@ -176,19 +176,19 @@ Page({
 
         nametext: "登录/注册",
         img: "icon-zhuce blue4",
-        path: "#",
+        path: "",
         control: true, //权限
         three: true
       }, {
         nametext: "我的信息",
         img: "icon-gerenzhongxinyewodexinxi  yellow1",
-        path: "#",
+        path: "",
         control: true //权限
       }, {
 
         nametext: "我的申请",
         img: "icon-shenqing1 .red1",
-        path: "#",
+        path: "",
         control: true //权限
       }, {
 
