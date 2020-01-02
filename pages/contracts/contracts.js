@@ -376,8 +376,6 @@ Page({
         num: 1000,
         title: '工程管理'
       })
-      // console.log("0")
-
     }
     //渲染数据
     this.deal()
