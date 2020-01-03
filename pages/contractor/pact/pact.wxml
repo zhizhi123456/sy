@@ -37,6 +37,12 @@
                                 <van-field data-name="chargemanName" value="{{info.chargemanName}}" placeholder="请输入" bind:blur="meetplaceblur" label="主要联系人" />
                             </van-cell-group>
                         </view>
+                          <view class="seach_item">
+                            <van-field value="{{info.UserName}}" bind:focus="showPopup1" class="time1" title-class="time1" label="项目经理" placeholder="请选择" />
+                            <van-popup show="{{show1}}" round position="bottom" bind:close="onClose1">
+                                <van-picker data-name="UserName" show-toolbar columns="{{ section3 }}" bind:cancel="onClose1" bind:confirm="onConfirm1" />
+                            </van-popup>
+                        </view>
                         <view class="seach_item">
                             <van-field value="{{info.Type}}" bind:focus="showPopup_o" class="time1" title-class="time1" label="所属公司" placeholder="请选择" />
                             <van-popup show="{{show_o}}" round position="bottom" bind:close="onClose_o">
@@ -78,6 +84,10 @@
                 <view>
                     <text class="info">施工队名称</text>
                     <text>{{item.ConstructionName}}</text>
+                </view>
+                 <view>
+                    <text class="info">项目经理</text>
+                    <text>{{item.ProjectManager}}</text>
                 </view>
                 <view>
                     <text class="info">所属公司</text>

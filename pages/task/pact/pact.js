@@ -99,16 +99,6 @@ Page({
         deptxt: options.deptxt,
       })
       var that = this
-      wx.getStorage({
-        key: 'myInfo',
-        success (res) {
-          if(res.data.UserName == that.data.userid){
-            that.setData({
-              hadNew:1
-            })
-          }
-        }
-      })
       util.qgroupdeliver(groupTask, this,this.data.hadNew)
     }else{
       this.setData({

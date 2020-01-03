@@ -29,7 +29,8 @@ Page({
       StartTime: "",
       EndTime: "",
       Type: '',
-      state: ''
+      state: '',
+      UserName:''
     },
     sections: '',
     pull: false,
@@ -62,8 +63,8 @@ Page({
       console.log(res)
       if (res.code == 10000) {
         let item = res.List;
-        util.listData(item, app.globalData.department);
-        util.outflowlist(item, this)
+        // util.listData(item, app.globalData.department);
+        // util.outflowlist(item, this)
         this.setData({
           InfoList: item.reverse()
         })
@@ -84,6 +85,13 @@ Page({
     wx.showLoading({
       title: '加载中',
     });
+    var b = app.globalData.staff.map(q=>{
+      return q.text
+    })
+    this.setData({
+      section3: b
+    })
+
     // 调用查询
     this.setData({
       seach: ""
@@ -107,7 +115,9 @@ Page({
     });
   },
   onConfirm1(e) {
+    console.log(e.detail.value)
     let info = util.editInfo(e, this, e.detail.value);
+    console.log(info)
     this.setData({
       info,
       show1: false,

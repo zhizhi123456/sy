@@ -527,7 +527,8 @@ Page({
       },
 
     ],
-    smalls: []
+    smalls: [],
+    primarymarket:1000
   },
   screen() {
     wx.showLoading({
@@ -619,9 +620,9 @@ Page({
       })
       console.log(1)
     } else {
-      util.returnMenu();
+      util.returnMenu(this.data.primarymarket);
       // wx.reLaunch({
-      //   url: "/pages/contracts/contracts"
+      //   url: "/pages/contracts/contracts?id="+this.data.primarymarket
       // })
       // wx.navigateBack({
       //   delta: 1
@@ -633,6 +634,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if(options.primarymarket){
+      this.setData({
+        primarymarket:options.primarymarket
+      })
+    }
     var that = this
     wx.getStorage({
       key: 'myInfo',

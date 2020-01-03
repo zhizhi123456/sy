@@ -31,6 +31,18 @@
             </van-popup>
         </view>
         <view class="check_item">
+            <view class="kind require">
+                <text>项目经理</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.ProjectManager?info.ProjectManager:'请选择'}}" bind:click="showPopup3">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show3 }}" round position="bottom" bind:close="onClose3">
+                <van-picker data-name="ProjectManager" show-toolbar columns="{{section3}}" bind:cancel="onClose3" bind:confirm="onConfirm3" />
+            </van-popup>
+        </view>
+        <view class="check_item">
             <text class="kind">公司地址</text>
             <van-cell-group>
                 <van-field data-name="Address" value="{{info.Address}}" placeholder="请输入" bind:blur="projectcodelur" />

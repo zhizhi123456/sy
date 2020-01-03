@@ -1266,7 +1266,7 @@ const defaultimgs = (e, key, img) => {
 // 是否
 
 const whether = (content) => {
-  console.log(content)
+  // console.log(content)
   if (content == "是") {
     var c = true
     return c
@@ -1285,7 +1285,7 @@ const whether = (content) => {
     return c
   }
   if (content === null) {
-    console.log("1")
+    // console.log("1")
     var c = ''
     return c
   }
@@ -1518,6 +1518,12 @@ const intro = (data, that) => {
     if (s.text == data.designman) {
       data.designman = s.value
     }
+    if (s.text == data.ProjectManager) {
+      data.ProjectManager = s.value
+    }
+    if (s.text == data.UserName) {
+      data.UserName = s.value
+    }
   })
   app.globalData.Ifwinbidlist.forEach(s => {
     if (s.text == data.ifwinbid) {
@@ -1666,6 +1672,14 @@ const outflow = (data, that) => {
     if (s.value == data.designman) {
       data.designman = s.text
     }
+    if (s.value == data.ProjectManager) {
+      data.ProjectManager = s.text
+    }
+    if (s.value == data.UserName) {
+      data.UserName = s.text
+    }
+    
+
   })
   app.globalData.Ifwinbidlist.forEach(s => {
     if (s.value == data.ifwinbid) {
@@ -1735,7 +1749,7 @@ const qgroupdeliver = (funcname, that, hadNew) => {
       }
     })
     intro(info, this)
-    console.log(info)
+    // console.log(info)
 
     for (let i in info) {
       if (info[i] == "请选择" || !info[i] || info[i] == "") {
@@ -1769,7 +1783,7 @@ const qgroupdeliver = (funcname, that, hadNew) => {
     funcname(
       infodata
     ).then(res => {
-      console.log(res)
+      // console.log(res)
       wx.showLoading({
         title: '加载中',
       });
@@ -1834,7 +1848,7 @@ const qgroupdeliver = (funcname, that, hadNew) => {
             info
           })
         }
-        console.log(info)
+        // console.log(info)
       } else {
         // 请求失败
         let info = that.data.info;
@@ -1859,7 +1873,7 @@ const qgroupdeliver = (funcname, that, hadNew) => {
             info
           })
         }
-        console.log(info)
+        // console.log(info)
 
 
       }

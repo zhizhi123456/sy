@@ -391,7 +391,7 @@ Page({
         this.setData({
           materials
         })
-        console.log(materials)
+        // console.log(materials)
         if (materials[0].ConstructionunitCheck&& materials[0].Idea) {
           util.checkContent(info, this);
           util.intro(info,this)
@@ -407,7 +407,7 @@ Page({
           // 如果有详细表的情况下
           // 判断明细表内容
           // 新增退料单
-          console.log(infodata)
+          // console.log(infodata)
           addbuilding(infodata).then(res => {
             // console.log(res)
             if (res.code == 10000) {
@@ -443,7 +443,7 @@ Page({
               this.setData({
                 materials
               })
-              console.log(JSON.stringify(materials))
+              // console.log(JSON.stringify(materials))
               return addbuildingsmall({
                 Timestamp: app.globalData.time,
                 details: JSON.stringify(materials)
@@ -476,7 +476,7 @@ Page({
 
       } else {
         // 没有详细表的情况下
-        console.log(infodata)
+        // console.log(infodata)
         util.checkContent(info, this);
         util.intro(info,this)
         this.setData({
@@ -593,27 +593,19 @@ Page({
   },
   // 基础材料 的请求
   qingqiu() {
-    MainSubproject().then(res => {
-      // console.log(res)
-      var q = JSON.parse(res)
-      var s = q.map(t => {
-        return t.subprojectname
-      })
-      this.setData({
-        sections: s,
-      })
-      // console.log(this.data.section1)
+    var a = app.globalData.MainSubproject
+    var b = a.map(s => {
+      return s.text
     })
-    Companytitle().then(res => {
-      // console.log(res)
-      var q = JSON.parse(res)
-      var s = q.map(t => {
-        return t.Value
-      })
-      // console.log(s)
-      this.setData({
-        section1: s,
-      })
+    this.setData({
+      sections: b
+    })
+    var c = app.globalData.Companytitle
+    var d = c.map(e => {
+      return e.text
+    })
+    this.setData({
+      section1: d
     })
   },
 
@@ -640,10 +632,6 @@ Page({
         }
       })
     }
-    this.setData({
-      firms: app.globalData.Companytitle,
-      totals: app.globalData.MainProject,
-    })
   },
 
 })

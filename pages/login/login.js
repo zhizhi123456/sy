@@ -152,6 +152,8 @@ Page({
         if (res.code == 10000) {
           // app.globalData.userInfo = res.Item;
           wx.setStorageSync("myInfo", res.Item)
+          wx.setStorageSync("username",this.data.username)
+          wx.setStorageSync("password",this.data.password)
           // 跳转到个人中心
           wx.reLaunch({
             url: '/pages/mine/mine'

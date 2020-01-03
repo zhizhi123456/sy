@@ -1,5 +1,9 @@
 {
   "pages": [
+    
+    "pages/contractor/pact/pact",
+    "pages/member/pact/pact",
+      "pages/corps/section",
     "pages/contracts/contracts",
     "pages/sign/pact/pact",
     "pages/section/section",
@@ -99,8 +103,7 @@
     "pages/building/newlink/newlink",
     "pages/building/detaillink/detaillink",
     "pages/building/detail/detail",
-    "pages/building/new/new",
-    "pages/MYBlog/MYBlog/MYBlog"
+    "pages/building/new/new"
   ],
   "window": {
     "backgroundTextStyle": "dark",

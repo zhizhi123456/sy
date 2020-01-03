@@ -16,6 +16,10 @@
                         <view class="kind">施工队名称</view>
                         <view class="check">{{info.ConstructionName}}</view>
                     </view>
+                     <view class="c_item">
+                        <view class="kind">项目经理</view>
+                        <view class="check">{{info.ProjectManager}}</view>
+                    </view>
                     <view class="c_item">
                         <view class="kind">所属公司</view>
                         <view class="check">{{info.Companytitle}}</view>
