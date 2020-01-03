@@ -99,12 +99,9 @@ Page({
         deptxt: options.deptxt,
       })
       var that = this
-      console.log("0")
       wx.getStorage({
         key: 'myInfo',
         success (res) {
-          console.log("123")
-          console.log(res.data.UserName == that.data.userid)
           if(res.data.UserName == that.data.userid){
             that.setData({
               hadNew:1

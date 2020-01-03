@@ -184,7 +184,7 @@ Page({
         img: "icon-gerenzhongxinyewodexinxi  yellow1",
         path: "/pages/section/section2?my=1",
         control: true ,//权限，
-        three:true
+        // three:true
         
       }, {
 
