@@ -22,6 +22,7 @@ Page({
         value: 1
       }
     ],
+    top: '设计任务',
     InfoList: [],
     info: {
       designtaskname: "",
@@ -38,10 +39,15 @@ Page({
     currentDate1: new Date().getTime(),
     show_time: false,
     show_endtime: false,
+    hadNew: 1
   },
   // 返回
   return () {
-    util.returnMenu();
+    if (this.data.hadNew) {
+      util.returnMenu();
+    } else {
+      util.backprev();
+    }
   },
   setSeach(e) {
     // console.log(e)
@@ -51,53 +57,68 @@ Page({
   },
   // 模糊查询
   seachInfo() {
-    wx.showLoading({
-      title: '加载中',
-    });
-    querydesign({
-      designtaskname: this.data.seach
-    }).then(res => {
-      // console.log(res)
-      if (res.code == 10000) {
-        let item = res.List;
-        util.listData(item, app.globalData.department);
-        util.outflowlist(item, this)
-        this.setData({
-          InfoList: item.reverse()
-        })
-        wx.hideLoading();
-      }
-    })
+    if (this.data.hadNew) {
+      wx.showLoading({
+        title: '加载中',
+      });
+      querydesign({
+        designtaskname: this.data.seach
+      }).then(res => {
+        // console.log(res)
+        if (res.code == 10000) {
+          let item = res.List;
+          util.listData(item, app.globalData.department);
+          util.outflowlist(item, this)
+          this.setData({
+            InfoList: item.reverse()
+          })
+          wx.hideLoading();
+        }
+      })
+    } else {
+      let info = this.data.info
+      info.designtaskname= this.data.seach
+      this.setData({
+        info
+      })
+      util.qgroupdeliver(qgroupdesign, this, this.data.hadNew)
+    }
+
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // console.log(options)
     wx.showLoading({
       title: '加载中',
     });
-    // 调用查询
-    querydesign().then(res => {
-      console.log(res.List)
-      if (res.code == 10000) {
-        let item = res.List;
-        util.listData(item, app.globalData.department);
-        util.outflowlist(item, this)
-        this.setData({
-          InfoList: item.reverse()
-        })
-        wx.hideLoading();
-        // 请求筛选数据
-        var a = app.globalData.staff.map(s => {
-          return s.text
-        })
-        this.setData({
-          sections: a
-        })
-      }
-    }).catch(err => {
-      console.log(err)
+    var a = app.globalData.Principal.map(s => {
+      return s.text
     })
+    this.setData({
+      sections: a
+    })
+    if (options.userid) {
+      let info = this.data.info;
+      info.departmentID = options.dep;
+      info.designman = options.userid;
+      this.setData({
+        top: options.caption + '的设计任务',
+        hadNew: 0,
+        info,
+        departmenttext: options.deptxt,
+        userid: options.userid,
+        deptxt: options.deptxt,
+      })
+      // console.log(info)
+      util.qgroupdeliver(qgroupdesign, this, this.data.hadNew)
+    } else {
+      this.setData({
+        seach: ''
+      })
+      this.seachInfo()
+    }
 
   },
   meetplaceblur(e) {
@@ -176,7 +197,7 @@ Page({
   },
   // 组合查询
   seachqur() {
-   
-    util.qgroupdeliver(qgroupdesign, this)
+
+    util.qgroupdeliver(qgroupdesign, this,this.data.hadNew)
   },
 })

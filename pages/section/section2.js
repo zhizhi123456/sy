@@ -46,16 +46,64 @@ Page({
       {
         name: "任务书",
         menuId: null,
-        icon: 'icon-guiji1',
+        icon: 'icon-renwu green3',
         path: '/pages/task/pact/pact'
       },
       {
         name: "设计任务",
         menuId: null,
-        icon: 'icon-guiji1',
+        icon: 'icon-lunkuodasan- .green4',
         path: '/pages/design/pact/pact'
       }
-    ]
+    ],
+    menu2:[ {
+      name: "我的分包项目",
+      menuId: null,
+      icon: "icon-xiangmu1 blue",
+      path: "",
+    },
+    {
+      nametext: "我的分包合同",
+      icon: "icon-hetong2 blue2",
+      path: "",
+  
+    },
+    {
+      nametext: "我的费用",
+      icon: "icon-feiyong2 blue4",
+      path: "",
+    
+    },
+    {
+      nametext: "我的考勤",
+      icon: "icon-kaoqin1 red2",
+      path: "/pages/sign/pact/pact",
+ 
+    },
+    {
+      nametext: "我的轨迹",
+      icon: "icon-guiji1 blue5",
+      path: "",
+
+    },
+    {
+      nametext: "我的定位",
+      icon: "icon-duomeitiicon- green2",
+      path: "",
+
+    },
+    {
+      name: "任务书",
+      menuId: null,
+      icon: 'icon-renwu green3',
+      path: '/pages/task/pact/pact'
+    },
+    {
+      name: "设计任务",
+      menuId: null,
+      icon: 'icon-lunkuodasan- .green4',
+      path: '/pages/design/pact/pact'
+    }]
   },
   return () {
     if (this.data.caption == "我") {
@@ -77,6 +125,20 @@ Page({
         userid: options.userid,
         dep: options.dep,
         deptxt: options.deptxt
+      })
+    }
+    var that  = this
+    if((options.my)){
+      wx.getStorage({
+        key: 'myInfo',
+        success (res) {
+          that.setData({
+            caption: '我',
+            userid: res.data.UserName,
+            dep: '',
+            deptxt: ''
+          })
+        }
       })
     }
   },

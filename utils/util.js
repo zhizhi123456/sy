@@ -1515,6 +1515,9 @@ const intro = (data, that) => {
     if (s.text == data.itemManage) {
       data.itemManage = s.value
     }
+    if (s.text == data.designman) {
+      data.designman = s.value
+    }
   })
   app.globalData.Ifwinbidlist.forEach(s => {
     if (s.text == data.ifwinbid) {
@@ -1646,7 +1649,6 @@ const outflow = (data, that) => {
     if (s.value == data.Ranks) {
       data.Ranks = s.text
     }
-
     if (s.value == data.chargemanName) {
       data.chargemanName = s.text
     }
@@ -1660,6 +1662,9 @@ const outflow = (data, that) => {
     }
     if (s.value == data.itemManage) {
       data.itemManage = s.text
+    }
+    if (s.value == data.designman) {
+      data.designman = s.text
     }
   })
   app.globalData.Ifwinbidlist.forEach(s => {
@@ -1698,7 +1703,7 @@ const introlist = (list, that) => {
   }
 }
 // 组合查询
-const qgroupdeliver = (funcname, that) => {
+const qgroupdeliver = (funcname, that, hadNew) => {
   var app = getApp();
   var zhen = []
   let info = that.data.info;
@@ -1713,6 +1718,7 @@ const qgroupdeliver = (funcname, that) => {
   var t = zhen.some(s => {
     return s == true
   })
+  // 所有为空
   // console.log(t)
   if (!t) {
     wx.showToast({
@@ -1721,6 +1727,7 @@ const qgroupdeliver = (funcname, that) => {
       duration: 2000
     })
   } else {
+    // 至少有一项
     wx.getStorage({
       key: 'myInfo',
       success(res) {
@@ -1766,12 +1773,17 @@ const qgroupdeliver = (funcname, that) => {
       wx.showLoading({
         title: '加载中',
       });
-      if (res.code == 10000) {
-        wx.showToast({
-          title: '搜索成功',
-          icon: 'success',
-          duration: 3000
-        })
+    
+      if (res.code == 10000) { 
+         //  如果是进入部门看
+        if (hadNew != '0') {
+          wx.showToast({
+            title: '搜索成功',
+            icon: 'success',
+            duration: 3000
+          })
+        }
+
         that.onClose()
         let item
         if (funcname == querysign) {
@@ -1804,27 +1816,54 @@ const qgroupdeliver = (funcname, that) => {
         })
 
         wx.hideLoading();
-        for (var key in info) {
-          info[key] = ''
+        if (hadNew != '0') {
+          for (var key in info) {
+            info[key] = ''
+          }
+          that.setData({
+            info
+          })
+        } else {
+          // 进入部门看
+          for (var key in info) {
+            if (!info.chargemanName &&!info.designman) {
+              info[key] = ''
+            }
+          }
+          that.setData({
+            info
+          })
         }
-        that.setData({
-          info
-        })
+        console.log(info)
       } else {
+        // 请求失败
         let info = that.data.info;
-        for (var key in info) {
-          info[key] = ''
+        if (hadNew == '0') {
+          // 进入部门看
+          for (var key in info) {
+            if (!info.chargemanName &&!info.designman) {
+              info[key] = ''
+            }
+          }
+          info.picurl = [];
+          that.setData({
+            info
+          })
+        }else{
+
+          for (var key in info) {
+            info[key] = ''
+          }
+          info.picurl = [];
+          that.setData({
+            info
+          })
         }
-        info.picurl = [];
-        that.setData({
-          info
-        })
+        console.log(info)
+
+
       }
     })
-
-    const dispose = () => {
-
-    }
   }
 
 }

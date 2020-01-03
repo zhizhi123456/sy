@@ -23,10 +23,15 @@ Page({
     show_3: false,
     show_time: false,
     show_endtime: false,
+    hadNew:1
   },
   // 返回
   return () {
-    util.returnMenu(1001);
+    if (this.data.hadNew) {
+      util.returnMenu(1001);
+    } else {
+      util.backprev();
+    }
   },
   setSeach(e) {
     // console.log(e)
@@ -36,28 +41,41 @@ Page({
   },
   // 模糊查询
   seachInfo() {
-    list = [];
-    wx.showLoading({
-      title: '加载中',
-    });
-    this.setData({
-      pages: 1
-    })
-    getTask({
-      projectname: this.data.seach
-    }).then(res => {
-      // console.log(res)
-      if (res.code == 10000) {
-        item = res.List;
-        list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list);
-        this.setData({
-          InfoList: list,
-          item,
-          seach: ''
-        })
-        wx.hideLoading();
-      }
-    })
+    if (this.data.hadNew) {
+      list = [];
+      wx.showLoading({
+        title: '加载中',
+      });
+      this.setData({
+        pages: 1
+      })
+      getTask({
+        projectname: this.data.seach
+      }).then(res => {
+        // console.log(res)
+        if (res.code == 10000) {
+          item = res.List;
+          list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list);
+          this.setData({
+            InfoList: list,
+            item,
+            seach: ''
+          })
+          wx.hideLoading();
+        }
+      })
+    } else {
+      // console.log("0")
+      let info = this.data.info;
+      info.departmentID = this.data.deptxt;
+      info.chargemanName = this.data.userid;
+      info.keyword = this.data.seach
+      this.setData({
+        info
+      })
+      util.qgroupdeliver(groupTask, this,this.data.hadNew)
+    }
+
   },
   /**
    * 生命周期函数--监听页面加载
@@ -73,22 +91,35 @@ Page({
       info.departmentID = options.dep;
       info.chargemanName = options.userid;
       this.setData({
-        top: options.caption + '的分包项目',
+        top: options.caption + '的任务书',
         hadNew: 0,
         info,
         departmenttext: options.deptxt,
         userid: options.userid,
         deptxt: options.deptxt,
       })
+      var that = this
+      console.log("0")
+      wx.getStorage({
+        key: 'myInfo',
+        success (res) {
+          console.log("123")
+          console.log(res.data.UserName == that.data.userid)
+          if(res.data.UserName == that.data.userid){
+            that.setData({
+              hadNew:1
+            })
+          }
+        }
+      })
+      util.qgroupdeliver(groupTask, this,this.data.hadNew)
+    }else{
+      this.setData({
+        seach:''
+      })
+      this.seachInfo()
     }
-    // 调用查询
-    this.setData({
-      seach: '',
-      chargemanName: this.data.info.chargemanName
-    })
-
-
-    this.seachInfo()
+  
     if (app.globalData.CountItem) {
       this.setData({
         props: app.globalData.Projectprop,
@@ -124,6 +155,14 @@ Page({
     this.setData({
       pages: 1
     })
+    if(!this.data.hadNew){
+      let info = this.data.info;
+      info.departmentID = this.data.deptxt;
+      info.chargemanName = this.data.userid;
+      this.setData({
+        info
+      })
+    }
     if (this.data.info.keyword || this.data.info.Type || this.data.info.chargemanName || this.data.info.StartTime || this.data.info.state) {
       groupTask(this.data.info).then(res => {
         if (res.code == 10000) {
@@ -135,6 +174,14 @@ Page({
             info: {},
           })
           wx.hideLoading();
+          if(!this.data.hadNew){
+            let info = this.data.info;
+            info.departmentID = this.data.deptxt;
+            info.chargemanName = this.data.userid;
+            this.setData({
+              info
+            })
+          }
         }
       })
       this.setData({

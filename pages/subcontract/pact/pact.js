@@ -103,7 +103,7 @@ Page({
       info.departmentID = options.dep;
       info.chargemanName = options.userid;
       this.setData({
-        top: options.caption + '的分包项目',
+        top: options.caption + '的任务书',
         hadNew: 0,
         info,
         departmenttext: options.deptxt,

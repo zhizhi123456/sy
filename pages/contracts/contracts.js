@@ -182,8 +182,10 @@ Page({
       }, {
         nametext: "我的信息",
         img: "icon-gerenzhongxinyewodexinxi  yellow1",
-        path: "pages/Personal/pact/pact",
-        control: true //权限
+        path: "/pages/section/section2?my=1",
+        control: true ,//权限，
+        three:true
+        
       }, {
 
         nametext: "我的申请",

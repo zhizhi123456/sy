@@ -190,7 +190,7 @@ Page({
         })
       })
     }
-    var a = app.globalData.staff
+    var a = app.globalData.Principal
     a = a.map(s=>{
       return s.text
     })

@@ -1,8 +1,7 @@
 {
   "pages": [
     "pages/contracts/contracts",
-    
-      "pages/sign/pact/pact",
+    "pages/sign/pact/pact",
     "pages/section/section",
     "pages/subcontract/pact/pact",
     "pages/section/section2",
@@ -62,7 +61,6 @@
     "pages/close/pact/pact",
     "pages/close/detail/detail",
     "pages/close/new/new",
-
     "pages/pipes/detail/detail",
     "pages/pipes/new/new",
     "pages/count/pact/pact",
@@ -78,7 +76,6 @@
     "pages/talk/new/new",
     "pages/plan/detail/detail",
     "pages/plan/new/new",
-   
     "pages/member/detail/detail",
     "pages/member/new/new",
     "pages/contractor/detail/detail",
@@ -102,8 +99,8 @@
     "pages/building/newlink/newlink",
     "pages/building/detaillink/detaillink",
     "pages/building/detail/detail",
-    "pages/building/new/new"
-   
+    "pages/building/new/new",
+    "pages/MYBlog/MYBlog/MYBlog"
   ],
   "window": {
     "backgroundTextStyle": "dark",

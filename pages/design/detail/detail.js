@@ -12,7 +12,8 @@ Page({
   data: {
     edit: false,
     info: {},
-    steps: []
+    steps: [],
+    hadNew:1
   },
   // 文件
   up_photo() {
@@ -28,12 +29,21 @@ Page({
   },
   // 返回
   return () {
-    util.returnPrev('design')
+    if(this.data.hadNew){
+      util.returnPrev('design')
+    }else{
+      util.retPrev('design')
+    }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if(options.hadNew == '0'){
+      this.setData({
+        hadNew:false
+      })
+     }
     wx.showLoading({
       title: '加载中',
     });

@@ -3,12 +3,12 @@
     <view class="header d_header" wx:if="{{info.ID}}">
         <icon class="iconfont icon-jiantou2 fl" bindtap="editreturn"></icon>
         <text class="fr newCreate" bindtap="editconfirm">确定</text>
-        <view class="apply">编辑安全交底</view>
+        <view class="apply">编辑设计任务</view>
     </view>
     <view class="header d_header" wx:else>
         <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
         <text class="fr newCreate" bindtap="confirm">确定</text>
-        <view class="apply">新建安全交底</view>
+        <view class="apply">新建设计任务</view>
     </view>
     <view class="main n_main">
         <van-toast id="van-toast" />

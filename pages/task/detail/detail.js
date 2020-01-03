@@ -16,10 +16,15 @@ Page({
     tab: 'a',
     returned: true,
     isreturn: true,
+    hadNew:1
   },
   // 返回
   return () {
-    util.returnPrev('task')
+    if(this.data.hadNew){
+      util.returnPrev('task')
+    }else{
+      util.retPrev('task')
+    }
   },
   /**
    * 生命周期函数--监听页面加载
@@ -28,6 +33,11 @@ Page({
     wx.showLoading({
       title: '加载中',
     });
+    if(options.hadNew == '0'){
+     this.setData({
+       hadNew:false
+     })
+    }
     if (options.id) {
       referTask({
         ID: options.id
