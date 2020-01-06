@@ -24,12 +24,24 @@
                 <van-picker data-name="ConstructionTeamID" show-toolbar columns="{{section2}}" bind:cancel="onClose1" bind:confirm="onConfirm1" />
             </van-popup>
         </view>
-        <view class="check_item">
+          <view class="check_item">
+            <view class="kind require">
+                <text>成员姓名</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{MemberNametext?MemberNametext:'请选择'}}" bind:click="showPopup2">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show2 }}" round position="bottom" bind:close="onClose2">
+                <van-picker data-name="MemberName" show-toolbar columns="{{section3}}" bind:cancel="onClose2" bind:confirm="onConfirm2" />
+            </van-popup>
+        </view>
+        <!-- <view class="check_item">
             <text class="kind">成员姓名</text>
             <van-cell-group>
                 <van-field data-name="MemberName" value="{{info.MemberName}}" placeholder="请输入" bind:blur="projectcodelur" />
             </van-cell-group>
-        </view>
+        </view> -->
         <view class="check_item">
             <text class="kind">年龄</text>
             <van-cell-group>

@@ -88,12 +88,35 @@ App({
       }
     })
     if (!this.globalData.CountItem[0]) {
+       //负责人
+    Principal().then(res => {
+      // console.log(res)
+      let Principal = JSON.parse(res.replace(/userName/g, 'value').replace(/EmpName/g, 'text'));
+      // console.log(Principal)
+      Principal.forEach((s, index) => {
+        if (s.text == null) {
+          // s.text = ' '
+          var a= Principal
+          a.splice(index, 1)
+          Principal = a
+          return 0
+        }
+        if (s.text == '') {
+          // s.text = ' '
+          var a= Principal
+          a.splice(index, 1)
+          Principal = a
+          return 0
+        }
+      })
+      this.globalData.Principal = Principal;
+    })
       util.sumup(department, this, 'department', "techofficename", "ID");
       util.sumup(Companytitle, this, 'Companytitle', "Value", "Key");
       util.sumup(staff, this, 'staff', "Name", "ID");
       util.sumup(source, this, 'source', "Value", "Key");
       util.sumup(Contactman, this, 'Contactman', "Name", "ID");
-      util.sumup(Principal, this, 'Principal', "EmpName", "userName");
+      // util.sumup(Principal, this, 'Principal', "EmpName", "userName");
       util.sumup(Servcietype, this, 'Servcietype', "Value", "Key");
       util.sumup(Projectprop, this, 'Projectprop', "Value", "Key");
       util.sumup(Projecttype, this, 'Projecttype', "Value", "Key");
@@ -207,14 +230,14 @@ App({
       this.globalData.Ifmakecontactlist = Ifmakecontactlist;
     })
     // 材料明细
-    Goodsname().then(res=>{
+    Goodsname().then(res => {
       let Goodsname = JSON.parse(res);
       this.globalData.Goodsname = Goodsname;
     })
     // 公司单位
     Customer().then(res => {
       let Customer = JSON.parse(res);
-      Customer = Customer.map(s=>{
+      Customer = Customer.map(s => {
         return s.customername
       })
       this.globalData.Customer = Customer;
@@ -245,12 +268,20 @@ App({
     Principal().then(res => {
       // console.log(res)
       let Principal = JSON.parse(res.replace(/userName/g, 'value').replace(/EmpName/g, 'text'));
-       Principal.forEach(s => {
+      Principal.forEach((s, index) => {
         if (s.text == null) {
-          s.text = ' '
+          // s.text = ' '
+          var a= Principal
+          a.splice(index, 1)
+          Principal = a
+          return 0
         }
         if (s.text == '') {
-          s.text = ' '
+          // s.text = ' '
+          var a= Principal
+          a.splice(index, 1)
+          Principal = a
+          return 0
         }
       })
       this.globalData.Principal = Principal;
@@ -750,5 +781,5 @@ App({
       text: '已超时'
     }]
   }
-   
+
 })

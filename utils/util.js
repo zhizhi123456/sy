@@ -1524,6 +1524,10 @@ const intro = (data, that) => {
     if (s.text == data.UserName) {
       data.UserName = s.value
     }
+    if (s.text == data.MemberName) {
+      data.MemberName = s.value
+    }
+
   })
   app.globalData.Ifwinbidlist.forEach(s => {
     if (s.text == data.ifwinbid) {
@@ -1678,7 +1682,10 @@ const outflow = (data, that) => {
     if (s.value == data.UserName) {
       data.UserName = s.text
     }
-    
+    if (s.value == data.MemberName) {
+      data.MemberName = s.text
+    }
+
 
   })
   app.globalData.Ifwinbidlist.forEach(s => {
@@ -1721,6 +1728,7 @@ const qgroupdeliver = (funcname, that, hadNew) => {
   var app = getApp();
   var zhen = []
   let info = that.data.info;
+  // console.log(info)
   for (var t in info) {
     if (info[t]) {
       zhen.push(true)
@@ -1734,6 +1742,7 @@ const qgroupdeliver = (funcname, that, hadNew) => {
   })
   // 所有为空
   // console.log(t)
+  // console.log(info.UserName)
   if (!t) {
     wx.showToast({
       title: '请至少输入一项',
@@ -1741,16 +1750,15 @@ const qgroupdeliver = (funcname, that, hadNew) => {
       duration: 2000
     })
   } else {
-    // 至少有一项
-    wx.getStorage({
-      key: 'myInfo',
-      success(res) {
-        info.UserName = res.data.UserName
-      }
-    })
+    if (!info.UserName) {
+      wx.getStorage({
+        key: 'myInfo',
+        success(res) {
+          info.UserName = res.data.UserName
+        }
+      })
+    }
     intro(info, this)
-    // console.log(info)
-
     for (let i in info) {
       if (info[i] == "请选择" || !info[i] || info[i] == "") {
         info[i] = null
@@ -1787,9 +1795,9 @@ const qgroupdeliver = (funcname, that, hadNew) => {
       wx.showLoading({
         title: '加载中',
       });
-    
-      if (res.code == 10000) { 
-         //  如果是进入部门看
+
+      if (res.code == 10000) {
+        //  如果是进入部门看
         if (hadNew != '0') {
           wx.showToast({
             title: '搜索成功',
@@ -1840,7 +1848,7 @@ const qgroupdeliver = (funcname, that, hadNew) => {
         } else {
           // 进入部门看
           for (var key in info) {
-            if (!info.chargemanName &&!info.designman) {
+            if (!info.chargemanName && !info.designman) {
               info[key] = ''
             }
           }
@@ -1855,7 +1863,7 @@ const qgroupdeliver = (funcname, that, hadNew) => {
         if (hadNew == '0') {
           // 进入部门看
           for (var key in info) {
-            if (!info.chargemanName &&!info.designman) {
+            if (!info.chargemanName && !info.designman) {
               info[key] = ''
             }
           }
@@ -1863,7 +1871,7 @@ const qgroupdeliver = (funcname, that, hadNew) => {
           that.setData({
             info
           })
-        }else{
+        } else {
 
           for (var key in info) {
             info[key] = ''

@@ -2,7 +2,7 @@
 var app = getApp();
 var util = require("../../utils/util");
 import {
-  employee,
+  qgroupcontractor,
 } from "../../service/getData";
 Page({
 
@@ -14,6 +14,8 @@ Page({
     info: {},
     InfoList: [],
     activeKey: 0,
+    employee:'',
+    b:'',
   },
   return () {
     util.returnMenu(1002);
@@ -27,11 +29,15 @@ Page({
       dep: id,
       deptxt: this.data.sections[e.detail].text
     })
-    employee({
-      ID: id
+    // //console.log(id)
+    qgroupcontractor({
+      UserName: id
     }).then(res => {
+      //console.log(res)
+      var a = JSON.stringify(res.List)
+      var b  = JSON.parse(a.replace(/ID/g, 'value').replace(/ConstructionName/g, 'text'));
       this.setData({
-        employee: util.getBase(res, "name", "userId")
+        employee: b
       })
     })
   },
@@ -47,7 +53,7 @@ Page({
     });
   },
   onConfirm_o(e) {
-    // console.log(e)
+    // //console.log(e)
     let info = util.editInfo(e, this, e.detail.value.text);
     this.setData({
       info,
@@ -56,15 +62,20 @@ Page({
       dep: e.detail.value.value,
       deptxt: e.detail.value.text
     })
-    employee({
-      ID: e.detail.value.value
+    qgroupcontractor({
+      UserName: e.detail.value.value
     }).then(res => {
-      // console.log(res)
       let info = this.data.info;
       info.person = '';
+      if (res.List) {
+        var a = JSON.stringify(res.List)
+        var b  = JSON.parse(a.replace(/ID/g, 'value').replace(/ConstructionName/g, 'text'));
+      } else {
+        var b = []
+      }
       this.setData({
         info,
-        employee: util.getBase(res, "name", "userId")
+        employee: b
       })
     })
   },
@@ -72,7 +83,7 @@ Page({
   showPopup_1() {
     if (!this.data.info.department) {
       wx.showToast({
-        title: '请先选择部门',
+        title: '请先选择部门经理',
         icon: 'none',
         duration: 2000
       })
@@ -85,7 +96,7 @@ Page({
       });
     } else {
       wx.showToast({
-        title: '无员工信息',
+        title: '无施工队信息',
         icon: 'none',
         duration: 2000
       })
@@ -107,11 +118,29 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(app.globalData.CountItem)
+    // //console.log(app.globalData.Principal)
+    var a = app.globalData.Principal[0].value
+    qgroupcontractor({
+      UserName: a
+    }).then(res => {
+      //console.log(res)
+      if (res.List) {
+        var a = JSON.stringify(res.List)
+        var b  = JSON.parse(a.replace(/ID/g, 'value').replace(/ConstructionName/g, 'text'));
+        this.setData({
+          b
+        })
+      } else {
+       var  b = ''
+        this.setData({
+          b
+        })
+      }
+    })
     if (app.globalData.CountItem) {
       this.setData({
-        sections: app.globalData.department,
-        employee: app.globalData.employee,
+        sections: app.globalData.Principal,
+        employee: this.data.b,
         Companytitle: app.globalData.Companytitle,
         dep: app.globalData.department[0].value,
         deptxt: app.globalData.department[0].text
@@ -120,8 +149,8 @@ Page({
       app.DataCallback = employ => {
         if (employ != '') {
           this.setData({
-            sections: app.globalData.department,
-            employee: app.globalData.employee,
+            sections: app.globalData.Principal,
+            employee: this.data.b,
             Companytitle: app.globalData.Companytitle,
             dep: app.globalData.department[0].value,
             deptxt: app.globalData.department[0].text

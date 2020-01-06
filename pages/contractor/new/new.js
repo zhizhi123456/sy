@@ -74,7 +74,7 @@ Page({
     })
   },
   confirm() {
-    console.log(this.data.info)
+    // console.log(this.data.info)
     if (this.data.info.Companytitle) {
       let info = this.data.info;
       util.checkContent(info, this);

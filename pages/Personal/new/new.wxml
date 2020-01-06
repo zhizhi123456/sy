@@ -26,18 +26,18 @@
                 <van-field data-name="Email" value="{{info.Email}}" placeholder="请输入" bind:blur="projectcodelur" />
             </van-cell-group>
         </view>
-        <!-- <view class="check_item">
+         <!-- <view class="check_item">
             <text class="kind">工号</text>
             <van-cell-group>
                 <van-field data-name="EmpCode" value="{{info.EmpCode}}" placeholder="请输入" bind:blur="projectcodelur" />
             </van-cell-group>
-        </view>
+        </view> -->
           <view class="check_item">
             <text class="kind">职位</text>
             <van-cell-group>
                 <van-field data-name="EmpName" value="{{info.EmpName}}" placeholder="请输入" bind:blur="projectcodelur" />
             </van-cell-group>
-        </view> -->
+        </view>
         
         <view class="check_item">
             <text class="kind">电话</text>

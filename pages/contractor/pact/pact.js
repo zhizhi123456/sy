@@ -60,11 +60,11 @@ Page({
     querycontractor({
       ConstructionName: this.data.seach
     }).then(res => {
-      console.log(res)
+      // console.log(res)
       if (res.code == 10000) {
         let item = res.List;
-        // util.listData(item, app.globalData.department);
-        // util.outflowlist(item, this)
+        util.listData(item, app.globalData.department);
+        util.outflowlist(item, this)
         this.setData({
           InfoList: item.reverse()
         })
@@ -115,9 +115,7 @@ Page({
     });
   },
   onConfirm1(e) {
-    console.log(e.detail.value)
     let info = util.editInfo(e, this, e.detail.value);
-    console.log(info)
     this.setData({
       info,
       show1: false,

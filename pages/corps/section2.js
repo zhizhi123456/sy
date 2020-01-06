@@ -61,8 +61,8 @@ Page({
     if (this.data.caption == "我") {
       util.returnMenu();
     } else {
-      wx.redirectTo({
-        url: '/pages/section/section'
+      wx.navigateBack({
+        url: "/pages/corps/members/members"
       })
     }
   },
