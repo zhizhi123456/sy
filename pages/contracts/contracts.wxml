@@ -19,7 +19,8 @@
       <icon class="{{' red  icon iconfont '+ item.img + (item.control ?'':' c') }}"></icon>
       <text class="{{item.control ?'':'c'}}">{{item.nametext}}</text>
       <!-- <navigator url="{{ item.three?item.path +'?menuId='+ item.menuId:(item.control ? '/pages/secondarys/secondarys?id='+item.ID+'&title='+item.nametext :'#')}}"></navigator> -->
-      <navigator url="{{(!item.control)?'':(item.three?(item.path +'?menuId='+ item.menuId+'&id='+item.ID+'&title='+item.nametext):('/pages/secondarys/secondarys?id='+item.ID+'&title='+item.nametext))}}"></navigator>
+      <!-- <navigator url="{{(!item.control)?'':(item.three?(item.path +'?menuId='+ item.menuId+'&id='+item.ID+'&title='+item.nametext):('/pages/secondarys/secondarys?id='+item.ID+'&title='+item.nametext))}}"></navigator> -->
+      <navigator url="{{(!item.control)?'':(item.three?(item.path +'?menuId='+ item.menuId):('/pages/secondarys/secondarys?id='+item.ID+'&title='+item.nametext+'&primarymarket='+num))}}"></navigator>
     </view>
   </view>
   <!-- tabar -->

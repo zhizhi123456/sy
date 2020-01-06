@@ -26,6 +26,7 @@ Page({
     },
     show_nature1: false,
     section2: [],
+    section3:[],
     show_photo: false,
     ConstructionTeamIDtext: '',
     check_photo: [{
@@ -33,6 +34,8 @@ Page({
     }, {
       name: "从相册选择"
     }],
+    MemberNametext:'',
+    show2:false
   },
   // 照片
   // 照片
@@ -81,6 +84,26 @@ Page({
       info,
       show_nature1: false,
       ConstructionTeamIDtext: e.detail.value.text
+    })
+  },
+  showPopup2() {
+    this.setData({
+      show2: true
+    })
+  },
+  onClose2() {
+    this.setData({
+      show2: false
+    })
+  },
+  onConfirm2(e) {
+    // console.log(e)
+    let info = util.editInfo(e, this, e.detail.value.value);
+
+    this.setData({
+      info,
+      show2: false,
+      MemberNametext: e.detail.value.text
     })
   },
   confirm() {
@@ -144,7 +167,8 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      section2: app.globalData.ConstructionTeam
+      section2: app.globalData.ConstructionTeam,
+      section3:app.globalData.Principal
     })
     if (options.id) {
       detailmember({

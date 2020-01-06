@@ -53,7 +53,7 @@ Page({
     })
   },
   onConfirm(e) {
-    console.log(e.detail.value)
+    // console.log(e.detail.value)
     let info = util.editInfo(e, this, e.detail.value);
     this.setData({
       info,
@@ -233,17 +233,13 @@ Page({
         sections: q
       })
     })
-    staff().then(res => {
-      console.log(res)
-      var w = JSON.parse(res)
-      var q = w.map(s => {
-        return s.Name
-      })
-      this.setData({
-        section1: q
-      })
+    var a = app.globalData.staff
+    var b = a.map(s => {
+      return s.text
     })
-    
+    this.setData({
+      section1: b
+    })
     if (options.id) {
       detailcheck({
         ID: options.id

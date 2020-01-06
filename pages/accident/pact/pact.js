@@ -13,11 +13,11 @@ Page({
     loading: false,
     val: 0,
     pact: [{
-        text: '全部重大质量事故',
+        text: '全部重大工程质量事故报告',
         value: 0
       },
       {
-        text: '我的重大质量事故',
+        text: '我的重大工程质量事故报告',
         value: 1
       }
     ],

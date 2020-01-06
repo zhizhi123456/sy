@@ -18,10 +18,14 @@ Page({
       ConstructionName: "",
       chiefcontactman: '',
       contactway: '',
-      intro: ''
+      intro: '',
+      ProjectManager:''
     },
     show_nature1: false,
-    section2:[]
+    section2:[],
+    show3:false,
+    section2:"",
+    section3:''
   },
   projectcodelur(e) {
     let info = util.editInfo(e, this, e.detail.value);
@@ -50,8 +54,27 @@ Page({
       show_nature1: false
     })
   },
+   // 项目经理
+   showPopup3() {
+    this.setData({
+      show3: true
+    })
+  },
+  onClose3() {
+    this.setData({
+      show3: false
+    })
+  },
+  onConfirm3(e) {
+    // console.log(e)
+    let info = util.editInfo(e, this, e.detail.value);
+    this.setData({
+      info,
+      show3: false
+    })
+  },
   confirm() {
-    console.log(this.data.info)
+    // console.log(this.data.info)
     if (this.data.info.Companytitle) {
       let info = this.data.info;
       util.checkContent(info, this);
@@ -111,8 +134,15 @@ Page({
         return t.text
       })
       this.setData({
-        section2: s,
+        section2: s
       })
+      var a = app.globalData.staff.map(q=>{
+        return q.text
+      })
+      this.setData({
+        section3: a
+      })
+
   },
   /**
    * 生命周期函数--监听页面加载

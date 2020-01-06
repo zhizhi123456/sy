@@ -4,13 +4,11 @@
     <view class="header">
         <view class="title">
             <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
-            <navigator url="/pages/design/new/new" hover-class="none" class="fr newCreate">
+            <navigator url="/pages/design/new/new" hover-class="none" class="fr newCreate" wx:if="{{hadNew}}">
                 新建
             </navigator>
             <view class="apply">
-                <van-dropdown-menu active-color="red">
-                    <van-dropdown-item value="{{val}}" options="{{pact}}" />
-                </van-dropdown-menu>
+                <text>{{top}}</text>
             </view>
         </view>
         <view class="seach">
@@ -62,7 +60,7 @@
     </view>
     <view class="main">
         <view class="list" wx:for="{{InfoList}}" wx:key="{{index}}">
-            <navigator url="/pages/design/detail/detail?id={{item.ID}}" hover-class="none">
+            <navigator url="/pages/design/detail/detail?id={{item.ID}}&hadNew={{hadNew}}" hover-class="none">
                 <!-- <view>
                     <text class="caption">{{item.verifysubprocode}}</text>
                 </view> -->

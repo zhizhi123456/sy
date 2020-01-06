@@ -528,7 +528,8 @@ Page({
       },
 
     ],
-    smalls: []
+    smalls: [],
+    primarymarket:1000
   },
   screen() {
     wx.showLoading({
@@ -622,6 +623,13 @@ Page({
       util.returnMenu(1002);
     } else {
       util.returnMenu();
+      // util.returnMenu(this.data.primarymarket);
+      // wx.reLaunch({
+      //   url: "/pages/contracts/contracts?id="+this.data.primarymarket
+      // })
+      // wx.navigateBack({
+      //   delta: 1
+      // })
     }
 
   },
@@ -660,6 +668,12 @@ Page({
       })
     }
     var that = this;
+    if(options.primarymarket){
+      this.setData({
+        primarymarket:options.primarymarket
+      })
+    }
+    var that = this
     wx.getStorage({
       key: 'myInfo',
       success(res) {

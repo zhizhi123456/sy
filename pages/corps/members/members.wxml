@@ -1,0 +1,47 @@
+<!--pages/corps/sections/sections2.wxml-->
+<view class="wraper">
+    <!-- 头部 -->
+    <view class="header">
+        <view class="title">
+            <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
+            <view class="apply">施工队成员</view>
+        </view>
+        <view class="seach">
+            <!-- <icon class="iconfont icon-sousuo fr" bindtap="seachInfo"></icon> -->
+            <view class="data_list seachTime">
+                <input value="{{info.department}}" bindtap="showPopup_o" placeholder="请选择项目经理" disabled />
+                <view>
+                    <van-popup show="{{show_o}}" round position="bottom" bind:close="onClose_o">
+                        
+                        <van-picker data-name="department" show-toolbar columns="{{ sections }}" bind:cancel="onClose_o" bind:confirm="onConfirm_o" />
+                    </van-popup>
+                </view>
+                <input value="{{info.person}}" bindtap="showPopup_1" placeholder="请选择施工队" disabled />
+                <view>
+                    <van-popup show="{{show_1}}" round position="bottom" bind:close="onClose_1">
+                        <van-picker data-name="person" show-toolbar columns="{{ employee }}" bind:cancel="onClose_1" bind:confirm="onConfirm_1" />
+                    </van-popup>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="main" wx:if="{{sections[0]}}">
+        <van-sidebar active-key="{{ activeKey }}" bind:change="onChange" class="listwraper fl">
+            <block wx:for="{{sections}}" wx:key="index">
+                <van-sidebar-item title="{{item.text}}" />
+            </block>
+        </van-sidebar>
+        <view class="personlist" wx:if="{{employee[0]}}">
+            <block wx:for="{{employee}}" wx:key="index">
+                <navigator url="/pages/corps/section2?name={{item.text}}&userid={{item.MemberName}}">
+                <!-- name={{item.text}}&userid={{item.value}}&dep={{dep}}&deptxt={{deptxt}} -->
+                    <view class="p_wdot">
+                        <text class="p_dot">-●</text>
+                        {{item.text}}
+                    </view>
+                </navigator>
+            </block>
+        </view>
+        <text class="mp_hint" wx:else>暂无施工队成员信息</text>
+    </view>
+</view>

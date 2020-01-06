@@ -738,7 +738,7 @@ export const ConstructionTeam = () => http.get("http://192.168.2.125:88/api/Meth
 export const Personal = (params) => http.post("http://192.168.2.148:88/api/User/update", params);
 
 
-//施工队成员
+// 设计任务
 // 查询
 export const querydesign = (params) => http.post("http://192.168.2.148:88/api/designtask/Query", params);
 // 添加

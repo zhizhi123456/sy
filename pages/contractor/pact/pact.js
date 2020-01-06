@@ -29,7 +29,8 @@ Page({
       StartTime: "",
       EndTime: "",
       Type: '',
-      state: ''
+      state: '',
+      UserName:''
     },
     sections: '',
     pull: false,
@@ -59,7 +60,7 @@ Page({
     querycontractor({
       ConstructionName: this.data.seach
     }).then(res => {
-      console.log(res)
+      // console.log(res)
       if (res.code == 10000) {
         let item = res.List;
         util.listData(item, app.globalData.department);
@@ -84,6 +85,13 @@ Page({
     wx.showLoading({
       title: '加载中',
     });
+    var b = app.globalData.staff.map(q=>{
+      return q.text
+    })
+    this.setData({
+      section3: b
+    })
+
     // 调用查询
     this.setData({
       seach: ""

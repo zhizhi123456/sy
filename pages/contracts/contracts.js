@@ -184,8 +184,10 @@ Page({
       }, {
         nametext: "我的信息",
         img: "icon-gerenzhongxinyewodexinxi  yellow1",
-        path: "pages/Personal/pact/pact",
-        control: true //权限
+        path: "/pages/section/section2?my=1",
+        control: true ,//权限，
+        // three:true
+        
       }, {
 
         nametext: "我的申请",
@@ -242,7 +244,7 @@ Page({
       this.setData({
         tags: s
       })
-      console.log(this.data.tags)
+      // console.log(this.data.tags)
       this.log()
       wx.hideLoading()
 
@@ -309,19 +311,7 @@ Page({
         // console.log(zong)
         this.setData({
           lists: zong
-        })
-        // 测试
-        // this.setData({
-        //   lists: this.data.list.reverse()
-        // })
-
-        for (var s in this.data.tag) {
-          if (this.data.tag[s].ID == this.data.num) {
-            this.setData({
-              title: this.data.tag[s].nametext
-            })
-          }
-        }
+        })    
         var that = this
         // console.log(that.data.tags)
         wx.getStorage({
@@ -346,6 +336,8 @@ Page({
               }
 
 
+              that.setTag()
+             
             }
           },
           fail(res) {
@@ -360,6 +352,8 @@ Page({
               })
             }
 
+            that.setTag()
+           
           }
 
         })
@@ -373,6 +367,7 @@ Page({
     this.setData({
       num: i.currentTarget.dataset.change
     })
+    // console.log(this.data.num)
     this.screen()
   },
   task() {
@@ -382,10 +377,6 @@ Page({
   },
   // 判断登录
   log() {
-    // wx.setStorage({
-    //   key:"key",
-    //   data:"value"
-    // }) 
     var that = this
     wx.getStorage({
       key: 'myInfo',
@@ -398,21 +389,26 @@ Page({
 
     })
 
-
+  },
+  setTag(){
+    for (var s in this.data.tags) {
+      if (this.data.tags[s].ID == this.data.num) {
+        this.setData({
+          title: this.data.tags[s].nametext
+        })
+      }
+    }
   },
   // 90
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // console.log(options)
     this.log() //判断是否登录
-    // console.log(options.grading)
     if (options.grading !== undefined && options.grading !== "undefined") {
       this.setData({
         num: options.grading
       })
-      // console.log("1")
     } else {
       this.setData({
         num: 1000,

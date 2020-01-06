@@ -1,10 +1,6 @@
 // pages/new/new.js
 import Toast from 'vant-weapp/dist/toast/toast';
 import {
-  // addPurchase,
-  // addPdetail,
-  // referPurchase,
-  // amendPurchase
   querycable,
   detailcable,
   addcable,
@@ -445,24 +441,18 @@ Page({
     c = c.map((item) => {
       return item.value
     })
-    staff().then(res => {
-      //项目经理
-      console.log(res)
-      var q = JSON.parse(res)
-      var s = q.map(t => {
-        return t.Name
-      })
-      this.setData({
-        sections: s,
-      })
+    var a = app.globalData.staff
+    var b = a.map(s => {
+      return s.text
+    })
+    this.setData({
+      sections: b
     })
     this.setData({
       firms: app.globalData.Companytitle, //施工单位
       totals: c, //工程名称
-      // Supplier: app.globalData.Supplier,
-      // sections: app.globalData.department
     })
-    console.log(this.data.totals)
+    // console.log(this.data.totals)
   },
   /**
    * 生命周期函数--监听页面加载

@@ -29,7 +29,7 @@ Page({
         name: "考勤",
         menuId: null,
         icon: 'icon-kaoqin2',
-        path: '/pages/sign/pact/pact'
+        path: ''
       },
       {
         name: "定位",
@@ -58,15 +58,19 @@ Page({
     ],
   },
   return () {
-    wx.redirectTo({
-      url: '/pages/section/section'
-    })
+    if (this.data.caption == "我") {
+      util.returnMenu();
+    } else {
+      wx.navigateBack({
+        url: "/pages/corps/members/members"
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
+    // console.log(options)
     if (options) {
       this.setData({
         caption: options.name,

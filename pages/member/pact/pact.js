@@ -181,6 +181,7 @@ Page({
   },
   // 组合查询
   seachqur() {
+    // console.log(this.data.info)
     util.qgroupdeliver(qgroupmember, this)
   },
 })

@@ -113,6 +113,7 @@ Page({
         options: options
       })
     }
+    // console.log(options)
     if (options.userid) {
       let info = this.data.info;
       info.departmentID = options.dep;

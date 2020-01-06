@@ -1,7 +1,6 @@
 // pages/new/new.js
 import Toast from 'vant-weapp/dist/toast/toast';
 import {
-  Companytitle,
   getSubItems,
   addaccident,
   detailaccident,
@@ -132,13 +131,10 @@ Page({
     })
   },
   confirm() {
-    // console.log(this.data.info)
-    // console.log(this.data.info.sites)
-    // console.log(this.data.info.projectcode!='请选择')
     if (this.data.info.sites && this.data.info.projectcode) {
       let info = this.data.info;
       util.checkContent(info, this);
-      util.intro(info,this)
+      util.intro(info, this)
       this.setData({
         info
       })
@@ -171,7 +167,7 @@ Page({
   editconfirm() {
     let info = this.data.info;
     util.checkChange(info, this, app.globalData.department);
-    util.intro(info,this)
+    util.intro(info, this)
     this.setData({
       info
     })
@@ -188,20 +184,16 @@ Page({
     })
   },
   qingqiu() {
-    Companytitle().then(res => {
-      // console.log(res)
-      var q = JSON.parse(res)
-      var s = q.map(t => {
-        return t.Value
-      })
-      // console.log(s)
-      this.setData({
-        section1: s,
-      })
+    var a = app.globalData.Companytitle
+    var b = a.map(s => {
+      return s.text
     })
-    getSubItems().then(res=>{
+    this.setData({
+      section1: b
+    })
+    getSubItems().then(res => {
       // console.log(res)
-      
+
       var q = res.List
       var s = q.map(t => {
         return t.subprojectname
@@ -217,9 +209,7 @@ Page({
    */
   onLoad: function (options) {
     this.qingqiu()
-    this.setData({
-      nature: app.globalData.nature
-    })
+
     if (options.id) {
       detailaccident({
         ID: options.id
@@ -227,7 +217,7 @@ Page({
         // console.log(res)
         let item = res.Item;
         util.handleData(item, this, app.globalData.department);
-        util.outflow(item,this)
+        util.outflow(item, this)
         this.setData({
           info: item
         })
