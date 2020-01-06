@@ -26,14 +26,22 @@ Page({
     show_endtime: false,
     item: [],
     pages: 1,
-    hadNew: 1
+    hadNew: 1,
+    me: 0,
+    applyT: 0
   },
   // 返回
   return () {
-    if (this.data.hadNew) {
-      util.returnMenu2(this.data.options.id, this.data.options.title);
+    if (this.data.hadNew || this.data.me) {
+      util.returnMenu2(this.data.options.id || this.data.options.rid, this.data.options.title);
+    } else if (this.data.applyT) {
+      wx.redirectTo({
+        url: "/pages/current/current/current?title=" + this.data.options.title + '&id=' + (this.data.options.id || this.data.options.rid)
+      });
     } else {
-      util.backprev();
+      wx.redirectTo({
+        url: "/pages/section/section2?name=" + this.data.caption + '&dep=' + this.data.dep + '&deptxt=' + this.data.deptxt + '&userid=' + this.data.userid
+      });
     }
   },
   setSeach(e) {
@@ -92,7 +100,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if (options.id) {
+    if (options.id || options.rid) {
       this.setData({
         options: options
       })
@@ -101,6 +109,7 @@ Page({
     wx.showLoading({
       title: '加载中',
     });
+    // console.log(options)
     if (options.userid) {
       let info = this.data.info;
       info.departmentID = options.dep;
@@ -112,7 +121,19 @@ Page({
         departmenttext: options.deptxt,
         userid: options.userid,
         deptxt: options.deptxt,
+        caption: options.caption,
+        dep: options.dep
       })
+      if (options.caption == '我') {
+        this.setData({
+          me: 1,
+        })
+      }
+      if (options.caption == '我申请') {
+        this.setData({
+          applyT: 1
+        })
+      }
       // 综合查询
       groupContract({
         createman: options.userid

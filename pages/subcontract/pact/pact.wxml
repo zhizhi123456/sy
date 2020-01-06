@@ -4,7 +4,7 @@
     <view class="header">
         <view class="title">
             <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
-            <navigator url="/pages/subcontract/new/new" hover-class="none" class="fr newCreate" wx:if="{{hadNew}}">
+            <navigator url="/pages/subcontract/new/new?rid={{options.id||options.rid}}&title={{options.title}}&{{userid?'userid='+userid+'&caption='+caption+'&dep='+dep+'&deptxt='+deptxt:''}}" hover-class="none" class="fr newCreate" wx:if="{{hadNew||me||applyT}}">
                 新建
             </navigator>
             <view class="apply">{{top}}</view>
@@ -80,7 +80,7 @@
     </view>
     <view class="main">
         <view class="list" wx:for="{{InfoList}}" wx:key="index">
-            <navigator url="/pages/subcontract/detail/detail?id={{item.ID}}&hadNew={{hadNew}}" hover-class="none">
+            <navigator url="/pages/subcontract/detail/detail?id={{item.ID}}&hadNew={{hadNew}}&rid={{options.id||options.rid}}&title={{options.title}}&{{userid?'userid='+userid+'&caption='+caption+'&dep='+dep+'&deptxt='+deptxt+'&me='+me+'&applyT='+applyT:''}}" hover-class="none">
                 <view>
                     <text class="caption">{{item.subprojectname}}</text>
                 </view>

@@ -106,7 +106,7 @@ Page({
     })
   },
   onConfirm_time(e) {
-    console.log(e)
+    // console.log(e)
     let info = util.editInfo(e, this, util.datefomate(e.detail));
     this.setData({
       info,
@@ -153,7 +153,7 @@ Page({
   },
   confirm() {
     // console.log(this.data.info)
-    if (this.data.info.Companytitle&&this.data.info.department&&this.data.info.subcontactname&&this.data.info.subprojcectCode&&this.data.info.demo) {
+    if (this.data.info.Companytitle && this.data.info.department && this.data.info.subcontactname && this.data.info.subprojcectCode && this.data.info.demo) {
       let info = this.data.info;
       util.checkContent(info, this);
       this.setData({
@@ -167,7 +167,8 @@ Page({
             icon: 'success',
             duration: 3000
           })
-          util.returnPrev('contract')
+          util.returnPrev('contract', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+            this.data.rid, this.data.title)
         }
       })
     } else {
@@ -179,11 +180,13 @@ Page({
   },
   // 返回
   return () {
-    util.returnPrev('contract')
+    util.returnPrev('contract', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+      this.data.rid, this.data.title)
   },
   // 编辑分包项目页面的确定和返回
   editreturn() {
-    util.returnPrev('contract', this)
+    util.returnPrev('contract', this, this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+      this.data.rid, this.data.title)
   },
   editconfirm() {
     let info = this.data.info;
@@ -199,7 +202,8 @@ Page({
           icon: 'success',
           duration: 3000
         })
-        util.returnPrev('contract', this)
+        util.returnPrev('contract', this, this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+          this.data.rid, this.data.title)
       }
     })
   },
@@ -207,6 +211,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (options.userid) {
+      this.setData({
+        userid: options.userid,
+        caption: options.caption,
+        dep: options.dep,
+        deptxt: options.deptxt,
+        rid: options.rid,
+        title: options.title
+      })
+    }
     this.setData({
       sections: app.globalData.department,
       firms: app.globalData.Companytitle,

@@ -218,7 +218,7 @@ Page({
   },
   confirm() {
     // console.log(this.data.info)
-    if (this.data.info.subprojcectCode && this.data.info.subprojectname && this.data.info.subCompanyName&& this.data.info.projcectCode&& this.data.info.workplace&& this.data.info.projectcontext&& this.data.info.subprojectprop&& this.data.info.planbegindate&& this.data.info.planenddate&& this.data.info.demo) {
+    if (this.data.info.subprojcectCode && this.data.info.subprojectname && this.data.info.subCompanyName && this.data.info.projcectCode && this.data.info.workplace && this.data.info.projectcontext && this.data.info.subprojectprop && this.data.info.planbegindate && this.data.info.planenddate && this.data.info.demo) {
       let info = this.data.info;
       util.checkContent(info, this);
       this.setData({
@@ -232,7 +232,8 @@ Page({
             icon: 'success',
             duration: 3000
           })
-          util.returnPrev('subcontract')
+          util.returnPrev('subcontract', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+            this.data.rid, this.data.title)
         }
       })
     } else {
@@ -244,18 +245,21 @@ Page({
   },
   // 返回
   return () {
-    util.returnPrev('subcontract')
+    util.returnPrev('subcontract', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+      this.data.rid, this.data.title)
   },
   // 编辑分包项目页面的确定和返回
   editreturn() {
-    util.returnPrev('subcontract',this)
+    util.returnPrev('subcontract', this, this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+      this.data.rid, this.data.title)
   },
   editconfirm() {
     let info = this.data.info;
-    util.checkChange(info, this,app.globalData.department);
+    util.checkChange(info, this, app.globalData.department);
     this.setData({
       info
     })
+    // console.log(this.data.info)
     amendSubItems(this.data.info).then(res => {
       // console.log(res)
       if (res.code == 10000) {
@@ -264,7 +268,8 @@ Page({
           icon: 'success',
           duration: 3000
         })
-        util.returnPrev('subcontract',this)
+        util.returnPrev('subcontract', this, this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+          this.data.rid, this.data.title)
       }
     })
   },
@@ -272,6 +277,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // console.log(options, 'new')
+    if (options.userid) {
+      this.setData({
+        userid: options.userid,
+        caption: options.caption,
+        dep: options.dep,
+        deptxt: options.deptxt,
+        rid: options.rid,
+        title: options.title
+      })
+    }
     this.setData({
       sections: app.globalData.department,
       firms: app.globalData.Companytitle,
@@ -282,7 +298,6 @@ Page({
       referSubItems({
         ID: options.id
       }).then(res => {
-        console.log(res)
         let item = res.Item;
         util.handleData(item, this, app.globalData.department);
         this.setData({

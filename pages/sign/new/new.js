@@ -162,7 +162,8 @@ Page({
               icon: 'success',
               duration: 3000
             })
-            util.returnPrev('sign');
+            util.returnPrev('sign', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+            this.data.rid, this.data.title)
           } else {
             wx.showToast({
               title: '打卡失败',
@@ -175,12 +176,23 @@ Page({
     }
   },
   return () {
-    util.returnPrev('sign');
+    util.returnPrev('sign', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+    this.data.rid, this.data.title)
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (options.userid) {
+      this.setData({
+        userid: options.userid,
+        caption: options.caption,
+        dep: options.dep,
+        deptxt: options.deptxt,
+        rid: options.rid,
+        title: options.title
+      })
+    }
     wx.setNavigationBarTitle({
       title: '考勤打卡'
     })

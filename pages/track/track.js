@@ -20,13 +20,16 @@ Page({
     show_time: false,
     show_endtime: false,
     top: '我的轨迹',
+    hadNew: 1,
+    me: 0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if (options.id) {
+    // console.log(options)
+    if (options.id|| options.rid) {
       this.setData({
         options: options
       })
@@ -38,8 +41,18 @@ Page({
     if (options.userid) {
       this.setData({
         top: options.caption + "的轨迹",
-        person: options.caption
+        hadNew: 0,
+        person: options.caption,
+        userid: options.userid,
+        deptxt: options.deptxt,
+        caption: options.caption,
+        dep: options.dep
       })
+      if (options.caption == '我') {
+        this.setData({
+          me: 1,
+        })
+      }
       userID({
         UserName: options.userid
       }).then(res => {
@@ -105,7 +118,13 @@ Page({
   },
   // 返回
   return () {
-    util.returnMenu2(this.data.options.id, this.data.options.title);
+    if (this.data.hadNew || this.data.me) {
+      util.returnMenu2(this.data.options.id || this.data.options.rid, this.data.options.title);
+    } else {
+      wx.redirectTo({
+        url: "/pages/section/section2?name=" + this.data.caption+'&dep='+this.data.dep+'&deptxt='+this.data.deptxt+'&userid='+this.data.userid
+      });
+    }
   },
   // 开始时间
   showPopup_time() {

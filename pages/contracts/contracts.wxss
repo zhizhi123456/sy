@@ -170,3 +170,10 @@
   margin-top: 55rpx;
   background-color: transparent;
 }
+
+/* 提示 */
+.HINT {
+  position: absolute;
+  top: 0;
+  right: 0;
+}

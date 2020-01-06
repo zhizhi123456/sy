@@ -1,5 +1,5 @@
 <!-- pages/oa/oa.wxml -->
-<map id="myMap" markers="{{markers}}" style="width:100%;height:100vh;" longitude="{{poi.longitude}}" latitude="{{poi.latitude}}" show-location show-compass polyline="{{polyline}}" wx:if="{{showmap}}">
+<map id="myMap" markers="{{markers}}" style="width:100%;height:100vh;" longitude="{{poi.longitude}}" latitude="{{poi.latitude}}" show-location show-compass polyline="{{polyline}}" wx:if="{{showmap||me}}">
     <cover-view class="return" bindtap="return">
         <cover-view class="iconfont fl icon-jiantou2" />
     </cover-view>

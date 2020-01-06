@@ -32,17 +32,26 @@ Page({
   // },
   // 返回
   return () {
-    if(this.data.hadNew){
-      util.returnPrev('subcontract')
-    }else{
-      util.retPrev('subcontract')
-    }
+    util.returnPrev('subcontract', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+      this.data.rid, this.data.title)
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     // console.log(options)
+    if (options.userid) {
+      this.setData({
+        userid: options.userid,
+        caption: options.caption,
+        dep: options.dep,
+        deptxt: options.deptxt,
+        me: Number(options.me),
+        rid: options.rid,
+        title: options.title,
+        applyT: Number(options.applyT)
+      })
+    }
     if (options.hadNew) {
       this.setData({
         hadNew: Number(options.hadNew)
@@ -78,17 +87,17 @@ Page({
   // 工作流流转
   // 退回上步
   sendback() {
-    util.Triggerflow(this, 'return', 'subproject', 'subcontract')
+    util.Triggerflow(this, 'return', 'subproject', 'subcontract', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+      this.data.rid, this.data.title)
   },
   // 提交下步
   putin() {
-    util.Triggerflow(this, 'next', 'subproject', 'subcontract')
+    util.Triggerflow(this, 'next', 'subproject', 'subcontract', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+      this.data.rid, this.data.title)
   },
   // 删除
   delete() {
-    // console.log(this.data.info)
     cancelSubItems({
-      Timestamp: app.globalData.time,
       ID: this.data.info.ID
     }).then(res => {
       if (res.code == 10000) {
@@ -97,7 +106,8 @@ Page({
           icon: 'success',
           duration: 3000
         })
-        util.returnPrev('subcontract')
+        util.returnPrev('subcontract', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+          this.data.rid, this.data.title)
       }
     })
   },

@@ -16,7 +16,7 @@ Page({
     info: {}
   },
   return () {
-    wx.switchTab({
+    wx.redirectTo({
       url: '/pages/mine/mine'
     })
   },
@@ -120,7 +120,7 @@ Page({
       success(res) {
         console.log(res)
         const tempFilePaths = res.tempFilePaths[0];
-       
+
       }
     })
   },

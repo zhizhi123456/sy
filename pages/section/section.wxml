@@ -25,21 +25,23 @@
         </view>
     </view>
     <view class="main" wx:if="{{sections[0]}}">
-        <van-sidebar active-key="{{ activeKey }}" bind:change="onChange" class="listwraper fl">
-            <block wx:for="{{sections}}" wx:key="index">
-                <van-sidebar-item title="{{item.text}}" />
-            </block>
-        </van-sidebar>
-        <view class="personlist" wx:if="{{employee[0]}}">
-            <block wx:for="{{employee}}" wx:key="index">
-                <navigator url="/pages/section/section2?name={{item.text}}&userid={{item.value}}&dep={{dep}}&deptxt={{deptxt}}">
-                    <view class="p_wdot">
-                        <text class="p_dot">-●</text>
-                        {{item.text}}
-                    </view>
-                </navigator>
-            </block>
+        <view class="w-mbox">
+            <van-sidebar active-key="{{ activeKey }}" bind:change="onChange" class="listwraper fl">
+                <block wx:for="{{sections}}" wx:key="index">
+                    <van-sidebar-item title="{{item.text}}" />
+                </block>
+            </van-sidebar>
+            <view class="personlist" wx:if="{{employee[0]}}">
+                <block wx:for="{{employee}}" wx:key="index">
+                    <navigator url="/pages/section/section2?name={{item.text}}&userid={{item.value}}&dep={{dep}}&deptxt={{deptxt}}">
+                        <view class="p_wdot">
+                            <text class="p_dot"></text>
+                            {{item.text}}
+                        </view>
+                    </navigator>
+                </block>
+            </view>
+            <text class="mp_hint" wx:else>暂无部门员工信息</text>
         </view>
-        <text class="mp_hint" wx:else>暂无部门员工信息</text>
     </view>
 </view>

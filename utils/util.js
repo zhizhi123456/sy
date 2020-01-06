@@ -101,7 +101,7 @@ const checkContent = (value, key) => {
     })
     value.API_Picurl = value.API_Picurl.join(",")
   }
-   var app = getApp();
+  var app = getApp();
   //公司
   app.globalData.Companytitle.forEach(res => {
     if (value.Companytitle == res.text) {
@@ -246,34 +246,34 @@ const checkContent = (value, key) => {
       value.HoleFirePrevInstQty = res.value;
     }
   })
-    //合同签订情况
-    app.globalData.Ifmakecontactlist.forEach(res => {
-      if (value.contactbookstate == res.text) {
-        value.contactbookstate = res.value;
-      }
-    })
-    //材料编码
-    app.globalData.Goodsname.forEach(res => {
-      if (value.goodscode == res.text) {
-        value.goodscode = res.value;
-      }
-    })
-    // 项目类型
-    if (value.mainprojecttype) {
-      var kinds = [];
-      value.mainprojecttype.split(",").forEach(res => {
-        app.globalData.Projecttype.forEach(depart => {
-          if (res == depart.text.substr(-1)) {
-            if (kinds.indexOf(depart.value.substr(-1)) == -1) {
-              kinds.push(depart.value.substr(-1))
-            }
-          }
-        })
-      })
-      value.mainprojecttype = kinds.join(",");
+  //合同签订情况
+  app.globalData.Ifmakecontactlist.forEach(res => {
+    if (value.contactbookstate == res.text) {
+      value.contactbookstate = res.value;
     }
-  };
-  
+  })
+  //材料编码
+  app.globalData.Goodsname.forEach(res => {
+    if (value.goodscode == res.text) {
+      value.goodscode = res.value;
+    }
+  })
+  // 项目类型
+  if (value.mainprojecttype) {
+    var kinds = [];
+    value.mainprojecttype.split(",").forEach(res => {
+      app.globalData.Projecttype.forEach(depart => {
+        if (res == depart.text.substr(-1)) {
+          if (kinds.indexOf(depart.value.substr(-1)) == -1) {
+            kinds.push(depart.value.substr(-1))
+          }
+        }
+      })
+    })
+    value.mainprojecttype = kinds.join(",");
+  }
+};
+
 // 判断更改内容...
 const checkChange = (value, key, dep) => {
   for (let i in value) {
@@ -488,8 +488,8 @@ const handleData = (data, key, dep) => {
     if (data[i] == null || data[i] == "null" || !data[i]) {
       data[i] = ""
     }
-  } 
-   // 部门
+  }
+  // 部门
   app.globalData.department.forEach(depart => {
     if (data.departmentId == depart.value || data.department == depart.value) {
       data.department = depart.text;
@@ -498,7 +498,7 @@ const handleData = (data, key, dep) => {
         departmenttext: depart.text
       })
     }
-  })  
+  })
   // 公司
   app.globalData.Companytitle.forEach(depart => {
     if (data.Companytitle == depart.value) {
@@ -513,7 +513,7 @@ const handleData = (data, key, dep) => {
     if (data.SentFileCompany == depart.value) {
       data.SentFileCompany = depart.text
     }
-     if (data.bulidcompanyname == depart.value) {
+    if (data.bulidcompanyname == depart.value) {
       data.bulidcompanyname = depart.text
     }
   })
@@ -744,8 +744,8 @@ const listData = (data, dep, page, list) => {
       if (value.department == depart.value) {
         value.department = depart.text
       }
-    })   
-     //公司
+    })
+    //公司
     app.globalData.Companytitle.forEach(res => {
       if (value.Companytitle == res.value) {
         value.Companytitle = res.text;
@@ -762,8 +762,8 @@ const listData = (data, dep, page, list) => {
       if (value.ConstructCompany == res.value) {
         value.ConstructCompany = res.text;
       }
-    })   
-     // //总包项目
+    })
+    // //总包项目
     // app.globalData.MainProject.forEach(res => {
     //   if (value.projectcode == res.value) {
     //     value.projectcode = res.text;
@@ -786,23 +786,32 @@ const listData = (data, dep, page, list) => {
       if (value.projectcode == res.value) {
         value.projectcode = res.text;
       }
-   })
-   if (value.amountPlan && value.amountQuantity) {
-    data[index].offset = ((value.amountPlan - value.amountQuantity) / value.amountPlan * 100).toFixed(2) + "%";
-  }
-  value.materialcost = value.materialcost ? value.materialcost : 0;
-  value.projectcost = value.projectcost ? value.projectcost : 0;
-  value.harmonizecost = value.harmonizecost ? value.harmonizecost : 0;
-  value.installcost = value.installcost ? value.installcost : 0;
-  value.totalCost = value.materialcost + value.projectcost + value.harmonizecost + value.installcost;
-  value.profit = value.contcactamount - value.totalCost;
-  value.rate = (value.profit / value.contcactamount * 100).toFixed(2) + "%";
-  app.globalData.Companytitle.forEach(depart => {
-    if (value.Companytitle == depart.value) {
-      value.Companytitle = depart.text
+    })
+    //项目属性
+    app.globalData.Projectprop.forEach(res => {
+      if (value.subprojectprop == res.value) {
+        value.subprojectprop = res.text;
+      }
+      if (value.mainprojectprop == res.value) {
+        value.mainprojectprop = res.text;
+      }
+    })
+    if (value.amountPlan && value.amountQuantity) {
+      data[index].offset = ((value.amountPlan - value.amountQuantity) / value.amountPlan * 100).toFixed(2) + "%";
     }
-  })
-  if (value.mainprojecttype) {
+    value.materialcost = value.materialcost ? value.materialcost : 0;
+    value.projectcost = value.projectcost ? value.projectcost : 0;
+    value.harmonizecost = value.harmonizecost ? value.harmonizecost : 0;
+    value.installcost = value.installcost ? value.installcost : 0;
+    value.totalCost = value.materialcost + value.projectcost + value.harmonizecost + value.installcost;
+    value.profit = value.contcactamount - value.totalCost;
+    value.rate = (value.profit / value.contcactamount * 100).toFixed(2) + "%";
+    app.globalData.Companytitle.forEach(depart => {
+      if (value.Companytitle == depart.value) {
+        value.Companytitle = depart.text
+      }
+    })
+    if (value.mainprojecttype) {
       var kinds = [];
       value.mainprojecttype.split(",").forEach(res => {
         app.globalData.Projecttype.forEach(depart => {
@@ -818,16 +827,17 @@ const listData = (data, dep, page, list) => {
       }
       value.mainprojecttype = kinds.join(",");
     }
-  }); 
-   if (page) {
-  let num = Math.ceil(data.length / 5);
-  if (page && num >= page) {
-    let addArr = data.slice((page - 1) * 5, ((page - 1) * 5) + 5);
-    list.push(...addArr);
+  });
+  if (page) {
+    let num = Math.ceil(data.length / 5);
+    if (page && num >= page) {
+      let addArr = data.slice((page - 1) * 5, ((page - 1) * 5) + 5);
+      list.push(...addArr);
+    }
+    return list;
   }
-  return list;
 }
-}
+
 // 页面滚动到底部
 const pageScrollToBottom = () => {
   wx.createSelectorQuery().select('.wraper').boundingClientRect(function (rect) {
@@ -883,31 +893,16 @@ const editInfo = (e, key, val) => {
   return info;
 }
 // 返回
-const returnPrev = (kind, key) => {
+const returnPrev = (kind, key, id, cap, dep, dert, rid, tit) => {
   if (key) {
     wx.redirectTo({
-      url: '/pages/' + kind + '/detail/detail?id=' + key.data.info.ID
+      url: `/pages/${kind}/detail/detail?id=${key.data.info.ID}${id?'&userid='+id+'&caption='+cap+'&dep='+dep+'&deptxt='+dert+'&rid='+rid+'&title='+tit:""}`
     })
   } else {
     wx.redirectTo({
-      url: "/pages/" + kind + "/pact/pact"
+      url: `/pages/${kind}/pact/pact${id?'?userid='+id+'&caption='+cap+'&dep='+dep+'&deptxt='+dert+'&rid='+rid+'&title='+tit:""}`
     })
   }
-}
-// 返回
-const retPrev = (kind, key) => {
-  if (key) {
-    wx.navigateBack({
-      url: '/pages/' + kind + '/detail/detail?id=' + key.data.info.ID
-    })
-  } else {
-    wx.navigateBack({
-      url: "/pages/" + kind + "/pact/pact"
-    })
-  }
-}
-const backprev = () => {
-  wx.navigateBack();
 }
 // 上传图片
 const upImage = (key, way) => {
@@ -1086,7 +1081,7 @@ const checkState = (key, id, chart, bh) => {
   }
 }
 // 工作流流转
-const Triggerflow = (key, direction, sheet, piece) => {
+const Triggerflow = (key, direction, sheet, piece,id, cap, dep, dert, rid, tit) => {
   let userinfo = wx.getStorageSync("myInfo");
   if (userinfo) {
     flow({
@@ -1120,7 +1115,8 @@ const Triggerflow = (key, direction, sheet, piece) => {
         let that = key;
         setTimeout(function () {
           wx.redirectTo({
-            url: '/pages/' + piece + '/detail/detail?id=' + that.data.info.ID + "&tab=b"
+            // url: '/pages/' + piece + '/detail/detail?id=' + that.data.info.ID + "&tab=b",
+            url: `/pages/${piece}/detail/detail?tab=b&id=${that.data.info.ID}${id?'&userid='+id+'&caption='+cap+'&dep='+dep+'&deptxt='+dert+'&rid='+rid+'&title='+tit:""}`
           })
         }, 1000)
       } else {
@@ -1275,7 +1271,7 @@ const whether = (content) => {
     var c = false
     return c
   }
-  
+
   if (content == "已完成") {
     var c = true
     return c
@@ -1289,7 +1285,7 @@ const whether = (content) => {
     var c = ''
     return c
   }
-  
+
 }
 const whethercontent = (content) => {
   if (content === true) {
@@ -1408,7 +1404,7 @@ const intro = (data, that) => {
     if (s.text == data.mainprojectprop) {
       data.mainprojectprop = s.value
     }
-    
+
 
   })
   app.globalData.Progress1.forEach(s => {
@@ -1628,7 +1624,7 @@ const outflow = (data, that) => {
     if (s.value == data.bulidcompanyname) {
       data.bulidcompanyname = s.text
     }
-   
+
   })
   app.globalData.IntentionClass.forEach(s => {
     if (s.value == data.TellIntentionClass) {
@@ -1673,7 +1669,7 @@ const outflow = (data, that) => {
       data.ConstructionTeamID = s.text
     }
   })
- 
+
 }
 const outflowlist = (list, that) => {
   // 合同签订情况
@@ -1782,7 +1778,7 @@ const qgroupdeliver = (funcname, that) => {
       that.setData({
         InfoList: item.reverse()
       })
-    
+
       wx.hideLoading();
     } else {
       let info = that.data.info;
@@ -1914,6 +1910,4 @@ module.exports = {
   getBase,
   back,
   sumup,
-  retPrev,
-  backprev
 }

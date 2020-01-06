@@ -33,71 +33,97 @@ Page({
     inputFocus: false,
     time: 0,
     hadNew: 1,
-    showmap: true
+    showmap: true,
+    me: 0
   },
   return () {
-    util.returnMenu2(this.data.options.id, this.data.options.title);
+    if (this.data.hadNew || this.data.me) {
+      util.returnMenu2(this.data.options.id || this.data.options.rid, this.data.options.title);
+    } else {
+      wx.redirectTo({
+        url: "/pages/section/section2?name=" + this.data.caption + '&dep=' + this.data.dep + '&deptxt=' + this.data.deptxt + '&userid=' + this.data.userid
+      });
+    }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if (options.id) {
+    // console.log(options)
+    if (options.id || options.rid) {
       this.setData({
         options: options
       })
     }
+    if (options.caption == '我') {
+      this.setData({
+        me: 1,
+      })
+    }
     if (options.userid) {
       this.setData({
-        hadNew: 0
+        hadNew: 0,
+        userid: options.userid,
+        deptxt: options.deptxt,
+        caption: options.caption,
+        dep: options.dep
       })
-      userID({
-        UserName: options.userid
-      }).then(res => {
-        if (res) {
-          let resarr = JSON.parse(res);
-          track({
-            UserID: resarr[0].ID,
-            Todaydate: util.formatday(new Date()),
-          }).then(res => {
-            if (res.code == 10000) {
-              let item = res.List;
-              if (item.length) {
-                this.setData({
-                  poi: {
-                    latitude: item[item.length - 1].latitude,
-                    longitude: item[item.length - 1].longitude
-                  },
-                  markers: [{
-                    title: item[item.length - 1].addres,
-                    id: 0,
-                    latitude: item[item.length - 1].latitude,
-                    longitude: item[item.length - 1].longitude,
-                    width: 20,
-                    height: 20,
-                    callout: { //在markers上展示地址名称
-                      content: options.caption + '的位置:\n' + item[item.length - 1].addres,
-                      color: '#fff',
-                      display: 'ALWAYS',
-                      padding: 5,
-                      bgColor: '#008080'
-                    }
-                  }]
-                })
-              } else {
-                wx.showToast({
-                  title: '暂无定位信息',
-                  icon: 'none',
-                  duration: 5000
-                })
-                this.setData({
-                  showmap: false
-                })
+      if (!this.data.me) {
+        userID({
+          UserName: options.userid
+        }).then(res => {
+          if (res) {
+            let resarr = JSON.parse(res);
+            track({
+              UserID: resarr[0].ID,
+              Todaydate: util.formatday(new Date()),
+            }).then(res => {
+              if (res.code == 10000) {
+                let item = res.List;
+                if (item.length) {
+                  this.setData({
+                    poi: {
+                      latitude: item[item.length - 1].latitude,
+                      longitude: item[item.length - 1].longitude
+                    },
+                    markers: [{
+                      title: item[item.length - 1].addres,
+                      id: 0,
+                      latitude: item[item.length - 1].latitude,
+                      longitude: item[item.length - 1].longitude,
+                      width: 20,
+                      height: 20,
+                      callout: { //在markers上展示地址名称
+                        content: options.caption + '的位置:\n' + item[item.length - 1].addres,
+                        color: '#fff',
+                        display: 'ALWAYS',
+                        padding: 5,
+                        bgColor: '#008080'
+                      }
+                    }]
+                  })
+                } else {
+                  wx.showToast({
+                    title: '暂无定位信息',
+                    icon: 'none',
+                    duration: 5000
+                  })
+                  this.setData({
+                    showmap: false
+                  })
+                }
               }
-            }
-          })
-        }
-      })
+            })
+          }
+        })
+      } else {
+        let that = this;
+        that.getUserLocation();
+        // 每隔半个小时存储一次位置
+        setInterval(function () {
+          that.getUserLocation()
+        }, 1800000)
+      }
     } else {
       let that = this;
       that.getUserLocation();
@@ -232,7 +258,7 @@ Page({
               width: 20,
               height: 20,
               callout: { //在markers上展示地址名称
-                content: res.address,
+                content: '您当前位置:\n'+res.address,
                 color: '#fff',
                 display: 'ALWAYS',
                 padding: 5,

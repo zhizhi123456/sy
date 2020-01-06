@@ -10,13 +10,12 @@
 .main .listwraper {
     padding: 50rpx 0;
     display: inline-block;
-    height: 800rpx;
+    height: 880rpx;
     overflow-y: auto;
 }
 
 .main .van-sidebar {
-    width: 300rpx;
-    border-right: 6rpx solid #ddd;
+    display: inline;
 }
 
 .main .van-hairline--top-bottom:after {
@@ -27,16 +26,17 @@
     font-size: 36rpx;
     border-left: 10rpx solid transparent;
     padding: 40rpx 24rpx 40rpx 16rpx;
+    border-right: 1rpx solid #ccc;
 }
 
 .main .van-sidebar-item--selected {
-    border-color: teal;
+    border-left-color: teal;
     color: teal;
     font-weight: bold;
 }
 
 .main .personlist {
-    margin-left: 310rpx;
+    margin-left: 270rpx;
     padding-top: 50rpx;
 }
 
@@ -62,9 +62,13 @@
 }
 
 .p_dot {
+    width: 30rpx;
+    height: 30rpx;
     position: absolute;
-    top: 0;
-    left: -15rpx;
-    font-size: 48rpx;
-    color: teal;
+    top: 50%;
+    left: -35rpx;
+    margin-top: -35rpx;
+    background-color: teal;
+    border-radius: 50%;
+    border: 20rpx solid #fafafa;
 }

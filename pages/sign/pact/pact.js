@@ -1,9 +1,11 @@
 // pages/generalcontract/pact/pact.js
 import {
   querysign,
+  groupSign,
 } from '../../../service/getData.js';
 var app = getApp();
 var util = require("../../../utils/util");
+let item;
 Page({
   /**
    * 页面的初始数据
@@ -11,16 +13,7 @@ Page({
   data: {
     seach: '',
     loading: false,
-    val: 0,
-    pact: [{
-        text: '我的考勤打卡',
-        value: 0
-      },
-      // {
-      //   text: '我的考勤打卡',
-      //   value: 1
-      // }
-    ],
+    top: '我的考勤打卡',
     info: {
       Company: "",
       starttime: "请选择",
@@ -33,53 +26,25 @@ Page({
     pull: false,
     show: false,
     currentDate: new Date().getTime(),
-    currentDate1: new Date().getTime(),
     show_time: false,
     show_endtime: false,
     Token: "",
     TokenType: "",
     UserID: "",
     starttime: "",
-    endtime: ""
+    endtime: "",
+    hadNew: 1,
+    me: 0
   },
   // 返回
   return () {
-    util.returnMenu2(1004,"人员管理");
-  },
-  setSeach(e) {
-    // console.log(e)
-    this.setData({
-      seach: e.detail.value
-    })
-  }, 
-  // 模糊查询
-  seachInfo() {
-    wx.showLoading({
-      title: '加载中',
-    });
-    querysign({
-      Token: this.data.Token,
-      TokenType: this.data.TokenType,
-      UserID: this.data.UserID,
-      starttime: this.data.starttime,
-      endtime: this.data.endtime
-    }).then(res => {
-      console.log(res)
-      if (res.code == 10000) {
-        let item = res.Lists;
-        util.listData(item, app.globalData.department);
-
-        item.forEach(value => {
-          value.checkindate = value.checkindate.substring(0, 10)
-          // value.Checkintime = value.Checkintime.substring(10)
-          value.condition == "忘打卡" ? value.Checkintime = '' : value.condition
-        });
-        this.setData({
-          InfoList: item.reverse()
-        })
-        wx.hideLoading();
-      }
-    })
+    if (this.data.hadNew || this.data.me) {
+      util.returnMenu2(this.data.options.id || this.data.options.rid, this.data.options.title);
+    } else {
+      wx.redirectTo({
+        url: "/pages/section/section2?name=" + this.data.caption + '&dep=' + this.data.dep + '&deptxt=' + this.data.deptxt + '&userid=' + this.data.userid
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载
@@ -97,10 +62,111 @@ Page({
       "info.TokenType": "ww",
       "info.UserID": "c30735fb-7b21-4b6e-919c-0039d9c8945f",
     })
-    this.seachInfo()
+    if (options.id || options.rid) {
+      this.setData({
+        options: options
+      })
+    }
+    wx.showLoading({
+      title: '加载中',
+    });
 
+    if (options.userid) {
+      let info = this.data.info;
+      info.department = options.dep;
+      info.name = options.userid;
+      this.setData({
+        top: options.caption + '的考勤打卡',
+        hadNew: 0,
+        info,
+        departmenttext: options.deptxt,
+        userid: options.userid,
+        deptxt: options.deptxt,
+        caption: options.caption,
+        dep: options.dep
+      })
+      if (options.caption == '我') {
+        this.setData({
+          me: 1,
+        })
+      }
+      groupSign({
+        name: options.userid
+      }).then(res => {
+        if (res.code == 10000) {
+          item = res.Lists;
+          this.setData({
+            InfoList: item.reverse(),
+            item,
+            info: {},
+            departmenttext: ""
+          })
+          if (!this.data.hadNew) {
+            let info = this.data.info;
+            info.department = this.data.dep;
+            info.name = this.data.userid;
+            this.setData({
+              info,
+              departmenttext: this.data.deptxt
+            })
+          }
+          wx.hideLoading();
+        }
+      })
+    } else {
+      querysign({
+        Token: this.data.Token,
+        TokenType: this.data.TokenType,
+        UserID: this.data.UserID,
+        starttime: this.data.starttime,
+        endtime: this.data.endtime
+      }).then(res => {
+        // console.log(res)
+        if (res.code == 10000) {
+          let item = res.Lists;
+          util.listData(item, app.globalData.department);
+          item.forEach(value => {
+            value.checkindate = value.checkindate.substring(0, 10)
+            // value.Checkintime = value.Checkintime.substring(10)
+            value.condition == "忘打卡" ? value.Checkintime = '' : value.condition
+          });
+          this.setData({
+            InfoList: item.reverse()
+          })
+          wx.hideLoading();
+        }
+      })
+    }
   },
   meetplaceblur(e) {
+    let info = util.editInfo(e, this, e.detail.value);
+    this.setData({
+      info
+    })
+  },
+  // 部门
+  showPopup_0() {
+    if (this.data.hadNew) {
+      this.setData({
+        show_0: true
+      })
+    }
+  },
+  onClose_0() {
+    this.setData({
+      show_0: false
+    })
+  },
+  onConfirm_0(e) {
+    let info = util.editInfo(e, this, e.detail.value.value);
+    this.setData({
+      show_0: false,
+      info,
+      departmenttext: e.detail.value.text
+    })
+  },
+  // 创建人
+  nameblur(e) {
     let info = util.editInfo(e, this, e.detail.value);
     this.setData({
       info
@@ -158,8 +224,41 @@ Page({
   },
   // 组合查询
   seachqur() {
-
-    util.qgroupdeliver(querysign, this)
+    wx.showLoading({
+      title: '加载中',
+    });
+    if (this.data.info.department || this.data.info.name || this.data.info.startdate || this.data.info.enddate) {
+      groupSign(this.data.info).then(res => {
+        if (res.code == 10000) {
+          item = res.Lists;
+          this.setData({
+            InfoList: item.reverse(),
+            item,
+            info: {},
+            departmenttext: ""
+          })
+          if (!this.data.hadNew) {
+            let info = this.data.info;
+            info.department = this.data.dep;
+            info.name = this.data.userid;
+            this.setData({
+              info,
+              departmenttext: this.data.deptxt
+            })
+          }
+          wx.hideLoading();
+        }
+      })
+      this.setData({
+        show: false
+      })
+    } else(
+      wx.showToast({
+        title: '请至少输入一项内容',
+        icon: 'none',
+        duration: 3000
+      })
+    )
   },
 
 })

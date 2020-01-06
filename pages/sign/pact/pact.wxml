@@ -4,24 +4,16 @@
     <view class="header">
         <view class="title">
             <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
-            <navigator url="/pages/sign/new/new" hover-class="none" class="fr newCreate">
+            <navigator url="/pages/sign/new/new?rid={{options.id||options.rid}}&title={{options.title}}&{{userid?'userid='+userid+'&caption='+caption+'&dep='+dep+'&deptxt='+deptxt:''}}" hover-class="none" class="fr newCreate" wx:if="{{hadNew||me}}">
                 新建
             </navigator>
-            <view class="apply">
-                <van-dropdown-menu active-color="red">
-                    <van-dropdown-item value="{{val}}" options="{{pact}}" />
-                </van-dropdown-menu>
-            </view>
+            <view class="apply">{{top}}</view>
         </view>
         <view class="seach">
             <icon class="iconfont icon-fuxuananniu fl s-sort" bindtap="change"></icon>
-            <icon class="iconfont icon-sousuo fr" bindtap="change"></icon>
             <view class="data_list">
-                <!-- <input value="{{seach}}" bindblur="setSeach" /> -->
-                <view class="number" wx:if="{{!seach}}">
-                    <!-- <icon class="iconfont icon-sousuo"></icon> -->
+                <view class="number Nonumber">
                     <text wx:if="{{InfoList.length}}">共{{InfoList.length}}条</text>
-                    <text wx:else>搜索</text>
                 </view>
             </view>
         </view>
@@ -29,12 +21,7 @@
     <view class="main">
         <view class="list" wx:for="{{InfoList}}" wx:key="index">
             <navigator url="/pages/sign/detail/detail?id={{item.ID}}" hover-class="none">
-
-                <!-- <view>
-                    <text class="info">用户</text>
-                    <text>{{item.User}}</text>
-                </view> -->
-                   <view>
+                <view>
                     <text class="info">状态</text>
                     <text>{{item.classes}}</text>
                 </view>
@@ -46,7 +33,6 @@
                     <text class="info">打卡日期</text>
                     <text>{{item.Checkintime}}</text>
                 </view>
-             
                 <view>
                     <text class="info">考勤状态</text>
                     <text>{{item.condition}}</text>
@@ -60,28 +46,35 @@
             <van-toast id="van-toast" />
             <view class="seachif scroll-view" scroll-y="true">
                 <view class="main n_main check">
-                    <!-- <view class="check_item">
-                        <text class="kind">对方公司</text>
+                    <view class="seach_item">
                         <van-cell-group>
-                            <van-field data-name="Company" value="{{info.Company}}" placeholder="请输入" bind:blur="meetplaceblur" />
+                            <van-field value="{{departmenttext}}" placeholder="请选择" bindtap="showPopup_0" label="部门" disabled />
                         </van-cell-group>
-                    </view> -->
+                        <van-popup show="{{ show_0 }}" round position="bottom" bind:close="onClose_0">
+                            <van-picker data-name="department" show-toolbar columns="{{ sections }}" bind:cancel="onClose_0" bind:confirm="onConfirm_0" />
+                        </van-popup>
+                    </view>
+                    <view class="seach_item">
+                        <van-cell-group>
+                            <van-field data-name="name" value="{{info.name}}" placeholder="请输入" bind:blur="nameblur" label="创建人" disabled="{{!hadNew}}" />
+                        </van-cell-group>
+                    </view>
                     <view class="check_item">
                         <view class="kind">
                             <text>开始时间</text>
                         </view>
-                        <van-cell title="{{info.starttime?info.starttime:'请选择'}}" is-link bind:click="showPopup_time" class="time1" />
+                        <van-cell title="{{info.startdate?info.startdate:'请选择'}}" is-link bind:click="showPopup_time" class="time1" />
                         <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
-                            <van-datetime-picker data-name="starttime" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
+                            <van-datetime-picker data-name="startdate" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
                         </van-popup>
                     </view>
                     <view class="check_item">
                         <view class="kind">
                             <text>结束时间</text>
                         </view>
-                        <van-cell title="{{info.endtime?info.endtime:'请选择'}}" is-link bind:click="showPopup_endtime" class="time1" />
+                        <van-cell title="{{info.enddate?info.enddate:'请选择'}}" is-link bind:click="showPopup_endtime" class="time1" />
                         <van-popup show="{{ show_endtime }}" round position="bottom" bind:close="onClose_endtime">
-                            <van-datetime-picker data-name="endtime" value="{{ currentDate1 }}" bind:cancel="onClose_endtime" bind:confirm="onConfirm_endtime" />
+                            <van-datetime-picker data-name="enddate" value="{{ currentDate }}" bind:cancel="onClose_endtime" bind:confirm="onConfirm_endtime" />
                         </van-popup>
                     </view>
                     <view class="check_item check2">

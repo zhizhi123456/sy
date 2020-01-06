@@ -26,10 +26,9 @@ Page({
       wx.redirectTo({
         url: '/pages/' + this.data.nape + '/detail/detail?tab=c&id=' + this.data.returnid
       })
-    } else if (this.data.hadNew) {
-      util.returnPrev('cost')
     } else {
-      util.returnPrev('cost')
+      util.returnPrev('cost', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+        this.data.rid, this.data.title)
     }
   },
   /**
@@ -42,6 +41,18 @@ Page({
       this.setData({
         nape,
         returnid
+      })
+    }
+    if (options.userid) {
+      this.setData({
+        userid: options.userid,
+        caption: options.caption,
+        dep: options.dep,
+        deptxt: options.deptxt,
+        me: Number(options.me),
+        rid: options.rid,
+        title: options.title,
+        applyT: Number(options.applyT)
       })
     }
     if (options.hadNew) {
@@ -78,11 +89,13 @@ Page({
   // 工作流流转
   // 退回上步
   sendback() {
-    util.Triggerflow(this, 'return', 'charge', 'cost')
+    util.Triggerflow(this, 'return', 'charge', 'cost', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+      this.data.rid, this.data.title)
   },
   // 提交下步
   putin() {
-    util.Triggerflow(this, 'next', 'charge', 'cost')
+    util.Triggerflow(this, 'next', 'charge', 'cost', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+      this.data.rid, this.data.title)
   },
   // 删除
   delete() {
@@ -96,7 +109,8 @@ Page({
           icon: 'success',
           duration: 3000
         })
-        util.returnPrev('cost')
+        util.returnPrev('cost', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+          this.data.rid, this.data.title)
       }
     })
   },

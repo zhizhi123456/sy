@@ -2,8 +2,10 @@
 
 import {
   queryMenu,
+  getTaskTNUm
 } from "./../../service/getData";
 var app = getApp();
+let userinfo = wx.getStorageSync("myInfo");
 Page({
   /**
    * 页面的初始数据
@@ -188,8 +190,10 @@ Page({
 
         nametext: "我的申请",
         img: "icon-shenqing1 .red1",
-        path: "",
-        control: true //权限
+        path: "/pages/current/current/current",
+        control: true, //权限
+        three: true,
+        ANUm: true
       }, {
 
         nametext: "部门管理",
@@ -203,11 +207,12 @@ Page({
         img: "icon-renwu .green5",
         path: "/pages/current/current/current",
         control: true,
-        three: true
+        three: true,
+        TNUm: true
       }
     ],
     login: true,
-    exist:''
+    exist: ''
 
   },
   deal() {
@@ -324,39 +329,39 @@ Page({
           success(res) {
             if (res.data.ID) {
               that.setData({
-                exist:res.data.ID
+                exist: res.data.ID
               })
               var s = that.data.tags
-            
+
               var d = s.findIndex(a => {
                 // console.log(a)
                 return a.nametext == '我的/登录'
               })
               // console.log(d)
-              if(d>-1){
+              if (d > -1) {
                 s[d].nametext = '我的'
                 that.setData({
-                   tags:s
+                  tags: s
                 })
               }
-             
-              
+
+
             }
           },
-          fail(res){
+          fail(res) {
             var s = that.data.tags
             var d = s.findIndex(a => {
               return a.nametext == '我的/登录'
             })
-            if(d>-1){
+            if (d > -1) {
               s[d].nametext = '登录'
               that.setData({
-                tags:s
-             })
+                tags: s
+              })
             }
-           
+
           }
-    
+
         })
         wx.hideLoading()
 
@@ -393,7 +398,7 @@ Page({
 
     })
 
-    
+
   },
   // 90
   /**
@@ -418,7 +423,54 @@ Page({
     this.deal()
     this.screen()
 
- 
+    if (userinfo) {
+      getTaskTNUm({
+        UserName: userinfo.UserName
+      }).then(res => {
+        // console.log(res)
+        if (res.code == 10000) {
+          let item = res.List,
+            TaskTNUm = 0;
+          item.forEach(element => {
+            TaskTNUm += element.Number;
+          });
+          this.setData({
+            TaskTNUm
+          })
+        }
+      })
+    }
   }
 
 })
+
+
+// let item = [{
+//   Name: "分包项目",
+//   TableName: "subproject",
+//   Number: 1
+// }, {
+//   Name: "分包合同",
+//   TableName: "subcontact",
+//   Number: 1
+// }, {
+//   Name: "任务书",
+//   TableName: "prjassignbook",
+//   Number: 2
+// }, {
+//   Name: "费用",
+//   TableName: "charge",
+//   Number: 1
+// }, {
+//   Name: "领料申请",
+//   TableName: "getmaterial",
+//   Number: 1
+// }, {
+//   Name: "退料申请",
+//   TableName: "losematerial",
+//   Number: 3
+// }, {
+//   Name: "分包合同编号申请",
+//   TableName: "subprjcodeapply",
+//   Number: 1
+// }],

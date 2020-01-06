@@ -14,7 +14,7 @@ Page({
   data: {
     departmenttext: '请选择',
     info: {
-      belongtoman:''
+      belongtoman: ''
     },
     currentDate: new Date().getTime(),
     show: false,
@@ -162,7 +162,7 @@ Page({
   },
   confirm() {
     // console.log(this.data.info)
-    if (this.data.info.chargename&&this.data.info.department&&this.data.info.Companytitle&&this.data.info.usechargeman) {
+    if (this.data.info.chargename && this.data.info.department && this.data.info.Companytitle && this.data.info.usechargeman) {
       let info = this.data.info;
       util.checkContent(info, this);
       this.setData({
@@ -176,7 +176,8 @@ Page({
             icon: 'success',
             duration: 3000
           })
-          util.returnPrev('cost');
+          util.returnPrev('cost', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+            this.data.rid, this.data.title);
         }
       })
     } else {
@@ -188,11 +189,13 @@ Page({
   },
   // 返回
   return () {
-    util.returnPrev('cost');
+    util.returnPrev('cost', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+      this.data.rid, this.data.title);
   },
   // 编辑页面的确定和返回
   editreturn() {
-    util.returnPrev('cost', this);
+    util.returnPrev('cost', this, this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+      this.data.rid, this.data.title);
   },
   editconfirm() {
     let info = this.data.info;
@@ -209,7 +212,8 @@ Page({
           icon: 'success',
           duration: 3000
         })
-        util.returnPrev('cost', this);
+        util.returnPrev('cost', this, this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+          this.data.rid, this.data.title);
       }
     })
   },
@@ -217,6 +221,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (options.userid) {
+      this.setData({
+        userid: options.userid,
+        caption: options.caption,
+        dep: options.dep,
+        deptxt: options.deptxt,
+        rid: options.rid,
+        title: options.title
+      })
+    }
     this.setData({
       firms: app.globalData.Companytitle,
       totals: app.globalData.MainProject,

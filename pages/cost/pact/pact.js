@@ -27,15 +27,23 @@ Page({
     item: [],
     pages: 1,
     hadNew: 1,
-    show_2:false,
-    show_3:false,
+    show_2: false,
+    show_3: false,
+    me: 0,
+    applyT: 0
   },
   // 返回
   return () {
-    if (this.data.hadNew) {
-      util.returnMenu2(this.data.options.id, this.data.options.title);
+    if (this.data.hadNew || this.data.me) {
+      util.returnMenu2(this.data.options.id || this.data.options.rid, this.data.options.title);
+    } else if (this.data.applyT) {
+      wx.redirectTo({
+        url: "/pages/current/current/current?title=" + this.data.options.title + '&id=' + (this.data.options.id || this.data.options.rid)
+      });
     } else {
-      util.backprev();
+      wx.redirectTo({
+        url: "/pages/section/section2?name=" + this.data.caption + '&dep=' + this.data.dep + '&deptxt=' + this.data.deptxt + '&userid=' + this.data.userid
+      });
     }
   },
   setSeach(e) {
@@ -91,7 +99,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if (options.id) {
+    if (options.id || options.rid) {
       this.setData({
         options: options
       })
@@ -105,13 +113,25 @@ Page({
       info.departmentID = options.dep;
       info.chargemanName = options.userid;
       this.setData({
-        top: options.caption + '的分包项目',
+        top: options.caption + '的费用',
         hadNew: 0,
         info,
         departmenttext: options.deptxt,
         userid: options.userid,
-        deptxt: options.deptxt
+        deptxt: options.deptxt,
+        caption: options.caption,
+        dep: options.dep
       })
+      if (options.caption == '我') {
+        this.setData({
+          me: 1,
+        })
+      }
+      if (options.caption == '我申请') {
+        this.setData({
+          applyT: 1
+        })
+      }
       // 综合查询
       groupCost({
         chargemanName: options.userid

@@ -17,23 +17,50 @@ Page({
    * 页面的初始数据
    */
   data: {
-    track: []
+    track: [],
+    hadNew: 1
   },
   return () {
-    wx.navigateBack({
-      delta: 1
-    })
+    if (this.data.hadNew || this.data.me) {
+      wx.redirectTo({
+        url: "/pages/track/track?id=" + (this.data.options.rid || this.data.options.id) + '&title=' + this.data.options.title
+      })
+    } else {
+      wx.redirectTo({
+        url: "/pages/track/track?caption=" + this.data.caption + '&dep=' + this.data.dep + '&deptxt=' + this.data.deptxt + '&userid=' + this.data.userid 
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     // console.log(options)
-    if (options) {
+    if (options.id || options.rid) {
       this.setData({
-        person: options.person
+        options: options
       })
-      track(options).then(res => {
+    }
+    if (options.userid) {
+      this.setData({
+        hadNew: 0,
+        person: options.caption,
+        userid: options.userid,
+        deptxt: options.deptxt,
+        caption: options.caption,
+        dep: options.dep
+      })
+    }
+    if (options.caption == '我') {
+      this.setData({
+        me: 1,
+      })
+    }
+    if (options.UserID) {
+      track({
+        UserID: options.UserID,
+        Todaydate: options.Todaydate
+      }).then(res => {
         // console.log(res)
         item = res.List;
         if (res.code == 10000) {

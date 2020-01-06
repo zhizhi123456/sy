@@ -1,6 +1,7 @@
 // pages/secondarys/secondarys.js
 import {
   queryMenu,
+  getdep
 } from "./../../service/getData";
 var app = getApp();
 var util = require("../../utils/util");
@@ -10,7 +11,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    id: "",
+    rid: "",
     title: "",
     chuancan: 1003,
     small: [{
@@ -461,19 +462,19 @@ Page({
       {
         nametext: "我的分包项目",
         img: "icon-xiangmu1 blue",
-        path: "",
+        path: '/pages/subcontract/pact/pact',
         control: true,
       },
       {
         nametext: "我的分包合同",
         img: "icon-hetong2 blue2",
-        path: "",
+        path: "/pages/contract/pact/pact",
         control: true,
       },
       {
         nametext: "我的费用",
         img: "icon-feiyong2 blue4",
-        path: "",
+        path: "/pages/cost/pact/pact",
         control: true,
       },
       {
@@ -485,13 +486,13 @@ Page({
       {
         nametext: "我的轨迹",
         img: "icon-guiji1 blue5",
-        path: "",
+        path: "/pages/track/track",
         control: true,
       },
       {
         nametext: "我的定位",
         img: "icon-duomeitiicon- green2",
-        path: "",
+        path: "/pages/location/location",
         control: true,
       },
       {
@@ -518,7 +519,7 @@ Page({
         path: "",
         control: true,
       },
-      
+
       {
         nametext: "申请任务书",
         img: "icon-lunkuodasan- blue10",
@@ -612,28 +613,53 @@ Page({
     })
   },
   back() {
-    // console.log(this.data.chuancan)
     if (this.data.chuancan == "wode" || this.data.chuancan == "xiangmuhetong") {
       wx.navigateTo({
         url: '/pages/contract/contract'
       })
       console.log(1)
+    } else if (this.data.chuancan == 1055) {
+      util.returnMenu(1002);
     } else {
       util.returnMenu();
-      // wx.reLaunch({
-      //   url: "/pages/contracts/contracts"
-      // })
-      // wx.navigateBack({
-      //   delta: 1
-      // })
     }
 
+  },
+  checkperson() {
+    if (!this.data.userinfo) {
+      wx.showToast({
+        title: '请登录',
+        icon: 'none',
+        duration: 2000
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this
+    console.log(options)
+    let userinfo = wx.getStorageSync("myInfo");
+    if (userinfo) {
+      getdep({
+        UserName: userinfo.UserName
+      }).then(res => {
+        // console.log(res);
+        let resData = JSON.parse(res);
+        this.setData({
+          userinfo,
+        })
+        if (options.id == 1055) {
+          this.setData({
+            userid: userinfo.UserName,
+            caption: '我',
+            dep: resData[0].ID,
+            deptxt: resData[0].techofficename,
+          })
+        }
+      })
+    }
+    var that = this;
     wx.getStorage({
       key: 'myInfo',
       success(res) {
@@ -642,9 +668,7 @@ Page({
           id: res.data.ID
         })
       }
-
     })
-    console.log(options)
     // console.log(options.title)
     // 页面初始加载 检测传入id 传入传参
     if (!options.id) {
@@ -655,8 +679,6 @@ Page({
       this.setData({
         chuancan: options.id,
         title: options.title
-
-        
       })
     }
 

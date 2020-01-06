@@ -1,1 +1,4 @@
 /* pages/current/current/current.wxss */
+.cmain {
+    background-color: white;
+}
