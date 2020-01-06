@@ -16,27 +16,42 @@ Page({
     tab: 'a',
     returned: true,
     isreturn: true,
-    hadNew:1
+    hadNew: 1,
+    hadMy: 0
   },
   // 返回
   return () {
-    if(this.data.hadNew){
-      util.returnPrev('task')
-    }else{
-      util.retPrev('task')
+    if (this.data.hadNew) {
+      if (this.data.hadMy) {
+        wx.navigateBack({
+          url: '/pages/task/pact/pact?hadMy=' + this.data.hadMy
+        })
+      } else {
+        util.returnPrev('task')
+      }
+    } else {
+      wx.navigateBack({
+        url: "/pages/task/pact/pact"
+      })
     }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
+    if (options.hadMy) {
+      this.setData({
+        hadMy: options.hadMy
+      })
+    }
     wx.showLoading({
       title: '加载中',
     });
-    if(options.hadNew == '0'){
-     this.setData({
-       hadNew:false
-     })
+    if (options.hadNew == '0') {
+      this.setData({
+        hadNew: false
+      })
     }
     if (options.id) {
       referTask({
@@ -65,11 +80,13 @@ Page({
   // 工作流流转
   // 退回上步
   sendback() {
-    util.Triggerflow(this, 'return', 'prjassignbook', 'task')
+    util.Triggerflow(this, 'return', 'prjassignbook', 'task',this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+    this.data.rid, this.data.title,this.data.hadMy)
   },
   // 提交下步
   putin() {
-    util.Triggerflow(this, 'next', 'prjassignbook', 'task')
+    util.Triggerflow(this, 'next', 'prjassignbook', 'task',this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+    this.data.rid, this.data.title,this.data.hadMy)
   },
   // 删除
   delete() {
@@ -83,54 +100,16 @@ Page({
           icon: 'success',
           duration: 3000
         })
-        util.returnPrev('task')
+      
+          if (this.data.hadMy) {
+            wx.redirectTo({
+              url: '/pages/task/pact/pact?hadMy=' + this.data.hadMy
+            })
+          } else {
+            util.returnPrev('task')
+          }
+      
       }
     })
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {},
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

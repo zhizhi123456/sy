@@ -4,7 +4,7 @@
     <view class="header">
         <view class="title">
             <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
-            <navigator url="/pages/task/new/new" hover-class="none" class="fr newCreate" wx:if="{{hadNew}}">
+            <navigator url="/pages/task/new/new?hadMy={{hadMy}}" hover-class="none" class="fr newCreate" wx:if="{{hadNew || hadMy}}">
                 新建
             </navigator>
             <view class="apply">{{top}}</view>
@@ -72,7 +72,7 @@
     </view>
     <view class="main">
         <view class="list" wx:for="{{InfoList}}" wx:key="index">
-            <navigator url="/pages/task/detail/detail?id={{item.ID}}&hadNew={{hadNew}}" hover-class="none">
+            <navigator url="/pages/task/detail/detail?id={{item.ID}}&hadNew={{hadNew}}&hadMy={{hadMy}}" hover-class="none">
                 <view>
                     <text class="caption">{{item.proassignbookcode}}</text>
                 </view>

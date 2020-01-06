@@ -23,14 +23,22 @@ Page({
     show_3: false,
     show_time: false,
     show_endtime: false,
-    hadNew:1
+    hadNew: 1,
+    hadMy: 0,
+    UserName: ''
   },
   // 返回
   return () {
     if (this.data.hadNew) {
-      util.returnMenu(1001);
+      if (this.data.hadMy) {
+        util.returnMenu2(1055, '我的信息');
+      } else {
+        util.returnMenu(1001);
+      }
     } else {
-      util.backprev();
+
+      wx.navigateBack();
+
     }
   },
   setSeach(e) {
@@ -41,7 +49,7 @@ Page({
   },
   // 模糊查询
   seachInfo() {
-    if (this.data.hadNew) {
+    if (this.data.hadNew != '0' && this.data.hadMy!='1') {
       list = [];
       wx.showLoading({
         title: '加载中',
@@ -73,7 +81,7 @@ Page({
       this.setData({
         info
       })
-      util.qgroupdeliver(groupTask, this,this.data.hadNew)
+      util.qgroupdeliver(groupTask, this, this.data.hadNew,this.data.hadMy)
     }
 
   },
@@ -82,11 +90,33 @@ Page({
    */
   onLoad: function (options) {
     console.log(options)
+    var that = this
+    if (options.hadMy) {
+      console.log("10")
+      wx.getStorage({
+        key: 'myInfo',
+        success(res) {
+          console.log(res.data)
+          // info.departmentID = options.dep;
+          let info = that.data.info;
+          info.chargemanName = res.data.UserName;
+          that.setData({
+            top: '我的任务书',
+            info,
+            hadMy: 1,
+            userid:res.data.UserName
+          })
+          util.qgroupdeliver(groupTask, that, that.data.hadNew, that.data.hadMy)
+        }
+      })
+   
+    }
     list = [];
     wx.showLoading({
       title: '加载中',
     });
     if (options.userid) {
+      console.log("1")
       let info = this.data.info;
       info.departmentID = options.dep;
       info.chargemanName = options.userid;
@@ -99,14 +129,16 @@ Page({
         deptxt: options.deptxt,
       })
       var that = this
-      util.qgroupdeliver(groupTask, this,this.data.hadNew)
-    }else{
+      util.qgroupdeliver(groupTask, this, this.data.hadNew)
+    }
+    if (options.hadNew != '0' && options.hadMy !='1') {
+      console.log("we")
       this.setData({
-        seach:''
+        seach: ''
       })
       this.seachInfo()
     }
-  
+
     if (app.globalData.CountItem) {
       this.setData({
         props: app.globalData.Projectprop,
@@ -142,7 +174,10 @@ Page({
     this.setData({
       pages: 1
     })
-    if(!this.data.hadNew){
+    console.log(this.data.hadNew)
+    console.log(this.data.hadMy)
+    console.log(this.data.hadNew == '0' || this.data.hadMy=='1')
+    if (this.data.hadNew == '0' || this.data.hadMy=='1') {
       let info = this.data.info;
       info.departmentID = this.data.deptxt;
       info.chargemanName = this.data.userid;
@@ -161,7 +196,7 @@ Page({
             info: {},
           })
           wx.hideLoading();
-          if(!this.data.hadNew){
+          if (this.data.hadNew == '0' || this.data.hadMy=='1') {
             let info = this.data.info;
             info.departmentID = this.data.deptxt;
             info.chargemanName = this.data.userid;

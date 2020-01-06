@@ -32,7 +32,9 @@ Page({
     if(this.data.hadNew){
       util.returnPrev('design')
     }else{
-      util.retPrev('design')
+      wx.navigateBack({
+        url: "/pages/design/pact/pact"
+      })
     }
   },
   /**

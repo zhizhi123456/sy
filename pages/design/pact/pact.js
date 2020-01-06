@@ -46,7 +46,7 @@ Page({
     if (this.data.hadNew) {
       util.returnMenu();
     } else {
-      util.backprev();
+      wx.navigateBack();
     }
   },
   setSeach(e) {

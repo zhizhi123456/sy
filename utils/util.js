@@ -1081,7 +1081,7 @@ const checkState = (key, id, chart, bh) => {
   }
 }
 // 工作流流转
-const Triggerflow = (key, direction, sheet, piece,id, cap, dep, dert, rid, tit) => {
+const Triggerflow = (key, direction, sheet, piece,id, cap, dep, dert, rid, tit,hadMy) => {
   let userinfo = wx.getStorageSync("myInfo");
   if (userinfo) {
     flow({
@@ -1116,7 +1116,7 @@ const Triggerflow = (key, direction, sheet, piece,id, cap, dep, dert, rid, tit) 
         setTimeout(function () {
           wx.redirectTo({
             // url: '/pages/' + piece + '/detail/detail?id=' + that.data.info.ID + "&tab=b",
-            url: `/pages/${piece}/detail/detail?tab=b&id=${that.data.info.ID}${id?'&userid='+id+'&caption='+cap+'&dep='+dep+'&deptxt='+dert+'&rid='+rid+'&title='+tit:""}`
+            url: `/pages/${piece}/detail/detail?tab=b&id=${that.data.info.ID}${id?'&userid='+id+'&caption='+cap+'&dep='+dep+'&deptxt='+dert+'&rid='+rid+'&title='+tit:""+'&hadMy='+ hadMy}`
           })
         }, 1000)
       } else {
@@ -1720,7 +1720,7 @@ const introlist = (list, that) => {
   }
 }
 // 组合查询
-const qgroupdeliver = (funcname, that, hadNew) => {
+const qgroupdeliver = (funcname, that, hadNew,hadMy) => {
   var app = getApp();
   var zhen = []
   let info = that.data.info;
@@ -1794,7 +1794,7 @@ const qgroupdeliver = (funcname, that, hadNew) => {
 
       if (res.code == 10000) {
         //  如果是进入部门看
-        if (hadNew != '0') {
+        if (hadNew != '0' && hadMy!='1') {
           wx.showToast({
             title: '搜索成功',
             icon: 'success',
@@ -1834,7 +1834,7 @@ const qgroupdeliver = (funcname, that, hadNew) => {
         })
 
         wx.hideLoading();
-        if (hadNew != '0') {
+        if (hadNew != '0' && hadMy!='1') {
           for (var key in info) {
             info[key] = ''
           }
@@ -1852,46 +1852,35 @@ const qgroupdeliver = (funcname, that, hadNew) => {
             info
           })
         }
-      // });
-  //     that.setData({
-  //       InfoList: item.reverse()
-  //     })
+      that.setData({
+        InfoList: item.reverse()
+      })
+      wx.hideLoading();
+      } else {
+        // 请求失败
+        let info = that.data.info;
+        if (hadNew == '0' || hadMy=='1') {
+          // 进入部门看
+          for (var key in info) {
+            if (!info.chargemanName && !info.designman) {
+              info[key] = ''
+            }
+          }
+          info.picurl = [];
+          that.setData({
+            info
+          })
+        } else {
 
-  //     wx.hideLoading();
-  //   } else {
-  //     let info = that.data.info;
-  //     info.picurl = [];
-  //     that.setData({
-  //       info
-  //     })
-  //   }
-  // })
-  //       // console.log(info)
-  //     } else {
-  //       // 请求失败
-  //       let info = that.data.info;
-  //       if (hadNew == '0') {
-  //         // 进入部门看
-  //         for (var key in info) {
-  //           if (!info.chargemanName && !info.designman) {
-  //             info[key] = ''
-  //           }
-  //         }
-  //         info.picurl = [];
-  //         that.setData({
-  //           info
-  //         })
-  //       } else {
-
-  //         for (var key in info) {
-  //           info[key] = ''
-  //         }
-  //         info.picurl = [];
-  //         that.setData({
-  //           info
-  //         })
-  //       }
-  //       // console.log(info)
+          for (var key in info) {
+            info[key] = ''
+          }
+          info.picurl = [];
+          that.setData({
+            info
+          })
+        }
+        // console.log(info)
 
 
       }

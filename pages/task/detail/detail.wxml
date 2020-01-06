@@ -125,7 +125,7 @@
             <text>退回上步</text>
         </view>
         <view wx:if="{{hadNew}}">
-            <navigator url="/pages/task/new/new?id={{info.ID}}" hover-class="none" >
+            <navigator url="/pages/task/new/new?id={{info.ID}}&hadMy={{hadMy}}" hover-class="none" >
                 <icon class="iconfont icon-bianji"></icon>
                 <text>编辑</text>
             </navigator>

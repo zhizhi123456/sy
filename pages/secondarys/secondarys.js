@@ -496,6 +496,19 @@ Page({
         control: true,
       },
       {
+
+        nametext: "我的任务书",
+        img: "icon-renwu green3",
+        path: "/pages/task/pact/pact?hadMy=1",
+        control: true //权限
+      },
+      {
+        nametext: "我的设计任务",
+        img: "icon-lunkuodasan- .green4",
+        path: "/pages/design/pact/pact?hadMy=1",
+        control: true //权限
+      },
+      {
         nametext: "申请领料",
         img: "icon-yuancailiao blue8",
         path: "",
