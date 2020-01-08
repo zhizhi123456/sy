@@ -666,4 +666,75 @@ van-checkbox {
 .seach .van-field__input--disabled {
     color: #333;
 }
+/* 菜单样式 */
+.header {
+    height: 100rpx;
+    line-height: 100rpx;
+    text-align: center;
+    background-color: teal;
+    /* position: relative; */
+  }
+  
+  .header.icon1 {
+    font-size: 50rpx;
+    position: absolute;
+    right: 26rpx;
+    top: 30rpx;
+  }
+  
+  .list {
+    margin: 100rpx 0 120rpx 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    font-size: 28rpx;
+  }
+  
+  .list>.box {
+    width: 185rpx;
+    height: 185rpx;
+    /* border: 1px solid #cccc; */
+    margin: 30rpx 31rpx 10rpx;
+    position: relative;
+    text-align: center;
+    padding: 20rpx 0;
+    box-sizing: border-box;
+    border-radius: 20rpx;
+    overflow: hidden;
+  }
+  
+  .list>.box .icon {
+    margin: 0 auto;
+  }
+  
+  .list text {
+    display: inline-block;
+    width: 100%;
+  }
+  
+  .list>.box navigator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 10;
+  }
+  
+  .list>.box text {
+    position: absolute;
+    bottom: -9rpx;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .list .icon {
+    font-size: 78rpx;
+    margin: 0 auto;
+    width: 100rpx;
+    height: 90rpx;
+    background-color: #419e9e;
+    color: white;
+    padding: 10rpx;
+    border-radius: 10rpx;
+  }
 

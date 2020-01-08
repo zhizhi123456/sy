@@ -184,10 +184,8 @@ Page({
       }, {
         nametext: "我的信息",
         img: "icon-gerenzhongxinyewodexinxi  yellow1",
-        path: "/pages/section/section2?my=1",
-        control: true ,//权限，
-        // three:true
-        
+        path: "pages/Personal/pact/pact",
+        control: true //权限
       }, {
 
         nametext: "我的申请",
@@ -311,7 +309,19 @@ Page({
         // console.log(zong)
         this.setData({
           lists: zong
-        })    
+        })
+        // 测试
+        // this.setData({
+        //   lists: this.data.list.reverse()
+        // })
+
+        for (var s in this.data.tag) {
+          if (this.data.tag[s].ID == this.data.num) {
+            this.setData({
+              title: this.data.tag[s].nametext
+            })
+          }
+        }
         var that = this
         // console.log(that.data.tags)
         wx.getStorage({
@@ -322,7 +332,6 @@ Page({
                 exist: res.data.ID
               })
               var s = that.data.tags
-
               var d = s.findIndex(a => {
                 // console.log(a)
                 return a.nametext == '我的/登录'
@@ -334,10 +343,21 @@ Page({
                   tags: s
                 })
               }
-
-
-              that.setTag()
-             
+              if (that.data.num == 1002) {
+                let item = that.data.lists;
+                item.shift();
+                item.push({
+                  nametext: "注销登录",
+                  img: "icon-tuichu blue4",
+                  path: "/",
+                  control: true, //权限
+                  three: true,
+                  out: true
+                });
+                that.setData({
+                  lists: item
+                })
+              }
             }
           },
           fail(res) {
@@ -352,8 +372,6 @@ Page({
               })
             }
 
-            that.setTag()
-           
           }
 
         })
@@ -367,7 +385,6 @@ Page({
     this.setData({
       num: i.currentTarget.dataset.change
     })
-    // console.log(this.data.num)
     this.screen()
   },
   task() {
@@ -377,6 +394,10 @@ Page({
   },
   // 判断登录
   log() {
+    // wx.setStorage({
+    //   key:"key",
+    //   data:"value"
+    // }) 
     var that = this
     wx.getStorage({
       key: 'myInfo',
@@ -388,27 +409,35 @@ Page({
       }
 
     })
-
   },
-  setTag(){
-    for (var s in this.data.tags) {
-      if (this.data.tags[s].ID == this.data.num) {
-        this.setData({
-          title: this.data.tags[s].nametext
-        })
+  out() {
+    wx.showModal({
+      content: '是否登出当前账号？',
+      success(res) {
+        if (res.confirm) {
+          // console.log('用户点击确定')
+          wx.removeStorageSync("myInfo");
+          wx.redirectTo({
+            url: '/pages/login/login'
+          })
+        }
       }
-    }
+    })
   },
   // 90
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    userinfo=wx.getStorageSync("myInfo")
+    // console.log(options)
     this.log() //判断是否登录
+    // console.log(options.grading)
     if (options.grading !== undefined && options.grading !== "undefined") {
       this.setData({
         num: options.grading
       })
+      // console.log("1")
     } else {
       this.setData({
         num: 1000,

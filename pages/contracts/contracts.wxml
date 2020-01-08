@@ -19,15 +19,13 @@
       <icon class="{{' red  icon iconfont '+ item.img + (item.control ?'':' c') }}"></icon>
       <text class="{{item.control ?'':'c'}}">{{item.nametext}}</text>
       <!-- <navigator url="{{ item.three?item.path +'?menuId='+ item.menuId:(item.control ? '/pages/secondarys/secondarys?id='+item.ID+'&title='+item.nametext :'#')}}"></navigator> -->
-      <!-- <navigator url="{{(!item.control)?'':(item.three?(item.path +'?menuId='+ item.menuId+'&id='+item.ID+'&title='+item.nametext):('/pages/secondarys/secondarys?id='+item.ID+'&title='+item.nametext))}}"></navigator> -->
-      <navigator url="{{(!item.control)?'':(item.three?(item.path +'?menuId='+ item.menuId):('/pages/secondarys/secondarys?id='+item.ID+'&title='+item.nametext+'&primarymarket='+num))}}"></navigator>
+      <navigator bindtap="{{item.out?'out':''}}" url="{{(!item.control)?'':(item.three?(item.path +'?menuId='+ item.menuId+'&id='+item.ID+'&title='+item.nametext):('/pages/secondarys/secondarys?id='+item.ID+'&title='+item.nametext))}}"></navigator>
     </view>
   </view>
   <!-- tabar -->
   <view class="tabarcontent">
     <view class="tabar">
-      <view class="{{'box'+ (num==item.ID?' active':'')}}" wx:for="{{tags}}" wx:key='*this' catchtap="change" data-change="{{item.ID}}">
-        <!-- wx:if="{{TaskTNUm||applyNUM}}" -->
+      <view class="{{'box'+ (num==item.ID?' active':'')}}" wx:for="{{tags}}" wx:key='index' catchtap="change" data-change="{{item.ID}}">
         <van-tag wx:if="{{item.ID=='1002'&&(TaskTNUm||applyNUM)}}" round type="danger" class="HINT">
           new
         </van-tag>

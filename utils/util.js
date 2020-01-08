@@ -1523,11 +1523,25 @@ const intro = (data, that) => {
     if (s.text == data.MemberName) {
       data.MemberName = s.value
     }
+    if (s.text == data.applyman) {
+      data.applyman = s.value
+    }
 
   })
   app.globalData.Ifwinbidlist.forEach(s => {
     if (s.text == data.ifwinbid) {
       data.ifwinbid = s.value
+    }
+  })
+   // 总包项目
+   app.globalData.projectall.forEach(s => {
+    if (s.text == data.itemnumber) {
+      data.itemnumber = s.value
+    }
+  })
+  app.globalData.YesOrNo1.forEach(s=>{
+    if (s.text == data.ifpurchase) {
+      data.ifpurchase = s.value
     }
   })
 }
@@ -1681,7 +1695,9 @@ const outflow = (data, that) => {
     if (s.value == data.MemberName) {
       data.MemberName = s.text
     }
-
+    if (s.value == data.applyman) {
+      data.applyman = s.text
+    }
 
   })
   app.globalData.Ifwinbidlist.forEach(s => {
@@ -1695,11 +1711,23 @@ const outflow = (data, that) => {
       data.ConstructionTeamID = s.text
     }
   })
+  // 总包项目
+  app.globalData.projectall.forEach(s => {
+    if (s.value == data.itemnumber) {
+      data.itemnumber = s.text
+    }
+  })
+  // 
+  app.globalData.YesOrNo1.forEach(s=>{
+    if (s.value == data.ifpurchase) {
+      data.ifpurchase = s.text
+    }
+  })
 
 }
 const outflowlist = (list, that) => {
   // 合同签订情况
-  var that = this
+
   if (list) {
     list.forEach(data => {
       // console.log(data)
@@ -1724,7 +1752,7 @@ const qgroupdeliver = (funcname, that, hadNew,hadMy) => {
   var app = getApp();
   var zhen = []
   let info = that.data.info;
-  // console.log(info)
+  console.log(info)
   for (var t in info) {
     if (info[t]) {
       zhen.push(true)
@@ -1844,7 +1872,8 @@ const qgroupdeliver = (funcname, that, hadNew,hadMy) => {
         } else {
           // 进入部门看
           for (var key in info) {
-            if (!info.chargemanName && !info.designman) {
+            // console.log(key)
+            if(!(key == 'chargemanName')&&!(key =='designman')){
               info[key] = ''
             }
           }
@@ -1862,7 +1891,7 @@ const qgroupdeliver = (funcname, that, hadNew,hadMy) => {
         if (hadNew == '0' || hadMy=='1') {
           // 进入部门看
           for (var key in info) {
-            if (!info.chargemanName && !info.designman) {
+            if(!(key == 'chargemanName')&&!(key =='designman')){
               info[key] = ''
             }
           }

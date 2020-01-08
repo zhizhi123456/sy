@@ -183,7 +183,6 @@ Page({
       // 如果有详细表的情况下
       if (this.data.materials[0]) {
         var materials = this.data.materials;
-
         for (let i in materials) {
           if (info[i] == "请选择") {
             info[i] = ""

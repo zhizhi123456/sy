@@ -73,7 +73,7 @@
     </view>
     <view class="footer" wx:if="{{hadNew}}">
         <view >
-            <navigator url="/pages/design/new/new?id={{info.ID}}" hover-class="none">
+            <navigator url="/pages/design/new/new?id={{info.ID}}&hadMy={{hadMy}}" hover-class="none">
                 <icon class="iconfont icon-bianji"></icon>
                 <text>编辑</text>
             </navigator>

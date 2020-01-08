@@ -33,7 +33,7 @@
         </van-sidebar>
         <view class="personlist" wx:if="{{employee[0]}}">
             <block wx:for="{{employee}}" wx:key="index">
-                <navigator url="/pages/corps/section2?name={{item.text}}&userid={{item.MemberName}}">
+                <navigator url="/pages/corps/section2?name={{item.text}}&userid={{item.MemberName}}&title={{name}}">
                 <!-- name={{item.text}}&userid={{item.value}}&dep={{dep}}&deptxt={{deptxt}} -->
                     <view class="p_wdot">
                         <text class="p_dot">-●</text>

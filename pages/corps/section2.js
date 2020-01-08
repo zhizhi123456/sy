@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    title:"",
     menu: [{
         name: "分包项目",
         menuId: null,
@@ -61,8 +62,10 @@ Page({
     if (this.data.caption == "我") {
       util.returnMenu();
     } else {
-      wx.navigateBack({
-        url: "/pages/corps/members/members"
+      // console.log(this.data.title)
+      wx.redirectTo({
+    
+        url: "/pages/corps/members/members?name="+this.data.title
       })
     }
   },
@@ -76,7 +79,8 @@ Page({
         caption: options.name,
         userid: options.userid,
         dep: options.dep,
-        deptxt: options.deptxt
+        deptxt: options.deptxt,
+        title:options.title
       })
     }
   },

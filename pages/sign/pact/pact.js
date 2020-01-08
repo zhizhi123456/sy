@@ -52,16 +52,16 @@ Page({
   onLoad: function (options) {
     // 获取到  userid  token  tokrntype  开始时间 结束时间  设置给data
     // 获取到  userid  token  tokrntype   设置给info
-    this.setData({
-      Token: "ww",
-      TokenType: "ww",
-      UserID: "c30735fb-7b21-4b6e-919c-0039d9c8945f",
-      starttime: "2017-12-12",
-      endtime: "2060-12-12",
-      "info.Token": "ww",
-      "info.TokenType": "ww",
-      "info.UserID": "c30735fb-7b21-4b6e-919c-0039d9c8945f",
-    })
+    // this.setData({
+    //   Token: "ww",
+    //   TokenType: "ww",
+    //   UserID: "c30735fb-7b21-4b6e-919c-0039d9c8945f",
+    //   starttime: "2017-12-12",
+    //   endtime: "2060-12-12",
+    //   "info.Token": "ww",
+    //   "info.TokenType": "ww",
+    //   "info.UserID": "c30735fb-7b21-4b6e-919c-0039d9c8945f",
+    // })
     if (options.id || options.rid) {
       this.setData({
         options: options

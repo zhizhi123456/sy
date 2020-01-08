@@ -154,10 +154,8 @@ Page({
           wx.setStorageSync("myInfo", res.Item)
           wx.setStorageSync("username",this.data.username)
           wx.setStorageSync("password",this.data.password)
-          // 跳转到个人中心
-          wx.reLaunch({
-            url: '/pages/mine/mine'
-          })
+          // 跳转到首页
+          util.returnMenu();
         } else {
           wx.showToast({
             title: '用户名或密码错误',

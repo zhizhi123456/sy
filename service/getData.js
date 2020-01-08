@@ -817,3 +817,81 @@ export const getTaskTNUm = (params) => http.post("http://192.168.2.125:88/api/Ta
 export const getTaskList = (params) => http.post("http://192.168.2.125:88/api/TaskList/TaskList", params);
 // 申请
 export const getapply = (params) => http.post("http://192.168.2.125:88/api/TaskList/TaskApply", params);
+
+
+// 申购
+// 查询
+export const queryapply = (params) => http.post("http://192.168.2.148:88/api/applybuyform/Query", params);
+// 添加
+export const addapply = (params) => http.post("http://192.168.2.148:88/api/applybuyform/Insert", params);
+// 根据id查询
+export const detailapply = (params) => http.post("http://192.168.2.148:88/api/applybuyform/Detail", params);
+// 更新
+export const updateapply = (params) =>  http.post("http://192.168.2.148:88/api/applybuyform/Update", params);
+// 删除
+export const delapply = (params) => http.post("http://192.168.2.148:88/api/applybuyform/Delete", params);
+// 综合查询
+export const qgroupapply = (params) =>  http.post("http://192.168.2.148:88/api/applybuyform/Querygroup", params);
+// 申购明细
+// 查询
+export const queryapplysmall = (params) => http.post("http://192.168.2.148:88/api/applybuyforminfo/Query", params);
+// 添加
+export const addapplysmall = (params) => http.post("http://192.168.2.148:88/api/applybuyforminfo/Insert", params);
+// 根据id查询
+export const detailapplysmall = (params) => http.post("http://192.168.2.148:88/api/applybuyforminfo/Detail", params);
+// 更新
+export const updateapplysmall = (params) =>http.post("http://192.168.2.148:88/api/applybuyforminfo/Update", params);
+// 删除
+export const delapplysmall = (params) => http.post("http://192.168.2.148:88/api/applybuyforminfo/Delete", params);
+
+// 申领
+// 查询
+export const queryapplyFor = (params) => http.post("http://192.168.2.148:88/api/applyform/Query", params);
+// 添加
+export const addapplyFor = (params) => http.post("http://192.168.2.148:88/api/applyform/Insert", params);
+// 根据id查询
+export const detailapplyFor = (params) => http.post("http://192.168.2.148:88/api/applyform/Detail", params);
+// 更新
+export const updateapplyFor = (params) => http.post("http://192.168.2.148:88/api/applyform/Update", params);
+// 删除
+export const delapplyFor = (params) => http.post("http://192.168.2.148:88/api/applyform/Delete", params);
+// 综合查询
+export const qgroupapplyFor = (params) => http.post("http://192.168.2.148:88/api/applyform/Querygroup", params);
+// 申领明细
+// 查询
+export const queryapplyForsmall = (params) => http.post("http://192.168.2.148:88/api/applyforminfo/Query", params);
+// 添加
+export const addapplyForsmall = (params) => http.post("http://192.168.2.148:88/api/applyforminfo/Insert", params);
+// 根据id查询
+export const detailapplyForsmall = (params) => http.post("http://192.168.2.148:88/api/applyforminfo/Detail", params);
+// 更新
+export const updateapplyForsmall = (params) => http.post("http://192.168.2.148:88/api/applyforminfo/Detail", params);
+// 删除
+export const delapplyForsmall = (params) => http.post("http://192.168.2.148:88/api/applyforminfo/Delete", params);
+
+// purchase
+// 采购合同
+// 查询
+export const querypurchase = (params) => http.post("http://192.168.2.148:88/api/purchasecontact/Query", params);
+// 添加
+export const addpurchase = (params) => http.post("http://192.168.2.148:88/api/purchasecontact/Insert", params);
+// 根据id查询
+export const detailpurchase = (params) => http.post("http://192.168.2.148:88/api/purchasecontact/Detail", params);
+// 更新
+export const updatepurchase = (params) =>  http.post("http://192.168.2.148:88/api/purchasecontact/Update", params);
+// 删除
+export const delpurchase = (params) => http.post("http://192.168.2.148:88/api/purchasecontact/Delete", params);
+// 综合查询
+export const qgrouppurchase = (params) =>  http.post("http://192.168.2.148:88/api/purchasecontact/Querygroup", params);
+// 申购明细
+// 查询
+export const querypurchasesmall = (params) => http.post("http://192.168.2.148:88/api/purchasecontactDetail/Detail", params);
+// 添加
+export const addpurchasesmall = (params) => http.post("http://192.168.2.148:88/api/purchasecontactDetail/Insert", params);
+// 根据id查询
+export const detailpurchasesmall = (params) => http.post("http://192.168.2.148:88/api/applybuyforminfo/Detail", params);
+// 更新
+export const updatepurchasesmall = (params) =>http.post("http://192.168.2.148:88/api/purchasecontactDetail/Update", params);
+// 删除
+export const delpurchasesmall = (params) => http.post("http://192.168.2.148:88/api/purchasecontactDetail/Detail", params);
+

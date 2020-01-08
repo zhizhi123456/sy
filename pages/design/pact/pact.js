@@ -39,14 +39,23 @@ Page({
     currentDate1: new Date().getTime(),
     show_time: false,
     show_endtime: false,
-    hadNew: 1
+    hadNew: 1,
+    hadMy: 0,
+    UserName: ''
   },
   // 返回
   return () {
     if (this.data.hadNew) {
-      util.returnMenu();
+      if (this.data.hadMy) {
+        util.returnMenu2(1055, '我的信息');
+      } else {
+        util.returnMenu2(1009,'技术管理');
+      }
     } else {
-      wx.navigateBack();
+      // console.log("12")
+      wx.redirectTo({
+        url:'/pages/section/section2?name='+this.data.caption+'&userid='+this.data.userid+'&dep='+this.data.dep+'&deptxt='+'&deptxt='+this.data.deptxt
+      })
     }
   },
   setSeach(e) {
@@ -57,7 +66,7 @@ Page({
   },
   // 模糊查询
   seachInfo() {
-    if (this.data.hadNew) {
+    if (this.data.hadNew != '0' && this.data.hadMy!='1') {
       wx.showLoading({
         title: '加载中',
       });
@@ -78,10 +87,11 @@ Page({
     } else {
       let info = this.data.info
       info.designtaskname= this.data.seach
+      info.designman = this.data.userid;
       this.setData({
         info
       })
-      util.qgroupdeliver(qgroupdesign, this, this.data.hadNew)
+      util.qgroupdeliver(qgroupdesign, this, this.data.hadNew,this.data.hadMy)
     }
 
   },
@@ -99,6 +109,25 @@ Page({
     this.setData({
       sections: a
     })
+    var that = this
+    if (options.hadMy) {
+      // console.log("10")
+      wx.getStorage({
+        key: 'myInfo',
+        success(res) {
+          let info = that.data.info;
+          info.designman = res.data.UserName;
+          that.setData({
+            top: '我的设计任务',
+            info,
+            hadMy: 1,
+            userid:res.data.UserName
+          })
+          util.qgroupdeliver(qgroupdesign, that, that.data.hadNew, that.data.hadMy)
+        }
+      })
+   
+    }
     if (options.userid) {
       let info = this.data.info;
       info.departmentID = options.dep;
@@ -109,11 +138,14 @@ Page({
         info,
         departmenttext: options.deptxt,
         userid: options.userid,
+        dep:options.dep,
         deptxt: options.deptxt,
+        caption:options.caption
       })
       // console.log(info)
       util.qgroupdeliver(qgroupdesign, this, this.data.hadNew)
-    } else {
+    } 
+    if (options.hadNew != '0' && options.hadMy !='1') {
       this.setData({
         seach: ''
       })
@@ -197,7 +229,6 @@ Page({
   },
   // 组合查询
   seachqur() {
-
-    util.qgroupdeliver(qgroupdesign, this,this.data.hadNew)
+    util.qgroupdeliver(qgroupdesign, this,this.data.hadNew,this.data.hadMy)
   },
 })
