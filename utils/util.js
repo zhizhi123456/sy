@@ -4,7 +4,7 @@ import {
   Projecttype,
   valid,
   returned,
-  querysign
+  querysign,
 } from "../service/getData";
 var app = getApp();
 const formatTime = date => {
@@ -70,22 +70,15 @@ const datefom = value => {
   // return Y + '年' + m + '月' + d + '日';
   return Y + '-' + m + '-' + d;
 };
-// // 格式化写入的数据
-// const printf = (gain, base) => {
-//   if (gain) {
-//     base.forEach(item => {
-//       if (gain == item.text) {
-//         gain = item.value;
-//       }
-//     })
-//   }
-// }
 // 判断新增选项内容...
 const checkContent = (value, key) => {
   for (let i in value) {
     if (!value[i]) {
-      value[i] = ""
+      value[i] = "";
     }
+  }
+  if (!value.formid) {
+    value.formid = null;
   }
   // console.log("0")
   value.createtime = format(new Date());
@@ -118,6 +111,9 @@ const checkContent = (value, key) => {
     }
     if (value.ConstructCompany == res.text) {
       value.ConstructCompany = res.value;
+    }
+    if (value.Type == res.text) {
+      value.Type = res.value;
     }
   })
   // //总包项目
@@ -278,8 +274,11 @@ const checkContent = (value, key) => {
 const checkChange = (value, key, dep) => {
   for (let i in value) {
     if (!value[i]) {
-      value[i] = ""
+      value[i] = '';
     }
+  }
+  if (!value.formid) {
+    value.formid = null;
   }
   value.updatetime = format(new Date());
   let user = wx.getStorageSync("myInfo");
@@ -471,16 +470,6 @@ const checkChange = (value, key, dep) => {
     value.mainprojecttype = kinds.join(",");
   }
 };
-// // 格式化显示代码
-// const printhand = (reveal, glodata) => {
-//   if (reveal) {
-//     glodata.forEach(res => {
-//       if (reveal == res.value) {
-//         reveal = res.text
-//       }
-//     })
-//   }
-// }
 // 处理显示数据
 const handleData = (data, key, dep) => {
   var app = getApp();
@@ -819,13 +808,13 @@ const listData = (data, dep, page, list) => {
             if (kinds.indexOf(depart.text) == -1) {
               kinds.push(depart.text)
             }
+            // if (value.mainprojecttype && value.mainprojecttype.split(",").length > kinds.length) {
+            //   kinds.push("**");
+            // }
+            value.mainprojecttype = kinds.join(",");
           }
         })
       })
-      if (value.mainprojecttype && value.mainprojecttype.split(",").length > kinds.length) {
-        kinds.push("**");
-      }
-      value.mainprojecttype = kinds.join(",");
     }
   });
   if (page) {
@@ -896,11 +885,11 @@ const editInfo = (e, key, val) => {
 const returnPrev = (kind, key, id, cap, dep, dert, rid, tit) => {
   if (key) {
     wx.redirectTo({
-      url: `/pages/${kind}/detail/detail?id=${key.data.info.ID}${id?'&userid='+id+'&caption='+cap+'&dep='+dep+'&deptxt='+dert+'&rid='+rid+'&title='+tit:""}`
+      url: `/pages/${kind}/detail/detail?id=${key.data.info.ID}&rid=${rid}&title=${tit}${id?'&userid='+id+'&caption='+cap+'&dep='+dep+'&deptxt='+dert:""}`
     })
   } else {
     wx.redirectTo({
-      url: `/pages/${kind}/pact/pact${id?'?userid='+id+'&caption='+cap+'&dep='+dep+'&deptxt='+dert+'&rid='+rid+'&title='+tit:""}`
+      url: `/pages/${kind}/pact/pact?rid=${rid}&title=${tit}${id?'&userid='+id+'&caption='+cap+'&dep='+dep+'&deptxt='+dert:""}`
     })
   }
 }
@@ -1019,18 +1008,20 @@ const workList = (key, id) => {
         steps
       })
       let userinfo = wx.getStorageSync("myInfo");
-      if (step[0].nextstepid > step[0].stepid) {
-        key.setData({
-          returned: true
-        })
-      } else if (userinfo.UserName == step[0].nextdealuser) {
-        key.setData({
-          returned: true
-        })
-      } else {
-        key.setData({
-          returned: false
-        })
+      if (step[0]) {
+        if (step[0].nextstepid > step[0].stepid) {
+          key.setData({
+            returned: true
+          })
+        } else if (userinfo.UserName == step[0].nextdealuser) {
+          key.setData({
+            returned: true
+          })
+        } else {
+          key.setData({
+            returned: false
+          })
+        }
       }
     }
   })
@@ -1081,7 +1072,7 @@ const checkState = (key, id, chart, bh) => {
   }
 }
 // 工作流流转
-const Triggerflow = (key, direction, sheet, piece,id, cap, dep, dert, rid, tit) => {
+const Triggerflow = (key, direction, sheet, piece, id, cap, dep, dert, rid, tit) => {
   let userinfo = wx.getStorageSync("myInfo");
   if (userinfo) {
     flow({
@@ -1116,7 +1107,7 @@ const Triggerflow = (key, direction, sheet, piece,id, cap, dep, dert, rid, tit) 
         setTimeout(function () {
           wx.redirectTo({
             // url: '/pages/' + piece + '/detail/detail?id=' + that.data.info.ID + "&tab=b",
-            url: `/pages/${piece}/detail/detail?tab=b&id=${that.data.info.ID}${id?'&userid='+id+'&caption='+cap+'&dep='+dep+'&deptxt='+dert+'&rid='+rid+'&title='+tit:""}`
+            url: `/pages/${piece}/detail/detail?tab=b&id=${that.data.info.ID}&rid=${rid}&title=${tit}${id?'&userid='+id+'&caption='+cap+'&dep='+dep+'&deptxt='+dert:""}`
           })
         }, 1000)
       } else {
@@ -1336,41 +1327,6 @@ const itemtypeto = (content) => {
     })
   })
 }
-// //// 对传入的数据 根据 key值 得到 Value值  
-// // funcname 函数名 须在之前页面引入  content key值 适用于有key和value的
-// const intro = (funcname, content) => {
-//   return new Promise(function (resolve, reject) {
-//     funcname().then(res => {
-//       // console.log(res)
-//       var w = JSON.parse(res)
-//       w.forEach(s => {
-//         // console.log(s.Key == content)
-//         if (s.Key == content) {
-//           resolve(s.Value);
-//         } else {
-//           reject("");
-//         }
-//       })
-//     })
-//   })
-// }
-// //  传出 
-// const outflow = (funcname, content) => {
-//   return new Promise(function (resolve, reject) {
-//     funcname().then(res => {
-//       console.log(res)
-//       var w = JSON.parse(res)
-//       w.forEach(s => {
-//         if (s.Value == content) {
-//           resolve(s.Key);
-//         } else {
-//           reject("");
-//         }
-//       })
-//     })
-//   })
-// }
-// 
 const intro = (data, that) => {
   // 合同签订情况
   var app = getApp()
@@ -1523,7 +1479,6 @@ const intro = (data, that) => {
     if (s.text == data.MemberName) {
       data.MemberName = s.value
     }
-
   })
   app.globalData.Ifwinbidlist.forEach(s => {
     if (s.text == data.ifwinbid) {
@@ -1655,6 +1610,7 @@ const outflow = (data, that) => {
     if (s.value == data.Ranks) {
       data.Ranks = s.text
     }
+
     if (s.value == data.chargemanName) {
       data.chargemanName = s.text
     }
@@ -1681,8 +1637,6 @@ const outflow = (data, that) => {
     if (s.value == data.MemberName) {
       data.MemberName = s.text
     }
-
-
   })
   app.globalData.Ifwinbidlist.forEach(s => {
     if (s.value == data.ifwinbid) {
@@ -1852,52 +1806,104 @@ const qgroupdeliver = (funcname, that, hadNew) => {
             info
           })
         }
-      // });
-  //     that.setData({
-  //       InfoList: item.reverse()
-  //     })
+// const qgroupdeliver = (funcname, that) => {
+//   var app = getApp();
+//   let info = that.data.info;
+//   wx.getStorage({
+//     key: 'myInfo',
+//     success(res) {
+//       info.UserName = res.data.UserName
+//     }
+//   })
+//   intro(info, this)
+//   console.log(info)
 
-  //     wx.hideLoading();
-  //   } else {
-  //     let info = that.data.info;
-  //     info.picurl = [];
-  //     that.setData({
-  //       info
-  //     })
-  //   }
-  // })
-  //       // console.log(info)
-  //     } else {
-  //       // 请求失败
-  //       let info = that.data.info;
-  //       if (hadNew == '0') {
-  //         // 进入部门看
-  //         for (var key in info) {
-  //           if (!info.chargemanName && !info.designman) {
-  //             info[key] = ''
-  //           }
-  //         }
-  //         info.picurl = [];
-  //         that.setData({
-  //           info
-  //         })
-  //       } else {
+//   for (let i in info) {
+//     if (info[i] == "请选择" || !info[i] || info[i] == "") {
+//       info[i] = null
+//     }
+//   }
+//   if (info.quantity) {
+//     info.quantity = Number(info.quantity)
+//   }
+//   if (info.departmentID) {
+//     app.globalData.department.forEach(depart => {
+//       if (info.departmentID == depart.text) {
+//         info.departmentID = depart.value
+//       }
+//     })
+//   }
+//   if (info.department) {
+//     app.globalData.department.forEach(depart => {
+//       if (info.department == depart.text) {
+//         info.department = depart.value
+//       }
+//     })
+//   }
+//   that.setData({
+//     info
+//   })
+//   let infodata = {
+//     Timestamp: app.globalData.time,
+//     ...that.data.info
+//   }
+//   funcname(
+//     infodata
+//   ).then(res => {
+//     console.log(res)
+//     wx.showLoading({
+//       title: '加载中',
+//     });
+//     if (res.code == 10000) {
+//       wx.showToast({
+//         title: '搜索成功',
+//         icon: 'success',
+//         duration: 3000
+//       })
+//       that.onClose()
+//       let item
+//       if (funcname == querysign) {
+//         item = res.Lists;
+//       } else {
+//         item = res.List;
+//       }
+//       outflowlist(item, this)
+//       for (let k of item) {
+//         for (let i in k) {
+//           if (k[i] == null || k[i] == "null" || !k[i]) {
+//             k[i] = " "
+//           }
+//         }
+//       }
+//       item.forEach(value => {
+//         app.globalData.department.forEach(depart => {
+//           if (value.department == depart.value) {
+//             value.department = depart.text
+//           }
+//         })
+//         if (value.checkindate || value.condition) {
+//           value.checkindate = value.checkindate.substring(0, 10)
+//           // value.Checkintime = value.Checkintime.substring(10)
+//           value.condition == "忘打卡" ? value.Checkintime = '' : value.condition
+//         }
+//       });
+//       that.setData({
+//         InfoList: item.reverse()
+//       })
 
-  //         for (var key in info) {
-  //           info[key] = ''
-  //         }
-  //         info.picurl = [];
-  //         that.setData({
-  //           info
-  //         })
-  //       }
-  //       // console.log(info)
+//       wx.hideLoading();
+//     } else {
+//       let info = that.data.info;
+//       info.picurl = [];
+//       that.setData({
+//         info
+//       })
+    }
+  })
 
+  const dispose = () => {
 
-      }
-    })
   }
-
 }
 // 组合查询
 const qgroupsmall = (funcname, that) => {

@@ -50,7 +50,14 @@ import {
   Engineer,
   CountItem,
   Team,
-  employee
+  employee,
+  groupSubItems,
+  groupContract,
+  groupTask,
+  groupCost,
+  groupBill,
+  groupReturnM,
+  groupPnumber
 
 } from "./service/getData";
 var util = require("./utils/util");
@@ -87,36 +94,141 @@ App({
         }
       }
     })
+    // //获取新信息
+    // groupSubItems({
+    //   UserName: wx.getStorageSync("myInfo").UserName,
+    // }).then(res => {
+    //   if (res.code == 10000) {
+    //     let item = res.List,
+    //       num = 0;
+    //     item.forEach(ele => {
+    //       if (ele.ApplygetNew) {
+    //         num += 1;
+    //       }
+    //     })
+    //     this.globalData.NEWnum.push(num);
+    //     util.back(this,num);
+    //   }
+    // })
+    // groupContract({
+    //   createman: wx.getStorageSync("myInfo").UserName,
+    // }).then(res => {
+    //   if (res.code == 10000) {
+    //     let item = res.List,
+    //       num = 0;
+    //     item.forEach(ele => {
+    //       if (ele.ApplygetNew) {
+    //         num += 1;
+    //       }
+    //     })
+    //     this.globalData.NEWnum.push(num);
+    //     util.back(this,num);
+    //   }
+    // })
+    // groupTask({
+    //   UserName: wx.getStorageSync("myInfo").UserName,
+    // }).then(res => {
+    //   if (res.code == 10000) {
+    //     let item = res.List,
+    //       num = 0;
+    //     item.forEach(ele => {
+    //       if (ele.ApplygetNew) {
+    //         num += 1;
+    //       }
+    //     })
+    //     this.globalData.NEWnum.push(num);
+    //     util.back(this,num);
+    //   }
+    // })
+    // groupCost({
+    //   UserName: wx.getStorageSync("myInfo").UserName,
+    // }).then(res => {
+    //   if (res.code == 10000) {
+    //     let item = res.List,
+    //       num = 0;
+    //     item.forEach(ele => {
+    //       if (ele.ApplygetNew) {
+    //         num += 1;
+    //       }
+    //     })
+    //     this.globalData.NEWnum.push(num);
+    //     util.back(this,num);
+    //   }
+    // })
+    // groupBill({
+    //   applyman: wx.getStorageSync("myInfo").UserName,
+    // }).then(res => {
+    //   if (res.code == 10000) {
+    //     let item = res.List,
+    //       num = 0;
+    //     item.forEach(ele => {
+    //       if (ele.ApplygetNew) {
+    //         num += 1;
+    //       }
+    //     })
+    //     this.globalData.NEWnum.push(num);
+    //     util.back(this,num);
+    //   }
+    // })
+    // groupReturnM({
+    //   applyman: wx.getStorageSync("myInfo").UserName,
+    // }).then(res => {
+    //   if (res.code == 10000) {
+    //     let item = res.List,
+    //       num = 0;
+    //     item.forEach(ele => {
+    //       if (ele.ApplygetNew) {
+    //         num += 1;
+    //       }
+    //     })
+    //     this.globalData.NEWnum.push(num);
+    //     util.back(this,num);
+    //   }
+    // })
+    // groupPnumber({
+    //   createman: wx.getStorageSync("myInfo").UserName,
+    // }).then(res => {
+    //   if (res.code == 10000) {
+    //     let item = res.List,
+    //       num = 0;
+    //     item.forEach(ele => {
+    //       if (ele.ApplygetNew) {
+    //         num += 1;
+    //       }
+    //     })
+    //     this.globalData.NEWnum.push(num);
+    //     util.back(this,num);
+    //   }
+    // })
     if (!this.globalData.CountItem[0]) {
-       //负责人
-    Principal().then(res => {
-      // console.log(res)
-      let Principal = JSON.parse(res.replace(/userName/g, 'value').replace(/EmpName/g, 'text'));
-      // console.log(Principal)
-      Principal.forEach((s, index) => {
-        if (s.text == null) {
-          // s.text = ' '
-          var a= Principal
-          a.splice(index, 1)
-          Principal = a
-          return 0
-        }
-        if (s.text == '') {
-          // s.text = ' '
-          var a= Principal
-          a.splice(index, 1)
-          Principal = a
-          return 0
-        }
+      Principal().then(res => {
+        // console.log(res)
+        let Principal = JSON.parse(res.replace(/userName/g, 'value').replace(/EmpName/g, 'text'));
+        // console.log(Principal)
+        Principal.forEach((s, index) => {
+          if (s.text == null) {
+            // s.text = ' '
+            var a= Principal
+            a.splice(index, 1)
+            Principal = a
+            return 0
+          }
+          if (s.text == '') {
+            // s.text = ' '
+            var a= Principal
+            a.splice(index, 1)
+            Principal = a
+            return 0
+          }
+        })
+        this.globalData.Principal = Principal;
       })
-      this.globalData.Principal = Principal;
-    })
       util.sumup(department, this, 'department', "techofficename", "ID");
       util.sumup(Companytitle, this, 'Companytitle', "Value", "Key");
       util.sumup(staff, this, 'staff', "Name", "ID");
       util.sumup(source, this, 'source', "Value", "Key");
       util.sumup(Contactman, this, 'Contactman', "Name", "ID");
-      // util.sumup(Principal, this, 'Principal', "EmpName", "userName");
+      util.sumup(Principal, this, 'Principal', "EmpName", "userName");
       util.sumup(Servcietype, this, 'Servcietype', "Value", "Key");
       util.sumup(Projectprop, this, 'Projectprop', "Value", "Key");
       util.sumup(Projecttype, this, 'Projecttype', "Value", "Key");
@@ -173,10 +285,10 @@ App({
         util.back(this, result)
       })
     }
+
     // 基础类库各项数据的调用
     // // 部门
     department().then(res => {
-
       if (res) {
         let department = JSON.parse(res.replace(/ID/g, 'value').replace(/techofficename/g, 'text'));
         this.globalData.department = department;
@@ -268,20 +380,12 @@ App({
     Principal().then(res => {
       // console.log(res)
       let Principal = JSON.parse(res.replace(/userName/g, 'value').replace(/EmpName/g, 'text'));
-      Principal.forEach((s, index) => {
+      Principal.forEach(s => {
         if (s.text == null) {
-          // s.text = ' '
-          var a= Principal
-          a.splice(index, 1)
-          Principal = a
-          return 0
+          s.text = ' '
         }
         if (s.text == '') {
-          // s.text = ' '
-          var a= Principal
-          a.splice(index, 1)
-          Principal = a
-          return 0
+          s.text = ' '
         }
       })
       this.globalData.Principal = Principal;
@@ -417,10 +521,7 @@ App({
   globalData: {
     mapadress: "",
     pic: [],
-    userInfo: null,
-    time: util.format(new Date()),
-    mapadress: "",
-    pic: [],
+    NEWnum: [],
     userInfo: null,
     time: util.format(new Date()),
     department: [{
@@ -780,6 +881,5 @@ App({
     }, {
       text: '已超时'
     }]
-  }
-
+  },
 })
