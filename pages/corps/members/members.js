@@ -16,10 +16,11 @@ Page({
     activeKey: 0,
     employee: '',
     b: '',
-    member: ""
+    member: "",
+    name:''
   },
   return () {
-    wx.navigateBack({
+    wx.redirectTo({
       url: "/pages/corps/section"
     })
   },
@@ -27,11 +28,13 @@ Page({
     this.setData({
       info: {}
     })
-    //console.log(this.data.sections)
-    //console.log(e.detail)
+  
     let id = this.data.sections[e.detail].value;
-    //console.log(id)
-    //console.log(id)
+    
+    this.setData({
+      name:id
+    })
+   
     this.setData({
       dep: id,
       deptxt: this.data.sections[e.detail].text
@@ -85,6 +88,11 @@ Page({
       dep: e.detail.value.value,
       deptxt: e.detail.value.text
     })
+    // 页面传值参数
+    this.setData({
+      name:e.detail.value.value
+    })
+   
     qgroupmember({
       Type: e.detail.value.value
     }).then(res => {
@@ -149,8 +157,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // //console.log(app.globalData.Principal)
-    //console.log(options.name)
+    if (options) {
+      this.setData({
+        caption: options.name,
+        userid: options.userid,
+        dep: options.dep,
+        deptxt: options.deptxt,
+        title: options.title
+      })
+    }
+  console.log(options.dep, options.deptxt)
+
+    // console.log(options)
     qgroupcontractor().then(res => {
       //console.log(res.List)
       if (res.List) {
@@ -167,6 +185,11 @@ Page({
     })
     if (options.name) {
       var a = options.name
+    
+      this.setData({
+        name:options.name
+      })
+      // console.log(this.data.name)
     }
     qgroupmember({
       Type: a
@@ -184,7 +207,6 @@ Page({
         })
         var u = JSON.stringify(q)
         var b = JSON.parse(u.replace(/ID/g, 'value').replace(/username/g, 'text'));
-        console.log(b)
         this.setData({
           b
         })

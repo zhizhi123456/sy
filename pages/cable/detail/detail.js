@@ -3,9 +3,6 @@ import {
   detailcable ,
   delcable,
   querycablesmall
-
-
-
 } from '../../../service/getData.js';
 var app = getApp();
 var util = require("../../../utils/util");

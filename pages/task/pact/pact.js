@@ -153,6 +153,7 @@ Page({
       })
     }
     if (options.userid) {
+      console.log("1")
       let info = this.data.info;
       info.UserId = options.userid;
       this.setData({

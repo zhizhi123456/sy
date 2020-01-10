@@ -198,10 +198,16 @@ Page({
     })
     // 计时器时间变化
     this.getdata()
-    this.setData({
-      "info.Token": "ww",
-      "info.TokenType": "ww",
-      "info.UserID": "c30735fb-7b21-4b6e-919c-0039d9c8945f",
+    var that = this
+    wx.getStorage({
+      key: 'myInfo',
+      success(res) {
+        that.setData({
+          "info.Token": res.data.Token,
+          "info.TokenType":res.data.TokenType,
+          "info.UserID":  res.data.ID,
+        })
+      }
     })
     // 获得办公区域位置
     officeAddress({
@@ -209,7 +215,7 @@ Page({
       TokenType: this.data.info.TokenType,
       UserID: this.data.info.UserID,
     }).then(res => {
-      console.log(res)
+      // console.log(res)
       this.setData({
         "info.WorkAreaID": res.Item.ID,
         "info.WorkAreaCentPosi": res.Item.CenterAddressPosition,

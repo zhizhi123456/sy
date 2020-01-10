@@ -117,6 +117,7 @@ Page({
         Timestamp: app.globalData.time,
         ID: options.id
       }).then(res => {
+        // console.log(res)
         if (res.code == 10000) {
           let item = res.Item;
           util.handleData(item, this, app.globalData.department)

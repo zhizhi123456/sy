@@ -51,6 +51,7 @@ import {
   CountItem,
   Team,
   employee,
+<<<<<<< HEAD
   groupSubItems,
   groupContract,
   groupTask,
@@ -59,6 +60,9 @@ import {
   groupReturnM,
   groupPnumber
 
+=======
+  projectall
+>>>>>>> 924cd74c3e3f5d3e1c7eaa447c3ec2551b5df491
 } from "./service/getData";
 var util = require("./utils/util");
 App({
@@ -67,7 +71,6 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-
     // 登录
     wx.login({
       success: res => {
@@ -83,7 +86,6 @@ App({
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
-
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
               if (this.userInfoReadyCallback) {
@@ -201,6 +203,7 @@ App({
     //   }
     // })
     if (!this.globalData.CountItem[0]) {
+      //负责人
       Principal().then(res => {
         // console.log(res)
         let Principal = JSON.parse(res.replace(/userName/g, 'value').replace(/EmpName/g, 'text'));
@@ -222,6 +225,30 @@ App({
           }
         })
         this.globalData.Principal = Principal;
+        var t = Principal.filter(s => {
+          return s.text
+        })
+
+        this.globalData.Principal = t;
+        // console.log(this.globalData.Principal)
+      })
+      // 总包项目
+      projectall().then(res => {
+        // console.log(res.List)
+        if (res.code == 10000) {
+          // var c = JSON.stringify(res.List) 
+          var c = res.List
+          var m = []
+          c.forEach(s => {
+            m.push({
+              projcectCode: s.projcectCode,
+              projectname: s.projectname
+            })
+          })
+          var n = JSON.stringify(m)
+          let projectall = JSON.parse(n.replace(/projcectCode/g, 'value').replace(/projectname/g, 'text'));
+          this.globalData.projectall = projectall;
+        }
       })
       util.sumup(department, this, 'department', "techofficename", "ID");
       util.sumup(Companytitle, this, 'Companytitle', "Value", "Key");
@@ -237,7 +264,7 @@ App({
       util.sumup(Progress1, this, 'Progress1', "Value", "Key");
       util.sumup(Ifwinbidlist, this, 'Ifwinbidlist', "Value", "Key");
       util.sumup(Ifmakecontactlist, this, 'Ifmakecontactlist', "Value", "Key");
-      util.sumup(YesOrNo, this, 'YesOrNo', "Value", "Key");
+      // util.sumup(YesOrNo, this, 'YesOrNo', "Value", "Key");
       util.sumup(InstallQuality, this, 'InstallQuality', "Value", "Key");
       util.sumup(Customer, this, 'Customer', "customername", "ID");
       util.sumup(MainProject, this, 'MainProject', "projcectCode", "projectname");
@@ -388,135 +415,17 @@ App({
           s.text = ' '
         }
       })
-      this.globalData.Principal = Principal;
-    })
-    // 工程进度三/回款类型
-    Progress3().then(res => {
-      // console.log(res)
-      let Progress3 = JSON.parse(res.replace(/Key/g, 'value').replace(/Value/g, 'text'));
-      this.globalData.Progress3 = Progress3;
-    })
-    // 工程进度二
-    Progress2().then(res => {
-      // console.log(res)
-      let Progress2 = JSON.parse(res.replace(/Key/g, 'value').replace(/Value/g, 'text'));
-      this.globalData.Progress2 = Progress2;
-    })
-    // 工程进度一
-    Progress1().then(res => {
-      // console.log(res)
-      let Progress1 = JSON.parse(res.replace(/Key/g, 'value').replace(/Value/g, 'text'));
-      this.globalData.Progress1 = Progress1;
-    })
-    // 是否中标
-    Ifwinbidlist().then(res => {
-      let Ifwinbidlist = JSON.parse(res.replace(/Key/g, 'value').replace(/Value/g, 'text'));
-      this.globalData.Ifwinbidlist = Ifwinbidlist;
-    })
-    // // 工程类别
-    EngineerClass().then(res => {
-      let EngineerClass = JSON.parse(res.replace(/Key/g, 'value').replace(/Value/g, 'text'));
-      this.globalData.EngineerClass = EngineerClass;
-    })
-    // 管线落地管道工程进度
-    Pipeline().then(res => {
-      let Pipeline = JSON.parse(res.replace(/Key/g, 'value').replace(/Value/g, 'text'));
-      this.globalData.Pipeline = Pipeline;
-    })
-    // 管线落地线路工程进度
-    Circuit().then(res => {
-      let Circuit = JSON.parse(res.replace(/Key/g, 'value').replace(/Value/g, 'text'));
-      this.globalData.Circuit = Circuit;
-    })
-    // 用户平移工程进度
-    Translation().then(res => {
-      let Translation = JSON.parse(res.replace(/Key/g, 'value').replace(/Value/g, 'text'));
-      this.globalData.Translation = Translation;
-    })
-    // 客户类别
-    ClientType().then(res => {
-      let ClientType = JSON.parse(res.replace(/Key/g, 'value').replace(/Value/g, 'text'));
-      this.globalData.ClientType = ClientType;
-    })
-    // // 供应商
-    // Supplier().then(res => {
-    //   console.log(res)
-    // })
-    // 分包合同
-    Subcontact().then(res => {
-      // console.log(res)
-      let Subcontact = JSON.parse(res.replace(/subprojcectCode/g, 'value').replace(/subcontactname/g, 'text'));
-      this.globalData.Subcontact = Subcontact;
-    })
-    // // 采购合同
-    // Purchasecontact().then(res => {
-    //   console.log(res)
-    // })
-    //  借条类型
-    Debitnotetype().then(res => {
-      let Debitnotetype = JSON.parse(res.replace(/Key/g, 'value').replace(/Value/g, 'text'));
-      this.globalData.Debitnotetype = Debitnotetype;
-    })
-    // 用章类型
-    Usesealtype().then(res => {
-      let Usesealtype = JSON.parse(res.replace(/Key/g, 'value').replace(/Value/g, 'text'));
-      this.globalData.Usesealtype = Usesealtype;
-    })
-    //  开票类别
-    Invoicetype().then(res => {
-      let Invoicetype = JSON.parse(res.replace(/Key/g, 'value').replace(/Value/g, 'text'));
-      this.globalData.Invoicetype = Invoicetype;
-    })
-    // 票率
-    Invoicefeerate().then(res => {
-      let Invoicefeerate = JSON.parse(res.replace(/Key/g, 'value').replace(/Value/g, 'text'));
-      this.globalData.Invoicefeerate = Invoicefeerate;
-    })
-    // 销售阶段
-    MarketStage().then(res => {
-      let MarketStage = JSON.parse(res.replace(/Key/g, 'value').replace(/Value/g, 'text'));
-      this.globalData.MarketStage = MarketStage;
-    })
-    // 回款方式
-    RetMoneyWay().then(res => {
-      let RetMoneyWay = JSON.parse(res.replace(/Key/g, 'value').replace(/Value/g, 'text'));
-      this.globalData.RetMoneyWay = RetMoneyWay;
-    })
-    // 快递类别
-    ExpressageType().then(res => {
-      let ExpressageType = JSON.parse(res.replace(/Key/g, 'value').replace(/Value/g, 'text'));
-      this.globalData.ExpressageType = ExpressageType;
-    })
-    // 耗材用品类别
-    SuppliesType().then(res => {
-      let SuppliesType = JSON.parse(res.replace(/Key/g, 'value').replace(/Value/g, 'text'));
-      this.globalData.SuppliesType = SuppliesType;
-    })
-    // // 办公室用品类别
-    OfficeSuppliesType().then(res => {
-      let SuppliesType = JSON.parse(res.replace(/Key/g, 'value').replace(/Value/g, 'text'));
-      this.globalData.SuppliesType = SuppliesType;
-    })
-    //工作流定义步骤号
-    WorkflowStepNo().then(res => {
-      let WorkflowStepNo = JSON.parse(res.replace(/Key/g, 'value').replace(/Value/g, 'text'));
-      this.globalData.WorkflowStepNo = WorkflowStepNo;
-    })
-    // 角色
-    Role().then(res => {
-      let Role = JSON.parse(res.replace(/Key/g, 'value').replace(/Value/g, 'text'));
-      this.globalData.Role = Role;
-    })
-    // 交底类别
-    IntentionClass().then(res => {
-      let IntentionClass = JSON.parse(res.replace(/Key/g, 'value').replace(/Value/g, 'text'));
-      this.globalData.IntentionClass = IntentionClass;
-    })
-    // 施工队id
-    ConstructionTeam().then(res => {
-      let ConstructionTeam = JSON.parse(res.replace(/ID/g, 'value').replace(/ConstructionName/g, 'text'));
-      this.globalData.ConstructionTeam = ConstructionTeam;
-    })
+      // 材料明细
+      Goodsname().then(res => {
+        let Goodsname = JSON.parse(res);
+        this.globalData.Goodsname = Goodsname;
+      })
+      // 施工队id
+      ConstructionTeam().then(res => {
+        let ConstructionTeam = JSON.parse(res.replace(/ID/g, 'value').replace(/ConstructionName/g, 'text'));
+        this.globalData.ConstructionTeam = ConstructionTeam;
+      })
+    }
   },
   globalData: {
     mapadress: "",
@@ -524,304 +433,21 @@ App({
     NEWnum: [],
     userInfo: null,
     time: util.format(new Date()),
-    department: [{
-      value: 1003,
-      text: "工程部"
+    YesOrNo: [{
+      ID: 3104,
+      value: true,
+      text: "是"
     }, {
-      value: 1004,
-      text: "综合管理部"
-    }, {
-      value: 1005,
-      text: "财务部"
-    }, {
-      value: 2009,
-      text: "信息科"
-    }, {
-      value: 2010,
-      text: "市场部"
-    }, {
-      value: 2011,
-      text: "信息采集部"
+      ID: 3105,
+      value: false,
+      text: "否"
     }],
-    Companytitle: [{
-      ID: 2063,
-      value: "company1",
-      text: "上海尚雍电子技术有限公司"
+    YesOrNo1: [{
+      value: 3104,
+      text: "是"
     }, {
-      ID: 2064,
-      value: "company2",
-      text: "强飞电子信息"
-    }, {
-      ID: 2065,
-      value: "company3",
-      text: "测试公司抬头2"
-    }, {
-      ID: 2066,
-      value: "company4",
-      text: "测试公司抬头3"
-    }],
-    MainProject: [{
-      text: "SY19-117-08 ",
-      value: "杨浦区控江四村等旧小区信息通信架空线入地项目 "
-    }, {
-      text: "SY19-117-07",
-      value: "杨浦区控江三村等旧小区信息通信架空线入地项目 "
-    }],
-    MainSubproject: [{
-      ID: 10008,
-      value: "测试",
-      text: "测试"
-    }, {
-      ID: 10010,
-      value: "测试2",
-      text: "测试2"
-    }, {
-      ID: 10011,
-      value: "1",
-      text: "测试"
-    }, {
-      ID: 10012,
-      value: "测试",
-      text: "测试"
-    }, {
-      ID: 10013,
-      value: "WebApi测试添加1",
-      text: "WebApi测试添加1"
-    }, {
-      ID: 10014,
-      value: "WebApi测试修改",
-      text: "WebApi测试修改"
-    }, {
-      ID: 10016,
-      value: "测试12",
-      text: "测试12"
-    }, {
-      ID: 10029,
-      value: "测试",
-      text: "测试"
-    }],
-    // 属性
-    nature: [{
-      ID: 3099,
-      value: "projectprop1",
-      text: "大包"
-    }, {
-      ID: 3100,
-      value: "projectprop2",
-      text: "轻包"
-    }, {
-      ID: 3101,
-      value: "projectprop3",
-      text: "采购"
-    }, {
-      ID: 3102,
-      value: "projectprop4",
-      text: "其它"
-    }],
-    // 类型
-    Allkinds: [{
-      ID: 3088,
-      value: "projecttype1",
-      text: "配套"
-    }, {
-      ID: 3089,
-      value: "projecttype2",
-      text: "改造"
-    }, {
-      ID: 3090,
-      value: "projecttype3",
-      text: "共建"
-    }, {
-      ID: 3091,
-      value: "projecttype4",
-      text: "搬迁"
-    }, {
-      ID: 3092,
-      value: "projecttype5",
-      text: "铁塔"
-    }, {
-      ID: 3093,
-      value: "projecttype6",
-      text: "智能化"
-    }, {
-      ID: 3094,
-      value: "projecttype7",
-      text: "代维"
-    }, {
-      ID: 3095,
-      value: "projecttype8",
-      text: "外协"
-    }, {
-      ID: 3096,
-      value: "projecttype9",
-      text: "旧改线路"
-    }, {
-      ID: 3097,
-      value: "projecttype10",
-      text: "其它"
-    }],
-    concludesign: [{
-      ID: 3172,
-      value: "Ifmakecontactlist1",
-      text: "已签订"
-    }, {
-      ID: 3173,
-      value: "Ifmakecontactlist2",
-      text: "未签订"
-    }],
-    detaillink: [{
-      ID: 10014,
-      text: "sy-001",
-      goodsothercode: "sy-001-01",
-      goodsname: "戴尔电脑",
-      specifications: "灵越燃7000"
-    }, {
-      ID: 10015,
-      text: "sy-002",
-      goodsothercode: "sy-001-02",
-      goodsname: "惠普电脑",
-      specifications: "灵越燃7000"
-    }],
-    // 总包合同
-    MaincontactAll: [{
-      value: 11021,
-      text: "武宁路74弄2-10号（双号）信息通信线路临时搬迁工程 "
-    }, {
-      value: 11022,
-      text: "武宁路73弄2-10号（双号）信息通信线路临时搬迁工程 "
-    }, {
-      value: 11024,
-      text: "WebApi测试添加1"
-    }, {
-      value: 11025,
-      text: "WebApi测试修改1"
-    }, {
-      value: 11051,
-      text: "测试添加11"
-    }, {
-      value: 11052,
-      text: "测试添加12"
-    }],
-    costkind: [{
-      ID: 3084,
-      value: "chargetype1",
-      text: "应酬"
-    }, {
-      ID: 3085,
-      value: "chargetype2",
-      text: "差旅"
-    }, {
-      ID: 3086,
-      value: "chargetype3",
-      text: "招待"
-    }, {
-      ID: 3304,
-      value: "chargetype4",
-      text: "施工费"
-    }, {
-      ID: 3305,
-      value: "chargetype5",
-      text: "协调费"
-    }, {
-      ID: 3306,
-      value: "chargetype6",
-      text: "安装调试费"
-    }],
-    costobj: [{
-      ID: 3080,
-      value: "usechargemanList1",
-      text: "经理"
-    }, {
-      ID: 3081,
-      value: "usechargemanList2",
-      text: "项目经理"
-    }, {
-      ID: 3082,
-      value: "usechargemanList3",
-      text: "总经理"
-    }],
-    //供应商
-    Supplier: [{
-      ID: 10005,
-      text: "测试"
-    }, {
-      ID: 10018,
-      text: "测试"
-    }, {
-      ID: 10020,
-      text: "测试"
-    }, {
-      ID: 10021,
-      text: "测试"
-    }, {
-      ID: 10022,
-      text: "测试"
-    }, {
-      ID: 10023,
-      text: "测试"
-    }, {
-      ID: 10024,
-      text: "测试"
-    }, {
-      ID: 10025,
-      text: "测试"
-    }, {
-      ID: 10026,
-      text: "测试"
-    }, {
-      ID: 10027,
-      text: "测试"
-    }, {
-      ID: 10028,
-      text: "测试"
-    }, {
-      ID: 10029,
-      text: "测试"
-    }, {
-      ID: 10030,
-      text: "测试"
-    }, {
-      ID: 10031,
-      text: "测试"
-    }],
-    // 公司单位
-    unit: [{
-      ID: 10015,
-      text: "上海尚雍电子技术工程有限公司"
-    }, {
-      ID: 10016,
-      text: "上海尚雍实业有限公司"
-    }, {
-      ID: 10017,
-      text: "上海西部企业（集团）有限公司"
-    }, {
-      ID: 10018,
-      text: "上海菲冠环境科技有限公司"
-    }, {
-      ID: 10019,
-      text: "长城宽带"
-    }, {
-      ID: 10020,
-      text: "冠丰（上海）房地产发展有限公司"
-    }, {
-      ID: 10021,
-      text: "上海畅清建设工程有限公司"
-    }, {
-      ID: 10022,
-      text: "上海暄颐房地产开发有限公司"
-    }],
-    quality: [{
-      ID: 3162,
-      value: "installquality1",
-      text: "未安装"
-    }, {
-      ID: 3163,
-      value: "installquality2",
-      text: "合格"
-    }, {
-      ID: 3164,
-      value: "installquality3",
-      text: "不合格"
+      value: 3105,
+      text: "否"
     }],
     department: '',
     Companytitle: '',
@@ -837,7 +463,6 @@ App({
     Progress1: '',
     Ifwinbidlist: '',
     Ifmakecontactlist: '',
-    YesOrNo: '',
     InstallQuality: '',
     Customer: '',
     MainProject: '',
@@ -872,6 +497,7 @@ App({
     CountItem: '',
     Team: '',
     employee: '',
+    projectall: '',
     states: [{
       text: '所有'
     }, {

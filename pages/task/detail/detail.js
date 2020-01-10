@@ -17,11 +17,24 @@ Page({
     tab: 'a',
     returned: true,
     isreturn: true,
+    hadNew: 1,
+    hadMy: 0
   },
   // 返回
   return () {
-    util.returnPrev('task', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
-      this.data.rid, this.data.title)
+    if (this.data.hadNew) {
+      if (this.data.hadMy) {
+        wx.navigateBack({
+          url: '/pages/task/pact/pact?hadMy=' + this.data.hadMy
+        })
+      } else {
+        util.returnPrev('task')
+      }
+    } else {
+      wx.navigateBack({
+        url: "/pages/task/pact/pact"
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载
@@ -42,11 +55,6 @@ Page({
         me: Number(options.me),
         applyT: Number(options.applyT),
         ISconduct: Number(options.ISconduct)
-      })
-    }
-    if (options.hadNew) {
-      this.setData({
-        hadNew: Number(options.hadNew)
       })
     }
     wx.showLoading({
@@ -117,50 +125,4 @@ Page({
       }
     })
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {},
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

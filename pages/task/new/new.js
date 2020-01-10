@@ -3,7 +3,7 @@ import Toast from 'vant-weapp/dist/toast/toast';
 import {
   addTask,
   referTask,
-  amendTask
+  amendTask,
 } from "../../../service/getData";
 var util = require("../../../utils/util");
 var app = getApp();
@@ -26,7 +26,8 @@ Page({
     result: [],
     allkinds: [],
     nature: [],
-    concludesign: []
+    concludesign: [],
+    hadMy:0
   },
   // 建设单位名称
   showPopup() {

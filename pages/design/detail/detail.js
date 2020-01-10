@@ -13,7 +13,8 @@ Page({
     edit: false,
     info: {},
     steps: [],
-    hadNew:1
+    hadNew:1,
+    hadMy: 0
   },
   // 文件
   up_photo() {
@@ -29,16 +30,31 @@ Page({
   },
   // 返回
   return () {
-    if(this.data.hadNew){
-      util.returnPrev('design')
-    }else{
-      util.retPrev('design')
+
+    if (this.data.hadNew) {
+      if (this.data.hadMy) {
+        wx.redirectTo({
+          url: '/pages/design/pact/pact?hadMy=' + this.data.hadMy
+        })
+      } else {
+        util.returnPrev('design')
+      }
+    } else {
+      wx.navigateBack({
+        url: "/pages/design/pact/pact"
+      })
     }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // console.log(options)
+    if (options.hadMy) {
+      this.setData({
+        hadMy: options.hadMy
+      })
+    }
     if(options.hadNew == '0'){
       this.setData({
         hadNew:false
@@ -61,17 +77,8 @@ Page({
             info: item
           })
           wx.hideLoading();
-          // 调取工作流记录
-          //列表
 
-          let mid = res.Item.Formid; 
-          if (mid) {
-            util.workList(this, mid)
-            // console.log(this.data.steps)
-          }
-           //处理状态判断
-          util.checkState(this, mid, 'EngineerdesignRpt', item.CurStepbh);
-        
+         
         }
       })
     }
@@ -88,7 +95,13 @@ Page({
           icon: 'success',
           duration: 3000
         })
-        util.returnPrev('design')
+        if (this.data.hadMy) {
+          wx.redirectTo({
+            url: '/pages/design/pact/pact?hadMy=' + this.data.hadMy
+          })
+        } else {
+          util.returnPrev('design')
+        }
       }
     })
   },

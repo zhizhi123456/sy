@@ -262,9 +262,7 @@ Page({
    */
   onLoad: function (options) {
     this.qingqiu()
-    this.setData({
-      nature: app.globalData.nature
-    })
+  
    
     if (options.id) {
       detailquality({

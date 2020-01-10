@@ -198,14 +198,14 @@ Page({
       }, {
 
         nametext: "部门管理",
-        img: "icon-bumen.green4",
+        img: "icon-bumen .green4",
         path: "/pages/section/section",
         control: true, //权限
         three: true
       },
       {
         nametext: "当前任务",
-        img: "icon-renwu .green5",
+        img: ".icon-renwu .green5",
         path: "/pages/current/current/current",
         control: true,
         three: true,
@@ -418,7 +418,7 @@ Page({
         if (res.confirm) {
           // console.log('用户点击确定')
           wx.removeStorageSync("myInfo");
-          wx.reLaunch({
+          wx.redirectTo({
             url: '/pages/login/login'
           })
         }
@@ -430,7 +430,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    userinfo = wx.getStorageSync("myInfo");
+    userinfo=wx.getStorageSync("myInfo");
     // console.log(options)
     this.log() //判断是否登录
     // console.log(options.grading)

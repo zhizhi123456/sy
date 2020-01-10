@@ -423,6 +423,7 @@ Page({
   },
   // 状态
   showPopup_3() {
+    // console.log(userinfo)
     if (userinfo) {
       let info = this.data.info;
       info.UserName = userinfo.UserName;

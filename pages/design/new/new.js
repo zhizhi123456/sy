@@ -32,6 +32,7 @@ Page({
     sections: ['未完成','已完成'],
     section1: [],
     show1: false,
+    hadMy:0
   },
   // 总包项目名称
   projectnameblur(e) {
@@ -134,7 +135,7 @@ Page({
             icon: 'success',
             duration: 3000
           })
-          util.returnPrev('design')
+         this.return()
         }
       })
     } else {
@@ -146,11 +147,23 @@ Page({
   },
   // 返回
   return () {
-    util.returnPrev('design')
+    if (this.data.hadMy) {
+      wx.redirectTo({
+        url: '/pages/design/pact/pact?hadMy=' + this.data.hadMy
+      })
+    } else {
+      util.returnPrev('design')
+    }
   },
   // 编辑分包项目页面的确定和返回
   editreturn() {
-    util.returnPrev('design', this)
+    if (this.data.hadMy) {
+      wx.redirectTo({
+        url: '/pages/design/detail/detail?hadMy=' + this.data.hadMy+'&id='+this.data.id
+      })
+    } else {
+      util.returnPrev('design', this)
+    }
   },
   editconfirm() {
     let info = this.data.info;
@@ -168,7 +181,7 @@ Page({
           icon: 'success',
           duration: 3000
         })
-        util.returnPrev('design', this)
+       this.editreturn()
       }
     })
   },
@@ -176,7 +189,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (options.hadMy) {
+      this.setData({
+        hadMy: options.hadMy
+      })
+      // console.log(this.data.hadMy)
+    }
     if (options.id) {
+      this.setData({
+         id:options.id
+      })
       detaildesign({
         ID: options.id
       }).then(res => {

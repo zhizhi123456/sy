@@ -100,7 +100,7 @@ Page({
 
       {
         nametext: "仓库材料查询",
-        img: ".icon-zhongguohangtiantubiaoheji-weizhuanlunkuo- .green2",
+        img: "icon-zhongguohangtiantubiaoheji-weizhuanlunkuo- .green2",
         path: "/pages/material/pact/pact",
         control: true //权限
       }, {
@@ -496,9 +496,43 @@ Page({
         control: true,
       },
       {
+        // nametext: "我的任务书",
+        // img: "icon-lunkuodasan- green2",
+        // path: "/pages/task/pact/pact",
+
         nametext: "我的任务书",
-        img: "icon-lunkuodasan- green2",
-        path: "/pages/task/pact/pact",
+        img: "icon-renwu green3",
+        path: "/pages/task/pact/pact?hadMy=1",
+        control: true //权限
+      },
+      {
+        nametext: "我的设计任务",
+        img: "icon-lunkuodasan- .green4",
+        path: "/pages/design/pact/pact?hadMy=1",
+        control: true //权限
+      },
+      {
+        nametext: "申请领料",
+        img: "icon-yuancailiao blue8",
+        path: "",
+        control: true,
+      },
+      {
+        nametext: "申请费用",
+        img: "icon-feiyong2 yellow",
+        path: "",
+        control: true,
+      },
+      {
+        nametext: "申请分包编号",
+        img: "icon-bianhaonumbered5 red4",
+        path: "",
+        control: true,
+      },
+      {
+        nametext: "申请招投标",
+        img: "icon-zhaotoubiao-daikaifang yellow1",
+        path: "",
         control: true,
       },
       // {
