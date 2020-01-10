@@ -1,9 +1,10 @@
 {
   "pages": [
+    "pages/contracts/contracts",
+    
       "pages/corps/section",
     "pages/member/pact/pact",
   
-    "pages/contracts/contracts",
    
     "pages/officeCost/pact/pact",
     "pages/officeCost/detail/detail",
