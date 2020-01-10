@@ -1,20 +1,22 @@
 {
   "pages": [
-     "pages/corps/section",
+    "pages/corps/section",
+    "pages/officeCost/pact/pact",
+    "pages/officeCost/detail/detail",
+    "pages/officeCost/new/new",
+   
+    "pages/apply/pact/pact",
+    "pages/apply/detail/detail",
+    "pages/apply/new/new",
+    "pages/apply/newlink/newlink",
+    "pages/apply/detaillink/detaillink",
     "pages/applyFor/pact/pact",
     "pages/applyFor/detail/detail",
     "pages/applyFor/new/new",
     "pages/applyFor/newlink/newlink",
     "pages/applyFor/detaillink/detaillink",
-    
-      "pages/apply/pact/pact",
-      "pages/apply/detail/detail",
-      "pages/apply/new/new",
-      "pages/apply/newlink/newlink",
-      "pages/apply/detaillink/detaillink",
-   
-   
-    
+    "pages/secondarys/secondarys",
+    "pages/sign/new/new",
     "pages/contracts/contracts",
     "pages/member/pact/pact",
     "pages/contractor/pact/pact",
@@ -152,6 +154,7 @@
     "van-collapse": "vant-weapp/dist/collapse/index",
     "van-collapse-item": "vant-weapp/dist/collapse-item/index",
     "van-sidebar": "vant-weapp/dist/sidebar/index",
-    "van-sidebar-item": "vant-weapp/dist/sidebar-item/index"
+    "van-sidebar-item": "vant-weapp/dist/sidebar-item/index",
+    "van-divider": "vant-weapp/dist/divider/index"
   }
 }

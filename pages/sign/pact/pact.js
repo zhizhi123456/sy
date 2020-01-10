@@ -17,7 +17,7 @@ Page({
     info: {
       Company: "",
       starttime: "请选择",
-      endtime: "请选择",
+      endtime: "",
       Token: "",
       TokenType: "",
       UserID: "",
@@ -50,8 +50,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options.userid)
     // 获取到  userid  token  tokrntype  开始时间 结束时间  设置给data
     // 获取到  userid  token  tokrntype   设置给info
+  
     // this.setData({
     //   Token: "ww",
     //   TokenType: "ww",
@@ -114,6 +116,24 @@ Page({
         }
       })
     } else {
+      var that = this
+      wx.getStorage({
+        key: 'myInfo',
+        success(res) {
+          that.setData({
+            top: '我的考勤打卡',
+            Token:res.data.Token,
+            TokenType: res.data.TokenType,
+            UserID: res.data.ID,
+            starttime: "2017-12-12",
+            endtime: "2060-12-12",
+            "info.Token": res.data.Token,
+            "info.TokenType":res.data.TokenType,
+            "info.UserID":  res.data.ID,
+          })
+        }
+      })
+   
       querysign({
         Token: this.data.Token,
         TokenType: this.data.TokenType,
@@ -185,6 +205,7 @@ Page({
   },
   onConfirm_time(e) {
     let info = util.editInfo(e, this, util.datefomate(e.detail));
+    console.log(info)
     this.setData({
       info,
       show_time: false
@@ -203,7 +224,7 @@ Page({
   },
   onConfirm_endtime(e) {
     // console.log(e)
-    // console.log(util.datefomate(e.detail))
+    console.log(util.datefomate(e.detail))
     let info = util.editInfo(e, this, util.datefomate(e.detail));
     this.setData({
       info,

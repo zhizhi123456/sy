@@ -3,6 +3,7 @@ var app = getApp();
 var util = require("../../utils/util");
 import {
   qgroupcontractor,
+  getdep 
 } from "../../service/getData";
 Page({
 
@@ -20,26 +21,36 @@ Page({
   return () {
     util.returnMenu(1002);
   },
-  onChange(e) {
-    this.setData({
-      info: {}
+  // 根据用户名得到部门
+  updep(id,that){
+    getdep({UserName:id}).then(res=>{
+      if(res!=='[]'){
+        var s = JSON.parse(res)
+        that.setData({
+          dep: s[0].ID,
+          deptxt:s[0].techofficename
+        })
+        console.log(that.data.dep,that.data.deptxt)
+      }
     })
-    let id = this.data.sections[e.detail].value;
-    this.setData({
-      dep: id,
-      deptxt: this.data.sections[e.detail].text
-    })
-    // //console.log(id)
+    // 
     qgroupcontractor({
       UserName: id
     }).then(res => {
-      //console.log(res)
-      var a = JSON.stringify(res.List)
-      var b  = JSON.parse(a.replace(/ID/g, 'value').replace(/ConstructionName/g, 'text'));
-      this.setData({
+      if (res.List) {
+        var a = JSON.stringify(res.List)
+        var b  = JSON.parse(a.replace(/ID/g, 'value').replace(/ConstructionName/g, 'text'));
+      } else {
+        var b = []
+      }
+      that.setData({
         employee: b
       })
     })
+  },
+  onChange(e) {
+    let id = this.data.sections[e.detail].value;
+    this.updep(id,this)
   },
   //部门
   showPopup_o() {
@@ -53,31 +64,12 @@ Page({
     });
   },
   onConfirm_o(e) {
-    // //console.log(e)
-    let info = util.editInfo(e, this, e.detail.value.text);
     this.setData({
-      info,
       show_o: false,
       activeKey: e.detail.index,
-      dep: e.detail.value.value,
-      deptxt: e.detail.value.text
     })
-    qgroupcontractor({
-      UserName: e.detail.value.value
-    }).then(res => {
-      let info = this.data.info;
-      info.person = '';
-      if (res.List) {
-        var a = JSON.stringify(res.List)
-        var b  = JSON.parse(a.replace(/ID/g, 'value').replace(/ConstructionName/g, 'text'));
-      } else {
-        var b = []
-      }
-      this.setData({
-        info,
-        employee: b
-      })
-    })
+    this.updep(e.detail.value.value,this)
+   
   },
   //员工
   showPopup_1() {

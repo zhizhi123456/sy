@@ -197,14 +197,14 @@ Page({
       }, {
 
         nametext: "部门管理",
-        img: "icon-bumen.green4",
+        img: "icon-bumen .green4",
         path: "/pages/section/section",
         control: true, //权限
         three: true
       },
       {
         nametext: "当前任务",
-        img: "icon-renwu .green5",
+        img: ".icon-renwu .green5",
         path: "/pages/current/current/current",
         control: true,
         three: true,

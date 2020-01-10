@@ -28,7 +28,7 @@ Page({
       {
         name: "考勤",
         menuId: null,
-        icon: 'icon-kaoqin2',
+        icon: 'icon-kaoqin1',
         path: '/pages/sign/pact/pact'
       },
       {
@@ -41,7 +41,7 @@ Page({
         name: "轨迹",
         menuId: null,
         icon: 'icon-guiji1',
-        path: '/pages/track/task'
+        path: '/pages/track/track'
       },
       {
         name: "任务书",

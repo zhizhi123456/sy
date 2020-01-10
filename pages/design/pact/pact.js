@@ -13,15 +13,6 @@ Page({
     seach: '',
     loading: false,
     val: 0,
-    pact: [{
-        text: '全部设计任务',
-        value: 0
-      },
-      {
-        text: '我的设计任务',
-        value: 1
-      }
-    ],
     top: '设计任务',
     InfoList: [],
     info: {

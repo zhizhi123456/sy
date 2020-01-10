@@ -1,0 +1,3 @@
+.van-popup--bottom {
+    bottom: -56rpx;
+}

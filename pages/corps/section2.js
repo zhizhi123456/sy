@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    title:"",
+    title: "",
     menu: [{
         name: "分包项目",
         menuId: null,
@@ -29,8 +29,8 @@ Page({
       {
         name: "考勤",
         menuId: null,
-        icon: 'icon-kaoqin2',
-        path: ''
+        icon: 'icon-kaoqin1',
+        path: '/pages/sign/pact/pact'
       },
       {
         name: "定位",
@@ -42,7 +42,7 @@ Page({
         name: "轨迹",
         menuId: null,
         icon: 'icon-guiji1',
-        path: '/pages/track/task'
+        path: '/pages/track/track'
       },
       {
         name: "任务书",
@@ -59,15 +59,9 @@ Page({
     ],
   },
   return () {
-    if (this.data.caption == "我") {
-      util.returnMenu();
-    } else {
-      // console.log(this.data.title)
-      wx.redirectTo({
-    
-        url: "/pages/corps/members/members?name="+this.data.title
-      })
-    }
+    wx.redirectTo({
+      url: "/pages/corps/members/members?name=" + this.data.title
+    })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -80,9 +74,9 @@ Page({
         userid: options.userid,
         dep: options.dep,
         deptxt: options.deptxt,
-        title:options.title
+        title: options.title
       })
     }
   },
-  
+
 })

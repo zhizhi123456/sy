@@ -100,7 +100,7 @@ Page({
 
       {
         nametext: "仓库材料查询",
-        img: ".icon-zhongguohangtiantubiaoheji-weizhuanlunkuo- .green2",
+        img: "icon-zhongguohangtiantubiaoheji-weizhuanlunkuo- .green2",
         path: "/pages/material/pact/pact",
         control: true //权限
       }, {

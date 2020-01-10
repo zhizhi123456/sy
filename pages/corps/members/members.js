@@ -157,6 +157,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (options) {
+      this.setData({
+        caption: options.name,
+        userid: options.userid,
+        dep: options.dep,
+        deptxt: options.deptxt,
+        title: options.title
+      })
+    }
+  console.log(options.dep, options.deptxt)
+
     // console.log(options)
     qgroupcontractor().then(res => {
       //console.log(res.List)

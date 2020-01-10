@@ -60,7 +60,6 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-
     // 登录
     wx.login({
       success: res => {
@@ -76,7 +75,6 @@ App({
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
-
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
               if (this.userInfoReadyCallback) {
@@ -93,23 +91,12 @@ App({
         // console.log(res)
         let Principal = JSON.parse(res.replace(/userName/g, 'value').replace(/EmpName/g, 'text'));
         // console.log(Principal)
-        Principal.forEach((s, index) => {
-          if (s.text == null) {
-            // s.text = ' '
-            var a = Principal
-            a.splice(index, 1)
-            Principal = a
-            return 0
-          }
-          if (s.text == '') {
-            // s.text = ' '
-            var a = Principal
-            a.splice(index, 1)
-            Principal = a
-            return 0
-          }
+        var t = Principal.filter(s => {
+          return s.text
         })
-        this.globalData.Principal = Principal;
+
+        this.globalData.Principal = t;
+        // console.log(this.globalData.Principal)
       })
       // 总包项目
       projectall().then(res => {
@@ -128,7 +115,6 @@ App({
           let projectall = JSON.parse(n.replace(/projcectCode/g, 'value').replace(/projectname/g, 'text'));
           this.globalData.projectall = projectall;
         }
-
       })
       util.sumup(department, this, 'department', "techofficename", "ID");
       util.sumup(Companytitle, this, 'Companytitle', "Value", "Key");
@@ -191,60 +177,25 @@ App({
         this.globalData.employee = result;
         util.back(this, result)
       })
+      // 基础类库各项数据的调用
+      //分包项目
+      MainSubproject().then(res => {
+        if (res) {
+          let MainSubproject = JSON.parse(res.replace(/subprojcectCode/g, 'value').replace(/subprojectname/g, 'text'));
+          this.globalData.MainSubproject = MainSubproject;
+        }
+      })
+      // 材料明细
+      Goodsname().then(res => {
+        let Goodsname = JSON.parse(res);
+        this.globalData.Goodsname = Goodsname;
+      })
+      // 施工队id
+      ConstructionTeam().then(res => {
+        let ConstructionTeam = JSON.parse(res.replace(/ID/g, 'value').replace(/ConstructionName/g, 'text'));
+        this.globalData.ConstructionTeam = ConstructionTeam;
+      })
     }
-    // 基础类库各项数据的调用
-    //分包项目
-    MainSubproject().then(res => {
-      if (res) {
-        let MainSubproject = JSON.parse(res.replace(/subprojcectCode/g, 'value').replace(/subprojectname/g, 'text'));
-        this.globalData.MainSubproject = MainSubproject;
-      }
-    })
-
-    // 材料明细
-    Goodsname().then(res => {
-      let Goodsname = JSON.parse(res);
-      this.globalData.Goodsname = Goodsname;
-    })
-    // //联系人
-    // Contactman().then(res=>{
-    //   console.log(res)
-    // })
-    // //负责人
-    // Principal().then(res => {
-    //   // console.log(res)
-    //   let Principal = JSON.parse(res.replace(/userName/g, 'value').replace(/EmpName/g, 'text'));
-    //   Principal.forEach((s, index) => {
-    //     if (s.text == null) {
-    //       // s.text = ' '
-    //       var a= Principal
-    //       a.splice(index, 1)
-    //       Principal = a
-    //       return 0
-    //     }
-    //     if (s.text == '') {
-    //       // s.text = ' '
-    //       var a= Principal
-    //       a.splice(index, 1)
-    //       Principal = a
-    //       return 0
-    //     }
-    //   })
-    //   this.globalData.Principal = Principal;
-    // })
-    // // 供应商
-    // Supplier().then(res => {
-    //   console.log(res)
-    // })
-    // // 采购合同
-    // Purchasecontact().then(res => {
-    //   console.log(res)
-    // })
-    // 施工队id
-    ConstructionTeam().then(res => {
-      let ConstructionTeam = JSON.parse(res.replace(/ID/g, 'value').replace(/ConstructionName/g, 'text'));
-      this.globalData.ConstructionTeam = ConstructionTeam;
-    })
   },
   globalData: {
     mapadress: "",
@@ -255,128 +206,21 @@ App({
     pic: [],
     userInfo: null,
     time: util.format(new Date()),
-    YesOrNo:[{ID:3104,value:true,text:"是"},{ID:3105,value:false,text:"否"}],
-    YesOrNo1:[{value:3104,text:"是"},{value:3105,text:"否"}],
-    // 属性
-    nature: [{
-      ID: 3099,
-      value: "projectprop1",
-      text: "大包"
+    YesOrNo: [{
+      ID: 3104,
+      value: true,
+      text: "是"
     }, {
-      ID: 3100,
-      value: "projectprop2",
-      text: "轻包"
-    }, {
-      ID: 3101,
-      value: "projectprop3",
-      text: "采购"
-    }, {
-      ID: 3102,
-      value: "projectprop4",
-      text: "其它"
+      ID: 3105,
+      value: false,
+      text: "否"
     }],
-    // 类型
-    Allkinds: [{
-      ID: 3088,
-      value: "projecttype1",
-      text: "配套"
+    YesOrNo1: [{
+      value: 3104,
+      text: "是"
     }, {
-      ID: 3089,
-      value: "projecttype2",
-      text: "改造"
-    }, {
-      ID: 3090,
-      value: "projecttype3",
-      text: "共建"
-    }, {
-      ID: 3091,
-      value: "projecttype4",
-      text: "搬迁"
-    }, {
-      ID: 3092,
-      value: "projecttype5",
-      text: "铁塔"
-    }, {
-      ID: 3093,
-      value: "projecttype6",
-      text: "智能化"
-    }, {
-      ID: 3094,
-      value: "projecttype7",
-      text: "代维"
-    }, {
-      ID: 3095,
-      value: "projecttype8",
-      text: "外协"
-    }, {
-      ID: 3096,
-      value: "projecttype9",
-      text: "旧改线路"
-    }, {
-      ID: 3097,
-      value: "projecttype10",
-      text: "其它"
-    }],
-    concludesign: [{
-      ID: 3172,
-      value: "Ifmakecontactlist1",
-      text: "已签订"
-    }, {
-      ID: 3173,
-      value: "Ifmakecontactlist2",
-      text: "未签订"
-    }],
-    detaillink: [{
-      ID: 10014,
-      text: "sy-001",
-      goodsothercode: "sy-001-01",
-      goodsname: "戴尔电脑",
-      specifications: "灵越燃7000"
-    }, {
-      ID: 10015,
-      text: "sy-002",
-      goodsothercode: "sy-001-02",
-      goodsname: "惠普电脑",
-      specifications: "灵越燃7000"
-    }],
-    // 公司单位
-    unit: [{
-      ID: 10015,
-      text: "上海尚雍电子技术工程有限公司"
-    }, {
-      ID: 10016,
-      text: "上海尚雍实业有限公司"
-    }, {
-      ID: 10017,
-      text: "上海西部企业（集团）有限公司"
-    }, {
-      ID: 10018,
-      text: "上海菲冠环境科技有限公司"
-    }, {
-      ID: 10019,
-      text: "长城宽带"
-    }, {
-      ID: 10020,
-      text: "冠丰（上海）房地产发展有限公司"
-    }, {
-      ID: 10021,
-      text: "上海畅清建设工程有限公司"
-    }, {
-      ID: 10022,
-      text: "上海暄颐房地产开发有限公司"
-    }],
-    quality: [{
-      ID: 3162,
-      value: "installquality1",
-      text: "未安装"
-    }, {
-      ID: 3163,
-      value: "installquality2",
-      text: "合格"
-    }, {
-      ID: 3164,
-      value: "installquality3",
-      text: "不合格"
+      value: 3105,
+      text: "否"
     }],
     department: '',
     Companytitle: '',

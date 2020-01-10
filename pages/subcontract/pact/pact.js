@@ -335,6 +335,7 @@ Page({
   // 状态
   showPopup_3() {
     let userinfo = wx.getStorageSync("myInfo");
+    console.log(userinfo)
     if (userinfo) {
       let info = this.data.info;
       info[UserName] = userinfo.UserName;

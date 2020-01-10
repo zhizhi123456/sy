@@ -869,29 +869,17 @@ export const updateapplyForsmall = (params) => http.post("http://192.168.2.148:8
 // 删除
 export const delapplyForsmall = (params) => http.post("http://192.168.2.148:88/api/applyforminfo/Delete", params);
 
-// purchase
-// 采购合同
+// 申购
 // 查询
-export const querypurchase = (params) => http.post("http://192.168.2.148:88/api/purchasecontact/Query", params);
+export const queryofficeCost = (params) => http.post("http://192.168.2.148:88/api/OfficeCharge/Query", params);
 // 添加
-export const addpurchase = (params) => http.post("http://192.168.2.148:88/api/purchasecontact/Insert", params);
+export const addofficeCost = (params) => http.post("http://192.168.2.148:88/api/OfficeCharge/Insert", params);
 // 根据id查询
-export const detailpurchase = (params) => http.post("http://192.168.2.148:88/api/purchasecontact/Detail", params);
+export const detailofficeCost = (params) => http.post("http://192.168.2.148:88/api/OfficeCharge/Detail", params);
 // 更新
-export const updatepurchase = (params) =>  http.post("http://192.168.2.148:88/api/purchasecontact/Update", params);
+export const updateofficeCost = (params) =>  http.post("http://192.168.2.148:88/api/OfficeCharge/Update", params);
 // 删除
-export const delpurchase = (params) => http.post("http://192.168.2.148:88/api/purchasecontact/Delete", params);
+export const delofficeCost = (params) => http.post("http://192.168.2.148:88/api/applybuyform/Delete", params);
 // 综合查询
-export const qgrouppurchase = (params) =>  http.post("http://192.168.2.148:88/api/purchasecontact/Querygroup", params);
-// 申购明细
-// 查询
-export const querypurchasesmall = (params) => http.post("http://192.168.2.148:88/api/purchasecontactDetail/Detail", params);
-// 添加
-export const addpurchasesmall = (params) => http.post("http://192.168.2.148:88/api/purchasecontactDetail/Insert", params);
-// 根据id查询
-export const detailpurchasesmall = (params) => http.post("http://192.168.2.148:88/api/applybuyforminfo/Detail", params);
-// 更新
-export const updatepurchasesmall = (params) =>http.post("http://192.168.2.148:88/api/purchasecontactDetail/Update", params);
-// 删除
-export const delpurchasesmall = (params) => http.post("http://192.168.2.148:88/api/purchasecontactDetail/Detail", params);
+export const qgroupofficeCost = (params) =>  http.post("http://192.168.2.148:88/api/OfficeCharge/Querygroup", params);
 
