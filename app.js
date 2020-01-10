@@ -85,30 +85,12 @@ App({
         }
       }
     })
-   
     if (!this.globalData.CountItem[0]) {
       //负责人
       Principal().then(res => {
         // console.log(res)
         let Principal = JSON.parse(res.replace(/userName/g, 'value').replace(/EmpName/g, 'text'));
         // console.log(Principal)
-        Principal.forEach((s, index) => {
-          if (s.text == null) {
-            // s.text = ' '
-            var a= Principal
-            a.splice(index, 1)
-            Principal = a
-            return 0
-          }
-          if (s.text == '') {
-            // s.text = ' '
-            var a= Principal
-            a.splice(index, 1)
-            Principal = a
-            return 0
-          }
-        })
-        this.globalData.Principal = Principal;
         var t = Principal.filter(s => {
           return s.text
         })
@@ -139,7 +121,7 @@ App({
       util.sumup(staff, this, 'staff', "Name", "ID");
       util.sumup(source, this, 'source', "Value", "Key");
       util.sumup(Contactman, this, 'Contactman', "Name", "ID");
-      util.sumup(Principal, this, 'Principal', "EmpName", "userName");
+      // util.sumup(Principal, this, 'Principal', "EmpName", "userName");
       util.sumup(Servcietype, this, 'Servcietype', "Value", "Key");
       util.sumup(Projectprop, this, 'Projectprop', "Value", "Key");
       util.sumup(Projecttype, this, 'Projecttype', "Value", "Key");
@@ -195,108 +177,12 @@ App({
         this.globalData.employee = result;
         util.back(this, result)
       })
-    }
-
-    // 基础类库各项数据的调用
-    // // 部门
-    department().then(res => {
-      if (res) {
-        let department = JSON.parse(res.replace(/ID/g, 'value').replace(/techofficename/g, 'text'));
-        this.globalData.department = department;
-      }
-    })
-    // 公司抬头
-    Companytitle().then(res => {
-      // console.log(res)
-      if (res) {
-        let Companytitle = JSON.parse(res.replace(/Key/g, 'value').replace(/Value/g, 'text'));
-        this.globalData.Companytitle = Companytitle;
-      }
-    })
-    // 总包项目
-    MainProject().then(res => {
-      if (res) {
-        let MainProject = JSON.parse(res.replace(/projectname/g, 'value').replace(/projcectCode/g, 'text'));
-        this.globalData.MainProject = MainProject;
-        // console.log(this.globalData.MainProject)
-      }
-    })
-    //分包项目
-    MainSubproject().then(res => {
-      if (res) {
-        let MainSubproject = JSON.parse(res.replace(/subprojcectCode/g, 'value').replace(/subprojectname/g, 'text'));
-        this.globalData.MainSubproject = MainSubproject;
-      }
-    })
-    // 总包项目属性
-    Projectprop().then(res => {
-      let Projectprop = JSON.parse(res.replace(/Key/g, 'value').replace(/Value/g, 'text'));
-      this.globalData.Projectprop = Projectprop;
-      // console.log(this.globalData.Projectprop)
-    })
-    // 总包项目类型
-    Projecttype().then(res => {
-      let Projecttype = JSON.parse(res.replace(/Key/g, 'value').replace(/Value/g, 'text'));
-      this.globalData.Projecttype = Projecttype;
-      // console.log(this.globalData.Projecttype)
-    })
-    // 业务类型
-    Servcietype().then(res => {
-      // console.log(res)
-      let Servcietype = JSON.parse(res.replace(/Key/g, 'value').replace(/Value/g, 'text'));
-      this.globalData.Servcietype = Servcietype;
-    })
-    // 合同签订情况
-    Ifmakecontactlist().then(res => {
-      // console.log(res)
-      let Ifmakecontactlist = JSON.parse(res.replace(/Key/g, 'value').replace(/Value/g, 'text'));
-      this.globalData.Ifmakecontactlist = Ifmakecontactlist;
-    })
-    // 材料明细
-    Goodsname().then(res => {
-      let Goodsname = JSON.parse(res);
-      this.globalData.Goodsname = Goodsname;
-    })
-    // 公司单位
-    Customer().then(res => {
-      let Customer = JSON.parse(res);
-      Customer = Customer.map(s => {
-        return s.customername
-      })
-      this.globalData.Customer = Customer;
-    })
-    // 质量
-    InstallQuality().then(res => {
-      // console.log(res)
-      let InstallQuality = JSON.parse(res.replace(/Key/g, 'value').replace(/Value/g, 'text'));
-      this.globalData.InstallQuality = InstallQuality;
-    })
-    // 员工
-    staff().then(res => {
-      // console.log(res)
-      let staff = JSON.parse(res.replace(/ID/g, 'value').replace(/Name/g, 'text'));
-      this.globalData.staff = staff;
-    })
-    // 来源
-    source().then(res => {
-      // console.log(res)
-      let source = JSON.parse(res.replace(/Key/g, 'value').replace(/Value/g, 'text'));
-      this.globalData.source = source;
-    })
-    // //联系人
-    // Contactman().then(res=>{
-    //   console.log(res)
-    // })
-    //负责人
-    Principal().then(res => {
-      // console.log(res)
-      let Principal = JSON.parse(res.replace(/userName/g, 'value').replace(/EmpName/g, 'text'));
-      Principal.forEach(s => {
-        if (s.text == null) {
-          s.text = ' '
-        }
-        if (s.text == '') {
-          s.text = ' '
+      // 基础类库各项数据的调用
+      //分包项目
+      MainSubproject().then(res => {
+        if (res) {
+          let MainSubproject = JSON.parse(res.replace(/subprojcectCode/g, 'value').replace(/subprojectname/g, 'text'));
+          this.globalData.MainSubproject = MainSubproject;
         }
       })
       // 材料明细
@@ -309,12 +195,15 @@ App({
         let ConstructionTeam = JSON.parse(res.replace(/ID/g, 'value').replace(/ConstructionName/g, 'text'));
         this.globalData.ConstructionTeam = ConstructionTeam;
       })
-    })
+    }
   },
   globalData: {
     mapadress: "",
     pic: [],
-    NEWnum: [],
+    userInfo: null,
+    time: util.format(new Date()),
+    mapadress: "",
+    pic: [],
     userInfo: null,
     time: util.format(new Date()),
     YesOrNo: [{
@@ -391,5 +280,6 @@ App({
     }, {
       text: '已超时'
     }]
-  },
+  }
+
 })
