@@ -34,10 +34,16 @@ Page({
     starttime: "",
     endtime: "",
     hadNew: 1,
-    me: 0
+    me: 0,
+    constructionteam: 0
   },
   // 返回
   return () {
+    if (this.data.constructionteam) {
+      wx.redirectTo({
+        url: "/pages/corps/section2?name=" + this.data.caption + '&dep=' + this.data.dep + '&deptxt=' + this.data.deptxt + '&userid=' + this.data.userid
+      });
+    }
     if (this.data.hadNew || this.data.me) {
       let menus = wx.getStorageSync('menus');
       util.returnMenu2(menus.id, menus.title);
@@ -46,12 +52,19 @@ Page({
         url: "/pages/section/section2?name=" + this.data.caption + '&dep=' + this.data.dep + '&deptxt=' + this.data.deptxt + '&userid=' + this.data.userid
       })
     }
+
+
+
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options.userid)
+    if (options.constructionteam) {
+      this.setData({
+        constructionteam: options.constructionteam
+      })
+    }
     // 获取到  userid  token  tokrntype  开始时间 结束时间  设置给data
     // 获取到  userid  token  tokrntype   设置给info
     this.setData({
@@ -135,18 +148,18 @@ Page({
         success(res) {
           that.setData({
             top: '我的考勤打卡',
-            Token:res.data.Token,
+            Token: res.data.Token,
             TokenType: res.data.TokenType,
             UserID: res.data.ID,
             starttime: "2017-12-12",
             endtime: "2060-12-12",
             "info.Token": res.data.Token,
-            "info.TokenType":res.data.TokenType,
-            "info.UserID":  res.data.ID,
+            "info.TokenType": res.data.TokenType,
+            "info.UserID": res.data.ID,
           })
         }
       })
-   
+
       querysign({
         Token: this.data.Token,
         TokenType: this.data.TokenType,

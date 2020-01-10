@@ -353,7 +353,15 @@ Page({
                   control: true, //权限
                   three: true,
                   out: true
-                });
+                },
+                {
+                  nametext: "施工队管理",
+                  img: "icon-bumen .green4",
+                  path: "/pages/corps/section",
+                  control: true, //权限
+                  three: true,
+                },
+                );
                 that.setData({
                   lists: item
                 })

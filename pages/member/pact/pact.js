@@ -58,7 +58,8 @@ Page({
       title: '加载中',
     });
     querymember({
-      MemberName: this.data.seach
+      MemberName: this.data.seach,
+      UserName:"cc"
     }).then(res => {
       console.log(res)
       if (res.code == 10000) {

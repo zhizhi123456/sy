@@ -21,7 +21,8 @@ Page({
     show_endtime: false,
     top: '我的轨迹',
     hadNew: 1,
-    me: 0
+    me: 0,
+    constructionteam: 0
   },
 
   /**
@@ -29,6 +30,11 @@ Page({
    */
   onLoad: function (options) {
     // console.log(options)
+    if (options.constructionteam) {
+      this.setData({
+        constructionteam: options.constructionteam
+      })
+    }
     if (options.id) {
       wx.setStorageSync('menus', options)
     }
@@ -116,6 +122,12 @@ Page({
   },
   // 返回
   return () {
+    if (this.data.constructionteam) {
+      wx.redirectTo({
+        url: "/pages/corps/section2?name=" + this.data.caption + '&dep=' + this.data.dep + '&deptxt=' + this.data.deptxt + '&userid=' + this.data.userid
+      });
+
+    }
     if (this.data.hadNew || this.data.me) {
       let menus = wx.getStorageSync('menus');
       util.returnMenu2(menus.id, menus.title);
@@ -124,6 +136,8 @@ Page({
         url: "/pages/section/section2?name=" + this.data.caption + '&dep=' + this.data.dep + '&deptxt=' + this.data.deptxt + '&userid=' + this.data.userid
       });
     }
+
+
   },
   // 开始时间
   showPopup_time() {

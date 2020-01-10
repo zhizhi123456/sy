@@ -32,10 +32,16 @@ Page({
     show_3: false,
     me: 0,
     applyT: 0,
-    ISconduct: 0
+    ISconduct: 0,
+    constructionteam: 0
   },
   // 返回
   return () {
+    if (this.data.constructionteam) {
+      wx.redirectTo({
+        url: "/pages/corps/section2?name=" + this.data.caption + '&dep=' + this.data.dep + '&deptxt=' + this.data.deptxt + '&userid=' + this.data.userid
+      });
+    }
     if (this.data.hadNew || this.data.me) {
       util.returnMenu2(this.data.options.id || this.data.options.rid, this.data.options.title);
     } else if (this.data.applyT || this.data.ISconduct) {
@@ -47,6 +53,7 @@ Page({
         url: "/pages/section/section2?name=" + this.data.caption + '&dep=' + this.data.dep + '&deptxt=' + this.data.deptxt + '&userid=' + this.data.userid
       });
     }
+
   },
   setSeach(e) {
     // console.log(e)
@@ -138,6 +145,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (options.constructionteam) {
+      this.setData({
+        constructionteam: options.constructionteam
+      })
+    }
     userinfo = wx.getStorageSync("myInfo");
     if (options.id || options.rid) {
       this.setData({

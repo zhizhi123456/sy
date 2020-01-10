@@ -716,21 +716,6 @@ export const delcontractor = (params) => http.post("http://192.168.2.148:88/api/
 // 综合查询
 export const qgroupcontractor = (params) => http.post("http://192.168.2.148:88/api/ConstructionTeam/GroupQuery", params);
 
-
-
-//施工队成员
-// 查询
-export const querymember = (params) => http.post("http://192.168.2.148:88/api/ConstructionTeamMember/Query", params);
-// 添加
-export const addmember = (params) => http.post("http://192.168.2.148:88/api/ConstructionTeamMember/Insert", params);
-// 根据id查询
-export const detailmember = (params) => http.post("http://192.168.2.148:88/api/ConstructionTeamMember/Edit", params);
-// 更新
-export const updatemember = (params) => http.post("http://192.168.2.148:88/api/ConstructionTeamMember/EditInfo", params);
-// 删除
-export const delmember = (params) => http.post("http://192.168.2.148:88/api/ConstructionTeamMember/Delete", params);
-// 综合查询
-export const qgroupmember = (params) => http.post("http://192.168.2.148:88/api/ConstructionTeamMember/GroupQuery", params);
 //施工队id
 // 部门
 export const ConstructionTeam = () => http.get("http://192.168.2.148:88/api/MethodOfDataService/ConstructionTeam");
@@ -740,17 +725,20 @@ export const Personal = (params) => http.post("http://192.168.2.148:88/api/User/
 
 //施工队成员
 // 查询
-export const querydesign = (params) => http.post("http://192.168.2.148:88/api/designtask/Query", params);
+export const querymember = (params) => http.post("http://192.168.2.125:88/api/ConstructionTeamMember/Query", params);
 // 添加
-export const adddesign = (params) => http.post("http://192.168.2.148:88/api/designtask/Insert", params);
+export const addmember = (params) => http.post("http://192.168.2.125:88/api/ConstructionTeamMember/Insert", params);
 // 根据id查询
-export const detaildesign = (params) => http.post("http://192.168.2.148:88/api/designtask/Detail", params);
+export const detailmember = (params) => http.post("http://192.168.2.125:88/api/ConstructionTeamMember/Edit", params);
 // 更新
-export const updatedesign = (params) => http.post("http://192.168.2.148:88/api/designtask/Update", params);
+export const updatemember = (params) => http.post("http://192.168.2.125:88/api/ConstructionTeamMember/EditInfo", params);
 // 删除
-export const deldesign = (params) => http.post("http://192.168.2.148:88/api/designtask/Delete", params);
+export const delmember = (params) => http.post("http://192.168.2.125:88/api/ConstructionTeamMember/Delete", params);
 // 综合查询
-export const qgroupdesign = (params) => http.post("http://192.168.2.148:88/api/designtask/MulticonditionalQuery", params);
+export const qgroupmember = (params) => http.post("http://192.168.2.125:88/api/ConstructionTeamMember/GroupQuery", params);
+
+
+
 // 工程量统计之材料
 // 查询
 export const getScale = (params) => http.post("http://192.168.2.148:88/api/quantityStatisticMaterial/Query", params);
@@ -873,7 +861,7 @@ export const updateapplyForsmall = (params) => http.post("http://192.168.2.148:8
 // 删除
 export const delapplyForsmall = (params) => http.post("http://192.168.2.148:88/api/applyforminfo/Delete", params);
 
-// 申购
+// 办公费用
 // 查询
 export const queryofficeCost = (params) => http.post("http://192.168.2.148:88/api/OfficeCharge/Query", params);
 // 添加
@@ -887,3 +875,16 @@ export const delofficeCost = (params) => http.post("http://192.168.2.148:88/api/
 // 综合查询
 export const qgroupofficeCost = (params) =>  http.post("http://192.168.2.148:88/api/OfficeCharge/Querygroup", params);
 
+// 设计任务
+// 查询
+export const querydesign = (params) => http.post("http://192.168.2.148:88/api/designtask/Query", params);
+// 添加
+export const adddesign = (params) => http.post("http://192.168.2.148:88/api/designtask/Insert", params);
+// 根据id查询
+export const detaildesign = (params) => http.post("http://192.168.2.148:88/api/designtask/Detail", params);
+// 更新
+export const updatedesign = (params) => http.post("http://192.168.2.148:88/api/designtask/Update", params);
+// 删除
+export const deldesign = (params) => http.post("http://192.168.2.148:88/api/designtask/Delete", params);
+// 综合查询
+export const qgroupdesign = (params) => http.post("http://192.168.2.148:88/api/designtask/MulticonditionalQuery", params);

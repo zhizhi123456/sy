@@ -8,18 +8,19 @@ Page({
    */
   data: {
     title: "",
-    menu: [{
-        name: "分包项目",
-        menuId: null,
-        icon: 'icon-zhaotoubiao',
-        path: '/pages/subcontract/pact/pact'
-      },
-      {
-        name: "分包合同",
-        menuId: null,
-        icon: 'icon-fenbaohetong',
-        path: '/pages/contract/pact/pact'
-      },
+    menu: [
+      // {
+      //   name: "分包项目",
+      //   menuId: null,
+      //   icon: 'icon-zhaotoubiao',
+      //   path: '/pages/subcontract/pact/pact'
+      // },
+      // {
+      //   name: "分包合同",
+      //   menuId: null,
+      //   icon: 'icon-fenbaohetong',
+      //   path: '/pages/contract/pact/pact'
+      // },
       {
         name: "费用",
         menuId: null,
@@ -44,18 +45,18 @@ Page({
         icon: 'icon-guiji1',
         path: '/pages/track/track'
       },
-      {
-        name: "任务书",
-        menuId: null,
-        icon: 'icon-renwu green3',
-        path: '/pages/task/pact/pact'
-      },
-      {
-        name: "设计任务",
-        menuId: null,
-        icon: 'icon-lunkuodasan- .green4',
-        path: '/pages/design/pact/pact'
-      }
+      // {
+      //   name: "任务书",
+      //   menuId: null,
+      //   icon: 'icon-renwu green3',
+      //   path: '/pages/task/pact/pact'
+      // },
+      // {
+      //   name: "设计任务",
+      //   menuId: null,
+      //   icon: 'icon-lunkuodasan- .green4',
+      //   path: '/pages/design/pact/pact'
+      // }
     ],
   },
   return () {
@@ -68,6 +69,7 @@ Page({
    */
   onLoad: function (options) {
     // console.log(options)
+    console.log(options)
     if (options) {
       this.setData({
         caption: options.name,
