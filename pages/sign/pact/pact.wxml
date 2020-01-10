@@ -33,7 +33,6 @@
                             </van-cell-group>
                         </view>
                         <view class="seach_item">
-                              {{info}}
                             <van-field  value="{{info.startdate}}"  bind:focus="showPopup_time" class="time1" label="开始时间" placeholder="请选择"  />
                             <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
                                 <van-datetime-picker data-name="startdate" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
@@ -46,7 +45,6 @@
                             </van-popup>
                         </view>
                         <view class="checkkind">
-                           
                             <text bind:tap="onClose">取消</text>
                              <text bind:tap="seachqur">确认</text>
                         </view>

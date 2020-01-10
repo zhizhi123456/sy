@@ -20,6 +20,8 @@ Page({
     steps: [],
     material_list: [],
     table: "a",
+    returned: true,
+    isreturn: true,
   },
   // 返回
   return () {
@@ -63,7 +65,7 @@ Page({
       Timestamp: app.globalData.time,
       ID: this.data.info.ID
     }).then(res => {
-      console.log(res)
+      // console.log(res)
       if (res.code == 10000) {
         wx.showToast({
           title: '删除成功',
@@ -103,6 +105,16 @@ Page({
         applyT: Number(options.applyT),
         ISconduct: Number(options.ISconduct)
       })
+      if (options.caption == '我') {
+        this.setData({
+          me: 1,
+        })
+      }
+      if (options.caption == '我申请') {
+        this.setData({
+          applyT: 1
+        })
+      }
     }
     if (options.hadNew) {
       this.setData({
@@ -152,8 +164,6 @@ Page({
             util.workList(this, res.Item.formid)
           }
           util.checkState(this, res.Item.formid, 'losematerial', item.CurStepbh);
-
-
         }
       })
       console.log()

@@ -1044,7 +1044,7 @@ const Triggerflow = (key, direction, sheet, piece, id, cap, dep, dert, rid, tit)
       userName: userinfo.UserName,
       formName: sheet
     }).then(res => {
-      console.log(res)
+      // console.log(res)
       if (res.code == 10000) {
         if (direction == "next") {
           wx.showToast({
