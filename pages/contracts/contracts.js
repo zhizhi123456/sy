@@ -140,8 +140,7 @@ Page({
         nametext: "任务书",
         img: "icon-renwu green3",
         path: "/pages/task/pact/pact",
-        control: true //权限
-          ,
+        control: true, //权限
         three: true
       }, {
 

@@ -141,6 +141,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     userinfo = wx.getStorageSync("myInfo");
     list = [];
     wx.showLoading({
@@ -153,7 +154,6 @@ Page({
       })
     }
     if (options.userid) {
-      console.log("1")
       let info = this.data.info;
       info.UserId = options.userid;
       this.setData({

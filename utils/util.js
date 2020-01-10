@@ -1756,100 +1756,100 @@ const introlist = (list, that) => {
 //           Timestamp: app.globalData.time,
 //           ...that.data.info
 //         }
-// // const qgroupdeliver = (funcname, that) => {
-// //   var app = getApp();
-// //   let info = that.data.info;
-// //   wx.getStorage({
-// //     key: 'myInfo',
-// //     success(res) {
-// //       info.UserName = res.data.UserName
-// //     }
-// //   })
-// //   intro(info, this)
-// //   console.log(info)
+// const qgroupdeliver = (funcname, that) => {
+//   var app = getApp();
+//   let info = that.data.info;
+//   wx.getStorage({
+//     key: 'myInfo',
+//     success(res) {
+//       info.UserName = res.data.UserName
+//     }
+//   })
+//   intro(info, this)
+//   console.log(info)
 
-// //   for (let i in info) {
-// //     if (info[i] == "请选择" || !info[i] || info[i] == "") {
-// //       info[i] = null
-// //     }
-// //   }
-// //   if (info.quantity) {
-// //     info.quantity = Number(info.quantity)
-// //   }
-// //   if (info.departmentID) {
-// //     app.globalData.department.forEach(depart => {
-// //       if (info.departmentID == depart.text) {
-// //         info.departmentID = depart.value
-// //       }
-// //     })
-// //   }
-// //   if (info.department) {
-// //     app.globalData.department.forEach(depart => {
-// //       if (info.department == depart.text) {
-// //         info.department = depart.value
-// //       }
-// //     })
-// //   }
-// //   that.setData({
-// //     info
-// //   })
-// //   let infodata = {
-// //     Timestamp: app.globalData.time,
-// //     ...that.data.info
-// //   }
-// //   funcname(
-// //     infodata
-// //   ).then(res => {
-// //     console.log(res)
-// //     wx.showLoading({
-// //       title: '加载中',
-// //     });
-// //     if (res.code == 10000) {
-// //       wx.showToast({
-// //         title: '搜索成功',
-// //         icon: 'success',
-// //         duration: 3000
-// //       })
-// //       that.onClose()
-// //       let item
-// //       if (funcname == querysign) {
-// //         item = res.Lists;
-// //       } else {
-// //         item = res.List;
-// //       }
-// //       outflowlist(item, this)
-// //       for (let k of item) {
-// //         for (let i in k) {
-// //           if (k[i] == null || k[i] == "null" || !k[i]) {
-// //             k[i] = " "
-// //           }
-// //         }
-// //       }
-// //       item.forEach(value => {
-// //         app.globalData.department.forEach(depart => {
-// //           if (value.department == depart.value) {
-// //             value.department = depart.text
-// //           }
-// //         })
-// //         if (value.checkindate || value.condition) {
-// //           value.checkindate = value.checkindate.substring(0, 10)
-// //           // value.Checkintime = value.Checkintime.substring(10)
-// //           value.condition == "忘打卡" ? value.Checkintime = '' : value.condition
-// //         }
-// //       });
-// //       that.setData({
-// //         InfoList: item.reverse()
-// //       })
+//   for (let i in info) {
+//     if (info[i] == "请选择" || !info[i] || info[i] == "") {
+//       info[i] = null
+//     }
+//   }
+//   if (info.quantity) {
+//     info.quantity = Number(info.quantity)
+//   }
+//   if (info.departmentID) {
+//     app.globalData.department.forEach(depart => {
+//       if (info.departmentID == depart.text) {
+//         info.departmentID = depart.value
+//       }
+//     })
+//   }
+//   if (info.department) {
+//     app.globalData.department.forEach(depart => {
+//       if (info.department == depart.text) {
+//         info.department = depart.value
+//       }
+//     })
+//   }
+//   that.setData({
+//     info
+//   })
+//   let infodata = {
+//     Timestamp: app.globalData.time,
+//     ...that.data.info
+//   }
+//   funcname(
+//     infodata
+//   ).then(res => {
+//     console.log(res)
+//     wx.showLoading({
+//       title: '加载中',
+//     });
+//     if (res.code == 10000) {
+//       wx.showToast({
+//         title: '搜索成功',
+//         icon: 'success',
+//         duration: 3000
+//       })
+//       that.onClose()
+//       let item
+//       if (funcname == querysign) {
+//         item = res.Lists;
+//       } else {
+//         item = res.List;
+//       }
+//       outflowlist(item, this)
+//       for (let k of item) {
+//         for (let i in k) {
+//           if (k[i] == null || k[i] == "null" || !k[i]) {
+//             k[i] = " "
+//           }
+//         }
+//       }
+//       item.forEach(value => {
+//         app.globalData.department.forEach(depart => {
+//           if (value.department == depart.value) {
+//             value.department = depart.text
+//           }
+//         })
+//         if (value.checkindate || value.condition) {
+//           value.checkindate = value.checkindate.substring(0, 10)
+//           // value.Checkintime = value.Checkintime.substring(10)
+//           value.condition == "忘打卡" ? value.Checkintime = '' : value.condition
+//         }
+//       });
+//       that.setData({
+//         InfoList: item.reverse()
+//       })
 
-// //       wx.hideLoading();
-// //     } else {
-// //       let info = that.data.info;
-// //       info.picurl = [];
-// //       that.setData({
-// //         info
-// //       })
-//   //   }
-//   // })
+//       wx.hideLoading();
+//     } else {
+//       let info = that.data.info;
+//       info.picurl = [];
+//       that.setData({
+//         info
+//       })
+//     }
+//   })
 
 //   const dispose = () => {
 
@@ -2027,7 +2027,7 @@ const title = (() => {
 module.exports = {
   title,
   qgroupsmall,
-  qgroupdeliver,
+  // qgroupdeliver,
   outflow,
   intro,
   whethercontent,
@@ -2071,5 +2071,5 @@ module.exports = {
   whethercontent1,
   getBase,
   back,
-  sumup,
+  sumup
 }

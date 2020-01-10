@@ -496,13 +496,9 @@ Page({
         control: true,
       },
       {
-        // nametext: "我的任务书",
-        // img: "icon-lunkuodasan- green2",
-        // path: "/pages/task/pact/pact",
-
         nametext: "我的任务书",
-        img: "icon-renwu green3",
-        path: "/pages/task/pact/pact?hadMy=1",
+        img: "icon-lunkuodasan- green2",
+        path: "/pages/task/pact/pact",
         control: true //权限
       },
       {

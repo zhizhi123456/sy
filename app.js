@@ -51,18 +51,7 @@ import {
   CountItem,
   Team,
   employee,
-<<<<<<< HEAD
-  groupSubItems,
-  groupContract,
-  groupTask,
-  groupCost,
-  groupBill,
-  groupReturnM,
-  groupPnumber
-
-=======
   projectall
->>>>>>> 924cd74c3e3f5d3e1c7eaa447c3ec2551b5df491
 } from "./service/getData";
 var util = require("./utils/util");
 App({
@@ -96,112 +85,7 @@ App({
         }
       }
     })
-    // //获取新信息
-    // groupSubItems({
-    //   UserName: wx.getStorageSync("myInfo").UserName,
-    // }).then(res => {
-    //   if (res.code == 10000) {
-    //     let item = res.List,
-    //       num = 0;
-    //     item.forEach(ele => {
-    //       if (ele.ApplygetNew) {
-    //         num += 1;
-    //       }
-    //     })
-    //     this.globalData.NEWnum.push(num);
-    //     util.back(this,num);
-    //   }
-    // })
-    // groupContract({
-    //   createman: wx.getStorageSync("myInfo").UserName,
-    // }).then(res => {
-    //   if (res.code == 10000) {
-    //     let item = res.List,
-    //       num = 0;
-    //     item.forEach(ele => {
-    //       if (ele.ApplygetNew) {
-    //         num += 1;
-    //       }
-    //     })
-    //     this.globalData.NEWnum.push(num);
-    //     util.back(this,num);
-    //   }
-    // })
-    // groupTask({
-    //   UserName: wx.getStorageSync("myInfo").UserName,
-    // }).then(res => {
-    //   if (res.code == 10000) {
-    //     let item = res.List,
-    //       num = 0;
-    //     item.forEach(ele => {
-    //       if (ele.ApplygetNew) {
-    //         num += 1;
-    //       }
-    //     })
-    //     this.globalData.NEWnum.push(num);
-    //     util.back(this,num);
-    //   }
-    // })
-    // groupCost({
-    //   UserName: wx.getStorageSync("myInfo").UserName,
-    // }).then(res => {
-    //   if (res.code == 10000) {
-    //     let item = res.List,
-    //       num = 0;
-    //     item.forEach(ele => {
-    //       if (ele.ApplygetNew) {
-    //         num += 1;
-    //       }
-    //     })
-    //     this.globalData.NEWnum.push(num);
-    //     util.back(this,num);
-    //   }
-    // })
-    // groupBill({
-    //   applyman: wx.getStorageSync("myInfo").UserName,
-    // }).then(res => {
-    //   if (res.code == 10000) {
-    //     let item = res.List,
-    //       num = 0;
-    //     item.forEach(ele => {
-    //       if (ele.ApplygetNew) {
-    //         num += 1;
-    //       }
-    //     })
-    //     this.globalData.NEWnum.push(num);
-    //     util.back(this,num);
-    //   }
-    // })
-    // groupReturnM({
-    //   applyman: wx.getStorageSync("myInfo").UserName,
-    // }).then(res => {
-    //   if (res.code == 10000) {
-    //     let item = res.List,
-    //       num = 0;
-    //     item.forEach(ele => {
-    //       if (ele.ApplygetNew) {
-    //         num += 1;
-    //       }
-    //     })
-    //     this.globalData.NEWnum.push(num);
-    //     util.back(this,num);
-    //   }
-    // })
-    // groupPnumber({
-    //   createman: wx.getStorageSync("myInfo").UserName,
-    // }).then(res => {
-    //   if (res.code == 10000) {
-    //     let item = res.List,
-    //       num = 0;
-    //     item.forEach(ele => {
-    //       if (ele.ApplygetNew) {
-    //         num += 1;
-    //       }
-    //     })
-    //     this.globalData.NEWnum.push(num);
-    //     util.back(this,num);
-    //   }
-    // })
+   
     if (!this.globalData.CountItem[0]) {
       //负责人
       Principal().then(res => {
@@ -425,7 +309,7 @@ App({
         let ConstructionTeam = JSON.parse(res.replace(/ID/g, 'value').replace(/ConstructionName/g, 'text'));
         this.globalData.ConstructionTeam = ConstructionTeam;
       })
-    }
+    })
   },
   globalData: {
     mapadress: "",
