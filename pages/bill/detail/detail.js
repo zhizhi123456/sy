@@ -92,6 +92,16 @@ Page({
         applyT: Number(options.applyT),
         ISconduct:Number(options.ISconduct)
       })
+      if (options.caption == '我') {
+        this.setData({
+          me: 1,
+        })
+      }
+      if (options.caption == '我申请') {
+        this.setData({
+          applyT: 1
+        })
+      }
     }
     wx.showLoading({
       title: '加载中',

@@ -36,6 +36,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // console.log(options)
     if (options.nape && options.returnid) {
       let nape = options.nape,
         returnid = options.returnid;
@@ -61,6 +62,16 @@ Page({
         hadNew: Number(options.hadNew),
         ISconduct: Number(options.ISconduct)
       })
+      if (options.caption == '我') {
+        this.setData({
+          me: 1,
+        })
+      }
+      if (options.caption == '我申请') {
+        this.setData({
+          applyT: 1
+        })
+      }
     }
     wx.showLoading({
       title: '加载中',

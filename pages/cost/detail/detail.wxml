@@ -2,9 +2,7 @@
 <view wx:if="{{info}}">
     <view class="header d_header">
         <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
-        <text wx:if="{{hadNew||me||applyT}}" class="fr newCreate" bindtap="delete">
-            删除
-        </text>
+        <text wx:if="{{hadNew||me||applyT}}" class="fr newCreate" bindtap="delete">删除</text>
         <view class="apply">资料详情</view>
     </view>
     <view class="card">
@@ -103,7 +101,7 @@
             <text>退回上步</text>
         </view>
         <view>
-            <navigator url="/pages/cost/new/new?id={{info.ID}}&rid={{rid}}&title={{title}}&{{userid?'userid='+userid+'&caption='+caption+'&dep='+dep+'&deptxt='+deptxt+'&ISconduct='+ISconduct:''}}" hover-class="none">
+            <navigator url="/pages/cost/new/new?id={{info.ID}}&rid={{rid}}&title={{title}}&{{userid?'userid='+userid+'&caption='+caption+'&dep='+dep+'&deptxt='+deptxt+'&ISconduct='+ISconduct+'&me='+me+'&applyT='+applyT:''}}" hover-class="none">
                 <icon class="iconfont icon-bianji"></icon>
                 <text>编辑</text>
             </navigator>
