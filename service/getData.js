@@ -83,27 +83,27 @@ export const Role = () => http.get("http://192.168.2.148:88/api/MethodOfDataServ
 // 工作流名称
 export const WorkflowName = () => http.get("http://192.168.2.148:88/api/MethodOfDataService/GetWorkflowName");
 //费用类型
-export const costkind = () => http.get("http://192.168.2.125:88/api/MethodOfDataService/chargetypeList");
+export const costkind = () => http.get("http://192.168.2.148:88/api/MethodOfDataService/chargetypeList");
 //费用对象
-export const costobj = () => http.get("http://192.168.2.125:88/api/MethodOfDataService/usechargemanList");
+export const costobj = () => http.get("http://192.168.2.148:88/api/MethodOfDataService/usechargemanList");
 //交底类别
-export const IntentionClass = () => http.get("http://192.168.2.125:88/api/MethodOfDataService/TellIntentionClass");
+export const IntentionClass = () => http.get("http://192.168.2.148:88/api/MethodOfDataService/TellIntentionClass");
 // 统计年月
-export const CountYear = () => http.get("http://192.168.2.125:88/api/MethodOfDataService/CountYearMonthList");
+export const CountYear = () => http.get("http://192.168.2.148:88/api/MethodOfDataService/CountYearMonthList");
 // 工程进度
-export const Engineer = (params) => http.post("http://192.168.2.125:88/api/MethodOfDataService/EngineerProgressList", params);
+export const Engineer = (params) => http.post("http://192.168.2.148:88/api/MethodOfDataService/EngineerProgressList", params);
 // 工程进度的统计项目
-export const CountItem = () => http.get("http://192.168.2.125:88/api/MethodOfDataService/CountItemList");
+export const CountItem = () => http.get("http://192.168.2.148:88/api/MethodOfDataService/CountItemList");
 // 施工队
-export const Team = () => http.get("http://192.168.2.125:88/api/MethodOfDataService/ConstructionTeam");
+export const Team = () => http.get("http://192.168.2.148:88/api/MethodOfDataService/ConstructionTeam");
 // 部门员工
-export const employee = (params) => http.post("http://192.168.2.125:88/api/MethodOfDataService/DepartmentStaff", params);
+export const employee = (params) => http.post("http://192.168.2.148:88/api/MethodOfDataService/DepartmentStaff", params);
 //员工ID
-export const userID = (params) => http.post("http://192.168.2.125:88/api/MethodOfDataService/GetUserId", params);
+export const userID = (params) => http.post("http://192.168.2.148:88/api/MethodOfDataService/GetUserId", params);
 //员工->部门
-export const getdep = (params) => http.post("http://192.168.2.125:88/api/MethodOfDataService/GetUserDepartment", params);
+export const getdep = (params) => http.post("http://192.168.2.148:88/api/MethodOfDataService/GetUserDepartment", params);
 //员工ID->姓名
-export const getName = (params) => http.post("http://192.168.2.125:88/api/MethodOfDataService/GetUserNameAndEmpName", params);
+export const getName = (params) => http.post("http://192.168.2.148:88/api/MethodOfDataService/GetUserNameAndEmpName", params);
 // =================================================================================================================================================================
 // 工作流接口
 // 工作流流转
@@ -111,11 +111,11 @@ export const flow = (params) => http.post("http://192.168.2.148:88/api/SubmitWor
 // 工作流记录
 export const record = (params) => http.post("http://192.168.2.148:88/api/SubmitWorkFlowService/GetWorkflowRecord", params)
 // 获取工作流是否有效时间
-export const valid = (params) => http.post("http://192.168.2.125:88/api/SubmitWorkFlowService/GetWorkflowIsvalidtime", params);
+export const valid = (params) => http.post("http://192.168.2.148:88/api/SubmitWorkFlowService/GetWorkflowIsvalidtime", params);
 // 工作流是否已处理
-export const past = (params) => http.post("http://192.168.2.125:88/api/SubmitWorkFlowService/ConvertUseridToName", params);
+export const past = (params) => http.post("http://192.168.2.148:88/api/SubmitWorkFlowService/ConvertUseridToName", params);
 // 工作流可回退
-export const returned = (params) => http.post("http://192.168.2.125:88/api/SubmitWorkFlowService/returned", params);
+export const returned = (params) => http.post("http://192.168.2.148:88/api/SubmitWorkFlowService/returned", params);
 // =================================================================================================================================================================
 // 总包合同
 // 查询列表
@@ -123,7 +123,7 @@ export const getQuery = (params) => http.post('http://192.168.2.148:88/api/mainc
 // 根据id查询
 export const referId = (params) => http.post('http://192.168.2.148:88/api/maincontact/Edit', params);
 // 组合查询
-export const groupId = (params) => http.post('http://192.168.2.125:88/api/maincontact/GroupQuery', params);
+export const groupId = (params) => http.post('http://192.168.2.148:88/api/maincontact/GroupQuery', params);
 // 添加
 export const addPact = (params) => http.post('http://192.168.2.148:88/api/maincontact/Insert', params);
 // 修改
@@ -158,13 +158,13 @@ export const cancelBdetail = (params) => http.post('http://192.168.2.148:88/api/
 // 查询
 export const getSubItems = (params) => http.post("http://192.168.2.148:88/api/subproject/Query", params);
 // 根据id查询
-export const referSubItems = (params) => http.post("http://192.168.2.148:88/api/subproject/Edit", params);
+export const referSubItems = (params) => http.post("http://192.168.2.125:88/api/subproject/Edit", params);
 // 组合查询
 export const groupSubItems = (params) => http.post("http://192.168.2.125:88/api/subproject/GroupQuery", params);
 // 添加
 export const addSubItems = (params) => http.post("http://192.168.2.148:88/api/subproject/Insert", params);
 // 修改
-export const amendSubItems = (params) => http.post("http://192.168.2.125:88/api/subproject/EditInfo", params);
+export const amendSubItems = (params) => http.post("http://192.168.2.148:88/api/subproject/EditInfo", params);
 // 删除
 export const cancelSubItems = (params) => http.post("http://192.168.2.148:88/api/subproject/Delete", params);
 // 任务书
@@ -181,7 +181,7 @@ export const amendTask = (params) => http.post("http://192.168.2.148:88/api/prja
 // 删除
 export const cancelTask = (params) => http.post("http://192.168.2.148:88/api/prjassignbook/Delete", params);
 // 综合查询
-export const qgroupTask = (params) => http.post("http://192.168.2.125:88/api/prjassignbook/GroupQuery", params);
+export const qgroupTask = (params) => http.post("http://192.168.2.148:88/api/prjassignbook/GroupQuery", params);
 
 // 分包合同
 // 查询
@@ -224,7 +224,7 @@ export const getShelter = (params) => http.post("http://192.168.2.148:88/api/hid
 // 根据id查询
 export const referShelter = (params) => http.post("http://192.168.2.148:88/api/hideprojectrecord/Edit", params);
 // 组合查询
-export const groupShelter = (params) => http.post("http://192.168.2.125:88/api/hideprojectrecord/GroupQuery", params);
+export const groupShelter = (params) => http.post("http://192.168.2.148:88/api/hideprojectrecord/GroupQuery", params);
 // 添加
 export const addShelter = (params) => http.post("http://192.168.2.148:88/api/hideprojectrecord/Insert", params);
 // 修改
@@ -332,37 +332,37 @@ export const updatefollow = (params) => http.post("http://192.168.2.148:88/api/A
 // 随工记录 删除
 export const delfollow = (params) => http.post("http://192.168.2.148:88/api/AccompanyRecord/Delete", params);
 // 综合查询
-export const qgroupfollow = (params) => http.post("http://192.168.2.125:88/api/AccompanyRecord/GroupQuery", params);
+export const qgroupfollow = (params) => http.post("http://192.168.2.148:88/api/AccompanyRecord/GroupQuery", params);
 
 
 // 安全技术交底记录
 // 查询
-export const getSafety = (params) => http.post("http://192.168.2.125:88/api/SafeTechTellIntention/Query", params);
+export const getSafety = (params) => http.post("http://192.168.2.148:88/api/SafeTechTellIntention/Query", params);
 // 根据id查询
-export const referSafety = (params) => http.post("http://192.168.2.125:88/api/SafeTechTellIntention/Edit", params);
+export const referSafety = (params) => http.post("http://192.168.2.148:88/api/SafeTechTellIntention/Edit", params);
 // 添加
-export const addSafety = (params) => http.post("http://192.168.2.125:88/api/SafeTechTellIntention/Insert", params);
+export const addSafety = (params) => http.post("http://192.168.2.148:88/api/SafeTechTellIntention/Insert", params);
 // 修改
-export const amendSafety = (params) => http.post("http://192.168.2.125:88/api/SafeTechTellIntention/EditInfo", params);
+export const amendSafety = (params) => http.post("http://192.168.2.148:88/api/SafeTechTellIntention/EditInfo", params);
 // 删除
-export const cancelSafety = (params) => http.post("http://192.168.2.125:88/api/SafeTechTellIntention/Delete", params);
+export const cancelSafety = (params) => http.post("http://192.168.2.148:88/api/SafeTechTellIntention/Delete", params);
 // 费用
 // 查询
-export const getCost = (params) => http.post("http://192.168.2.125:88/api/charge/Query", params);
+export const getCost = (params) => http.post("http://192.168.2.148:88/api/charge/Query", params);
 // 根据id查询
-export const referCost = (params) => http.post("http://192.168.2.125:88/api/charge/Edit", params);
+export const referCost = (params) => http.post("http://192.168.2.148:88/api/charge/Edit", params);
 // 组合查询
 export const groupCost = (params) => http.post("http://192.168.2.125:88/api/charge/GroupQuery", params);
 // 添加
-export const addCost = (params) => http.post("http://192.168.2.125:88/api/charge/Insert", params);
+export const addCost = (params) => http.post("http://192.168.2.148:88/api/charge/Insert", params);
 // 修改
-export const amendCost = (params) => http.post("http://192.168.2.125:88/api/charge/EditInfo", params);
+export const amendCost = (params) => http.post("http://192.168.2.148:88/api/charge/EditInfo", params);
 // 删除
 export const cancelCost = (params) => http.post("http://192.168.2.148:88/api/charge/Delete", params);
 // 从总包项目中查询费用
-export const selectCost = (params) => http.post("http://192.168.2.125:88/api/charge/LookCharge", params);
+export const selectCost = (params) => http.post("http://192.168.2.148:88/api/charge/LookCharge", params);
 // 材料采购
-// 查询P
+// 查询
 export const getPurchase = (params) => http.post("http://192.168.2.148:88/api/purchasecontact/Query", params);
 // 根据id查询
 export const referPurchase = (params) => http.post("http://192.168.2.148:88/api/purchasecontact/Detail", params);
@@ -466,17 +466,17 @@ export const qgroupmaterial = (params) => http.post("http://192.168.2.148:88/api
 
 // 开停工记录
 // 查询
-export const querycease = (params) => http.post("http://192.168.2.125:88/api/projectNotice/Query", params);
+export const querycease = (params) => http.post("http://192.168.2.148:88/api/projectNotice/Query", params);
 // 添加
-export const addcease = (params) => http.post("http://192.168.2.125:88/api/projectNotice/Insert", params);
+export const addcease = (params) => http.post("http://192.168.2.148:88/api/projectNotice/Insert", params);
 // 根据id查询
-export const detailcease = (params) => http.post("http://192.168.2.125:88/api/projectNotice/Edit", params);
+export const detailcease = (params) => http.post("http://192.168.2.148:88/api/projectNotice/Edit", params);
 // 更新
-export const updatecease = (params) => http.post("http://192.168.2.125:88/api/projectNotice/EditInfo", params);
+export const updatecease = (params) => http.post("http://192.168.2.148:88/api/projectNotice/EditInfo", params);
 // 删除
-export const delcease = (params) => http.post("http://192.168.2.125:88/api/projectNotice/Delete", params);
+export const delcease = (params) => http.post("http://192.168.2.148:88/api/projectNotice/Delete", params);
 // 组合查询
-export const qgroupcease = (params) => http.post("http://192.168.2.125:88/api/projectNotice/GroupQuery", params);
+export const qgroupcease = (params) => http.post("http://192.168.2.148:88/api/projectNotice/GroupQuery", params);
 
 
 // 送货查询
@@ -521,7 +521,7 @@ export const amendLedger = (params) => http.post("http://192.168.2.148:88/api/st
 // 删除
 export const cancelLedger = (params) => http.post("http://192.168.2.148:88/api/standingbook/Delete", params);
 // 综合查询
-export const qgroupLedger = (params) => http.post("http://192.168.2.125:88/api/standingbook/GroupQuery", params);
+export const qgroupLedger = (params) => http.post("http://192.168.2.148:88/api/standingbook/GroupQuery", params);
 
 //考勤
 // 添加
@@ -535,43 +535,43 @@ export const groupSign = (params) => http.post("http://192.168.2.148:88/api/Chec
 
 // 建筑分布验收
 // 查询
-export const querybuilding = (params) => http.post("http://192.168.2.125:88/api/buildingAcceptance/Query", params);
+export const querybuilding = (params) => http.post("http://192.168.2.148:88/api/buildingAcceptance/Query", params);
 // 添加
-export const addbuilding = (params) => http.post("http://192.168.2.125:88/api/buildingAcceptance/Insert", params);
+export const addbuilding = (params) => http.post("http://192.168.2.148:88/api/buildingAcceptance/Insert", params);
 // 根据id查询
-export const detailbuilding = (params) => http.post("http://192.168.2.125:88/api/buildingAcceptance/Edit", params);
+export const detailbuilding = (params) => http.post("http://192.168.2.148:88/api/buildingAcceptance/Edit", params);
 // 更新
-export const updatebuilding = (params) => http.post("http://192.168.2.125:88/api/buildingAcceptance/EditInfo", params);
+export const updatebuilding = (params) => http.post("http://192.168.2.148:88/api/buildingAcceptance/EditInfo", params);
 // 删除
-export const delbuilding = (params) => http.post("http://192.168.2.125:88/api/buildingAcceptance/Delete", params);
+export const delbuilding = (params) => http.post("http://192.168.2.148:88/api/buildingAcceptance/Delete", params);
 // 综合查询
-export const qgroupbuilding = (params) => http.post("http://192.168.2.125:88/api/buildingAcceptance/GroupQuery", params);
+export const qgroupbuilding = (params) => http.post("http://192.168.2.148:88/api/buildingAcceptance/GroupQuery", params);
 // 建筑分布验收明细
 // 查询
-export const querybuildingsmall = (params) => http.post("http://192.168.2.125:88/api/buildingAcceptancedetail/Query", params);
+export const querybuildingsmall = (params) => http.post("http://192.168.2.148:88/api/buildingAcceptancedetail/Query", params);
 // 添加
-export const addbuildingsmall = (params) => http.post("http://192.168.2.125:88/api/buildingAcceptancedetail/Insert", params);
+export const addbuildingsmall = (params) => http.post("http://192.168.2.148:88/api/buildingAcceptancedetail/Insert", params);
 // 根据id查询
-export const detailbuildingsmall = (params) => http.post("http://192.168.2.125:88/api/buildingAcceptancedetail/Edit", params);
+export const detailbuildingsmall = (params) => http.post("http://192.168.2.148:88/api/buildingAcceptancedetail/Edit", params);
 // 更新
-export const updatebuildingsmall = (params) => http.post("http://192.168.2.125:88/api/buildingAcceptancedetail/EditInfo", params);
+export const updatebuildingsmall = (params) => http.post("http://192.168.2.148:88/api/buildingAcceptancedetail/EditInfo", params);
 // 删除
-export const delbuildingsmall = (params) => http.post("http://192.168.2.125:88/api/buildingAcceptancedetail/Delete", params);
+export const delbuildingsmall = (params) => http.post("http://192.168.2.148:88/api/buildingAcceptancedetail/Delete", params);
 
 
 // 工程质量报告
 // 查询
-export const queryquality = (params) => http.post("http://192.168.2.125:88/api/projectsupervision/Query", params);
+export const queryquality = (params) => http.post("http://192.168.2.148:88/api/projectsupervision/Query", params);
 // 添加
-export const addquality = (params) => http.post("http://192.168.2.125:88/api/projectsupervision/Insert", params);
+export const addquality = (params) => http.post("http://192.168.2.148:88/api/projectsupervision/Insert", params);
 // 根据id查询
-export const detailquality = (params) => http.post("http://192.168.2.125:88/api/projectsupervision/Edit", params);
+export const detailquality = (params) => http.post("http://192.168.2.148:88/api/projectsupervision/Edit", params);
 // 更新
-export const updatequality = (params) => http.post("http://192.168.2.125:88/api/projectsupervision/EditInfo", params);
+export const updatequality = (params) => http.post("http://192.168.2.148:88/api/projectsupervision/EditInfo", params);
 // 删除
-export const delquality = (params) => http.post("http://192.168.2.125:88/api/projectsupervision/Delete", params);
+export const delquality = (params) => http.post("http://192.168.2.148:88/api/projectsupervision/Delete", params);
 // 综合查询
-export const qgroupquality = (params) => http.post("http://192.168.2.125:88/api/projectsupervision/GroupQuery", params);
+export const qgroupquality = (params) => http.post("http://192.168.2.148:88/api/projectsupervision/GroupQuery", params);
 
 // 线缆质量验收
 // 查询
@@ -631,9 +631,9 @@ export const updatesecuritysmall = (params) => http.post("http://192.168.2.148:8
 export const delsecuritysmall = (params) => http.post("http://192.168.2.148:88/api/SecurityKgRecordDetail/Delete", params);
 
 // authority  工作流当前用户是否可以处理
-export const authority = (params) => http.post("http://192.168.2.125:88/api/SubmitWorkFlowService/GetWorkflowIsvalidtime", params);
-export const authoritytwo = (params) => http.post("http://192.168.2.125:88/api/SubmitWorkFlowService/ConvertUseridToName", params);
-export const sendback = (params) => http.post("http://192.168.2.125:88/api/SubmitWorkFlowService/returned", params);
+export const authority = (params) => http.post("http://192.168.2.148:88/api/SubmitWorkFlowService/GetWorkflowIsvalidtime", params);
+export const authoritytwo = (params) => http.post("http://192.168.2.148:88/api/SubmitWorkFlowService/ConvertUseridToName", params);
+export const sendback = (params) => http.post("http://192.168.2.148:88/api/SubmitWorkFlowService/returned", params);
 
 // 项目月度报表
 export const queryreport = (params) => http.post("http://192.168.2.148:88/api/projectmonthlyscoreSynthesize/Query", params);
@@ -656,89 +656,89 @@ export const delcheck = (params) => http.post("http://192.168.2.148:88/api/proje
 
 // 开工报告
 // 查询
-export const querystartUp = (params) => http.post("http://192.168.2.125:88/api/startProReport/Query", params);
+export const querystartUp = (params) => http.post("http://192.168.2.148:88/api/startProReport/Query", params);
 // 添加
-export const addstartUp = (params) => http.post("http://192.168.2.125:88/api/startProReport/Insert", params);
+export const addstartUp = (params) => http.post("http://192.168.2.148:88/api/startProReport/Insert", params);
 // 根据id查询
-export const detailstartUp = (params) => http.post("http://192.168.2.125:88/api/startProReport/Edit", params);
+export const detailstartUp = (params) => http.post("http://192.168.2.148:88/api/startProReport/Edit", params);
 // 更新
-export const updatestartUp = (params) => http.post("http://192.168.2.125:88/api/startProReport/EditInfo", params);
+export const updatestartUp = (params) => http.post("http://192.168.2.148:88/api/startProReport/EditInfo", params);
 // 删除
-export const delstartUp = (params) => http.post("http://192.168.2.125:88/api/startProReport/Delete", params);
+export const delstartUp = (params) => http.post("http://192.168.2.148:88/api/startProReport/Delete", params);
 // 综合查询
-export const qgroupstartUp = (params) => http.post("http://192.168.2.125:88/api/startProReport/GroupQuery", params);
+export const qgroupstartUp = (params) => http.post("http://192.168.2.148:88/api/startProReport/GroupQuery", params);
 
 
 // 完工报告
 // 查询
-export const querycomplete = (params) => http.post("http://192.168.2.125:88/api/EngineerCompleteRpt/Query", params);
+export const querycomplete = (params) => http.post("http://192.168.2.148:88/api/EngineerCompleteRpt/Query", params);
 // 添加
-export const addcomplete = (params) => http.post("http://192.168.2.125:88/api/EngineerCompleteRpt/Insert", params);
+export const addcomplete = (params) => http.post("http://192.168.2.148:88/api/EngineerCompleteRpt/Insert", params);
 // 根据id查询
-export const detailcomplete = (params) => http.post("http://192.168.2.125:88/api/EngineerCompleteRpt/Edit", params);
+export const detailcomplete = (params) => http.post("http://192.168.2.148:88/api/EngineerCompleteRpt/Edit", params);
 // 更新
-export const updatecomplete = (params) => http.post("http://192.168.2.125:88/api/EngineerCompleteRpt/EditInfo", params);
+export const updatecomplete = (params) => http.post("http://192.168.2.148:88/api/EngineerCompleteRpt/EditInfo", params);
 // 删除
-export const delcomplete = (params) => http.post("http://192.168.2.125:88/api/EngineerCompleteRpt/Delete", params);
+export const delcomplete = (params) => http.post("http://192.168.2.148:88/api/EngineerCompleteRpt/Delete", params);
 // 综合查询
-export const qgroupcomplete = (params) => http.post("http://192.168.2.125:88/api/EngineerCompleteRpt/GroupQuery", params);
+export const qgroupcomplete = (params) => http.post("http://192.168.2.148:88/api/EngineerCompleteRpt/GroupQuery", params);
 
 
 // 安全技术交底
 // 查询
-export const querydisclosure = (params) => http.post("http://192.168.2.125:88/api/SafeTechTellIntention/Query", params);
+export const querydisclosure = (params) => http.post("http://192.168.2.148:88/api/SafeTechTellIntention/Query", params);
 // 添加
-export const adddisclosure = (params) => http.post("http://192.168.2.125:88/api/SafeTechTellIntention/Insert", params);
+export const adddisclosure = (params) => http.post("http://192.168.2.148:88/api/SafeTechTellIntention/Insert", params);
 // 根据id查询
-export const detaildisclosure = (params) => http.post("http://192.168.2.125:88/api/SafeTechTellIntention/Edit", params);
+export const detaildisclosure = (params) => http.post("http://192.168.2.148:88/api/SafeTechTellIntention/Edit", params);
 // 更新
-export const updatedisclosure = (params) => http.post("http://192.168.2.125:88/api/SafeTechTellIntention/EditInfo", params);
+export const updatedisclosure = (params) => http.post("http://192.168.2.148:88/api/SafeTechTellIntention/EditInfo", params);
 // 删除
-export const deldisclosure = (params) => http.post("http://192.168.2.125:88/api/SafeTechTellIntention/Delete", params);
+export const deldisclosure = (params) => http.post("http://192.168.2.148:88/api/SafeTechTellIntention/Delete", params);
 // 综合查询
-export const qgroupdisclosure = (params) => http.post("http://192.168.2.125:88/api/SafeTechTellIntention/GroupQuery", params);
+export const qgroupdisclosure = (params) => http.post("http://192.168.2.148:88/api/SafeTechTellIntention/GroupQuery", params);
 
 // 员工
-export const constPersonne = (params) => http.post("http://192.168.2.125:88/api/MethodOfDataService/DepartmentStaff", params);
+export const constPersonne = (params) => http.post("http://192.168.2.148:88/api/MethodOfDataService/DepartmentStaff", params);
 
 
 //施工队
 // 查询
-export const querycontractor = (params) => http.post("http://192.168.2.125:88/api/ConstructionTeam/Query", params);
+export const querycontractor = (params) => http.post("http://192.168.2.148:88/api/ConstructionTeam/Query", params);
 // 添加
-export const addcontractor = (params) => http.post("http://192.168.2.125:88/api/ConstructionTeam/Insert", params);
+export const addcontractor = (params) => http.post("http://192.168.2.148:88/api/ConstructionTeam/Insert", params);
 // 根据id查询
-export const detailcontractor = (params) => http.post("http://192.168.2.125:88/api/ConstructionTeam/Edit", params);
+export const detailcontractor = (params) => http.post("http://192.168.2.148:88/api/ConstructionTeam/Edit", params);
 // 更新
-export const updatecontractor = (params) => http.post("http://192.168.2.125:88/api/ConstructionTeam/EditInfo", params);
+export const updatecontractor = (params) => http.post("http://192.168.2.148:88/api/ConstructionTeam/EditInfo", params);
 // 删除
-export const delcontractor = (params) => http.post("http://192.168.2.125:88/api/ConstructionTeam/Delete", params);
+export const delcontractor = (params) => http.post("http://192.168.2.148:88/api/ConstructionTeam/Delete", params);
 // 综合查询
-export const qgroupcontractor = (params) => http.post("http://192.168.2.125:88/api/ConstructionTeam/GroupQuery", params);
+export const qgroupcontractor = (params) => http.post("http://192.168.2.148:88/api/ConstructionTeam/GroupQuery", params);
 
 
 
 //施工队成员
 // 查询
-export const querymember = (params) => http.post("http://192.168.2.125:88/api/ConstructionTeamMember/Query", params);
+export const querymember = (params) => http.post("http://192.168.2.148:88/api/ConstructionTeamMember/Query", params);
 // 添加
-export const addmember = (params) => http.post("http://192.168.2.125:88/api/ConstructionTeamMember/Insert", params);
+export const addmember = (params) => http.post("http://192.168.2.148:88/api/ConstructionTeamMember/Insert", params);
 // 根据id查询
-export const detailmember = (params) => http.post("http://192.168.2.125:88/api/ConstructionTeamMember/Edit", params);
+export const detailmember = (params) => http.post("http://192.168.2.148:88/api/ConstructionTeamMember/Edit", params);
 // 更新
-export const updatemember = (params) => http.post("http://192.168.2.125:88/api/ConstructionTeamMember/EditInfo", params);
+export const updatemember = (params) => http.post("http://192.168.2.148:88/api/ConstructionTeamMember/EditInfo", params);
 // 删除
-export const delmember = (params) => http.post("http://192.168.2.125:88/api/ConstructionTeamMember/Delete", params);
+export const delmember = (params) => http.post("http://192.168.2.148:88/api/ConstructionTeamMember/Delete", params);
 // 综合查询
-export const qgroupmember = (params) => http.post("http://192.168.2.125:88/api/ConstructionTeamMember/GroupQuery", params);
+export const qgroupmember = (params) => http.post("http://192.168.2.148:88/api/ConstructionTeamMember/GroupQuery", params);
 //施工队id
 // 部门
-export const ConstructionTeam = () => http.get("http://192.168.2.125:88/api/MethodOfDataService/ConstructionTeam");
+export const ConstructionTeam = () => http.get("http://192.168.2.148:88/api/MethodOfDataService/ConstructionTeam");
 // 修改用户信息
 export const Personal = (params) => http.post("http://192.168.2.148:88/api/User/update", params);
 
 
-// 设计任务
+//施工队成员
 // 查询
 export const querydesign = (params) => http.post("http://192.168.2.148:88/api/designtask/Query", params);
 // 添加
@@ -753,30 +753,30 @@ export const deldesign = (params) => http.post("http://192.168.2.148:88/api/desi
 export const qgroupdesign = (params) => http.post("http://192.168.2.148:88/api/designtask/MulticonditionalQuery", params);
 // 工程量统计之材料
 // 查询
-export const getScale = (params) => http.post("http://192.168.2.125:88/api/quantityStatisticMaterial/Query", params);
+export const getScale = (params) => http.post("http://192.168.2.148:88/api/quantityStatisticMaterial/Query", params);
 // 根据id查询
-export const referScale = (params) => http.post("http://192.168.2.125:88/api/quantityStatisticMaterial/Edit", params);
+export const referScale = (params) => http.post("http://192.168.2.148:88/api/quantityStatisticMaterial/Edit", params);
 // 组合查询
-export const groupScale = (params) => http.post("http://192.168.2.125:88/api/quantityStatisticMaterial/GroupQuery", params);
+export const groupScale = (params) => http.post("http://192.168.2.148:88/api/quantityStatisticMaterial/GroupQuery", params);
 // 添加
-export const addScale = (params) => http.post("http://192.168.2.125:88/api/quantityStatisticMaterial/Insert", params);
+export const addScale = (params) => http.post("http://192.168.2.148:88/api/quantityStatisticMaterial/Insert", params);
 // 修改
-export const amendScale = (params) => http.post("http://192.168.2.125:88/api/quantityStatisticMaterial/EditInfo", params);
+export const amendScale = (params) => http.post("http://192.168.2.148:88/api/quantityStatisticMaterial/EditInfo", params);
 // 删除
-export const cancelScale = (params) => http.post("http://192.168.2.125:88/api/quantityStatisticMaterial/Delete", params);
+export const cancelScale = (params) => http.post("http://192.168.2.148:88/api/quantityStatisticMaterial/Delete", params);
 // 工程量统计之工程量
 // 查询
-export const getQuantitie = (params) => http.post("http://192.168.2.125:88/api/quantityStatisticProject/Query", params);
+export const getQuantitie = (params) => http.post("http://192.168.2.148:88/api/quantityStatisticProject/Query", params);
 // 根据id查询
-export const referQuantitie = (params) => http.post("http://192.168.2.125:88/api/quantityStatisticProject/Edit", params);
+export const referQuantitie = (params) => http.post("http://192.168.2.148:88/api/quantityStatisticProject/Edit", params);
 // 组合查询
-export const groupQuantitie = (params) => http.post("http://192.168.2.125:88/api/quantityStatisticProject/GroupQuery", params);
+export const groupQuantitie = (params) => http.post("http://192.168.2.148:88/api/quantityStatisticProject/GroupQuery", params);
 // 添加
-export const addQuantitie = (params) => http.post("http://192.168.2.125:88/api/quantityStatisticProject/Insert", params);
+export const addQuantitie = (params) => http.post("http://192.168.2.148:88/api/quantityStatisticProject/Insert", params);
 // 修改
-export const amendQuantitie = (params) => http.post("http://192.168.2.125:88/api/quantityStatisticProject/EditInfo", params);
+export const amendQuantitie = (params) => http.post("http://192.168.2.148:88/api/quantityStatisticProject/EditInfo", params);
 // 删除
-export const cancelQuantitie = (params) => http.post("http://192.168.2.125:88/api/quantityStatisticProject/Delete", params);
+export const cancelQuantitie = (params) => http.post("http://192.168.2.148:88/api/quantityStatisticProject/Delete", params);
 // 工程统计
 // 查询
 export const getCount = (params) => http.post("http://192.168.2.148:88/api/engineerStatistic/Query", params);
@@ -817,3 +817,7 @@ export const getTaskTNUm = (params) => http.post("http://192.168.2.125:88/api/Ta
 export const getTaskList = (params) => http.post("http://192.168.2.125:88/api/TaskList/TaskList", params);
 // 申请
 export const getapply = (params) => http.post("http://192.168.2.125:88/api/TaskList/TaskApply", params);
+//申请的新变动
+export const getapplyNEWinfo = (params) => http.post("http://192.168.2.125:88/api/TaskList/MyApplyNewNumber", params);
+//新信息
+export const getNEWinfo = (params) => http.post("http://192.168.2.125:88/api/TaskList/NewNumber", params);

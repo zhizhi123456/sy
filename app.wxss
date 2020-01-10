@@ -127,6 +127,7 @@
     padding: 20rpx 30rpx;
     background-color: white;
     border-radius: 20rpx;
+    position: relative;
 }
 
 .list view {
@@ -499,69 +500,80 @@ van-checkbox {
 .seach .checkkind text:first-child {
     background-color: #999;
 }
+
 /* 组合查询 */
 
-.pullpo .check{
+.pullpo .check {
     padding: 0rpx;
     margin: 0rpx;
     height: 100%;
     background-color: white;
 }
-.pullpo .check .kind{
+
+.pullpo .check .kind {
     margin: 0;
 }
-.pullpo{
+
+.pullpo {
     width: 90%;
     height: 100%;
 }
-.pullpo .check .check_item{
-    display: flex; 
+
+.pullpo .check .check_item {
+    display: flex;
     align-items: center;
     margin: 0;
     border-bottom: 1px solid #F5F6F7;
     width: 90%;
     margin-left: 20rpx;
 }
-.pullpo .check .check_item .kind{
+
+.pullpo .check .check_item .kind {
     width: 200rpx;
 }
-.pullpo .check2{
+
+.pullpo .check2 {
     height: 100rpx;
     color: #58C2FF;
     display: flex;
-    justify-content:space-between
+    justify-content: space-between
 }
-.pullpo .check2 text{
+
+.pullpo .check2 text {
     width: 125rpx;
     display: inline-block;
     text-align: center;
     font-size: 31rpx;
 }
-.pullpo .time1{
+
+.pullpo .time1 {
     width: 100rpx;
     font-size: 30rpx;
 }
+
 /* 多选搜索框 */
-.checkro{
-    width:280rpx;
+.checkro {
+    width: 280rpx;
     float: left;
     margin-left: 55rpx;
     margin-top: 40rpx;
 }
+
 /* .checkro2 .checkro1{ */
-    /* display: flex;
+/* display: flex;
     justify-content: space-around; */
 /* } */
-.checkro8 .checkro10{
+.checkro8 .checkro10 {
     width: 77%;
     display: flex;
-    justify-content:space-between;
+    justify-content: space-between;
     margin-top: 30rpx;
     margin-left: 90rpx;
     color: #4EA4FB;
 
 }
-.checkro9{
+
+.checkro9 {
     height: 50rpx;
     width: 100%;
 }
@@ -618,10 +630,11 @@ van-checkbox {
 }
 
 .m_listitem .iconfont {
-    width: 120rpx;
-    height: 120rpx;
-    line-height: 120rpx;
+    width: 100rpx;
+    height: 90rpx;
+    line-height: 90rpx;
     font-size: 64rpx;
+    padding: 10rpx;
     background-color: #4E8DCC;
     color: white;
     font-weight: bold;
@@ -634,7 +647,7 @@ van-checkbox {
 }
 
 .m_listitem view {
-    font-size: 32rpx;
+    font-size: 28rpx;
     margin-top: 20rpx;
     color: #555;
     white-space: nowrap;
@@ -667,3 +680,13 @@ van-checkbox {
     color: #333;
 }
 
+.list .LThint {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: rotateZ(25deg);
+}
+
+.LThint .van-tag {
+    font-size: 28rpx;
+}

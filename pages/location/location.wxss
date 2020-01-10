@@ -46,7 +46,7 @@
     border-radius: 50%;
     position: absolute;
     left: 50%;
-    bottom: 20rpx;
+    bottom: 50rpx;
     font-size: 32rpx;
     text-align: center;
     color: white;

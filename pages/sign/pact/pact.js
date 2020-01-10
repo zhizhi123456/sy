@@ -39,7 +39,8 @@ Page({
   // 返回
   return () {
     if (this.data.hadNew || this.data.me) {
-      util.returnMenu2(this.data.options.id || this.data.options.rid, this.data.options.title);
+      let menus = wx.getStorageSync('menus');
+      util.returnMenu2(menus.id, menus.title);
     } else {
       wx.redirectTo({
         url: "/pages/section/section2?name=" + this.data.caption + '&dep=' + this.data.dep + '&deptxt=' + this.data.deptxt + '&userid=' + this.data.userid
@@ -62,10 +63,8 @@ Page({
       "info.TokenType": "ww",
       "info.UserID": "c30735fb-7b21-4b6e-919c-0039d9c8945f",
     })
-    if (options.id || options.rid) {
-      this.setData({
-        options: options
-      })
+    if (options.id) {
+      wx.setStorageSync('menus', options)
     }
     wx.showLoading({
       title: '加载中',
@@ -228,6 +227,11 @@ Page({
       title: '加载中',
     });
     if (this.data.info.department || this.data.info.name || this.data.info.startdate || this.data.info.enddate) {
+      let info = this.data.info;
+      util.checkContent(info, this);
+      this.setData({
+        info
+      })
       groupSign(this.data.info).then(res => {
         if (res.code == 10000) {
           item = res.Lists;

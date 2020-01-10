@@ -24,7 +24,7 @@
         <view class="check_item">
             <text class="kind">总包项目编号</text>
             <van-cell-group>
-                <van-field data-name="projectcode" value="{{info.projectcode}}" placeholder="请输入" bind:blur="projectcodelur" />
+                <van-field data-name="projectcode" value="{{info.projectcode}}" placeholder="请输入数字" bind:blur="projectcodelur" />
             </van-cell-group>
         </view>
         <view class="check_item">

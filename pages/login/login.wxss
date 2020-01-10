@@ -124,3 +124,13 @@ button:not([size='mini']) {
     bottom: -40rpx;
     right: 35rpx;
 }
+
+.import .eyes {
+    position: absolute;
+    top: 0;
+    right: 110rpx;
+    z-index: 2;
+}
+.eyes .iconfont{
+    padding: 0 20rpx;
+}

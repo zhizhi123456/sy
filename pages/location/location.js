@@ -38,7 +38,8 @@ Page({
   },
   return () {
     if (this.data.hadNew || this.data.me) {
-      util.returnMenu2(this.data.options.id || this.data.options.rid, this.data.options.title);
+      let menus = wx.getStorageSync('menus');
+      util.returnMenu2(menus.id, menus.title);
     } else {
       wx.redirectTo({
         url: "/pages/section/section2?name=" + this.data.caption + '&dep=' + this.data.dep + '&deptxt=' + this.data.deptxt + '&userid=' + this.data.userid
@@ -51,9 +52,7 @@ Page({
   onLoad: function (options) {
     // console.log(options)
     if (options.id || options.rid) {
-      this.setData({
-        options: options
-      })
+      wx.setStorageSync('menus', options)
     }
     if (options.caption == '我') {
       this.setData({
@@ -258,7 +257,7 @@ Page({
               width: 20,
               height: 20,
               callout: { //在markers上展示地址名称
-                content: '您当前位置:\n'+res.address,
+                content: '您当前位置:\n' + res.address,
                 color: '#fff',
                 display: 'ALWAYS',
                 padding: 5,

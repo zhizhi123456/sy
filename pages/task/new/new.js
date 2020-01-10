@@ -12,8 +12,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    info: {
-    },
+    info: {},
     currentDate: new Date().getTime(),
     show: false,
     show_nature: false,
@@ -228,7 +227,7 @@ Page({
     })
   },
   confirm() {
-    console.log(this.data.info)
+    // console.log(this.data.info)
     if (this.data.info.planbegindate && this.data.info.planenddate && this.data.info.projectname && this.data.info.proassignbookcode) {
       let info = this.data.info;
       util.checkContent(info, this);
@@ -244,7 +243,8 @@ Page({
             icon: 'success',
             duration: 3000
           })
-          util.returnPrev('task')
+          util.returnPrev('task', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+            this.data.rid, this.data.title)
         }
       })
     } else {
@@ -256,15 +256,17 @@ Page({
   },
   // 返回
   return () {
-    util.returnPrev('task')
+    util.returnPrev('task', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+      this.data.rid, this.data.title)
   },
   // 编辑分包项目页面的确定和返回
   editreturn() {
-    util.returnPrev('task',this)
+    util.returnPrev('task', this, this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+      this.data.rid, this.data.title)
   },
   editconfirm() {
     let info = this.data.info;
-    util.checkChange(info, this,app.globalData.department);
+    util.checkChange(info, this, app.globalData.department);
     this.setData({
       info
     })
@@ -276,7 +278,8 @@ Page({
           icon: 'success',
           duration: 3000
         })
-        util.returnPrev('task',this)
+        util.returnPrev('task', this, this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+          this.data.rid, this.data.title)
       }
     })
   },
@@ -284,6 +287,20 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (options.id || options.rid) {
+      this.setData({
+        rid: options.rid,
+        title: options.title,
+      })
+    }
+    if (options.userid) {
+      this.setData({
+        userid: options.userid,
+        caption: options.caption,
+        dep: options.dep,
+        deptxt: options.deptxt,
+      })
+    }
     this.setData({
       firms: app.globalData.Companytitle,
       totals: app.globalData.MainProject,

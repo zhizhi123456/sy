@@ -126,6 +126,11 @@ Page({
       pages: 1
     })
     if (this.data.info.keyword || this.data.info.departmentID || this.data.info.chargemanName || this.data.info.StartTime) {
+      let info = this.data.info;
+      util.checkContent(info, this);
+      this.setData({
+        info
+      })
       groupId(this.data.info).then(res => {
         if (res.code == 10000) {
           item = res.List;

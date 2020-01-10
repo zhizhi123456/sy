@@ -13,14 +13,15 @@ Page({
     seach: '',
     loading: false,
     val: 0,
-    top:"工程接受签证单",
+    top: "工程接受签证单",
     InfoList: [],
     item: [],
     pages: 1,
   },
   // 返回
   return () {
-    util.returnMenu2(this.data.options.id, this.data.options.title);
+    let menus = wx.getStorageSync('menus');
+    util.returnMenu2(menus.id, menus.title);
   },
   setSeach(e) {
     // console.log(e)
@@ -30,7 +31,7 @@ Page({
   },
   // 模糊查询
   seachInfo() {
-    list=[];
+    list = [];
     wx.showLoading({
       title: '加载中',
     });
@@ -42,12 +43,12 @@ Page({
     }).then(res => {
       // console.log(res)
       if (res.code == 10000) {
-       item = res.List;
+        item = res.List;
         list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list);
         this.setData({
           InfoList: list,
           item,
-          seach:''
+          seach: ''
         })
         wx.hideLoading();
       }
@@ -58,9 +59,7 @@ Page({
    */
   onLoad: function (options) {
     if (options.id) {
-      this.setData({
-        options: options
-      })
+      wx.setStorageSync('menus', options)
     }
     list = [];
     wx.showLoading({

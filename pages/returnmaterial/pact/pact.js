@@ -1,10 +1,11 @@
 // pages/bill/pact/pact.js
 import {
   ReturnMaterialall,
-  qgroupdeliver
+  groupReturnM
 } from '../../../service/getData';
 var util = require("../../../utils/util");
 var app = getApp();
+let userinfo = wx.getStorageSync("myInfo");
 Page({
   /**
    * 页面的初始数据
@@ -12,26 +13,8 @@ Page({
   data: {
     seach: '',
     loading: false,
-    val: 0,
-    pact: [{
-        text: '全部退料单',
-        value: 0
-      },
-      {
-        text: '我的退料单',
-        value: 1
-      }
-    ],
-    info: {
-      Company: "",
-      delievrycode: "",
-      projectcode: "",
-      delieveryaddress: "",
-      goodsclasscode: "",
-      receivemanphone: "",
-      remark: "",
-      ApplygetNew:true
-    },
+    top: "退料单",
+    info: {},
     InfoList: [],
     pull: false,
     show: false,
@@ -39,10 +22,19 @@ Page({
     currentDate1: new Date().getTime(),
     show_time: false,
     show_endtime: false,
+    applyT: 0,
+    hadNew: 1,
+    ISconduct: 0
   },
   // 返回
-  return (e) {
-    util.returnMenu2(1006,'材料管理');
+  return () {
+    if (this.data.applyT || this.data.ISconduct) {
+      wx.redirectTo({
+        url: "/pages/current/current/current?title=" + this.data.options.title + '&id=' + (this.data.options.id || this.data.options.rid)
+      });
+    } else {
+      util.returnMenu2(1006, '材料管理');
+    }
   },
   setSeach(e) {
     // console.log(e)
@@ -55,92 +47,335 @@ Page({
     wx.showLoading({
       title: '加载中',
     });
-    ReturnMaterialall({
-      Timestamp: app.globalData.time,
-      losematerialName: this.data.seach
-    }).then(res => {
-      // console.log(res)
-      if (res.code == 10000) {
-        let item = res.List;
-        util.listData(item, app.globalData.department);
-        this.setData({
-          InfoList: item.reverse()
+    if (this.data.hadNew) {
+      ReturnMaterialall({
+        Timestamp: app.globalData.time,
+        losematerialName: this.data.seach
+      }).then(res => {
+        // console.log(res)
+        if (res.code == 10000) {
+          let item = res.List;
+          util.listData(item, app.globalData.department);
+          this.setData({
+            InfoList: item.reverse()
+          })
+          wx.hideLoading();
+        }
+      })
+    } else {
+      if (this.data.ISconduct) {
+        if (this.data.seach) {
+          groupReturnM({
+            losematerialName: this.data.seach,
+            state: this.data.info.state,
+            UserName: userinfo.UserName
+          }).then(res => {
+            // console.log(res.List)
+            if (res.code == 10000) {
+              let item = res.List;
+              util.listData(item, app.globalData.department);
+              this.setData({
+                InfoList: item.reverse(),
+                item,
+                seach: ''
+              })
+              wx.hideLoading();
+            }
+          }).catch(err => {
+            console.log(err)
+          })
+        } else {
+          groupReturnM({
+            state: this.data.info.state,
+            UserName: userinfo.UserName
+          }).then(res => {
+            // console.log(res.List)
+            if (res.code == 10000) {
+              let item = res.List;
+              util.listData(item, app.globalData.department);
+              this.setData({
+                InfoList: item.reverse(),
+                item,
+                seach: ''
+              })
+              wx.hideLoading();
+            }
+          }).catch(err => {
+            console.log(err)
+          })
+        }
+      } else {
+        groupReturnM({
+          losematerialName: this.data.seach,
+          applyman: this.data.info.applyman
+        }).then(res => {
+          // console.log(res.List)
+          if (res.code == 10000) {
+            let item = res.List;
+            util.listData(item, app.globalData.department);
+            this.setData({
+              InfoList: item.reverse(),
+              item,
+              seach: ''
+            })
+            wx.hideLoading();
+          }
+        }).catch(err => {
+          console.log(err)
         })
-        wx.hideLoading();
       }
-    })
+    }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    userinfo = wx.getStorageSync("myInfo");
     // 列表
     wx.showLoading({
       title: '加载中',
     });
-    this.setData({
-      seach: ""
-    })
-    this.seachItem()
+    if (options.id || options.rid) {
+      this.setData({
+        options: options
+      })
+    }
+    // console.log(options)
+    if (options.userid) {
+      let info = this.data.info;
+      info.department = options.dep;
+      info.applyman = options.userid;
+      this.setData({
+        top: options.caption + '的退料单',
+        hadNew: 0,
+        info,
+        departmenttext: options.deptxt,
+        userid: options.userid,
+        deptxt: options.deptxt,
+        caption: options.caption,
+        dep: options.dep
+      })
+      if (options.caption == '我申请') {
+        this.setData({
+          applyT: 1
+        })
+      }
+      if (options.caption == '未处理') {
+        info.state = options.caption;
+        info.UserName = userinfo.UserName;
+        delete info.applyman;
+        delete info.department;
+        this.setData({
+          info,
+          ISconduct: 1,
+          departmenttext: ''
+        })
+        groupReturnM({
+          state: this.data.info.state,
+          UserName: userinfo.UserName
+        }).then(res => {
+          // console.log(res.List)
+          if (res.code == 10000) {
+            let item = res.List;
+            util.listData(item, app.globalData.department);
+            this.setData({
+              InfoList: item.reverse()
+            })
+            wx.hideLoading();
+          }
+        }).catch(err => {
+          console.log(err)
+        })
+      } else {
+        groupReturnM({
+          applyman: options.userid
+        }).then(res => {
+          // console.log(res.List)
+          if (res.code == 10000) {
+            let item = res.List;
+            util.listData(item, app.globalData.department);
+            this.setData({
+              InfoList: item.reverse()
+            })
+            wx.hideLoading();
+          }
+        }).catch(err => {
+          console.log(err)
+        })
+      }
+    } else {
+      this.setData({
+        seach: ""
+      })
+      this.seachItem();
+    }
+    if (app.globalData.CountItem) {
+      this.setData({
+        sections: app.globalData.department,
+        firms: app.globalData.Companytitle,
+        states: app.globalData.states
+      })
+    } else {
+      app.DataCallback = employ => {
+        if (employ != '') {
+          this.setData({
+            sections: app.globalData.department,
+            firms: app.globalData.Companytitle,
+            states: app.globalData.states
+          })
+        }
+      }
+    }
   },
-  meetplaceblur(e) {
-    let info = util.editInfo(e, this, e.detail.value);
+  // 组合查询
+  showgroup() {
     this.setData({
-      info
-    })
-  },
-  // 计划开工时间
-  showPopup_time() {
-    this.setData({
-      show_time: true
-    })
-  },
-  onClose_time() {
-    this.setData({
-      show_time: false
-    })
-  },
-  onConfirm_time(e) {
-    let info = util.editInfo(e, this, util.datefomate(e.detail));
-    this.setData({
-      info,
-      show_time: false
-    })
-  },
-  // 计划完工时间
-  showPopup_endtime() {
-    this.setData({
-      show_endtime: true
-    })
-  },
-  onClose_endtime() {
-    this.setData({
-      show_endtime: false
-    })
-  },
-  onConfirm_endtime(e) {
-    // console.log(e)
-    // console.log(util.datefomate(e.detail))
-    let info = util.editInfo(e, this, util.datefomate(e.detail));
-    this.setData({
-      info,
-      show_endtime: false
-    })
-  },
-  // 组合查询关闭与开启
-  change() {
-    this.setData({
-      pull: false,
-      show: false,
+      show: true
     })
   },
   onClose() {
     this.setData({
       show: false
-    });
+    })
   },
-  // 组合查询
-  seachqur() {
-    util.qgroupdeliver(qgroupdeliver, this)
+  onConfirm_seach() {
+    wx.showLoading({
+      title: '加载中',
+    });
+    if (this.data.info.losematerialName || this.data.info.Companytitle || this.data.info.department || this.data.info.applyman || this.data.info.state) {
+      let info = this.data.info;
+      if (info.Companytitle) {
+        this.data.firms.forEach(res => {
+          if (info.Companytitle == res.text) {
+            info.Companytitle = res.value;
+          }
+        })
+        this.setData({
+          info
+        })
+      }
+      // console.log(this.data.info)
+      groupReturnM(this.data.info).then(res => {
+        if (res.code == 10000) {
+          let item = res.List;
+          util.listData(item, app.globalData.department);
+          this.setData({
+            InfoList: item.reverse(),
+            info: {},
+            departmenttext: ""
+          })
+          if (!this.data.hadNew) {
+            let info = this.data.info;
+            info.department = this.data.dep;
+            info.applyman = this.data.userid;
+            if (this.data.ISconduct) {
+              delete info.applyman;
+              delete info.department;
+              info.state = '未处理';
+              info.UserName = userinfo.UserName;
+            }
+            this.setData({
+              info,
+              departmenttext: this.data.ISconduct ? '' : this.data.deptxt
+            })
+          }
+          wx.hideLoading();
+        }
+      })
+      this.setData({
+        show: false
+      })
+    } else(
+      wx.showToast({
+        title: '请至少输入一项内容',
+        icon: 'none',
+        duration: 3000
+      })
+    )
+  },
+  // 退料名称
+  losematerialNameblur(e) {
+    let info = util.editInfo(e, this, e.detail.value);
+    this.setData({
+      info
+    })
+  },
+  // 公司
+  showPopup_2() {
+    this.setData({
+      show_2: true
+    })
+  },
+  onClose_2() {
+    this.setData({
+      show_2: false
+    })
+  },
+  onConfirm_2(e) {
+    let info = util.editInfo(e, this, e.detail.value.text);
+    this.setData({
+      show_2: false,
+      info
+    })
+  },
+  // 部门
+  showPopup_0() {
+    if (this.data.hadNew) {
+      this.setData({
+        show_0: true
+      })
+    }
+  },
+  onClose_0() {
+    this.setData({
+      show_0: false
+    })
+  },
+  onConfirm_0(e) {
+    let info = util.editInfo(e, this, e.detail.value.value);
+    this.setData({
+      show_0: false,
+      info,
+      departmenttext: e.detail.value.text
+    })
+  },
+  // 申请人
+  applymanblur(e) {
+    let info = util.editInfo(e, this, e.detail.value);
+    this.setData({
+      info
+    })
+  },
+  // 状态
+  showPopup_3() {
+    let userinfo = wx.getStorageSync("myInfo");
+    if (userinfo) {
+      let info = this.data.info;
+      info.UserName = userinfo.UserName;
+      if (!this.data.ISconduct) {
+        this.setData({
+          show_3: true,
+          info
+        })
+      }
+    } else {
+      wx.showToast({
+        title: '请登录',
+        icon: 'none',
+        duration: 2000
+      })
+    }
+  },
+  onClose_3() {
+    this.setData({
+      show_3: false
+    })
+  },
+  onConfirm_3(e) {
+    let info = util.editInfo(e, this, e.detail.value.text);
+    this.setData({
+      show_3: false,
+      info
+    })
   },
 })

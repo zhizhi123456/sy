@@ -2,3 +2,6 @@
 .cmain {
     background-color: white;
 }
+.kktag{
+    min-width: 120rpx;
+}

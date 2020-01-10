@@ -1,7 +1,8 @@
 // pages/generalcontract/detail/detail.js
 import {
   referCost,
-  cancelCost
+  cancelCost,
+  amendCost
 } from '../../../service/getData.js';
 var app = getApp();
 var util = require("../../../utils/util");
@@ -43,6 +44,12 @@ Page({
         returnid
       })
     }
+    if (options.id || options.rid) {
+      this.setData({
+        rid: options.rid,
+        title: options.title,
+      })
+    }
     if (options.userid) {
       this.setData({
         userid: options.userid,
@@ -50,14 +57,9 @@ Page({
         dep: options.dep,
         deptxt: options.deptxt,
         me: Number(options.me),
-        rid: options.rid,
-        title: options.title,
-        applyT: Number(options.applyT)
-      })
-    }
-    if (options.hadNew) {
-      this.setData({
-        hadNew: Number(options.hadNew)
+        applyT: Number(options.applyT),
+        hadNew: Number(options.hadNew),
+        ISconduct: Number(options.ISconduct)
       })
     }
     wx.showLoading({
@@ -74,6 +76,19 @@ Page({
           this.setData({
             info: item
           })
+          if (this.data.applyT && this.data.info.ApplygetNew) {
+            let info = this.data.info;
+            info.ApplygetNew = false;
+            util.checkContent(info, this);
+            this.setData({
+              info
+            })
+            amendCost(this.data.info).then(res => {
+              if (res.code == 10000) {
+                console.log('已查看')
+              }
+            })
+          }
           wx.hideLoading();
           // 调取工作流记录
           let mid = res.Item.formid;

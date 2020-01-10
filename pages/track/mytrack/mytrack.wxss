@@ -34,6 +34,7 @@
 
 .return .iconfont {
     font-size: 64rpx;
+    font-weight: bold;
     line-height: 100rpx;
     color: teal;
 }

@@ -19,7 +19,8 @@ Page({
   },
   // 返回
   return () {
-    util.returnMenu2(this.data.options.id, this.data.options.title);
+    let menus = wx.getStorageSync('menus');
+    util.returnMenu2(menus.id, menus.title);
   },
   setSeach(e) {
     // console.log(e)
@@ -57,9 +58,7 @@ Page({
    */
   onLoad: function (options) {
     if (options.id) {
-      this.setData({
-        options: options
-      })
+      wx.setStorageSync('menus', options)
     }
     list = [];
     wx.showLoading({

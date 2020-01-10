@@ -54,6 +54,14 @@
                             <van-datetime-picker data-name="endtime" value="{{ currentDate }}" bind:cancel="onClose_endtime" bind:confirm="onConfirm_endtime" />
                         </van-popup>
                     </view>
+                    <view class="seach_item">
+                        <van-cell-group>
+                            <van-field value="{{info.state}}" placeholder="请选择" bindtap="showPopup_3" label="状态" disabled />
+                        </van-cell-group>
+                        <van-popup show="{{ show_3 }}" round position="bottom" bind:close="onClose_3">
+                            <van-picker data-name="state" show-toolbar columns="{{ states }}" bind:cancel="onClose_3" bind:confirm="onConfirm_3" />
+                        </van-popup>
+                    </view>
                     <view class="checkkind">
                         <text bindtap="onClose">取消</text>
                         <text bindtap="onConfirm_seach">查询</text>
@@ -64,7 +72,10 @@
     </view>
     <view class="main">
         <view class="list" wx:for="{{InfoList}}" wx:key="index">
-            <navigator url="/pages/contract/detail/detail?id={{item.ID}}&hadNew={{hadNew}}&rid={{options.id||options.rid}}&title={{options.title}}&{{userid?'userid='+userid+'&caption='+caption+'&dep='+dep+'&deptxt='+deptxt+'&me='+me+'&applyT='+applyT:''}}" hover-class="none">
+            <van-tag class="LThint" round type="danger" size="large" wx:if="{{item.ApplygetNew&&applyT}}">
+                new
+            </van-tag>
+            <navigator url="/pages/contract/detail/detail?id={{item.ID}}&hadNew={{hadNew}}&rid={{options.id||options.rid}}&title={{options.title}}&{{userid?'userid='+userid+'&caption='+caption+'&dep='+dep+'&deptxt='+deptxt+'&me='+me+'&applyT='+applyT+'&ISconduct='+ISconduct:''}}" hover-class="none">
                 <view>
                     <text class="caption">{{item.subcontactname}}</text>
                 </view>

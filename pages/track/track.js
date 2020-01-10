@@ -29,10 +29,8 @@ Page({
    */
   onLoad: function (options) {
     // console.log(options)
-    if (options.id|| options.rid) {
-      this.setData({
-        options: options
-      })
+    if (options.id) {
+      wx.setStorageSync('menus', options)
     }
     let that = this;
     wx.showLoading({
@@ -119,10 +117,11 @@ Page({
   // 返回
   return () {
     if (this.data.hadNew || this.data.me) {
-      util.returnMenu2(this.data.options.id || this.data.options.rid, this.data.options.title);
+      let menus = wx.getStorageSync('menus');
+      util.returnMenu2(menus.id, menus.title);
     } else {
       wx.redirectTo({
-        url: "/pages/section/section2?name=" + this.data.caption+'&dep='+this.data.dep+'&deptxt='+this.data.deptxt+'&userid='+this.data.userid
+        url: "/pages/section/section2?name=" + this.data.caption + '&dep=' + this.data.dep + '&deptxt=' + this.data.deptxt + '&userid=' + this.data.userid
       });
     }
   },

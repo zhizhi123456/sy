@@ -59,7 +59,7 @@
     </view>
     <view class="footer">
         <view>
-            <navigator url="/pages/bill/newlink/newlink?detailid={{info.ID}}" hover-class="none">
+            <navigator url="/pages/bill/newlink/newlink?detailid={{info.ID}}&caption={{caption}}&dep={{dep}}&deptxt={{deptxt}}&userid={{userid}}&rid={{rid}}&title={{title}}" hover-class="none">
                 <icon class="iconfont icon-bianji"></icon>
                 <text>编辑</text>
             </navigator>

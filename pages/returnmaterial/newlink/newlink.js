@@ -18,13 +18,13 @@ Page({
       losematerialid: ''
     }],
     billid: 0,
-    show1:false,
-    section1:""
+    show1: false,
+    section1: ""
   },
   // 返回
   return () {
     wx.redirectTo({
-      url: "/pages/returnmaterial/detail/detail?id=" + this.data.billid + "&table=c"
+      url: "/pages/returnmaterial/detail/detail?table=c&id=" + this.data.billid + '&rid=' + this.data.rid + '&title=' + this.data.title + (this.data.userid ? '&caption=' + this.data.caption + '&dep=' + this.data.dep + '&deptxt=' + this.data.deptxt + '&userid=' + this.data.userid : "")
     })
 
 
@@ -48,8 +48,8 @@ Page({
   getRecord(e) {
     util.updateValue(e, this);
   },
-   // 商品编号
-   showPopup1() {
+  // 商品编号
+  showPopup1() {
     this.setData({
       show1: true
     });
@@ -106,7 +106,8 @@ Page({
           })
           wx.redirectTo({
             // url: "/pages/returnmaterial/detail/detail?id=" + this.data.billid + "&table=c"
-            url: "/pages/returnmaterial/detail/detail?id=" + this.data.billid + "&table=c"
+            // url: "/pages/returnmaterial/detail/detail?id=" + this.data.billid + "&table=c"
+            url: "/pages/returnmaterial/detail/detail?table=c&id=" + this.data.billid + '&rid=' + this.data.rid + '&title=' + this.data.title + (this.data.userid ? '&caption=' + this.data.caption + '&dep=' + this.data.dep + '&deptxt=' + this.data.deptxt + '&userid=' + this.data.userid : "")
           })
         } else {
           wx.showToast({
@@ -127,7 +128,8 @@ Page({
   // 编辑材料明细时的返回和确定
   linkreturn() {
     wx.redirectTo({
-      url: "/pages/returnmaterial/detaillink/detaillink?detailid=" + this.data.materials[0].ID
+      // url: "/pages/returnmaterial/detaillink/detaillink?detailid=" + this.data.materials[0].ID
+      url: "/pages/returnmaterial/detaillink/detaillink?detailid=" + this.data.materials[0].ID + '&rid=' + this.data.rid + '&title=' + this.data.title + (this.data.userid ? '&caption=' + this.data.caption + '&dep=' + this.data.dep + '&deptxt=' + this.data.deptxt + '&userid=' + this.data.userid : "")
       // url: "/pages/returnmaterial/detail/detail?id=" + this.data.billid
     })
   },
@@ -147,8 +149,9 @@ Page({
         })
         console.log(this.data.billid)
         wx.redirectTo({
-          url: "/pages/returnmaterial/detaillink/detaillink?detailid=" + this.data.materials[0].ID
+          // url: "/pages/returnmaterial/detaillink/detaillink?detailid=" + this.data.materials[0].ID
           // url: "/pages/returnmaterial/detail/detail?id=" + this.data.billid
+          url: "/pages/returnmaterial/detaillink/detaillink?detailid=" + this.data.materials[0].ID + '&rid=' + this.data.rid + '&title=' + this.data.title + (this.data.userid ? '&caption=' + this.data.caption + '&dep=' + this.data.dep + '&deptxt=' + this.data.deptxt + '&userid=' + this.data.userid : "")
         })
       }
     })
@@ -157,6 +160,22 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (options.id || options.rid) {
+      this.setData({
+        rid: options.rid,
+        title: options.title,
+      })
+    }
+    if (options.userid) {
+      this.setData({
+        userid: options.userid,
+        caption: options.caption,
+        dep: options.dep,
+        deptxt: options.deptxt,
+        me: Number(options.me),
+        applyT: Number(options.applyT)
+      })
+    }
     // 领料单id
     console.log(options)
     if (options.id) {

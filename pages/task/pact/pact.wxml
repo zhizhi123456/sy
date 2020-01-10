@@ -4,7 +4,7 @@
     <view class="header">
         <view class="title">
             <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
-            <navigator url="/pages/task/new/new" hover-class="none" class="fr newCreate" wx:if="{{hadNew}}">
+            <navigator url="/pages/task/new/new?rid={{options.id||options.rid}}&title={{options.title}}&{{userid?'userid='+userid+'&caption='+caption+'&dep='+dep+'&deptxt='+deptxt:''}}" hover-class="none" class="fr newCreate" wx:if="{{hadNew||me||applyT}}">
                 新建
             </navigator>
             <view class="apply">{{top}}</view>
@@ -35,7 +35,17 @@
                     </view>
                     <view class="seach_item">
                         <van-cell-group>
-                            <van-field data-name="chargemanName" value="{{info.chargemanName}}" placeholder="请输入" bind:blur="chargemanNameblur" label="项目联系人" disabled="{{!hadNew}}" />
+                            <van-field data-name="chargemanName" value="{{info.chargemanName}}" placeholder="请输入" bind:blur="chargemanNameblur" label="项目联系人" />
+                        </van-cell-group>
+                    </view>
+                    <view class="seach_item" wx:if="{{ISconduct}}">
+                        <van-cell-group>
+                            <van-field data-name="UserId" value="{{info.UserId}}" placeholder="请输入" bind:blur="UserIdblur" label="创建人" />
+                        </van-cell-group>
+                    </view>
+                    <view class="seach_item" wx:else>
+                        <van-cell-group>
+                            <van-field data-name="UserId" value="{{info.UserId}}" placeholder="请输入" bind:blur="UserIdblur" label="创建人" disabled="{{!hadNew}}" />
                         </van-cell-group>
                     </view>
                     <view class="seach_item">
@@ -72,7 +82,10 @@
     </view>
     <view class="main">
         <view class="list" wx:for="{{InfoList}}" wx:key="index">
-            <navigator url="/pages/task/detail/detail?id={{item.ID}}&hadNew={{hadNew}}" hover-class="none">
+            <van-tag class="LThint" round type="danger" size="large" wx:if="{{item.ApplygetNew&&applyT}}">
+                new
+            </van-tag>
+            <navigator url="/pages/task/detail/detail?id={{item.ID}}&hadNew={{hadNew}}&rid={{options.id||options.rid}}&title={{options.title}}&{{userid?'userid='+userid+'&caption='+caption+'&dep='+dep+'&deptxt='+deptxt+'&me='+me+'&applyT='+applyT+'&ISconduct='+ISconduct:''}}" hover-class="none">
                 <view>
                     <text class="caption">{{item.proassignbookcode}}</text>
                 </view>

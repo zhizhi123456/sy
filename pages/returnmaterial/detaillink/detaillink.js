@@ -18,17 +18,17 @@ Page({
     info: {},
     bill: {},
     active: 0,
-    steps: [{
-      text: 'root2--新建了材料明细',
-      desc: '2019年3月29日 13:42'
-    }],
+    // steps: [{
+    //   text: 'root2--新建了材料明细',
+    //   desc: '2019年3月29日 13:42'
+    // }],
     material_list: [],
   },
   // 返回
   return () {
     wx.redirectTo({
       // url: "/pages/returnmaterial/detail/detail?id=" + this.data.info.getmaterialid + "&table=c"
-      url: "/pages/returnmaterial/detail/detail?id=" + this.data.info.losematerialid + "&table=c"
+      url: "/pages/returnmaterial/detail/detail?table=c&id=" + this.data.info.losematerialid + '&rid=' + this.data.rid + '&title=' + this.data.title + (this.data.userid ? '&caption = ' + this.data.caption + ' & dep = ' + this.data.dep + ' & deptxt = ' + this.data.deptxt + ' & userid = ' + this.data.userid : "")
     })
   },
   // add_speak() {
@@ -66,7 +66,7 @@ Page({
         //?
         wx.redirectTo({
           // url: "/pages/returnmaterial/detail/detail?id=" + this.data.info.getmaterialid + "&table=c"
-          url: "/pages/returnmaterial/detail/detail?id=" + this.data.info.losematerialid+ "&table=c"
+          url: "/pages/returnmaterial/detail/detail?table=c&id=" + this.data.info.losematerialid + '&rid=' + this.data.rid + '&title=' + this.data.title + (this.data.userid ? '&caption=' + this.data.caption + '&dep=' + this.data.dep + '&deptxt=' + this.data.deptxt + '&userid=' + this.data.userid : '')
         })
       }
     })
@@ -75,23 +75,39 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (options.id || options.rid) {
+      this.setData({
+        rid: options.rid,
+        title: options.title,
+      })
+    }
+    if (options.userid) {
+      this.setData({
+        userid: options.userid,
+        caption: options.caption,
+        dep: options.dep,
+        deptxt: options.deptxt,
+        me: Number(options.me),
+        applyT: Number(options.applyT)
+      })
+    }
     wx.showLoading({
       title: '加载中',
     });
-    console.log(options.detailid)
+    // console.log(options.detailid)
     if (options.detailid) {
       // 资料详情
       Returnone({
         Timestamp: app.globalData.time,
         ID: options.detailid
       }).then(res => {
-        console.log(res)
+        // console.log(res)
         if (res.code == 10000) {
-         
+
           this.setData({
             info: res.Item
           })
-          console.log(this.data.info)
+          // console.log(this.data.info)
           return ReturnMaterialone({
             Timestamp: app.globalData.time,
             ID: this.data.info.losematerialid

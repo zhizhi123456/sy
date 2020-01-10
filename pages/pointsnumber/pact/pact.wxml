@@ -4,7 +4,7 @@
     <view class="header">
         <view class="title">
             <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
-            <navigator url="/pages/pointsnumber/new/new" hover-class="none" class="fr newCreate">
+            <navigator url="/pages/pointsnumber/new/new?rid={{options.id||options.rid}}&title={{options.title}}&{{userid?'userid='+userid+'&caption='+caption+'&dep='+dep+'&deptxt='+deptxt:''}}" hover-class="none" class="fr newCreate" wx:if="{{hadNew||me||applyT}}">
                 新建
             </navigator>
             <view class="apply">{{top}}</view>
@@ -13,7 +13,7 @@
             <icon class="iconfont icon-fuxuananniu fl s-sort" bindtap="showgroup"></icon>
             <icon class="iconfont icon-sousuo fr" bindtap="seachInfo"></icon>
             <view class="data_list">
-                <input value="{{seach}}" bindblur="setSeach" />
+                <input value="{{seach}}" bindblur="setSeach" bindinput="setSeach" bindblur="setSeach" bindblur="setSeach" />
                 <view class="number" wx:if="{{!seach}}">
                     <icon class="iconfont icon-sousuo"></icon>
                     <text wx:if="{{InfoList.length}}">共{{item.length}}条</text>
@@ -40,9 +40,19 @@
                             <van-field value="{{info.subprojectprop}}" placeholder="请输入" bind:blur="subprojectpropblur" data-name="subprojectprop" label="分包项目属性" />
                         </van-cell-group>
                     </view>
+                    <view class="seach_item" wx:if="{{ISconduct}}">
+                        <van-cell-group>
+                            <van-field value="{{info.createman}}" placeholder="请输入" bind:blur="createmanblur" data-name="createman" label="创建人" />
+                        </van-cell-group>
+                    </view>
+                    <view class="seach_item" wx:else>
+                        <van-cell-group>
+                            <van-field value="{{info.createman}}" placeholder="请输入" bind:blur="createmanblur" data-name="createman" label="创建人" disabled="{{!hadNew}}" />
+                        </van-cell-group>
+                    </view>
                     <view class="seach_item">
                         <van-cell-group>
-                            <van-field value="{{info.begintimebegin}}" placeholder="请选择" label="计划开工开始时间" bindtap="showPopup_time" disabled />
+                            <van-field value="{{info.begintimebegin}}" placeholder="请选择" label="计划开工开始" bindtap="showPopup_time" disabled />
                         </van-cell-group>
                         <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
                             <van-datetime-picker data-name="begintimebegin" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
@@ -50,15 +60,15 @@
                     </view>
                     <view class="seach_item">
                         <van-cell-group>
-                            <van-field value="{{info.begintimeend}}" placeholder="请选择" label="计划开工结束时间" bindtap="showPopup_endtime" disabled />
+                            <van-field value="{{info.begintimeend}}" placeholder="请选择" label="计划开工结束" bindtap="showPopup_endtime" disabled />
                         </van-cell-group>
                         <van-popup show="{{ show_endtime }}" round position="bottom" bind:close="onClose_endtime">
                             <van-datetime-picker data-name="begintimeend" value="{{ currentDate }}" bind:cancel="onClose_endtime" bind:confirm="onConfirm_endtime" />
                         </van-popup>
                     </view>
-                    <view class="seach_item">
+                    <!-- <view class="seach_item">
                         <van-cell-group>
-                            <van-field value="{{info.endtimebegin}}" placeholder="请选择" label="计划完工开始时间" bindtap="showPopup_time2" disabled />
+                            <van-field value="{{info.endtimebegin}}" placeholder="请选择" label="计划完工开始" bindtap="showPopup_time2" disabled />
                         </van-cell-group>
                         <van-popup show="{{ show_time2 }}" round position="bottom" bind:close="onClose_time2">
                             <van-datetime-picker data-name="endtimebegin" value="{{ currentDate }}" bind:cancel="onClose_time2" bind:confirm="onConfirm_time2" />
@@ -66,10 +76,18 @@
                     </view>
                     <view class="seach_item">
                         <van-cell-group>
-                            <van-field value="{{info.endtimeend}}" placeholder="请选择" label="计划完工结束时间" bindtap="showPopup_endtime2" disabled />
+                            <van-field value="{{info.endtimeend}}" placeholder="请选择" label="计划完工结束" bindtap="showPopup_endtime2" disabled />
                         </van-cell-group>
                         <van-popup show="{{ show_endtime2 }}" round position="bottom" bind:close="onClose_endtime2">
                             <van-datetime-picker data-name="endtimeend" value="{{ currentDate }}" bind:cancel="onClose_endtime2" bind:confirm="onConfirm_endtime2" />
+                        </van-popup>
+                    </view> -->
+                    <view class="seach_item">
+                        <van-cell-group>
+                            <van-field value="{{info.state}}" placeholder="请选择" bindtap="showPopup_3" label="状态" disabled />
+                        </van-cell-group>
+                        <van-popup show="{{ show_3 }}" round position="bottom" bind:close="onClose_3">
+                            <van-picker data-name="state" show-toolbar columns="{{ states }}" bind:cancel="onClose_3" bind:confirm="onConfirm_3" />
                         </van-popup>
                     </view>
                     <view class="checkkind">
@@ -82,7 +100,10 @@
     </view>
     <view class="main">
         <view class="list" wx:for="{{InfoList}}" wx:key="index">
-            <navigator url="/pages/pointsnumber/detail/detail?id={{item.ID}}" hover-class="none">
+            <van-tag class="LThint" round type="danger" size="large" wx:if="{{(item.ApplygetNew&&applyT)}}">
+                new
+            </van-tag>
+            <navigator url="/pages/pointsnumber/detail/detail?id={{item.ID}}&hadNew={{hadNew}}&rid={{options.id||options.rid}}&title={{options.title}}&{{userid?'userid='+userid+'&caption='+caption+'&dep='+dep+'&deptxt='+deptxt+'&me='+me+'&applyT='+applyT+'&ISconduct='+ISconduct:''}}" hover-class="none">
                 <view>
                     <text class="caption">{{item.verifysubprocode}}</text>
                 </view>

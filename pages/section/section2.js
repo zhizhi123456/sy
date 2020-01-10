@@ -10,7 +10,7 @@ Page({
     menu: [{
         name: "分包项目",
         menuId: null,
-        icon: 'icon-zhaotoubiao',
+        icon: 'icon-xiangmu1',
         path: '/pages/subcontract/pact/pact'
       },
       {
@@ -22,40 +22,34 @@ Page({
       {
         name: "费用",
         menuId: null,
-        icon: 'icon-feiyong1',
+        icon: 'icon-feiyong2',
         path: '/pages/cost/pact/pact'
       },
       {
         name: "考勤",
         menuId: null,
-        icon: 'icon-kaoqin2',
+        icon: 'icon-kaoqin1',
         path: '/pages/sign/pact/pact'
-      },
-      {
-        name: "定位",
-        menuId: null,
-        icon: 'icon-renyuandingwei',
-        path: '/pages/location/location'
       },
       {
         name: "轨迹",
         menuId: null,
         icon: 'icon-guiji1',
-        path: '/pages/track/task'
+        path: '/pages/track/track'
+      },
+      {
+        name: "定位",
+        menuId: null,
+        icon: 'icon-duomeitiicon-',
+        path: '/pages/location/location'
       },
       {
         name: "任务书",
         menuId: null,
-        icon: 'icon-renwu green3',
+        icon: 'icon-lunkuodasan-',
         path: '/pages/task/pact/pact'
-      },
-      {
-        name: "设计任务",
-        menuId: null,
-        icon: 'icon-lunkuodasan- .green4',
-        path: '/pages/design/pact/pact'
       }
-    ],
+    ]
   },
   return () {
     wx.redirectTo({
@@ -66,7 +60,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
+    // console.log(options)
     if (options) {
       this.setData({
         caption: options.name,
@@ -76,5 +70,52 @@ Page({
       })
     }
   },
-  
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+
+  }
 })

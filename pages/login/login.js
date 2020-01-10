@@ -17,6 +17,10 @@ Page({
     confirmpwd: '',
     MobilePIN: "",
     Email: "",
+    showpwd: true,
+    hidepwd: true,
+    showpwd1: true,
+    hidepwd1: true
   },
   return () {
     util.returnMenu();
@@ -152,12 +156,8 @@ Page({
         if (res.code == 10000) {
           // app.globalData.userInfo = res.Item;
           wx.setStorageSync("myInfo", res.Item)
-          wx.setStorageSync("username",this.data.username)
-          wx.setStorageSync("password",this.data.password)
-          // 跳转到个人中心
-          wx.reLaunch({
-            url: '/pages/mine/mine'
-          })
+          // 跳转到首页
+          util.returnMenu();
         } else {
           wx.showToast({
             title: '用户名或密码错误',
@@ -210,6 +210,7 @@ Page({
         confirmpwd: '',
         MobilePIN: "",
         Email: "",
+        hidepwd: true
       })
     }
   },
@@ -218,7 +219,34 @@ Page({
     this.setData({
       ifenter: true,
       username: '',
-      password: ''
+      password: '',
+      hidepwd: true
+    })
+  },
+  //密码的显示隐藏
+  showpwd() {
+    this.setData({
+      showpwd: false,
+      hidepwd: true
+    })
+  },
+  hidepwd() {
+    this.setData({
+      hidepwd: false,
+      showpwd: true
+    })
+  },
+  //密码的显示隐藏
+  showpwd1() {
+    this.setData({
+      showpwd1: false,
+      hidepwd1: true
+    })
+  },
+  hidepwd1() {
+    this.setData({
+      hidepwd1: false,
+      showpwd1: true
     })
   },
   /**

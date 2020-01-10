@@ -3,9 +3,11 @@ var util = require("../../../utils/util");
 import {
   getTaskTNUm,
   getapply,
-  getdep
+  getdep,
+  getapplyNEWinfo
 } from "../../../service/getData";
 let userinfo = wx.getStorageSync("myInfo");
+var app = getApp();
 Page({
 
   /**
@@ -21,7 +23,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
+    wx.showLoading({
+      title: '加载中',
+    });
+    userinfo = wx.getStorageSync("myInfo");
+    // console.log(options)
     if (options.title) {
       this.setData({
         options: options
@@ -36,10 +42,9 @@ Page({
         this.setData({
           userinfo,
         })
-        if (options.id == 1056) {
+        if (options.id) {
           this.setData({
             userid: userinfo.UserName,
-            caption: '我申请',
             dep: resData[0].ID,
             deptxt: resData[0].techofficename,
           })
@@ -47,6 +52,9 @@ Page({
       })
       let NAnum = 0;
       if (options.id == 1058) {
+        this.setData({
+          caption: '未处理',
+        })
         getTaskTNUm({
           UserName: userinfo.UserName
         }).then(res => {
@@ -55,7 +63,7 @@ Page({
             let item = res.List;
             this.setData({
               taskData: item,
-              Nhint: true
+              Nhint: true,
             })
             item.forEach(element => {
               NAnum += element.Number;
@@ -63,15 +71,19 @@ Page({
             this.setData({
               NAnum
             })
+            wx.hideLoading();
           }
         })
       }
       if (options.id == 1056) {
+        this.setData({
+          caption: '我申请',
+        })
         getapply({
           UserName: userinfo.UserName
         }).then(res => {
-          console.log(res)
-          let ele = res.List;
+          // console.log(res)
+          let ele = res.List || [];
           this.setData({
             taskData: ele
           })
@@ -81,6 +93,17 @@ Page({
           this.setData({
             NAnum
           })
+          wx.hideLoading();
+        })
+        getapplyNEWinfo({
+          UserName: userinfo.UserName
+        }).then(res => {
+          // console.log(res)
+          if (res.code == 10000) {
+            this.setData({
+              NEWnum: res.List
+            })
+          }
         })
       }
     } else {
@@ -90,5 +113,8 @@ Page({
         duration: 3000
       })
     }
+  },
+  onShow: function () {
+    userinfo = wx.getStorageSync("myInfo");
   },
 })

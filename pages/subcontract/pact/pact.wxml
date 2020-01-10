@@ -41,7 +41,12 @@
                             <van-picker data-name="departmentID" show-toolbar columns="{{ sections }}" bind:cancel="onClose_0" bind:confirm="onConfirm_0" />
                         </van-popup>
                     </view>
-                    <view class="seach_item">
+                    <view class="seach_item" wx:if="{{ISconduct}}">
+                        <van-cell-group>
+                            <van-field value="{{info.chargemanName}}" placeholder="请输入" bind:blur="chargemanNameblur" data-name="chargemanName" label="创建人" />
+                        </van-cell-group>
+                    </view>
+                    <view class="seach_item" wx:else>
                         <van-cell-group>
                             <van-field data-name="chargemanName" value="{{info.chargemanName}}" placeholder="请输入" bind:blur="chargemanNameblur" label="创建人" disabled="{{!hadNew}}" />
                         </van-cell-group>
@@ -80,7 +85,10 @@
     </view>
     <view class="main">
         <view class="list" wx:for="{{InfoList}}" wx:key="index">
-            <navigator url="/pages/subcontract/detail/detail?id={{item.ID}}&hadNew={{hadNew}}&rid={{options.id||options.rid}}&title={{options.title}}&{{userid?'userid='+userid+'&caption='+caption+'&dep='+dep+'&deptxt='+deptxt+'&me='+me+'&applyT='+applyT:''}}" hover-class="none">
+            <van-tag class="LThint" round type="danger" size="large" wx:if="{{item.ApplygetNew&&applyT}}">
+                new
+            </van-tag>
+            <navigator url="/pages/subcontract/detail/detail?id={{item.ID}}&hadNew={{hadNew}}&rid={{options.id||options.rid}}&title={{options.title}}&{{userid?'userid='+userid+'&caption='+caption+'&dep='+dep+'&deptxt='+deptxt+'&me='+me+'&applyT='+applyT+'&ISconduct='+ISconduct:''}}" hover-class="none">
                 <view>
                     <text class="caption">{{item.subprojectname}}</text>
                 </view>

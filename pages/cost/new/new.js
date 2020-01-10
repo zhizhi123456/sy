@@ -195,7 +195,7 @@ Page({
   // 编辑页面的确定和返回
   editreturn() {
     util.returnPrev('cost', this, this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
-      this.data.rid, this.data.title);
+      this.data.rid, this.data.title, this.data.ISconduct);
   },
   editconfirm() {
     let info = this.data.info;
@@ -213,7 +213,7 @@ Page({
           duration: 3000
         })
         util.returnPrev('cost', this, this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
-          this.data.rid, this.data.title);
+          this.data.rid, this.data.title, this.data.ISconduct);
       }
     })
   },
@@ -221,14 +221,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (options.id || options.rid) {
+      this.setData({
+        rid: options.rid,
+        title: options.title,
+      })
+    }
     if (options.userid) {
       this.setData({
         userid: options.userid,
         caption: options.caption,
         dep: options.dep,
         deptxt: options.deptxt,
-        rid: options.rid,
-        title: options.title
+        ISconduct: Number(options.ISconduct)
       })
     }
     this.setData({

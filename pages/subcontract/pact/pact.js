@@ -6,6 +6,7 @@ import {
 var app = getApp();
 var util = require("../../../utils/util");
 let item, list;
+let userinfo = wx.getStorageSync("myInfo");
 Page({
   /**
    * 页面的初始数据
@@ -29,7 +30,8 @@ Page({
     show_2: false,
     show_3: false,
     me: 0,
-    applyT: 0
+    applyT: 0,
+    ISconduct: 0
   },
   // 返回
   return () {
@@ -37,7 +39,7 @@ Page({
       util.returnMenu(1001);
     } else if (this.data.me) {
       util.returnMenu2(this.data.options.id || this.data.options.rid, this.data.options.title);
-    } else if (this.data.applyT) {
+    } else if (this.data.applyT || this.data.ISconduct) {
       wx.redirectTo({
         url: "/pages/current/current/current?title=" + this.data.options.title + '&id=' + (this.data.options.id || this.data.options.rid)
       });
@@ -79,30 +81,72 @@ Page({
         }
       })
     } else {
-      groupSubItems({
-        keyword: this.data.seach,
-        chargemanName: this.data.info.chargemanName
-      }).then(res => {
-        // console.log(res.List)
-        if (res.code == 10000) {
-          item = res.List;
-          list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list);
-          this.setData({
-            InfoList: list,
-            item,
-            seach: ''
+      if (this.data.ISconduct) {
+        if (this.data.seach) {
+          groupSubItems({
+            keyword: this.data.seach,
+            state: this.data.info.state,
+            UserName: userinfo.UserName
+          }).then(res => {
+            if (res.code == 10000) {
+              item = res.List;
+              list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list);
+              this.setData({
+                InfoList: list,
+                item,
+                seach: ''
+              })
+              wx.hideLoading();
+            }
+          }).catch(err => {
+            console.log(err)
           })
-          wx.hideLoading();
+        } else {
+          groupSubItems({
+            state: this.data.info.state,
+            UserName: userinfo.UserName
+          }).then(res => {
+            if (res.code == 10000) {
+              item = res.List;
+              list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list);
+              this.setData({
+                InfoList: list,
+                item,
+                seach: ''
+              })
+              wx.hideLoading();
+            }
+          }).catch(err => {
+            console.log(err)
+          })
         }
-      }).catch(err => {
-        console.log(err)
-      })
+      } else {
+        groupSubItems({
+          keyword: this.data.seach,
+          chargemanName: this.data.info.chargemanName
+        }).then(res => {
+          // console.log(res.List)
+          if (res.code == 10000) {
+            item = res.List;
+            list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list);
+            this.setData({
+              InfoList: list,
+              item,
+              seach: ''
+            })
+            wx.hideLoading();
+          }
+        }).catch(err => {
+          console.log(err)
+        })
+      }
     }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    userinfo = wx.getStorageSync("myInfo");
     list = [];
     wx.showLoading({
       title: '加载中',
@@ -113,7 +157,6 @@ Page({
         options: options
       })
     }
-    // console.log(options)
     if (options.userid) {
       let info = this.data.info;
       info.departmentID = options.dep;
@@ -138,23 +181,52 @@ Page({
           applyT: 1
         })
       }
-      // 综合查询
-      groupSubItems({
-        chargemanName: options.userid
-      }).then(res => {
-        // console.log(res.List)
-        if (res.code == 10000) {
-          item = res.List;
-          list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list);
-          this.setData({
-            InfoList: list,
-            item
-          })
-          wx.hideLoading();
-        }
-      }).catch(err => {
-        console.log(err)
-      })
+      if (options.caption == '未处理') {
+        info.state = options.caption;
+        info.UserName = userinfo.UserName;
+        delete info.departmentID;
+        delete info.chargemanName;
+        this.setData({
+          info,
+          ISconduct: 1,
+          departmenttext: ''
+        })
+        groupSubItems({
+          state: this.data.info.state,
+          UserName: userinfo.UserName
+        }).then(res => {
+          // console.log(res.List)
+          if (res.code == 10000) {
+            item = res.List;
+            list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list);
+            this.setData({
+              InfoList: list,
+              item
+            })
+            wx.hideLoading();
+          }
+        }).catch(err => {
+          console.log(err)
+        })
+      } else {
+        // 综合查询
+        groupSubItems({
+          chargemanName: options.userid
+        }).then(res => {
+          // console.log(res.List)
+          if (res.code == 10000) {
+            item = res.List;
+            list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list);
+            this.setData({
+              InfoList: list,
+              item
+            })
+            wx.hideLoading();
+          }
+        }).catch(err => {
+          console.log(err)
+        })
+      }
     } else {
       // 调用查询
       getSubItems().then(res => {
@@ -210,6 +282,17 @@ Page({
       pages: 1
     })
     if (this.data.info.keyword || this.data.info.Type || this.data.info.departmentID || this.data.info.chargemanName || this.data.info.StartTime || this.data.info.state) {
+      let info = this.data.info;
+      if (info.Type) {
+        this.data.firms.forEach(res => {
+          if (info.Type == res.text) {
+            info.Type = res.value;
+          }
+        })
+        this.setData({
+          info
+        })
+      }
       groupSubItems(this.data.info).then(res => {
         if (res.code == 10000) {
           item = res.List;
@@ -224,9 +307,15 @@ Page({
             let info = this.data.info;
             info.departmentID = this.data.dep;
             info.chargemanName = this.data.userid;
+            if (this.data.ISconduct) {
+              delete info.chargemanName;
+              delete info.departmentID;
+              info.state = '未处理';
+              info.UserName = userinfo.UserName;
+            }
             this.setData({
               info,
-              departmenttext: this.data.deptxt
+              departmenttext: this.data.ISconduct ? '' : this.data.deptxt
             })
           }
           wx.hideLoading();
@@ -243,7 +332,7 @@ Page({
       })
     )
   },
-  // 费用名称
+  // 分包项目名称
   keywordblur(e) {
     let info = util.editInfo(e, this, e.detail.value);
     this.setData({
@@ -289,7 +378,7 @@ Page({
       departmenttext: e.detail.value.text
     })
   },
-  // 所有人
+  // 创建人
   chargemanNameblur(e) {
     let info = util.editInfo(e, this, e.detail.value);
     this.setData({
@@ -334,14 +423,15 @@ Page({
   },
   // 状态
   showPopup_3() {
-    let userinfo = wx.getStorageSync("myInfo");
     if (userinfo) {
       let info = this.data.info;
-      info[UserName] = userinfo.UserName;
-      this.setData({
-        show_3: true,
-        info
-      })
+      info.UserName = userinfo.UserName;
+      if (!this.data.ISconduct) {
+        this.setData({
+          show_3: true,
+          info
+        })
+      }
     } else {
       wx.showToast({
         title: '请登录',
@@ -373,7 +463,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    userinfo = wx.getStorageSync("myInfo");
   },
 
   /**

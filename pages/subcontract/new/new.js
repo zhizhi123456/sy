@@ -246,12 +246,12 @@ Page({
   // 返回
   return () {
     util.returnPrev('subcontract', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
-      this.data.rid, this.data.title)
+      this.data.rid, this.data.title);
   },
   // 编辑分包项目页面的确定和返回
   editreturn() {
     util.returnPrev('subcontract', this, this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
-      this.data.rid, this.data.title)
+      this.data.rid, this.data.title);
   },
   editconfirm() {
     let info = this.data.info;
@@ -269,7 +269,7 @@ Page({
           duration: 3000
         })
         util.returnPrev('subcontract', this, this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
-          this.data.rid, this.data.title)
+          this.data.rid, this.data.title);
       }
     })
   },
@@ -277,6 +277,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (options.id || options.rid) {
+      this.setData({
+        rid: options.rid,
+        title: options.title,
+      })
+    }
     // console.log(options, 'new')
     if (options.userid) {
       this.setData({
@@ -284,8 +290,6 @@ Page({
         caption: options.caption,
         dep: options.dep,
         deptxt: options.deptxt,
-        rid: options.rid,
-        title: options.title
       })
     }
     this.setData({

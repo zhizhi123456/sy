@@ -2,6 +2,7 @@
 import {
   referPnumber,
   cancelPnumber,
+  amendPnumber
 } from '../../../service/getData.js';
 var app = getApp();
 var util = require("../../../utils/util");
@@ -13,18 +14,38 @@ Page({
     edit: false,
     info: {},
     steps: [],
-    tab:'a',
+    tab: 'a',
     returned: true,
-    isreturn:true,
+    isreturn: true,
+    hadNew: 1
   },
   // 返回
   return () {
-    util.returnPrev('pointsnumber')
+    util.returnPrev('pointsnumber', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+      this.data.rid, this.data.title)
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (options.id || options.rid) {
+      this.setData({
+        rid: options.rid,
+        title: options.title,
+      })
+    }
+    if (options.userid) {
+      this.setData({
+        userid: options.userid,
+        caption: options.caption,
+        dep: options.dep,
+        deptxt: options.deptxt,
+        me: Number(options.me),
+        applyT: Number(options.applyT),
+        hadNew: Number(options.hadNew),
+        ISconduct: Number(options.ISconduct)
+      })
+    }
     wx.showLoading({
       title: '加载中',
     });
@@ -39,6 +60,19 @@ Page({
           this.setData({
             info: item
           })
+          if (this.data.applyT && this.data.info.ApplygetNew) {
+            let info = this.data.info;
+            info.ApplygetNew = false;
+            util.checkContent(info, this);
+            this.setData({
+              info
+            })
+            amendPnumber(this.data.info).then(res => {
+              if (res.code == 10000) {
+                console.log('已查看')
+              }
+            })
+          }
           wx.hideLoading();
           // 调取工作流记录
           //列表
@@ -46,8 +80,8 @@ Page({
           if (mid) {
             util.workList(this, mid)
           }
-           //处理状态判断
-           util.checkState(this, mid, 'subprjcodeapply', item.CurStepbh);
+          //处理状态判断
+          util.checkState(this, mid, 'subprjcodeapply', item.CurStepbh);
         }
       })
     }
@@ -55,11 +89,13 @@ Page({
   // 工作流流转
   // 退回上步
   sendback() {
-    util.Triggerflow(this, 'return', 'subprjcodeapply', 'pointsnumber')
+    util.Triggerflow(this, 'return', 'subprjcodeapply', 'pointsnumber', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+      this.data.rid, this.data.title)
   },
   // 提交下步
   putin() {
-    util.Triggerflow(this, 'next', 'subprjcodeapply', 'pointsnumber')
+    util.Triggerflow(this, 'next', 'subprjcodeapply', 'pointsnumber', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+      this.data.rid, this.data.title)
   },
   // 删除
   delete() {
@@ -73,7 +109,8 @@ Page({
           icon: 'success',
           duration: 3000
         })
-        util.returnPrev('pointsnumber')
+        util.returnPrev('pointsnumber', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+          this.data.rid, this.data.title)
       }
     })
   },

@@ -25,7 +25,7 @@ Page({
   // 返回
   return () {
     wx.redirectTo({
-      url: "/pages/bill/detail/detail?id=" + this.data.billid + "&tab=c"
+      url: "/pages/bill/detail/detail?tab=c&id=" + this.data.billid + '&rid=' + this.data.rid + '&title=' + this.data.title + (this.data.userid ? '&caption=' + this.data.caption + '&dep=' + this.data.dep + '&deptxt=' + this.data.deptxt + '&userid=' + this.data.userid : '')
     })
   },
   // 获取材料明细输入框中的数据并设置给data
@@ -79,7 +79,7 @@ Page({
   },
   // 新增领料单材料明细
   confirm() {
-    if (this.data.materials[0].goodsname&&this.data.materials[0].goodscode&&this.data.materials[0].quantity) {
+    if (this.data.materials[0].goodsname && this.data.materials[0].goodscode && this.data.materials[0].quantity) {
       let materials = this.data.materials;
       materials[0].getmaterialid = this.data.billid;
       this.setData({
@@ -97,7 +97,7 @@ Page({
             duration: 3000
           })
           wx.redirectTo({
-            url: "/pages/bill/detail/detail?id=" + this.data.billid + "&tab=c"
+            url: "/pages/bill/detail/detail?tab=c&id=" + this.data.billid + '&rid=' + this.data.rid + '&title=' + this.data.title + (this.data.userid ? '&caption=' + this.data.caption + '&dep=' + this.data.dep + '&deptxt=' + this.data.deptxt + '&userid=' + this.data.userid : '')
           })
         } else {
           wx.showToast({
@@ -118,7 +118,7 @@ Page({
   // 编辑材料明细时的返回和确定
   linkreturn() {
     wx.redirectTo({
-      url: "/pages/bill/detaillink/detaillink?detailid=" + this.data.materials[0].ID
+      url: "/pages/bill/detaillink/detaillink?detailid=" + this.data.materials[0].ID + '&rid=' + this.data.rid + '&title=' + this.data.title + (this.data.userid ? '&caption=' + this.data.caption + '&dep=' + this.data.dep + '&deptxt=' + this.data.deptxt + '&userid=' + this.data.userid : '')
     })
   },
   linkconfirm() {
@@ -135,7 +135,7 @@ Page({
           duration: 3000
         })
         wx.redirectTo({
-          url: "/pages/bill/detaillink/detaillink?detailid=" + this.data.materials[0].ID
+          url: "/pages/bill/detaillink/detaillink?detailid=" + this.data.materials[0].ID + '&rid=' + this.data.rid + '&title=' + this.data.title + (this.data.userid ? '&caption=' + this.data.caption + '&dep=' + this.data.dep + '&deptxt=' + this.data.deptxt + '&userid=' + this.data.userid : '')
         })
       }
     })
@@ -144,6 +144,23 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
+    if (options.id || options.rid) {
+      this.setData({
+        rid: options.rid,
+        title: options.title,
+      })
+    }
+    if (options.userid) {
+      this.setData({
+        userid: options.userid,
+        caption: options.caption,
+        dep: options.dep,
+        deptxt: options.deptxt,
+        me: Number(options.me),
+        applyT: Number(options.applyT)
+      })
+    }
     this.setData({
       designation: app.globalData.detaillink,
     })

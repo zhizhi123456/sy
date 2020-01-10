@@ -1,1 +1,4 @@
 /* pages/section/section2.wxss */
+.m_listitem .iconfont{
+    border-radius: 50%;
+}

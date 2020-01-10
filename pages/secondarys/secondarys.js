@@ -496,40 +496,45 @@ Page({
         control: true,
       },
       {
-        nametext: "申请领料",
-        img: "icon-yuancailiao blue8",
-        path: "",
+        nametext: "我的任务书",
+        img: "icon-lunkuodasan- green2",
+        path: "/pages/task/pact/pact",
         control: true,
       },
-      {
-        nametext: "申请费用",
-        img: "icon-feiyong2 yellow",
-        path: "",
-        control: true,
-      },
-      {
-        nametext: "申请分包编号",
-        img: "icon-bianhaonumbered5 red4",
-        path: "",
-        control: true,
-      },
-      {
-        nametext: "申请招投标",
-        img: "icon-zhaotoubiao-daikaifang yellow1",
-        path: "",
-        control: true,
-      },
+      // {
+      //   nametext: "申请领料",
+      //   img: "icon-yuancailiao blue8",
+      //   path: "",
+      //   control: true,
+      // },
+      // {
+      //   nametext: "申请费用",
+      //   img: "icon-feiyong2 yellow",
+      //   path: "",
+      //   control: true,
+      // },
+      // {
+      //   nametext: "申请分包编号",
+      //   img: "icon-bianhaonumbered5 red4",
+      //   path: "",
+      //   control: true,
+      // },
+      // {
+      //   nametext: "申请招投标",
+      //   img: "icon-zhaotoubiao-daikaifang yellow1",
+      //   path: "",
+      //   control: true,
+      // },
 
-      {
-        nametext: "申请任务书",
-        img: "icon-lunkuodasan- blue10",
-        path: "",
-        control: true,
-      },
+      // {
+      //   nametext: "申请任务书",
+      //   img: "icon-lunkuodasan- blue10",
+      //   path: "",
+      //   control: true,
+      // },
 
     ],
-    smalls: [],
-    primarymarket:1000
+    smalls: []
   },
   screen() {
     wx.showLoading({
@@ -623,13 +628,6 @@ Page({
       util.returnMenu(1002);
     } else {
       util.returnMenu();
-      // util.returnMenu(this.data.primarymarket);
-      // wx.reLaunch({
-      //   url: "/pages/contracts/contracts?id="+this.data.primarymarket
-      // })
-      // wx.navigateBack({
-      //   delta: 1
-      // })
     }
 
   },
@@ -668,12 +666,6 @@ Page({
       })
     }
     var that = this;
-    if(options.primarymarket){
-      this.setData({
-        primarymarket:options.primarymarket
-      })
-    }
-    var that = this
     wx.getStorage({
       key: 'myInfo',
       success(res) {

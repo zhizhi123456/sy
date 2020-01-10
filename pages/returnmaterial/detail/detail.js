@@ -2,7 +2,8 @@
 import {
   ReturnMaterialone,
   ReturnMaterialdel,
-  Returnall
+  Returnall,
+  ReturnMaterialup,
 } from '../../../service/getData';
 var app = getApp();
 var util = require("../../../utils/util");
@@ -22,9 +23,11 @@ Page({
   },
   // 返回
   return () {
-    wx.redirectTo({
-      url: "/pages/returnmaterial/pact/pact"
-    })
+    // wx.redirectTo({
+    //   url: "/pages/returnmaterial/pact/pact"
+    // })
+    util.returnPrev('returnmaterial', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+      this.data.rid, this.data.title)
   },
   tap_pic(e) {
     util.preview(this, e)
@@ -67,22 +70,45 @@ Page({
           icon: 'success',
           duration: 3000
         })
-        wx.redirectTo({
-          url: "/pages/returnmaterial/pact/pact"
-        })
+        // wx.redirectTo({
+        //   url: "/pages/returnmaterial/pact/pact"
+        // })
+        util.returnPrev('returnmaterial', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+          this.data.rid, this.data.title)
       }
     })
   },
   // 新增明细表
   addndlink() {
     wx.redirectTo({
-      url: "/pages/returnmaterial/newlink/newlink?id=" + this.data.info.ID
+      url: "/pages/returnmaterial/newlink/newlink?id=" + this.data.info.ID + '&rid=' + this.data.rid + '&title=' + this.data.title + (this.data.userid ? '&caption=' + this.data.caption + '&dep=' + this.data.dep + '&deptxt=' + this.data.deptxt + '&userid=' + this.data.userid : '')
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (options.id || options.rid) {
+      this.setData({
+        rid: options.rid,
+        title: options.title,
+      })
+    }
+    if (options.userid) {
+      this.setData({
+        userid: options.userid,
+        caption: options.caption,
+        dep: options.dep,
+        deptxt: options.deptxt,
+        applyT: Number(options.applyT),
+        ISconduct: Number(options.ISconduct)
+      })
+    }
+    if (options.hadNew) {
+      this.setData({
+        hadNew: Number(options.hadNew)
+      })
+    }
     wx.showLoading({
       title: '加载中',
     });
@@ -107,6 +133,19 @@ Page({
           this.setData({
             info: item
           })
+          if (this.data.applyT && this.data.info.ApplygetNew) {
+            let info = this.data.info;
+            info.ApplygetNew = false;
+            util.checkContent(info, this);
+            this.setData({
+              info
+            })
+            ReturnMaterialup(this.data.info).then(res => {
+              if (res.code == 10000) {
+                console.log('已查看')
+              }
+            })
+          }
           wx.hideLoading();
           // 调取工作流记录
           if (res.Item.formid) {
@@ -142,11 +181,13 @@ Page({
   // 工作流流转
   // 退回上步
   sendback() {
-    util.Triggerflow(this, 'return', 'losematerial', 'returnmaterial')
+    util.Triggerflow(this, 'return', 'losematerial', 'returnmaterial', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+      this.data.rid, this.data.title)
   },
   // 提交下步
   putin() {
-    util.Triggerflow(this, 'next', 'losematerial', 'returnmaterial')
+    util.Triggerflow(this, 'next', 'losematerial', 'returnmaterial', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+      this.data.rid, this.data.title)
   },
 
 })

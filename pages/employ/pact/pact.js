@@ -28,7 +28,8 @@ Page({
   },
   // 返回
   return () {
-    util.returnMenu2(this.data.options.id, this.data.options.title);
+    let menus = wx.getStorageSync('menus');
+    util.returnMenu2(menus.id, menus.title);
   },
   setSeach(e) {
     // console.log(e)
@@ -66,9 +67,7 @@ Page({
    */
   onLoad: function (options) {
     if (options.id) {
-      this.setData({
-        options: options
-      })
+      wx.setStorageSync('menus', options)
     }
     list = [];
     if (app.globalData.CountItem) {
@@ -123,6 +122,11 @@ Page({
       pages: 1
     })
     if (this.data.info.InoutwarehouseID || this.data.info.begintime || this.data.info.goodsname) {
+      let info = this.data.info;
+      util.checkContent(info, this);
+      this.setData({
+        info
+      })
       groupEmploy(this.data.info).then(res => {
         if (res.code == 10000) {
           item = res.List;

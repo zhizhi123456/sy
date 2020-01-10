@@ -228,7 +228,8 @@ Page({
                 icon: 'success',
                 duration: 3000
               })
-              util.returnPrev('bill')
+              util.returnPrev('bill', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+                this.data.rid, this.data.title)
             }
           })
         }
@@ -241,7 +242,8 @@ Page({
               icon: 'success',
               duration: 3000
             })
-            util.returnPrev('bill')
+            util.returnPrev('bill', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+              this.data.rid, this.data.title)
           }
         })
       }
@@ -255,11 +257,13 @@ Page({
   },
   // 返回
   return () {
-    util.returnPrev('bill')
+    util.returnPrev('bill', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+      this.data.rid, this.data.title)
   },
   // 编辑领料单
   editreturn() {
-    util.returnPrev('bill', this)
+    util.returnPrev('bill', this, this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+      this.data.rid, this.data.title)
   },
   editconfirm() {
     let info = this.data.info;
@@ -273,7 +277,8 @@ Page({
     amendBill(this.data.info).then(res => {
       // console.log(res)
       if (res.code == 10000) {
-        util.returnPrev('bill', this)
+        util.returnPrev('bill', this, this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+          this.data.rid, this.data.title)
         wx.hideLoading();
       }
     })
@@ -382,6 +387,23 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
+    if (options.id || options.rid) {
+      this.setData({
+        rid: options.rid,
+        title: options.title,
+      })
+    }
+    if (options.userid) {
+      this.setData({
+        userid: options.userid,
+        caption: options.caption,
+        dep: options.dep,
+        deptxt: options.deptxt,
+        me: Number(options.me),
+        applyT: Number(options.applyT)
+      })
+    }
     if (options.id) {
       wx.showLoading({
         title: '加载中',

@@ -12,8 +12,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    info: {
-    },
+    info: {},
     currentDate: new Date().getTime(),
     show_nature: false,
     show_time: false,
@@ -140,7 +139,7 @@ Page({
   },
   confirm() {
     // console.log(this.data.info)
-    if (this.data.info.planbegindate && this.data.info.planenddate && this.data.info.subprojectprop&& this.data.info.verifysubprocode&& this.data.info.projectname) {
+    if (this.data.info.planbegindate && this.data.info.planenddate && this.data.info.subprojectprop && this.data.info.verifysubprocode && this.data.info.projectname) {
       let info = this.data.info;
       util.checkContent(info, this);
       this.setData({
@@ -154,7 +153,8 @@ Page({
             icon: 'success',
             duration: 3000
           })
-          util.returnPrev('pointsnumber')
+          util.returnPrev('pointsnumber', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+            this.data.rid, this.data.title)
         }
       })
     } else {
@@ -166,15 +166,17 @@ Page({
   },
   // 返回
   return () {
-    util.returnPrev('pointsnumber')
+    util.returnPrev('pointsnumber', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+      this.data.rid, this.data.title)
   },
   // 编辑分包项目页面的确定和返回
   editreturn() {
-    util.returnPrev('pointsnumber',this)
+    util.returnPrev('pointsnumber', this, this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+      this.data.rid, this.data.title, this.data.ISconduct)
   },
   editconfirm() {
     let info = this.data.info;
-    util.checkChange(info, this,app.globalData.department);
+    util.checkChange(info, this, app.globalData.department);
     this.setData({
       info
     })
@@ -186,7 +188,8 @@ Page({
           icon: 'success',
           duration: 3000
         })
-        util.returnPrev('pointsnumber',this)
+        util.returnPrev('pointsnumber', this, this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+          this.data.rid, this.data.title, this.data.ISconduct)
       }
     })
   },
@@ -194,6 +197,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (options.id || options.rid) {
+      this.setData({
+        rid: options.rid,
+        title: options.title,
+      })
+    }
+    if (options.userid) {
+      this.setData({
+        userid: options.userid,
+        caption: options.caption,
+        dep: options.dep,
+        deptxt: options.deptxt,
+        ISconduct: Number(options.ISconduct)
+      })
+    }
     this.setData({
       nature: app.globalData.Projectprop
     })

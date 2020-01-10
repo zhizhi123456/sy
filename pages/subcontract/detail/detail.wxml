@@ -119,13 +119,13 @@
             </van-tab>
         </van-tabs>
     </view>
-    <view class="footer" wx:if="{{hadNew||me||applyT}}">
+    <view class="footer" wx:if="{{hadNew||me||applyT||ISconduct}}">
         <view bindtap="sendback" wx:if="{{info.formid&&isnext&&returned&&isreturn}}">
             <icon class="iconfont icon-wj-thwj"></icon>
             <text>退回上步</text>
         </view>
         <view>
-            <navigator url="/pages/subcontract/new/new?id={{info.ID}}&rid={{rid}}&title={{title}}&{{userid?'userid='+userid+'&caption='+caption+'&dep='+dep+'&deptxt='+deptxt:''}}" hover-class="none">
+            <navigator url="/pages/subcontract/new/new?id={{info.ID}}&rid={{rid}}&title={{title}}&{{userid?'userid='+userid+'&caption='+caption+'&dep='+dep+'&deptxt='+deptxt+'&ISconduct='+ISconduct:''}}" hover-class="none">
                 <icon class="iconfont icon-bianji"></icon>
                 <text>编辑</text>
             </navigator>

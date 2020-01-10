@@ -241,10 +241,12 @@ Page({
                 icon: 'success',
                 duration: 3000
               })
-              wx.redirectTo({
-                url: '/pages/returnmaterial/pact/pact'
-              })
-            }else{
+              // wx.redirectTo({
+              //   url: '/pages/returnmaterial/pact/pact'
+              // })
+              util.returnPrev('returnmaterial', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+                this.data.rid, this.data.title)
+            } else {
               Toast({
                 message: '请输入正确的内容',
                 mask: true
@@ -271,16 +273,18 @@ Page({
           ...this.data.info
         }
         ReturnMaterialadd(infodata).then(res => {
-           console.log(res)
+          console.log(res)
           if (res.code == 10000) {
             wx.showToast({
               title: '新建成功',
               icon: 'success',
               duration: 3000
             })
-            wx.redirectTo({
-              url: '/pages/returnmaterial/pact/pact'
-            })
+            // wx.redirectTo({
+            //   url: '/pages/returnmaterial/pact/pact'
+            // })
+            util.returnPrev('returnmaterial', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+              this.data.rid, this.data.title)
           }
         })
       }
@@ -294,14 +298,16 @@ Page({
   },
   // 返回
   return () {
-    wx.redirectTo({
-      url: "/pages/returnmaterial/pact/pact"
-    })
+    // wx.redirectTo({
+    //   url: "/pages/returnmaterial/pact/pact"
+    // })
+    util.returnPrev('returnmaterial', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+      this.data.rid, this.data.title)
   },
   // 编辑领料单
   editreturn() {
     wx.redirectTo({
-      url: "/pages/returnmaterial/detail/detail?id=" + this.data.info.ID
+      url: "/pages/returnmaterial/detail/detail?id=" + this.data.info.ID + '&rid=' + this.data.rid + '&title=' + this.data.title + (this.data.userid ? '&caption=' + this.data.caption + '&dep=' + this.data.dep + '&deptxt=' + this.data.deptxt + '&userid=' + this.data.userid : "")
     })
   },
   editconfirm() {
@@ -323,7 +329,7 @@ Page({
       console.log(res)
       if (res.code == 10000) {
         wx.redirectTo({
-          url: "/pages/returnmaterial/detail/detail?id=" + this.data.info.ID
+          url: "/pages/returnmaterial/detail/detail?id=" + this.data.info.ID + '&rid=' + this.data.rid + '&title=' + this.data.title + (this.data.userid ? '&caption=' + this.data.caption + '&dep=' + this.data.dep + '&deptxt=' + this.data.deptxt + '&userid=' + this.data.userid : "")
         })
         wx.hideLoading();
       }
@@ -388,6 +394,20 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (options.id || options.rid) {
+      this.setData({
+        rid: options.rid,
+        title: options.title
+      })
+    }
+    if (options.userid) {
+      this.setData({
+        userid: options.userid,
+        caption: options.caption,
+        dep: options.dep,
+        deptxt: options.deptxt,
+      })
+    }
     if (options.id) {
       wx.showLoading({
         title: '加载中',
