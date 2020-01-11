@@ -22,7 +22,7 @@
       <navigator bindtap="{{item.out?'out':''}}" url="{{(!item.control)?'':(item.three?(item.path +'?menuId='+ item.menuId+'&id='+item.ID+'&title='+item.nametext):('/pages/secondarys/secondarys?id='+item.ID+'&title='+item.nametext))}}"></navigator>
     </view>
   </view>
-  <view wx:if="{{entered}}" class="haDquit">
+  <view wx:if="{{entered&&num==1002}}" class="haDquit">
     <view bindtap="out">切换账号</view>
     <view bindtap="out">退出</view>
   </view>

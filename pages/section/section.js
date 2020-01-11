@@ -107,6 +107,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    //判断用户所属部门下的员工
+    // if (options.depid) {
+    //   employee({
+    //     ID: options.depid
+    //   }).then(res => {
+    //     this.setData({
+    //       employee: util.getBase(res, "name", "userId")
+    //     })
+    //   })
+    // }
     if (app.globalData.CountItem) {
       this.setData({
         sections: app.globalData.department,
