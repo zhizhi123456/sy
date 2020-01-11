@@ -346,16 +346,17 @@ Page({
               if (that.data.num == 1002) {
                 let item = that.data.lists;
                 item.shift();
-                item.push({
-                  nametext: "注销登录",
-                  img: "icon-tuichu blue4",
-                  path: "/",
-                  control: true, //权限
-                  three: true,
-                  out: true
-                });
+                // item.push({
+                //   nametext: "注销登录",
+                //   img: "icon-tuichu blue4",
+                //   path: "/",
+                //   control: true, //权限
+                //   three: true,
+                //   out: true
+                // });
                 that.setData({
-                  lists: item
+                  lists: item,
+                  entered: true
                 })
               }
             }
@@ -371,9 +372,7 @@ Page({
                 tags: s
               })
             }
-
           }
-
         })
         wx.hideLoading()
 
@@ -429,7 +428,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    userinfo=wx.getStorageSync("myInfo");
+    userinfo = wx.getStorageSync("myInfo");
     // console.log(options)
     this.log() //判断是否登录
     // console.log(options.grading)
