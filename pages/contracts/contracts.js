@@ -203,6 +203,13 @@ Page({
         three: true
       },
       {
+        nametext: "施工队管理",
+        img: "icon-bumen .green4",
+        path: "/pages/corps/section",
+        control: true, //权限
+        three: true,
+      },
+      {
         nametext: "当前任务",
         img: ".icon-renwu .green5",
         path: "/pages/current/current/current",
@@ -348,22 +355,26 @@ Page({
               if (that.data.num == 1002) {
                 let item = that.data.lists;
                 item.shift();
-                item.push({
-                  nametext: "注销登录",
-                  img: "icon-tuichu blue4",
-                  path: "/",
-                  control: true, //权限
-                  three: true,
-                  out: true
-                }, {
-                  nametext: "施工队管理",
-                  img: "icon-bumen .green4",
-                  path: "/pages/corps/section",
-                  control: true, //权限
-                  three: true,
-                }, );
+                // item.push({
+                //   nametext: "注销登录",
+                //   img: "icon-tuichu blue4",
+                //   path: "/",
+                //   control: true, //权限
+                //   three: true,
+                //   out: true
+                // });
+                // item.push(
+                // {
+                //   nametext: "施工队管理",
+                //   img: "icon-bumen .green4",
+                //   path: "/pages/corps/section",
+                //   control: true, //权限
+                //   three: true,
+                // },
+                // );
                 that.setData({
-                  lists: item
+                  lists: item,
+                  entered: true
                 })
                 // 设置title
                 for (var s in that.data.tag) {
@@ -387,9 +398,7 @@ Page({
                 tags: s
               })
             }
-
           }
-
         })
         wx.hideLoading()
 
