@@ -3,7 +3,7 @@ var app = getApp();
 var util = require("../../utils/util");
 import {
   qgroupcontractor,
-  getdep 
+  getdep
 } from "../../service/getData";
 Page({
 
@@ -15,31 +15,33 @@ Page({
     info: {},
     InfoList: [],
     activeKey: 0,
-    employee:'',
-    b:'',
+    employee: '',
+    b: '',
   },
   return () {
     util.returnMenu(1002);
   },
   // 根据用户名得到部门
-  updep(id,that){
-    getdep({UserName:id}).then(res=>{
-      if(res!=='[]'){
+  updep(id, that) {
+    getdep({
+      UserName: id
+    }).then(res => {
+      if (res !== '[]') {
         var s = JSON.parse(res)
         that.setData({
           dep: s[0].ID,
-          deptxt:s[0].techofficename
+          deptxt: s[0].techofficename
         })
-        console.log(that.data.dep,that.data.deptxt)
+        // console.log(that.data.dep, that.data.deptxt)
       }
     })
-    // 
+    // 根据用户名得到 施工队
     qgroupcontractor({
       UserName: id
     }).then(res => {
       if (res.List) {
         var a = JSON.stringify(res.List)
-        var b  = JSON.parse(a.replace(/ID/g, 'value').replace(/ConstructionName/g, 'text'));
+        var b = JSON.parse(a.replace(/ID/g, 'value').replace(/ConstructionName/g, 'text'));
       } else {
         var b = []
       }
@@ -50,7 +52,11 @@ Page({
   },
   onChange(e) {
     let id = this.data.sections[e.detail].value;
-    this.updep(id,this)
+    // 用户名
+    this.updep(id, this)
+    this.setData({
+      info:{}
+    })
   },
   //部门
   showPopup_o() {
@@ -63,13 +69,17 @@ Page({
       show_o: false
     });
   },
+  // 点击确定
   onConfirm_o(e) {
+    let info = util.editInfo(e, this, e.detail.value.text);
     this.setData({
+      info,
       show_o: false,
       activeKey: e.detail.index,
     })
-    this.updep(e.detail.value.value,this)
-   
+    
+    // e.detail.value.value 用户名
+    this.updep(e.detail.value.value, this)
   },
   //员工
   showPopup_1() {
@@ -110,42 +120,20 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // //console.log(app.globalData.Principal)
     var a = app.globalData.Principal[0].value
-    qgroupcontractor({
-      UserName: a
-    }).then(res => {
-      //console.log(res)
-      if (res.List) {
-        var a = JSON.stringify(res.List)
-        var b  = JSON.parse(a.replace(/ID/g, 'value').replace(/ConstructionName/g, 'text'));
-        this.setData({
-          b
-        })
-      } else {
-       var  b = ''
-        this.setData({
-          b
-        })
-      }
-    })
+    // 请求数据
+    this.updep(a, this)
     if (app.globalData.CountItem) {
       this.setData({
         sections: app.globalData.Principal,
-        employee: this.data.b,
         Companytitle: app.globalData.Companytitle,
-        dep: app.globalData.department[0].value,
-        deptxt: app.globalData.department[0].text
       })
     } else {
       app.DataCallback = employ => {
         if (employ != '') {
           this.setData({
             sections: app.globalData.Principal,
-            employee: this.data.b,
             Companytitle: app.globalData.Companytitle,
-            dep: app.globalData.department[0].value,
-            deptxt: app.globalData.department[0].text
           })
         }
       }

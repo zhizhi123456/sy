@@ -203,6 +203,13 @@ Page({
         three: true
       },
       {
+        nametext: "施工队管理",
+        img: "icon-bumen .green4",
+        path: "/pages/corps/section",
+        control: true, //权限
+        three: true,
+      },
+      {
         nametext: "当前任务",
         img: ".icon-renwu .green5",
         path: "/pages/current/current/current",
@@ -275,7 +282,7 @@ Page({
       queryMenu({
         Timestamp: app.globalData.time,
         pid: this.data.num,
-        // UId: this.data.id,
+        UId: this.data.id,
       }).then(ress => {
         // console.log(ress)
         fen = []
@@ -354,6 +361,15 @@ Page({
                 //   three: true,
                 //   out: true
                 // });
+                // item.push(
+                // {
+                //   nametext: "施工队管理",
+                //   img: "icon-bumen .green4",
+                //   path: "/pages/corps/section",
+                //   control: true, //权限
+                //   three: true,
+                // },
+                // );
                 that.setData({
                   lists: item,
                   entered: true

@@ -36,7 +36,7 @@ Page({
   },
   // 返回
   return () {
-    util.returnMenu();
+    util.returnMenu(1002);
   },
   setSeach(e) {
     // console.log(e)

@@ -34,9 +34,15 @@ Page({
     time: 0,
     hadNew: 1,
     showmap: true,
-    me: 0
+    me: 0,
+    constructionteam: 0
   },
   return () {
+    if (this.data.constructionteam) {
+      wx.redirectTo({
+        url: "/pages/corps/section2?name=" + this.data.caption + '&dep=' + this.data.dep + '&deptxt=' + this.data.deptxt + '&userid=' + this.data.userid
+      });
+    }
     if (this.data.hadNew || this.data.me) {
       let menus = wx.getStorageSync('menus');
       util.returnMenu2(menus.id, menus.title);
@@ -51,6 +57,11 @@ Page({
    */
   onLoad: function (options) {
     // console.log(options)
+    if (options.constructionteam) {
+      this.setData({
+        constructionteam: options.constructionteam
+      })
+    }
     if (options.id || options.rid) {
       wx.setStorageSync('menus', options)
     }

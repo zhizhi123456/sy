@@ -2,7 +2,9 @@ var app = getApp();
 var util = require("../../../utils/util");
 import {
   qgroupmember,
-  qgroupcontractor
+  qgroupcontractor,
+  detailcontractor,
+  getdep
 } from "../../../service/getData";
 Page({
 
@@ -17,29 +19,16 @@ Page({
     employee: '',
     b: '',
     member: "",
-    name:''
+    name: ''
   },
   return () {
     wx.redirectTo({
       url: "/pages/corps/section"
     })
   },
-  onChange(e) {
-    this.setData({
-      info: {}
-    })
-  
-    let id = this.data.sections[e.detail].value;
-    
-    this.setData({
-      name:id
-    })
-   
-    this.setData({
-      dep: id,
-      deptxt: this.data.sections[e.detail].text
-    })
-    //console.log(id)
+  upmember(id, that) {
+    // 根据施工队id查询 施工队成员
+    // console.log(id)
     qgroupmember({
       Type: id
     }).then(res => {
@@ -57,13 +46,45 @@ Page({
         var c = JSON.parse(u.replace(/ID/g, 'value').replace(/username/g, 'text'));
       } else {
         var c = []
-
       }
-
-      this.setData({
+      that.setData({
         employee: c
       })
     })
+    detailcontractor({ID:id}).then(res => {
+      console.log(res)
+      if(res.code==10000){
+          var item = res.Item
+          // item.chiefcontactman 用户名
+          if(item.chiefcontactman){
+            getdep({
+              UserName: item.chiefcontactman
+            }).then(res => {
+              if (res !== '[]') {
+                var s = JSON.parse(res)
+                this.setData({
+                  dep: s[0].ID,
+                  deptxt: s[0].techofficename
+                })
+                console.log(that.data.dep, that.data.deptxt)
+              }
+            })
+          }
+      }
+    })
+
+  },
+  onChange(e) {
+    this.setData({
+      info: {}
+    })
+    // id 施工队id
+    let id = this.data.sections[e.detail].value;
+    this.setData({
+      name: id
+    })
+    this.upmember(id, this)
+
   },
   //部门
   showPopup_o() {
@@ -77,46 +98,17 @@ Page({
     });
   },
   onConfirm_o(e) {
-    // //console.log(e)
-    //console.log(e.detail)
-    //console.log(e.detail.value)
     let info = util.editInfo(e, this, e.detail.value.text);
     this.setData({
       info,
       show_o: false,
       activeKey: e.detail.index,
-      dep: e.detail.value.value,
-      deptxt: e.detail.value.text
     })
     // 页面传值参数
     this.setData({
-      name:e.detail.value.value
+      name: e.detail.value.value
     })
-   
-    qgroupmember({
-      Type: e.detail.value.value
-    }).then(res => {
-      let info = this.data.info;
-      info.person = '';
-      if (res.List) {
-        var q = res.List
-        q.forEach(s => {
-          app.globalData.Principal.forEach(a => {
-            if (s.MemberName == a.value) {
-              s.username = a.text
-            }
-          })
-        })
-        var u = JSON.stringify(q)
-        var c = JSON.parse(u.replace(/ID/g, 'value').replace(/username/g, 'text'));
-      } else {
-        var c = []
-      }
-      this.setData({
-        info,
-        employee: c
-      })
-    })
+    this.upmember(e.detail.value.value, this)
   },
   //员工
   showPopup_1() {
@@ -157,103 +149,58 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     if (options) {
       this.setData({
-        caption: options.name,
-        userid: options.userid,
         dep: options.dep,
         deptxt: options.deptxt,
-        title: options.title
+        name: options.name,
       })
+      var a = options.name
+      // 传递的施工队id
     }
-  console.log(options.dep, options.deptxt)
-
-    // console.log(options)
+    // a:施工队id 根据获取施工队id 获得施工队成员列表
+    this.upmember(a, this)
     qgroupcontractor().then(res => {
-      //console.log(res.List)
       if (res.List) {
+        // 根据传递的施工队id 遍历得到应该在列表的那个位置 设置activeKey
         var a = res.List
         var c = a.findIndex(s => {
           return s.ID == options.name
         })
-        //console.log(c)
         this.setData({
           activeKey: c
         })
-
-      }
-    })
-    if (options.name) {
-      var a = options.name
-    
-      this.setData({
-        name:options.name
-      })
-      // console.log(this.data.name)
-    }
-    qgroupmember({
-      Type: a
-    }).then(res => {
-      if (res.List) {
+        // 
+        // 获得初始施工队列表
         var a = JSON.stringify(res.List)
-        var b = JSON.parse(a.replace(/ID/g, 'value').replace(/MemberName/g, 'text'));
-        var q = res.List
-        q.forEach(s => {
-          app.globalData.Principal.forEach(a => {
-            if (s.MemberName == a.value) {
-              s.username = a.text
-            }
-          })
-        })
-        var u = JSON.stringify(q)
-        var b = JSON.parse(u.replace(/ID/g, 'value').replace(/username/g, 'text'));
+        var c = JSON.parse(a.replace(/ID/g, 'value').replace(/ConstructionName/g, 'text'));
         this.setData({
-          b
+          member: c
+        })
+
+      } else {
+        this.setData({
+          member: []
+        })
+      }
+      if (app.globalData.CountItem) {
+        this.setData({
+          sections: this.data.member,
         })
       } else {
-        var b = []
-        this.setData({
-          b
-        })
-      }
-
-      qgroupcontractor().then(res => {
-        //console.log(res)
-
-        if (res.List) {
-          var a = JSON.stringify(res.List)
-          var c = JSON.parse(a.replace(/ID/g, 'value').replace(/ConstructionName/g, 'text'));
-
-          this.setData({
-            member: c
-          })
-        } else {
-          this.setData({
-            member: []
-          })
-        }
-
-        if (app.globalData.CountItem) {
-          this.setData({
-            sections: this.data.member,
-            employee: this.data.b,
-          })
-        } else {
-          app.DataCallback = employ => {
-            if (employ != '') {
-              this.setData({
-                sections: this.data.member,
-                employee: this.data.b,
-              })
-            }
+        app.DataCallback = employ => {
+          if (employ != '') {
+            this.setData({
+              sections: this.data.member,
+            })
           }
         }
-
-      })
-      //console.log(this.data.member)
-
+      }
     })
 
 
-  },
+
+
+  }
 })

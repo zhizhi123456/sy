@@ -1759,6 +1759,7 @@ const qgroupdeliver = (funcname, that, hadNew, hadMy) => {
         funcname(
           infodata
         ).then(res => {
+          console.log(res)
           wx.showLoading({
             title: '加载中',
           });
@@ -1974,5 +1975,6 @@ module.exports = {
   whethercontent1,
   getBase,
   back,
-  sumup
+  sumup,
+  qgroupdeliver
 }

@@ -597,7 +597,7 @@ Page({
       queryMenu({
         Timestamp: app.globalData.time,
         pid: this.data.chuancan,
-        // UId:this.data.id
+        UId:this.data.id
       }).then(ress => {
         // console.log(ress)
         var c = 0
