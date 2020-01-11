@@ -282,7 +282,7 @@ Page({
       queryMenu({
         Timestamp: app.globalData.time,
         pid: this.data.num,
-        UId: this.data.id,
+        // UId: this.data.id,
       }).then(ress => {
         // console.log(ress)
         fen = []
