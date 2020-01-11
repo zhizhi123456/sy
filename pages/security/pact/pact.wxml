@@ -8,9 +8,7 @@
                 新建
             </navigator>
             <view class="apply">
-                <van-dropdown-menu active-color="#339AFF">
-                    <van-dropdown-item value="{{val}}" options="{{pact}}" />
-                </van-dropdown-menu>
+               <text>安防质量验收</text>
             </view>
         </view>
         <view class="seach">

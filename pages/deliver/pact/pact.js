@@ -14,16 +14,7 @@ Page({
     firms: [],
     seach: '',
     loading: false,
-    val: 0,
-    pact: [{
-        text: '全部送货单',
-        value: 0
-      },
-      {
-        text: '我的送货单',
-        value: 1
-      }
-    ],
+
     info: {
       Company: "",
       projectcode: "",
@@ -52,26 +43,6 @@ Page({
       seach: e.detail.value
     })
   },
-  dispose(item) {
-    for (let k of item) {
-      for (let i in k) {
-        if (k[i] == null || k[i] == "null" || !k[i]) {
-          k[i] = " "
-        }
-      }
-    }
-    item.forEach(value => {
-      app.globalData.department.forEach(depart => {
-        if (value.department == depart.value) {
-          value.department = depart.text
-        }
-      })
-    });
-    this.setData({
-      InfoList: item.reverse()
-    })
-    wx.hideLoading();
-  },
   // 模糊查询
   seachItem() {
     wx.showLoading({
@@ -81,10 +52,15 @@ Page({
       Timestamp: app.globalData.time,
       delievrycode: this.data.seach
     }).then(res => {
-      console.log(res)
+      // console.log(res)
       if (res.code == 10000) {
         let item = res.List;
-        this.dispose(item)
+        util.listData(item, app.globalData.department);
+        util.outflowlist(item, this)
+        this.setData({
+          InfoList: item.reverse()
+        })
+        wx.hideLoading();
       }
     })
   },
@@ -133,6 +109,23 @@ Page({
       show_endtime: false
     })
   },
+   // 基础材料
+   qingqiu() {
+    MainProject().then(res => {
+      // console.log(res)
+      var q = JSON.parse(res)
+      var s = q.map(t => {
+        return t.projcectCode
+      })
+      this.setData({
+        sections: s,
+      })
+      console.log(this.data.sections)
+      this.setData({
+        firms: app.globalData.Customer,
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -146,9 +139,7 @@ Page({
       title: '加载中',
     });
     this.seachItem()
-    this.setData({
-      firms: app.globalData.Customer,
-    })
+  
   },
   //项目或合同编号
   showPopup_o() {
@@ -163,6 +154,7 @@ Page({
   },
   onConfirm_o(e) {
     let info = util.editInfo(e, this, e.detail.value);
+    console.log( e.detail.value)
     this.setData({
       info,
       show_o: false,
@@ -181,26 +173,13 @@ Page({
     });
   },
   onConfirm(e) {
-    let info = util.editInfo(e, this, e.detail.value);
+    let info = util.editInfo(e, this, e.detail.value.text);
     this.setData({
       info,
       show1: false
     })
   },
-    // 基础材料
-    qingqiu() {
-      MainProject().then(res => {
-        // console.log(res)
-        var q = JSON.parse(res)
-        var s = q.map(t => {
-          return t.projcectCode
-        })
-        this.setData({
-          sections: s,
-        })
-        // console.log(this.data.section1)
-      })
-    },
+   
   // 组合查询关闭与开启
   change() {
     this.setData({

@@ -5,9 +5,7 @@
         <view class="title">
             <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
             <view class="apply">
-                <van-dropdown-menu active-color="red">
-                    <van-dropdown-item value="{{val}}" options="{{pact}}" />
-                </van-dropdown-menu>
+               <text >项目月度报表</text>
             </view>
         </view>
         <view class="seach">

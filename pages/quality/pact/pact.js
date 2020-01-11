@@ -12,16 +12,6 @@ Page({
   data: {
     seach: '',
     loading: false,
-    val: 0,
-    pact: [{
-        text: '全部工程质量报告',
-        value: 0
-      },
-      {
-        text: '我的工程质量报告',
-        value: 1
-      }
-    ],
     InfoList: [],
     info: {
       keyword: "",
@@ -43,7 +33,7 @@ Page({
   },
   // 返回
   return () {
-    util.returnMenu();
+    util.returnMenu2(1010,"质量验收");
   },
   setSeach(e) {
     // console.log(e)

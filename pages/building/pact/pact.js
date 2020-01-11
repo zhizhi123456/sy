@@ -14,15 +14,6 @@ Page({
     seach: '',
     loading: false,
     val: 0,
-    pact: [{
-        text: '全部建筑分部验收',
-        value: 0
-      },
-      {
-        text: '我的建筑分部验收',
-        value: 1
-      }
-    ],
     info: {
       keyword: "",
       chargemanName: "",
@@ -43,7 +34,7 @@ Page({
   },
   // 返回
   return (e) {
-    util.returnMenu(1001);
+    util.returnMenu2(1010,"质量验收");
   },
   setSeach(e) {
     // console.log(e)

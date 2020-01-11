@@ -13,15 +13,6 @@ Page({
     seach: '',
     loading: false,
     val: 0,
-    pact: [{
-        text: '全部停复工记录',
-        value: 0
-      },
-      {
-        text: '我的停复工记录',
-        value: 1
-      }
-    ],
     info: {
       keyword: "",
       chargemanName: "",
@@ -43,7 +34,7 @@ Page({
   },
   // 返回
   return () {
-    util.returnMenu();
+    util.returnMenu2(1005,"项目进度");
   },
   setSeach(e) {
     // console.log(e)

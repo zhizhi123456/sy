@@ -18,7 +18,7 @@ Page({
     loading: false,
     val: 0,
     pact: [{
-        text: '全部项目月度报表',
+        text: '项目月度报表',
         value: 0
       },
       // {
@@ -47,8 +47,8 @@ Page({
     show_endtime: false,
   },
   // 返回
-  return () {
-    util.returnMenu();
+  return() {
+    util.returnMenu2(1008,"项目绩效");
   },
   setSeach(e) {
     // console.log(e)
