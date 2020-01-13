@@ -6,7 +6,7 @@
             <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
             <view class="apply">部门管理</view>
         </view>
-        <view class="seach">
+        <view class="seach" wx:if="{{content}}">
             <!-- <icon class="iconfont icon-sousuo fr" bindtap="seachInfo"></icon> -->
             <view class="data_list seachTime">
                 <input value="{{info.department}}" bindtap="showPopup_o" placeholder="请选择部门" disabled />

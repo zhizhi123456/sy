@@ -876,14 +876,14 @@ const upImage = (key, way) => {
         var uploadImgCount = 0;
         for (let i = 0; i < tempFilePaths.length; i++) {
           wx.uploadFile({
-            url: 'http://192.168.2.148:88/api/image/Get_photo',
+            url: 'https://shangyongren.com:9098/api/image/Get_photo',
             filePath: tempFilePaths[i],
             name: 'img_data',
             success(res) {
               uploadImgCount++;
               // console.log(res)
               if (res.statusCode == 200) {
-                info.API_Picurl.push("http://192.168.2.148:88" + res.data.replace(/"/g, ""))
+                info.API_Picurl.push("https://shangyongren.com:9098" + res.data.replace(/"/g, ""))
                 that.setData({
                   upimg: true,
                   show_photo: false,
@@ -1162,14 +1162,14 @@ const upImages = (key, img) => {
         var uploadImgCount = 0;
         for (let i = 0; i < tempFilePaths.length; i++) {
           wx.uploadFile({
-            url: 'http://192.168.2.148:88/api/image/Get_photo',
+            url: 'https://shangyongren.com:9098/api/image/Get_photo',
             filePath: tempFilePaths[i],
             name: 'img_data',
             success(res) {
               uploadImgCount++;
               // console.log(res)
               if (res.statusCode == 200) {
-                img.push("http://192.168.2.148:88" + res.data.replace(/"/g, ""))
+                img.push("https://shangyongren.com:9098" + res.data.replace(/"/g, ""))
                 that.setData({
                   upimg: true,
                   show_photo: false,
