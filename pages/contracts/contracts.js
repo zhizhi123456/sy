@@ -360,26 +360,22 @@ Page({
               if (that.data.num == 1002) {
                 let item = that.data.lists;
                 item.shift();
-                // item.push({
-                //   nametext: "注销登录",
-                //   img: "icon-tuichu blue4",
-                //   path: "/",
-                //   control: true, //权限
-                //   three: true,
-                //   out: true
-                // });
-                // item.push(
-                // {
-                //   nametext: "施工队管理",
-                //   img: "icon-bumen .green4",
-                //   path: "/pages/corps/section",
-                //   control: true, //权限
-                //   three: true,
-                // },
-                // );
                 that.setData({
                   lists: item,
                   entered: true
+                })
+                getLeader({
+                  UserName: userinfo.UserName
+                }).then(res => {
+                  let resARR = JSON.parse(res);
+                  if (resARR.length) {
+                    wx.setStorageSync("principal", res);
+                  } else {
+                    item.splice(2, 1)
+                    that.setData({
+                      lists: item,
+                    })
+                  }
                 })
                 // 设置title
                 for (var s in that.data.tag) {
@@ -461,27 +457,6 @@ Page({
    */
   onLoad: function (options) {
     userinfo = wx.getStorageSync("myInfo");
-    getLeader({
-      UserName: userinfo.UserName
-    }).then(res => {
-      let resARR = JSON.parse(res);
-      if (resARR.length) {
-        wx.setStorageSync("principal", res);
-      } else {
-        let item = this.data.lists;
-        item.splice(2, 1)
-        this.setData({
-          lists: item,
-        })
-      }
-
-      // let departID = JSON.parse(res)[0].ID;
-      // let depart = JSON.parse(res)[0].techofficename;
-      // this.setData({
-      //   depart,
-      //   departID
-      // })
-    })
     // console.log(options)
     this.log() //判断是否登录
     // console.log(options.grading)
