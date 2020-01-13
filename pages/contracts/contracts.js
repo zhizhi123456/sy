@@ -468,7 +468,7 @@ Page({
       if (resARR.length) {
         wx.setStorageSync("principal", res);
       } else {
-        let item = that.data.lists;
+        let item = this.data.lists;
         item.splice(2, 1)
         this.setData({
           lists: item,
