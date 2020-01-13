@@ -9,6 +9,7 @@ var util = require("../utils/util");
   // 导出一个对象，对象中包含get post put delete patch
 */
 
+
 function request(url, data, header, method) {
   const userinfo = wx.getStorageSync("myInfo");
   // console.log(userinfo)
@@ -26,7 +27,7 @@ function request(url, data, header, method) {
   return new Promise((resolve, reject) => {
     // 发起请求
     wx.request({
-      url,
+      url: 'http://192.168.2.148:88' + url,
       data: {
         ...data,
         ...Willpass
@@ -74,8 +75,6 @@ function request(url, data, header, method) {
     })
   })
 }
-
-
 const _get = (url, data = {}, header = {}) => {
   return request(url, data, header, "GET")
 }

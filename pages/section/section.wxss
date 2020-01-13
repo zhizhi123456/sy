@@ -25,8 +25,9 @@
 .main .van-sidebar-item {
     font-size: 36rpx;
     border-left: 10rpx solid transparent;
-    padding: 40rpx 24rpx 40rpx 16rpx;
+    padding: 40rpx 0 40rpx 16rpx;
     border-right: 1rpx solid #ccc;
+    width: 230rpx;
 }
 
 .main .van-sidebar-item--selected {

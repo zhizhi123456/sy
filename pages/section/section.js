@@ -107,19 +107,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //判断用户所属部门下的员工
-    // if (options.depid) {
-    //   employee({
-    //     ID: options.depid
-    //   }).then(res => {
-    //     this.setData({
-    //       employee: util.getBase(res, "name", "userId")
-    //     })
-    //   })
-    // }
+    // console.log(options)
+    let resStr = wx.getStorageSync("principal");
+    if (resStr) {
+      let sections = util.getBase(resStr, 'techofficename', 'ID');
+      this.setData({
+        sections
+      })
+    }
     if (app.globalData.CountItem) {
       this.setData({
-        sections: app.globalData.department,
+        // sections: app.globalData.department,
         employee: app.globalData.employee,
         Companytitle: app.globalData.Companytitle,
         dep: app.globalData.department[0].value,
@@ -129,7 +127,7 @@ Page({
       app.DataCallback = employ => {
         if (employ != '') {
           this.setData({
-            sections: app.globalData.department,
+            // sections: app.globalData.department,
             employee: app.globalData.employee,
             Companytitle: app.globalData.Companytitle,
             dep: app.globalData.department[0].value,
