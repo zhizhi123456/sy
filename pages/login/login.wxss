@@ -131,6 +131,12 @@ button:not([size='mini']) {
     right: 110rpx;
     z-index: 2;
 }
-.eyes .iconfont{
+
+.eyes .iconfont {
     padding: 0 20rpx;
+}
+
+/* 密码框 */
+.import .pwd {
+    padding: 15rpx 80rpx 15rpx 100rpx;
 }

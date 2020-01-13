@@ -10,7 +10,7 @@
             <icon class="iconfont icon-wode"></icon>
         </view>
         <view class="import">
-            <input type="{{hidepwd?'password':'text'}}" value="{{password}}" name="password" placeholder="请输入密码" bindblur="setpwd" />
+            <input class="pwd" type="{{hidepwd?'password':'text'}}" value="{{password}}" name="password" placeholder="请输入密码" bindblur="setpwd" />
             <icon class="iconfont icon-yewu"></icon>
             <view class="eyes">
                 <icon wx:if="{{showpwd}}" class="iconfont icon-yanjing_kai" bindtap="showpwd"></icon>
@@ -19,7 +19,7 @@
         </view>
         <view wx:if="{{!ifenter}}">
             <view class="import">
-                <input type="{{hidepwd1?'password':'text'}}" value="{{confirmpwd}}" name="password" placeholder="请再次输入密码" bindblur="setconfirmpwd" />
+                <input class="pwd" type="{{hidepwd1?'password':'text'}}" value="{{confirmpwd}}" name="password" placeholder="请再次输入密码" bindblur="setconfirmpwd" />
                 <icon class="iconfont icon-yewu"></icon>
                 <view class="eyes">
                     <icon wx:if="{{showpwd1}}" class="iconfont icon-yanjing_kai" bindtap="showpwd1"></icon>
