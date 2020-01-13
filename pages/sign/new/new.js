@@ -234,12 +234,6 @@ Page({
     let vm = this;
     wx.getSetting({
       success: (res) => {
-        // console.log(JSON.stringify(res)) //返回值中只会出现小程序已经向用户请求过的权限。
-        // {"errMsg":"getSetting:ok","authSetting":{"scope.userLocation":true,"scope.userInfo":true}}  
-        //地理位置                     用户信息  
-        // res.authSetting['scope.userLocation'] == undefined    表示 初始化进入该页面
-        // res.authSetting['scope.userLocation'] == false    表示 非初始化进入该页面,且未授权
-        // res.authSetting['scope.userLocation'] == true    表示 地理位置授权
         if (res.authSetting['scope.userLocation'] != undefined && res.authSetting['scope.userLocation'] != true) {
           // 不是初始化  且不等于true   授权为fasle
           wx.showModal({
@@ -292,11 +286,6 @@ Page({
     wx.getLocation({
       type: 'gcj02',
       success: function (res) {
-        // console.log(JSON.stringify(res))
-        // {"latitude":31.22352,"longitude":121.45591,"speed":-1,"accuracy":65,"verticalAccuracy":65,"horizontalAccuracy":65,"errMsg":"getLocation:ok"}
-        //测试需要(+vm.data.lat)
-        // var latitude = res.latitude  + vm.data.lat
-        // var longitude = res.longitude  + vm.data.lat
         var latitude = res.latitude
         var longitude = res.longitude
         var speed = res.speed
@@ -318,12 +307,6 @@ Page({
         longitude: longitude
       },
       success: function (res) {
-        // console.log(res);
-        // {status: 0, message: "query ok", request_id: "608944b4-1bd9-11ea-8237-525400fbd66b", result: {…}}
-        // message: "query ok"
-        // request_id: "608944b4-1bd9-11ea-8237-525400fbd66b"
-        // result: {location: {…}, address: "上海市静安区延安中路789号", formatted_addresses: {…}, address_component: {…}, ad_info: {…}, …}
-        // status: 0
         let province = res.result.ad_info.province
         let city = res.result.ad_info.city
         var pls = {
@@ -331,27 +314,6 @@ Page({
           longitude: longitude
         };
         let pl = vm.data.pl.push(pls); //把第一个值 push 
-        // console.log(vm.data.pl)
-        //轨迹保存  请求保存位置 
-        // wx.request({
-        //   url: 'http://192.168.2.148:88/api/MapTrajectory/Insert',
-        //   data: {
-        //     Timestamp: '2019-12-5',
-        //     token: 'token',
-        //     tokentype: 'tokentype',
-        //     UserID: "888281ff-31d7-4ad0-8444-40e4f1643263",
-        //     Todaydate: '2019-12-5',
-        //     Todaytime: util.formatTime(new Date()),
-        //     latitude: latitude, //经度与维度
-        //     longitude: longitude,
-        //     addres: res.result.address //位置上海市静安区延安中路789号
-        //   },
-        //   dataType: "json",
-        //   cache: false,
-        //   ContentType: "application/json",
-        //   method: 'Post',
-        //   success: function (res) {}
-        // })
         // 赋值
         vm.setData({
           address: res.result.address,

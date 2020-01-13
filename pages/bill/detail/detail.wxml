@@ -100,15 +100,6 @@
                         <view class="kind">修改时间</view>
                         <view class="check">{{info.updatetime}}</view>
                     </view>
-                    <!-- <view class="speak">
-                        <van-cell title="评论" is-link bind:click="add_speak" />
-                        <van-dialog use-slot title="评论" show="{{ show }}" show-cancel-button>
-                            <van-cell-group>
-                                <van-field value="" placeholder="请输入评论内容" bind:blur="onChange" />
-                            </van-cell-group>
-                        </van-dialog>
-                        <view class="speak_list" wx:if="{{speak}}">{{speak}}</view>
-                    </view> -->
                 </view>
             </van-tab>
             <van-tab title="动态" name="b">
