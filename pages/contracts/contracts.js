@@ -13,6 +13,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    deng:false,
     id: "",
     title: '',
     tags: [],
@@ -323,6 +324,13 @@ Page({
             }
           }
         }
+        zong.forEach(d=>{
+          if(d.nametext=='施工队管理'){
+            if(!this.data.deng){
+              d.control=false
+            }
+          }
+        })
         // console.log(zong)
         this.setData({
           lists: zong
@@ -433,8 +441,10 @@ Page({
       success(res) {
         // console.log(res.data.ID)
         that.setData({
-          id: res.data.ID
+          id: res.data.ID,
+          deng:true
         })
+        
       }
 
     })
