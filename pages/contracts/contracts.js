@@ -266,7 +266,7 @@ Page({
     })
     var zong = []
     var fen = []
-    // if (this.data.login) {
+    // if (this.data.login) {1
     queryMenu({
       Timestamp: app.globalData.time,
       pid: this.data.num,
@@ -288,7 +288,7 @@ Page({
       queryMenu({
         Timestamp: app.globalData.time,
         pid: this.data.num,
-        // UId: this.data.id,
+        UId: this.data.id,
       }).then(ress => {
         // console.log(ress)
         fen = []
