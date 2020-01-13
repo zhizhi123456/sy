@@ -27,7 +27,7 @@ function request(url, data, header, method) {
   return new Promise((resolve, reject) => {
     // 发起请求
     wx.request({
-      url: 'http://192.168.2.148:88' + url,
+      url: 'https://shangyongren.com:9098' + url,
       data: {
         ...data,
         ...Willpass
