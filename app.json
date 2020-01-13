@@ -1,9 +1,9 @@
 {
   "pages": [
     "pages/contracts/contracts",
+    "pages/secondarys/secondarys",
     "pages/login/login",
     "pages/current/current/current",
- 
     "pages/section/section",
     "pages/section/section2",
     "pages/bill/pact/pact",
@@ -162,7 +162,10 @@
     "pages/apply/detaillink/detaillink",
     "pages/officeCost/pact/pact",
     "pages/officeCost/new/new",
-    "pages/officeCost/detail/detail"
+    "pages/officeCost/detail/detail",
+    "pages/design/pact/pact",
+    "pages/design/new/new",
+    "pages/design/detail/detail"
   ],
   "window": {
     "backgroundTextStyle": "dark",

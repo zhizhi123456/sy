@@ -7,9 +7,10 @@
             <navigator url="/pages/contractproject/new/new" class="fr newCreate">新建</navigator>
             <navigator ></navigator>
             <view class="apply">
-                <van-dropdown-menu active-color="red">
+                <!-- <van-dropdown-menu active-color="red">
                     <van-dropdown-item value="{{val}}" options="{{pact}}" />
-                </van-dropdown-menu>
+                </van-dropdown-menu> -->
+                  <text>总包项目</text>
             </view>
         </view>
         <view class="seach">

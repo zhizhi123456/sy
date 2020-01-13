@@ -1,7 +1,7 @@
 // pages/pact/pact.js
 import {
   querycable,
-  groupPurchase
+  qgroupcable
 } from '../../../service/getData.js';
 var app = getApp();
 var util = require("../../../utils/util");
@@ -18,7 +18,23 @@ Page({
     InfoList: [],
     Times: [],
     Supplier: [],
-    info: {}
+    info: {
+      projectName: "",
+      subentryProjectName: "",
+      itemManage: "",
+      constructCompany: "",
+      state:"",
+      UserName:"",
+      begintime:"",
+      endtime:""
+    },
+    sections: '',
+    pull: false,
+    show: false,
+    currentDate: new Date().getTime(),
+    currentDate1: new Date().getTime(),
+    show_time: false,
+    show_endtime: false,
   },
   // 返回
   return () {
@@ -55,6 +71,14 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
+      sections: app.globalData.Companytitle,
+      section1:app.globalData.states,
+      section2: app.globalData.MainProject,
+      section5: app.globalData.Principal,
+      section3: app.globalData.staff,
+      section4: app.globalData.MainSubproject,
+    })
+    this.setData({
       Supplier: app.globalData.Supplier
     })
     wx.showLoading({
@@ -85,41 +109,107 @@ Page({
       console.log(err)
     })
   },
-  showgroup() {
+  meetplaceblur(e) {
+    let info = util.editInfo(e, this, e.detail.value);
     this.setData({
-      show: true
+      info
     })
   },
-  onClose() {
+  showPopup1() {
     this.setData({
-      show: false
+      show1: true
+    });
+  },
+  onClose1() {
+    this.setData({
+      show1: false
+    });
+  },
+  onConfirm1(e) {
+    let info = util.editInfo(e, this, e.detail.value.text);
+    this.setData({
+      info,
+      show1: false,
+      // departmenttext: e.detail.value.text
     })
   },
-  onConfirm_seach() {
-    if (this.data.info.makecontactdate || this.data.info.supplier || this.data.info.purchasecontactCode) {
-      groupPurchase(this.data.info).then(res => {
-        if (res.code == 10000) {
-          let item = res.List;
-          util.listData(item, app.globalData.department);
-          this.setData({
-            InfoList: item.reverse(),
-          })
-        }
-      })
+   // 部门
+   showPopup2() {
+    this.setData({
+      show2: true
+    })
+  },
+  onClose2() {
+    this.setData({
+      show2: false
+    })
+  },
+  onConfirm2(e) {
+    // console.log(e)
+    let info = util.editInfo(e, this, e.detail.value.value);
+    this.setData({
+      info,
+      show2: false
+    })
+  },
+  // 费用对象
+  showPopup3() {
+    this.setData({
+      show3: true
+    })
+  },
+  onClose3() {
+    this.setData({
+      show3: false
+    })
+  },
+  onConfirm3(e) {
+    // console.log(e)
+    let info = util.editInfo(e, this, e.detail.value.value);
+    this.setData({
+      info,
+      show3: false
+    })
+  },
+  // 费用类型
+  showPopup4() {
+    this.setData({
+      show4: true
+    })
+  },
+  onClose4() {
+    this.setData({
+      show4: false
+    })
+  },
+  onConfirm4(e) {
+    // console.log(e)
+    let info = util.editInfo(e, this, e.detail.value.value);
+    this.setData({
+      info,
+      show4: false
+    })
+  },
+    // 创建人
+    showPopup5() {
       this.setData({
-        show: false
+        show5: true
       })
-    } else(
-      wx.showToast({
-        title: '请至少输入一项内容',
-        icon: 'none',
-        duration: 3000
+    },
+    onClose5() {
+      this.setData({
+        show5: false
       })
-    )
-
-  },
-  // 组合查询
-  // 签订日期
+    },
+    onConfirm5(e) {
+      // console.log(e)
+      let info = util.editInfo(e, this, e.detail.value.value);
+      this.setData({
+        info,
+        show5: false
+      })
+    },
+  // 计划开工时间
   showPopup_time() {
     this.setData({
       show_time: true
@@ -131,36 +221,65 @@ Page({
     })
   },
   onConfirm_time(e) {
-    let info = util.editInfo(e, this, e.detail.value);
+    let info = util.editInfo(e, this, util.datefomate(e.detail));
     this.setData({
-      show_time: false,
-      info
+      info,
+      show_time: false
     })
   },
-  // 供应商
-  showPopup_0() {
+  // 计划完工时间
+  showPopup_endtime() {
     this.setData({
-      show_0: true
+      show_endtime: true
     })
   },
-  onClose_0() {
+  onClose_endtime() {
     this.setData({
-      show_0: false
+      show_endtime: false
     })
   },
-  onConfirm_0(e) {
-    let info = util.editInfo(e, this, e.detail.value.text);
+  //公司抬头
+  showPopup_o() {
     this.setData({
-      show_0: false,
-      info
+      show_o: true
+    });
+  },
+  onClose_o() {
+    this.setData({
+      show_o: false
+    });
+  },
+  onConfirm_o(e) {
+    let info = util.editInfo(e, this, e.detail.value.value);
+    this.setData({
+      info,
+      show_o: false,
+      // departmenttext: e.detail.value.text
     })
   },
-  // 采购编号
-  purchasecontactCodeblur(e) {
-    let info = util.editInfo(e, this, e.detail.value);
+  onConfirm_endtime(e) {
+    // console.log(e)
+    // console.log(util.datefomate(e.detail))
+    let info = util.editInfo(e, this, util.datefomate(e.detail));
     this.setData({
-      info
+      info,
+      show_endtime: false
     })
+  },
+  change() {
+    this.setData({
+      pull: true,
+      show: true
+    })
+  },
+  onClose() {
+    this.setData({
+      show: false
+    });
+  },
+  // 组合查询
+  seachqur() {
+    util.qgroupdeliver(qgroupcable, this)
   },
   
 })

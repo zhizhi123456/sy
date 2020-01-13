@@ -256,7 +256,7 @@ Page({
       console.log(res)
       var q = JSON.parse(res)
       var s = q.map(t => {
-        return t.projectname
+        return t.projcectCode
       })
       this.setData({
         section2: s

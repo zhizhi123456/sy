@@ -8,11 +8,11 @@
                 新建
             </navigator>
             <view class="apply">
-                 <text>线缆质量验收</text>
+                <text>线缆质量验收</text>
             </view>
         </view>
         <view class="seach">
-            <icon class="iconfont icon-fuxuananniu fl s-sort" bindtap="showgroup"></icon>
+            <icon class="iconfont icon-fuxuananniu fl s-sort" bindtap="change"></icon>
             <icon class="iconfont icon-sousuo fr" bindtap="seachInfo"></icon>
             <view class="data_list">
                 <input value="{{seach}}" bindblur="setSeach" />
@@ -22,33 +22,59 @@
                     <text wx:else>搜索</text>
                 </view>
             </view>
-            <!-- <van-popup show="{{ show }}" bind:close="onClose" position="right" custom-style="height: 100vh;color:#333">
-                <view class="seach_item">
-                    <van-cell-group>
-                        <van-field value="{{info.makecontactdate}}" placeholder="请选择" bind:focus="showPopup_time" label="签订日期" />
-                    </van-cell-group>
-                    <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
-                        <van-picker data-name="makecontactdate" show-toolbar columns="{{ Times }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
-                    </van-popup>
+            <van-popup show="{{ show }}" bind:close="onClose" position="right" overlay="{{ true }}" custom-style="height: 100vh;color:#333" custom-class="pullpo" bind:click-overlay="onClose">
+                <van-toast id="van-toast" />
+                <view class="seachif scroll-view" scroll-y="true">
+                    <view>
+                        <view class="seach_item">
+                            <van-field value="{{info.projectName}}" bind:focus="showPopup2" class="time1" title-class="time1" label="总包项目名称" placeholder="请选择" />
+                            <van-popup show="{{show2}}" round position="bottom" bind:close="onClose2">
+                                <van-picker data-name="projectName" show-toolbar columns="{{ section2 }}" bind:cancel="onClose2" bind:confirm="onConfirm2" />
+                            </van-popup>
+                        </view>
+                         <view class="seach_item">
+                            <van-field value="{{info.subentryProjectName}}" bind:focus="showPopup4" class="time1" title-class="time1" label="分包项目名称" placeholder="请选择" />
+                            <van-popup show="{{show4}}" round position="bottom" bind:close="onClose4">
+                                <van-picker data-name="subentryProjectName" show-toolbar columns="{{ section4 }}" bind:cancel="onClose4" bind:confirm="onConfirm4" />
+                            </van-popup>
+                        </view>
+                          <view class="seach_item">
+                            <van-field value="{{info.itemManage}}" bind:focus="showPopup3" class="time1" title-class="time1" label="项目经理" placeholder="请选择" />
+                            <van-popup show="{{show3}}" round position="bottom" bind:close="onClose3">
+                                <van-picker data-name="itemManage" show-toolbar columns="{{ section3 }}" bind:cancel="onClose3" bind:confirm="onConfirm3" />
+                            </van-popup>
+                        </view>
+                        <view class="seach_item">
+                            <van-field value="{{info.constructCompany}}" bind:focus="showPopup_o" class="time1" title-class="time1" label="施工单位" placeholder="请选择" />
+                            <van-popup show="{{show_o}}" round position="bottom" bind:close="onClose_o">
+                                <van-picker data-name="constructCompany" show-toolbar columns="{{ sections }}" bind:cancel="onClose_o" bind:confirm="onConfirm_o" />
+                            </van-popup>
+                        </view>
+                        <view class="seach_item">
+                            <van-field value="{{info.state}}" bind:focus="showPopup1" class="time1" title-class="time1" label="状态" placeholder="请选择" />
+                            <van-popup show="{{show1}}" round position="bottom" bind:close="onClose1">
+                                <van-picker data-name="state" show-toolbar columns="{{ section1 }}" bind:cancel="onClose1" bind:confirm="onConfirm1" />
+                            </van-popup>
+                        </view>
+                        <view class="seach_item">
+                            <van-field value="{{info.begintime}}" bind:focus="showPopup_time" class="time1" label="安装日期开始时间" placeholder="请选择" />
+                            <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
+                                <van-datetime-picker data-name="begintime" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
+                            </van-popup>
+                        </view>
+                        <view class="seach_item">
+                            <van-field value="{{info.endtime}}" bind:focus="showPopup_endtime" class="time1" label="安装日期结束时间" placeholder="请选择" />
+                            <van-popup show="{{ show_endtime }}" round position="bottom" bind:close="onClose_endtime">
+                                <van-datetime-picker data-name="endtime" value="{{ currentDate1 }}" bind:cancel="onClose_endtime" bind:confirm="onConfirm_endtime" />
+                            </van-popup>
+                        </view>
+                        <view class="checkkind">
+                            <text bind:tap="onClose">取消</text>
+                            <text bind:tap="seachqur">确认</text>
+                        </view>
+                    </view>
                 </view>
-                <view class="seach_item">
-                    <van-cell-group>
-                        <van-field value="{{info.supplier}}" placeholder="请选择" bind:focus="showPopup_0" label="供应商" />
-                    </van-cell-group>
-                    <van-popup show="{{ show_0 }}" round position="bottom" bind:close="onClose_0">
-                        <van-picker data-name="supplier" show-toolbar columns="{{ Supplier }}" bind:cancel="onClose_0" bind:confirm="onConfirm_0" />
-                    </van-popup>
-                </view>
-                <view class="seach_item">
-                    <van-cell-group>
-                        <van-field data-name="purchasecontactCode" value="{{info.purchasecontactCode}}" placeholder="请输入" bind:blur="purchasecontactCodeblur" label="材料采购编号" />
-                    </van-cell-group>
-                </view>
-                <view class="checkkind">
-                    <text bindtap="onClose">取消</text>
-                    <text bindtap="onConfirm_seach">确定</text>
-                </view>
-            </van-popup> -->
+            </van-popup>
         </view>
     </view>
     <view class="main">

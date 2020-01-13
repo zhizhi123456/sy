@@ -323,6 +323,11 @@ export const detailticket = (params) => http.post("/api/SceneTicket/Detail", par
 export const updateticket = (params) => http.post("/api/SceneTicket/Update", params);
 // 删除现场罚单
 export const delticket = (params) => http.post("/api/SceneTicket/Delete", params);
+// 现场罚单综合查询
+export const qgroupticket = (params) => http.post("/api/SceneTicket/Querygroup", params);
+
+
+
 // 随工记录 查询
 export const queryfollow = (params) => http.post("/api/AccompanyRecord/Query", params);
 // 随工记录 添加
@@ -586,6 +591,7 @@ export const detailcable = (params) => http.post("/api/CableQualityCheck/Detail"
 export const updatecable = (params) => http.post("/api/CableQualityCheck/Update", params);
 // 删除
 export const delcable = (params) => http.post("/api/CableQualityCheck/Delete", params);
+export const qgroupcable = (params) => http.post("/api/CableQualityCheck/Querygroup", params);
 // 线缆质量验收明细
 // 查询
 export const querycablesmall = (params) => http.post("/api/CableQualityCheckDetail/Query", params);
@@ -608,7 +614,7 @@ export const detailaccident = (params) => http.post("/api/majorProQuaReport/Deta
 export const updateaccident = (params) => http.post("/api/majorProQuaReport/Update", params);
 // 删除
 export const delaccident = (params) => http.post("/api/majorProQuaReport/Delete", params);
-
+export const qgroupaccident = (params) => http.post("/api/majorProQuaReport/Querygroup", params);
 // 安防质量验收
 // 查询
 export const querysecurity = (params) => http.post("/api/SecurityKgRecord/Query", params);
@@ -620,6 +626,9 @@ export const detailsecurity = (params) => http.post("/api/SecurityKgRecord/Detai
 export const updatesecurity = (params) => http.post("/api/SecurityKgRecord/Update", params);
 // 删除
 export const delsecurity = (params) => http.post("/api/SecurityKgRecord/Delete", params);
+
+export const groupquerysecurity = (params) => http.post("/api/SecurityKgRecord/Querygroup", params);
+
 // 安防质量验收明细
 // 查询
 export const querysecuritysmall = (params) => http.post("/api/SecurityKgRecordDetail/Query", params);

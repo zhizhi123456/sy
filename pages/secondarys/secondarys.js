@@ -126,7 +126,7 @@ Page({
       {
         nametext: "材料使用查询",
         img: "icon-chaxun .green2",
-        path: "",
+        path: "/pages/employ/pact/pact",
         control: true //权限
       },
       
@@ -265,8 +265,8 @@ Page({
       {
 
         nametext: "工程管道验收",
-        img: "icon-xianlan .red3",
-        path: "/pages/cable/pact/pact",
+        img: "icon-zhijiaoguandao .red3",
+        path: "/pages/pipes/pact/pact",
         control: true //权限
       },
 
@@ -303,36 +303,24 @@ Page({
       {
 
         nametext: "工程接受签证单",
-        img: "icon-yuancailiao .green2",
-        path: "/pages/unify/pact/pact",
+        img: "icon-jieshouweituo .green2",
+        path: "/pages/adopt/pact/pact",
         control: true //权限
       },
       
       {
-
         nametext: "工程结算签证明细",
-        img: "icon-yuancailiao .green2",
-        path: "/pages/unify/pact/pact",
+        img: "icon-chuyuanjiesuan .green2",
+        path: "/pages/close/pact/pact",
         control: true //权限
       },
-      
       {
-
-        nametext: "项目工程材料统计",
-        img: "icon-yuancailiao .green2",
-        path: "/pages/unify/pact/pact",
-        control: true //权限
-      },
-
-      {
-
         nametext: "请假",
         img: "icon-qingjia .green",
         path: "",
         control: true //权限
       },
       {
-
         nametext: "销假",
         img: "icon-xiaojiaguanli .pink",
         path: "",

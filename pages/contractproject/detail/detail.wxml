@@ -194,7 +194,7 @@
                     </view>
                 </view>
             </van-tab>
-            <van-tab title="动态" name="c">
+            <van-tab title="动态" name="b">
                 <block wx:if="{{info.formid}}">
                     <van-cell title="动态({{Workstate}})" />
                     <van-steps steps="{{ steps }}" active="{{ active }}" direction="vertical" />

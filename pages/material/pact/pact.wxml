@@ -8,9 +8,7 @@
                 新建
             </navigator>
             <view class="apply">
-                <van-dropdown-menu active-color="red">
-                    <van-dropdown-item value="{{val}}" options="{{pact}}" />
-                </van-dropdown-menu>
+               <text>仓库材料</text>
             </view>
         </view>
         <view class="seach">

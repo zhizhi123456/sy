@@ -1,7 +1,7 @@
 // pages/pact/pact.js
 import {
   querysecurity,
-  groupPurchase
+  groupquerysecurity
 } from '../../../service/getData.js';
 var app = getApp();
 var util = require("../../../utils/util");
@@ -11,15 +11,25 @@ Page({
    */
   data: {
     seach: '',
-    loading: false,
-    show: false,
-    show_time: false,
-  currentDate: new Date().getTime(),
-    
+    loading: false,   
     InfoList: [],
     Times: [],
     Supplier: [],
-    info: {}
+    info: {
+      projectName: "",
+      subentryProjectName: "",
+      itemManage: "",
+      constructCompany: "",
+      begintime:"",
+      endtime:""
+    },
+    sections: '',
+    pull: false,
+    show: false,
+    currentDate: new Date().getTime(),
+    currentDate1: new Date().getTime(),
+    show_time: false,
+    show_endtime: false,
   },
   // 返回
   return () {
@@ -56,6 +66,14 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
+      sections: app.globalData.Companytitle,
+      section1:app.globalData.states,
+      section2: app.globalData.MainProject1,
+      section5: app.globalData.Principal,
+      section3: app.globalData.Principal,
+      section4: app.globalData.costkind,
+    })
+    this.setData({
       Supplier: app.globalData.Supplier
     })
     wx.showLoading({
@@ -63,7 +81,7 @@ Page({
     });
     // 调用查询
     querysecurity().then(res => {
-      // console.log(res.List)
+      console.log(res)
       if (res.code == 10000) {
         let item = res.List;
         util.listData(item, app.globalData.department);
@@ -142,7 +160,7 @@ Page({
   },
   onConfirm3(e) {
     // console.log(e)
-    let info = util.editInfo(e, this, e.detail.value.text);
+    let info = util.editInfo(e, this, e.detail.value.value);
     this.setData({
       info,
       show3: false
@@ -227,7 +245,7 @@ Page({
     });
   },
   onConfirm_o(e) {
-    let info = util.editInfo(e, this, e.detail.value.text);
+    let info = util.editInfo(e, this, e.detail.value.value);
     this.setData({
       info,
       show_o: false,
@@ -256,6 +274,6 @@ Page({
   },
   // 组合查询
   seachqur() {
-    util.qgroupdeliver(qgroupofficeCost, this)
+    util.qgroupdeliver(groupquerysecurity, this)
   },
 })

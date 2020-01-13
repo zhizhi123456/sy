@@ -134,6 +134,7 @@ App({
       util.sumup(InstallQuality, this, 'InstallQuality', "Value", "Key");
       util.sumup(Customer, this, 'Customer', "customername", "ID");
       util.sumup(MainProject, this, 'MainProject', "projcectCode", "projectname");
+      util.sumup(MainProject, this, 'MainProject1', "projectname", "projcectCode");
       util.sumup(EngineerClass, this, 'EngineerClass', "Value", "Key");
       util.sumup(Pipeline, this, 'Pipeline', "Value", "Key");
       util.sumup(Circuit, this, 'Circuit', "Value", "Key");
@@ -239,6 +240,7 @@ App({
     InstallQuality: '',
     Customer: '',
     MainProject: '',
+    MainProject1:"",
     EngineerClass: '',
     Pipeline: '',
     Circuit: '',

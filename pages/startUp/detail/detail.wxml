@@ -86,9 +86,6 @@
                     </view>
                 </view>
             </van-tab>
-            <van-tab title="附件" name="c">
-                <van-cell title="文件" is-link bind:click="up_photo" />
-            </van-tab>
         </van-tabs>
     </view>
     <view class="footer">
