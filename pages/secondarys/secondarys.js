@@ -219,13 +219,13 @@ Page({
         control: true //权限
       },
       // 1
-      {
+      // {
 
-        nametext: "技术交底",
-        img: "icon-jishuziliao ",
-        path: "",
-        control: true //权限
-      },
+      //   nametext: "技术交底",
+      //   img: "icon-jishuziliao ",
+      //   path: "",
+      //   control: true //权限
+      // },
       {
 
         nametext: "重大事故报告",

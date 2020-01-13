@@ -52,7 +52,6 @@ Page({
           wx.hideLoading();
           // 调取工作流记录
           //列表
-
           let mid = res.Item.formid; 
           if (mid) {
             util.workList(this, mid)
@@ -60,7 +59,6 @@ Page({
           }
            //处理状态判断
           util.checkState(this, mid, 'OfficeCharge', item.CurStepbh);
-        
         }
       })
     }

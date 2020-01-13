@@ -31,7 +31,7 @@ Page({
       },
       {
         nametext: "我的/登录",
-        img: ".icon-wode .green6", //图标地址
+        img: "icon-wode .green6", //图标地址
       }
     ],
     list: [{
@@ -84,7 +84,7 @@ Page({
       },
       {
         nametext: "工程统计",
-        img: ".icon-tongji green1",
+        img: "icon-tongji green1",
         path: "/pages/secondary/secondary",
         control: true, //权限
       },
