@@ -114,14 +114,15 @@ Page({
         control: true, //权限
       },
 
-      {
+      // {
 
-        nametext: "招投标",
-        img: "icon-zhaotoubiao red1",
-        path: "",
-        control: true, //权限,
-        three: true
-      }, {
+      //   nametext: "招投标",
+      //   img: "icon-zhaotoubiao red1",
+      //   path: "",
+      //   control: true, //权限,
+      //   three: true
+      // }, 
+      {
 
         nametext: "总包项目",
         img: "icon-_huabanfuben blue3",
@@ -143,14 +144,16 @@ Page({
         path: "/pages/task/pact/pact",
         control: true, //权限
         three: true
-      }, {
+      },
+      // {
 
-        nametext: "项目统计",
-        img: "icon-icon-test1 yellow",
-        path: "",
-        control: true, //权限
-        three: true
-      }, {
+      //   nametext: "项目统计",
+      //   img: "icon-icon-test1 yellow",
+      //   path: "",
+      //   control: true, //权限
+      //   three: true
+      // },
+      {
 
         nametext: "分包编号申请",
         img: "icon-shenqing red3",
@@ -463,6 +466,12 @@ Page({
       let resARR = JSON.parse(res);
       if (resARR.length) {
         wx.setStorageSync("principal", res);
+      } else {
+        let item = that.data.lists;
+        item.splice(2, 1)
+        this.setData({
+          lists: item,
+        })
       }
 
       // let departID = JSON.parse(res)[0].ID;

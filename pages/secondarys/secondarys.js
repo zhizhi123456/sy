@@ -27,21 +27,9 @@ Page({
         control: true //权限
       },
       {
-        nametext: "分包协议",
-        img: "icon-yonghuxieyi .blue",
-        path: "",
-        control: true //权限
-      },
-      {
         nametext: "技术交底",
         img: "icon-jishuziliao .blue2",
         path: "/pages/disclosure/pact/pact",
-        control: true //权限
-      },
-      {
-        nametext: "施工设计交底",
-        img: "icon-dashujukeshihuaico- .blue3 ",
-        path: "",
         control: true //权限
       },
       {
@@ -173,7 +161,7 @@ Page({
 
         nametext: "项目主管随工记录",
         img: "icon-bianji .blue3",
-        path: "",
+        path: "/pages/workrecord/pact/pact",
         control: true //权限
       },
       {
@@ -198,14 +186,6 @@ Page({
         path: "/pages/report/pact/pact",
         control: true //权限
       },
-      {
-
-        nametext: "设计绩效",
-        img: "icon-design .yellow1",
-        path: "",
-        control: true //权限
-      },
-
       {
         nametext: "工程变更",
         img: "icon-gongchengbiangengshenpi .green4",
@@ -282,7 +262,7 @@ Page({
 
         nametext: "项目费用统计",
         img: "icon-shouzhimingxi .yellow2",
-        path: "/pages/count/pact/pact",
+        path: "/pages/cost/pact/pact",
         control: true //权限
       },
       {
@@ -540,30 +520,30 @@ Page({
         path: "/pages/design/pact/pact?hadMy=1",
         control: true //权限
       },
-      {
-        nametext: "申请领料",
-        img: "icon-yuancailiao blue8",
-        path: "",
-        control: true,
-      },
-      {
-        nametext: "申请费用",
-        img: "icon-feiyong2 yellow",
-        path: "",
-        control: true,
-      },
-      {
-        nametext: "申请分包编号",
-        img: "icon-bianhaonumbered5 red4",
-        path: "",
-        control: true,
-      },
-      {
-        nametext: "申请招投标",
-        img: "icon-zhaotoubiao-daikaifang yellow1",
-        path: "",
-        control: true,
-      },
+      // {
+      //   nametext: "申请领料",
+      //   img: "icon-yuancailiao blue8",
+      //   path: "",
+      //   control: true,
+      // },
+      // {
+      //   nametext: "申请费用",
+      //   img: "icon-feiyong2 yellow",
+      //   path: "",
+      //   control: true,
+      // },
+      // {
+      //   nametext: "申请分包编号",
+      //   img: "icon-bianhaonumbered5 red4",
+      //   path: "",
+      //   control: true,
+      // },
+      // {
+      //   nametext: "申请招投标",
+      //   img: "icon-zhaotoubiao-daikaifang yellow1",
+      //   path: "",
+      //   control: true,
+      // },
       // {
       //   nametext: "申请领料",
       //   img: "icon-yuancailiao blue8",

@@ -36,6 +36,16 @@
                 </view>
                 <view class="seach_item">
                     <van-cell-group>
+                        <van-field data-name="subprojectname" value="{{info.subprojectname}}" placeholder="请输入" bind:blur="subprojectnameblur" label="采购合同名称" />
+                    </van-cell-group>
+                </view>
+                <view class="seach_item">
+                    <van-cell-group>
+                        <van-field data-name="createman" value="{{info.createman}}" placeholder="请输入" bind:blur="createmanblur" label="创建人" />
+                    </van-cell-group>
+                </view>
+                <view class="seach_item">
+                    <van-cell-group>
                         <van-field value="{{info.begintime}}" placeholder="请选择" label="开始时间" bindtap="showPopup_time" disabled />
                     </van-cell-group>
                     <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">

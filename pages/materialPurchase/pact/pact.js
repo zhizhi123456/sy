@@ -120,7 +120,7 @@ Page({
     this.setData({
       pages: 1
     })
-    if (this.data.info.begintime || this.data.info.supplier || this.data.info.purchasecontactCode) {
+    if (this.data.info.begintime || this.data.info.supplier || this.data.info.purchasecontactCode || this.data.info.subprojectname || this.data.info.createman) {
       groupPurchase(this.data.info).then(res => {
         if (res.code == 10000) {
           item = res.List;
@@ -166,6 +166,20 @@ Page({
   },
   // 采购编号
   purchasecontactCodeblur(e) {
+    let info = util.editInfo(e, this, e.detail.value);
+    this.setData({
+      info
+    })
+  },
+  // 采购合同名称
+  subprojectnameblur(e) {
+    let info = util.editInfo(e, this, e.detail.value);
+    this.setData({
+      info
+    })
+  },
+  // 创建人
+  createmanblur(e) {
     let info = util.editInfo(e, this, e.detail.value);
     this.setData({
       info
