@@ -12,16 +12,6 @@ Page({
   data: {
     seach: '',
     loading: false,
-    val: 0,
-    pact: [{
-        text: '全部施工队成员',
-        value: 0
-      },
-      {
-        text: '我的施工队成员',
-        value: 1
-      }
-    ],
     InfoList: [],
     info: {
       keyword: "",
@@ -44,7 +34,7 @@ Page({
   },
   // 返回
   return () {
-    util.returnMenu();
+    util.returnMenu2(1004,"人员管理");
   },
   setSeach(e) {
     // console.log(e)
@@ -59,7 +49,6 @@ Page({
     });
     querymember({
       MemberName: this.data.seach,
-      UserName:"cc"
     }).then(res => {
       console.log(res)
       if (res.code == 10000) {
