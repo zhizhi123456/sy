@@ -960,12 +960,14 @@ const workList = (key, id) => {
         }
       })
       let steps = key.data.steps;
-      step.forEach(item => {
-        steps.push({
-          text: item.createtime.replace(/[ ]/g, "/") + " " + item.createman + "编辑了资料 ●审批状态：" + item.stepname + "——>" + item.nextstepname,
-          desc: '●时间：' + item.createtime
-        });
-      })
+      if (step[0]) {
+        step.forEach(item => {
+          steps.push({
+            text: item.createtime.replace(/[ ]/g, "/") + " " + item.createman + "编辑了资料 ●审批状态：" + item.stepname + "——>" + item.nextstepname,
+            desc: '●时间：' + item.createtime
+          });
+        })
+      }
       key.setData({
         steps
       })
@@ -1727,7 +1729,7 @@ const qgroupdeliver = (funcname, that, hadNew, hadMy) => {
       },
       success(res) {
         // 有状态时传递usernanme 当前用户 当传递UserName时不设置
-        if ( info.state && (!info.UserName)) {
+        if (info.state && (!info.UserName)) {
           that.setData({
             "info.UserName": res.data.UserName
           })
