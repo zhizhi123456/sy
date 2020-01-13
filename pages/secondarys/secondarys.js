@@ -126,7 +126,7 @@ Page({
       {
         nametext: "材料使用查询",
         img: "icon-chaxun .green2",
-        path: "",
+        path: "/pages/employ/pact/pact",
         control: true //权限
       },
       
@@ -282,7 +282,7 @@ Page({
 
         nametext: "项目费用统计",
         img: "icon-shouzhimingxi .yellow2",
-        path: "/pages/count/pact/pact",
+        path: "/pages/cost/pact/pact",
         control: true //权限
       },
       {
@@ -311,14 +311,6 @@ Page({
       {
 
         nametext: "工程结算签证明细",
-        img: "icon-yuancailiao .green2",
-        path: "/pages/unify/pact/pact",
-        control: true //权限
-      },
-      
-      {
-
-        nametext: "项目工程材料统计",
         img: "icon-yuancailiao .green2",
         path: "/pages/unify/pact/pact",
         control: true //权限

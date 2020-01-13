@@ -261,7 +261,7 @@ Page({
     this.setData({
       pages: 1
     })
-    if (this.data.info.Projectcode || this.data.info.Goodsname || this.data.info.Begintime || this.data.info.state || this.data.info.applyman) {
+    if (this.data.info.Projectcode || this.data.info.getmaterialName || this.data.info.Begintime || this.data.info.state || this.data.info.applyman) {
       groupBill(this.data.info).then(res => {
         if (res.code == 10000) {
           item = res.List;
@@ -316,7 +316,7 @@ Page({
     })
   },
   // 领料名称
-  Goodsnameblur(e) {
+  getmaterialNameblur(e) {
     let info = util.editInfo(e, this, e.detail.value);
     this.setData({
       info

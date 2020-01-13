@@ -3,7 +3,7 @@
     "pages/contracts/contracts",
     "pages/login/login",
     "pages/current/current/current",
- 
+    "pages/secondarys/secondarys",
     "pages/section/section",
     "pages/section/section2",
     "pages/bill/pact/pact",

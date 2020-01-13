@@ -954,11 +954,13 @@ const workList = (key, id) => {
     if (res.code == 10000) {
       // console.log(res)
       let step = res.list;
-      step.forEach(item => {
-        if (item.nextstepid == 0 && !item.nextstepname && !item.nextdealrole && !item.nextdealuser) {
-          item.nextstepname = "流程结束"
-        }
-      })
+      if (step[0]) {
+        step.forEach(item => {
+          if (item.nextstepid == 0 && !item.nextstepname && !item.nextdealrole && !item.nextdealuser) {
+            item.nextstepname = "流程结束"
+          }
+        })
+      }
       let steps = key.data.steps;
       if (step[0]) {
         step.forEach(item => {

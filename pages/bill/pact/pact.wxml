@@ -30,7 +30,7 @@
                 </view>
                 <view class="seach_item">
                     <van-cell-group>
-                        <van-field data-name="Goodsname" value="{{info.Goodsname}}" placeholder="请输入" bind:blur="Goodsnameblur" label="领料单名称" />
+                        <van-field data-name="getmaterialName" value="{{info.getmaterialName}}" placeholder="请输入" bind:blur="getmaterialNameblur" label="领料单名称" />
                     </van-cell-group>
                 </view>
                 <view class="seach_item" wx:if="{{ISconduct}}">
