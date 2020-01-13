@@ -4,6 +4,7 @@ var util = require("../../utils/util");
 import {
   employee,
 } from "../../service/getData";
+let userinfo = wx.getStorageSync("myInfo");
 Page({
 
   /**
@@ -14,6 +15,7 @@ Page({
     info: {},
     InfoList: [],
     activeKey: 0,
+    content: true
   },
   return () {
     util.returnMenu(1002);
@@ -107,12 +109,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    userinfo = wx.getStorageSync("myInfo");
     // console.log(options)
-    let resStr = wx.getStorageSync("principal");
-    if (resStr) {
-      let sections = util.getBase(resStr, 'techofficename', 'ID');
+    if (userinfo) {
+      let resStr = wx.getStorageSync("principal");
+      if (resStr) {
+        let sections = util.getBase(resStr, 'techofficename', 'ID');
+        this.setData({
+          sections
+        })
+      }
+    } else {
       this.setData({
-        sections
+        content: false
+      })
+      wx.showToast({
+        title: '请登录',
+        icon: 'none',
+        duration: 2000
       })
     }
     if (app.globalData.CountItem) {
@@ -149,7 +163,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    userinfo = wx.getStorageSync("myInfo");
   },
 
   /**
