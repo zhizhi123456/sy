@@ -602,7 +602,7 @@ Page({
       pid: this.data.chuancan,
     }).then(res => {
       // 请求所有模块    不带uid
-      console.log(res)
+      // console.log(res)
       var n = 0
       for (var k in res.List) {
         for (var i in this.data.small) {
@@ -641,15 +641,18 @@ Page({
         if (fen.length == 0) {
           console.log("数组为空")
           for (i in zong) {
-            zong[i].control = false
+            if (zong[i].menuId ===null) {
+              zong[i].control = true
+            } else {
+              zong[i].control = false
+            }
           }
-
         } else {
           // 如果 用户请求的列表中不含总列表中的模块    权限为fasle
           // console.log(zong)
           for (var i in zong) {
             if (fen.some(g => {
-                var c = g.nametext == zong[i].nametext
+                var c = g.nametext == zong[i].nametext || zong[i].menuId ===null
                 return c
               })) {
 
@@ -678,7 +681,7 @@ Page({
       wx.navigateTo({
         url: '/pages/contract/contract'
       })
-      console.log(1)
+      // console.log(1)
     } else if (this.data.chuancan == 1055) {
       util.returnMenu(1002);
     } else {
@@ -699,7 +702,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
+    // console.log(options)
     let userinfo = wx.getStorageSync("myInfo");
     if (userinfo) {
       getdep({

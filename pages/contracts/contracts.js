@@ -283,6 +283,7 @@ Page({
             zong[n].PID = res.List[k].PID
             n++
           }
+
         }
       }
       queryMenu({
@@ -301,17 +302,19 @@ Page({
         }
         // console.log(fen)
         if (fen.length == 0) {
+          // console.log("数组为空")
           for (i in zong) {
-            zong[i].control = false
-            if (zong[i].nametext == '登录/注册') {
+            if (zong[i].menuId ===null) {
               zong[i].control = true
+            } else {
+              zong[i].control = false
             }
           }
         } else {
           // console.log(zong)
           for (var i in zong) {
             if (fen.some(g => {
-                var c = g.nametext == zong[i].nametext
+                var c = g.nametext == zong[i].nametext || zong[i].menuId ===null
                 return c
               })) {
 
