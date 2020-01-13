@@ -104,6 +104,8 @@ export const userID = (params) => http.post("http://192.168.2.148:88/api/MethodO
 export const getdep = (params) => http.post("http://192.168.2.148:88/api/MethodOfDataService/GetUserDepartment", params);
 //员工ID->姓名
 export const getName = (params) => http.post("http://192.168.2.148:88/api/MethodOfDataService/GetUserNameAndEmpName", params);
+//员工ID->负责人
+export const getLeader = (params) => http.post("http://192.168.2.125:88/api/MethodOfDataService/GetDepartmentPrincipal", params);
 // =================================================================================================================================================================
 // 工作流接口
 // 工作流流转
@@ -819,11 +821,11 @@ export const addapply = (params) => http.post("http://192.168.2.148:88/api/apply
 // 根据id查询
 export const detailapply = (params) => http.post("http://192.168.2.148:88/api/applybuyform/Detail", params);
 // 更新
-export const updateapply = (params) =>  http.post("http://192.168.2.148:88/api/applybuyform/Update", params);
+export const updateapply = (params) => http.post("http://192.168.2.148:88/api/applybuyform/Update", params);
 // 删除
 export const delapply = (params) => http.post("http://192.168.2.148:88/api/applybuyform/Delete", params);
 // 综合查询
-export const qgroupapply = (params) =>  http.post("http://192.168.2.148:88/api/applybuyform/Querygroup", params);
+export const qgroupapply = (params) => http.post("http://192.168.2.148:88/api/applybuyform/Querygroup", params);
 // 申购明细
 // 查询
 export const queryapplysmall = (params) => http.post("http://192.168.2.148:88/api/applybuyforminfo/Query", params);
@@ -832,7 +834,7 @@ export const addapplysmall = (params) => http.post("http://192.168.2.148:88/api/
 // 根据id查询
 export const detailapplysmall = (params) => http.post("http://192.168.2.148:88/api/applybuyforminfo/Detail", params);
 // 更新
-export const updateapplysmall = (params) =>http.post("http://192.168.2.148:88/api/applybuyforminfo/Update", params);
+export const updateapplysmall = (params) => http.post("http://192.168.2.148:88/api/applybuyforminfo/Update", params);
 // 删除
 export const delapplysmall = (params) => http.post("http://192.168.2.148:88/api/applybuyforminfo/Delete", params);
 
@@ -869,11 +871,11 @@ export const addofficeCost = (params) => http.post("http://192.168.2.148:88/api/
 // 根据id查询
 export const detailofficeCost = (params) => http.post("http://192.168.2.148:88/api/OfficeCharge/Detail", params);
 // 更新
-export const updateofficeCost = (params) =>  http.post("http://192.168.2.148:88/api/OfficeCharge/Update", params);
+export const updateofficeCost = (params) => http.post("http://192.168.2.148:88/api/OfficeCharge/Update", params);
 // 删除
 export const delofficeCost = (params) => http.post("http://192.168.2.148:88/api/applybuyform/Delete", params);
 // 综合查询
-export const qgroupofficeCost = (params) =>  http.post("http://192.168.2.148:88/api/OfficeCharge/Querygroup", params);
+export const qgroupofficeCost = (params) => http.post("http://192.168.2.148:88/api/OfficeCharge/Querygroup", params);
 
 // 设计任务
 // 查询

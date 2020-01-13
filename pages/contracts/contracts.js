@@ -3,7 +3,8 @@ import {
   queryMenu,
   getTaskTNUm,
   getapplyNEWinfo,
-  getNEWinfo
+  getNEWinfo,
+  getLeader
 } from "./../../service/getData";
 var app = getApp();
 let userinfo = wx.getStorageSync("myInfo");
@@ -432,6 +433,7 @@ Page({
         if (res.confirm) {
           // console.log('用户点击确定')
           wx.removeStorageSync("myInfo");
+          wx.removeStorageSync("principal");
           wx.redirectTo({
             url: '/pages/login/login'
           })
@@ -445,6 +447,21 @@ Page({
    */
   onLoad: function (options) {
     userinfo = wx.getStorageSync("myInfo");
+    getLeader({
+      UserName: userinfo.UserName
+    }).then(res => {
+      let resARR = JSON.parse(res);
+      if (resARR.length) {
+        wx.setStorageSync("principal", res);
+      }
+
+      // let departID = JSON.parse(res)[0].ID;
+      // let depart = JSON.parse(res)[0].techofficename;
+      // this.setData({
+      //   depart,
+      //   departID
+      // })
+    })
     // console.log(options)
     this.log() //判断是否登录
     // console.log(options.grading)
