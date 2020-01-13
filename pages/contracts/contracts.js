@@ -200,18 +200,19 @@ Page({
         ANUm: true
       }, {
 
+        nametext: "施工队管理",
+        img: "icon-jinpaishigongdui",
+        path: "/pages/corps/section",
+        control: true, //权限
+        three: true
+      },
+      {
+
         nametext: "部门管理",
         img: "icon-bumen .green4",
         path: "/pages/section/section",
         control: true, //权限
         three: true
-      },
-      {
-        nametext: "施工队管理",
-        img: "icon-bumen .green4",
-        path: "/pages/corps/section",
-        control: true, //权限
-        three: true,
       },
       {
         nametext: "当前任务",

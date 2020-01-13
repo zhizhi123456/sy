@@ -520,6 +520,18 @@ Page({
         path: "/pages/design/pact/pact?hadMy=1",
         control: true //权限
       },
+      {
+        nametext: "施工队",
+        img: "icon-renyuandingwei green2",
+        path: "/pages/contractor/pact/pact",
+        control: true //权限
+      },
+      {
+        nametext: "施工队成员",
+        img: "icon-lunkuodasan- .green4",
+        path: "/pages/member/pact/pact",
+        control: true //权限
+      },
       // {
       //   nametext: "申请领料",
       //   img: "icon-yuancailiao blue8",
