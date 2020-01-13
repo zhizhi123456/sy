@@ -81,7 +81,7 @@ Page({
     });
   },
   onConfirm(e) {
-    let info = util.editInfo(e, this, e.detail.value);
+    let info = util.editInfo(e, this, e.detail.value.text);
     this.setData({
       info,
       show: false
@@ -192,7 +192,7 @@ Page({
         if (materials[0].goodscode && materials[0].goodsname&& materials[0].specifications && materials[0].unit && materials[0].quantity && materials[0].demo) {
           // 新增退料单
           util.checkContent(info, this);
-
+          util.intro(info, this)
           this.setData({
             info
           })
@@ -215,7 +215,7 @@ Page({
               // console.log(billlist[billlist.length - 1].ID)
               let id = billlist[billlist.length - 1].ID,
                 materials = this.data.materials;
-              materials.forEach(value => {
+               materials.forEach(value => {
                 value.quantity = parseInt(value.quantity);
                 value.delievryid = id;
               })
@@ -259,7 +259,7 @@ Page({
         console.log(infodata)
         // 新增退料单
         util.checkContent(info, this);
-          
+        util.intro(info, this)
         this.setData({
           info
         })
@@ -304,6 +304,7 @@ Page({
   editconfirm() {
     let info = this.data.info;
     util.checkChange(info, this);
+    util.intro(info, this)
     for (let k in info) {
       if (info[k] == "请选择") {
         info[k] = ""
@@ -417,6 +418,10 @@ Page({
     this.setData({
       section1: a
     })
+    this.setData({
+      firms: app.globalData.Customer,
+      totals: app.globalData.MainProject,
+    })
     this.qingqiu()
     if (options.id) {
       wx.showLoading({
@@ -426,42 +431,20 @@ Page({
         Timestamp: app.globalData.time,
         ID: options.id
       }).then(res => {
+        console.log(res)
         if (res.code == 10000) {
           let item = res.Item;
-          for (let i in item) {
-            if (item[i] == null || item[i] == "null" || !item[i]) {
-              item[i] = "";
-            }
-          }
-          app.globalData.department.forEach(depart => {
-            if (item.department == depart.value) {
-              this.setData({
-                departmenttext: depart.text
-              })
-            }
-          })
-          if (item.API_Picurl) {
-
-            item.API_Picurl = item.API_Picurl.split(",");
-            this.setData({
-              upimg: true
-            })
-            console.log(item.API_Picurl)
-          } else {
-            // data.API_Picurl = []
-          }
+          util.handleData(item, this, app.globalData.department);
+          util.outflow(item, this)
           this.setData({
             info: item
           })
-          wx.hideLoading();
+          wx.hideLoading()
         }
       })
 
     }
-    this.setData({
-      firms: app.globalData.Customer,
-      totals: app.globalData.MainProject,
-    })
+
   },
  // 商品编号
  showPopup1() {

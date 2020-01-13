@@ -12,20 +12,11 @@ Page({
     seach: '',
     loading: false,
     val: 0,
-    pact: [{
-        text: '全部重大工程质量事故报告',
-        value: 0
-      },
-      {
-        text: '我的重大工程质量事故报告',
-        value: 1
-      }
-    ],
     InfoList: []
   },
   // 返回
   return () {
-    util.returnMenu();
+    util.returnMenu2(1010,"质量验收");
   },
   setSeach(e) {
     // console.log(e)

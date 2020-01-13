@@ -8,9 +8,7 @@
                 新建
             </navigator>
             <view class="apply">
-                <van-dropdown-menu active-color="red">
-                    <van-dropdown-item value="{{val}}" options="{{pact}}" />
-                </van-dropdown-menu>
+               <text>安全技术交底</text>
             </view>
         </view>
         <view class="seach">
@@ -51,7 +49,7 @@
                             </van-popup>
                         </view>
                         <view class="seach_item">
-                            <van-field value="{{info.EndTime}}" bind:focus="showPopup_endtime" class="time1" label="交底时间" placeholder="请选择" />
+                            <van-field value="{{info.EndTime}}" bind:focus="showPopup_endtime" class="time1" label="交底时间结束时间" placeholder="请选择" />
                             <van-popup show="{{ show_endtime }}" round position="bottom" bind:close="onClose_endtime">
                                 <van-datetime-picker data-name="EndTime" value="{{ currentDate1 }}" bind:cancel="onClose_endtime" bind:confirm="onConfirm_endtime" />
                             </van-popup>

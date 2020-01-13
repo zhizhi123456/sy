@@ -213,9 +213,7 @@ Page({
   },
   // 组合查询
   seachqur() {
-    
     this.data.small.delievryid = this.data.info.ID
-
     util.qgroupsmall(qgroupdeliversmall, this)
   },
 })

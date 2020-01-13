@@ -14,17 +14,7 @@ Page({
     loading: false,
     show: false,
     show_time: false,
-    val: 0,
     currentDate: new Date().getTime(),
-    pact: [{
-        text: '全部线缆质量验收',
-        value: 0
-      },
-      {
-        text: '我的线缆质量验收',
-        value: 1
-      }
-    ],
     InfoList: [],
     Times: [],
     Supplier: [],
@@ -32,7 +22,7 @@ Page({
   },
   // 返回
   return () {
-    util.returnMenu();
+    util.returnMenu2(1010,"质量验收");
   },
   setSeach(e) {
     // console.log(e)

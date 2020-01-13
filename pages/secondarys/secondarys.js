@@ -76,7 +76,7 @@ Page({
       }, {
         nametext: "项目进度（每周）",
         img: "icon-schedule .blue7",
-        path: "",
+        path: "/pages/plan/pact/pact",
         control: true //权限
       },
       {
@@ -121,7 +121,17 @@ Page({
         img: "icon-zaitu .red2",
         path: "",
         control: true //权限
-      }, {
+      }, 
+      // 1
+      {
+        nametext: "材料使用查询",
+        img: "icon-chaxun .green2",
+        path: "",
+        control: true //权限
+      },
+      
+      
+      {
         nametext: "采购送货查询",
         img: "icon-chaxun .green2",
         path: "/pages/deliver/pact/pact",
@@ -208,13 +218,14 @@ Page({
         path: "/pages/design/pact/pact",
         control: true //权限
       },
-      // {
+      // 1
+      {
 
-      //   nametext: "技术交底",
-      //   img: "icon-jishuziliao ",
-      //   path: "",
-      //   control: true //权限
-      // },
+        nametext: "技术交底",
+        img: "icon-jishuziliao ",
+        path: "",
+        control: true //权限
+      },
       {
 
         nametext: "重大事故报告",
@@ -250,6 +261,16 @@ Page({
         path: "/pages/cable/pact/pact",
         control: true //权限
       },
+      // 1
+      {
+
+        nametext: "工程管道验收",
+        img: "icon-xianlan .red3",
+        path: "/pages/cable/pact/pact",
+        control: true //权限
+      },
+
+
       {
 
         nametext: "项目成本利润统计",
@@ -271,6 +292,30 @@ Page({
         path: "/pages/quantity/pact/pact",
         control: true //权限
       },
+      {
+
+        nametext: "项目工程材料统计",
+        img: "icon-yuancailiao .green2",
+        path: "/pages/unify/pact/pact",
+        control: true //权限
+      },
+      // 1
+      {
+
+        nametext: "工程接受签证单",
+        img: "icon-yuancailiao .green2",
+        path: "/pages/unify/pact/pact",
+        control: true //权限
+      },
+      
+      {
+
+        nametext: "工程结算签证明细",
+        img: "icon-yuancailiao .green2",
+        path: "/pages/unify/pact/pact",
+        control: true //权限
+      },
+      
       {
 
         nametext: "项目工程材料统计",
@@ -577,7 +622,7 @@ Page({
       pid: this.data.chuancan,
     }).then(res => {
       // 请求所有模块    不带uid
-      // console.log(res)
+      console.log(res)
       var n = 0
       for (var k in res.List) {
         for (var i in this.data.small) {
@@ -597,7 +642,7 @@ Page({
       queryMenu({
         Timestamp: app.globalData.time,
         pid: this.data.chuancan,
-        UId:this.data.id
+        // UId:this.data.id
       }).then(ress => {
         // console.log(ress)
         var c = 0
@@ -639,9 +684,9 @@ Page({
         this.setData({
           smalls: zong
         })
-        //测试
+        // 测试
         // this.setData({
-        //   smalls: this.data.small
+        //   // smalls: this.data.small
         // })
         wx.hideLoading()
 

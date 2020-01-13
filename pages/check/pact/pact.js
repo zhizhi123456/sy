@@ -25,7 +25,7 @@ Page({
   },
   // 返回
   return () {
-    util.returnMenu();
+    util.returnMenu2(1008,"项目绩效");
   },
   setSeach(e) {
     // console.log(e)

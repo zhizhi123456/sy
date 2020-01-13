@@ -43,7 +43,7 @@ Page({
   },
   // 返回
   return () {
-    util.returnMenu();
+    util.returnMenu2(1005,"项目经理");
   },
   setSeach(e) {
     // console.log(e)

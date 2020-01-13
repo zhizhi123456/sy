@@ -267,6 +267,7 @@ Page({
       Timestamp: app.globalData.time,
       pid: this.data.num,
     }).then(res => {
+      // console.log(res)
       var n = 0
       for (var k in res.List) {
         for (var i in this.data.list) {
@@ -296,11 +297,12 @@ Page({
         }
         // console.log(fen)
         if (fen.length == 0) {
-          console.log("数组为空")
           for (i in zong) {
             zong[i].control = false
+            if (zong[i].nametext == '登录/注册') {
+              zong[i].control = true
+            }
           }
-
         } else {
           // console.log(zong)
           for (var i in zong) {
@@ -322,7 +324,7 @@ Page({
         // this.setData({
         //   lists: this.data.list.reverse()
         // })
-
+        // 设置title
         for (var s in this.data.tag) {
           if (this.data.tag[s].ID == this.data.num) {
             this.setData({
@@ -375,6 +377,14 @@ Page({
                   lists: item,
                   entered: true
                 })
+                // 设置title
+                for (var s in that.data.tag) {
+                  if (that.data.tag[s].ID == that.data.num) {
+                    that.setData({
+                      title: that.data.tag[s].nametext
+                    })
+                  }
+                }
               }
             }
           },
