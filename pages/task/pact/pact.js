@@ -181,7 +181,21 @@ Page({
         delete info.UserId;
         this.setData({
           info,
-          ISconduct: 1
+          ISconduct: 1,
+          val: 0,
+          pact: [{
+              text: '未处理的任务书',
+              value: 0
+            },
+            {
+              text: '已处理的任务书',
+              value: 1
+            },
+            {
+              text: '已超时的任务书',
+              value: 2
+            }
+          ],
         })
         groupTask({
           state: this.data.info.state,
@@ -252,6 +266,35 @@ Page({
       }
     }
   },
+  changeItem(e) {
+    list = [];
+    let StateStr = (this.data.pact[e.detail].text).slice(0, 3);
+    let info = this.data.info;
+    info.state = StateStr;
+    this.setData({
+      info
+    })
+    wx.showLoading({
+      title: "加载中..."
+    })
+    groupTask({
+      state: StateStr,
+      UserName: userinfo.UserName
+    }).then(res => {
+      // console.log(res.List)
+      if (res.code == 10000) {
+        item = res.List;
+        list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list);
+        this.setData({
+          InfoList: list,
+          item
+        })
+        wx.hideLoading();
+      }
+    }).catch(err => {
+      console.log(err)
+    })
+  },
   // 组合查询
   showgroup() {
     this.setData({
@@ -271,7 +314,7 @@ Page({
     this.setData({
       pages: 1
     })
-    if (this.data.info.keyword || this.data.info.Type || this.data.info.chargemanName || this.data.info.StartTime || this.data.info.state|| this.data.info.UserId) {
+    if (this.data.info.keyword || this.data.info.Type || this.data.info.chargemanName || this.data.info.StartTime || this.data.info.state || this.data.info.UserId) {
       let info = this.data.info;
       if (info.Type) {
         this.data.props.forEach(res => {

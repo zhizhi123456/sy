@@ -899,3 +899,16 @@ export const updatedesign = (params) => http.post("/api/designtask/Update", para
 export const deldesign = (params) => http.post("/api/designtask/Delete", params);
 // 综合查询
 export const qgroupdesign = (params) => http.post("/api/designtask/MulticonditionalQuery", params);
+// 用章
+// 查询
+export const getChapter = (params) => http.post("/api/usesealform/Query", params);
+// 根据id查询
+export const referChapter = (params) => http.post("/api/usesealform/Edit", params);
+// 组合查询
+export const groupChapter = (params) => http.post("/api/usesealform/GroupQuery", params);
+// 添加
+export const addChapter = (params) => http.post("/api/usesealform/Insert", params);
+// 修改
+export const amendChapter = (params) => http.post("/api/usesealform/EditInfo", params);
+// 删除
+export const cancelChapter = (params) => http.post("/api/usesealform/Delete", params);

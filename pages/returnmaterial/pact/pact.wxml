@@ -7,7 +7,12 @@
             <navigator url="/pages/returnmaterial/new/new?rid={{options.id||options.rid}}&title={{options.title}}&{{userid?'userid='+userid+'&caption='+caption+'&dep='+dep+'&deptxt='+deptxt:''}}" class="fr newCreate" wx:if="{{hadNew||applyT}}">
                 新建
             </navigator>
-            <view class="apply">{{top}}</view>
+            <view class="apply" wx:if="{{ISconduct}}">
+                <van-dropdown-menu active-color="red">
+                    <van-dropdown-item value="{{val}}" options="{{pact}}" bindchange="changeItem" />
+                </van-dropdown-menu>
+            </view>
+            <view class="apply" wx:else>{{top}}</view>
         </view>
         <view class="seach">
             <icon class="iconfont icon-fuxuananniu fl s-sort" bindtap="showgroup"></icon>
