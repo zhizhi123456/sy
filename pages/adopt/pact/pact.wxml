@@ -10,7 +10,7 @@
             <view class="apply">{{top}}</view>
         </view>
         <view class="seach">
-            <icon class="iconfont icon-chaxun1 fl s-sort"></icon>
+            <icon class="iconfont icon-guanyu fl s-sort"></icon>
             <icon class="iconfont icon-sousuo fr" bindtap="seachInfo"></icon>
             <view class="data_list">
                 <input value="{{seach}}" bindblur="setSeach" />
