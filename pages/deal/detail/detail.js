@@ -13,13 +13,13 @@ Page({
     edit: false,
     info: {},
     steps: [],
-    tab:'a',
+    tab: 'a',
     returned: true,
-    isreturn:true,
+    isreturn: true,
   },
   // 返回
   return () {
-    util.returnPrev('deal')
+    util.returnPrev('deal');
   },
   /**
    * 生命周期函数--监听页面加载
@@ -42,12 +42,12 @@ Page({
           wx.hideLoading();
           // 调取工作流记录
           // console.log(res.Item.formid)
-          let mid=res.Item.formid;
+          let mid = res.Item.formid;
           if (mid) {
-            util.workList(this,mid)
+            util.workList(this, mid)
           }
-           //处理状态判断
-           util.checkState(this, mid, 'frameProtocol', item.CurStepbh);
+          //处理状态判断
+          util.checkState(this, mid, 'frameProtocol', item.CurStepbh);
         }
       })
     }
@@ -55,25 +55,34 @@ Page({
   // 工作流流转
   // 退回上步
   sendback() {
-    util.Triggerflow(this,'return','frameProtocol','deal')
+    util.Triggerflow(this, 'return', 'frameProtocol', 'deal')
   },
   // 提交下步
   putin() {
-    util.Triggerflow(this,'next','frameProtocol','deal')
+    util.Triggerflow(this, 'next', 'frameProtocol', 'deal')
   },
   // 删除
   delete() {
-    // console.log(this.data.info)
-    cancelDeal({
-      ID: this.data.info.ID
-    }).then(res => {
-      if (res.code == 10000) {
-        wx.showToast({
-          title: '删除成功',
-          icon: 'success',
-          duration: 3000
-        })
-        util.returnPrev('deal')
+    let that = this;
+    wx.showModal({
+      content: '确认要删除吗？',
+      success(res) {
+        if (res.confirm) {
+          cancelDeal({
+            ID: that.data.info.ID
+          }).then(res => {
+            if (res.code == 10000) {
+              wx.showToast({
+                title: '删除成功',
+                icon: 'success',
+                duration: 3000
+              })
+              setTimeout(function () {
+                util.returnPrev('deal');
+              }, 1000)
+            }
+          })
+        }
       }
     })
   },

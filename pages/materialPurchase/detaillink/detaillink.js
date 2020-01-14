@@ -26,19 +26,29 @@ Page({
     })
   },
   delete() {
-    cancelPdetail({
-      ID: this.data.info.ID
-    }).then(res => {
-      console.log(res)
-      if (res.code == 10000) {
-        wx.showToast({
-          title: '删除成功',
-          icon: 'success',
-          duration: 3000
-        })
-        wx.redirectTo({
-          url: "/pages/materialPurchase/detail/detail?id=" + this.data.info.purchasecontactId + "&tab=c"
-        })
+    let that = this;
+    wx.showModal({
+      content: '确认要删除吗？',
+      success(res) {
+        if (res.confirm) {
+          cancelPdetail({
+            ID: that.data.info.ID
+          }).then(res => {
+            console.log(res)
+            if (res.code == 10000) {
+              wx.showToast({
+                title: '删除成功',
+                icon: 'success',
+                duration: 3000
+              })
+              setTimeout(function () {
+                wx.redirectTo({
+                  url: "/pages/materialPurchase/detail/detail?id=" + that.data.info.purchasecontactId + "&tab=c"
+                });
+              }, 1000)
+            }
+          })
+        }
       }
     })
   },

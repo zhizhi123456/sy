@@ -16,7 +16,7 @@ Page({
   },
   // 返回
   return () {
-    util.returnPrev('quantity')
+    util.returnPrev('quantity');
   },
   /**
    * 生命周期函数--监听页面加载
@@ -43,17 +43,26 @@ Page({
   },
   // 删除
   delete() {
-    // console.log(this.data.info)
-    cancelQuantitie({
-      ID: this.data.info.ID
-    }).then(res => {
-      if (res.code == 10000) {
-        wx.showToast({
-          title: '删除成功',
-          icon: 'success',
-          duration: 3000
-        })
-        util.returnPrev('quantity')
+    let that = this;
+    wx.showModal({
+      content: '确认要删除吗？',
+      success(res) {
+        if (res.confirm) {
+          cancelQuantitie({
+            ID: that.data.info.ID
+          }).then(res => {
+            if (res.code == 10000) {
+              wx.showToast({
+                title: '删除成功',
+                icon: 'success',
+                duration: 3000
+              })
+              setTimeout(function () {
+                util.returnPrev('quantity');
+              }, 1000)
+            }
+          })
+        }
       }
     })
   },

@@ -13,13 +13,13 @@ Page({
     edit: false,
     info: {},
     steps: [],
-    tab:'a',
+    tab: 'a',
     returned: true,
-    isreturn:true,
+    isreturn: true,
   },
   // 返回
   return () {
-    util.returnPrev('variation')
+    util.returnPrev('variation');
   },
   /**
    * 生命周期函数--监听页面加载
@@ -45,8 +45,8 @@ Page({
           if (mid) {
             util.workList(this, mid)
           }
-           //处理状态判断
-           util.checkState(this, mid, 'CommunEnginAlter', item.CurStepbh);
+          //处理状态判断
+          util.checkState(this, mid, 'CommunEnginAlter', item.CurStepbh);
         }
       })
     }
@@ -62,17 +62,26 @@ Page({
   },
   // 删除
   delete() {
-    // console.log(this.data.info)
-    cancelVariation({
-      ID: this.data.info.ID
-    }).then(res => {
-      if (res.code == 10000) {
-        wx.showToast({
-          title: '删除成功',
-          icon: 'success',
-          duration: 3000
-        })
-        util.returnPrev('variation')
+    let that = this;
+    wx.showModal({
+      content: '确认要删除吗？',
+      success(res) {
+        if (res.confirm) {
+          cancelVariation({
+            ID: that.data.info.ID
+          }).then(res => {
+            if (res.code == 10000) {
+              wx.showToast({
+                title: '删除成功',
+                icon: 'success',
+                duration: 3000
+              })
+              setTimeout(function () {
+                util.returnPrev('variation');
+              }, 1000)
+            }
+          })
+        }
       }
     })
   },

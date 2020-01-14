@@ -17,7 +17,7 @@ Page({
     material_list: [],
     tab: "a",
     returned: true,
-    isreturn:true,
+    isreturn: true,
   },
   // 返回
   return () {
@@ -88,17 +88,26 @@ Page({
   },
   // 删除
   delete() {
-    // console.log(this.data.info)
-    cancelPurchase({
-      ID: this.data.info.ID
-    }).then(res => {
-      if (res.code == 10000) {
-        wx.showToast({
-          title: '删除成功',
-          icon: 'success',
-          duration: 3000
-        })
-        util.returnPrev('materialPurchase')
+    let that = this;
+    wx.showModal({
+      content: '确认要删除吗？',
+      success(res) {
+        if (res.confirm) {
+          cancelPurchase({
+            ID: that.data.info.ID
+          }).then(res => {
+            if (res.code == 10000) {
+              wx.showToast({
+                title: '删除成功',
+                icon: 'success',
+                duration: 3000
+              })
+              setTimeout(function () {
+                util.returnPrev('materialPurchase');
+              }, 1000)
+            }
+          })
+        }
       }
     })
   },
