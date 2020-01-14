@@ -899,3 +899,16 @@ export const updatedesign = (params) => http.post("/api/designtask/Update", para
 export const deldesign = (params) => http.post("/api/designtask/Delete", params);
 // 综合查询
 export const qgroupdesign = (params) => http.post("/api/designtask/MulticonditionalQuery", params);
+// 招投标
+// 查询
+export const querybid = (params) => http.post("/api/bidtoproject/Query", params);
+// 添加
+export const addbid = (params) => http.post("/api/bidtoproject/Insert", params);
+// 根据id查询
+export const detailbid = (params) => http.post("/api/bidtoproject/Detail", params);
+// 更新
+export const updatebid = (params) => http.post("/api/bidtoproject/Update", params);
+// 删除
+export const delbid = (params) => http.post("/api/bidtoproject/Delete", params);
+// 综合查询
+export const qgroupbid = (params) => http.post("/api/bidtoproject/MulticonditionalQuery", params);

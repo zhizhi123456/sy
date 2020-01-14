@@ -26,21 +26,7 @@ Page({
     })
   },
   delete() {
-    delcablesmall({
-      ID: this.data.info.ID
-    }).then(res => {
-      console.log(res)
-      if (res.code == 10000) {
-        wx.showToast({
-          title: '删除成功',
-          icon: 'success',
-          duration: 3000
-        })
-        wx.redirectTo({
-          url: "/pages/cable/detail/detail?id=" + this.data.info.CableQualityCheckId + "&table=c"
-        })
-      }
-    })
+    util.expurgateDetail(this,delcablesmall,'cable',this.data.info.CableQualityCheckId)
   },
   /**
    * 生命周期函数--监听页面加载

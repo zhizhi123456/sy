@@ -1308,6 +1308,9 @@ const intro = (data, that) => {
     if (s.text == data.projectType) {
       data.projectType = s.value
     }
+    if (s.text == data.projecttype) {
+      data.projecttype = s.value
+    }
   })
   app.globalData.Ifmakecontactlist.forEach((s) => {
     if (s.text == data.Ifmakecontact) {
@@ -1452,6 +1455,9 @@ const intro = (data, that) => {
     if (s.text == data.belongtoman) {
       data.belongtoman = s.value
     }
+    if (s.text == data.charageman) {
+      data.charageman = s.value
+    }
 
   })
   app.globalData.Ifwinbidlist.forEach(s => {
@@ -1495,6 +1501,10 @@ const outflow = (data, that) => {
     if (s.value == data.projectType) {
       data.projectType = s.text
     }
+    if (s.value == data.projecttype) {
+      data.projecttype = s.text
+    }
+
   })
   app.globalData.Ifmakecontactlist.forEach((s) => {
     if (s.value == data.Ifmakecontact) {
@@ -1636,6 +1646,9 @@ const outflow = (data, that) => {
     }
     if (s.value == data.belongtoman) {
       data.belongtoman = s.text
+    }
+    if (s.value == data.charageman) {
+      data.charageman = s.text
     }
 
   })
@@ -1868,9 +1881,9 @@ const qgroupsmall = (funcname, that) => {
   var app = getApp();
   // 判断是否全部为空
   var zhen = []
-  let info = that.data.info;
-  for (var t in info) {
-    if (info[t]) {
+  let small = that.data.small;
+  for (var t in small) {
+    if (small[t] && t!='delievryid') {
       zhen.push(true)
     } else {
       zhen.push(false)
@@ -1900,7 +1913,6 @@ const qgroupsmall = (funcname, that) => {
     that.setData({
       small
     })
-    console.log(that.data.small)
     let infodata = {
       Timestamp: app.globalData.time,
       ...that.data.small
@@ -1934,40 +1946,27 @@ const qgroupsmall = (funcname, that) => {
             }
           })
         });
-        that.setData({
-          material_list: item.reverse()
-        })
-        var info = that.data.info
-        for (var key in info) {
-          console.log(key)
+        for (var key in small) {
           if (key != 'delievryid') {
-            info[key] = ''
-            console.log(key)
+            small[key] = ''
           }
         }
-        info.picurl = [];
         that.setData({
-          info
+          material_list: item.reverse(),
+          small
         })
         wx.hideLoading();
       } else {
         let small = that.data.small;
-        small.picurl = [];
+        for (var key in small) {
+          if (key != 'delievryid') {
+            small[key] = ''
+          }
+        }
         that.setData({
           small
         })
-        var info = that.data.info
-        for (var key in info) {
-          console.log(key)
-          if (key != 'delievryid') {
-            console.log(key)
-            info[key] = ''
-          }
-        }
-        info.picurl = [];
-        that.setData({
-          info
-        })
+       
       }
     })
   }
@@ -1978,7 +1977,60 @@ const title = (() => {
     console.log(res)
   })
 })
+const expurgate = ((that, funcname, section) => {
+  wx.showModal({
+    content: '确定删除吗？',
+    success(res) {
+      if (res.confirm) {
+        funcname({
+          ID: that.data.info.ID
+        }).then(res => {
+          if (res.code == 10000) {
+            wx.showToast({
+              title: '删除成功',
+              icon: 'success',
+              duration: 3000
+            })
+            setTimeout(
+              function () {
+                returnPrev(section)
+              }, 3000)
+
+          }
+        })
+      }
+    }
+  })
+})
+const expurgateDetail = ((that, funcname, section,MasterDetailID) => {
+  wx.showModal({
+    content: '确定删除吗？',
+    success(res) {
+      if (res.confirm) {
+        funcname({
+          ID: that.data.info.ID
+        }).then(res => {
+          if (res.code == 10000) {
+            wx.showToast({
+              title: '删除成功',
+              icon: 'success',
+              duration: 3000
+            })
+            setTimeout(
+              function () {
+                wx.redirectTo({
+                  url: `/pages/${section}/detail/detail?id=` + MasterDetailID + "&table=c"
+                })
+              }, 3000)
+          }
+        })
+      }
+    }
+  })
+})
 module.exports = {
+  expurgateDetail,
+  expurgate,
   title,
   qgroupsmall,
   // qgroupdeliver,

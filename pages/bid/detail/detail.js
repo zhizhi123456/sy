@@ -1,7 +1,7 @@
 // / pages/generalcontract/detail/detail.js
 import {
-  detaildisclosure,
-  deldisclosure
+  detailbid,
+  delbid,
 } from '../../../service/getData.js';
 var app = getApp();
 var util = require("../../../utils/util");
@@ -12,23 +12,23 @@ Page({
   data: {
     edit: false,
     info: {},
-    steps: []
-  },
-  // 文件
-  up_photo() {
-    wx.chooseImage({
-      count: 9,
-      // sourceType:"camera",
-      success(res) {
-        // tempFilePath可以作为img标签的src属性显示图片
-        const tempFilePaths = res.tempFilePaths;
-        // console.log(tempFilePaths)
-      }
-    })
+    steps: [],
+    tab: 'a',
+    returned: true,
+    isreturn: true,
   },
   // 返回
   return () {
-    util.returnPrev('disclosure')
+    util.returnPrev('bid')
+  },
+  tap_pic(e) {
+    util.preview(this, e)
+  },
+  defaultimg(e) {
+    let info = util.defaultimg(e, this);
+    this.setData({
+      info
+    })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -38,29 +38,26 @@ Page({
       title: '加载中',
     });
     if (options.id) {
-      detaildisclosure({
+      detailbid({
         ID: options.id
       }).then(res => {
         // console.log(res)
         if (res.code == 10000) {
           let item = res.Item;
           util.handleData(item, this, app.globalData.department);
-          util.outflow(item,this)
+          util.outflow(item, this)
           this.setData({
             info: item
           })
           wx.hideLoading();
           // 调取工作流记录
           //列表
-
-          let mid = res.Item.Formid; 
+          let mid = res.Item.formid;
           if (mid) {
             util.workList(this, mid)
-            // console.log(this.data.steps)
           }
-           //处理状态判断
-          util.checkState(this, mid, 'EngineerdisclosureRpt', item.CurStepbh);
-        
+          //处理状态判断
+          util.checkState(this, mid, 'bidtoproject', item.CurStepbh);
         }
       })
     }
@@ -68,14 +65,14 @@ Page({
   // 工作流流转
   // 退回上步
   sendback() {
-    util.Triggerflow(this, 'return', 'EngineerdisclosureRpt', 'disclosure')
+    util.Triggerflow(this, 'return', 'bidtoproject', 'bid')
   },
   // 提交下步
   putin() {
-    util.Triggerflow(this, 'next', 'EngineerdisclosureRpt', 'disclosure')
+    util.Triggerflow(this, 'next', 'bidtoproject', 'bid')
   },
   // 删除
   delete() {
-    util.expurgate(this, deldisclosure, 'disclosure')
+    util.expurgate(this, delbid, 'bid')
   },
 })

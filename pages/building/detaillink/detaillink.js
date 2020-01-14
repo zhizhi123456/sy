@@ -56,28 +56,7 @@ Page({
     // console.log(this.data.info)
   },
   delete() {
-    // console.log("1")
-    // console.log(this.data.info.ID)
-    // console.log(delbuildingsmall)
-    delbuildingsmall({
-      ID: this.data.info.ID
-    }).then(res => {
-      // console.log(res)
-      if (res.code == 10000) {
-        wx.showToast({
-          title: '删除成功',
-          icon: 'success',
-          duration: 3000
-        })
-        //?
-        wx.redirectTo({
-          // url: "/pages/building/detail/detail?id=" + this.data.info.getmaterialid + "&table=c"
-          url: "/pages/building/detail/detail?id=" + this.data.info.buildingAcceptanceId + "&table=c"
-        })
-      }
-    }).catch(error => {
-      console.log(error);
-    })
+    util.expurgateDetail(this,delbuildingsmall,'building',this.data.info.buildingAcceptanceId)
   },
   /**
    * 生命周期函数--监听页面加载

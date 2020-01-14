@@ -153,26 +153,31 @@
     "pages/corps/section2",
     "pages/design/pact/pact",
     "pages/design/new/new",
-    "pages/design/detail/detail"
+    "pages/design/detail/detail",
+    "pages/bid/pact/pact",
+    "pages/bid/new/new",
+    "pages/bid/detail/detail"
   ],
-  "subpackages": [{
-    "root": "OAmoudle",
-    "pages": [
-      "pages/applyFor/pact/pact",
-      "pages/applyFor/new/new",
-      "pages/applyFor/detail/detail",
-      "pages/applyFor/newlink/newlink",
-      "pages/applyFor/detaillink/detaillink",
-      "pages/apply/pact/pact",
-      "pages/apply/new/new",
-      "pages/apply/detail/detail",
-      "pages/apply/newlink/newlink",
-      "pages/apply/detaillink/detaillink",
-      "pages/officeCost/pact/pact",
-      "pages/officeCost/new/new",
-      "pages/officeCost/detail/detail"
-    ]
-  }],
+  "subpackages": [
+    {
+      "root": "OAmoudle",
+      "pages": [
+        "pages/applyFor/pact/pact",
+        "pages/applyFor/new/new",
+        "pages/applyFor/detail/detail",
+        "pages/applyFor/newlink/newlink",
+        "pages/applyFor/detaillink/detaillink",
+        "pages/apply/pact/pact",
+        "pages/apply/new/new",
+        "pages/apply/detail/detail",
+        "pages/apply/newlink/newlink",
+        "pages/apply/detaillink/detaillink",
+        "pages/officeCost/pact/pact",
+        "pages/officeCost/new/new",
+        "pages/officeCost/detail/detail"
+      ]
+    }
+  ],
   "window": {
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#fff",

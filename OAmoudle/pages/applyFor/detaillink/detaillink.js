@@ -26,21 +26,7 @@ Page({
     })
   },
   delete() {
-    delapplyForsmall({
-      ID: this.data.info.ID
-    }).then(res => {
-      console.log(res)
-      if (res.code == 10000) {
-        wx.showToast({
-          title: '删除成功',
-          icon: 'success',
-          duration: 3000
-        })
-        wx.redirectTo({
-          url: "/pages/applyFor/detail/detail?id=" + this.data.info.applyid + "&table=c"
-        })
-      }
-    })
+    util.expurgateDetail(this,delapplyForsmall,'applyFor',this.data.info.applyid)
   },
   /**
    * 生命周期函数--监听页面加载

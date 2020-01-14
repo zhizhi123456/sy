@@ -45,19 +45,19 @@ Page({
         if (res.code == 10000) {
           let item = res.Item;
           util.handleData(item, this, app.globalData.department);
-          util.outflow(item,this)
+          util.outflow(item, this)
           this.setData({
             info: item
           })
           wx.hideLoading();
           // 调取工作流记录
           //列表
-          let mid = res.Item.formid; 
+          let mid = res.Item.formid;
           if (mid) {
             util.workList(this, mid)
             // console.log(this.data.steps)
           }
-           //处理状态判断
+          //处理状态判断
           util.checkState(this, mid, 'OfficeCharge', item.CurStepbh);
         }
       })
@@ -75,17 +75,6 @@ Page({
   // 删除
   delete() {
     // console.log(this.data.info)
-    delofficeCost({
-      ID: this.data.info.ID
-    }).then(res => {
-      if (res.code == 10000) {
-        wx.showToast({
-          title: '删除成功',
-          icon: 'success',
-          duration: 3000
-        })
-        util.returnPrev('officeCost')
-      }
-    })
+    util.expurgate(this, delofficeCost, 'officeCost')
   },
 })
