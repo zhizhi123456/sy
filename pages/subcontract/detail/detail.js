@@ -123,17 +123,27 @@ Page({
   },
   // 删除
   delete() {
-    cancelSubItems({
-      ID: this.data.info.ID
-    }).then(res => {
-      if (res.code == 10000) {
-        wx.showToast({
-          title: '删除成功',
-          icon: 'success',
-          duration: 3000
-        })
-        util.returnPrev('subcontract', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
-          this.data.rid, this.data.title)
+    let that = this;
+    wx.showModal({
+      content: '确认要删除吗？',
+      success(res) {
+        if (res.confirm) {
+          cancelSubItems({
+            ID: that.data.info.ID
+          }).then(res => {
+            if (res.code == 10000) {
+              wx.showToast({
+                title: '删除成功',
+                icon: 'success',
+                duration: 3000
+              })
+              setTimeout(function () {
+                util.returnPrev('subcontract', '', that.data.userid, that.data.caption, that.data.dep, that.data.deptxt,
+                  that.data.rid, that.data.title);
+              }, 1000)
+            }
+          })
+        }
       }
     })
   },

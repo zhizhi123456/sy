@@ -126,6 +126,35 @@ Page({
       }
     }
   },
+  changeItem(e) {
+    list = [];
+    let StateStr = (this.data.pact[e.detail].text).slice(0, 3);
+    let info = this.data.info;
+    info.state = StateStr;
+    this.setData({
+      info
+    })
+    wx.showLoading({
+      title: "加载中..."
+    })
+    groupReturnM({
+      state: StateStr,
+      UserName: userinfo.UserName
+    }).then(res => {
+      // console.log(res.List)
+      if (res.code == 10000) {
+        item = res.List;
+        list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list);
+        this.setData({
+          InfoList: list,
+          item
+        })
+        wx.hideLoading();
+      }
+    }).catch(err => {
+      console.log(err)
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

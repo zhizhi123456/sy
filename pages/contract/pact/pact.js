@@ -188,7 +188,21 @@ Page({
         this.setData({
           info,
           ISconduct: 1,
-          departmenttext: ""
+          departmenttext: "",
+          val: 0,
+          pact: [{
+              text: '未处理的分包合同',
+              value: 0
+            },
+            {
+              text: '已处理的分包合同',
+              value: 1
+            },
+            {
+              text: '已超时的分包合同',
+              value: 2
+            }
+          ],
         })
         groupContract({
           state: this.data.info.state,
@@ -260,6 +274,35 @@ Page({
         }
       }
     }
+  },
+  changeItem(e) {
+    list = [];
+    let StateStr = (this.data.pact[e.detail].text).slice(0, 3);
+    let info = this.data.info;
+    info.state = StateStr;
+    this.setData({
+      info
+    })
+    wx.showLoading({
+      title: "加载中..."
+    })
+    groupContract({
+      state: StateStr,
+      UserName: userinfo.UserName
+    }).then(res => {
+      // console.log(res.List)
+      if (res.code == 10000) {
+        item = res.List;
+        list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list);
+        this.setData({
+          InfoList: list,
+          item
+        })
+        wx.hideLoading();
+      }
+    }).catch(err => {
+      console.log(err)
+    })
   },
   // 组合查询
   showgroup() {

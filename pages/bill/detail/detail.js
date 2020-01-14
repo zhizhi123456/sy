@@ -51,18 +51,28 @@ Page({
     // console.log(this.data.info)
   },
   delete() {
-    cancelBill({
-      ID: this.data.info.ID
-    }).then(res => {
-      // console.log(res)
-      if (res.code == 10000) {
-        wx.showToast({
-          title: '删除成功',
-          icon: 'success',
-          duration: 3000
-        })
-        util.returnPrev('bill', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
-          this.data.rid, this.data.title)
+    let that = this;
+    wx.showModal({
+      content: '确认要删除吗？',
+      success(res) {
+        if (res.confirm) {
+          cancelBill({
+            ID: that.data.info.ID
+          }).then(res => {
+            // console.log(res)
+            if (res.code == 10000) {
+              wx.showToast({
+                title: '删除成功',
+                icon: 'success',
+                duration: 3000
+              })
+              setTimeout(function () {
+                util.returnPrev('bill', '', that.data.userid, that.data.caption, that.data.dep, that.data.deptxt,
+                  that.data.rid, that.data.title)
+              }, 1000)
+            }
+          })
+        }
       }
     })
   },
@@ -90,7 +100,7 @@ Page({
         dep: options.dep,
         deptxt: options.deptxt,
         applyT: Number(options.applyT),
-        ISconduct:Number(options.ISconduct)
+        ISconduct: Number(options.ISconduct)
       })
       if (options.caption == '我') {
         this.setData({

@@ -15,7 +15,7 @@ Page({
   },
   // 返回
   return () {
-    util.returnPrev('projectmeet')
+    util.returnPrev('projectmeet');
   },
   /**
    * 生命周期函数--监听页面加载
@@ -42,17 +42,26 @@ Page({
   },
   // 删除
   delete() {
-    // console.log(this.data.info)
-    cancelProjectmeet({
-      ID: this.data.info.ID
-    }).then(res => {
-      if (res.code == 10000) {
-        wx.showToast({
-          title: '删除成功',
-          icon: 'success',
-          duration: 3000
-        })
-        util.returnPrev('projectmeet');
+    let that = this;
+    wx.showModal({
+      content: '确认要删除吗？',
+      success(res) {
+        if (res.confirm) {
+          cancelProjectmeet({
+            ID: that.data.info.ID
+          }).then(res => {
+            if (res.code == 10000) {
+              wx.showToast({
+                title: '删除成功',
+                icon: 'success',
+                duration: 3000
+              })
+              setTimeout(function () {
+                util.returnPrev('projectmeet');
+              }, 1000)
+            }
+          })
+        }
       }
     })
   },

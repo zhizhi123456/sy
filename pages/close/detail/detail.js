@@ -13,9 +13,9 @@ Page({
     edit: false,
     info: {},
     steps: [],
-    tab:'a',
+    tab: 'a',
     returned: true,
-    isreturn:true,
+    isreturn: true,
   },
   // 返回
   return () {
@@ -63,19 +63,27 @@ Page({
   },
   // 删除
   delete() {
-    // console.log(this.data.info)
-    cancelClose({
-      ID: this.data.info.ID
-    }).then(res => {
-      if (res.code == 10000) {
-        wx.showToast({
-          title: '删除成功',
-          icon: 'success',
-          duration: 3000
-        })
-        util.returnPrev('close')
+    let that = this;
+    wx.showModal({
+      content: '确认要删除吗？',
+      success(res) {
+        if (res.confirm) {
+          cancelClose({
+            ID: that.data.info.ID
+          }).then(res => {
+            if (res.code == 10000) {
+              wx.showToast({
+                title: '删除成功',
+                icon: 'success',
+                duration: 3000
+              })
+              setTimeout(function () {
+                util.returnPrev('close');
+              }, 1000)
+            }
+          })
+        }
       }
     })
   },
- 
 })

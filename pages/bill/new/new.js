@@ -296,7 +296,7 @@ Page({
     })
   },
   onConfirm_add(e) {
-    console.log(e)
+    // console.log(e)
     let materials = util.updateCode(e, this);
     this.setData({
       materials,
@@ -387,7 +387,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
+    // console.log(options)
     if (options.id || options.rid) {
       this.setData({
         rid: options.rid,
@@ -420,7 +420,6 @@ Page({
           wx.hideLoading();
         }
       })
-
     }
     this.setData({
       sections: app.globalData.department,

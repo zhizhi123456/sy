@@ -16,7 +16,7 @@ Page({
   },
   // 返回
   return () {
-    util.returnPrev('shelter')
+    util.returnPrev('shelter');
   },
   /**
    * 生命周期函数--监听页面加载
@@ -43,19 +43,28 @@ Page({
   },
   // 删除
   delete() {
-    // console.log(this.data.info)
-    cancelShelter({
-      ID: this.data.info.ID
-    }).then(res => {
-      if (res.code == 10000) {
-        wx.showToast({
-          title: '删除成功',
-          icon: 'success',
-          duration: 3000
-        })
-        util.returnPrev('shelter')
+    let that = this;
+    wx.showModal({
+      content: '确认要删除吗？',
+      success(res) {
+        if (res.confirm) {
+          cancelShelter({
+            ID: that.data.info.ID
+          }).then(res => {
+            if (res.code == 10000) {
+              wx.showToast({
+                title: '删除成功',
+                icon: 'success',
+                duration: 3000
+              })
+              setTimeout(function () {
+                util.returnPrev('shelter');
+              }, 1000)
+            }
+          })
+        }
       }
     })
   },
- 
+
 })

@@ -189,7 +189,21 @@ Page({
         this.setData({
           info,
           ISconduct: 1,
-          departmenttext: ''
+          departmenttext: '',
+          val: 0,
+          pact: [{
+              text: '未处理的分包项目',
+              value: 0
+            },
+            {
+              text: '已处理的分包项目',
+              value: 1
+            },
+            {
+              text: '已超时的分包项目',
+              value: 2
+            }
+          ],
         })
         groupSubItems({
           state: this.data.info.state,
@@ -261,6 +275,35 @@ Page({
         }
       }
     }
+  },
+  changeItem(e) {
+    list = [];
+    let StateStr = (this.data.pact[e.detail].text).slice(0, 3);
+    let info = this.data.info;
+    info.state = StateStr;
+    this.setData({
+      info
+    })
+    wx.showLoading({
+      title: "加载中..."
+    })
+    groupSubItems({
+      state: StateStr,
+      UserName: userinfo.UserName
+    }).then(res => {
+      // console.log(res.List)
+      if (res.code == 10000) {
+        item = res.List;
+        list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list);
+        this.setData({
+          InfoList: list,
+          item
+        })
+        wx.hideLoading();
+      }
+    }).catch(err => {
+      console.log(err)
+    })
   },
   // 组合查询
   showgroup() {

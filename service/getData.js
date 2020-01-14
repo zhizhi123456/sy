@@ -912,3 +912,16 @@ export const updatebid = (params) => http.post("/api/bidtoproject/Update", param
 export const delbid = (params) => http.post("/api/bidtoproject/Delete", params);
 // 综合查询
 export const qgroupbid = (params) => http.post("/api/bidtoproject/MulticonditionalQuery", params);
+// 用章
+// 查询
+export const getChapter = (params) => http.post("/api/usesealform/Query", params);
+// 根据id查询
+export const referChapter = (params) => http.post("/api/usesealform/Edit", params);
+// 组合查询
+export const groupChapter = (params) => http.post("/api/usesealform/GroupQuery", params);
+// 添加
+export const addChapter = (params) => http.post("/api/usesealform/Insert", params);
+// 修改
+export const amendChapter = (params) => http.post("/api/usesealform/EditInfo", params);
+// 删除
+export const cancelChapter = (params) => http.post("/api/usesealform/Delete", params);

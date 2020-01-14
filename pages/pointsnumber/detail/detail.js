@@ -22,7 +22,7 @@ Page({
   // 返回
   return () {
     util.returnPrev('pointsnumber', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
-      this.data.rid, this.data.title)
+      this.data.rid, this.data.title);
   },
   /**
    * 生命周期函数--监听页面加载
@@ -109,18 +109,27 @@ Page({
   },
   // 删除
   delete() {
-    // console.log(this.data.info)
-    cancelPnumber({
-      ID: this.data.info.ID
-    }).then(res => {
-      if (res.code == 10000) {
-        wx.showToast({
-          title: '删除成功',
-          icon: 'success',
-          duration: 3000
-        })
-        util.returnPrev('pointsnumber', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
-          this.data.rid, this.data.title)
+    let that = this;
+    wx.showModal({
+      content: '确认要删除吗？',
+      success(res) {
+        if (res.confirm) {
+          cancelPnumber({
+            ID: that.data.info.ID
+          }).then(res => {
+            if (res.code == 10000) {
+              wx.showToast({
+                title: '删除成功',
+                icon: 'success',
+                duration: 3000
+              })
+              setTimeout(function () {
+                util.returnPrev('pointsnumber', '', that.data.userid, that.data.caption, that.data.dep, that.data.deptxt,
+                  that.data.rid, that.data.title);
+              }, 1000)
+            }
+          })
+        }
       }
     })
   },

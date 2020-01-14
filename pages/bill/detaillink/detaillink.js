@@ -26,19 +26,29 @@ Page({
     })
   },
   delete() {
-    cancelBdetail({
-      ID: this.data.info.ID
-    }).then(res => {
-      // console.log(res)
-      if (res.code == 10000) {
-        wx.showToast({
-          title: '删除成功',
-          icon: 'success',
-          duration: 3000
-        })
-        wx.redirectTo({
-          url: "/pages/bill/detail/detail?tab=c&id=" + this.data.info.getmaterialid + '&rid=' + this.data.rid + '&title=' + this.data.title + (this.data.userid ? '&caption=' + this.data.caption + '&dep=' + this.data.dep + '&deptxt=' + this.data.deptxt + '&userid=' + this.data.userid : '')
-        })
+    let that = this;
+    wx.showModal({
+      content: '确认要删除吗？',
+      success(res) {
+        if (res.confirm) {
+          cancelBdetail({
+            ID: that.data.info.ID
+          }).then(res => {
+            // console.log(res)
+            if (res.code == 10000) {
+              wx.showToast({
+                title: '删除成功',
+                icon: 'success',
+                duration: 3000
+              })
+              setTimeout(function () {
+                wx.redirectTo({
+                  url: "/pages/bill/detail/detail?tab=c&id=" + that.data.info.getmaterialid + '&rid=' + that.data.rid + '&title=' + that.data.title + (that.data.userid ? '&caption=' + that.data.caption + '&dep=' + that.data.dep + '&deptxt=' + that.data.deptxt + '&userid=' + that.data.userid : '')
+                })
+              }, 1000)
+            }
+          })
+        }
       }
     })
   },
