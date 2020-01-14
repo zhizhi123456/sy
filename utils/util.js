@@ -1866,66 +1866,112 @@ const qgroupdeliver = (funcname, that, hadNew, hadMy) => {
 // 组合查询
 const qgroupsmall = (funcname, that) => {
   var app = getApp();
-  // console.log(that.data.small)
-  let small = that.data.small;
-  for (let i in small) {
-    if (small[i] == "请选择" || !small[i] || small[i] == "") {
-      small[i] = null
+  // 判断是否全部为空
+  var zhen = []
+  let info = that.data.info;
+  for (var t in info) {
+    if (info[t]) {
+      zhen.push(true)
+    } else {
+      zhen.push(false)
     }
   }
-
-  if (small.quantity) {
-    small.quantity = Number(small.quantity)
-  }
-  that.setData({
-    small
+  var t = zhen.some(s => {
+    return s == true
   })
-  console.log(that.data.small)
-  let infodata = {
-    Timestamp: app.globalData.time,
-    ...that.data.small
-  }
-  funcname(
-    infodata
-  ).then(res => {
-    // console.log(res)
-    wx.showLoading({
-      title: '加载中',
-    });
-    if (res.code == 10000) {
-      wx.showToast({
-        title: '搜索成功',
-        icon: 'success',
-        duration: 3000
-      })
-      that.onClose()
-      let item = res.List;
-      for (let k of item) {
-        for (let i in k) {
-          if (k[i] == null || k[i] == "null" || !k[i]) {
-            k[i] = " "
+  if (!t) {
+    wx.showToast({
+      title: '请至少输入一项',
+      icon: 'none',
+      duration: 2000
+    })
+  } else {
+    // console.log(that.data.small)
+    let small = that.data.small;
+    for (let i in small) {
+      if (small[i] == "请选择" || !small[i] || small[i] == "") {
+        small[i] = null
+      }
+    }
+
+    if (small.quantity) {
+      small.quantity = Number(small.quantity)
+    }
+    that.setData({
+      small
+    })
+    console.log(that.data.small)
+    let infodata = {
+      Timestamp: app.globalData.time,
+      ...that.data.small
+    }
+    funcname(
+      infodata
+    ).then(res => {
+      // console.log(res)
+      wx.showLoading({
+        title: '加载中',
+      });
+      if (res.code == 10000) {
+        wx.showToast({
+          title: '搜索成功',
+          icon: 'success',
+          duration: 3000
+        })
+        that.onClose()
+        let item = res.List;
+        for (let k of item) {
+          for (let i in k) {
+            if (k[i] == null || k[i] == "null" || !k[i]) {
+              k[i] = " "
+            }
           }
         }
-      }
-      item.forEach(value => {
-        app.globalData.department.forEach(depart => {
-          if (value.department == depart.value) {
-            value.department = depart.text
-          }
+        item.forEach(value => {
+          app.globalData.department.forEach(depart => {
+            if (value.department == depart.value) {
+              value.department = depart.text
+            }
+          })
+        });
+        that.setData({
+          material_list: item.reverse()
         })
-      });
-      that.setData({
-        material_list: item.reverse()
-      })
-      wx.hideLoading();
-    } else {
-      let small = that.data.small;
-      small.picurl = [];
-      that.setData({
-        small
-      })
-    }
-  })
+        var info = that.data.info
+        for (var key in info) {
+          console.log(key)
+          if (key != 'delievryid') {
+            info[key] = ''
+            console.log(key)
+          }
+        }
+        info.picurl = [];
+        that.setData({
+          info
+        })
+        wx.hideLoading();
+      } else {
+        let small = that.data.small;
+        small.picurl = [];
+        that.setData({
+          small
+        })
+        var info = that.data.info
+        for (var key in info) {
+          console.log(key)
+          if (key != 'delievryid') {
+            console.log(key)
+            info[key] = ''
+          }
+        }
+        info.picurl = [];
+        that.setData({
+          info
+        })
+      }
+    })
+  }
+
 }
 const title = (() => {
   Companytitle().then(res => {

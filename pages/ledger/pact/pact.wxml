@@ -44,7 +44,7 @@
                     </view>
                  
                     <view class="seach_item">
-                        <van-field value="{{info.StartTime}}"  bind:focus="showPopup_time" class="time1"label="任务单下发时间开始时间" placeholder="请选择" />
+                        <van-field value="{{info.StartTime}}"  bind:focus="showPopup_time" class="time1"label="任务单下发时间开始时间" placeholder="请选择"  />
                         <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
                             <van-datetime-picker data-name="StartTime" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
                         </van-popup>

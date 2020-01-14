@@ -70,7 +70,7 @@ Page({
     });
   },
   onConfirm(e) {
-    let info = util.editInfo(e, this, e.detail.value);
+    let info = util.editInfo(e, this, e.detail.value.text);
     this.setData({
       info,
       show: false
@@ -88,7 +88,7 @@ Page({
     });
   },
   onConfirm_o(e) {
-    let info = util.editInfo(e, this, e.detail.value);
+    let info = util.editInfo(e, this, e.detail.value.text);
     this.setData({
       info,
       show_o: false,
@@ -239,39 +239,16 @@ Page({
       }
     })
   },
-  // 请求基础数据  //总包项目id 职位职称
-  qingqiu() {
-    Role().then(res => {
-      // console.log(res)
-      var q = JSON.parse(res)
-      var s = q.map(t => {
-        return t.Value
-      })
-      this.setData({
-        section1: s
-      })
-      // console.log(this.data.section1)
-    })
-    MainProject().then(res => {
-      console.log(res)
-      var q = JSON.parse(res)
-      var s = q.map(t => {
-        return t.projcectCode
-      })
-      this.setData({
-        section2: s
-      })
-      // console.log(this.data.section2)
-    })
-  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     app.globalData.pic = []
-    console.log(options.id)
-    this.qingqiu()
+    this.setData({
+      section1:app.globalData.Role,
+      section2:app.globalData.MainProject
+    })
     if (options.id) {
       this.setData({
         bianid: options.id // 页面判断是否有id

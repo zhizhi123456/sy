@@ -179,6 +179,10 @@ Page({
         util.handleData(item, this, app.globalData.department);
         util.outflow(item, this)
         this.setData({
+          ConstructionTeamIDtext: item.ConstructionTeamID,
+          MemberNametext:item.MemberName
+        })
+        this.setData({
           info: item
         })
       })

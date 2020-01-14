@@ -522,13 +522,13 @@ Page({
       },
       {
         nametext: "施工队",
-        img: "icon-renyuandingwei green2",
+        img: "icon-shigongduiguanli green2",
         path: "/pages/contractor/pact/pact",
         control: true //权限
       },
       {
         nametext: "施工队成员",
-        img: "icon-lunkuodasan- .green4",
+        img: "icon-members .green4",
         path: "/pages/member/pact/pact",
         control: true //权限
       },
@@ -702,7 +702,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // console.log(options)
+    console.log(options)
     let userinfo = wx.getStorageSync("myInfo");
     if (userinfo) {
       getdep({
