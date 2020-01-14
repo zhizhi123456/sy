@@ -23,11 +23,11 @@ Page({
   return () {
     if (this.data.hadNew || this.data.me) {
       wx.redirectTo({
-        url: "/pages/track/track?id=" + (this.data.options.rid || this.data.options.id) + '&title=' + this.data.options.title
+        url: "/pages/track/track"
       })
     } else {
       wx.redirectTo({
-        url: "/pages/track/track?caption=" + this.data.caption + '&dep=' + this.data.dep + '&deptxt=' + this.data.deptxt + '&userid=' + this.data.userid 
+        url: "/pages/track/track?caption=" + this.data.caption + '&dep=' + this.data.dep + '&deptxt=' + this.data.deptxt + '&userid=' + this.data.userid
       })
     }
   },
@@ -36,11 +36,6 @@ Page({
    */
   onLoad: function (options) {
     // console.log(options)
-    if (options.id || options.rid) {
-      this.setData({
-        options: options
-      })
-    }
     if (options.userid) {
       this.setData({
         hadNew: 0,
@@ -74,6 +69,15 @@ Page({
             }],
             marker: [{
               id: 0,
+              height: 20,
+              iconPath: '../../../img/mine.png',
+              latitude: item[0].latitude,
+              longitude: item[0].longitude,
+              callout: { //在markers上展示地址名称
+                display: 'BYCLICK',
+              }
+            }, {
+              id: 1,
               height: 50,
               iconPath: '../../../img/begin.png',
               latitude: item[0].latitude,
@@ -86,7 +90,7 @@ Page({
                 bgColor: '#008080'
               }
             }, {
-              id: 1,
+              id: 2,
               height: 30,
               iconPath: '../../../img/end.png',
               latitude: item[item.length - 1].latitude,
@@ -111,7 +115,7 @@ Page({
   onReady: function () {
     // 使用 wx.createMapContext 获取 map 上下文
     // 使轨迹居中
-    this.mapCtx = wx.createMapContext('myMap')
+    this.mapCtx = wx.createMapContext('myMap');
     this.mapCtx.includePoints({
       padding: [100],
       points: item
@@ -135,7 +139,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.mapCtx = wx.createMapContext('myMap');
+    this.mapCtx.includePoints({
+      padding: [100],
+      points: item
+    })
   },
   /**
    * 生命周期函数--监听页面隐藏
