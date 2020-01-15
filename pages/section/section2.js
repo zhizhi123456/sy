@@ -50,10 +50,10 @@ Page({
         path: '/pages/task/pact/pact'
       },
       {
-        nametext: "设计任务",
-        img: "icon-lunkuodasan- .green4",
+        name: "设计任务",
+        menuId: null,
+        icon: "icon-lunkuodasan- .green4",
         path: "/pages/design/pact/pact",
-        control: true //权限
       },
     ]
   },

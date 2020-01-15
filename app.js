@@ -223,6 +223,21 @@ App({
       value: 3105,
       text: "否"
     }],
+    statistics:[{
+      value: 1,
+      text: "项目"
+    }, {
+      value: 2,
+      text: "材料"
+    }
+  ],
+    YesOrNo1: [{
+      value: 3104,
+      text: "是"
+    }, {
+      value: 3105,
+      text: "否"
+    }],
     department: '',
     Companytitle: '',
     staff: '',

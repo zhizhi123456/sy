@@ -925,3 +925,5 @@ export const addChapter = (params) => http.post("/api/usesealform/Insert", param
 export const amendChapter = (params) => http.post("/api/usesealform/EditInfo", params);
 // 删除
 export const cancelChapter = (params) => http.post("/api/usesealform/Delete", params);
+// 材料领用综合查询
+export const qgroupreceive = (params) => http.post("/api/materialsOfRecipients/GroupQuery", params);

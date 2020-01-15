@@ -24,7 +24,7 @@ Page({
     show_endtime: false,
     applyT: 0,
     hadNew: 1,
-    ISconduct: 0
+    ISconduct: 0,
   },
   // 返回
   return () {

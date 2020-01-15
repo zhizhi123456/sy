@@ -215,13 +215,13 @@ Page({
       TokenType: this.data.info.TokenType,
       UserID: this.data.info.UserID,
     }).then(res => {
-      // console.log(res)
+      console.log("办公区域")
+      console.log(res)
       this.setData({
         "info.WorkAreaID": res.Item.ID,
         "info.WorkAreaCentPosi": res.Item.CenterAddressPosition,
         WorkAreaName: res.Item.WorkAreaName,
         Workposition: res.Item.CenterAddressPosition
-
       })
     })
     qqmapsdk = new QQMapWX({
