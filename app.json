@@ -1,6 +1,9 @@
 {
   "pages": [
+    
+    "pages/contracts1/contracts",
     "pages/contracts/contracts",
+    "pages/secondary/secondary",
     "pages/secondarys/secondarys",
     "pages/member/pact/pact",
     "pages/sceneticket/pact/pact",
@@ -174,37 +177,14 @@
         "pages/apply/detaillink/detaillink",
         "pages/officeCost/pact/pact",
         "pages/officeCost/new/new",
-        "pages/officeCost/detail/detail"
+        "pages/officeCost/detail/detail",
+        "pages/chapter/pact/pact",
+        "pages/chapter/detail/detail",
+        "pages/chapter/new/new",
+        "pages/receive/pact/pact"
       ]
     }
   ],
-  "subpackages": [{
-    "root": "OAmoudle",
-    "pages": [
-      "pages/applyFor/pact/pact",
-      "pages/applyFor/new/new",
-      "pages/applyFor/detail/detail",
-      "pages/applyFor/newlink/newlink",
-      "pages/applyFor/detaillink/detaillink",
-      "pages/apply/pact/pact",
-      "pages/apply/new/new",
-      "pages/apply/detail/detail",
-      "pages/apply/newlink/newlink",
-      "pages/apply/detaillink/detaillink",
-      "pages/officeCost/pact/pact",
-      "pages/officeCost/new/new",
-      "pages/officeCost/detail/detail",
-      "pages/chapter/pact/pact",
-      "pages/chapter/detail/detail",
-      "pages/chapter/new/new",
-      "pages/invoice/pact/pact",
-      "pages/invoice/detail/detail",
-      "pages/invoice/new/new",
-      "pages/vacate/pact/pact",
-      "pages/vacate/detail/detail",
-      "pages/vacate/new/new"
-    ]
-  }],
   "window": {
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#fff",

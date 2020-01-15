@@ -1,0 +1,198 @@
+/* pages/contracts/contracts.wxss */
+
+
+.tabarcontent {
+  position: fixed;
+  bottom: 0rpx;
+  width: 100%;
+  padding: 10rpx 0;
+  border-top: 1rpx solid #ddd;
+  color: #666;
+  background-color: white;
+  z-index: 100;
+}
+
+.tabar .iconfont {
+  color: #666;
+  background-color: white;
+}
+
+.tabar {
+  display: flex;
+  justify-content: space-around;
+  font-size: 30rpx;
+  background-color: white;
+
+}
+
+.tabar>.box {
+  width: 160rpx;
+  height: 100rpx;
+  position: relative;
+  text-align: center;
+}
+
+.tabar>.box navigator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 20;
+}
+
+.tabar>.box text {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 28rpx;
+}
+
+.tabar text {
+  display: inline-block;
+  width: 100%;
+}
+
+
+.tabarcontent .active {
+  color: #016536;
+  font-weight: 600;
+}
+
+.tab {
+  font-size: 48rpx;
+}
+
+.list .box:nth-child(4n-3) .iconfont {
+  /* background-color: rgb(255, 146, 82); */
+  background-color: rgb(148, 123, 231);
+}
+
+.list .box:nth-child(4n-2) .iconfont {
+  background-color: rgb(78, 182, 159);
+}
+
+.list .box:nth-child(4n-1) .iconfont {
+  /* background-color: #336699; */
+  background-color: #4e8dcc;
+}
+
+.list .masked {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(250, 250, 250, 0.7);
+  z-index: 11;
+  display: none;
+  border-radius: 20rpx;
+  /* border: 1rpx solid #ddd; */
+}
+
+.list .show {
+  display: block;
+}
+
+.list .box .masked .iconfont {
+  font-size: 56rpx;
+  color: rgb(146, 146, 146);
+  margin-top: 55rpx;
+  background-color: transparent;
+}
+
+/* 提示 */
+.HINT {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+/* 菜单样式 */
+.header {
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  background-color: teal;
+  /* position: relative; */
+}
+
+.header.icon1 {
+  font-size: 50rpx;
+  position: absolute;
+  right: 26rpx;
+  top: 30rpx;
+}
+
+.list {
+  margin: 100rpx 0 120rpx 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  font-size: 28rpx;
+}
+
+.list>.box {
+  width: 185rpx;
+  height: 185rpx;
+  /* border: 1px solid #cccc; */
+  margin: 30rpx 31rpx 10rpx;
+  position: relative;
+  text-align: center;
+  padding: 20rpx 0;
+  box-sizing: border-box;
+  border-radius: 20rpx;
+  overflow: hidden;
+}
+
+.list>.box .icon {
+  margin: 0 auto;
+}
+
+.list text {
+  display: inline-block;
+  width: 100%;
+}
+
+.list>.box navigator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.list>.box text {
+  position: absolute;
+  bottom: -9rpx;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.list .icon {
+  font-size: 78rpx;
+  margin: 0 auto;
+  width: 100rpx;
+  height: 90rpx;
+  background-color: #419e9e;
+  color: white;
+  padding: 10rpx;
+  border-radius: 10rpx;
+}
+
+.haDquit {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 120rpx;
+  text-align: center;
+}
+
+.haDquit view {
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  border-top: 20rpx solid #fafafa;
+  font-size: 32rpx;
+  letter-spacing: 5rpx;
+}

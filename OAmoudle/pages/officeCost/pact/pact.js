@@ -2,7 +2,7 @@
 import {
   queryofficeCost,
   qgroupofficeCost
-} from '../../../../service/getData.js';
+} from '../../../../service/getData';
 var app = getApp();
 var util = require("../../../../utils/util");
 Page({
