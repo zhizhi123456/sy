@@ -6,19 +6,15 @@
         <view class="apply">资料详情</view>
     </view>
     <view class="card">
-        <van-card title="{{info.useInfo}}" tag="资料详情" />
+        <van-card title="{{info.invoicename}}" tag="资料详情" />
     </view>
     <view class="main_nav">
         <van-tabs active="{{tab}}">
             <van-tab title="详细资料" name="a">
                 <view class="content">
                     <view class="c_item">
-                        <view class="kind">用途</view>
-                        <view class="check">{{info.useInfo}}</view>
-                    </view>
-                    <view class="c_item">
-                        <view class="kind">用章类别</view>
-                        <view class="check">{{info.usesealtype}}</view>
+                        <view class="kind">发票名称</view>
+                        <view class="check">{{info.invoicename}}</view>
                     </view>
                     <view class="c_item">
                         <view class="kind">公司</view>
@@ -29,12 +25,36 @@
                         <view class="check">{{info.department}}</view>
                     </view>
                     <view class="c_item">
-                        <view class="kind">金额</view>
-                        <view class="check">{{info.useamount}}</view>
+                        <view class="kind">合同</view>
+                        <view class="check">{{info.contactid}}</view>
                     </view>
                     <view class="c_item">
-                        <view class="kind">数量</view>
-                        <view class="check">{{info.usenumber}}</view>
+                        <view class="kind">开票类别</view>
+                        <view class="check">{{info.invoicetype}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">开票信息</view>
+                        <view class="check">{{info.invoiceinfo}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">发票内容</view>
+                        <view class="check">{{info.invoicecontext}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">含税金额</view>
+                        <view class="check">{{info.includetaxamont}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">票率</view>
+                        <view class="check">{{info.invoicefeerate}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">项目</view>
+                        <view class="check">{{info.projectid}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">项目地址</view>
+                        <view class="check">{{info.projectaddress}}</view>
                     </view>
                     <view class="c_item">
                         <view class="kind">图片</view>
@@ -93,7 +113,7 @@
             <text>退回上步</text>
         </view>
         <view>
-            <navigator url="/OAmoudle/pages/chapter/new/new?id={{info.ID}}" hover-class="none">
+            <navigator url="/OAmoudle/pages/invoice/new/new?id={{info.ID}}" hover-class="none">
                 <icon class="iconfont icon-bianji"></icon>
                 <text>编辑</text>
             </navigator>

@@ -1,9 +1,9 @@
 // pages/new/new.js
 import Toast from 'vant-weapp/dist/toast/toast';
 import {
-  addChapter,
-  referChapter,
-  amendChapter
+  addInvoice,
+  referInvoice,
+  amendInvoice
 } from "../../../../service/getData";
 var util = require("../../../../utils/util");
 var app = getApp();
@@ -62,7 +62,14 @@ Page({
       show: false
     })
   },
-  // 用章类型
+  // 发票名称
+  invoicenameblur(e) {
+    let info = util.editInfo(e, this, e.detail.value);
+    this.setData({
+      info
+    })
+  },
+  // 合同
   showPopup_1() {
     this.setData({
       show_1: true
@@ -80,22 +87,94 @@ Page({
       show_1: false
     })
   },
-  // 用途
-  useInfoblur(e) {
+  // 项目
+  showPopup_2() {
+    this.setData({
+      show_2: true
+    });
+  },
+  onClose_2() {
+    this.setData({
+      show_2: false
+    });
+  },
+  onConfirm_2(e) {
+    let info = util.editInfo(e, this, e.detail.value.text);
+    this.setData({
+      info,
+      show_2: false
+    })
+  },
+  // 项目地址
+  projectaddressblur(e) {
     let info = util.editInfo(e, this, e.detail.value);
     this.setData({
       info
     })
   },
-  // 数量
-  usenumberblur(e) {
+  // 开票类别
+  showPopup_3() {
+    this.setData({
+      show_3: true
+    });
+  },
+  onClose_3() {
+    this.setData({
+      show_3: false
+    });
+  },
+  onConfirm_3(e) {
+    let info = util.editInfo(e, this, e.detail.value.text);
+    this.setData({
+      info,
+      show_3: false
+    })
+  },
+  // 票率
+  showPopup_4() {
+    this.setData({
+      show_4: true
+    });
+  },
+  onClose_4() {
+    this.setData({
+      show_4: false
+    });
+  },
+  onConfirm_4(e) {
+    let info = util.editInfo(e, this, e.detail.value.text);
+    this.setData({
+      info,
+      show_4: false
+    })
+  },
+  // 发票内容
+  invoicecontextblur(e) {
     let info = util.editInfo(e, this, e.detail.value);
     this.setData({
       info
     })
   },
-  // 金额
-  useamountblur(e) {
+  // 开票信息
+  showPopup_5() {
+    this.setData({
+      show_5: true
+    });
+  },
+  onClose_5() {
+    this.setData({
+      show_5: false
+    });
+  },
+  onConfirm_5(e) {
+    let info = util.editInfo(e, this, e.detail.value.text);
+    this.setData({
+      info,
+      show_5: false
+    })
+  },
+  // 含税金额
+  includetaxamontblur(e) {
     let info = util.editInfo(e, this, e.detail.value);
     this.setData({
       info
@@ -128,13 +207,13 @@ Page({
 
   confirm() {
     // console.log(this.data.info)
-    if (this.data.info.department && this.data.info.Companytitle && this.data.info.usesealtype && this.data.info.useInfo) {
+    if (this.data.info.department && this.data.info.Companytitle && this.data.info.invoicename && this.data.info.contactid&& this.data.info.projectid&& this.data.info.projectaddress&& this.data.info.invoicetype&& this.data.info.invoicefeerate&& this.data.info.invoicecontext) {
       let info = this.data.info;
       util.checkContent(info, this);
       this.setData({
         info
       })
-      addChapter(this.data.info).then(res => {
+      addInvoice(this.data.info).then(res => {
         // console.log(res)
         if (res.code == 10000) {
           wx.showToast({
@@ -142,7 +221,7 @@ Page({
             icon: 'success',
             duration: 3000
           })
-          util.OAreturn('chapter');
+          util.OAreturn('invoice');
         }
       })
     } else {
@@ -154,11 +233,11 @@ Page({
   },
   // 返回
   return () {
-    util.OAreturn('chapter');
+    util.OAreturn('invoice');
   },
   // 编辑页面的确定和返回
   editreturn() {
-    util.OAreturn('chapter', this);
+    util.OAreturn('invoice', this);
   },
   editconfirm() {
     let info = this.data.info;
@@ -167,7 +246,7 @@ Page({
       info
     })
     // console.log(infodata)
-    amendChapter(this.data.info).then(res => {
+    amendInvoice(this.data.info).then(res => {
       // console.log(res)
       if (res.code == 10000) {
         wx.showToast({
@@ -175,7 +254,7 @@ Page({
           icon: 'success',
           duration: 3000
         })
-        util.OAreturn('chapter', this);
+        util.OAreturn('invoice', this);
       }
     })
   },
@@ -186,10 +265,14 @@ Page({
     this.setData({
       firms: app.globalData.Companytitle,
       sections: app.globalData.department,
-      Usesealtype: app.globalData.Usesealtype,
+      Invoicetype: app.globalData.Invoicetype,
+      MaincontactAll: app.globalData.MaincontactAll,
+      MainProject: app.globalData.MainProject,
+      Invoicefeerate: app.globalData.Invoicefeerate,
+      billing: app.globalData.billing
     })
     if (options.id) {
-      referChapter({
+      referInvoice({
         ID: options.id
       }).then(res => {
         // console.log(res)

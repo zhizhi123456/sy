@@ -95,6 +95,24 @@ const checkContent = (value, key) => {
     value.API_Picurl = value.API_Picurl.join(",")
   }
   var app = getApp();
+  // 用章类别
+  app.globalData.Usesealtype.forEach(res => {
+    if (value.usesealtype == res.text) {
+      value.usesealtype = res.value;
+    }
+  })
+  //开票类别
+  app.globalData.Invoicetype.forEach(res => {
+    if (value.invoicetype == res.text) {
+      value.invoicetype = res.value;
+    }
+  })
+  // 票率
+  app.globalData.Invoicefeerate.forEach(res => {
+    if (value.invoicefeerate == res.text) {
+      value.invoicefeerate = res.value;
+    }
+  })
   //公司
   app.globalData.Companytitle.forEach(res => {
     if (value.Companytitle == res.text) {
@@ -299,6 +317,24 @@ const checkChange = (value, key, dep) => {
     })
   }
   var app = getApp();
+  // 用章类别
+  app.globalData.Usesealtype.forEach(res => {
+    if (value.usesealtype == res.text) {
+      value.usesealtype = res.value;
+    }
+  })
+  //开票类别
+  app.globalData.Invoicetype.forEach(res => {
+    if (value.invoicetype == res.text) {
+      value.invoicetype = res.value;
+    }
+  })
+  // 票率
+  app.globalData.Invoicefeerate.forEach(res => {
+    if (value.invoicefeerate == res.text) {
+      value.invoicefeerate = res.value;
+    }
+  })
   //公司
   app.globalData.Companytitle.forEach(res => {
     if (value.Companytitle == res.text) {
@@ -478,6 +514,18 @@ const handleData = (data, key, dep) => {
       data[i] = ""
     }
   }
+  // 开票类别
+  app.globalData.Invoicetype.forEach(depart => {
+    if (data.invoicetype == depart.value) {
+      data.invoicetype = depart.text
+    }
+  })
+  // 票率
+  app.globalData.Invoicefeerate.forEach(depart => {
+    if (data.invoicefeerate == depart.value) {
+      data.invoicefeerate = depart.text
+    }
+  })
   // 部门
   app.globalData.department.forEach(depart => {
     if (data.departmentId == depart.value || data.department == depart.value) {
@@ -486,6 +534,12 @@ const handleData = (data, key, dep) => {
       key.setData({
         departmenttext: depart.text
       })
+    }
+  })
+  // 用章类别
+  app.globalData.Usesealtype.forEach(res => {
+    if (data.usesealtype == res.value) {
+      data.usesealtype = res.text;
     }
   })
   // 公司
@@ -688,6 +742,13 @@ const listData = (data, dep, page, list) => {
     }
   }
   data.forEach((value, index) => {
+    // 开票类别
+    app.globalData.Invoicetype.forEach(depart => {
+      if (value.invoicetype == depart.value) {
+        value.invoicetype = depart.text
+      }
+    })
+    // 部门
     app.globalData.department.forEach(depart => {
       if (value.departmentId == depart.value) {
         value.departmentId = depart.text
@@ -714,18 +775,12 @@ const listData = (data, dep, page, list) => {
         value.ConstructCompany = res.text;
       }
     })
-    // //总包项目
-    // app.globalData.MainProject.forEach(res => {
-    //   if (value.projectcode == res.value) {
-    //     value.projectcode = res.text;
-    //   }
-    //   if (value.mainprojcectCode == res.value) {
-    //     value.mainprojcectCode = res.text;
-    //   }
-    //   if (value.mycompanyprocode == res.value) {
-    //     value.mycompanyprocode = res.text;
-    //   }
-    // })
+    // 用章类别
+    app.globalData.Usesealtype.forEach(res => {
+      if (value.usesealtype == res.value) {
+        value.usesealtype = res.text;
+      }
+    })
     //分包项目
     app.globalData.MainSubproject.forEach(res => {
       if (value.subprojcectCode == res.value) {
@@ -842,6 +897,18 @@ const editInfo = (e, key, val) => {
   info[name] = val;
   // key.setData(info);
   return info;
+}
+// oa的返回
+const OAreturn = (kind, key, id, cap, dep, dert) => {
+  if (key) {
+    wx.redirectTo({
+      url: `/OAmoudle/pages/${kind}/detail/detail?id=${key.data.info.ID}${id?'&userid='+id+'&caption='+cap+'&dep='+dep+'&deptxt='+dert:""}`
+    })
+  } else {
+    wx.redirectTo({
+      url: `/OAmoudle/pages/${kind}/pact/pact?${id?'userid='+id+'&caption='+cap+'&dep='+dep+'&deptxt='+dert:""}`
+    })
+  }
 }
 // 返回
 const returnPrev = (kind, key, id, cap, dep, dert, rid, tit) => {
@@ -1038,7 +1105,7 @@ const checkState = (key, id, chart, bh) => {
   }
 }
 // 工作流流转
-const Triggerflow = (key, direction, sheet, piece, id, cap, dep, dert, rid, tit) => {
+const Triggerflow = (key, direction, sheet, piece, id, cap, dep, dert, rid, tit, oa) => {
   let userinfo = wx.getStorageSync("myInfo");
   // console.log(userinfo)
   if (userinfo) {
@@ -1073,10 +1140,16 @@ const Triggerflow = (key, direction, sheet, piece, id, cap, dep, dert, rid, tit)
         }
         let that = key;
         setTimeout(function () {
-          wx.redirectTo({
-            // url: '/pages/' + piece + '/detail/detail?id=' + that.data.info.ID + "&tab=b",
-            url: `/pages/${piece}/detail/detail?tab=b&id=${that.data.info.ID}&rid=${rid}&title=${tit}${id?'&userid='+id+'&caption='+cap+'&dep='+dep+'&deptxt='+dert:""}`
-          })
+          if (oa) {
+            wx.redirectTo({
+              url: `/OAmoudle/pages/${piece}/detail/detail?tab=b&id=${that.data.info.ID}${id?'&userid='+id+'&caption='+cap+'&dep='+dep+'&deptxt='+dert:""}`
+            })
+          } else {
+            wx.redirectTo({
+              // url: '/pages/' + piece + '/detail/detail?id=' + that.data.info.ID + "&tab=b",
+              url: `/pages/${piece}/detail/detail?tab=b&id=${that.data.info.ID}&rid=${rid}&title=${tit}${id?'&userid='+id+'&caption='+cap+'&dep='+dep+'&deptxt='+dert:""}`
+            })
+          }
         }, 1000)
       } else {
         wx.showToast({
@@ -2078,5 +2151,6 @@ module.exports = {
   getBase,
   back,
   sumup,
-  qgroupdeliver
+  qgroupdeliver,
+  OAreturn
 }

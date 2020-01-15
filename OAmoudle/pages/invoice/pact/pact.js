@@ -1,7 +1,7 @@
 // pages/pact/pact.js
 import {
-  getChapter,
-  groupChapter,
+  getInvoice,
+  groupInvoice,
 } from '../../../../service/getData';
 var app = getApp();
 var util = require("../../../../utils/util");
@@ -14,13 +14,13 @@ Page({
   data: {
     seach: '',
     loading: false,
-    top: '用章',
+    top: '发票',
     currentDate: new Date().getTime(),
     InfoList: [],
     item: [],
     pages: 1,
     hadNew: 1,
-    info:{}
+    info: {}
   },
   // 返回
   return () {
@@ -42,8 +42,8 @@ Page({
     this.setData({
       pages: 1
     })
-    getChapter({
-      useInfo: this.data.seach
+    getInvoice({
+      invoicename: this.data.seach
     }).then(res => {
       // console.log(res)
       if (res.code == 10000) {
@@ -71,7 +71,7 @@ Page({
       title: '加载中',
     });
     // 调用查询
-    getChapter().then(res => {
+    getInvoice().then(res => {
       // console.log(res.List)
       if (res.code == 10000) {
         item = res.List;
@@ -88,7 +88,9 @@ Page({
     if (app.globalData.CountItem) {
       this.setData({
         sections: app.globalData.department,
-        Usesealtype: app.globalData.Usesealtype,
+        Invoicetype: app.globalData.Invoicetype,
+        MaincontactAll: app.globalData.MaincontactAll,
+        MainProject: app.globalData.MainProject,
         states: app.globalData.states
       })
     } else {
@@ -96,7 +98,9 @@ Page({
         if (employ != '') {
           this.setData({
             sections: app.globalData.department,
-            Usesealtype: app.globalData.Usesealtype,
+            Invoicetype: app.globalData.Invoicetype,
+            MaincontactAll: app.globalData.MaincontactAll,
+            MainProject: app.globalData.MainProject,
             states: app.globalData.states
           })
         }
@@ -122,7 +126,7 @@ Page({
     this.setData({
       pages: 1
     })
-    if (this.data.info.Type || this.data.info.departmentID || this.data.info.keyword || this.data.info.chargemanName || this.data.info.StartTime || this.data.info.state) {
+    if (this.data.info.department || this.data.info.contactid || this.data.info.invoicename || this.data.info.projectid || this.data.info.createman || this.data.info.invoicetype || this.data.info.begintime || this.data.info.state) {
       let info = this.data.info;
       if (info.Type) {
         this.data.Usesealtype.forEach(res => {
@@ -134,7 +138,7 @@ Page({
           info
         })
       }
-      groupChapter(this.data.info).then(res => {
+      groupInvoice(this.data.info).then(res => {
         if (res.code == 10000) {
           item = res.List;
           list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list);
@@ -143,7 +147,7 @@ Page({
             item,
             info: {},
             loading: false,
-            departmenttext:''
+            departmenttext: ''
           })
           wx.hideLoading();
         }
@@ -159,21 +163,10 @@ Page({
       })
     )
   },
-  // 用章类型
-  showPopup_1() {
+  // 发票名称
+  invoicenameblur(e) {
+    let info = util.editInfo(e, this, e.detail.value);
     this.setData({
-      show_1: true
-    })
-  },
-  onClose_1() {
-    this.setData({
-      show_1: false
-    })
-  },
-  onConfirm_1(e) {
-    let info = util.editInfo(e, this, e.detail.value.text);
-    this.setData({
-      show_1: false,
       info
     })
   },
@@ -198,15 +191,44 @@ Page({
       departmenttext: e.detail.value.text
     })
   },
-  // 用途
-  keywordblur(e) {
-    let info = util.editInfo(e, this, e.detail.value);
+  // 合同
+  showPopup_2() {
     this.setData({
+      show_2: true
+    })
+  },
+  onClose_2() {
+    this.setData({
+      show_2: false
+    })
+  },
+  onConfirm_2(e) {
+    let info = util.editInfo(e, this, e.detail.value.text);
+    this.setData({
+      show_2: false,
       info
     })
   },
-  // 分包项目创建人
-  chargemanNameblur(e) {
+  // 项目
+  showPopup_4() {
+    this.setData({
+      show_4: true
+    })
+  },
+  onClose_4() {
+    this.setData({
+      show_4: false
+    })
+  },
+  onConfirm_4(e) {
+    let info = util.editInfo(e, this, e.detail.value.text);
+    this.setData({
+      show_4: false,
+      info
+    })
+  },
+  // 创建人
+  createmanblur(e) {
     let info = util.editInfo(e, this, e.detail.value);
     this.setData({
       info
@@ -228,6 +250,24 @@ Page({
     this.setData({
       info,
       show_time: false
+    })
+  },
+  // 开票类别
+  showPopup_1() {
+    this.setData({
+      show_1: true
+    })
+  },
+  onClose_1() {
+    this.setData({
+      show_1: false
+    })
+  },
+  onConfirm_1(e) {
+    let info = util.editInfo(e, this, e.detail.value.text);
+    this.setData({
+      show_1: false,
+      info
     })
   },
   // 结束时间

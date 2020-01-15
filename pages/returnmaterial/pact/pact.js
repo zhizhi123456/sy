@@ -197,7 +197,21 @@ Page({
         this.setData({
           info,
           ISconduct: 1,
-          departmenttext: ''
+          departmenttext: '',
+          val: 0,
+          pact: [{
+              text: '未处理的退料单',
+              value: 0
+            },
+            {
+              text: '已处理的退料单',
+              value: 1
+            },
+            {
+              text: '已超时的退料单',
+              value: 2
+            }
+          ],
         })
         groupReturnM({
           state: this.data.info.state,
