@@ -55,19 +55,7 @@ Page({
   },
   // 删除
   delete() {
-    // console.log(this.data.info)
-    delcease({
-      ID: this.data.info.ID
-    }).then(res => {
-      if (res.code == 10000) {
-        wx.showToast({
-          title: '删除成功',
-          icon: 'success',
-          duration: 3000
-        })
-        util.returnPrev('workorder');
-      }
-    })
+    util.expurgate(this,delcease, 'workorder')
   },
   // 点击图片放大预览
   tap_pic(e) {

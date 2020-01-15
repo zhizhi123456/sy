@@ -26,21 +26,7 @@ Page({
     })
   },
   delete() {
-    delsecuritysmall({
-      ID: this.data.info.ID
-    }).then(res => {
-      // console.log(res)
-      if (res.code == 10000) {
-        wx.showToast({
-          title: '删除成功',
-          icon: 'success',
-          duration: 3000
-        })
-        wx.redirectTo({
-          url: "/pages/security/detail/detail?id=" + this.data.info.SecurityKgRecordId + "&table=c"
-        })
-      }
-    })
+    util.expurgateDetail(this, delsecuritysmall, 'security', this.data.info.SecurityKgRecordId)
   },
   /**
    * 生命周期函数--监听页面加载

@@ -56,18 +56,7 @@ Page({
   // 删除
   delete() {
     // console.log(this.data.info)
-    delcheck({
-      ID: this.data.info.ID
-    }).then(res => {
-      if (res.code == 10000) {
-        wx.showToast({
-          title: '删除成功',
-          icon: 'success',
-          duration: 3000
-        })
-        util.returnPrev('check');
-      }
-    })
+    util.expurgate(this, delcheck, 'check')
   },
   // 点击图片放大预览
   tap_pic(e) {

@@ -77,21 +77,7 @@ Page({
     // console.log(this.data.info)
   },
   delete() {
-    delbuilding({
-      ID: this.data.info.ID
-    }).then(res => {
-      // console.log(res)
-      if (res.code == 10000) {
-        wx.showToast({
-          title: '删除成功',
-          icon: 'success',
-          duration: 3000
-        })
-        wx.redirectTo({
-          url: "/pages/building/pact/pact"
-        })
-      }
-    })
+    util.expurgate(this, delbuilding, 'building')
   },
   // 新增明细表
   addndlink() {

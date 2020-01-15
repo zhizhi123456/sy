@@ -93,21 +93,6 @@ Page({
   },
   // 删除
   delete() {
-    // console.log(this.data.info)
-    delticket({
-      Timestamp: app.globalData.time,
-      ID: this.data.info.ID
-    }).then(res => {
-      if (res.code == 10000) {
-        wx.showToast({
-          title: '删除成功',
-          icon: 'success',
-          duration: 3000
-        })
-        wx.redirectTo({
-          url: '/pages/sceneticket/pact/pact'
-        })
-      }
-    })
+    util.expurgate(this, delticket, 'sceneticket')
   },
 })

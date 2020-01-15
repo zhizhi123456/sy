@@ -38,6 +38,7 @@ Page({
     currentDate1: new Date().getTime(),
     show_time: false,
     show_endtime: false,
+    chuancan:""
   },
 
   // 返回
@@ -76,22 +77,7 @@ Page({
     // console.log(this.data.info)
   },
   delete() {
-    deldeliver({
-      Timestamp: app.globalData.time,
-      ID: this.data.info.ID
-    }).then(res => {
-      console.log(res)
-      if (res.code == 10000) {
-        wx.showToast({
-          title: '删除成功',
-          icon: 'success',
-          duration: 3000
-        })
-        wx.redirectTo({
-          url: "/pages/deliver/pact/pact"
-        })
-      }
-    })
+    util.expurgate(this,deldeliver, 'deliver')
   },
   // 新增明细表
   addndlink() {
@@ -106,10 +92,13 @@ Page({
     wx.showLoading({
       title: '加载中',
     });
-   //只能查询当前页面的 材料
+    //只能查询当前页面的 材料
     this.setData({
-      'small.delievryid':options.id
+      'small.delievryid': options.id
     })
+   this.setData({
+     chuancan:options.id
+   })
     if (options.id) {
       console.log(options.id)
       // 资料详情options.id
@@ -133,7 +122,7 @@ Page({
           wx.hideLoading();
         }
       })
-      console.log()
+ 
       // 领料单关联的明细列表
       querydeliversmall({
         Timestamp: app.globalData.time,
@@ -213,7 +202,11 @@ Page({
   },
   // 组合查询
   seachqur() {
-    this.data.small.delievryid = this.data.info.ID
+    var a = this.data.chuancan
+    this.setData({
+      'small.delievryid': a
+    })
+    console.log(this.data.small.delievryid)
     util.qgroupsmall(qgroupdeliversmall, this)
   },
 })
