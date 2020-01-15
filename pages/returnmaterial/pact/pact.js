@@ -127,7 +127,6 @@ Page({
     }
   },
   changeItem(e) {
-    list = [];
     let StateStr = (this.data.pact[e.detail].text).slice(0, 3);
     let info = this.data.info;
     info.state = StateStr;
@@ -143,11 +142,10 @@ Page({
     }).then(res => {
       // console.log(res.List)
       if (res.code == 10000) {
-        item = res.List;
-        list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list);
+        let item = res.List;
+        util.listData(item, app.globalData.department);
         this.setData({
-          InfoList: list,
-          item
+          InfoList: item.reverse()
         })
         wx.hideLoading();
       }
