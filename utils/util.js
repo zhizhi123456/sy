@@ -1878,14 +1878,20 @@ const qgroupdeliver = (funcname, that, hadNew, hadMy) => {
                 }
               }
             }
+
             item.forEach(value => {
               app.globalData.department.forEach(depart => {
                 if (value.department == depart.value) {
                   value.department = depart.text
                 }
               })
+              console.log(value.checkindate)
+              console.log( value.condition)
               if (value.checkindate || value.condition) {
-                value.checkindate = value.checkindate.substring(0, 10)
+                if(value.checkindate){
+                  value.checkindate = value.checkindate.substring(0, 10)
+                }
+                
                 // value.Checkintime = value.Checkintime.substring(10)
                 value.condition == "忘打卡" ? value.Checkintime = '' : value.condition
               }

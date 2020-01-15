@@ -31,8 +31,6 @@ Page({
       zong = res.List
       zong.forEach(s => {
         s.control = true
-      
-       
         var path = s.pageaddres
         if (path) {
           var a = path.substring(0, 1)
@@ -42,6 +40,7 @@ Page({
           if (s.name == '我的设计任务') {
             s.pageaddres = path +'?hadMy=1'
           }
+          s.pageaddres = path.replace(/[\r\n]/g, ""); 
         }
       })
       // 请求当前用户模块

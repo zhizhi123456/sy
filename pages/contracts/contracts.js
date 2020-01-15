@@ -34,7 +34,7 @@ Page({
     }).then(res => {
       this.setData({
         tags: res.List,
-        tag:res.List
+        tag: res.List
       })
       wx.hideLoading()
     })
@@ -63,20 +63,20 @@ Page({
           s.ANUm = true
         }
         var path = s.pageaddres
+        // console.log(path)
         if (path) {
           var a = path.substring(0, 1)
           if (a != '/') {
             s.pageaddres = '/' + path
           }
-          if(path == "/pages/secondary/secondary"){
-            s.pageaddres = "/pages/secondarys/secondarys"
-          }
-           var last =path.charAt(path.length-1)
-           console.log(last )
-           console.log(last == ` `)
-          //  basic = basic.substr(0, basic.length - 1);
-          // String str=array.get(i).replaceAll("\r|\n|\\s", "");  
+          // console.log(path == "/pages/secondary/secondary")
+          s.pageaddres = path.replace(/[\r\n]/g, "");
         }
+        if (path == "/pages/secondary/secondary") {
+          s.pageaddres = "/pages/secondarys/secondarys"
+          // s.three = true
+        }
+      
 
       })
       // 有用户限制的菜单 
@@ -118,7 +118,7 @@ Page({
             }
           }
         })
-        // console.log(zong)
+        console.log(zong)
         this.setData({
           lists: zong
         })
