@@ -3,7 +3,7 @@
     <view class="header">
         <view class="title">
             <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
-            <navigator url="/OAmoudle/pages/chapter/new/new" hover-class="none" class="fr newCreate">
+            <navigator url="/OAmoudle/pages/invoice/new/new" hover-class="none" class="fr newCreate">
                 新建
             </navigator>
             <view class="apply">{{top}}</view>
@@ -21,44 +21,60 @@
                 <van-popup show="{{ show }}" bind:close="onClose" position="right" custom-style="height: 100vh;color:#333">
                     <view class="seach_item">
                         <van-cell-group>
-                            <van-field value="{{info.Type}}" placeholder="请选择" bindtap="showPopup_1" label="用章类型" disabled />
+                            <van-field data-name="invoicename" value="{{info.invoicename}}" placeholder="请输入" bind:blur="invoicenameblur" label="发票名称" />
                         </van-cell-group>
-                        <van-popup show="{{ show_1 }}" round position="bottom" bind:close="onClose_1">
-                            <van-picker data-name="Type" show-toolbar columns="{{ Usesealtype }}" bind:cancel="onClose_1" bind:confirm="onConfirm_1" />
-                        </van-popup>
                     </view>
                     <view class="seach_item">
                         <van-cell-group>
                             <van-field value="{{departmenttext}}" placeholder="请选择" bindtap="showPopup_0" label="部门" disabled />
                         </van-cell-group>
                         <van-popup show="{{ show_0 }}" round position="bottom" bind:close="onClose_0">
-                            <van-picker data-name="departmentID" show-toolbar columns="{{ sections }}" bind:cancel="onClose_0" bind:confirm="onConfirm_0" />
+                            <van-picker data-name="department" show-toolbar columns="{{ sections }}" bind:cancel="onClose_0" bind:confirm="onConfirm_0" />
                         </van-popup>
                     </view>
                     <view class="seach_item">
                         <van-cell-group>
-                            <van-field data-name="keyword" value="{{info.keyword}}" placeholder="请输入" bind:blur="keywordblur" label="用途" />
+                            <van-field value="{{info.contactid}}" placeholder="请选择" bindtap="showPopup_2" label="合同" disabled />
+                        </van-cell-group>
+                        <van-popup show="{{ show_2 }}" round position="bottom" bind:close="onClose_2">
+                            <van-picker data-name="contactid" show-toolbar columns="{{ MaincontactAll }}" bind:cancel="onClose_2" bind:confirm="onConfirm_2" />
+                        </van-popup>
+                    </view>
+                    <view class="seach_item">
+                        <van-cell-group>
+                            <van-field value="{{info.projectid}}" placeholder="请选择" bindtap="showPopup_4" label="项目" disabled />
+                        </van-cell-group>
+                        <van-popup show="{{ show_4 }}" round position="bottom" bind:close="onClose_4">
+                            <van-picker data-name="projectid" show-toolbar columns="{{ MainProject }}" bind:cancel="onClose_4" bind:confirm="onConfirm_4" />
+                        </van-popup>
+                    </view>
+                    <view class="seach_item">
+                        <van-cell-group>
+                            <van-field data-name="createman" value="{{info.createman}}" placeholder="请输入" bind:blur="createmanblur" label="创建人" />
                         </van-cell-group>
                     </view>
                     <view class="seach_item">
                         <van-cell-group>
-                            <van-field data-name="chargemanName" value="{{info.chargemanName}}" placeholder="请输入" bind:blur="chargemanNameblur" label="分包项目创建人"/>
+                            <van-field value="{{info.invoicetype}}" placeholder="请选择" bindtap="showPopup_1" label="开票类别" disabled />
                         </van-cell-group>
+                        <van-popup show="{{ show_1 }}" round position="bottom" bind:close="onClose_1">
+                            <van-picker data-name="invoicetype" show-toolbar columns="{{ Invoicetype }}" bind:cancel="onClose_1" bind:confirm="onConfirm_1" />
+                        </van-popup>
                     </view>
                     <view class="seach_item">
                         <van-cell-group>
-                            <van-field value="{{info.StartTime}}" placeholder="请选择" label="开始时间" bindtap="showPopup_time" disabled />
+                            <van-field value="{{info.begintime}}" placeholder="请选择" label="开始时间" bindtap="showPopup_time" disabled />
                         </van-cell-group>
                         <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
-                            <van-datetime-picker data-name="StartTime" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
+                            <van-datetime-picker data-name="begintime" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
                         </van-popup>
                     </view>
                     <view class="seach_item">
                         <van-cell-group>
-                            <van-field value="{{info.EndTime}}" placeholder="请选择" label="结束时间" bindtap="showPopup_endtime" disabled />
+                            <van-field value="{{info.endtime}}" placeholder="请选择" label="结束时间" bindtap="showPopup_endtime" disabled />
                         </van-cell-group>
                         <van-popup show="{{ show_endtime }}" round position="bottom" bind:close="onClose_endtime">
-                            <van-datetime-picker data-name="EndTime" value="{{ currentDate }}" bind:cancel="onClose_endtime" bind:confirm="onConfirm_endtime" />
+                            <van-datetime-picker data-name="endtime" value="{{ currentDate }}" bind:cancel="onClose_endtime" bind:confirm="onConfirm_endtime" />
                         </van-popup>
                     </view>
                     <view class="seach_item">
@@ -79,17 +95,25 @@
     </view>
     <view class="main">
         <view class="list" wx:for="{{InfoList}}" wx:key="index">
-            <navigator url="/OAmoudle/pages/chapter/detail/detail?id={{item.ID}}" hover-class="none">
+            <navigator url="/OAmoudle/pages/invoice/detail/detail?id={{item.ID}}" hover-class="none">
                 <view>
-                    <text class="caption">{{item.useInfo}}</text>
+                    <text class="caption">{{item.invoicename}}</text>
                 </view>
                 <view>
-                    <text class="info">部门</text>
+                    <text class="info">发票名称</text>
+                    <text>{{item.invoicename}}</text>
+                </view>
+                <view>
+                    <text class="info">开票类别</text>
+                    <text>{{item.invoicetype}}</text>
+                </view>
+                <view>
+                    <text class="info">项目</text>
+                    <text>{{item.projectid}}</text>
+                </view>
+                <view>
+                    <text class="info">所属部门</text>
                     <text>{{item.department}}</text>
-                </view>
-                <view>
-                    <text class="info">用章类型</text>
-                    <text>{{item.usesealtype}}</text>
                 </view>
                 <view>
                     <text class="info">创建人</text>
@@ -98,14 +122,6 @@
                 <view>
                     <text class="info">创建时间</text>
                     <text>{{item.createtime}}</text>
-                </view>
-                <view>
-                    <text class="info">修改人</text>
-                    <text>{{item.updateman}}</text>
-                </view>
-                <view>
-                    <text class="info">修改时间</text>
-                    <text>{{item.updatetime}}</text>
                 </view>
                 <view>
                     <text class="info">当前步骤名称</text>

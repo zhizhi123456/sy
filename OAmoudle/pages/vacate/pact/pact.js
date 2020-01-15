@@ -1,7 +1,7 @@
 // pages/pact/pact.js
 import {
-  getChapter,
-  groupChapter,
+  getVacate,
+  groupVacate,
 } from '../../../../service/getData';
 var app = getApp();
 var util = require("../../../../utils/util");
@@ -20,7 +20,7 @@ Page({
     item: [],
     pages: 1,
     hadNew: 1,
-    info:{}
+    info: {}
   },
   // 返回
   return () {
@@ -42,8 +42,8 @@ Page({
     this.setData({
       pages: 1
     })
-    getChapter({
-      useInfo: this.data.seach
+    getVacate({
+      applyman: this.data.seach
     }).then(res => {
       // console.log(res)
       if (res.code == 10000) {
@@ -143,7 +143,7 @@ Page({
             item,
             info: {},
             loading: false,
-            departmenttext:''
+            departmenttext: ''
           })
           wx.hideLoading();
         }

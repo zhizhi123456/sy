@@ -240,7 +240,7 @@ App({
     InstallQuality: '',
     Customer: '',
     MainProject: '',
-    MainProject1:"",
+    MainProject1: "",
     EngineerClass: '',
     Pipeline: '',
     Circuit: '',
@@ -281,7 +281,14 @@ App({
       text: '已处理'
     }, {
       text: '已超时'
-    }]
+    }],
+    // 开票信息 
+    billing: [{
+      text: '电信'
+    }, {
+      text: '上海电信'
+    }, {
+      text: '长城宽带'
+    }],
   }
-
 })

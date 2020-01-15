@@ -7,8 +7,8 @@ import {
   updateapply,
   addapplysmall,
   staff
-} from "../../../service/getData";
-var util = require("../../../utils/util");
+} from "../../../../service/getData";
+var util = require("../../../../utils/util");
 var app = getApp();
 Page({
   /**

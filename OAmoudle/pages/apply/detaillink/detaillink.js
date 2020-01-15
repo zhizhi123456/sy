@@ -3,9 +3,9 @@ import {
   detailapplysmall,
   delapplysmall,
   detailapply
-} from '../../../service/getData';
+} from '../../../../service/getData';
 var app = getApp();
-var util = require("../../../utils/util");
+var util = require("../../../../utils/util");
 Page({
   /**
    * 页面的初始数据

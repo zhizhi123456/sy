@@ -912,3 +912,29 @@ export const addChapter = (params) => http.post("/api/usesealform/Insert", param
 export const amendChapter = (params) => http.post("/api/usesealform/EditInfo", params);
 // 删除
 export const cancelChapter = (params) => http.post("/api/usesealform/Delete", params);
+// 发票
+// 查询
+export const getInvoice = (params) => http.post("/api/invoice/Query", params);
+// 根据id查询
+export const referInvoice = (params) => http.post("/api/invoice/Detail", params);
+// 组合查询
+export const groupInvoice = (params) => http.post("/api/invoice/Querygroup", params);
+// 添加
+export const addInvoice = (params) => http.post("/api/invoice/Insert", params);
+// 修改
+export const amendInvoice = (params) => http.post("/api/invoice/Update", params);
+// 删除
+export const cancelInvoice = (params) => http.post("/api/invoice/Delete", params);
+// 请假
+// 查询
+export const getVacate = (params) => http.post("/api/leaveapplyform/Query", params);
+// 根据id查询
+export const referVacate = (params) => http.post("/api/leaveapplyform/Detail", params);
+// 组合查询
+export const groupVacate = (params) => http.post("/api/leaveapplyform/Querygroup", params);
+// 添加
+export const addVacate = (params) => http.post("/api/leaveapplyform/Insert", params);
+// 修改
+export const amendVacate = (params) => http.post("/api/leaveapplyform/Update", params);
+// 删除
+export const cancelVacate = (params) => http.post("/api/leaveapplyform/Delete", params);

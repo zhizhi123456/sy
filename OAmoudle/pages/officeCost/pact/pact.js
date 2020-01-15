@@ -2,9 +2,9 @@
 import {
   queryofficeCost,
   qgroupofficeCost
-} from '../../../service/getData.js';
+} from '../../../../service/getData.js';
 var app = getApp();
-var util = require("../../../utils/util");
+var util = require("../../../../utils/util");
 Page({
   /**
    * 页面的初始数据

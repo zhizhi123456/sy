@@ -1,7 +1,7 @@
 // pages/generalcontract/detail/detail.js
 import {
-  referChapter,
-  cancelChapter,
+  referInvoice,
+  cancelInvoice,
 } from '../../../../service/getData.js';
 var app = getApp();
 var util = require("../../../../utils/util");
@@ -19,7 +19,7 @@ Page({
   },
   // 返回
   return () {
-    util.OAreturn('chapter');
+    util.OAreturn('invoice');
   },
   /**
    * 生命周期函数--监听页面加载
@@ -29,7 +29,7 @@ Page({
       title: '加载中',
     });
     if (options.id) {
-      referChapter({
+      referInvoice({
         ID: options.id
       }).then(res => {
         // console.log(res)
@@ -54,11 +54,11 @@ Page({
   // 工作流流转
   // 退回上步
   sendback() {
-    util.Triggerflow(this, 'return', 'usesealform', 'chapter', '', '', '', '', '', '', 'oa')
+    util.Triggerflow(this, 'return', 'invoice', 'invoice', '', '', '', '', '', '', 'oa')
   },
   // 提交下步
   putin() {
-    util.Triggerflow(this, 'next', 'usesealform', 'chapter', '', '', '', '', '', '', 'oa')
+    util.Triggerflow(this, 'next', 'invoice', 'invoice', '', '', '', '', '', '', 'oa')
   },
   // 删除
   delete() {
@@ -67,7 +67,7 @@ Page({
       content: '确认要删除吗？',
       success(res) {
         if (res.confirm) {
-          cancelChapter({
+          cancelInvoice({
             ID: that.data.info.ID
           }).then(res => {
             if (res.code == 10000) {
@@ -77,7 +77,7 @@ Page({
                 duration: 3000
               })
               setTimeout(function () {
-                util.OAreturn('chapter');
+                util.OAreturn('invoice');
               }, 1000)
             }
           })
