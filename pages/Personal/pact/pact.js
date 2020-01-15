@@ -36,7 +36,7 @@ Page({
   },
   // 返回
   return () {
-    util.returnMenu(1002);
+    util.returnMenu2(1055,'我的信息');
   },
   setSeach(e) {
     // console.log(e)

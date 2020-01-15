@@ -5,7 +5,7 @@ import {
   getapplyNEWinfo,
   getNEWinfo,
   getLeader
-} from "./../../service/getData";
+} from "../../service/getData";
 var app = getApp();
 let userinfo = wx.getStorageSync("myInfo");
 Page({
@@ -13,217 +13,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-    deng:false,
+    deng: false,
     id: "",
     title: '',
     tags: [],
     lists: [],
     num: 1000,
-    tag: [{
-        nametext: "工程管理",
-        img: "icon-gongchengguanli- .yellow1", //图标地址
-      },
-      {
-        nametext: "项目合同",
-        img: "icon-web-icon- .red3", //图标地址
-      },
-      {
-        nametext: "公司oa项目",
-        img: "icon-OAshenpi .green7 ", //图标地址
-      },
-      {
-        nametext: "我的/登录",
-        img: "icon-wode .green6", //图标地址
-      }
-    ],
-    list: [{
-        nametext: "工程准备",
-        img: "icon-zhunbeiliangchan blue", //图标地址
-        path: "/pages/secondary/secondary", //w\网页地址 没有则不开放
-        control: true, //是否有权限
-      },
-      {
-        nametext: "人员管理",
-        img: "icon-drxx91 blue",
-        path: "/pages/secondary/secondary",
-        control: true, //权限
-      },
-      {
-        nametext: "项目进度",
-        img: "icon-jindu green2",
-        path: "/pages/secondary/secondary",
-        control: true, //权限
-      },
-      {
-        nametext: "材料管理",
-        img: "icon-cailiaojinchang blue1",
-        path: "/pages/secondary/secondary",
-        control: true, //权限
-      },
-      {
-        nametext: "施工现场",
-        img: "icon-construction green ",
-        path: "/pages/secondary/secondary",
-        control: true, //权限
-      },
-      {
-        nametext: "项目绩效",
-        img: "icon-jixiao red1",
-        path: "/pages/secondary/secondary",
-        control: true, //权限
-      },
-      {
-        nametext: "技术管理",
-        img: "icon-guanyugongsi-jishu .blue2",
-        path: "/pages/secondary/secondary",
-        control: true, //权限
-      },
-      {
-        nametext: "质量验收",
-        img: "icon-zhilianganquan orange",
-        path: "/pages/secondary/secondary",
-        control: true, //权限
-      },
-      {
-        nametext: "工程统计",
-        img: "icon-tongji green1",
-        path: "/pages/secondary/secondary",
-        control: true, //权限
-      },
-      {
-        nametext: "日常办公",
-        img: "icon-bangong1",
-        path: "/pages/secondary/secondary",
-        control: true, //权限
-      },
-      {
-        nametext: "业务处理",
-        img: "icon-dingdanchulizhong",
-        path: "/pages/secondary/secondary",
-        control: true, //权限
-      },
-      {
-        nametext: "计划与绩效",
-        img: "icon-jixiaokaoping",
-        path: "/pages/secondary/secondary",
-        control: true, //权限
-      },
-      {
-        nametext: "物品管理",
-        img: "icon-ico_wupinguanli_xiangmuxinxiweihu",
-        path: "/pages/secondary/secondary",
-        control: true, //权限
-      },
-
-      // {
-
-      //   nametext: "招投标",
-      //   img: "icon-zhaotoubiao red1",
-      //   path: "",
-      //   control: true, //权限,
-      //   three: true
-      // }, 
-      {
-
-        nametext: "总包项目",
-        img: "icon-_huabanfuben blue3",
-        path: "/pages/contractproject/pact/pact",
-        control: true, //权限
-        three: true
-      }, {
-
-        nametext: "总包合同",
-        img: "icon-hetong orange",
-        path: "/pages/generalcontract/pact/pact",
-        control: true //权限
-          ,
-        three: true
-      }, {
-
-        nametext: "任务书",
-        img: "icon-renwu green3",
-        path: "/pages/task/pact/pact",
-        control: true, //权限
-        three: true
-      },
-      // {
-
-      //   nametext: "项目统计",
-      //   img: "icon-icon-test1 yellow",
-      //   path: "",
-      //   control: true, //权限
-      //   three: true
-      // },
-      {
-
-        nametext: "分包编号申请",
-        img: "icon-shenqing red3",
-        path: "/pages/pointsnumber/pact/pact",
-        control: true,
-        three: true
-      }, {
-
-        nametext: "框架协议",
-        img: "icon-yonghuxieyi blue4",
-
-        path: "/pages/deal/pact/pact",
-        control: true //权限
-          ,
-        three: true
-      }, {
-
-        nametext: "分包项目",
-        img: "icon-web-icon- .blue",
-        path: "/pages/subcontract/pact/pact",
-        control: true //权限,
-          ,
-        three: true
-      },
-      {
-
-        nametext: "登录/注册",
-        img: "icon-zhuce blue4",
-        path: "/pages/login/login",
-        control: true, //权限
-        three: true
-      }, {
-        nametext: "我的信息",
-        img: "icon-gerenzhongxinyewodexinxi  yellow1",
-        path: "pages/Personal/pact/pact",
-        control: true //权限
-      }, {
-
-        nametext: "我的申请",
-        img: "icon-shenqing1 .red1",
-        path: "/pages/current/current/current",
-        control: true, //权限
-        three: true,
-        ANUm: true
-      }, {
-
-        nametext: "施工队管理",
-        img: "icon-jinpaishigongdui",
-        path: "/pages/corps/section",
-        control: true, //权限
-        three: true
-      },
-      {
-
-        nametext: "部门管理",
-        img: "icon-bumen .green4",
-        path: "/pages/section/section",
-        control: true, //权限
-        three: true
-      },
-      {
-        nametext: "当前任务",
-        img: ".icon-renwu .green5",
-        path: "/pages/current/current/current",
-        control: true,
-        three: true,
-        TNUm: true
-      }
-    ],
     login: true,
     exist: ''
 
@@ -237,97 +32,89 @@ Page({
       Timestamp: app.globalData.time,
       pid: 0,
     }).then(res => {
-      // console.log(res)
-      var s = []
-      var n = 0
-      for (var k in res.List) {
-        for (var i in this.data.tag) {
-          if (res.List[k].name == this.data.tag[i].nametext) {
-            s.push(this.data.tag[i])
-            s[n].ID = res.List[k].ID
-            s[n].menuId = res.List[k].menuId
-            s[n].icon = res.List[k].icon
-            s[n].PID = res.List[k].PID
-            n++
-          }
-        }
-      }
       this.setData({
-        tags: s
+        tags: res.List,
+        tag:res.List
       })
-      // console.log(this.data.tags)
-      this.log()
       wx.hideLoading()
-
     })
   },
+  // 请求二级菜单
   screen() {
     wx.showLoading({
       title: '加载中',
     })
+    this.log()
     var zong = []
     var fen = []
-    // if (this.data.login) {1
+    // 没有用户限制的菜单   所有菜单
     queryMenu({
       Timestamp: app.globalData.time,
       pid: this.data.num,
     }).then(res => {
-      // console.log(res)
-      var n = 0
-      for (var k in res.List) {
-        for (var i in this.data.list) {
-          if (res.List[k].name == this.data.list[i].nametext) {
-            zong.push(this.data.list[i])
-            zong[n].ID = res.List[k].ID
-            zong[n].menuId = res.List[k].menuId
-            zong[n].icon = res.List[k].icon
-            zong[n].PID = res.List[k].PID
-            n++
-          }
-
+      console.log(res)
+      zong = res.List
+      zong.forEach(s => {
+        s.control = true
+        if (s.name == '当前任务') {
+          s.TNUm = true
         }
-      }
+        if (s.name == '我的申请') {
+          s.ANUm = true
+        }
+        var path = s.pageaddres
+        if (path) {
+          var a = path.substring(0, 1)
+          if (a != '/') {
+            s.pageaddres = '/' + path
+          }
+          if(path == "/pages/secondary/secondary"){
+            s.pageaddres = "/pages/secondarys/secondarys"
+          }
+           var last =path.charAt(path.length-1)
+           console.log(last )
+           console.log(last == ` `)
+          //  basic = basic.substr(0, basic.length - 1);
+          // String str=array.get(i).replaceAll("\r|\n|\\s", "");  
+        }
+
+      })
+      // 有用户限制的菜单 
       queryMenu({
         Timestamp: app.globalData.time,
         pid: this.data.num,
         UId: this.data.id,
       }).then(ress => {
-        // console.log(ress)
-        fen = []
-        for (var w in ress.List) {
-          for (var v in this.data.list) {
-            if (ress.List[w].name == this.data.list[v].nametext) {
-              fen.push(this.data.list[v])
-            }
-          }
-        }
+        fen = ress.List
+        // console.log("用户菜单")
         // console.log(fen)
-        if (fen.length == 0) {
-          // console.log("数组为空")
+        // 有用户的菜单
+        if (ress.List == 0) {
           for (i in zong) {
-            if (zong[i].menuId ===null) {
+            if (zong[i].menuId === null) {
+              zong[i].control = true
+            } else {
+              zong[i].control = false
+            }
+
+          }
+        } else {
+          for (var i in zong) {
+            if (fen.some(g => {
+                // 如果有用户的菜单  和无用户的菜单 重合  赋予权限control 为true
+                var c = (g.ID == zong[i].ID) || (zong[i].menuId === null)
+                return c
+              })) {
               zong[i].control = true
             } else {
               zong[i].control = false
             }
           }
-        } else {
-          // console.log(zong)
-          for (var i in zong) {
-            if (fen.some(g => {
-                var c = g.nametext == zong[i].nametext || zong[i].menuId ===null
-                return c
-              })) {
-
-            } else {
-              zong[i].control = false
-            }
-          }
         }
-        zong.forEach(d=>{
-          if(d.nametext=='施工队管理'){
-            if(!this.data.deng){
-              d.control=false
+        zong.forEach(d => {
+          if (d.name == '施工队管理') {
+            if (!this.data.deng) {
+              d.control = false
             }
           }
         })
@@ -343,7 +130,7 @@ Page({
         for (var s in this.data.tag) {
           if (this.data.tag[s].ID == this.data.num) {
             this.setData({
-              title: this.data.tag[s].nametext
+              title: this.data.tag[s].name
             })
           }
         }
@@ -358,12 +145,10 @@ Page({
               })
               var s = that.data.tags
               var d = s.findIndex(a => {
-                // console.log(a)
-                return a.nametext == '我的/登录'
+                return a.name == '我的/登录'
               })
-              // console.log(d)
               if (d > -1) {
-                s[d].nametext = '我的'
+                s[d].name = '我的'
                 that.setData({
                   tags: s
                 })
@@ -392,7 +177,7 @@ Page({
                 for (var s in that.data.tag) {
                   if (that.data.tag[s].ID == that.data.num) {
                     that.setData({
-                      title: that.data.tag[s].nametext
+                      title: that.data.tag[s].name
                     })
                   }
                 }
@@ -402,10 +187,10 @@ Page({
           fail(res) {
             var s = that.data.tags
             var d = s.findIndex(a => {
-              return a.nametext == '我的/登录'
+              return a.name == '我的/登录'
             })
             if (d > -1) {
-              s[d].nametext = '登录'
+              s[d].name = '登录'
               that.setData({
                 tags: s
               })
@@ -431,10 +216,6 @@ Page({
   },
   // 判断登录
   log() {
-    // wx.setStorage({
-    //   key:"key",
-    //   data:"value"
-    // }) 
     var that = this
     wx.getStorage({
       key: 'myInfo',
@@ -442,11 +223,9 @@ Page({
         // console.log(res.data.ID)
         that.setData({
           id: res.data.ID,
-          deng:true
+          deng: true
         })
-        
       }
-
     })
   },
   out() {
@@ -469,25 +248,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     userinfo = wx.getStorageSync("myInfo");
-    // console.log(options)
     this.log() //判断是否登录
-    // console.log(options.grading)
     if (options.grading !== undefined && options.grading !== "undefined") {
       this.setData({
         num: options.grading
       })
-      // console.log("1")
     } else {
       this.setData({
         num: 1000,
         title: '工程管理'
       })
     }
-    //渲染数据
     this.deal()
     this.screen()
-
     if (userinfo) {
       getapplyNEWinfo({
         UserName: userinfo.UserName
