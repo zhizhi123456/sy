@@ -925,7 +925,6 @@ export const addChapter = (params) => http.post("/api/usesealform/Insert", param
 export const amendChapter = (params) => http.post("/api/usesealform/EditInfo", params);
 // 删除
 export const cancelChapter = (params) => http.post("/api/usesealform/Delete", params);
-<<<<<<< HEAD
 // 发票
 // 查询
 export const getInvoice = (params) => http.post("/api/invoice/Query", params);
@@ -952,5 +951,3 @@ export const addVacate = (params) => http.post("/api/leaveapplyform/Insert", par
 export const amendVacate = (params) => http.post("/api/leaveapplyform/Update", params);
 // 删除
 export const cancelVacate = (params) => http.post("/api/leaveapplyform/Delete", params);
-=======
->>>>>>> 451c9ceba23d31a981444dbfb5be68179810a829
