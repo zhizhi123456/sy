@@ -150,7 +150,7 @@ Page({
       })
     }
     this.setData({
-      designation: app.globalData.detaillink,
+      designation: app.globalData.Goodsnames,
     })
     // 领料单id
     if (options.id) {

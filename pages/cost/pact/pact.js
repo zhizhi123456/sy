@@ -469,7 +469,7 @@ Page({
   },
   // 状态
   showPopup_3() {
-    let userinfo = wx.getStorageSync("myInfo");
+    userinfo = wx.getStorageSync("myInfo");
     if (userinfo) {
       let info = this.data.info;
       info.UserName = userinfo.UserName;

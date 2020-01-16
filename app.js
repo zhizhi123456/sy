@@ -51,7 +51,8 @@ import {
   CountItem,
   Team,
   employee,
-  projectall
+  projectall,
+  Leavetypelist
 } from "./service/getData";
 var util = require("./utils/util");
 App({
@@ -140,7 +141,7 @@ App({
       util.sumup(Circuit, this, 'Circuit', "Value", "Key");
       util.sumup(Translation, this, 'Translation', "Value", "Key");
       util.sumup(MainSubproject, this, 'MainSubproject', "projcectCode", "projectname");
-      util.sumup(Goodsname, this, 'Goodsname', "goodscode", "goodsname");
+      util.sumup(Goodsname, this, 'Goodsnames', "goodscode", "goodsname");
       util.sumup(ClientType, this, 'ClientType', "Value", "Key");
       util.sumup(Supplier, this, 'Supplier', "suppliername", "ID");
       util.sumup(MaincontactAll, this, 'MaincontactAll', "maincontactname", "ID");
@@ -164,6 +165,7 @@ App({
       util.sumup(CountYear, this, 'CountYear', "Text", "Value");
       util.sumup(CountItem, this, 'CountItem', "Text", "Value");
       util.sumup(Team, this, 'Team', "ConstructionName", "ID");
+      util.sumup(Leavetypelist, this, 'Leavetypelist', "Value", "Key");
       Engineer({
         ID: 3209
       }).then(res => {
@@ -261,6 +263,7 @@ App({
     Circuit: '',
     Translation: '',
     MainSubproject: '',
+    Goodsnames: '',
     Goodsname: '',
     ClientType: '',
     Supplier: '',
@@ -288,6 +291,7 @@ App({
     Team: '',
     employee: '',
     projectall: '',
+    Leavetypelist:'',
     states: [{
       text: '所有'
     }, {
@@ -299,11 +303,14 @@ App({
     }],
     // 开票信息 
     billing: [{
-      text: '电信'
+      text: '电信',
+      value:1
     }, {
-      text: '上海电信'
+      text: '上海电信',
+      value:2
     }, {
-      text: '长城宽带'
+      text: '长城宽带',
+      value:3
     }],
   }
 })

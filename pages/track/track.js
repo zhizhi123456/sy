@@ -29,6 +29,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    user = wx.getStorageSync("myInfo");
     // console.log(options)
     user = wx.getStorageSync("myInfo");
     if (options.constructionteam) {

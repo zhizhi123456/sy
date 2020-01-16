@@ -178,6 +178,15 @@
         "pages/chapter/pact/pact",
         "pages/chapter/detail/detail",
         "pages/chapter/new/new",
+        "pages/invoice/pact/pact",
+        "pages/invoice/detail/detail",
+        "pages/invoice/new/new",
+        "pages/vacate/pact/pact",
+        "pages/vacate/detail/detail",
+        "pages/vacate/new/new",
+        "pages/payment/pact/pact",
+        "pages/payment/detail/detail",
+        "pages/payment/new/new",
         "pages/receive/pact/pact"
       ]
     }

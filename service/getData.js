@@ -106,6 +106,8 @@ export const getdep = (params) => http.post("/api/MethodOfDataService/GetUserDep
 export const getName = (params) => http.post("/api/MethodOfDataService/GetUserNameAndEmpName", params);
 //员工ID->负责人
 export const getLeader = (params) => http.post("/api/MethodOfDataService/GetDepartmentPrincipal", params);
+//请假类别
+export const Leavetypelist = (params) => http.post("/api/MethodOfDataService/Leavetypelist", params);
 // =================================================================================================================================================================
 // 工作流接口
 // 工作流流转
@@ -953,3 +955,16 @@ export const addVacate = (params) => http.post("/api/leaveapplyform/Insert", par
 export const amendVacate = (params) => http.post("/api/leaveapplyform/Update", params);
 // 删除
 export const cancelVacate = (params) => http.post("/api/leaveapplyform/Delete", params);
+// 付款签报
+// 查询
+export const getPayment = (params) => http.post("/api/paymentapproval/Query", params);
+// 根据id查询
+export const referPayment = (params) => http.post("/api/paymentapproval/Detail", params);
+// 组合查询
+export const groupPayment = (params) => http.post("/api/paymentapproval/MulticonditionalQuery", params);
+// 添加
+export const addPayment = (params) => http.post("/api/paymentapproval/Insert", params);
+// 修改
+export const amendPayment = (params) => http.post("/api/paymentapproval/Update", params);
+// 删除
+export const cancelPayment = (params) => http.post("/api/paymentapproval/Delete", params);

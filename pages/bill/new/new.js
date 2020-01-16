@@ -425,7 +425,7 @@ Page({
       sections: app.globalData.department,
       firms: app.globalData.Companytitle,
       totals: app.globalData.MainProject,
-      designation: app.globalData.detaillink
+      designation: app.globalData.Goodsnames
     })
   },
 

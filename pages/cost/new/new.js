@@ -7,6 +7,7 @@ import {
 } from "../../../service/getData";
 var util = require("../../../utils/util");
 var app = getApp();
+let user = wx.getStorageSync("myInfo");
 Page({
   /**
    * 页面的初始数据
@@ -256,12 +257,14 @@ Page({
         })
       })
     }
-    let user = wx.getStorageSync("myInfo"),
-      info = this.data.info;
-    info.belongtoman = user.UserName;
-    this.setData({
-      info
-    })
+    user = wx.getStorageSync("myInfo");
+    let info = this.data.info;
+    if (!info.belongtoman) {
+      info.belongtoman = user.UserName;
+      this.setData({
+        info
+      })
+    }
   },
 
   /**
@@ -275,7 +278,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    user = wx.getStorageSync("myInfo");
   },
 
   /**
