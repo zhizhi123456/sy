@@ -1,9 +1,9 @@
 // pages/new/new.js
 import Toast from 'vant-weapp/dist/toast/toast';
 import {
-  addVacate,
-  referVacate,
-  amendVacate
+  addPayment,
+  referPayment,
+  amendPayment
 } from "../../../../service/getData";
 var util = require("../../../../utils/util");
 var app = getApp();
@@ -27,8 +27,8 @@ Page({
       name: "从相册选择"
     }],
   },
-  // 请假事由
-  leavereasonblur(e) {
+  // 签报名称
+  payapproveformnameblur(e) {
     let info = util.editInfo(e, this, e.detail.value);
     this.setData({
       info
@@ -71,7 +71,7 @@ Page({
       show: false
     })
   },
-  // 请假类别
+  // 付款方式
   showPopup_1() {
     this.setData({
       show_1: true
@@ -89,44 +89,155 @@ Page({
       show_1: false
     })
   },
-  // 请假开始时间
-  showPopup_time() {
+  // 付款金额
+  payammountblur(e) {
+    let info = util.editInfo(e, this, e.detail.value);
     this.setData({
-      show_time: true
+      info
     })
   },
-  onClose_time() {
+  // 总包项目
+  showPopup_2() {
     this.setData({
-      show_time: false
-    })
+      show_2: true
+    });
   },
-  onConfirm_time(e) {
-    let info = util.editInfo(e, this, util.datefomate(e.detail));
+  onClose_2() {
     this.setData({
-      info,
-      show_time: false
-    })
+      show_2: false
+    });
   },
-  // 请假结束时间
-  showPopup_endtime() {
-    this.setData({
-      show_endtime: true
-    })
-  },
-  onClose_endtime() {
-    this.setData({
-      show_endtime: false
-    })
-  },
-  onConfirm_endtime(e) {
-    let info = util.editInfo(e, this, util.datefomate(e.detail));
+  onConfirm_2(e) {
+    let info = util.editInfo(e, this, e.detail.value.text);
     this.setData({
       info,
-      show_endtime: false
+      show_2: false
     })
   },
-  // 请假天数
-  leavedaysblur(e) {
+  // 项目类型
+  showPopup_3() {
+    this.setData({
+      show_3: true
+    });
+  },
+  onClose_3() {
+    this.setData({
+      show_3: false
+    });
+  },
+  onConfirm_3(e) {
+    let info = util.editInfo(e, this, e.detail.value.text);
+    this.setData({
+      info,
+      show_3: false
+    })
+  },
+  // 总包合同
+  showPopup_4() {
+    this.setData({
+      show_4: true
+    });
+  },
+  onClose_4() {
+    this.setData({
+      show_4: false
+    });
+  },
+  onConfirm_4(e) {
+    let info = util.editInfo(e, this, e.detail.value.text);
+    this.setData({
+      info,
+      show_4: false
+    })
+  },
+  // 分包合同
+  showPopup_5() {
+    this.setData({
+      show_5: true
+    });
+  },
+  onClose_5() {
+    this.setData({
+      show_5: false
+    });
+  },
+  onConfirm_5(e) {
+    let info = util.editInfo(e, this, e.detail.value.text);
+    this.setData({
+      info,
+      show_5: false
+    })
+  },
+  // 分包编号
+  showPopup_6() {
+    this.setData({
+      show_6: true
+    });
+  },
+  onClose_6() {
+    this.setData({
+      show_6: false
+    });
+  },
+  onConfirm_6(e) {
+    let info = util.editInfo(e, this, e.detail.value.text);
+    this.setData({
+      info,
+      show_6: false
+    })
+  },
+  // 采购合同
+  showPopup_7() {
+    this.setData({
+      show_7: true
+    });
+  },
+  onClose_7() {
+    this.setData({
+      show_7: false
+    });
+  },
+  onConfirm_7(e) {
+    let info = util.editInfo(e, this, e.detail.value.text);
+    this.setData({
+      info,
+      show_7: false
+    })
+  },
+  // 供应商
+  showPopup_8() {
+    this.setData({
+      show_8: true
+    });
+  },
+  onClose_8() {
+    this.setData({
+      show_8: false
+    });
+  },
+  onConfirm_8(e) {
+    let info = util.editInfo(e, this, e.detail.value.text);
+    this.setData({
+      info,
+      show_8: false
+    })
+  },
+  // 已支付金额
+  havepaidammountblur(e) {
+    let info = util.editInfo(e, this, e.detail.value);
+    this.setData({
+      info
+    })
+  },
+  // 付款说明
+  payamtexplainblur(e) {
+    let info = util.editInfo(e, this, e.detail.value);
+    this.setData({
+      info
+    })
+  },
+  // 备注
+  remarkblur(e) {
     let info = util.editInfo(e, this, e.detail.value);
     this.setData({
       info
@@ -159,13 +270,13 @@ Page({
 
   confirm() {
     // console.log(this.data.info)
-    if (this.data.info.leavereason && this.data.info.applyman && this.data.info.department && this.data.info.Companytitle && this.data.info.leavebegintime && this.data.info.leaveendtime && this.data.info.leavedays) {
+    if (this.data.info.payapproveformname && this.data.info.department && this.data.info.Companytitle && this.data.info.paytype && this.data.info.payammount && this.data.info.mainprojectcode && this.data.info.projecttype && this.data.info.maincontactcode && this.data.info.subprojectcode && this.data.info.subcontactcode && this.data.info.purchasecontactcode && this.data.info.suppliercode && this.data.info.havepaidammount && this.data.info.payamtexplain) {
       let info = this.data.info;
       util.checkContent(info, this);
       this.setData({
         info
       })
-      addVacate(this.data.info).then(res => {
+      addPayment(this.data.info).then(res => {
         // console.log(res)
         if (res.code == 10000) {
           wx.showToast({
@@ -173,7 +284,7 @@ Page({
             icon: 'success',
             duration: 3000
           })
-          util.OAreturn('vacate');
+          util.OAreturn('payment');
         }
       })
     } else {
@@ -185,11 +296,11 @@ Page({
   },
   // 返回
   return () {
-    util.OAreturn('vacate');
+    util.OAreturn('payment');
   },
   // 编辑页面的确定和返回
   editreturn() {
-    util.OAreturn('vacate', this);
+    util.OAreturn('payment', this);
   },
   editconfirm() {
     let info = this.data.info;
@@ -198,7 +309,7 @@ Page({
       info
     })
     // console.log(infodata)
-    amendVacate(this.data.info).then(res => {
+    amendPayment(this.data.info).then(res => {
       // console.log(res)
       if (res.code == 10000) {
         wx.showToast({
@@ -206,7 +317,7 @@ Page({
           icon: 'success',
           duration: 3000
         })
-        util.OAreturn('vacate', this);
+        util.OAreturn('payment', this);
       }
     })
   },
@@ -217,10 +328,17 @@ Page({
     this.setData({
       firms: app.globalData.Companytitle,
       sections: app.globalData.department,
-      Leavetypelist: app.globalData.Leavetypelist,
+      ItemType: app.globalData.ItemType,
+      PayType: app.globalData.PayType,
+      MainProject: app.globalData.MainProject,
+      MaincontactAll: app.globalData.MaincontactAll,
+      Subcontact: app.globalData.Subcontact,
+      Purchasecontact: app.globalData.Purchasecontact,
+      Supplier: app.globalData.Supplier,
+      MainSubproject: app.globalData.MainSubproject
     })
     if (options.id) {
-      referVacate({
+      referPayment({
         ID: options.id
       }).then(res => {
         // console.log(res)

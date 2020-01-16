@@ -18,14 +18,11 @@
       </van-tag>
       <icon class="{{' red  icon iconfont '+ item.icon + (item.control ?'':' c') }}"></icon>
       <text class="{{item.control ?'':'c'}}">{{item.name}}</text>
-      <!-- <navigator url="{{ item.three?item.path +'?menuId='+ item.menuId:(item.control ? '/pages/secondary/secondary?id='+item.ID+'&title='+item.nametext :'#')}}"></navigator> -->
-      <!-- <navigator url="{{(!item.control)?'':(item.three?(item.pageaddres +'?menuId='+ item.menuId+'&id='+item.ID+'&title='+item.name):('/pages/secondary/secondary?id='+item.ID+'&title='+item.name))}}"></navigator> -->
-        <navigator url="{{(!item.control)?'':(item.pageaddres +'?menuId='+ item.menuId+'&id='+item.ID+'&title='+item.name)}}"></navigator>
+      <!-- <navigator url="{{ item.three?item.path +'?menuId='+ item.menuId:(item.control ? '/pages/secondarys/secondarys?id='+item.ID+'&title='+item.nametext :'#')}}"></navigator> -->
+      <!-- <navigator url="{{(!item.control)?'':(item.three?(item.pageaddres +'?menuId='+ item.menuId+'&id='+item.ID+'&title='+item.name):('/pages/secondarys/secondarys?id='+item.ID+'&title='+item.name))}}"></navigator> -->
+      <navigator url="{{(!item.control)?'':(item.pageaddres +'?menuId='+ item.menuId+'&id='+item.ID+'&title='+item.name)}}"></navigator>
     </view>
   </view>
-  <navigator url="/OAmoudle/pages/payment/pact/pact" wx:if="{{num==1000}}">
-    <view>付款签报</view>
-  </navigator>
   <view wx:if="{{entered&&num==1002}}" class="haDquit">
     <view bindtap="out">切换账号</view>
     <view bindtap="out">退出</view>

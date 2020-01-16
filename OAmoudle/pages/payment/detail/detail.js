@@ -1,7 +1,7 @@
 // pages/generalcontract/detail/detail.js
 import {
-  referVacate,
-  cancelVacate,
+  referPayment,
+  cancelPayment,
 } from '../../../../service/getData.js';
 var app = getApp();
 var util = require("../../../../utils/util");
@@ -19,7 +19,7 @@ Page({
   },
   // 返回
   return () {
-    util.OAreturn('vacate');
+    util.OAreturn('payment');
   },
   /**
    * 生命周期函数--监听页面加载
@@ -29,7 +29,7 @@ Page({
       title: '加载中',
     });
     if (options.id) {
-      referVacate({
+      referPayment({
         ID: options.id
       }).then(res => {
         // console.log(res)
@@ -46,7 +46,7 @@ Page({
             util.workList(this, mid)
           }
           //处理状态判断
-          util.checkState(this, mid, 'leaveapplyform', item.CurStepbh);
+          util.checkState(this, mid, 'paymentapproval', item.CurStepbh);
         }
       })
     }
@@ -54,11 +54,11 @@ Page({
   // 工作流流转
   // 退回上步
   sendback() {
-    util.Triggerflow(this, 'return', 'leaveapplyform', 'vacate', '', '', '', '', '', '', 'oa')
+    util.Triggerflow(this, 'return', 'paymentapproval', 'payment', '', '', '', '', '', '', 'oa')
   },
   // 提交下步
   putin() {
-    util.Triggerflow(this, 'next', 'leaveapplyform', 'vacate', '', '', '', '', '', '', 'oa')
+    util.Triggerflow(this, 'next', 'paymentapproval', 'payment', '', '', '', '', '', '', 'oa')
   },
   // 删除
   delete() {
@@ -67,7 +67,7 @@ Page({
       content: '确认要删除吗？',
       success(res) {
         if (res.confirm) {
-          cancelVacate({
+          cancelPayment({
             ID: that.data.info.ID
           }).then(res => {
             if (res.code == 10000) {
@@ -77,7 +77,7 @@ Page({
                 duration: 3000
               })
               setTimeout(function () {
-                util.OAreturn('vacate');
+                util.OAreturn('payment');
               }, 1000)
             }
           })

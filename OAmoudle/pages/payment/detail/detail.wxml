@@ -13,12 +13,8 @@
             <van-tab title="详细资料" name="a">
                 <view class="content">
                     <view class="c_item">
-                        <view class="kind">请假类型</view>
-                        <view class="check">{{info.leavetype}}</view>
-                    </view>
-                    <view class="c_item">
-                        <view class="kind">请假事由</view>
-                        <view class="check">{{info.leavereason}}</view>
+                        <view class="kind">付款签报名称</view>
+                        <view class="check">{{info.payapproveformname}}</view>
                     </view>
                     <view class="c_item">
                         <view class="kind">公司</view>
@@ -29,20 +25,52 @@
                         <view class="check">{{info.department}}</view>
                     </view>
                     <view class="c_item">
-                        <view class="kind">申请人</view>
-                        <view class="check">{{info.applyman}}</view>
+                        <view class="kind">付款方式</view>
+                        <view class="check">{{info.paytype}}</view>
                     </view>
                     <view class="c_item">
-                        <view class="kind">请假天数</view>
-                        <view class="check">{{info.leavedays}}</view>
+                        <view class="kind">付款金额</view>
+                        <view class="check">{{info.payammount}}</view>
                     </view>
                     <view class="c_item">
-                        <view class="kind">请假开始时间</view>
-                        <view class="check">{{info.leavebegintime}}</view>
+                        <view class="kind">已支付金额</view>
+                        <view class="check">{{info.havepaidammount}}</view>
                     </view>
                     <view class="c_item">
-                        <view class="kind">请假结束时间</view>
-                        <view class="check">{{info.leaveendtime}}</view>
+                        <view class="kind">付款说明</view>
+                        <view class="check">{{info.payamtexplain}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">项目类型</view>
+                        <view class="check">{{info.projecttype}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">采购合同编号</view>
+                        <view class="check">{{info.purchasecontactcode}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">总包合同编号</view>
+                        <view class="check">{{info.maincontactcode}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">总包项目编号</view>
+                        <view class="check">{{info.mainprojectcode}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">分包项目编号</view>
+                        <view class="check">{{info.subcontactcode}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">分包合同编号</view>
+                        <view class="check">{{info.subprojectcode}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">供应商编号</view>
+                        <view class="check">{{info.suppliercode}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">备注</view>
+                        <view class="check">{{info.remark}}</view>
                     </view>
                     <view class="c_item">
                         <view class="kind">图片</view>
@@ -101,7 +129,7 @@
             <text>退回上步</text>
         </view>
         <view>
-            <navigator url="/OAmoudle/pages/vacate/new/new?id={{info.ID}}" hover-class="none">
+            <navigator url="/OAmoudle/pages/payment/new/new?id={{info.ID}}" hover-class="none">
                 <icon class="iconfont icon-bianji"></icon>
                 <text>编辑</text>
             </navigator>
