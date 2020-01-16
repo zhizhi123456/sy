@@ -32,6 +32,7 @@ Page({
       Timestamp: app.globalData.time,
       pid: 0,
     }).then(res => {
+      console.log(res)
       this.setData({
         tags: res.List,
         tag: res.List
@@ -72,10 +73,7 @@ Page({
           // console.log(path == "/pages/secondary/secondary")
           s.pageaddres = path.replace(/[\r\n]/g, "");
         }
-        if (path == "/pages/secondary/secondary") {
-          s.pageaddres = "/pages/secondarys/secondarys"
-          // s.three = true
-        }
+        console.log(path)
       
 
       })

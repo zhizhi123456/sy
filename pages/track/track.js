@@ -30,6 +30,7 @@ Page({
    */
   onLoad: function (options) {
     // console.log(options)
+    user = wx.getStorageSync("myInfo");
     if (options.constructionteam) {
       this.setData({
         constructionteam: options.constructionteam
@@ -214,7 +215,9 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {},
+  onShow: function () {
+    user = wx.getStorageSync("myInfo");
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */

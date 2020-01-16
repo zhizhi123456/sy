@@ -1011,7 +1011,7 @@ const returnMenu = (id) => {
 // 返回三级菜单
 const returnMenu2 = (id, title) => {
   wx.reLaunch({
-    url: `/pages/secondarys/secondarys?id=${id}&title=${title}`
+    url: `/pages/secondary/secondary?id=${id}&title=${title}`
   })
 }
 const workList = (key, id) => {
@@ -2073,7 +2073,7 @@ const expurgate = ((that, funcname, section) => {
             setTimeout(
               function () {
                 returnPrev(section)
-              }, 3000)
+              }, 2300)
 
           }
         })
@@ -2100,7 +2100,7 @@ const expurgateDetail = ((that, funcname, section,MasterDetailID) => {
                 wx.redirectTo({
                   url: `/pages/${section}/detail/detail?id=` + MasterDetailID + "&table=c"
                 })
-              }, 3000)
+              }, 2300)
           }
         })
       }
