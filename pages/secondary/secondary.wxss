@@ -1,4 +1,4 @@
-/* pages/secondarys/secondarys.wxss */
+/* pages/secondary/secondary.wxss */
 .title {
   width: 100%;
   text-align: center;

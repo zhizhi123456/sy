@@ -30,9 +30,9 @@ Page({
   },
   // 返回
   return () {
-
+   console.log(this.data.hadNew,this.data.hadMy)
     if (this.data.hadNew) {
-      if (this.data.hadMy) {
+      if (this.data.hadMy!='0') {
         wx.redirectTo({
           url: '/pages/design/pact/pact?hadMy=' + this.data.hadMy
         })
@@ -49,7 +49,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // console.log(options)
+    console.log(options)
     if (options.hadMy) {
       this.setData({
         hadMy: options.hadMy

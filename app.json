@@ -1,9 +1,7 @@
 {
   "pages": [
     "pages/contracts/contracts",
-    "pages/secondarys/secondarys",
-    "pages/member/pact/pact",
-    "pages/sceneticket/pact/pact",
+    "pages/secondary/secondary",
     "pages/login/login",
     "pages/current/current/current",
     "pages/section/section",
@@ -86,6 +84,7 @@
     "pages/returnmaterial/detail/detail",
     "pages/returnmaterial/newlink/newlink",
     "pages/returnmaterial/detaillink/detaillink",
+    "pages/sceneticket/pact/pact",
     "pages/sceneticket/new/new",
     "pages/sceneticket/detail/detail",
     "pages/workrecord/pact/pact",
@@ -146,6 +145,7 @@
     "pages/contractor/pact/pact",
     "pages/contractor/new/new",
     "pages/contractor/detail/detail",
+    "pages/member/pact/pact",
     "pages/member/new/new",
     "pages/member/detail/detail",
     "pages/corps/section",

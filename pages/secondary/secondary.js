@@ -1,4 +1,4 @@
-// pages/secondarys/secondarys.js
+// pages/secondary/secondary.js
 import {
   queryMenu,
   getdep
@@ -14,7 +14,7 @@ Page({
     rid: "",
     title: "",
     chuancan: 1003,
-    small:[],
+    small: [],
     smalls: []
   },
   screen() {
@@ -37,16 +37,19 @@ Page({
           if (a != '/') {
             s.pageaddres = '/' + path
           }
-          if (s.name == '我的设计任务') {
-            s.pageaddres = path +'?hadMy=1'
-          }
-          s.pageaddres = path.replace(/[\r\n]/g, ""); 
+          s.pageaddres = path.replace(/[\r\n]/g, "");
+        }
+        if (s.name == '我的设计任务') {
+          s.pageaddres = path + '?hadMy=1'
+        }
+        if (s.name == "材料领用查询") {
+          s.pageaddres = '/OAmoudle/pages/receive/pact/pact'
         }
       })
       // 请求当前用户模块
       queryMenu({
         pid: this.data.chuancan,
-        UId:this.data.id
+        UId: this.data.id
       }).then(ress => {
         fen = ress.List
         // 有用户的菜单
@@ -88,6 +91,8 @@ Page({
       // console.log(1)
     } else if (this.data.chuancan == 1055) {
       util.returnMenu(1002);
+    } else if (this.data.chuancan == 2055 || this.data.chuancan == 2056 || this.data.chuancan == 2057 || this.data.chuancan == 2058) {
+      util.returnMenu(2054);
     } else {
       util.returnMenu();
     }
@@ -106,7 +111,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // console.log(options)
+    console.log(options)
     let userinfo = wx.getStorageSync("myInfo");
     if (userinfo) {
       getdep({
@@ -149,7 +154,7 @@ Page({
         title: options.title
       })
     }
-    
+
     this.screen()
   }
 })

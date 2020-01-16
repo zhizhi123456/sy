@@ -36,6 +36,8 @@ Page({
   },
   // 返回
   return () {
+    console.log(this.data.hadNew)
+    console.log(this.data.hadMy)
     if (this.data.hadNew) {
       if (this.data.hadMy) {
         util.returnMenu2(1055, '我的信息');
@@ -90,7 +92,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // console.log(options)
+    console.log(options)
     wx.showLoading({
       title: '加载中',
     });

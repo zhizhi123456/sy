@@ -3,7 +3,8 @@ var app = getApp();
 var util = require("../../utils/util");
 import {
   qgroupcontractor,
-  getdep
+  getdep,
+  referDeal
 } from "../../service/getData";
 Page({
 
@@ -17,6 +18,7 @@ Page({
     activeKey: 0,
     employee: '',
     b: '',
+    title:''
   },
   return () {
     util.returnMenu(1002);
@@ -55,7 +57,7 @@ Page({
     // 用户名
     this.updep(id, this)
     this.setData({
-      info:{}
+      info: {}
     })
   },
   //部门
@@ -77,7 +79,7 @@ Page({
       show_o: false,
       activeKey: e.detail.index,
     })
-    
+
     // e.detail.value.value 用户名
     this.updep(e.detail.value.value, this)
   },
@@ -120,23 +122,46 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var a = app.globalData.Principal[0].value
-    // 请求数据
-    this.updep(a, this)
-    if (app.globalData.CountItem) {
-      this.setData({
-        sections: app.globalData.Principal,
-        Companytitle: app.globalData.Companytitle,
-      })
-    } else {
-      app.DataCallback = employ => {
-        if (employ != '') {
-          this.setData({
-            sections: app.globalData.Principal,
-            Companytitle: app.globalData.Companytitle,
+    var a
+    var that = this
+    wx.getStorage({
+      key: 'myInfo',
+      success(res) {
+        // console.log(res.data.UserName)
+        if (res.data.UserName) {
+    
+          app.globalData.Principal.forEach(s => {
+
+            if (s.value == res.data.UserName) {
+              a = s.value
+              var c = []
+              c.push(s)
+              that.setData({
+                sections:c
+              })
+              that.updep(res.data.UserName, that)
+            }
           })
         }
       }
-    }
+    })
+
+    // 请求数据
+  
+    // if (app.globalData.CountItem) {
+    //   this.setData({
+    //     sections: app.globalData.Principal,
+    //     Companytitle: app.globalData.Companytitle,
+    //   })
+    // } else {
+    //   app.DataCallback = employ => {
+    //     if (employ != '') {
+    //       this.setData({
+    //         sections: app.globalData.Principal,
+    //         Companytitle: app.globalData.Companytitle,
+    //       })
+    //     }
+      // }
+    // }
   },
 })

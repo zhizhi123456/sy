@@ -51,25 +51,27 @@ Page({
         employee: c
       })
     })
-    detailcontractor({ID:id}).then(res => {
+    detailcontractor({
+      ID: id
+    }).then(res => {
       console.log(res)
-      if(res.code==10000){
-          var item = res.Item
-          // item.chiefcontactman 用户名
-          if(item.chiefcontactman){
-            getdep({
-              UserName: item.chiefcontactman
-            }).then(res => {
-              if (res !== '[]') {
-                var s = JSON.parse(res)
-                this.setData({
-                  dep: s[0].ID,
-                  deptxt: s[0].techofficename
-                })
-                console.log(that.data.dep, that.data.deptxt)
-              }
-            })
-          }
+      if (res.code == 10000) {
+        var item = res.Item
+        // item.chiefcontactman 用户名
+        if (item.chiefcontactman) {
+          getdep({
+            UserName: item.chiefcontactman
+          }).then(res => {
+            if (res !== '[]') {
+              var s = JSON.parse(res)
+              this.setData({
+                dep: s[0].ID,
+                deptxt: s[0].techofficename
+              })
+              console.log(that.data.dep, that.data.deptxt)
+            }
+          })
+        }
       }
     })
 
@@ -166,6 +168,16 @@ Page({
         // 根据传递的施工队id 遍历得到应该在列表的那个位置 设置activeKey
         var a = res.List
         var c = a.findIndex(s => {
+
+          if (s.ID == options.name) {
+            var b = []
+            b.push(s)
+            var a = JSON.stringify(b)
+            var c = JSON.parse(a.replace(/ID/g, 'value').replace(/ConstructionName/g, 'text'));
+            this.setData({
+              member: c
+            })
+          }
           return s.ID == options.name
         })
         this.setData({
@@ -173,11 +185,11 @@ Page({
         })
         // 
         // 获得初始施工队列表
-        var a = JSON.stringify(res.List)
-        var c = JSON.parse(a.replace(/ID/g, 'value').replace(/ConstructionName/g, 'text'));
-        this.setData({
-          member: c
-        })
+        // var a = JSON.stringify(res.List)
+        // var c = JSON.parse(a.replace(/ID/g, 'value').replace(/ConstructionName/g, 'text'));
+        // this.setData({
+        //   member: c
+        // })
 
       } else {
         this.setData({
