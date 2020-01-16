@@ -73,11 +73,12 @@ Page({
     this.setData({
       sections: app.globalData.Companytitle,
       section1:app.globalData.states,
-      section2: app.globalData.MainProject,
+      section2: app.globalData.MainProject1,
       section5: app.globalData.Principal,
-      section3: app.globalData.staff,
+      section3: app.globalData.Principal,
       section4: app.globalData.MainSubproject,
     })
+    // console.log(this.data.section4)
     this.setData({
       Supplier: app.globalData.Supplier
     })
@@ -146,7 +147,7 @@ Page({
   },
   onConfirm2(e) {
     // console.log(e)
-    let info = util.editInfo(e, this, e.detail.value.value);
+    let info = util.editInfo(e, this, e.detail.value.text);
     this.setData({
       info,
       show2: false
@@ -184,7 +185,7 @@ Page({
   },
   onConfirm4(e) {
     // console.log(e)
-    let info = util.editInfo(e, this, e.detail.value.value);
+    let info = util.editInfo(e, this, e.detail.value.text);
     this.setData({
       info,
       show4: false

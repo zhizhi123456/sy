@@ -32,6 +32,7 @@ Page({
     section3: '',
     section4: '',
     section5: "",
+    show6:false
    
   },
   // 返回
@@ -83,7 +84,8 @@ Page({
       section3: app.globalData.Companytitle,
       section4: app.globalData.department,
       section5:app.globalData.projectall,
-      section6:app.globalData.YesOrNo
+      section6:app.globalData.YesOrNo,
+      section7: app.globalData.Principal,
     })
     // console.log(app.globalData.projectall)
     wx.showLoading({
@@ -247,6 +249,24 @@ Page({
     this.setData({
       info,
       show5: false,
+      // departmenttext: e.detail.value.text
+    })
+  },
+  showPopup6() {
+    this.setData({
+      show6: true
+    });
+  },
+  onClose6() {
+    this.setData({
+      show6: false
+    });
+  },
+  onConfirm6(e) {
+    let info = util.editInfo(e, this, e.detail.value.value);
+    this.setData({
+      info,
+      show6: false,
       // departmenttext: e.detail.value.text
     })
   },

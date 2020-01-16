@@ -37,12 +37,25 @@
                                 <van-picker data-name="projectcode" show-toolbar columns="{{ sections }}" bind:cancel="onClose_o" bind:confirm="onConfirm_o" />
                             </van-popup>
                         </view>
-                        <view class="seach_item">
-                            <!-- <text class="kind">材料名称关键字</text> -->
-                            <van-cell-group>
-                                <van-field data-name="goodsname" value="{{info.goodsname}}" placeholder="请输入" bind:blur="meetplaceblur" input-class="time1" label="材料名称关键字" />
-                            </van-cell-group>
+                         <view class="seach_item">
+                            <van-field value="{{info.createman}}" bind:focus="showPopup5" class="time1" title-class="time1" label="创建人" placeholder="请选择" />
+                            <van-popup show="{{show5}}" round position="bottom" bind:close="onClose5">
+                                <van-picker data-name="createman" show-toolbar columns="{{ section5 }}" bind:cancel="onClose5" bind:confirm="onConfirm5" />
+                            </van-popup>
                         </view>
+                          <view class="seach_item">
+                            <van-field value="{{info.begintime}}" bind:focus="showPopup_time" class="time1" label="创建时间开始时间" placeholder="请选择" />
+                            <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
+                                <van-datetime-picker data-name="begintime" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
+                            </van-popup>
+                        </view>
+                        <view class="seach_item">
+                            <van-field value="{{info.endtime}}" bind:focus="showPopup_endtime" class="time1" label="创建时间结束时间" placeholder="请选择" />
+                            <van-popup show="{{ show_endtime }}" round position="bottom" bind:close="onClose_endtime">
+                                <van-datetime-picker data-name="endtime" value="{{ currentDate1 }}" bind:cancel="onClose_endtime" bind:confirm="onConfirm_endtime" />
+                            </van-popup>
+                        </view>
+                      
                         <view class="checkkind">
                              <text bind:tap="onClose">取消</text>
                             <text bind:tap="seachqur">确认</text>

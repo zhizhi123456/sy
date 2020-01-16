@@ -56,6 +56,12 @@
                                 <van-picker data-name="itemnumber" show-toolbar columns="{{ section5 }}" bind:cancel="onClose5" bind:confirm="onConfirm5" />
                             </van-popup>
                         </view>
+                           <view class="seach_item">
+                            <van-field value="{{info.createman }}" bind:focus="showPopup6" class="time1" title-class="time1" label="创建人" placeholder="请选择" />
+                            <van-popup show="{{show6}}" round position="bottom" bind:close="onClose6">
+                                <van-picker data-name="createman" show-toolbar columns="{{ section7 }}" bind:cancel="onClose6" bind:confirm="onConfirm6" />
+                            </van-popup>
+                        </view>
                         <!-- <view class="seach_item">
                             <van-field value="{{info.begintime}}" bind:focus="showPopup_time" class="time1" label="进场日期开始时间" placeholder="请选择" />
                             <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">

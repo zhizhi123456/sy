@@ -5,11 +5,11 @@
 </view>
 <view class="list">
   <view class="box" wx:for="{{smalls}}" wx:key="index" data-show="{{item.control}}">
-    <view class="{{'blue2 masked'+ (item.control ? '':' show')+ (item.path?'':' show')}}">
+    <view class="{{'blue2 masked'+ (item.control ? '':' show')+ (item.pageaddres?'':' show')}}">
       <icon class="iconfont icon-mima"></icon>
     </view>
-    <icon class="{{' icon iconfont '+ item.img + (item.control ?'':' c') }}"></icon>
-    <text class="{{item.control ?'':'c'}}">{{item.nametext}}</text>
-    <navigator url="{{ item.control ?(userinfo?item.path+'?menuId='+ item.menuId+'&id='+chuancan+'&title='+title:'') : '#'}}&{{userid?'userid='+userid+'&caption='+caption+'&dep='+dep+'&deptxt='+deptxt:''}}" bindtap="checkperson"></navigator>
+    <icon class="{{' icon iconfont '+ item.icon + (item.control ?'':' c') }}"></icon>
+    <text class="{{item.control ?'':'c'}}">{{item.name}}</text>
+    <navigator url="{{ item.control ?(userinfo?item.pageaddres+'?menuId='+ item.menuId+'&id='+chuancan+'&title='+title:'') : '#'}}&{{userid?'userid='+userid+'&caption='+caption+'&dep='+dep+'&deptxt='+deptxt:''}}" bindtap="checkperson"></navigator>
   </view>
 </view>

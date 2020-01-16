@@ -18,9 +18,11 @@ Page({
     info: {
       Company: "",
       projectcode: "",
-      goodsname: "",
       createtime: "",
       updatetime: "",
+      UserName:"",
+      begintime:"",
+      endtime:""
     },
     sections: [],
     show1: false,
@@ -109,28 +111,15 @@ Page({
       show_endtime: false
     })
   },
-   // 基础材料
-   qingqiu() {
-    MainProject().then(res => {
-      // console.log(res)
-      var q = JSON.parse(res)
-      var s = q.map(t => {
-        return t.projcectCode
-      })
-      this.setData({
-        sections: s,
-      })
-      console.log(this.data.sections)
-      this.setData({
-        firms: app.globalData.Customer,
-      })
-    })
-  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.qingqiu()
+    this.setData({
+      sections: app.globalData.MainProject,
+      section5: app.globalData.Principal,
+      firms: app.globalData.Customer,
+    })
     // 列表
     this.setData({
       seach: ""
@@ -153,7 +142,7 @@ Page({
     });
   },
   onConfirm_o(e) {
-    let info = util.editInfo(e, this, e.detail.value);
+    let info = util.editInfo(e, this, e.detail.value.text);
     console.log( e.detail.value)
     this.setData({
       info,
@@ -179,7 +168,63 @@ Page({
       show1: false
     })
   },
-   
+   // 创建人
+   showPopup5() {
+    this.setData({
+      show5: true
+    })
+  },
+  onClose5() {
+    this.setData({
+      show5: false
+    })
+  },
+  onConfirm5(e) {
+    // console.log(e)
+    let info = util.editInfo(e, this, e.detail.value.value);
+    this.setData({
+      info,
+      show5: false
+    })
+  },
+// 计划开工时间
+showPopup_time() {
+  this.setData({
+    show_time: true
+  })
+},
+onClose_time() {
+  this.setData({
+    show_time: false
+  })
+},
+onConfirm_time(e) {
+  let info = util.editInfo(e, this, util.datefomate(e.detail));
+  this.setData({
+    info,
+    show_time: false
+  })
+},
+// 计划完工时间
+showPopup_endtime() {
+  this.setData({
+    show_endtime: true
+  })
+},
+onClose_endtime() {
+  this.setData({
+    show_endtime: false
+  })
+}, 
+onConfirm_endtime(e) {
+  // console.log(e)
+  // console.log(util.datefomate(e.detail))
+  let info = util.editInfo(e, this, util.datefomate(e.detail));
+  this.setData({
+    info,
+    show_endtime: false
+  })
+},
   // 组合查询关闭与开启
   change() {
     this.setData({

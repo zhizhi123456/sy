@@ -237,7 +237,7 @@ Page({
     });
   },
   onConfirm_o(e) {
-    let info = util.editInfo(e, this, e.detail.value.text);
+    let info = util.editInfo(e, this, e.detail.value.value);
     this.setData({
       info,
       show_o: false,
@@ -266,6 +266,7 @@ Page({
   },
   // 组合查询
   seachqur() {
+    console.log(this.data.info)
     util.qgroupdeliver(qgroupaccident, this)
   },
 })
