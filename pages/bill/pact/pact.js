@@ -410,7 +410,6 @@ Page({
   },
   // 状态
   showPopup_3() {
-    let userinfo = wx.getStorageSync("myInfo");
     if (userinfo) {
       let info = this.data.info;
       info.UserName = userinfo.UserName;
@@ -440,7 +439,12 @@ Page({
       info
     })
   },
-
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    userinfo = wx.getStorageSync("myInfo");
+  },
   /**
    * 页面上拉触底事件的处理函数
    */

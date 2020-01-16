@@ -95,6 +95,12 @@ const checkContent = (value, key) => {
     value.API_Picurl = value.API_Picurl.join(",")
   }
   var app = getApp();
+  // 请假类别
+  app.globalData.Leavetypelist.forEach(res => {
+    if (value.leavetype == res.text) {
+      value.leavetype = res.value
+    }
+  })
   // 用章类别
   app.globalData.Usesealtype.forEach(res => {
     if (value.usesealtype == res.text) {
@@ -111,6 +117,12 @@ const checkContent = (value, key) => {
   app.globalData.Invoicefeerate.forEach(res => {
     if (value.invoicefeerate == res.text) {
       value.invoicefeerate = res.value;
+    }
+  })
+  // 开票信息
+  app.globalData.billing.forEach(res => {
+    if (value.invoiceinfo == res.text) {
+      value.invoiceinfo = res.value;
     }
   })
   //公司
@@ -317,6 +329,12 @@ const checkChange = (value, key, dep) => {
     })
   }
   var app = getApp();
+  // 请假类别
+  app.globalData.Leavetypelist.forEach(res => {
+    if (value.leavetype == res.text) {
+      value.leavetype = res.value
+    }
+  })
   // 用章类别
   app.globalData.Usesealtype.forEach(res => {
     if (value.usesealtype == res.text) {
@@ -333,6 +351,12 @@ const checkChange = (value, key, dep) => {
   app.globalData.Invoicefeerate.forEach(res => {
     if (value.invoicefeerate == res.text) {
       value.invoicefeerate = res.value;
+    }
+  })
+  // 开票信息
+  app.globalData.billing.forEach(res => {
+    if (value.invoiceinfo == res.text) {
+      value.invoiceinfo = res.value;
     }
   })
   //公司
@@ -514,6 +538,12 @@ const handleData = (data, key, dep) => {
       data[i] = ""
     }
   }
+  // 请假类别
+  app.globalData.Leavetypelist.forEach(depart => {
+    if (data.leavetype == depart.value) {
+      data.leavetype = depart.text
+    }
+  })
   // 开票类别
   app.globalData.Invoicetype.forEach(depart => {
     if (data.invoicetype == depart.value) {
@@ -524,6 +554,12 @@ const handleData = (data, key, dep) => {
   app.globalData.Invoicefeerate.forEach(depart => {
     if (data.invoicefeerate == depart.value) {
       data.invoicefeerate = depart.text
+    }
+  })
+  // 票率
+  app.globalData.billing.forEach(depart => {
+    if (data.invoiceinfo == depart.value) {
+      data.invoiceinfo = depart.text
     }
   })
   // 部门
@@ -742,6 +778,12 @@ const listData = (data, dep, page, list) => {
     }
   }
   data.forEach((value, index) => {
+    // 请假类别
+    app.globalData.Leavetypelist.forEach(depart => {
+      if (value.leavetype == depart.value) {
+        value.leavetype = depart.text
+      }
+    })
     // 开票类别
     app.globalData.Invoicetype.forEach(depart => {
       if (value.invoicetype == depart.value) {
@@ -881,11 +923,11 @@ const updateCode = (e, key) => {
   let materials = key.data.materials;
   if (i) {
     materials[i][name] = e.detail.value.text;
-    materials[i].goodsname = e.detail.value.goodsname;
+    materials[i].goodsname = e.detail.value.value;
     materials[i].specifications = e.detail.value.specifications;
   } else {
     materials[0][name] = e.detail.value.text;
-    materials[0].goodsname = e.detail.value.goodsname;
+    materials[0].goodsname = e.detail.value.value;
     materials[0].specifications = e.detail.value.specifications;
   }
   return materials;
@@ -1956,7 +1998,7 @@ const qgroupsmall = (funcname, that) => {
   var zhen = []
   let small = that.data.small;
   for (var t in small) {
-    if (small[t] && t!='delievryid') {
+    if (small[t] && t != 'delievryid') {
       zhen.push(true)
     } else {
       zhen.push(false)
@@ -2039,7 +2081,7 @@ const qgroupsmall = (funcname, that) => {
         that.setData({
           small
         })
-       
+
       }
     })
   }
@@ -2075,7 +2117,7 @@ const expurgate = ((that, funcname, section) => {
     }
   })
 })
-const expurgateDetail = ((that, funcname, section,MasterDetailID) => {
+const expurgateDetail = ((that, funcname, section, MasterDetailID) => {
   wx.showModal({
     content: '确定删除吗？',
     success(res) {

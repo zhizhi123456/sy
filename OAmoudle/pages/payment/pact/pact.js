@@ -1,7 +1,7 @@
 // pages/pact/pact.js
 import {
-  getVacate,
-  groupVacate,
+  getPayment,
+  groupPayment,
 } from '../../../../service/getData';
 var app = getApp();
 var util = require("../../../../utils/util");
@@ -14,7 +14,7 @@ Page({
   data: {
     seach: '',
     loading: false,
-    top: '请假',
+    top: '付款签报',
     currentDate: new Date().getTime(),
     InfoList: [],
     item: [],
@@ -42,7 +42,7 @@ Page({
     this.setData({
       pages: 1
     })
-    getVacate({
+    getPayment({
       applyman: this.data.seach
     }).then(res => {
       // console.log(res)
@@ -71,7 +71,7 @@ Page({
       title: '加载中',
     });
     // 调用查询
-    getVacate().then(res => {
+    getPayment().then(res => {
       // console.log(res.List)
       if (res.code == 10000) {
         item = res.List;
