@@ -161,7 +161,7 @@ Page({
             icon: 'success',
             duration: 3000
           })
-          util.returnPrev('officeCost')
+          util.OAreturn('officeCost')
         }
       })
     } else {
@@ -173,11 +173,11 @@ Page({
   },
   // 返回
   return () {
-    util.returnPrev('officeCost')
+    util.OAreturn('officeCost')
   },
   // 编辑分包项目页面的确定和返回
   editreturn() {
-    util.returnPrev('officeCost', this)
+    util.OAreturn('officeCost', this)
   },
   editconfirm() {
     let info = this.data.info;
@@ -194,7 +194,7 @@ Page({
           icon: 'success',
           duration: 3000
         })
-        util.returnPrev('officeCost', this)
+        util.OAreturn('officeCost', this)
       }
     })
   },

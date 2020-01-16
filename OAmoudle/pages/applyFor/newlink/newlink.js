@@ -32,7 +32,7 @@ Page({
   // 返回
   return () {
     wx.redirectTo({
-      url: "/pages/applyFor/detail/detail?id=" + this.data.billid + "&table=c"
+      url: "/OAmoudle/pages/applyFor/detail/detail?id=" + this.data.billid + "&table=c"
     })
   },
   getgcode(e) {
@@ -116,7 +116,7 @@ Page({
             duration: 3000
           })
           wx.redirectTo({
-            url: "/pages/applyFor/detail/detail?id=" + this.data.billid + "&table=c"
+            url: "/OAmoudle/pages/applyFor/detail/detail?id=" + this.data.billid + "&table=c"
           })
         } else {
           wx.showToast({
@@ -132,7 +132,7 @@ Page({
   // 编辑材料明细时的返回和确定
   linkreturn() {
     wx.redirectTo({
-      url: "/pages/applyFor/detaillink/detaillink?detailid=" + this.data.materials[0].ID
+      url: "/OAmoudle/pages/applyFor/detaillink/detaillink?detailid=" + this.data.materials[0].ID
     })
   },
   linkconfirm() {
@@ -157,7 +157,7 @@ Page({
           duration: 3000
         })
         wx.redirectTo({
-          url: "/pages/applyFor/detaillink/detaillink?detailid=" + this.data.materials[0].ID
+          url: "/OAmoudle/pages/applyFor/detaillink/detaillink?detailid=" + this.data.materials[0].ID
         })
       }
     })

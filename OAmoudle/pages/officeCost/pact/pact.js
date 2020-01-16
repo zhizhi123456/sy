@@ -35,7 +35,7 @@ Page({
   },
   // 返回
   return () {
-    util.returnMenu();
+    util.returnMenu2(2055,"日常办公")
   },
   setSeach(e) {
     // console.log(e)

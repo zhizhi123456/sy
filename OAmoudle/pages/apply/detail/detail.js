@@ -31,12 +31,12 @@ Page({
   },
   // 返回
   return () {
-    util.returnPrev('apply')
+    util.OAreturn('apply')
   },
   // 新增明细表
   addndlink() {
     wx.redirectTo({
-      url: "/pages/apply/newlink/newlink?id=" + this.data.info.ID
+      url: "/OAmoudle/pages/apply/newlink/newlink?id=" + this.data.info.ID
     })
   },
   /**
@@ -91,15 +91,15 @@ Page({
   // 工作流流转
   // 退回上步
   sendback() {
-    util.Triggerflow(this, 'return', 'applybuyform', 'apply')
+    util.Triggerflow(this, 'return', 'applybuyform', 'apply', '', '', '', '', '', '', 'oa')
   },
   // 提交下步
   putin() {
-    util.Triggerflow(this, 'next', 'applybuyform', 'apply')
+    util.Triggerflow(this, 'next', 'applybuyform', 'apply', '', '', '', '', '', '', 'oa')
   },
   // 删除
   delete() {
-    util.expurgate(this, delapply, 'apply')
+    util.OAexpurgate(this, delapply, 'apply')
   },
   // 点击图片放大预览
   tap_pic(e) {

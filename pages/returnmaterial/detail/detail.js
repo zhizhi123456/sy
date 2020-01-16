@@ -4,6 +4,7 @@ import {
   ReturnMaterialdel,
   Returnall,
   ReturnMaterialup,
+  qgroupfile
 } from '../../../service/getData';
 var app = getApp();
 var util = require("../../../utils/util");
@@ -90,6 +91,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
+    util.readRecord('losematerial', options.id, this,'退料单')
     if (options.id || options.rid) {
       this.setData({
         rid: options.rid,
@@ -162,6 +165,7 @@ Page({
           // 调取工作流记录
           if (res.Item.formid) {
             util.workList(this, res.Item.formid)
+            console.log(this.data.steps)
           }
           util.checkState(this, res.Item.formid, 'losematerial', item.CurStepbh);
         }

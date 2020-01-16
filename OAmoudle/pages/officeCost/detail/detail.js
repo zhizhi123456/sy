@@ -28,7 +28,7 @@ Page({
   },
   // 返回
   return () {
-    util.returnPrev('officeCost')
+    util.OAreturn('officeCost')
   },
   /**
    * 生命周期函数--监听页面加载
@@ -66,15 +66,15 @@ Page({
   // 工作流流转
   // 退回上步
   sendback() {
-    util.Triggerflow(this, 'return', 'OfficeCharge', 'officeCost')
+    util.Triggerflow(this, 'return', 'OfficeCharge', 'officeCost', '', '', '', '', '', '', 'oa')
   },
   // 提交下步
   putin() {
-    util.Triggerflow(this, 'next', 'OfficeCharge', 'officeCost')
+    util.Triggerflow(this, 'next', 'OfficeCharge', 'officeCost', '', '', '', '', '', '', 'oa')
   },
   // 删除
   delete() {
     // console.log(this.data.info)
-    util.expurgate(this, delofficeCost, 'officeCost')
+    util.OAexpurgate(this, delofficeCost, 'officeCost')
   },
 })

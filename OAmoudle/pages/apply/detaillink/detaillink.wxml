@@ -59,7 +59,7 @@
     </view>
     <view class="footer">
         <view>
-            <navigator url="/pages/apply/newlink/newlink?detailid={{info.ID}}" hover-class="none">
+            <navigator url="/OAmoudle/pages/apply/newlink/newlink?detailid={{info.ID}}" hover-class="none">
                 <icon class="iconfont icon-bianji"></icon>
                 <text>编辑</text>
             </navigator>

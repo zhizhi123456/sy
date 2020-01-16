@@ -7,7 +7,8 @@ import {
   Returnall,
   Returnone,
   ReturnMaterialall,
-  Returnadd
+  Returnadd,
+  fileRecord
 
 } from "../../../service/getData";
 import Toast from 'vant-weapp/dist/toast/toast';
@@ -330,6 +331,7 @@ Page({
         wx.redirectTo({
           url: "/pages/returnmaterial/detail/detail?id=" + this.data.info.ID + '&rid=' + this.data.rid + '&title=' + this.data.title + (this.data.userid ? '&caption=' + this.data.caption + '&dep=' + this.data.dep + '&deptxt=' + this.data.deptxt + '&userid=' + this.data.userid : "")
         })
+        util.ModifyRecord(this.data.information,"losematerial")
         wx.hideLoading();
       }
     })
@@ -417,7 +419,9 @@ Page({
       }).then(res => {
         if (res.code == 10000) {
           let item = res.Item;
-
+          this.setData({
+            information: item
+          })
           //  console.log(item.API_Picurl)
           util.handleData(item, this, app.globalData.department);
           util.outflow(item, this)

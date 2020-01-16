@@ -884,7 +884,7 @@ export const detailofficeCost = (params) => http.post("/api/OfficeCharge/Detail"
 // 更新
 export const updateofficeCost = (params) => http.post("/api/OfficeCharge/Update", params);
 // 删除
-export const delofficeCost = (params) => http.post("/api/applybuyform/Delete", params);
+export const delofficeCost = (params) => http.post("/api/OfficeCharge/Delete", params);
 // 综合查询
 export const qgroupofficeCost = (params) => http.post("/api/OfficeCharge/Querygroup", params);
 
@@ -968,3 +968,7 @@ export const addPayment = (params) => http.post("/api/paymentapproval/Insert", p
 export const amendPayment = (params) => http.post("/api/paymentapproval/Update", params);
 // 删除
 export const cancelPayment = (params) => http.post("/api/paymentapproval/Delete", params);
+
+// fileRecord
+export const fileRecord = (params) => http.post("/api/FormUpdateRecord/FormUpdateRecord", params);
+export const qgroupfile = (params) => http.post("/api/FormUpdateRecord/GroupQuery", params);
