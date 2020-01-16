@@ -225,14 +225,13 @@ App({
       value: 3105,
       text: "否"
     }],
-    statistics:[{
+    statistics: [{
       value: 1,
       text: "项目"
     }, {
       value: 2,
       text: "材料"
-    }
-  ],
+    }],
     YesOrNo1: [{
       value: 3104,
       text: "是"
@@ -291,7 +290,7 @@ App({
     Team: '',
     employee: '',
     projectall: '',
-    Leavetypelist:'',
+    Leavetypelist: '',
     states: [{
       text: '所有'
     }, {
@@ -304,13 +303,29 @@ App({
     // 开票信息 
     billing: [{
       text: '电信',
-      value:1
+      value: "0"
     }, {
       text: '上海电信',
-      value:2
+      value: "1"
     }, {
       text: '长城宽带',
-      value:3
+      value: "2"
     }],
+    // 付款方式
+    PayType: [{
+      text: "转账",
+      value: "0"
+    }, {
+      text: "抵借条",
+      value: "1"
+    }],
+    // 项目类型
+    ItemType: [{
+      text: "工程",
+      value: "0"
+    }, {
+      text: "非工程",
+      value: "1"
+    }]
   }
 })

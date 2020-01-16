@@ -21,16 +21,13 @@
                 <van-popup show="{{ show }}" bind:close="onClose" position="right" custom-style="height: 100vh;color:#333">
                     <view class="seach_item">
                         <van-cell-group>
-                            <van-field data-name="applyman" value="{{info.applyman}}" placeholder="请输入" bind:blur="applymanblur" label="申请人" />
+                            <van-field data-name="payapproveformname" value="{{info.payapproveformname}}" placeholder="请输入" bind:blur="payapproveformnameblur" label="付款签报名称" />
                         </van-cell-group>
                     </view>
                     <view class="seach_item">
                         <van-cell-group>
-                            <van-field value="{{info.leavetype}}" placeholder="请选择" bindtap="showPopup_1" label="请假类型" disabled />
+                            <van-field data-name="createman" value="{{info.createman}}" placeholder="请输入" bind:blur="createmanblur" label="创建人" />
                         </van-cell-group>
-                        <van-popup show="{{ show_1 }}" round position="bottom" bind:close="onClose_1">
-                            <van-picker data-name="leavetype" show-toolbar columns="{{ Leavetypelist }}" bind:cancel="onClose_1" bind:confirm="onConfirm_1" />
-                        </van-popup>
                     </view>
                     <view class="seach_item">
                         <van-cell-group>
@@ -42,20 +39,10 @@
                     </view>
                     <view class="seach_item">
                         <van-cell-group>
-                            <van-field data-name="leavereason" value="{{info.leavereason}}" placeholder="请输入" bind:blur="leavereasonblur" label="请假事由" />
-                        </van-cell-group>
-                    </view>
-                    <view class="seach_item">
-                        <van-cell-group>
-                            <van-field data-name="leavedays" value="{{info.leavedays}}" placeholder="请输入" bind:blur="leavedaysblur" label=" 请假天数" />
-                        </van-cell-group>
-                    </view>
-                    <view class="seach_item">
-                        <van-cell-group>
-                            <van-field value="{{info.begintime}}" placeholder="请选择" label="开始时间" bindtap="showPopup_time" disabled />
+                            <van-field value="{{info.starttime}}" placeholder="请选择" label="开始时间" bindtap="showPopup_time" disabled />
                         </van-cell-group>
                         <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
-                            <van-datetime-picker data-name="begintime" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
+                            <van-datetime-picker data-name="starttime" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
                         </van-popup>
                     </view>
                     <view class="seach_item">
@@ -68,10 +55,10 @@
                     </view>
                     <view class="seach_item">
                         <van-cell-group>
-                            <van-field value="{{info.state}}" placeholder="请选择" bindtap="showPopup_3" label="状态" disabled />
+                            <van-field value="{{info.processstate}}" placeholder="请选择" bindtap="showPopup_3" label="状态" disabled />
                         </van-cell-group>
                         <van-popup show="{{ show_3 }}" round position="bottom" bind:close="onClose_3">
-                            <van-picker data-name="state" show-toolbar columns="{{ states }}" bind:cancel="onClose_3" bind:confirm="onConfirm_3" />
+                            <van-picker data-name="processstate" show-toolbar columns="{{ states }}" bind:cancel="onClose_3" bind:confirm="onConfirm_3" />
                         </van-popup>
                     </view>
                     <view class="checkkind">
@@ -86,23 +73,19 @@
         <view class="list" wx:for="{{InfoList}}" wx:key="index">
             <navigator url="/OAmoudle/pages/payment/detail/detail?id={{item.ID}}" hover-class="none">
                 <view>
-                    <text class="caption">{{item.leavetype}}</text>
+                    <text class="caption">{{item.payapproveformname}}</text>
                 </view>
                 <view>
-                    <text class="info">请假类型</text>
-                    <text>{{item.leavetype}}</text>
+                    <text class="info">签报名称</text>
+                    <text>{{item.payapproveformname}}</text>
                 </view>
                 <view>
-                    <text class="info">请假事由</text>
-                    <text>{{item.leavereason}}</text>
+                    <text class="info">付款金额</text>
+                    <text>{{item.payammount}}</text>
                 </view>
                 <view>
-                    <text class="info">请假天数</text>
-                    <text>{{item.leavedays}}</text>
-                </view>
-                <view>
-                    <text class="info">申请人</text>
-                    <text>{{item.applyman}}</text>
+                    <text class="info">公司</text>
+                    <text>{{item.Companytitle}}</text>
                 </view>
                 <view>
                     <text class="info">创建人</text>

@@ -1,8 +1,6 @@
 {
   "pages": [
     "pages/contracts/contracts",
-    "pages/contracts1/contracts",
-    "pages/secondary/secondary",
     "pages/secondarys/secondarys",
     "pages/member/pact/pact",
     "pages/sceneticket/pact/pact",

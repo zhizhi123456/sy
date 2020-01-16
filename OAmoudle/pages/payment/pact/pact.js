@@ -88,7 +88,6 @@ Page({
     if (app.globalData.CountItem) {
       this.setData({
         sections: app.globalData.department,
-        Leavetypelist:app.globalData.Leavetypelist,
         states: app.globalData.states
       })
     } else {
@@ -96,7 +95,6 @@ Page({
         if (employ != '') {
           this.setData({
             sections: app.globalData.department,
-            Leavetypelist:app.globalData.Leavetypelist,
             states: app.globalData.states
           })
         }
@@ -122,19 +120,8 @@ Page({
     this.setData({
       pages: 1
     })
-    if (this.data.info.applyman || this.data.info.leavetype || this.data.info.department || this.data.info.leavereason || this.data.info.leavedays || this.data.info.begintime|| this.data.info.state) {
-      let info = this.data.info;
-      if (info.leavetype) {
-        this.data.Leavetypelist.forEach(res => {
-          if (info.leavetype == res.text) {
-            info.leavetype = res.value;
-          }
-        })
-        this.setData({
-          info
-        })
-      }
-      groupVacate(this.data.info).then(res => {
+    if (this.data.info.payapproveformname || this.data.info.createman || this.data.info.department || this.data.info.starttime || this.data.info.endtime || this.data.info.processstate) {
+      groupPayment(this.data.info).then(res => {
         if (res.code == 10000) {
           item = res.List;
           list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list);
@@ -159,28 +146,17 @@ Page({
       })
     )
   },
-    // 申请人
-    applymanblur(e) {
-      let info = util.editInfo(e, this, e.detail.value);
-      this.setData({
-        info
-      })
-    },
-  // 请假类型
-  showPopup_1() {
+  // 付款签报名称
+  payapproveformnameblur(e) {
+    let info = util.editInfo(e, this, e.detail.value);
     this.setData({
-      show_1: true
+      info
     })
   },
-  onClose_1() {
+  // 创建人
+  createmanblur(e) {
+    let info = util.editInfo(e, this, e.detail.value);
     this.setData({
-      show_1: false
-    })
-  },
-  onConfirm_1(e) {
-    let info = util.editInfo(e, this, e.detail.value.text);
-    this.setData({
-      show_1: false,
       info
     })
   },
@@ -203,20 +179,6 @@ Page({
       show_0: false,
       info,
       departmenttext: e.detail.value.text
-    })
-  },
-  // 请假事由
-  leavereasonblur(e) {
-    let info = util.editInfo(e, this, e.detail.value);
-    this.setData({
-      info
-    })
-  },
-  // 请假天数
-  leavedaysblur(e) {
-    let info = util.editInfo(e, this, e.detail.value);
-    this.setData({
-      info
     })
   },
   // 开始时间

@@ -101,6 +101,18 @@ const checkContent = (value, key) => {
       value.leavetype = res.value
     }
   })
+  // 付款方式
+  app.globalData.PayType.forEach(res => {
+    if (value.paytype == res.text) {
+      value.paytype = res.value
+    }
+  })
+  // 项目类型
+  app.globalData.ItemType.forEach(res => {
+    if (value.projecttype == res.text) {
+      value.projecttype = res.value
+    }
+  })
   // 用章类别
   app.globalData.Usesealtype.forEach(res => {
     if (value.usesealtype == res.text) {
@@ -353,6 +365,18 @@ const checkChange = (value, key, dep) => {
       value.invoicefeerate = res.value;
     }
   })
+  // 付款方式
+  app.globalData.PayType.forEach(res => {
+    if (value.paytype == res.text) {
+      value.paytype = res.value
+    }
+  })
+  // 项目类型
+  app.globalData.ItemType.forEach(res => {
+    if (value.projecttype == res.text) {
+      value.projecttype = res.value
+    }
+  })
   // 开票信息
   app.globalData.billing.forEach(res => {
     if (value.invoiceinfo == res.text) {
@@ -534,7 +558,7 @@ const checkChange = (value, key, dep) => {
 const handleData = (data, key, dep) => {
   var app = getApp();
   for (let i in data) {
-    if (data[i] == null || data[i] == "null" || !data[i]) {
+    if (data[i] == null || data[i] == "null" || data[i] == 'NULL') {
       data[i] = ""
     }
   }
@@ -542,6 +566,18 @@ const handleData = (data, key, dep) => {
   app.globalData.Leavetypelist.forEach(depart => {
     if (data.leavetype == depart.value) {
       data.leavetype = depart.text
+    }
+  })
+  // 付款方式
+  app.globalData.PayType.forEach(res => {
+    if (data.paytype == res.value) {
+      data.paytype = res.text
+    }
+  })
+  // 项目类型
+  app.globalData.ItemType.forEach(res => {
+    if (data.projecttype == res.value) {
+      data.projecttype = res.text
     }
   })
   // 开票类别
@@ -772,7 +808,7 @@ const listData = (data, dep, page, list) => {
   var app = getApp();
   for (let k of data) {
     for (let i in k) {
-      if (k[i] == null || k[i] == "null" || !k[i]) {
+      if (k[i] == null || k[i] == "null" || k[i] == 'NULL') {
         k[i] = ""
       }
     }
@@ -782,6 +818,18 @@ const listData = (data, dep, page, list) => {
     app.globalData.Leavetypelist.forEach(depart => {
       if (value.leavetype == depart.value) {
         value.leavetype = depart.text
+      }
+    })
+    // 付款方式
+    app.globalData.PayType.forEach(res => {
+      if (value.paytype == res.value) {
+        value.paytype = res.text
+      }
+    })
+    // 项目类型
+    app.globalData.ItemType.forEach(res => {
+      if (value.projecttype == res.value) {
+        value.projecttype = res.text
       }
     })
     // 开票类别
@@ -1928,12 +1976,12 @@ const qgroupdeliver = (funcname, that, hadNew, hadMy) => {
                 }
               })
               console.log(value.checkindate)
-              console.log( value.condition)
+              console.log(value.condition)
               if (value.checkindate || value.condition) {
-                if(value.checkindate){
+                if (value.checkindate) {
                   value.checkindate = value.checkindate.substring(0, 10)
                 }
-                
+
                 // value.Checkintime = value.Checkintime.substring(10)
                 value.condition == "忘打卡" ? value.Checkintime = '' : value.condition
               }
