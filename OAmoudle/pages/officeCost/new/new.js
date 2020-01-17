@@ -59,7 +59,7 @@ Page({
     })
   },
   onConfirm_4(e) {
-    // console.log(e)
+    // //console.log(e)
     let info = util.editInfo(e, this, e.detail.value.text);
     this.setData({
       info,
@@ -78,7 +78,7 @@ Page({
     })
   },
   onConfirm1(e) {
-    // console.log(e)
+    // //console.log(e)
     let info = util.editInfo(e, this, e.detail.value.text);
     this.setData({
       info,
@@ -97,7 +97,7 @@ Page({
     })
   },
   onConfirm2(e) {
-    // console.log(e)
+    // //console.log(e)
     let info = util.editInfo(e, this, e.detail.value.text);
     this.setData({
       info,
@@ -116,7 +116,7 @@ Page({
     })
   },
   onConfirm3(e) {
-    // console.log(e)
+    // //console.log(e)
     let info = util.editInfo(e, this, e.detail.value.text);
     this.setData({
       info,
@@ -135,7 +135,7 @@ Page({
     })
   },
   onConfirm4(e) {
-    // console.log(e)
+    // //console.log(e)
     let info = util.editInfo(e, this, e.detail.value.text);
     this.setData({
       info,
@@ -143,7 +143,7 @@ Page({
     })
   },
   confirm() {
-    // console.log(this.data.info)
+    // //console.log(this.data.info)
     if (this.data.info.chargename && this.data.info.Companytitle 
       && this.data.info.department && this.data.info.belongtoman 
       && this.data.info.usechargeman ) {
@@ -154,7 +154,7 @@ Page({
         info
       })
       addofficeCost(this.data.info).then(res => {
-        // console.log(res)
+        // //console.log(res)
         if (res.code == 10000) {
           wx.showToast({
             title: '新建成功',
@@ -187,7 +187,7 @@ Page({
       info
     })
     updateofficeCost(this.data.info).then(res => {
-      // console.log(res)
+      // //console.log(res)
       if (res.code == 10000) {
         wx.showToast({
           title: '编辑成功',
@@ -213,7 +213,7 @@ Page({
       detailofficeCost({
         ID: options.id
       }).then(res => {
-        // console.log(res)
+        // //console.log(res)
         let item = res.Item;
         util.handleData(item, this, app.globalData.department);
         util.outflow(item, this)

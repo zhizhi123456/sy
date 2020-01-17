@@ -138,7 +138,7 @@ onConfirm_endtime(e) {
     });
     // 调用查询
     querymaterial().then(res => {
-      console.log(res.List)
+      // console.log(res.List)
       if (res.code == 10000) {
         let item = res.List;
         util.listData(item, app.globalData.department);

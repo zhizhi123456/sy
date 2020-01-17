@@ -27,7 +27,7 @@ Page({
       pid: this.data.chuancan,
     }).then(res => {
       // 请求所有模块    不带uid
-      console.log(res)
+      // console.log(res)
       zong = res.List
       zong.forEach(s => {
         s.control = true
@@ -111,7 +111,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
+    // console.log(options)
     let userinfo = wx.getStorageSync("myInfo");
     if (userinfo) {
       getdep({
