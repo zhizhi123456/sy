@@ -5,6 +5,7 @@ import {
 } from "./../../service/getData";
 var app = getApp();
 var util = require("../../utils/util");
+let userinfo = wx.getStorageSync("myInfo");
 Page({
 
   /**
@@ -132,15 +133,9 @@ Page({
         }
       })
     }
-    var that = this;
-    wx.getStorage({
-      key: 'myInfo',
-      success(res) {
-        // console.log(res.data.ID)
-        that.setData({
-          id: res.data.ID
-        })
-      }
+    // console.log(res.data.ID)
+    this.setData({
+      id: userinfo.ID
     })
     // console.log(options.title)
     // 页面初始加载 检测传入id 传入传参

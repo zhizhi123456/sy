@@ -97,7 +97,7 @@ Page({
       if (info.Password != this.data.password) {
         // 改变密码
         info.LastPasswordChangedDate = util.format(new Date())
-        wx.setStorageSync("password",info.Password)
+        wx.setStorageSync("password", info.Password)
       } else {
         // 没有改变密码
         info.Password = this.data.password
@@ -111,7 +111,7 @@ Page({
       if ((info.IslockedOut != this.data.IslockedOut) && info.IslockedOut) {
         info.LastLockoutDate = util.format(new Date())
       }
-     
+
       info.LUD = util.format(new Date()),
       info.Timestamp = util.format(new Date())
       // util.checkChange(info, this, app.globalData.department);
@@ -119,9 +119,9 @@ Page({
       this.setData({
         info
       })
-      // console.log(this.data.info)
+      console.log(this.data.info)
       Personal(this.data.info).then(res => {
-        // console.log(res)
+        console.log(res)
         if (res.value) {
           wx.showToast({
             title: '编辑成功',
@@ -155,64 +155,51 @@ Page({
    */
   onLoad: function (options) {
     var that = this
-   
-    wx.getStorage({
-      key: 'username',
-      success(res) {
-        // console.log(res)
-        that.setData({
-          username: res.data
-        })
-      }
+    let username = wx.getStorageSync("username");
+    this.setData({
+      username: username
     })
-    wx.getStorage({
-      key: 'password',
-      success(res) {
-        // console.log(res)
-        that.setData({
-          password: res.data
-        })
-      }
+    let password = wx.getStorageSync("password");
+    this.setData({
+      password: password
     })
-    wx.getStorage({
-      key: 'myInfo',
-      success(res) {
-        // console.log(res.data)
-        var s = res.data
-        for (var key in s) {
-          if (s[key] === null) {
-            s[key] = ''
-          }
-        }
-        res.data.IslockedOut = util.whethercontent(res.data.IslockedOut)
+    let userinfo = wx.getStorageSync("myInfo");
+    var s = userinfo
+    for (var key in s) {
+      if (s[key] === null) {
+        s[key] = ''
+      }
+    }
+    userinfo.IslockedOut = util.whethercontent(userinfo.IslockedOut)
+    that.setData({
+      'info.ID': userinfo.ID,
+      'info.UserName': userinfo.UserName,
+      'info.Password': that.data.password,
+      'info.Email': userinfo.Email,
+      'info.MobilePIN': userinfo.MobilePIN,
+      'info.PasswordQuestion': userinfo.PasswordQuestion,
+      'info.PasswordAnswer': userinfo.PasswordAnswer,
+      'info.IslockedOut': userinfo.IslockedOut,
+      'IslockedOut': userinfo.IslockedOut,
+      'info.Memo': userinfo.Memo,
+      'info.EmpCode': userinfo.EmpCode,
+      'info.EmpName': userinfo.EmpName,
+      'info.LastLoginDate': userinfo.LastLoginDate,
+      'info.LastPasswordChangedDate': userinfo.LastPasswordChangedDate,
+      'info.LastLockoutDate': userinfo.LastLockoutDate,
+      'info.FCD': userinfo.FCD,
+      'info.LUD': userinfo.LUD,
+      'info.ReportViewPermissions': userinfo.ReportViewPermissions,
+      "info.Timestamp": util.format(new Date()),
+      "info.Token": userinfo.Token,
+      "info.TokenType": userinfo.TokenType,
+    })
+    var IslockedOut = util.whether(that.data.IslockedOut)
+    that.setData({
+      IslockedOut
+    })
+    wx.hideLoading();
 
-        that.setData({
-          'info.ID': res.data.ID,
-          'info.UserName': res.data.UserName,
-          'info.Password': that.data.password,
-          'info.Email': res.data.Email,
-          'info.MobilePIN': res.data.MobilePIN,
-          'info.PasswordQuestion': res.data.PasswordQuestion,
-          'info.PasswordAnswer': res.data.PasswordAnswer,
-          'info.IslockedOut': res.data.IslockedOut,
-          'IslockedOut': res.data.IslockedOut,
-          'info.Memo': res.data.Memo,
-          'info.EmpCode': res.data.EmpCode,
-          'info.EmpName': res.data.EmpName,
-          'info.LastLoginDate': res.data.LastLoginDate,
-          'info.LastPasswordChangedDate': res.data.LastPasswordChangedDate,
-          'info.LastLockoutDate': res.data.LastLockoutDate,
-          'info.FCD': res.data.FCD,
-          'info.LUD': res.data.LUD,
-          'info.ReportViewPermissions':res.data.ReportViewPermissions
-        })
-        var IslockedOut =util.whether( that.data.IslockedOut)
-        that.setData({
-          IslockedOut
-        })
-        wx.hideLoading();
-      }
-    })
   },
 
 })

@@ -1,6 +1,6 @@
 {
   "pages": [
-    "pages/returnmaterial/pact/pact",
+   
     "pages/contracts/contracts",
     "pages/secondary/secondary",
     "pages/login/login",
@@ -80,6 +80,7 @@
     "pages/contractproject/pact/pact",
     "pages/contractproject/new/new",
     "pages/contractproject/detail/detail",
+    "pages/returnmaterial/pact/pact",
     "pages/returnmaterial/new/new",
     "pages/returnmaterial/detail/detail",
     "pages/returnmaterial/newlink/newlink",

@@ -20,7 +20,8 @@ Page({
     lists: [],
     num: 1000,
     login: true,
-    exist: ''
+    exist: '',
+    deng:''
 
   },
   deal() {
@@ -33,9 +34,13 @@ Page({
       pid: 0,
     }).then(res => {
       //console.log(res)
+      var s = res.List
+      var w = s[2]
+      s[2] = s[3]
+      s[3] = w
       this.setData({
-        tags: res.List,
-        tag: res.List
+        tags:s,
+        tag: s
       })
       wx.hideLoading()
     })

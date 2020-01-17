@@ -29,7 +29,7 @@ Page({
       ifeffective: "",
     },
     WorkAreaName: "",
-    getto:false,
+    getto: false,
     date: "",
     check_photo: [{
       name: "拍照"
@@ -115,15 +115,15 @@ Page({
     j1 = Math.abs(j1)
     var w1 = jingdu[1] - this.data.latitude
     w1 = Math.abs(w1)
-    console.log(j1,w1)
-    if(j1 > 0.003 || w1 > 0.003){
+    console.log(j1, w1)
+    if (j1 > 0.003 || w1 > 0.003) {
       this.setData({
-        getto:false
+        getto: false
       })
       return false
-    }else{
+    } else {
       this.setData({
-        getto:true
+        getto: true
       })
       return true
     }
@@ -139,7 +139,7 @@ Page({
       "info.CheckinCentPosi": jd,
       "info.ifeffective": true
     })
-    var reach  = this.arrive()
+    var reach = this.arrive()
     console.log(reach)
     if (!reach) {
       Toast({
@@ -163,7 +163,7 @@ Page({
               duration: 3000
             })
             util.returnPrev('sign', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
-            this.data.rid, this.data.title)
+              this.data.rid, this.data.title)
           } else {
             wx.showToast({
               title: '打卡失败',
@@ -177,7 +177,7 @@ Page({
   },
   return () {
     util.returnPrev('sign', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
-    this.data.rid, this.data.title)
+      this.data.rid, this.data.title)
   },
   /**
    * 生命周期函数--监听页面加载
@@ -199,15 +199,11 @@ Page({
     // 计时器时间变化
     this.getdata()
     var that = this
-    wx.getStorage({
-      key: 'myInfo',
-      success(res) {
-        that.setData({
-          "info.Token": res.data.Token,
-          "info.TokenType":res.data.TokenType,
-          "info.UserID":  res.data.ID,
-        })
-      }
+    var userinfo = wx.getStorageSync("myInfo");
+    that.setData({
+      "info.Token": userinfo.Token,
+      "info.TokenType": userinfo.TokenType,
+      "info.UserID": userinfo.ID,
     })
     // 获得办公区域位置
     officeAddress({

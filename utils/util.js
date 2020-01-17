@@ -1937,7 +1937,7 @@ const qgroupdeliver = (funcname, that, hadNew, hadMy) => {
           Timestamp: app.globalData.time,
           ...that.data.info
         }
-        //console.log(infodata)
+        console.log(infodata)
         funcname(
           infodata
         ).then(res => {
@@ -1991,8 +1991,6 @@ const qgroupdeliver = (funcname, that, hadNew, hadMy) => {
             that.setData({
               InfoList: item.reverse()
             })
-
-            wx.hideLoading();
             if (hadNew != '0' && hadMy != '1') {
               for (var key in info) {
                 info[key] = ''
