@@ -28,10 +28,10 @@
                         <view class="kind">公司抬头</view>
                         <view class="check">{{info.Companytitle}}</view>
                     </view>
-                    <view class="c_item">
+                    <!-- <view class="c_item">
                         <view class="kind">审批状态</view>
                         <view class="check">{{info.ApprovalStatusint}}</view>
-                    </view>
+                    </view> -->
                     <view class="c_item">
                         <view class="kind">项目编号</view>
                         <view class="check">{{info.projectcode}}</view>

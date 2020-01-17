@@ -205,13 +205,13 @@ Page({
           }
           // 新增退料单
           ReturnMaterialadd(infodata).then(res => {
-            console.log(res)
+            // console.log(res)
             if (res.code == 10000) {
               // 查询总条数
               return ReturnMaterialall()
             }
           }).then(res => {
-            console.log(res)
+            // console.log(res)
             if (res.code == 10000) {
               let billlist = res.List;
               // //  console.log(res)
@@ -273,7 +273,7 @@ Page({
           ...this.data.info
         }
         ReturnMaterialadd(infodata).then(res => {
-          console.log(res)
+          // console.log(res)
           if (res.code == 10000) {
             wx.showToast({
               title: '新建成功',
@@ -324,7 +324,7 @@ Page({
     wx.showLoading({
       title: "加载中",
     })
-    console.log(infodata)
+    // console.log(infodata)
     ReturnMaterialup(infodata).then(res => {
       console.log(res)
       if (res.code == 10000) {
@@ -431,7 +431,6 @@ Page({
           wx.hideLoading();
         }
       })
-
     }
     this.setData({
       sections: app.globalData.department,

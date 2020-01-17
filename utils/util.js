@@ -1638,9 +1638,9 @@ const intro = (data, that) => {
     if (s.text == data.MemberName) {
       data.MemberName = s.value
     }
-    if (s.text == data.applyman) {
-      data.applyman = s.value
-    }
+    // if (s.text == data.applyman) {
+    //   data.applyman = s.value
+    // }
     if (s.text == data.belongtoman) {
       data.belongtoman = s.value
     }
@@ -1830,9 +1830,9 @@ const outflow = (data, that) => {
     if (s.value == data.MemberName) {
       data.MemberName = s.text
     }
-    if (s.value == data.applyman) {
-      data.applyman = s.text
-    }
+    // if (s.value == data.applyman) {
+    //   data.applyman = s.text
+    // }
     if (s.value == data.belongtoman) {
       data.belongtoman = s.text
     }

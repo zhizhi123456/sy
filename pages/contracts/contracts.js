@@ -21,7 +21,7 @@ Page({
     num: 1000,
     login: true,
     exist: '',
-    deng:''
+    deng: ''
 
   },
   deal() {
@@ -33,14 +33,15 @@ Page({
       Timestamp: app.globalData.time,
       pid: 0,
     }).then(res => {
-      //console.log(res)
+      console.log(res)
       var s = res.List
-      var w = s[2]
-      s[2] = s[3]
-      s[3] = w
+
+      var t = s.filter((a, index) => {
+        return index != 3
+      })
       this.setData({
-        tags:s,
-        tag: s
+        tags: t,
+        tag: t
       })
       wx.hideLoading()
     })

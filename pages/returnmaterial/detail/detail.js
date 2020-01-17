@@ -171,7 +171,6 @@ Page({
           util.checkState(this, res.Item.formid, 'losematerial', item.CurStepbh);
         }
       })
-      console.log()
       // 领料单关联的明细列表
       Returnall({
         losematerialid: options.id
