@@ -471,7 +471,13 @@ Page({
       })
     }
   },
-
+  findnew(e) {
+    let index = e.currentTarget.dataset.index - 1;
+    wx.pageScrollTo({
+      selector: '#new' + index,
+      duration: 500
+    })
+  },
   /**
    * 用户点击右上角分享
    */

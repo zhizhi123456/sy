@@ -419,6 +419,13 @@ Page({
       info
     })
   },
+  findnew(e) {
+    let index = e.currentTarget.dataset.index - 1;
+    wx.pageScrollTo({
+      selector: '#new' + index,
+      duration: 500
+    })
+  },
     /**
    * 生命周期函数--监听页面显示
    */
