@@ -5,6 +5,7 @@ import {
 } from '../../../service/getData.js';
 var app = getApp();
 var util = require("../../../utils/util");
+let linktime;
 Page({
   /**
    * 页面的初始数据
@@ -76,7 +77,7 @@ Page({
                 icon: 'success',
                 duration: 3000
               })
-              setTimeout(function () {
+              linktime = setTimeout(function () {
                 util.returnPrev('variation');
               }, 1000)
             }
@@ -101,7 +102,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    clearTimeout('linktime');
   },
 
   /**

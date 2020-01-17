@@ -30,8 +30,6 @@ Page({
    */
   onLoad: function (options) {
     user = wx.getStorageSync("myInfo");
-    // console.log(options)
-    user = wx.getStorageSync("myInfo");
     if (options.constructionteam) {
       this.setData({
         constructionteam: options.constructionteam
