@@ -136,7 +136,7 @@ App({
       util.sumup(Customer, this, 'Customer', "customername", "ID");
       util.sumup(MainProject, this, 'MainProject', "projcectCode", "projectname");
       util.sumup(MainProject, this, 'MainProject1', "projectname", "projcectCode");
-      util.sumup(EngineerClass, this, 'EngineerClass', "Value", "Key");
+      util.sumup(EngineerClass, this, 'EngineerClass', "Value", "ID");
       util.sumup(Pipeline, this, 'Pipeline', "Value", "Key");
       util.sumup(Circuit, this, 'Circuit', "Value", "Key");
       util.sumup(Translation, this, 'Translation', "Value", "Key");
@@ -169,7 +169,7 @@ App({
       Engineer({
         ID: 3209
       }).then(res => {
-        let result = util.getBase(res, "Value", "Key");
+        let result = util.getBase(res, "Value", "ID");
         this.globalData.Engineer = result;
         util.back(this, result)
       })

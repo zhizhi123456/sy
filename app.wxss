@@ -115,6 +115,7 @@
     margin-top: 200rpx;
     padding: 0 30rpx;
     flex: 1;
+    -webkit-overflow-scrolling: touch;
 }
 
 .main input {
@@ -199,6 +200,7 @@
 /* 主体 */
 .main_nav {
     margin-bottom: 100rpx;
+    -webkit-overflow-scrolling: touch;
 }
 
 .content {
@@ -303,6 +305,7 @@
     padding: 30rpx;
     background-color: #f1f1f1;
     margin-top: 100rpx;
+    -webkit-overflow-scrolling: touch;
 }
 
 .main .check_item {

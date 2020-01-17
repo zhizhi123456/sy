@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/returnmaterial/pact/pact",
     "pages/contracts/contracts",
+    "pages/returnmaterial/pact/pact",
     "pages/secondary/secondary",
     "pages/login/login",
     "pages/current/current/current",

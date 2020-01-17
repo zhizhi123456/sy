@@ -816,6 +816,30 @@ const listData = (data, dep, page, list) => {
     }
   }
   data.forEach((value, index) => {
+    // 工程类别
+    app.globalData.EngineerClass.forEach(res => {
+      if (value.EngineerClass == res.value) {
+        value.EngineerClass = res.text
+      }
+    })
+    //统计项目
+    app.globalData.CountItem.forEach(res => {
+      if (value.CountItem == res.value) {
+        value.CountItem = res.text;
+      }
+    })
+    //统计年月
+    app.globalData.CountYear.forEach(res => {
+      if (value.CountYearMonth == res.value) {
+        value.CountYearMonth = res.text;
+      }
+    })
+    //工程进度
+    app.globalData.Engineer.forEach(res => {
+      if (value.EngineerProgress == res.value) {
+        value.EngineerProgress = res.text;
+      }
+    })
     // 请假类别
     app.globalData.Leavetypelist.forEach(depart => {
       if (value.leavetype == depart.value) {
@@ -1113,7 +1137,7 @@ const workList = (key, id) => {
     if (res.code == 10000) {
       // //console.log(res)
       let step = res.list;
-      if (step[0]) {
+      if (step.length) {
         step.forEach(item => {
           if (item.nextstepid == 0 && !item.nextstepname && !item.nextdealrole && !item.nextdealuser) {
             item.nextstepname = "流程结束"
@@ -1121,7 +1145,7 @@ const workList = (key, id) => {
         })
       }
       let steps = key.data.steps;
-      if (step[0]) {
+      if (step.length) {
         step.forEach(item => {
           steps.push({
             text: item.createtime.replace(/[ ]/g, "/") + " " + item.createman + "编辑了资料 ●审批状态：" + item.stepname + "——>" + item.nextstepname,
@@ -2253,25 +2277,25 @@ const OAexpurgateDetail = ((that, funcname, section, MasterDetailID) => {
     }
   })
 })
-const  ModifyRecord = ((oldrecord,sheet)=>{
+const ModifyRecord = ((oldrecord, sheet) => {
   var userinfo = wx.getStorageSync("myInfo");
   var id = userinfo.UserName
   var oldcontext = JSON.stringify(oldrecord)
   var list = {
-    Timestamp:format(new Date()),
-    oldcontext ,
+    Timestamp: format(new Date()),
+    oldcontext,
     TableName: sheet,
-    Form_id: Number (oldrecord.ID),
-    formid: Number(oldrecord.formid) ,
+    Form_id: Number(oldrecord.ID),
+    formid: Number(oldrecord.formid),
     updateman: id
   }
   fileRecord(list).then(res => {
-    if(res.code = 10000){
-       console.log("上传成功")
+    if (res.code = 10000) {
+      console.log("上传成功")
     }
   })
 })
-const readRecord = ((sheet,datum,that,datumname)=>{
+const readRecord = ((sheet, datum, that, datumname) => {
   qgroupfile({
     Timestamp: format(new Date()),
     TableName: sheet,
@@ -2283,7 +2307,7 @@ const readRecord = ((sheet,datum,that,datumname)=>{
     if (modification) {
       modification.forEach(s => {
         var a = {
-          text: s.updateman +' ' + datumname +' '+'资料变更',
+          text: s.updateman + ' ' + datumname + ' ' + '资料变更',
           desc: s.updatetime
         }
         record.push(a)
