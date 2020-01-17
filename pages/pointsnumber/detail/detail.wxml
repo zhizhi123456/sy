@@ -109,7 +109,7 @@
             <text>退回上步</text>
         </view>
         <view>
-            <navigator url="/pages/pointsnumber/new/new?id={{info.ID}}&rid={{rid}}&title={{title}}&{{userid?'userid='+userid+'&caption='+caption+'&dep='+dep+'&deptxt='+deptxt+'&ISconduct='+ISconduct:''}}" hover-class="none">
+            <navigator open-type="redirect" url="/pages/pointsnumber/new/new?id={{info.ID}}&rid={{rid}}&title={{title}}&{{userid?'userid='+userid+'&caption='+caption+'&dep='+dep+'&deptxt='+deptxt+'&ISconduct='+ISconduct:''}}" hover-class="none">
                 <icon class="iconfont icon-bianji"></icon>
                 <text>编辑</text>
             </navigator>

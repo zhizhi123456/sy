@@ -115,7 +115,7 @@
                 </van-cell>
                 <block wx:for="{{material_list}}" wx:key="index">
                     <view class="material">
-                        <navigator url="/pages/bill/detaillink/detaillink?detailid={{item.ID}}&rid={{rid}}&title={{title}}&{{userid?'userid='+userid+'&caption='+caption+'&dep='+dep+'&deptxt='+deptxt+'&me='+me:''}}" hover-class="none">
+                        <navigator open-type="redirect" url="/pages/bill/detaillink/detaillink?detailid={{item.ID}}&rid={{rid}}&title={{title}}&{{userid?'userid='+userid+'&caption='+caption+'&dep='+dep+'&deptxt='+deptxt+'&me='+me:''}}" hover-class="none">
                             <view class="m_item">
                                 <text class="m_info">商品编号</text>
                                 <text>{{item.goodscode}}</text>
@@ -140,7 +140,7 @@
             <text>退回上步</text>
         </view>
         <view>
-            <navigator url="/pages/bill/new/new?id={{info.ID}}&rid={{rid}}&title={{title}}&{{userid?'userid='+userid+'&caption='+caption+'&dep='+dep+'&deptxt='+deptxt:''}}" hover-class="none">
+            <navigator open-type="redirect" url="/pages/bill/new/new?id={{info.ID}}&rid={{rid}}&title={{title}}&{{userid?'userid='+userid+'&caption='+caption+'&dep='+dep+'&deptxt='+deptxt:''}}" hover-class="none">
                 <icon class="iconfont icon-bianji"></icon>
                 <text>编辑</text>
             </navigator>

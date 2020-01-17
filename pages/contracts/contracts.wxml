@@ -20,7 +20,7 @@
       <text class="{{item.control ?'':'c'}}">{{item.name}}</text>
       <!-- <navigator url="{{ item.three?item.path +'?menuId='+ item.menuId:(item.control ? '/pages/secondarys/secondarys?id='+item.ID+'&title='+item.nametext :'#')}}"></navigator> -->
       <!-- <navigator url="{{(!item.control)?'':(item.three?(item.pageaddres +'?menuId='+ item.menuId+'&id='+item.ID+'&title='+item.name):('/pages/secondarys/secondarys?id='+item.ID+'&title='+item.name))}}"></navigator> -->
-      <navigator url="{{(!item.control)?'':(item.pageaddres +'?menuId='+ item.menuId+'&id='+item.ID+'&title='+item.name)}}"></navigator>
+      <navigator open-type="redirect" url="{{(!item.control)?'':(item.pageaddres +'?menuId='+ item.menuId+'&id='+item.ID+'&title='+item.name)}}" open-type="redirect"></navigator>
     </view>
   </view>
   <view wx:if="{{entered&&num==1002}}" class="haDquit">

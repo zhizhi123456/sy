@@ -4,7 +4,7 @@
     <view class="header">
         <view class="title">
             <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
-            <navigator url="/pages/generalcontract/new/new" class="fr newCreate">新建</navigator>
+            <navigator open-type="redirect" url="/pages/generalcontract/new/new" class="fr newCreate">新建</navigator>
             <view class="apply">{{top}}</view>
         </view>
         <view class="seach">
@@ -78,7 +78,7 @@
     </view>
     <view class="main">
         <view class="list" wx:for="{{InfoList}}" wx:key="index">
-            <navigator url="/pages/generalcontract/detail/detail?id={{item.ID}}" hover-class="none">
+            <navigator open-type="redirect" url="/pages/generalcontract/detail/detail?id={{item.ID}}" hover-class="none">
                 <view>
                     <text class="caption">{{item.maincontactname}}</text>
                 </view>

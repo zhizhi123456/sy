@@ -4,7 +4,7 @@
     <view class="header">
         <view class="title">
             <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
-            <navigator url="/pages/material/new/new" hover-class="none" class="fr newCreate">
+            <navigator open-type="redirect" url="/pages/material/new/new" hover-class="none" class="fr newCreate">
                 新建
             </navigator>
             <view class="apply">
@@ -48,7 +48,7 @@
     </view>
     <view class="main">
         <view class="list" wx:for="{{InfoList}}" wx:key="index">
-            <navigator url="/pages/material/detail/detail?id={{item.ID}}" hover-class="none">
+            <navigator open-type="redirect" url="/pages/material/detail/detail?id={{item.ID}}" hover-class="none">
                 <view>
                     <text class="info">存货编码</text>
                     <text>{{item.goodscode}}</text>

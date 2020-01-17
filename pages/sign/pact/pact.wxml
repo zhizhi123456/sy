@@ -4,7 +4,7 @@
     <view class="header">
         <view class="title">
             <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
-            <navigator url="/pages/sign/new/new?rid={{options.id||options.rid}}&title={{options.title}}&{{userid?'userid='+userid+'&caption='+caption+'&dep='+dep+'&deptxt='+deptxt:''}}" hover-class="none" class="fr newCreate" wx:if="{{hadNew||me}}">
+            <navigator open-type="redirect" url="/pages/sign/new/new?rid={{options.id||options.rid}}&title={{options.title}}&{{userid?'userid='+userid+'&caption='+caption+'&dep='+dep+'&deptxt='+deptxt:''}}" hover-class="none" class="fr newCreate" wx:if="{{hadNew||me}}">
                 新建
             </navigator>
             <view class="apply">{{top}}</view>
@@ -55,7 +55,7 @@
     </view>
     <view class="main">
         <view class="list" wx:for="{{InfoList}}" wx:key="index">
-            <navigator url="/pages/sign/detail/detail?id={{item.ID}}" hover-class="none">
+            <navigator open-type="redirect" url="/pages/sign/detail/detail?id={{item.ID}}" hover-class="none">
                 <view>
                     <text class="info">状态</text>
                     <text>{{item.classes}}</text>
