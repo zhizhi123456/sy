@@ -685,11 +685,22 @@ van-checkbox {
 
 .list .LThint {
     position: absolute;
-    top: 0;
-    right: 0;
-    transform: rotateZ(25deg);
+    top: -10rpx;
+    left: -20rpx;
+    transform: rotateZ(-30deg);
+
 }
 
 .LThint .van-tag {
     font-size: 28rpx;
+}
+.main {
+    position: relative;
+}
+
+.linkLThint {
+    position: fixed;
+    top: 210rpx;
+    right:10rpx;
+    z-index: 2;
 }

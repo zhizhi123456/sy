@@ -113,7 +113,7 @@ Page({
    */
   onLoad: function (options) {
     // console.log(options)
-    let userinfo = wx.getStorageSync("myInfo");
+    userinfo = wx.getStorageSync("myInfo");
     if (userinfo) {
       getdep({
         UserName: userinfo.UserName
@@ -129,6 +129,15 @@ Page({
             caption: '我',
             dep: resData[0].ID,
             deptxt: resData[0].techofficename,
+          })
+        }
+      }).catch(err=>{
+        if (options.id == 1055) {
+          this.setData({
+            userid: userinfo.UserName,
+            caption: '我',
+            dep: "",
+            deptxt: "",
           })
         }
       })
@@ -151,5 +160,11 @@ Page({
     }
 
     this.screen()
-  }
+  },
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    userinfo = wx.getStorageSync("myInfo");
+  },
 })

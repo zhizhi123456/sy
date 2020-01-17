@@ -81,11 +81,14 @@
     </view>
     <view class="main">
         <view class="list" wx:for="{{InfoList}}" wx:key="index">
+            <van-tag class="linkLThint" round type="danger" size="large" wx:if="{{item.ApplygetNew&&applyT&&(index>1)}}" bindtap="findnew" data-index="{{index}}">
+                ↓↓
+            </van-tag>
             <van-tag class="LThint" round type="danger" size="large" wx:if="{{item.ApplygetNew&&applyT}}">
                 new
             </van-tag>
             <navigator open-type="redirect" url="/pages/bill/detail/detail?id={{item.ID}}&hadNew={{hadNew}}&rid={{options.id||options.rid}}&title={{options.title}}&{{userid?'userid='+userid+'&caption='+caption+'&dep='+dep+'&deptxt='+deptxt+'&me='+me+'&applyT='+applyT+'&ISconduct='+ISconduct:''}}" hover-class="none">
-                <view>
+                <view id="{{'new'+index}}">
                     <text class="caption">{{item.getmaterialName}}</text>
                 </view>
                 <view>
