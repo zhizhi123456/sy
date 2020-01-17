@@ -142,6 +142,7 @@ App({
       util.sumup(Translation, this, 'Translation', "Value", "Key");
       util.sumup(MainSubproject, this, 'MainSubproject', "projcectCode", "projectname");
       util.sumup(Goodsname, this, 'Goodsnames', "goodscode", "goodsname");
+      util.sumup(Goodsname, this, 'Goodsname', "goodscode", "goodsname");
       util.sumup(ClientType, this, 'ClientType', "Value", "Key");
       util.sumup(Supplier, this, 'Supplier', "suppliername", "ID");
       util.sumup(MaincontactAll, this, 'MaincontactAll', "maincontactname", "ID");
@@ -187,11 +188,6 @@ App({
           let MainSubproject = JSON.parse(res.replace(/subprojcectCode/g, 'value').replace(/subprojectname/g, 'text'));
           this.globalData.MainSubproject = MainSubproject;
         }
-      })
-      // 材料明细
-      Goodsname().then(res => {
-        let Goodsname = JSON.parse(res);
-        this.globalData.Goodsname = Goodsname;
       })
       // 施工队id
       ConstructionTeam().then(res => {

@@ -205,7 +205,7 @@ Page({
   },
   onConfirm2(e) {
     // console.log(e)
-    let info = util.editInfo(e, this, e.detail.value.value);
+    let info = util.editInfo(e, this, e.detail.value.text);
     this.setData({
       info,
       show2: false

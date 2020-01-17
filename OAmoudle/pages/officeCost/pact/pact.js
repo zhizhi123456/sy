@@ -38,7 +38,7 @@ Page({
     util.returnMenu2(2055,"日常办公")
   },
   setSeach(e) {
-    // console.log(e)
+    // //console.log(e)
     this.setData({
       seach: e.detail.value
     })
@@ -51,7 +51,7 @@ Page({
     queryofficeCost({
       chargename: this.data.seach
     }).then(res => {
-      // console.log(res)
+      // //console.log(res)
       if (res.code == 10000) {
         let item = res.List;
         util.listData(item, app.globalData.department);
@@ -83,7 +83,7 @@ Page({
     })
     this.seachInfo()
    
-    console.log(this.data.section3)
+    //console.log(this.data.section3)
 
   },
   meetplaceblur(e) {
@@ -122,7 +122,7 @@ Page({
     })
   },
   onConfirm2(e) {
-    // console.log(e)
+    // //console.log(e)
     let info = util.editInfo(e, this, e.detail.value.text);
     this.setData({
       info,
@@ -141,7 +141,7 @@ Page({
     })
   },
   onConfirm3(e) {
-    // console.log(e)
+    // //console.log(e)
     let info = util.editInfo(e, this, e.detail.value.text);
     this.setData({
       info,
@@ -160,7 +160,7 @@ Page({
     })
   },
   onConfirm4(e) {
-    // console.log(e)
+    // //console.log(e)
     let info = util.editInfo(e, this, e.detail.value.text);
     this.setData({
       info,
@@ -179,7 +179,7 @@ Page({
       })
     },
     onConfirm5(e) {
-      // console.log(e)
+      // //console.log(e)
       let info = util.editInfo(e, this, e.detail.value.value);
       this.setData({
         info,
@@ -235,8 +235,8 @@ Page({
     })
   },
   onConfirm_endtime(e) {
-    // console.log(e)
-    // console.log(util.datefomate(e.detail))
+    // //console.log(e)
+    // //console.log(util.datefomate(e.detail))
     let info = util.editInfo(e, this, util.datefomate(e.detail));
     this.setData({
       info,

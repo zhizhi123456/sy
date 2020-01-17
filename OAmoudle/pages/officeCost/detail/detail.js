@@ -22,7 +22,7 @@ Page({
       success(res) {
         // tempFilePath可以作为img标签的src属性显示图片
         const tempFilePaths = res.tempFilePaths;
-        // console.log(tempFilePaths)
+        // //console.log(tempFilePaths)
       }
     })
   },
@@ -41,7 +41,7 @@ Page({
       detailofficeCost({
         ID: options.id
       }).then(res => {
-        console.log(res)
+        //console.log(res)
         if (res.code == 10000) {
           let item = res.Item;
           util.handleData(item, this, app.globalData.department);
@@ -55,7 +55,7 @@ Page({
           let mid = res.Item.formid;
           if (mid) {
             util.workList(this, mid)
-            // console.log(this.data.steps)
+            // //console.log(this.data.steps)
           }
           //处理状态判断
           util.checkState(this, mid, 'OfficeCharge', item.CurStepbh);
@@ -74,7 +74,7 @@ Page({
   },
   // 删除
   delete() {
-    // console.log(this.data.info)
+    // //console.log(this.data.info)
     util.OAexpurgate(this, delofficeCost, 'officeCost')
   },
 })

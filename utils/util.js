@@ -1977,8 +1977,8 @@ const qgroupdeliver = (funcname, that, hadNew, hadMy) => {
                   value.department = depart.text
                 }
               })
-              console.log(value.checkindate)
-              console.log(value.condition)
+              // console.log(value.checkindate)
+              // console.log(value.condition)
               if (value.checkindate || value.condition) {
                 if (value.checkindate) {
                   value.checkindate = value.checkindate.substring(0, 10)
@@ -2277,13 +2277,13 @@ const readRecord = ((sheet,datum,that,datumname)=>{
     TableName: sheet,
     Form_id: datum
   }).then(res => {
-    console.log(res)
+    // console.log(res)
     var record = []
     var modification = res.List.reverse()
     if (modification) {
       modification.forEach(s => {
         var a = {
-          text: s.updateman +' ' + datumname +' '+'资料变更',
+          text: s.updateman + datumname +'资料变更',
           desc: s.updatetime
         }
         record.push(a)
