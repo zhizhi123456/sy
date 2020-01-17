@@ -280,7 +280,7 @@ Page({
                 icon: 'success',
                 duration: 3000
               })
-              util.returnPrev('apply');
+              util.OAreturn('apply');
             } else {
               Toast({
                 message: '请输入正确的内容',
@@ -304,7 +304,7 @@ Page({
               icon: 'success',
               duration: 3000
             })
-            util.returnPrev('apply');
+            util.OAreturn('apply');
           }
         })
       }
@@ -317,11 +317,11 @@ Page({
   },
   // 返回
   return () {
-    util.returnPrev('apply');
+    util.OAreturn('apply');
   },
   // 编辑页面的确定和返回
   editreturn() {
-    util.returnPrev('apply', this);
+    util.OAreturn('apply', this);
   },
   editconfirm() {
     let info = this.data.info;
@@ -339,7 +339,7 @@ Page({
           icon: 'success',
           duration: 3000
         })
-        util.returnPrev('apply', this);
+        util.OAreturn('apply', this);
       }
     })
   },

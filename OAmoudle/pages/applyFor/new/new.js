@@ -297,7 +297,7 @@ Page({
                 icon: 'success',
                 duration: 3000
               })
-              util.returnPrev('applyFor');
+              util.OAreturn('applyFor');
             } else {
               Toast({
                 message: '请输入正确的内容',
@@ -322,7 +322,7 @@ Page({
               icon: 'success',
               duration: 3000
             })
-            util.returnPrev('applyFor');
+            util.OAreturn('applyFor');
           }
         })
       }
@@ -335,11 +335,11 @@ Page({
   },
   // 返回
   return () {
-    util.returnPrev('applyFor');
+    util.OAreturn('applyFor');
   },
   // 编辑页面的确定和返回
   editreturn() {
-    util.returnPrev('applyFor', this);
+    util.OAreturn('applyFor', this);
   },
   editconfirm() {
     let info = this.data.info;
@@ -357,7 +357,7 @@ Page({
           icon: 'success',
           duration: 3000
         })
-        util.returnPrev('applyFor', this);
+        util.OAreturn('applyFor', this);
       }
     })
   },

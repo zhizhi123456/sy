@@ -31,12 +31,12 @@ Page({
   },
   // 返回
   return () {
-    util.returnPrev('applyFor')
+    util.OAreturn('applyFor')
   },
   // 新增明细表
   addndlink() {
     wx.redirectTo({
-      url: "/pages/applyFor/newlink/newlink?id=" + this.data.info.ID
+      url: "/OAmoudle/pages/applyFor/newlink/newlink?id=" + this.data.info.ID
     })
   },
   /**
@@ -91,16 +91,16 @@ Page({
   // 工作流流转
   // 退回上步
   sendback() {
-    util.Triggerflow(this, 'return', 'applyform', 'applyFor')
+    util.Triggerflow(this, 'return', 'applyform', 'applyFor', '', '', '', '', '', '', 'oa')
   },
   // 提交下步
   putin() {
-    util.Triggerflow(this, 'next', 'applyform', 'applyFor')
+    util.Triggerflow(this, 'next', 'applyform', 'applyFor', '', '', '', '', '', '', 'oa')
   },
   // 删除
   delete() {
     // console.log(this.data.info)
-    util.expurgate(this, delapplyFor, 'applyFor')
+    util.OAexpurgate(this, delapplyFor, 'applyFor')
   },
   // 点击图片放大预览
   tap_pic(e) {

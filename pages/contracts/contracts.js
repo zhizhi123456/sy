@@ -32,7 +32,7 @@ Page({
       Timestamp: app.globalData.time,
       pid: 0,
     }).then(res => {
-      console.log(res)
+      //console.log(res)
       this.setData({
         tags: res.List,
         tag: res.List
@@ -53,7 +53,7 @@ Page({
       Timestamp: app.globalData.time,
       pid: this.data.num,
     }).then(res => {
-      console.log(res)
+      //console.log(res)
       zong = res.List
       zong.forEach(s => {
         s.control = true
@@ -64,17 +64,16 @@ Page({
           s.ANUm = true
         }
         var path = s.pageaddres
-        // console.log(path)
+        // //console.log(path)
         if (path) {
           var a = path.substring(0, 1)
           if (a != '/') {
             s.pageaddres = '/' + path
           }
-          // console.log(path == "/pages/secondary/secondary")
+          // //console.log(path == "/pages/secondary/secondary")
           s.pageaddres = path.replace(/[\r\n]/g, "");
         }
-        console.log(path)
-      
+        //console.log(path)
 
       })
       // 有用户限制的菜单 
@@ -84,8 +83,8 @@ Page({
         UId: this.data.id,
       }).then(ress => {
         fen = ress.List
-        // console.log("用户菜单")
-        // console.log(fen)
+        // //console.log("用户菜单")
+        // //console.log(fen)
         // 有用户的菜单
         if (ress.List == 0) {
           for (i in zong) {
@@ -116,7 +115,7 @@ Page({
             }
           }
         })
-        console.log(zong)
+        //console.log(zong)
         this.setData({
           lists: zong
         })
@@ -133,7 +132,7 @@ Page({
           }
         }
         var that = this
-        // console.log(that.data.tags)
+        // //console.log(that.data.tags)
         wx.getStorage({
           key: 'myInfo',
           success(res) {
@@ -218,7 +217,7 @@ Page({
     wx.getStorage({
       key: 'myInfo',
       success(res) {
-        // console.log(res.data.ID)
+        // //console.log(res.data.ID)
         that.setData({
           id: res.data.ID,
           deng: true
@@ -231,7 +230,7 @@ Page({
       content: '是否登出当前账号？',
       success(res) {
         if (res.confirm) {
-          // console.log('用户点击确定')
+          // //console.log('用户点击确定')
           wx.removeStorageSync("myInfo");
           wx.removeStorageSync("principal");
           wx.redirectTo({
@@ -246,7 +245,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
+    //console.log(options)
     userinfo = wx.getStorageSync("myInfo");
     this.log() //判断是否登录
     if (options.grading !== undefined && options.grading !== "undefined") {
@@ -279,7 +278,7 @@ Page({
       getTaskTNUm({
         UserName: userinfo.UserName
       }).then(res => {
-        // console.log(res)
+        // //console.log(res)
         if (res.code == 10000) {
           let item = res.List,
             TaskTNUm = 0;

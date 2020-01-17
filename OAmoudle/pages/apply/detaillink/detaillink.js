@@ -22,11 +22,11 @@ Page({
   // 返回
   return () {
     wx.redirectTo({
-      url: "/pages/apply/detail/detail?id=" + this.data.info.applybuyid + "&table=c"
+      url: "/OAmoudle/pages/apply/detail/detail?id=" + this.data.info.applybuyid + "&table=c"
     })
   },
   delete() {
-  util.expurgateDetail(this,delapplysmall,'apply',this.data.info.applybuyid)
+  util.OAexpurgateDetail(this,delapplysmall,'apply',this.data.info.applybuyid)
   },
   /**
    * 生命周期函数--监听页面加载

@@ -36,7 +36,7 @@ Page({
   },
   // 返回
   return () {
-    util.returnMenu(1001);
+    util.returnMenu2(1006,"材料管理");
   },
   setSeach(e) {
     // console.log(e)
