@@ -1,8 +1,6 @@
 {
   "pages": [
-   
     "pages/contracts/contracts",
-    "pages/returnmaterial/pact/pact",
     "pages/secondary/secondary",
     "pages/login/login",
     "pages/current/current/current",
@@ -231,6 +229,7 @@
     "van-sidebar": "vant-weapp/dist/sidebar/index",
     "van-sidebar-item": "vant-weapp/dist/sidebar-item/index",
     "van-tag": "vant-weapp/dist/tag/index",
-    "van-divider": "vant-weapp/dist/divider/index"
+    "van-divider": "vant-weapp/dist/divider/index",
+    "van-button": "vant-weapp/dist/button/index"
   }
 }

@@ -1874,6 +1874,7 @@ const outflow = (data, that) => {
       data.chargetype = s.text
     }
   })
+  data.IfWfComplete = whethercontent(data.IfWfComplete)
 
 }
 const outflowlist = (list, that) => {

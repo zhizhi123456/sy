@@ -137,6 +137,7 @@ Page({
         if (res.code == 10000) {
           let item = res.Item;
           util.handleData(item, this, app.globalData.department)
+          util.outflow(item,this)
           item.ifwinbid = util.whethercontent(item.ifwinbid)
           item.ifmaterialinto = util.whethercontent(item.ifmaterialinto)
           item.ifmaterialcomplete = util.whethercontent(item.ifmaterialcomplete)
