@@ -114,9 +114,26 @@ Page({
     if (userinfo) {
       let resStr = wx.getStorageSync("principal");
       if (resStr) {
-        let sections = util.getBase(resStr, 'techofficename', 'ID');
-        this.setData({
-          sections
+        if (JSON.parse(resStr)[0].ID == 4007) {
+          this.setData({
+            sections: app.globalData.department
+          })
+        } else {
+          let sections = util.getBase(resStr, 'techofficename', 'ID');
+          this.setData({
+            sections
+          })
+        }
+        employee({
+          ID: this.data.sections[0].value
+        }).then(res => {
+          // console.log(res)
+          let info = this.data.info;
+          info.person = '';
+          this.setData({
+            info,
+            employee: util.getBase(res, "name", "userId")
+          })
         })
       }
     } else {
