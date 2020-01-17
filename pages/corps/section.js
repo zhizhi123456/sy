@@ -131,11 +131,11 @@ Page({
         if (res.data.UserName) {
     
           app.globalData.Principal.forEach(s => {
-
             if (s.value == res.data.UserName) {
               a = s.value
               var c = []
               c.push(s)
+              // console.log(c)
               that.setData({
                 sections:c
               })

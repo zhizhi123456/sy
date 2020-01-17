@@ -42,4 +42,5 @@
         </view>
         <text class="mp_hint" wx:else>暂无施工队信息</text>
     </view>
+    <text class="mp_hint" wx:else>暂无施工队信息</text>
 </view>

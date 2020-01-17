@@ -80,16 +80,6 @@ Page({
     if (options.id) {
       wx.setStorageSync('menus', options)
     }
-    // this.setData({
-    //   Token: "ww",
-    //   TokenType: "ww",
-    //   UserID: "c30735fb-7b21-4b6e-919c-0039d9c8945f",
-    //   starttime: "2017-12-12",
-    //   endtime: "2060-12-12",
-    //   "info.Token": "ww",
-    //   "info.TokenType": "ww",
-    //   "info.UserID": "c30735fb-7b21-4b6e-919c-0039d9c8945f",
-    // })
     if (options.id || options.rid) {
       this.setData({
         options: options
@@ -143,22 +133,22 @@ Page({
       })
     } else {
       var that = this
-      wx.getStorage({
-        key: 'myInfo',
-        success(res) {
-          that.setData({
-            top: '我的考勤打卡',
-            Token: res.data.Token,
-            TokenType: res.data.TokenType,
-            UserID: res.data.ID,
-            starttime: "2017-12-12",
-            endtime: "2060-12-12",
-            "info.Token": res.data.Token,
-            "info.TokenType": res.data.TokenType,
-            "info.UserID": res.data.ID,
-          })
-        }
+     var userinfo = wx.getStorageSync("myInfo");
+
+
+      that.setData({
+        top: '我的考勤打卡',
+        Token: userinfo.Token,
+        TokenType: userinfo.TokenType,
+        UserID: userinfo.ID,
+        starttime: "2017-12-12",
+        endtime: "2060-12-12",
+        "info.Token": userinfo.Token,
+        "info.TokenType": userinfo.TokenType,
+        "info.UserID": userinfo.ID,
       })
+
+
 
       querysign({
         Token: this.data.Token,

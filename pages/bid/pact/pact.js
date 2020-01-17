@@ -5,6 +5,7 @@ import {
 } from '../../../service/getData.js';
 var app = getApp();
 var util = require("../../../utils/util");
+let userinfo = wx.getStorageSync("myInfo");
 let item, list;
 Page({
   /**
@@ -89,9 +90,9 @@ Page({
       section3: app.globalData.Principal,
       section4: app.globalData.costkind,
     })
-   
+
     this.setData({
-      seach:""
+      seach: ""
     })
     this.seachInfo()
   },
@@ -267,29 +268,17 @@ Page({
   // 组合查询
   seachqur() {
     var that = this
-    if(this.data.info.processstate){
-      wx.getStorage({
-        key: 'myInfo',
-        fail(res) {
-          wx.showToast({
-            title: '请登录',
-            icon: 'none',
-            duration: 2000
-          })
-        },
-        success(res) {
-          console.log(res)
-          that.setData({
-            "info.UserName": res.data.UserName
-          })
-          util.qgroupdeliver(qgroupbid, that)
-        },
+    if (this.data.info.processstate) {
+      that.setData({
+        "info.UserName": userinfo.UserName
       })
-    }else{
+      util.qgroupdeliver(qgroupbid, that)
+
+    } else {
       util.qgroupdeliver(qgroupbid, that)
     }
-   
-   
+
+
   },
   /**
    * 页面相关事件处理函数--监听用户下拉动作
