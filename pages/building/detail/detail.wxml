@@ -184,7 +184,7 @@
                 </van-cell>
                 <block wx:for="{{material_list}}" wx:key="index">
                     <view class="material">
-                        <navigator url="/pages/building/detaillink/detaillink?detailid={{item.ID}}" hover-class="none">
+                        <navigator open-type="redirect" url="/pages/building/detaillink/detaillink?detailid={{item.ID}}" hover-class="none">
                             <!-- <view>
                                 <text class="m_caption">{{item.losematerialid}}</text>
                             </view> -->
@@ -212,7 +212,7 @@
             <text>退回上步</text>
         </view>
         <view>
-            <navigator url="/pages/building/new/new?id={{info.ID}}" hover-class="none">
+            <navigator open-type="redirect" url="/pages/building/new/new?id={{info.ID}}" hover-class="none">
                 <icon class="iconfont icon-bianji"></icon>
                 <text>编辑</text>
             </navigator>

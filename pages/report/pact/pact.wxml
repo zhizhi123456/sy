@@ -80,7 +80,7 @@
     </view>
     <view class="main">
         <view class="list" wx:for="{{InfoList}}" wx:key="index">
-            <navigator url="/pages/report/detail/detail?id={{item.ID}}" hover-class="none">
+            <navigator open-type="redirect" url="/pages/report/detail/detail?id={{item.ID}}" hover-class="none">
                 <!-- <view>
                     <text class="caption">{{item.projectname}}</text>
                 </view> -->

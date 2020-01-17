@@ -70,7 +70,7 @@
     </view>
     <view class="footer">
         <view>
-            <navigator url="/pages/employ/new/new?id={{info.ID}}" hover-class="none">
+            <navigator open-type="redirect" url="/pages/employ/new/new?id={{info.ID}}" hover-class="none">
                 <icon class="iconfont icon-bianji"></icon>
                 <text>编辑</text>
             </navigator>

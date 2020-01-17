@@ -10,6 +10,6 @@
     </view>
     <icon class="{{' icon iconfont '+ item.icon + (item.control ?'':' c') }}"></icon>
     <text class="{{item.control ?'':'c'}}">{{item.name}}</text>
-    <navigator url="{{ item.control ?(userinfo?item.pageaddres+'?menuId='+ item.menuId+'&id='+chuancan+'&title='+title:'') : '#'}}&{{userid?'userid='+userid+'&caption='+caption+'&dep='+dep+'&deptxt='+deptxt:''}}" bindtap="checkperson"></navigator>
+    <navigator open-type="redirect" url="{{ item.control ?(userinfo?item.pageaddres+'?menuId='+ item.menuId+'&id='+chuancan+'&title='+title:'') : '#'}}&{{userid?'userid='+userid+'&caption='+caption+'&dep='+dep+'&deptxt='+deptxt:''}}" bindtap="checkperson"></navigator>
   </view>
 </view>

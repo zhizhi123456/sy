@@ -93,7 +93,7 @@
             <text>退回上步</text>
         </view>
         <view>
-            <navigator url="/OAmoudle/pages/chapter/new/new?id={{info.ID}}" hover-class="none">
+            <navigator open-type="redirect" url="/OAmoudle/pages/chapter/new/new?id={{info.ID}}" hover-class="none">
                 <icon class="iconfont icon-bianji"></icon>
                 <text>编辑</text>
             </navigator>

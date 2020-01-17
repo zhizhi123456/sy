@@ -8,7 +8,7 @@
         <view class="m_column">
             <block wx:for="{{menu}}" wx:key="index">
                 <view class="m_listitem">
-                    <navigator url="{{item.path+'?userid=' + userid + '&caption=' + caption+'&dep='+dep+'&deptxt='+deptxt}}" hover-class="none">
+                    <navigator open-type="redirect" url="{{item.path+'?userid=' + userid + '&caption=' + caption+'&dep='+dep+'&deptxt='+deptxt}}" hover-class="none">
                         <icon wx:if="{{item.icon}}" class="iconfont {{item.icon}}"></icon>
                         <icon wx:else class="iconfont {{menuicon[index]}}"></icon>
                         <view>{{item.name}}</view>

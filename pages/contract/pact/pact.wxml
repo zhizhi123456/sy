@@ -4,7 +4,7 @@
     <view class="header">
         <view class="title">
             <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
-            <navigator url="/pages/contract/new/new?rid={{options.id||options.rid}}&title={{options.title}}&{{userid?'userid='+userid+'&caption='+caption+'&dep='+dep+'&deptxt='+deptxt:''}}" hover-class="none" class="fr newCreate" wx:if="{{hadNew||me||applyT}}">
+            <navigator open-type="redirect" url="/pages/contract/new/new?rid={{options.id||options.rid}}&title={{options.title}}&{{userid?'userid='+userid+'&caption='+caption+'&dep='+dep+'&deptxt='+deptxt:''}}" hover-class="none" class="fr newCreate" wx:if="{{hadNew||me||applyT}}">
                 新建
             </navigator>
             <view class="apply" wx:if="{{ISconduct}}">
@@ -80,7 +80,7 @@
             <van-tag class="LThint" round type="danger" size="large" wx:if="{{item.ApplygetNew&&applyT}}">
                 new
             </van-tag>
-            <navigator url="/pages/contract/detail/detail?id={{item.ID}}&hadNew={{hadNew}}&rid={{options.id||options.rid}}&title={{options.title}}&{{userid?'userid='+userid+'&caption='+caption+'&dep='+dep+'&deptxt='+deptxt+'&me='+me+'&applyT='+applyT+'&ISconduct='+ISconduct:''}}" hover-class="none">
+            <navigator open-type="redirect" url="/pages/contract/detail/detail?id={{item.ID}}&hadNew={{hadNew}}&rid={{options.id||options.rid}}&title={{options.title}}&{{userid?'userid='+userid+'&caption='+caption+'&dep='+dep+'&deptxt='+deptxt+'&me='+me+'&applyT='+applyT+'&ISconduct='+ISconduct:''}}" hover-class="none">
                 <view>
                     <text class="caption">{{item.subcontactname}}</text>
                 </view>

@@ -3,7 +3,7 @@
     <view class="header">
         <view class="title">
             <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
-            <navigator url="/OAmoudle/pages/invoice/new/new" hover-class="none" class="fr newCreate">
+            <navigator open-type="redirect" url="/OAmoudle/pages/invoice/new/new" hover-class="none" class="fr newCreate">
                 新建
             </navigator>
             <view class="apply">{{top}}</view>
@@ -95,7 +95,7 @@
     </view>
     <view class="main">
         <view class="list" wx:for="{{InfoList}}" wx:key="index">
-            <navigator url="/OAmoudle/pages/invoice/detail/detail?id={{item.ID}}" hover-class="none">
+            <navigator open-type="redirect" url="/OAmoudle/pages/invoice/detail/detail?id={{item.ID}}" hover-class="none">
                 <view>
                     <text class="caption">{{item.invoicename}}</text>
                 </view>

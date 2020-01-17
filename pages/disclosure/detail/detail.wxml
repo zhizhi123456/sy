@@ -82,7 +82,7 @@
     </view>
     <view class="footer">
         <view>
-            <navigator url="/pages/disclosure/new/new?id={{info.ID}}" hover-class="none">
+            <navigator open-type="redirect" url="/pages/disclosure/new/new?id={{info.ID}}" hover-class="none">
                 <icon class="iconfont icon-bianji"></icon>
                 <text>编辑</text>
             </navigator>
