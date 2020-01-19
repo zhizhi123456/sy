@@ -135,6 +135,13 @@ Page({
       }).then(res => {
         console.log(res)
         if (res.code == 10000) {
+          var data1 =res.Item
+          var b = JSON.stringify(data1)
+          var c  = JSON.parse(b)
+          this.setData({
+            information:c
+          })
+          console.log(this.data.information)
           let item = res.Item;
           util.handleData(item, this, app.globalData.department)
           util.outflow(item, this)
@@ -168,7 +175,6 @@ Page({
           util.checkState(this, res.Item.formid, 'losematerial', item.CurStepbh);
         }
       })
-      console.log()
       // 领料单关联的明细列表
       Returnall({
         losematerialid: options.id
@@ -193,13 +199,17 @@ Page({
   // 工作流流转
   // 退回上步
   sendback() {
+
     util.Triggerflow(this, 'return', 'losematerial', 'returnmaterial', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
       this.data.rid, this.data.title)
+      // util.ModifyRecord(this.data.information,"losematerial")
   },
   // 提交下步
   putin() {
+    console.log(this.data.information)
     util.Triggerflow(this, 'next', 'losematerial', 'returnmaterial', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
       this.data.rid, this.data.title)
+      // util.ModifyRecord(this.data.information,"losematerial")
   },
 
 })

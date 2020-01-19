@@ -37,6 +37,7 @@ Page({
     wx.showLoading({
       title: '加载中',
     });
+    
     if (options.id) {
       detailofficeCost({
         ID: options.id
@@ -50,6 +51,7 @@ Page({
             info: item
           })
           wx.hideLoading();
+          util.readRecord('OfficeCharge', options.id, this,'办公费用')
           // 调取工作流记录
           //列表
           let mid = res.Item.formid;

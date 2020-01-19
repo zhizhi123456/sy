@@ -81,7 +81,13 @@
                 </block>
                 <view class="dynamic_state" wx:else>暂无动态</view>
             </van-tab>
-
+            <van-tab title="修改记录" name="d">
+                <block wx:if="{{amendant}}">
+                    <van-cell title="记录({{amendant.length}})" />
+                    <van-steps steps="{{ amendant }}" active="{{ active }}" direction="vertical" />
+                </block>
+                <view class="dynamic_state" wx:else>暂无记录</view>
+            </van-tab>
         </van-tabs>
     </view>
     <view class="footer">

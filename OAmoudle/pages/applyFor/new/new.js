@@ -19,9 +19,9 @@ Page({
       purpose: "",
       Companytitle: '',
       department: '',
-      ifpurchase:"",
+      ifpurchase: "",
       itemnumber: '',
-      applynumber:"",
+      applynumber: "",
       API_Picurl: []
     },
     currentDate: new Date().getTime(),
@@ -46,9 +46,9 @@ Page({
     section3: [],
     section4: [],
     materials: [],
-    section5: ["红酒","购物卡","食品","烟","电脑"],
+    section5: ["红酒", "购物卡", "食品", "烟", "电脑"],
     section6: [],
-    ifpurchasetext:''
+    ifpurchasetext: ''
   },
   // 公司抬头
   showPopup_o() {
@@ -87,25 +87,25 @@ Page({
       // departmenttext: e.detail.value.text
     })
   },
-    // 项目编号
-    showPopup2() {
-      this.setData({
-        show2: true
-      });
-    },
-    onClose2() {
-      this.setData({
-        show2: false
-      });
-    },
-    onConfirm2(e) {
-      let info = util.editInfo(e, this, e.detail.value.value);
-      this.setData({
-        info,
-        show2: false,
-        ifpurchasetext: e.detail.value.text
-      })
-    },
+  // 项目编号
+  showPopup2() {
+    this.setData({
+      show2: true
+    });
+  },
+  onClose2() {
+    this.setData({
+      show2: false
+    });
+  },
+  onConfirm2(e) {
+    let info = util.editInfo(e, this, e.detail.value.value);
+    this.setData({
+      info,
+      show2: false,
+      ifpurchasetext: e.detail.value.text
+    })
+  },
   // 部门
   showPopup() {
     this.setData({
@@ -234,7 +234,7 @@ Page({
   confirm() {
     let info = this.data.info;
     // console.log(this.data.info)
-    if (info.purpose  && info.Companytitle && info.department && info.ifpurchase !=='' && info.itemnumber) {
+    if (info.purpose && info.Companytitle && info.department && info.ifpurchase !== '' && info.itemnumber) {
       var materials = this.data.materials;
       for (let k of materials) {
         for (let i in k) {
@@ -245,7 +245,7 @@ Page({
       }
       // console.log("1")
       if (this.data.materials[0]) {
-        if (!( materials[0].type && materials[0].quantity && materials[0].unitprice &&
+        if (!(materials[0].type && materials[0].quantity && materials[0].unitprice &&
             materials[0].detailname)) {
           Toast({
             message: '请填写明细表必填项',
@@ -357,6 +357,7 @@ Page({
           icon: 'success',
           duration: 3000
         })
+        util.ModifyRecord(this.data.information, "applyform")
         util.OAreturn('applyFor', this);
       }
     })
@@ -424,7 +425,7 @@ Page({
       section2: app.globalData.Companytitle,
       section3: app.globalData.department,
       section4: app.globalData.projectall,
-      section6:app.globalData.YesOrNo1
+      section6: app.globalData.YesOrNo1
     })
     if (options.id) {
       detailapplyFor({
@@ -432,11 +433,16 @@ Page({
       }).then(res => {
         // console.log(res)
         let item = res.Item;
-      
+        var data1 = res.Item
+        var b = JSON.stringify(data1)
+        var c = JSON.parse(b)
+        this.setData({
+          information: c
+        })
         util.handleData(item, this, app.globalData.department);
         util.outflow(item, this)
         this.setData({
-          ifpurchasetext:item.ifpurchase
+          ifpurchasetext: item.ifpurchase
         })
         this.setData({
           info: item

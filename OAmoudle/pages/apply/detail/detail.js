@@ -51,6 +51,7 @@ Page({
     wx.showLoading({
       title: '加载中',
     });
+    util.readRecord('applybuyform', options.id, this,'申购')
     if (options.id) {
       detailapply({
         ID: options.id

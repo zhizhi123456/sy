@@ -98,7 +98,7 @@
         </view>
         <view class="check_item">
             <view class="kind require">
-                <text>建筑面积</text>
+                <text>建筑面积或长度</text>
                 <text class="required">*</text>
             </view>
             <van-cell-group>
@@ -119,12 +119,15 @@
                 <text>负责人</text>
                 <text class="required">*</text>
             </view>
-            <van-cell title="{{info.charageman?info.charageman:'请选择'}}" bind:click="showPopup7">
+              <van-cell-group>
+                <van-field data-name="charageman" value="{{info.charageman}}" placeholder="请输入" bind:blur="projectnameblur" disabled />
+            </van-cell-group>
+            <!-- <van-cell title="{{info.charageman?info.charageman:'请选择'}}" bind:click="showPopup7">
                 <icon class="iconfont icon-jiantou" />
             </van-cell>
             <van-popup show="{{ show7 }}" round position="bottom" bind:close="onClose7">
                 <van-picker data-name="charageman" show-toolbar columns="{{section7}}" bind:cancel="onClose7" bind:confirm="onConfirm7" />
-            </van-popup>
+            </van-popup> -->
         </view>
         <view class="check_item">
             <text class="kind">图片</text>

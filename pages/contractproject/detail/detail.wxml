@@ -29,6 +29,10 @@
                         <view class="kind">甲方单位名称</view>
                         <view class="check">{{info.FirstCompanyName}}</view>
                     </view>
+                     <view class="c_item">
+                        <view class="kind">公司抬头</view>
+                        <view class="check">{{info.Companytitle}}</view>
+                    </view>
                     <view class="c_item">
                         <view class="kind">施工地点</view>
                         <view class="check">{{info.workplace}}</view>
@@ -38,7 +42,7 @@
                         <view class="check">{{info.material}}</view>
                     </view> -->
                     <view class="c_item">
-                        <view class="kind">甲方报建编号</view>
+                        <view class="kind">甲方项目编号</view>
                         <view class="check">{{info.FirstReportPrjcode}}</view>
                     </view>
                     <view class="c_item">
@@ -61,14 +65,14 @@
                         <view class="check">{{info.planbegindate}}</view>
                     </view>
                     <view class="c_item">
-                        <view class="kind">完工时间</view>
+                        <view class="kind">计划完工时间</view>
                         <view class="check">{{info.planenddate}}</view>
                     </view>
                     <view class="c_item">
                         <view class="kind">备注</view>
                         <view class="check">{{info.demo}}</view>
                     </view>
-                    <view class="c_item">
+                    <!-- <view class="c_item">
                         <view class="kind">工程进度一</view>
                         <view class="check">{{info.progress1}}</view>
                     </view>
@@ -83,7 +87,7 @@
                     <view class="c_item">
                         <view class="kind">是否中标</view>
                         <view class="check">{{info.ifwinbid}}</view>
-                    </view>
+                    </view> -->
                     <!-- <view class="c_item">
                         <view class="kind">市场部邮箱</view>
                         <view class="check">{{info.marketemail}}</view>
@@ -112,10 +116,7 @@
                         <view class="kind">主要施工内容</view>
                         <view class="check">{{info.mainbuildcontext}}</view>
                     </view>
-                    <view class="c_item">
-                        <view class="kind">公司抬头</view>
-                        <view class="check">{{info.Companytitle}}</view>
-                    </view>
+                   
                     <view class="c_item">
                         <view class="kind">主要联系人</view>
                         <view class="check">{{info.chiefcontactman}}</view>
@@ -124,10 +125,10 @@
                         <view class="kind">负责人</view>
                         <view class="check">{{info.chargeman}}</view>
                     </view>
-                    <view class="c_item">
+                    <!-- <view class="c_item">
                         <view class="kind">材料是否进场</view>
                         <view class="check">{{info.ifmaterialinto}}</view>
-                    </view>
+                    </view> -->
                     <view class="c_item">
                         <view class="kind">材料是否准备齐全</view>
                         <view class="check">{{info.ifmaterialcomplete}}</view>

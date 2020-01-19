@@ -976,3 +976,5 @@ export const cancelPayment = (params) => http.post("/api/paymentapproval/Delete"
 // fileRecord
 export const fileRecord = (params) => http.post("/api/FormUpdateRecord/FormUpdateRecord", params);
 export const qgroupfile = (params) => http.post("/api/FormUpdateRecord/GroupQuery", params);
+// contrast
+export const contrastfile = (params) => http.post("/api/FormUpdateRecord/DetermineJsonDifferences", params);

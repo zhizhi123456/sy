@@ -85,17 +85,17 @@ Page({
     })
   },
   back() {
-    if (this.data.chuancan == "wode" || this.data.chuancan == "xiangmuhetong") {
-      wx.navigateTo({
-        url: '/pages/contract/contract'
-      })
-      // console.log(1)
+    if (this.data.uponelevel) {
+      util.returnMenu(this.data.uponelevel);
     } else if (this.data.chuancan == 1055) {
+      // 我的信息
       util.returnMenu(1002);
     } else if (this.data.chuancan == 2055 || this.data.chuancan == 2056 || this.data.chuancan == 2057 || this.data.chuancan == 2058) {
+      // 0
       util.returnMenu(2054);
     } else {
-      util.returnMenu();
+      // 工程管理
+      util.returnMenu(1000);
     }
 
   },
@@ -112,7 +112,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // console.log(options)
+    this.setData({
+      uponelevel: options.num
+    })
     userinfo = wx.getStorageSync("myInfo");
     if (userinfo) {
       getdep({
@@ -131,7 +133,7 @@ Page({
             deptxt: resData[0].techofficename,
           })
         }
-      }).catch(err=>{
+      }).catch(err => {
         if (options.id == 1055) {
           this.setData({
             userid: userinfo.UserName,
