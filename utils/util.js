@@ -6,7 +6,8 @@ import {
   returned,
   querysign,
   fileRecord,
-  qgroupfile
+  qgroupfile,
+  contrastfile
 } from "../service/getData";
 var app = getApp();
 const formatTime = date => {
@@ -1875,6 +1876,7 @@ const outflow = (data, that) => {
     }
   })
   data.IfWfComplete = whethercontent(data.IfWfComplete)
+  return data
 
 }
 const outflowlist = (list, that) => {
@@ -2277,6 +2279,7 @@ const OAexpurgateDetail = ((that, funcname, section, MasterDetailID) => {
   })
 })
 const ModifyRecord = ((oldrecord, sheet) => {
+  console.log(oldrecord)
   var userinfo = wx.getStorageSync("myInfo");
   var id = userinfo.UserName
   var oldcontext = JSON.stringify(oldrecord)
@@ -2300,22 +2303,84 @@ const readRecord = ((sheet, datum, that, datumname) => {
     TableName: sheet,
     Form_id: datum
   }).then(res => {
-    // console.log(res)
     var record = []
     var modification = res.List.reverse()
+    // contrastfile
     if (modification) {
-      modification.forEach(s => {
-        var a = {
-          text: s.updateman + datumname +'资料变更',
-          desc: s.updatetime
-        }
-        record.push(a)
+      modification.forEach(item => {
+        // console.log(item)
+        var newcontext = item.newcontext
+        var oldcontext = item.oldcontext
+        contrastfile({
+          TableName: sheet,
+          oldcontext,
+          newcontext
+        }).then(res => {
+          var dif = res.DifferentList
+          var contents = []
+          dif.forEach(s => {
+            // 对时间的处理
+            if ((s.fieldName == 'enterdatetime')) {
+              var times = datefomate(s.newData)
+              s.newData = times
+            }
+            if ((s.fieldName != 'createtime') && (s.fieldName != 'updatetime') && (s.fieldName != 'updateman') &&
+              (s.fieldName != 'IfWfComplete') && (s.fieldName != 'IfWfComplete') && (s.fieldName != 'ApplygetNew') &&
+              (s.fieldName != 'CurStepName') && (s.fieldName != 'CurDealer') &&
+              (!((s.oldData == '' || s.oldData === null) && (s.newData == '' || s.newData === null))) &&
+              (!(s.newData == s.oldData))
+            ) {
+              // 格式转换
+              var c = outflow({
+                [s.fieldName]: s.oldData
+              })
+              s.oldData = c[s.fieldName]
+              var e = outflow({
+                [s.fieldName]: s.newData
+              })
+              s.newData = e[s.fieldName]
+              // 图片以及空处理
+              if (s.fieldName == 'API_Picurl' && s.newData && (!((s.newData === null) || (s.newData == '')))) {
+                s.newData = '图片变更'
+              }
+
+              if (s.fieldName == 'API_Picurl' && s.oldData && (!((s.oldData === null) || (s.oldData == '')))) {
+                s.oldData = '图片'
+              }
+              if ((s.oldData === null) || (s.oldData == '')) {
+                s.oldData = '空'
+              }
+              if ((s.newData === null) || (s.newData == '')) {
+                s.newData = '空'
+              }
+              // 对超出字符进行处理
+              // var arroldData = s.oldData.split('')
+              // if (arroldData.length > 10) {
+              //   var a = arroldData.slice(0, 10)
+              //   s.oldData = a.join('') + '...'
+              // }
+              // var arrnewData = s.newData.split('')
+              // if (arrnewData.length > 10) {
+              //   var a = arrnewData.slice(0, 10)
+              //   s.newData = a.join('') + '...'
+              // }
+              var content = s.fieldChineseName + ':' + s.oldData + '=>' + s.newData + ' '
+              contents.push(content)
+            }
+          })
+          var contentss = contents.join(' ')
+          var a = {
+            text: item.updateman + datumname + '资料变更' + ' ' + contentss,
+            desc: item.updatetime
+          }
+          record.push(a)
+          that.setData({
+            amendant: record
+          })
+        })
       })
     }
-    console.log(record)
-    that.setData({
-      amendant: record
-    })
+    // console.log(record)
   })
 
 })

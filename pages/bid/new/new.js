@@ -7,6 +7,7 @@ import {
 } from "../../../service/getData";
 var util = require("../../../utils/util");
 var app = getApp();
+let userinfo = wx.getStorageSync("myInfo");
 Page({
   /**
    * 页面的初始数据
@@ -23,7 +24,7 @@ Page({
       projectaddress: "",
       bulidareas: "",
       projectrange: "",
-      charageman: "",
+      charageman: userinfo.UserName,
       API_Picurl:[]
     },
     section1:[],
@@ -130,25 +131,25 @@ Page({
       show4: false
     })
   },
-  // 负责人
-  showPopup7() {
-    this.setData({
-      show7: true
-    })
-  },
-  onClose7() {
-    this.setData({
-      show7: false
-    })
-  },
-  onConfirm7(e) {
-    // console.log(e)
-    let info = util.editInfo(e, this, e.detail.value.text);
-    this.setData({
-      info,
-      show7: false
-    })
-  },
+  // // 负责人
+  // showPopup7() {
+  //   this.setData({
+  //     show7: true
+  //   })
+  // },
+  // onClose7() {
+  //   this.setData({
+  //     show7: false
+  //   })
+  // },
+  // onConfirm7(e) {
+  //   // console.log(e)
+  //   let info = util.editInfo(e, this, e.detail.value.text);
+  //   this.setData({
+  //     info,
+  //     show7: false
+  //   })
+  // },
   showPopup_photo() {
     this.setData({
       show_photo: true

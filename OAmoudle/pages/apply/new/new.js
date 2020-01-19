@@ -339,6 +339,7 @@ Page({
           icon: 'success',
           duration: 3000
         })
+        util.ModifyRecord(this.data.information,"applybuyform")
         util.OAreturn('apply', this);
       }
     })
@@ -422,6 +423,12 @@ Page({
       }).then(res => {
         // console.log(res)
         let item = res.Item;
+        var data1 =res.Item
+        var b = JSON.stringify(data1)
+        var c  = JSON.parse(b)
+        this.setData({
+          information:c
+        })
         util.handleData(item, this, app.globalData.department);
         util.outflow(item, this)
         this.setData({

@@ -311,6 +311,7 @@ Page({
     })
   },
   editconfirm() {
+    console.log(this.data.information)
     let info = this.data.info;
     util.checkChange(info, this, app.globalData.department);
     util.intro(info, this)
@@ -331,6 +332,7 @@ Page({
         wx.redirectTo({
           url: "/pages/returnmaterial/detail/detail?id=" + this.data.info.ID + '&rid=' + this.data.rid + '&title=' + this.data.title + (this.data.userid ? '&caption=' + this.data.caption + '&dep=' + this.data.dep + '&deptxt=' + this.data.deptxt + '&userid=' + this.data.userid : "")
         })
+        console.log(this.data.information)
         util.ModifyRecord(this.data.information,"losematerial")
         wx.hideLoading();
       }
@@ -419,8 +421,11 @@ Page({
       }).then(res => {
         if (res.code == 10000) {
           let item = res.Item;
+          var data1 =res.Item
+          var b = JSON.stringify(data1)
+          var c  = JSON.parse(b)
           this.setData({
-            information: item
+            information:c
           })
           //  console.log(item.API_Picurl)
           util.handleData(item, this, app.globalData.department);
@@ -429,6 +434,7 @@ Page({
             info: item
           })
           wx.hideLoading();
+          console.log(this.data.information)
         }
       })
     }

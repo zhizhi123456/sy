@@ -23,7 +23,7 @@
         </view>
         <view class="check_item">
             <view class="kind require">
-                <text>项目名称</text>
+                <text>总包项目名称</text>
                 <text class="required">*</text>
             </view>
             <van-cell-group>
@@ -45,9 +45,19 @@
                 <text>甲方单位名称</text>
                 <text class="required">*</text>
             </view>
-            <van-cell title="{{info.FirstCompanyName?info.FirstCompanyName:'请选择'}}" is-link bind:click="showPopup_o" />
+            <!-- <van-cell title="{{info.FirstCompanyName?info.FirstCompanyName:'请选择'}}" is-link bind:click="showPopup_o" />
             <van-popup show="{{show_o}}" round position="bottom" bind:close="onClose_o">
                 <van-picker data-name="FirstCompanyName" show-toolbar columns="{{ section }}" bind:cancel="onClose_o" bind:confirm="onConfirm_o" />
+            </van-popup> -->
+            <van-cell-group>
+                <van-field data-name="FirstCompanyName" value="{{info.FirstCompanyName}}" placeholder="请输入" bind:blur="maincontactnameblur" type="textarea" autosize />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">公司抬头</text>
+            <van-cell title="{{info.Companytitle?info.Companytitle:'请选择'}}" is-link bind:click="showPopup11" />
+            <van-popup show="{{show12}}" round position="bottom" bind:close="onClose11">
+                <van-picker data-name="Companytitle" show-toolbar columns="{{ section11 }}" bind:cancel="onClose11" bind:confirm="onConfirm11" />
             </van-popup>
         </view>
         <view class="check_item">
@@ -61,22 +71,24 @@
         </view>
         <view class="check_item">
             <view class="kind require">
-                <text>甲方报建编号</text>
+                <text>甲方项目编号</text>
                 <text class="required">*</text>
             </view>
             <van-cell-group>
                 <van-field data-name="FirstReportPrjcode" value="{{info.FirstReportPrjcode}}" placeholder="请输入" bind:blur="maincontactnameblur" type="textarea" autosize />
             </van-cell-group>
         </view>
-          <view class="check_item">
+        <view class="check_item">
             <view class="kind require">
                 <text>合同签订情况</text>
                 <text class="required">*</text>
             </view>
-            <van-cell title="{{info.Ifmakecontact?info.Ifmakecontact:'请选择'}}" is-link bind:click="showPopup21" />
-            <van-popup show="{{show22}}" round position="bottom" bind:close="onClose_o21">
+            <!-- <van-cell title="{{info.Ifmakecontact?info.Ifmakecontact:'请选择'}}" is-link /> -->
+            <van-field data-name="FirstReportPrjcode" value="{{info.Ifmakecontact}}" placeholder="请输入" bind:blur="maincontactnameblur" type="textarea" autosize  />
+            <!-- <van-cell title="{{info.Ifmakecontact?info.Ifmakecontact:'请选择'}}" is-link bind:click="showPopup21" /> -->
+            <!-- <van-popup show="{{show22}}" round position="bottom" bind:close="onClose_o21">
                 <van-picker data-name="Ifmakecontact" show-toolbar columns="{{ section21 }}" bind:cancel="onClose21" bind:confirm="onConfirm21" />
-            </van-popup>
+            </van-popup> -->
         </view>
         <!-- <view class="check_item">
             <view class="kind require">
@@ -87,8 +99,8 @@
                 <van-field data-name="Ifmakecontact" value="{{info.Ifmakecontact}}" placeholder="请输入" bind:blur="maincontactnameblur" type="textarea" autosize />
             </van-cell-group>
         </view> -->
-          <view class="check_item checkro8">
-             <view class="kind require">
+        <view class="check_item checkro8">
+            <view class="kind require">
                 <text>项目类型</text>
                 <text class="required">*</text>
             </view>
@@ -96,7 +108,7 @@
             <van-popup show="{{show1}}" round position="bottom" bind:close="onClose1">
                 <view class="checkro10">
                     <text bind:tap="onClose1">取消</text>
-                    <text class="checkro2"  bind:tap="onConfirm1" data-name="projecttype">确认</text>
+                    <text class="checkro2" bind:tap="onConfirm1" data-name="projecttype">确认</text>
                 </view>
                 <view class="checkro9"></view>
                 <van-checkbox wx:for="{{ section1 }}" wx:key="index" name="{{ item.Value }}" value="{{ item.show }}" bind:tap="onChange" data-name="{{item.Value}}" class="checkro">
@@ -143,7 +155,7 @@
                 <van-field data-name="demo" value="{{info.demo}}" placeholder="请输入" bind:blur="maincontactnameblur" type="textarea" autosize />
             </van-cell-group>
         </view>
-        <view class="check_item">
+        <!-- <view class="check_item">
             <text class="kind">工程进度一</text>
             <van-cell title="{{info.progress1?info.progress1:'请选择'}}" is-link bind:click="showPopup3" />
             <van-popup show="{{show4}}" round position="bottom" bind:close="onClose3">
@@ -163,14 +175,14 @@
             <van-popup show="{{show6}}" round position="bottom" bind:close="onClose5">
                 <van-picker data-name="progress3" show-toolbar columns="{{ section5 }}" bind:cancel="onClose5" bind:confirm="onConfirm5" />
             </van-popup>
-        </view>
-        <view class="check_item">
+        </view> -->
+        <!-- <view class="check_item">
             <text class="kind">是否中标</text>
             <van-cell title="{{info.ifwinbid?info.ifwinbid:'请选择'}}" is-link bind:click="showPopup6" />
             <van-popup show="{{show7}}" round position="bottom" bind:close="onClose6">
                 <van-picker data-name="ifwinbid" show-toolbar columns="{{ section6 }}" bind:cancel="onClose6" bind:confirm="onConfirm6" />
             </van-popup>
-        </view>
+        </view> -->
         <!-- <view class="check_item">
             <text class="kind">市场部邮箱</text>
             <van-cell title="{{info.marketemail?info.marketemail:'请选择'}}" is-link bind:click="showPopup7" />
@@ -207,10 +219,13 @@
         </view>
         <view class="check_item">
             <text class="kind">部门</text>
-            <van-cell title="{{info.department?info.department:'请选择'}}" is-link bind:click="showPopup10" />
+               <van-cell-group>
+                <van-field data-name="department" value="{{info.department}}" placeholder="请输入" bind:blur="maincontactnameblur" type="textarea" autosize   />
+            </van-cell-group>
+            <!-- <van-cell title="{{info.department?info.department:'请选择'}}" is-link bind:click="showPopup10" />
             <van-popup show="{{show11}}" round position="bottom" bind:close="onClose10">
                 <van-picker data-name="department" show-toolbar columns="{{ section10 }}" bind:cancel="onClose10" bind:confirm="onConfirm10" />
-            </van-popup>
+            </van-popup> -->
         </view>
         <view class="check_item">
             <view class="kind">
@@ -221,13 +236,6 @@
             </van-cell-group>
         </view>
         <view class="check_item">
-            <text class="kind">公司抬头</text>
-            <van-cell title="{{info.Companytitle?info.Companytitle:'请选择'}}" is-link bind:click="showPopup11" />
-            <van-popup show="{{show12}}" round position="bottom" bind:close="onClose11">
-                <van-picker data-name="Companytitle" show-toolbar columns="{{ section11 }}" bind:cancel="onClose11" bind:confirm="onConfirm11" />
-            </van-popup>
-        </view>
-        <view class="check_item">
             <text class="kind">主要联系人</text>
             <van-cell title="{{info.chiefcontactman?info.chiefcontactman:'请选择'}}" is-link bind:click="showPopup12" />
             <van-popup show="{{show13}}" round position="bottom" bind:close="onClose12">
@@ -236,18 +244,21 @@
         </view>
         <view class="check_item">
             <text class="kind">负责人</text>
-            <van-cell title="{{info.chargeman?info.chargeman:'请选择'}}" is-link bind:click="showPopup13" />
+               <van-cell-group>
+                <van-field data-name="chargeman" value="{{info.chargeman}}" placeholder="请输入" bind:blur="maincontactnameblur" type="textarea" autosize    />
+            </van-cell-group>
+            <!-- <van-cell title="{{info.chargeman?info.chargeman:'请选择'}}" is-link bind:click="showPopup13" />
             <van-popup show="{{show14}}" round position="bottom" bind:close="onClose13">
                 <van-picker data-name="chargeman" show-toolbar columns="{{ section13 }}" bind:cancel="onClose13" bind:confirm="onConfirm13" />
-            </van-popup>
+            </van-popup> -->
         </view>
-        <view class="check_item">
+        <!-- <view class="check_item">
             <text class="kind">材料是否进场</text>
             <van-cell title="{{info.ifmaterialinto?info.ifmaterialinto:'请选择'}}" is-link bind:click="showPopup14" />
             <van-popup show="{{show15}}" round position="bottom" bind:close="onClose14">
                 <van-picker data-name="ifmaterialinto" show-toolbar columns="{{ section14 }}" bind:cancel="onClose14" bind:confirm="onConfirm14" />
             </van-popup>
-        </view>
+        </view> -->
         <view class="check_item">
             <text class="kind">进场材料是否齐全</text>
             <van-cell title="{{info.ifmaterialcomplete?info.ifmaterialcomplete:'请选择'}}" is-link bind:click="showPopup15" />

@@ -13,10 +13,12 @@ import {
   projectadd,
   projectup,
   projectone,
-  Customer
+  Customer,
+  getdep
 } from "../../../service/getData";
 var util = require("../../../utils/util");
 var app = getApp();
+let userinfo = wx.getStorageSync("myInfo");
 Page({
   /**
    * 页面的初始数据
@@ -30,7 +32,7 @@ Page({
       FirstCompanyName: "",
       workplace: "",
       FirstReportPrjcode: "",
-      Ifmakecontact: "",
+      Ifmakecontact: "已签订",
       projectprop: "",
       projecttype: "",
       projectaddress: "",
@@ -44,11 +46,11 @@ Page({
       engineeremail: "",
       costacountemail: "",
       marketemail: "",
-      department: "",
+      department: '',
       mainbuildcontext: "",
       Companytitle: "",
       chiefcontactman: "",
-      chargeman: "",
+      chargeman: userinfo.UserName,
       ifmaterialinto: '',
       ifmaterialcomplete: '',
       projectpercent: 0,
@@ -728,6 +730,8 @@ Page({
     let info = this.data.info;
     util.checkContent(info, this);
     util.intro(info,this)
+    console.log(info)
+    console.log(info.projcectCode && info.FirstCompanyName && info.projectname && info.workplace && info.FirstReportPrjcode && info.Ifmakecontact && info.projectprop && info.projecttype && info.projectaddress && info.planbegindate && info.planenddate && info.demo)
     if (info.projcectCode && info.FirstCompanyName && info.projectname && info.workplace && info.FirstReportPrjcode && info.Ifmakecontact && info.projectprop && info.projecttype && info.projectaddress && info.planbegindate && info.planenddate && info.demo) {
       this.dispose()
       let infodata = {
@@ -953,6 +957,14 @@ Page({
         })
         this.setData({
           info: item
+        })
+      })
+    }else{
+      getdep({UserName:userinfo.UserName}).then(res=>{
+        var s = JSON.parse(res)
+        // console.log(s[0].techofficename)
+        this.setData({
+          'info.department':s[0].techofficename
         })
       })
     }

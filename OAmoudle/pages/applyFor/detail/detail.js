@@ -51,6 +51,7 @@ Page({
     wx.showLoading({
       title: '加载中',
     });
+    util.readRecord('applyform', options.id, this,'申领')
     if (options.id) {
       detailapplyFor({
         ID: options.id
