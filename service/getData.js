@@ -108,6 +108,10 @@ export const getName = (params) => http.post("/api/MethodOfDataService/GetUserNa
 export const getLeader = (params) => http.post("/api/MethodOfDataService/GetDepartmentPrincipal", params);
 //请假类别
 export const Leavetypelist = (params) => http.post("/api/MethodOfDataService/Leavetypelist", params);
+//已提交流转
+export const referflow = (params) => http.post("/api/SubmitWorkFlowService/GetWorkflowRecord2", params);
+//未提交流转
+export const unreferflow = (params) => http.post("/api/SubmitWorkFlowService/GetWorkflowRecord3", params);
 // =================================================================================================================================================================
 // 工作流接口
 // 工作流流转

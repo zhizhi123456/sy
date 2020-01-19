@@ -83,6 +83,10 @@
                     <text class="caption">{{item.maincontactname}}</text>
                 </view>
                 <view>
+                    <text class="info">当前任务状态</text>
+                    <text class="caution">{{Workstates[index]}}</text>
+                </view>
+                <view>
                     <text class="info">部门</text>
                     <text>{{item.department}}</text>
                 </view>

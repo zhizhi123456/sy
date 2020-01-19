@@ -4,7 +4,6 @@ import {
 } from '../../../../service/getData';
 var app = getApp();
 var util = require("../../../../utils/util");
-let item, list;
 Page({
   /**
    * 页面的初始数据
@@ -23,8 +22,8 @@ Page({
       project: "",
       warehouseName: "",
       Type: '',
-      chargemanName:"",
-      keyword:"",
+      chargemanName: "",
+      keyword: "",
     },
     sections: '',
     pull: false,
@@ -36,7 +35,7 @@ Page({
   },
   // 返回
   return () {
-    util.returnMenu2(1006,"材料管理");
+    util.returnMenu2(1006, "材料管理");
   },
   setSeach(e) {
     // console.log(e)
@@ -48,18 +47,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    list = [];
     this.setData({
       sections: app.globalData.MainProject,
-      section1:app.globalData.states,
+      section1: app.globalData.states,
       section2: app.globalData.Goodsname,
       section5: app.globalData.Companytitle,
       section3: app.globalData.statistics,
       section4: app.globalData.Principal,
-      'info.c':'c'
+      'info.c': 'c'
     })
-    util.qgroupdeliver( qgroupreceive, this,0,1)
-   
+    util.qgroupdeliver(qgroupreceive, this, 0, 1)
+
   },
   // 总包项目名称
   projectnameblur(e) {
@@ -192,8 +190,8 @@ Page({
       // departmenttext: e.detail.value.text
     })
   },
-   // 部门
-   showPopup2() {
+  // 部门
+  showPopup2() {
     this.setData({
       show2: true
     })
@@ -249,25 +247,25 @@ Page({
       show4: false
     })
   },
-    // 创建人
-    showPopup5() {
-      this.setData({
-        show5: true
-      })
-    },
-    onClose5() {
-      this.setData({
-        show5: false
-      })
-    },
-    onConfirm5(e) {
-      // console.log(e)
-      let info = util.editInfo(e, this, e.detail.value.value);
-      this.setData({
-        info,
-        show5: false
-      })
-    },
+  // 创建人
+  showPopup5() {
+    this.setData({
+      show5: true
+    })
+  },
+  onClose5() {
+    this.setData({
+      show5: false
+    })
+  },
+  onConfirm5(e) {
+    // console.log(e)
+    let info = util.editInfo(e, this, e.detail.value.value);
+    this.setData({
+      info,
+      show5: false
+    })
+  },
   // 计划开工时间
   showPopup_time() {
     this.setData({
@@ -339,40 +337,13 @@ Page({
   // 组合查询
   seachqur() {
     this.setData({
-      'info.c':'c'
+      'info.c': 'c'
     })
-    util.qgroupdeliver( qgroupreceive, this)
-  },  /**
+    util.qgroupdeliver(qgroupreceive, this)
+  },
+  /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {},
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-    console.log(list.length, item.length)
-    if (item.length > 5 && list.length < item.length) {
-      this.setData({
-        loading: true
-      })
-      let pages = this.data.pages,
-        n = Math.ceil(item.length / 5);
-      if (n > pages) {
-        setTimeout(() => {
-          pages = pages + 1;
-          list = util.listData(item.reverse(), app.globalData.department, pages, list);
-          this.setData({
-            pages,
-            InfoList: list,
-          })
-        }, 1000)
-      }
-    } else {
-      this.setData({
-        loading: false
-      })
-    }
-  },
 
 })

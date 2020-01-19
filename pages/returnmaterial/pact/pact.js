@@ -55,7 +55,7 @@ Page({
         // console.log(res)
         if (res.code == 10000) {
           let item = res.List;
-          util.listData(item, app.globalData.department);
+          util.listData(item, app.globalData.department,'','',this,'losematerial');
           this.setData({
             InfoList: item.reverse()
           })
@@ -73,7 +73,7 @@ Page({
             // console.log(res.List)
             if (res.code == 10000) {
               let item = res.List;
-              util.listData(item, app.globalData.department);
+              util.listData(item, app.globalData.department,'','',this,'losematerial');
               this.setData({
                 InfoList: item.reverse(),
                 item,
@@ -112,7 +112,7 @@ Page({
           // console.log(res.List)
           if (res.code == 10000) {
             let item = res.List;
-            util.listData(item, app.globalData.department);
+            util.listData(item, app.globalData.department,'','',this,'losematerial');
             this.setData({
               InfoList: item.reverse(),
               item,
@@ -143,7 +143,7 @@ Page({
       // console.log(res.List)
       if (res.code == 10000) {
         let item = res.List;
-        util.listData(item, app.globalData.department);
+        util.listData(item, app.globalData.department,'','',this,'losematerial');
         this.setData({
           InfoList: item.reverse()
         })
@@ -218,7 +218,7 @@ Page({
           // console.log(res.List)
           if (res.code == 10000) {
             let item = res.List;
-            util.listData(item, app.globalData.department);
+            util.listData(item, app.globalData.department,'','',this,'losematerial');
             this.setData({
               InfoList: item.reverse()
             })
@@ -234,7 +234,7 @@ Page({
           // console.log(res.List)
           if (res.code == 10000) {
             let item = res.List;
-            util.listData(item, app.globalData.department);
+            util.listData(item, app.globalData.department,'','',this,'losematerial');
             this.setData({
               InfoList: item.reverse()
             })
@@ -299,7 +299,7 @@ Page({
       groupReturnM(this.data.info).then(res => {
         if (res.code == 10000) {
           let item = res.List;
-          util.listData(item, app.globalData.department);
+          util.listData(item, app.globalData.department,'','',this,'losematerial');
           this.setData({
             InfoList: item.reverse(),
             info: {},

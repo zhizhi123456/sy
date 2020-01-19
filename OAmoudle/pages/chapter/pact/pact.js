@@ -48,7 +48,7 @@ Page({
       // console.log(res)
       if (res.code == 10000) {
         item = res.List;
-        list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list);
+        list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list,this,'usesealform');
         this.setData({
           InfoList: list,
           item,
@@ -75,7 +75,7 @@ Page({
       // console.log(res.List)
       if (res.code == 10000) {
         item = res.List;
-        list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list);
+        list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list,this,'usesealform');
         this.setData({
           InfoList: list,
           item
@@ -137,7 +137,7 @@ Page({
       groupChapter(this.data.info).then(res => {
         if (res.code == 10000) {
           item = res.List;
-          list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list);
+          list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list,this,'usesealform');
           this.setData({
             InfoList: list,
             item,

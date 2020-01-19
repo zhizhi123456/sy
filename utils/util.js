@@ -6,7 +6,9 @@ import {
   returned,
   querysign,
   fileRecord,
-  qgroupfile
+  qgroupfile,
+  referflow,
+  unreferflow
 } from "../service/getData";
 var app = getApp();
 const formatTime = date => {
@@ -560,7 +562,7 @@ const checkChange = (value, key, dep) => {
 const handleData = (data, key, dep) => {
   var app = getApp();
   for (let i in data) {
-    if (data[i] == null || data[i] == "null" || data[i] == 'NULL') {
+    if (data[i] == null || data[i] == "null" || data[i] == 'NULL' || data[i] == ' ') {
       data[i] = ""
     }
   }
@@ -806,16 +808,18 @@ const handleData = (data, key, dep) => {
   }
 }
 //列表页展示数据的格式化
-const listData = (data, dep, page, list) => {
+const listData = (data, dep, page, list, key, billname) => {
   var app = getApp();
   for (let k of data) {
     for (let i in k) {
-      if (k[i] == null || k[i] == "null" || k[i] == 'NULL') {
+      if (k[i] == null || k[i] == "null" || k[i] == 'NULL' || k[i] == ' ') {
         k[i] = ""
       }
     }
   }
+  let Workstates = [];
   data.forEach((value, index) => {
+    checkState(key, (value.formid || value.Formid), billname, value.CurStepbh, Workstates);
     // 工程类别
     app.globalData.EngineerClass.forEach(res => {
       if (value.EngineerClass == res.value) {
@@ -1130,53 +1134,115 @@ const returnMenu2 = (id, title) => {
     url: `/pages/secondary/secondary?id=${id}&title=${title}`
   })
 }
-const workList = (key, id) => {
-  record({
-    formid: id
-  }).then(res => {
-    if (res.code == 10000) {
-      // //console.log(res)
-      let step = res.list;
-      if (step.length) {
-        step.forEach(item => {
-          if (item.nextstepid == 0 && !item.nextstepname && !item.nextdealrole && !item.nextdealuser) {
-            item.nextstepname = "流程结束"
-          }
-        })
-      }
-      let steps = key.data.steps;
-      if (step.length) {
-        step.forEach(item => {
-          steps.push({
-            text: item.createtime.replace(/[ ]/g, "/") + " " + item.createman + "编辑了资料 ●审批状态：" + item.stepname + "——>" + item.nextstepname,
-            desc: '●时间：' + item.createtime
-          });
-        })
-      }
-      key.setData({
-        steps
-      })
-      let userinfo = wx.getStorageSync("myInfo");
-      if (step[0]) {
-        if (step[0].nextstepid > step[0].stepid) {
-          key.setData({
-            returned: true
+const workList = (key, id, billname) => {
+  let userinfo = wx.getStorageSync("myInfo");
+  if (id) {
+    referflow({
+      formName: billname,
+      formid: id
+    }).then(res => {
+      if (res.code == 10000) {
+        let result = res.WorkflowRecordList;
+        if (result && result.length) {
+          let steps = key.data.steps,
+            longlength = result.length + 1;
+          result.forEach(res => {
+            if (res.ApplyTime) {
+              longlength--;
+            }
+            steps.push({
+              text: res.NewApplyStats,
+              desc: res.ApplyTime ? res.ApplyTime : ''
+            })
+            if (steps.length == result.length) {
+              steps.push({
+                text: res.NextApplyStats,
+                desc: ""
+              })
+            }
           })
-        } else if (userinfo.UserName == step[0].nextdealuser) {
+          // console.log(longlength)
           key.setData({
-            returned: true
-          })
-        } else {
-          key.setData({
-            returned: false
+            steps: steps.reverse(),
+            actived: longlength == 1 ? 0 : longlength
           })
         }
       }
-    }
-  })
+    })
+    record({
+      formid: id
+    }).then(res => {
+      if (res.code == 10000) {
+        //console.log(res)
+        let step = res.list;
+        // if (step.length) {
+        //   step.forEach(item => {
+        //     if (item.nextstepid == 0 && !item.nextstepname && !item.nextdealrole && !item.nextdealuser) {
+        //       item.nextstepname = "流程结束"
+        //     }
+        //   })
+        // }
+        // let steps = key.data.steps;
+        // if (step.length) {
+        //   step.forEach(item => {
+        //     steps.push({
+        //       text: item.createtime.replace(/[ ]/g, "/") + " " + item.createman + "编辑了资料 ●审批状态：" + item.stepname + "——>" + item.nextstepname,
+        //       desc: '●时间：' + item.createtime
+        //     });
+        //   })
+        // }
+        // key.setData({
+        //   steps
+        // })
+        if (step[0]) {
+          if (step[0].nextstepid > step[0].stepid) {
+            key.setData({
+              returned: true
+            })
+          } else if (userinfo.UserName == step[0].nextdealuser) {
+            key.setData({
+              returned: true
+            })
+          } else {
+            key.setData({
+              returned: false
+            })
+          }
+        }
+      }
+    })
+  } else {
+    unreferflow({
+      formName: billname,
+      userName: userinfo.UserName
+    }).then(res => {
+      if (res.code == 10000) {
+        let result = res.WorkflowRecordList;
+        if (result.length) {
+          let steps = key.data.steps;
+          result.forEach(res => {
+            steps.push({
+              text: res.NewApplyStats,
+              desc: ""
+            })
+            if (steps.length == result.length) {
+              steps.push({
+                text: res.NextApplyStats,
+                desc: ""
+              })
+            }
+          })
+          key.setData({
+            steps: steps.reverse(),
+            actived: steps.length + 1
+          })
+        }
+      }
+    })
+  }
 }
 //处理状态判断
-const checkState = (key, id, chart, bh) => {
+const checkState = (key, id, chart, bh, Workstates) => {
   let userinfo = wx.getStorageSync("myInfo");
   if (userinfo) {
     valid({
@@ -1185,11 +1251,26 @@ const checkState = (key, id, chart, bh) => {
       userName: userinfo.UserName,
       formid: id
     }).then(res => {
-      // //console.log(res)
       if (res.code == 10000) {
-        key.setData({
-          Workstate: res.Isvalidtime.True || res.Isvalidtime.False
-        })
+        if (Workstates && key) {
+          Workstates.push(res.Isvalidtime.True || res.Isvalidtime.False);
+          key.setData({
+            Workstates
+          })
+        } else if (key) {
+          key.setData({
+            Workstate: (res.Isvalidtime.True || res.Isvalidtime.False),
+          })
+          if (res.Isvalidtime.True) {
+            key.setData({
+              isnext: false
+            })
+          } else {
+            key.setData({
+              isnext: true
+            })
+          }
+        }
         returned({
           formName: chart,
           userName: userinfo.UserName,
@@ -1201,22 +1282,7 @@ const checkState = (key, id, chart, bh) => {
             })
           }
         })
-        if (res.Isvalidtime.True) {
-          key.setData({
-            isnext: false
-          })
-        } else {
-          key.setData({
-            isnext: true
-          })
-        }
       }
-    })
-  } else {
-    wx.showToast({
-      title: '请登录',
-      icon: 'none',
-      duration: 2000
     })
   }
 }
@@ -2217,7 +2283,6 @@ const OAexpurgate = ((that, funcname, section) => {
               function () {
                 OAreturn(section)
               }, 2300)
-
           }
         })
       }
@@ -2306,7 +2371,7 @@ const readRecord = ((sheet, datum, that, datumname) => {
     if (modification) {
       modification.forEach(s => {
         var a = {
-          text: s.updateman + datumname +'资料变更',
+          text: s.updateman + datumname + '资料变更',
           desc: s.updatetime
         }
         record.push(a)

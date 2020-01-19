@@ -29,6 +29,10 @@
                     <text class="caption">{{item.EngineerName}}</text>
                 </view>
                 <view>
+                    <text class="info">当前任务状态</text>
+                    <text class="caution">{{Workstates[index]}}</text>
+                </view>
+                <view>
                     <text class="info">工程编号名称</text>
                     <text>{{item.EngineerName}}</text>
                 </view>

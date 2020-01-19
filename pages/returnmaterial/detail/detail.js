@@ -92,7 +92,7 @@ Page({
    */
   onLoad: function (options) {
 
-    util.readRecord('losematerial', options.id, this,'退料单')
+    util.readRecord('losematerial', options.id, this, '退料单')
     if (options.id || options.rid) {
       this.setData({
         rid: options.rid,
@@ -137,7 +137,7 @@ Page({
         if (res.code == 10000) {
           let item = res.Item;
           util.handleData(item, this, app.globalData.department)
-          util.outflow(item,this)
+          util.outflow(item, this)
           item.ifwinbid = util.whethercontent(item.ifwinbid)
           item.ifmaterialinto = util.whethercontent(item.ifmaterialinto)
           item.ifmaterialcomplete = util.whethercontent(item.ifmaterialcomplete)
@@ -164,10 +164,7 @@ Page({
           }
           wx.hideLoading();
           // 调取工作流记录
-          if (res.Item.formid) {
-            util.workList(this, res.Item.formid)
-            console.log(this.data.steps)
-          }
+          util.workList(this, res.Item.formid, 'losematerial');
           util.checkState(this, res.Item.formid, 'losematerial', item.CurStepbh);
         }
       })

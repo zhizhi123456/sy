@@ -5,7 +5,7 @@ import {
 } from '../../../service/getData.js';
 var app = getApp();
 var util = require("../../../utils/util");
-let linktime;
+let userinfo = wx.getStorageSync("myInfo");
 Page({
   /**
    * 页面的初始数据
@@ -26,6 +26,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    userinfo = wx.getStorageSync("myInfo");
     wx.showLoading({
       title: '加载中',
     });
@@ -43,9 +44,7 @@ Page({
           wx.hideLoading();
           // 调取工作流记录
           let mid = res.Item.Formid;
-          if (mid) {
-            util.workList(this, mid)
-          }
+          util.workList(this, mid, 'CommunEnginAlter');
           //处理状态判断
           util.checkState(this, mid, 'CommunEnginAlter', item.CurStepbh);
         }
@@ -77,7 +76,7 @@ Page({
                 icon: 'success',
                 duration: 3000
               })
-              linktime = setTimeout(function () {
+              setTimeout(function () {
                 util.returnPrev('variation');
               }, 1000)
             }
@@ -95,15 +94,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    userinfo = wx.getStorageSync("myInfo");
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
-    clearTimeout('linktime');
-  },
+  onHide: function () {},
 
   /**
    * 生命周期函数--监听页面卸载

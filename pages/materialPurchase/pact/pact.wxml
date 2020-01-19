@@ -74,6 +74,10 @@
                     <text class="caption">{{item.purchasecontactCode}}</text>
                 </view>
                 <view>
+                    <text class="info">当前任务状态</text>
+                    <text class="caution">{{Workstates[index]}}</text>
+                </view>
+                <view>
                     <text class="info">采购合同名称</text>
                     <text>{{item.subprojectname}}</text>
                 </view>

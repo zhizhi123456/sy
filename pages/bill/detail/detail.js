@@ -144,9 +144,7 @@ Page({
           // 调取工作流记录
           //列表
           let mid = res.Item.formid;
-          if (mid) {
-            util.workList(this, mid)
-          }
+          util.workList(this, mid, 'getmaterial');
           //处理状态判断
           util.checkState(this, mid, 'getmaterial', item.CurStepbh);
         }

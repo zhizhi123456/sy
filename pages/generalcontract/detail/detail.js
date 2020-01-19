@@ -51,9 +51,7 @@ Page({
           // console.log(res.Item.formid)
           //列表
           let mid = res.Item.formid;
-          if (mid) {
-            util.workList(this, mid)
-          }
+          util.workList(this, mid, 'maincontact');
           //处理状态判断
           util.checkState(this, mid, 'maincontact', item.CurStepbh);
           // 查询项目相关的费用列表

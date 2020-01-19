@@ -29,6 +29,10 @@
                     <text class="caption">{{item.frameProtocolname}}</text>
                 </view>
                 <view>
+                    <text class="info">当前任务状态</text>
+                    <text class="caution">{{Workstates[index]}}</text>
+                </view>
+                <view>
                     <text class="info">框架协议编号</text>
                     <text>{{item.frameProtocolCode}}</text>
                 </view>

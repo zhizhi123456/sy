@@ -108,10 +108,11 @@
             </van-tab>
             <van-tab title="动态" name="b">
                 <van-cell title="动态({{Workstate}})" />
-                <block wx:if="{{info.formid}}">
+                <!-- <block wx:if="{{info.formid}}">
                     <van-steps steps="{{ steps }}" active="{{ active }}" direction="vertical" />
                 </block>
-                <view class="dynamic_state" wx:else>暂无动态</view>
+                <view class="dynamic_state" wx:else>暂无动态</view> -->
+                <van-steps steps="{{ steps }}" active="{{ actived }}" direction="vertical" active-color="#008080" inactive-icon="stop-circle" />
             </van-tab>
         </van-tabs>
     </view>

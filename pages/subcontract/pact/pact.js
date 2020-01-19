@@ -71,7 +71,7 @@ Page({
         // console.log(res)
         if (res.code == 10000) {
           item = res.List;
-          list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list);
+          list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list ,this,"subproject");
           this.setData({
             InfoList: list,
             item,
@@ -90,7 +90,7 @@ Page({
           }).then(res => {
             if (res.code == 10000) {
               item = res.List;
-              list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list);
+              list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list,this,"subproject");
               this.setData({
                 InfoList: list,
                 item,
@@ -108,7 +108,7 @@ Page({
           }).then(res => {
             if (res.code == 10000) {
               item = res.List;
-              list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list);
+              list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list,this, "subproject");
               this.setData({
                 InfoList: list,
                 item,
@@ -128,7 +128,7 @@ Page({
           // console.log(res.List)
           if (res.code == 10000) {
             item = res.List;
-            list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list);
+            list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list,this, "subproject");
             this.setData({
               InfoList: list,
               item,
@@ -142,11 +142,7 @@ Page({
       }
     }
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    userinfo = wx.getStorageSync("myInfo");
+  getLIST(options) {
     list = [];
     wx.showLoading({
       title: '加载中',
@@ -212,7 +208,7 @@ Page({
           // console.log(res.List)
           if (res.code == 10000) {
             item = res.List;
-            list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list);
+            list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list,this, "subproject");
             this.setData({
               InfoList: list,
               item
@@ -230,7 +226,7 @@ Page({
           // console.log(res.List)
           if (res.code == 10000) {
             item = res.List;
-            list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list);
+            list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list,this, "subproject");
             this.setData({
               InfoList: list,
               item
@@ -247,7 +243,7 @@ Page({
         // console.log(res.List)
         if (res.code == 10000) {
           item = res.List;
-          list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list);
+          list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list, this, "subproject");
           this.setData({
             InfoList: list,
             item
@@ -258,6 +254,13 @@ Page({
         console.log(err)
       })
     }
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    userinfo = wx.getStorageSync("myInfo");
+    this.getLIST(options);
     if (app.globalData.CountItem) {
       this.setData({
         sections: app.globalData.department,
@@ -278,6 +281,7 @@ Page({
   },
   changeItem(e) {
     list = [];
+    console.log(e)
     let StateStr = (this.data.pact[e.detail].text).slice(0, 3);
     let info = this.data.info;
     info.state = StateStr;
@@ -294,7 +298,7 @@ Page({
       // console.log(res.List)
       if (res.code == 10000) {
         item = res.List;
-        list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list);
+        list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list,this, "subproject");
         this.setData({
           InfoList: list,
           item
@@ -339,7 +343,7 @@ Page({
       groupSubItems(this.data.info).then(res => {
         if (res.code == 10000) {
           item = res.List;
-          list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list);
+          list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list,this, "subproject");
           this.setData({
             InfoList: list,
             item,
@@ -527,7 +531,11 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {},
+  onPullDownRefresh: function () {
+    this.getLIST(this.data.options);
+    console.log(this.data.pact, this.data.caption, this.data.val)
+    wx.stopPullDownRefresh();
+  },
 
   /**
    * 页面上拉触底事件的处理函数

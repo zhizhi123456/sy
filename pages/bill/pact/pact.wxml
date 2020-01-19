@@ -92,6 +92,10 @@
                     <text class="caption">{{item.getmaterialName}}</text>
                 </view>
                 <view>
+                    <text class="info">当前任务状态</text>
+                    <text class="caution">{{Workstates[index]}}</text>
+                </view>
+                <view>
                     <text class="info">负责人</text>
                     <text>{{item.CurDealer}}</text>
                 </view>

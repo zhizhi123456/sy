@@ -238,11 +238,11 @@
     z-index: 3;
 }
 
-.van-step__title view:first-child {
+/* .van-step__title view:first-child {
     word-spacing: 10000rpx;
     margin-bottom: 10rpx;
     line-height: 1.5em;
-}
+} */
 
 .c_item .van-cell {
     padding: 0;
@@ -694,6 +694,7 @@ van-checkbox {
 .LThint .van-tag {
     font-size: 28rpx;
 }
+
 .main {
     position: relative;
 }
@@ -701,6 +702,17 @@ van-checkbox {
 .linkLThint {
     position: fixed;
     top: 210rpx;
-    right:10rpx;
+    right: 10rpx;
     z-index: 2;
 }
+
+.main .caution {
+    font-size: 30rpx;
+    color: red;
+    /* height: 60rpx; */
+}
+
+/* .caution .cautionhint {
+    color: #999;
+    font-size: 24rpx;
+} */

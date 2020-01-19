@@ -88,9 +88,7 @@ Page({
           // console.log(res.Item.formid)
           //列表
           let mid = res.Item.formid;
-          if (mid) {
-            util.workList(this, mid)
-          }
+          util.workList(this, mid, 'subcontact');
           //处理状态判断
           util.checkState(this, mid, 'subcontact', item.CurStepbh);
         }

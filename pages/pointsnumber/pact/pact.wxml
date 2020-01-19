@@ -115,6 +115,10 @@
                 <view id="{{'new'+index}}">
                     <text class="caption">{{item.verifysubprocode}}</text>
                 </view>
+                 <view>
+                    <text class="info">当前任务状态</text>
+                    <text class="caution">{{Workstates[index]}}</text>
+                </view>
                 <view>
                     <text class="info">总包项目名称</text>
                     <text>{{item.projectname}}</text>
