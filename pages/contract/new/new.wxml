@@ -14,6 +14,16 @@
         <van-toast id="van-toast" />
         <view class="check_item">
             <view class="kind require">
+                <text>分包项目</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.subprojcectCode?info.subprojcectCode:'请选择'}}" is-link bind:click="showPopup_3" />
+            <van-popup show="{{show_3}}" round position="bottom" bind:close="onClose_3">
+                <van-picker data-name="subprojcectCode" show-toolbar columns="{{ section22 }}" bind:cancel="onClose_3" bind:confirm="onConfirm_3" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
                 <text>公司抬头</text>
                 <text class="required">*</text>
             </view>
@@ -42,16 +52,6 @@
             <van-cell-group>
                 <van-field data-name="subcontactname" value="{{info.subcontactname}}" placeholder="请输入" bind:blur="subcontactnameblur" />
             </van-cell-group>
-        </view>
-        <view class="check_item">
-            <view class="kind require">
-                <text>分包项目</text>
-                <text class="required">*</text>
-            </view>
-            <van-cell title="{{info.subprojcectCode?info.subprojcectCode:'请选择'}}" is-link bind:click="showPopup_3" />
-            <van-popup show="{{show_3}}" round position="bottom" bind:close="onClose_3">
-                <van-picker data-name="subprojcectCode" show-toolbar columns="{{ Citems }}" bind:cancel="onClose_3" bind:confirm="onConfirm_3" />
-            </van-popup>
         </view>
         <view class="check_item">
             <text class="kind">签订时间</text>

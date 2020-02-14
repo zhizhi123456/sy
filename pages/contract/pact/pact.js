@@ -208,7 +208,7 @@ Page({
           state: this.data.info.state,
           UserName: userinfo.UserName
         }).then(res => {
-          // console.log(res.List)
+          console.log(res.List)
           if (res.code == 10000) {
             item = res.List;
             list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list,this,'subcontact');
@@ -226,7 +226,7 @@ Page({
         groupContract({
           createman: options.userid
         }).then(res => {
-          // console.log(res.List)
+          console.log(res.List)
           if (res.code == 10000) {
             item = res.List;
             list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list,this,'subcontact');
@@ -243,7 +243,7 @@ Page({
     } else {
       // 调用查询
       getContract().then(res => {
-        // console.log(res.List)
+        console.log(res.List)
         if (res.code == 10000) {
           item = res.List;
           list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list,this,'subcontact');
@@ -290,7 +290,7 @@ Page({
       state: StateStr,
       UserName: userinfo.UserName
     }).then(res => {
-      // console.log(res.List)
+      console.log(res.List)
       if (res.code == 10000) {
         item = res.List;
         list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list,this,'subcontact');

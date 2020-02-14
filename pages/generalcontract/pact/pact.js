@@ -52,7 +52,7 @@ Page({
     getQuery({
       maincontactname: this.data.seach
     }).then(res => {
-      // console.log(res)
+      console.log(res)
       if (res.code == 10000) {
         item = res.List;
         list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list,this,'maincontact');

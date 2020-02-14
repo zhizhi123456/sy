@@ -91,7 +91,7 @@
                 </view>
                 <view>
                     <text class="info">审批状态</text>
-                    <text>{{item.bidprojectcode}}</text>
+                    <text>{{item.ApprovalStatusint}}</text>
                 </view>
                 <view>
                     <text class="info">招投标编号</text>

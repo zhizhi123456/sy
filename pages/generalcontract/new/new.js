@@ -3,10 +3,13 @@ import Toast from 'vant-weapp/dist/toast/toast';
 import {
   addPact,
   referId,
-  amend
+  amend,
+  qgroupproject,
+  projectone
 } from "../../../service/getData";
 var util = require("../../../utils/util");
 var app = getApp();
+let userinfo = wx.getStorageSync("myInfo");
 Page({
   /**
    * 页面的初始数据
@@ -94,6 +97,46 @@ Page({
       info,
       show_3: false
     })
+
+    projectone({
+      ID: e.detail.value.value
+    }).then(res => {
+      console.log(res)
+      console.log(e.detail.value.value)
+      if (res.code == 10000 && res.Item) {
+        var item = util.outflow(res.Item)
+        util.handleData(item, this, app.globalData.department);
+        // console.log(item)
+        this.setData({
+          // 公司抬头
+          'info.Companytitle': item.Companytitle,
+          'info.department': item.department,
+          departmenttext: item.department,
+          // 部门
+          // 合同照片
+          'info.API_Picurl': item.API_Picurl,
+          // 总包项目编号
+          'info.projcectCode': item.projcectCode,
+          // 施工地点
+          'info.workplace': item.workplace,
+          // 施工地点
+          'info.planbegindate': item.planbegindate,// 计划开工时间
+          'info.planenddate': item.planenddate,// 计划完工时间
+          'info.demo': item.demo,// 备注
+          'info.mainbuildcontext': item.mainbuildcontext,//主要施工内容
+          'info.chiefcontactman': item.chiefcontactman,//主要联系人
+          'info.chargeman': item.chargeman,//负责人
+        
+        })
+        console.log(item.API_Picurl)
+      }
+    })
+
+
+
+
+
+
   },
   // 金额
   contcactamountblur(e) {
@@ -162,11 +205,15 @@ Page({
     // console.log(this.data.info)
     if (this.data.info.maincontactname && this.data.info.projcectCode && this.data.info.demo) {
       let info = this.data.info;
+      // console.log( util.checkContent)
       util.checkContent(info, this);
+      util.intro(info,this)
+      // console.log(info)
       this.setData({
         info
       })
-      addPact(this.data.info).then(res => {
+      console.log(this.data.info)
+      addPact(info).then(res => {
         // console.log(res)
         if (res.code == 10000) {
           wx.showToast({
@@ -196,6 +243,7 @@ Page({
   editconfirm() {
     let info = this.data.info;
     util.checkChange(info, this, app.globalData.department);
+    util.intro(info,this)
     this.setData({
       info
     })
@@ -220,6 +268,21 @@ Page({
       firms: app.globalData.Companytitle,
       totals: app.globalData.MainProject,
     })
+    qgroupproject({createman:userinfo.UserName}).then(res=>{
+      console.log(res)
+      if(res.code==10000&&res.List){
+        var res1 = JSON.stringify(res.List)
+        let bidlist = JSON.parse(res1.replace(/ID/g, 'value').replace(/projcectCode/g, 'text'));
+        this.setData({
+          section22 : bidlist
+        })
+        console.log(this.data.section22)
+      }else{
+        this.setData({
+          section22 :[]
+        })
+      }
+    })
     if (options.id) {
       referId({
         ID: options.id
@@ -233,52 +296,4 @@ Page({
     }
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

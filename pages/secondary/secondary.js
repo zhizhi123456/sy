@@ -40,11 +40,21 @@ Page({
           }
           s.pageaddres = path.replace(/[\r\n]/g, "");
         }
+        var nametext = s.name
+        if (nametext) {
+          s.name = nametext.replace(/[\r\n]/g, "");
+        }
         if (s.name == '我的设计任务') {
           s.pageaddres = path + '?hadMy=1'
         }
         if (s.name == "材料领用查询") {
           s.pageaddres = '/OAmoudle/pages/receive/pact/pact'
+        }
+        if (s.name == "办公物品") {
+          s.pageaddres = '/OAmoudle/pages/supply/pact/pact'
+        }
+        if (s.name == "销假") {
+          s.pageaddres = '/OAmoudle/pages/resumption/pact/pact'
         }
       })
       // 请求当前用户模块

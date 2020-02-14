@@ -93,7 +93,9 @@ const checkContent = (value, key) => {
     value.applyman = user.UserName;
     value.belongtoman = user.UserName;
   }
+  // console.log(value.API_Picurl)
   if (value.API_Picurl) {
+    // console.log("tupian")
     key.setData({
       upimg: false
     })
@@ -651,9 +653,9 @@ const handleData = (data, key, dep) => {
   // })
   //分包项目
   app.globalData.MainSubproject.forEach(res => {
-    if (data.subprojcectCode == res.value) {
-      data.subprojcectCode = res.text;
-    }
+    // if (data.subprojcectCode == res.value) {
+    //   data.subprojcectCode = res.text;
+    // }
     if (data.InoutwarehouseID == res.value) {
       data.InoutwarehouseID = res.text;
     }
@@ -904,9 +906,9 @@ const listData = (data, dep, page, list, key, billname) => {
     })
     //分包项目
     app.globalData.MainSubproject.forEach(res => {
-      if (value.subprojcectCode == res.value) {
-        value.subprojcectCode = res.text;
-      }
+      // if (value.subprojcectCode == res.value) {
+      //   value.subprojcectCode = res.text;
+      // }
       if (value.InoutwarehouseID == res.value) {
         value.InoutwarehouseID = res.text;
       }
@@ -1136,12 +1138,14 @@ const returnMenu2 = (id, title) => {
   })
 }
 const workList = (key, id, billname) => {
+  console.log(key, id, billname)
   let userinfo = wx.getStorageSync("myInfo");
   if (id) {
     referflow({
       formName: billname,
       formid: id
     }).then(res => {
+      console.log(res)
       if (res.code == 10000) {
         let result = res.WorkflowRecordList;
         if (result && result.length) {
@@ -1714,6 +1718,9 @@ const intro = (data, that) => {
     if (s.text == data.charageman) {
       data.charageman = s.value
     }
+    if (s.text == data.applycancelman) {
+      data.applycancelman = s.value
+    }
 
   })
   app.globalData.Ifwinbidlist.forEach(s => {
@@ -1740,6 +1747,11 @@ const intro = (data, that) => {
   app.globalData.costkind.forEach(s => {
     if (s.text == data.chargetype) {
       data.chargetype = s.value
+    }
+  })
+  app.globalData.OfficeSuppliesType.forEach(s => {
+    if (s.text == data.classID) {
+      data.classID = s.value
     }
   })
 }
@@ -1906,6 +1918,10 @@ const outflow = (data, that) => {
     if (s.value == data.charageman) {
       data.charageman = s.text
     }
+    if (s.value == data.applycancelman) {
+      data.applycancelman = s.text
+    }
+
 
   })
   app.globalData.Ifwinbidlist.forEach(s => {
@@ -1941,6 +1957,11 @@ const outflow = (data, that) => {
       data.chargetype = s.text
     }
   })
+  app.globalData.OfficeSuppliesType.forEach(s => {
+    if (s.value == data.classID) {
+      data.classID = s.text
+    }
+  })
   data.IfWfComplete = whethercontent(data.IfWfComplete)
   return data
 
@@ -1973,6 +1994,7 @@ const qgroupdeliver = (funcname, that, hadNew, hadMy) => {
   // 判断是否全部为空
   var zhen = []
   let info = that.data.info;
+  console.log(info)
   for (var t in info) {
     if (info[t]) {
       zhen.push(true)

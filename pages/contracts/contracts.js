@@ -4,7 +4,8 @@ import {
   getTaskTNUm,
   getapplyNEWinfo,
   getNEWinfo,
-  getLeader
+  getLeader,
+  hotjob
 } from "../../service/getData";
 var app = getApp();
 let userinfo = wx.getStorageSync("myInfo");
@@ -36,13 +37,13 @@ Page({
       // //console.log(res)
       var s = res.List
       var w = s[0]
-      s[0]=s[1]
-      s[1]=w
+      s[0] = s[1]
+      s[1] = w
       var t = s
       var t = s.filter((a, index) => {
         return index != 3
       })
-      
+
       this.setData({
         tags: t,
         tag: t
@@ -73,6 +74,7 @@ Page({
         if (s.name == '我的申请') {
           s.ANUm = true
         }
+
         var path = s.pageaddres
         // ////console.log(path)
         if (path) {
@@ -106,6 +108,7 @@ Page({
 
           }
         } else {
+          // console.log(zong)
           for (var i in zong) {
             if (fen.some(g => {
                 // 如果有用户的菜单  和无用户的菜单 重合  赋予权限control 为true
@@ -125,7 +128,20 @@ Page({
             }
           }
         })
-        ////console.log(zong)
+        if (this.data.num == 1002) {
+          // console.log(zong)
+          zong.push({
+            ID: 1099,
+            PID: 1099,
+            control: true,
+            icon: "icon-weiwangguanicon-defuben-",
+            menuId: null,
+            name: "紧急任务",
+            pageaddres: "/pages/hot/lead/lead",
+            hot :true
+          })
+         
+        }
         this.setData({
           lists: zong
         })
@@ -300,6 +316,22 @@ Page({
           })
         }
       })
+      hotjob({
+        UserName: userinfo.UserName
+      }).then(res=>{
+        if(res.code=10000){
+          if(res.urgentTaskList.Num == 0){
+            this.setData({
+              hotnum:false
+            })
+          }else{
+            this.setData({
+              hotnum:res.urgentTaskList.Num
+            })
+          }
+        }
+      })
+
     }
   },
   onShow: function () {

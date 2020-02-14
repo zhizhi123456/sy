@@ -3,9 +3,12 @@ import Toast from 'vant-weapp/dist/toast/toast';
 import {
   addContract,
   referContract,
-  amendContract
+  amendContract,
+  groupSubItems,
+  referSubItems
 } from "../../../service/getData";
 var util = require("../../../utils/util");
+let userinfo = wx.getStorageSync("myInfo");
 var app = getApp();
 Page({
   /**
@@ -30,7 +33,8 @@ Page({
     sections: [],
     firms: [],
     totals: [],
-    Citems: []
+    Citems: [],
+    section22: []
   },
   // 公司
   showPopup() {
@@ -92,6 +96,27 @@ Page({
     this.setData({
       info,
       show_3: false
+    })
+    referSubItems({
+      ID: e.detail.value.value
+    }).then(res => {
+      // console.log(res)
+      if (res.code == 10000 && res.Item) {
+        var item = util.outflow(res.Item)
+        util.handleData(item, this, app.globalData.department);
+        // console.log(item)
+        this.setData({
+          'info.Companytitle': item.Companytitle,
+          'info.department': item.department,
+          departmenttext: item.department,
+          // 部门
+          // 合同金额
+          'info.contcactamount': item.contcactamount,
+          // 合同照片
+          'info.API_Picurl': item.API_Picurl
+         
+        })
+      }
     })
   },
   // 签订时间
@@ -156,6 +181,7 @@ Page({
     if (this.data.info.Companytitle && this.data.info.department && this.data.info.subcontactname && this.data.info.subprojcectCode && this.data.info.demo) {
       let info = this.data.info;
       util.checkContent(info, this);
+      util.intro(info,this)
       this.setData({
         info
       })
@@ -191,6 +217,7 @@ Page({
   editconfirm() {
     let info = this.data.info;
     util.checkChange(info, this, app.globalData.department);
+    util.intro(info,this)
     this.setData({
       info
     })
@@ -231,6 +258,23 @@ Page({
       firms: app.globalData.Companytitle,
       totals: app.globalData.MainProject,
       Citems: app.globalData.MainSubproject,
+    })
+    groupSubItems({
+      chargemanName: userinfo.UserName
+    }).then(res => {
+      // console.log(res)
+      if (res.code == 10000 && res.List) {
+        var res1 = JSON.stringify(res.List)
+        let bidlist = JSON.parse(res1.replace(/ID/g, 'value').replace(/subprojectname/g, 'text'));
+        this.setData({
+          section22: bidlist
+        })
+        // console.log(this.data.section22)
+      } else {
+        this.setData({
+          section22: []
+        })
+      }
     })
     if (options.id) {
       referContract({

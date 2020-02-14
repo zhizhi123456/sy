@@ -14,7 +14,10 @@ import {
   projectup,
   projectone,
   Customer,
-  getdep
+  getdep,
+  qgroupbid,
+  detailbid,
+  record
 } from "../../../service/getData";
 var util = require("../../../utils/util");
 var app = getApp();
@@ -59,7 +62,7 @@ Page({
       iftoexam: '',
       iftocheck: '',
       makecontactdemo: "",
-      ifbindtoproject: '',
+      ifbindtoproject: '是',
       bindtoprojectcode: "",
       updateman: "",
       updatetime: "",
@@ -146,12 +149,37 @@ Page({
     });
   },
   onConfirm_o(e) {
-    let info = util.editInfo(e, this, e.detail.value);
+    // console.log(e.detail.value.text)
+    let info = util.editInfo(e, this, e.detail.value.text);
     // console.log(info)
     this.setData({
       info,
       show_o: false,
     })
+    detailbid({ID:e.detail.value.value}).then(res=>{
+      // console.log(res)
+      if(res.code == 10000 && res.Item){
+        var item = util.outflow(res.Item)
+        // console.log(item)
+        this.setData({
+          'info.Companytitle':item.Companytitle,
+          // projectname
+          'info.projectname':item.projectname,
+          // 项目名称
+          'info.department':item.department,
+          // 部门
+          'info.projecttype':item.projecttype,
+          // 项目类型
+          'info.projectprop':item.projectprop,
+          // 总包项目属性
+          'info.projectaddress':item.projectaddress,
+          // 项目地址
+          'info.bindtoprojectcode':e.detail.value.text
+
+        })
+      }
+    })
+
   },
   // 项目类型
   showPopup1() {
@@ -730,8 +758,8 @@ Page({
     let info = this.data.info;
     util.checkContent(info, this);
     util.intro(info,this)
-    console.log(info)
-    console.log(info.projcectCode && info.FirstCompanyName && info.projectname && info.workplace && info.FirstReportPrjcode && info.Ifmakecontact && info.projectprop && info.projecttype && info.projectaddress && info.planbegindate && info.planenddate && info.demo)
+    // console.log(info)
+    // console.log(info.projcectCode && info.FirstCompanyName && info.projectname && info.workplace && info.FirstReportPrjcode && info.Ifmakecontact && info.projectprop && info.projecttype && info.projectaddress && info.planbegindate && info.planenddate && info.demo)
     if (info.projcectCode && info.FirstCompanyName && info.projectname && info.workplace && info.FirstReportPrjcode && info.Ifmakecontact && info.projectprop && info.projecttype && info.projectaddress && info.planbegindate && info.planenddate && info.demo) {
       this.dispose()
       let infodata = {
@@ -912,7 +940,21 @@ Page({
         section13: q
       })
     })
-
+    qgroupbid({charageman:userinfo.UserName}).then(res=>{
+      console.log(res)
+      if(res.code==10000&&res.List){
+        var res1 = JSON.stringify(res.List)
+        let bidlist = JSON.parse(res1.replace(/ID/g, 'value').replace(/bidprojectcode/g, 'text'));
+        this.setData({
+          section22 : bidlist
+        })
+        console.log(this.data.section22)
+      }else{
+        this.setData({
+          section22 :[]
+        })
+      }
+    })
   },
 
   /**

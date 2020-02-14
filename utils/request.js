@@ -19,10 +19,12 @@ function request(url, data, header, method) {
       Token: userinfo.Token,
       TokenType: userinfo.TokenType
     }
+
   } else {
     var Willpass = {
       Timestamp: util.format(new Date()),
     }
+    
   }
   return new Promise((resolve, reject) => {
     // 发起请求

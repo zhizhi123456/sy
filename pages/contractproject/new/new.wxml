@@ -17,9 +17,13 @@
                 <text>项目编号</text>
                 <text class="required">*</text>
             </view>
-            <van-cell-group>
+            <van-cell title="{{info.projcectCode?info.projcectCode:'请选择'}}" is-link bind:click="showPopup_o" />
+            <van-popup show="{{show_o}}" round position="bottom" bind:close="onClose_o">
+                <van-picker data-name="projcectCode" show-toolbar columns="{{ section22 }}" bind:cancel="onClose_o" bind:confirm="onConfirm_o" />
+            </van-popup>
+            <!-- <van-cell-group>
                 <van-field data-name="projcectCode" value="{{info.projcectCode}}" placeholder="请输入" bind:blur="maincontactnameblur" type="textarea" autosize />
-            </van-cell-group>
+            </van-cell-group> -->
         </view>
         <view class="check_item">
             <view class="kind require">

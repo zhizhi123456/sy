@@ -13,6 +13,16 @@
     <view class="main n_main">
         <van-toast id="van-toast" />
         <view class="check_item">
+            <view class="kind require">
+                <text>总包项目</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.projcectCode?info.projcectCode:'请选择'}}" is-link bind:click="showPopup_3" />
+            <van-popup show="{{ show_3 }}" round position="bottom" bind:close="onClose_3">
+                <van-picker data-name="projcectCode" show-toolbar columns="{{ section22 }}" bind:cancel="onClose_3" bind:confirm="onConfirm_3" />
+            </van-popup>
+        </view>
+        <view class="check_item">
             <text class="kind">部门</text>
             <van-cell title="{{departmenttext}}" is-link bind:click="showPopup_o" />
             <van-popup show="{{show_o}}" round position="bottom" bind:close="onClose_o">
@@ -35,16 +45,7 @@
                 <van-field data-name="maincontactname" value="{{info.maincontactname}}" placeholder="请填写合同名称" bind:blur="maincontactnameblur" type="textarea" autosize />
             </van-cell-group>
         </view>
-        <view class="check_item">
-            <view class="kind require">
-                <text>总包项目</text>
-                <text class="required">*</text>
-            </view>
-            <van-cell title="{{info.projcectCode?info.projcectCode:'请选择'}}" is-link bind:click="showPopup_3" />
-            <van-popup show="{{ show_3 }}" round position="bottom" bind:close="onClose_3">
-                <van-picker data-name="projcectCode" show-toolbar columns="{{ totals }}" bind:cancel="onClose_3" bind:confirm="onConfirm_3" />
-            </van-popup>
-        </view>
+        
         <view class="check_item">
             <text class="kind">总包合同金额</text>
             <van-cell-group>

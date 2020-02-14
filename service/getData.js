@@ -978,3 +978,37 @@ export const fileRecord = (params) => http.post("/api/FormUpdateRecord/FormUpdat
 export const qgroupfile = (params) => http.post("/api/FormUpdateRecord/GroupQuery", params);
 // contrast
 export const contrastfile = (params) => http.post("/api/FormUpdateRecord/DetermineJsonDifferences", params);
+
+
+
+// 办公费用
+// 查询
+export const querysupply = (params) => http.post("/api/OfficeitemsUse/Query", params);
+// 添加
+export const addsupply = (params) => http.post("/api/OfficeitemsUse/Insert", params);
+// 根据id查询
+export const detailsupply = (params) => http.post("/api/OfficeitemsUse/Detail", params);
+// 更新
+export const updatesupply = (params) => http.post("/api/OfficeitemsUse/Update", params);
+// 删除
+export const delsupply = (params) => http.post("/api/OfficeitemsUse/Delete", params);
+// 综合查询
+export const qgroupsupply = (params) => http.post("/api/OfficeitemsUse/Querygroup", params);
+
+
+// 销假
+// 查询
+export const queryresumption = (params) => http.post("/api/leavecancelform/Query", params);
+// 添加
+export const addresumption = (params) => http.post("/api/leavecancelform/Insert", params);
+// 根据id查询
+export const detailresumption = (params) => http.post("/api/leavecancelform/Detail", params);
+// 更新
+export const updateresumption = (params) => http.post("/api/leavecancelform/Update", params);
+// 删除
+export const delresumption = (params) => http.post("/api/leavecancelform/Delete", params);
+// 综合查询
+export const qgroupresumption = (params) => http.post("/api/leavecancelform/Querygroup", params);
+// 紧急任务
+
+export const hotjob = (params) => http.post("/api/TaskList/UrgentTask", params);

@@ -1,0 +1,103 @@
+<!-- pages/new/new.wxml -->
+<view class="wraper">
+    <view class="header d_header" wx:if="{{info.ID}}">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="editreturn"></icon>
+        <text class="fr newCreate" bindtap="editconfirm">确定</text>
+        <view class="apply">编辑销假</view>
+    </view>
+    <view class="header d_header" wx:else>
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="confirm">确定</text>
+        <view class="apply">新建销假</view>
+    </view>
+    <view class="main n_main">
+        <van-toast id="van-toast" />
+        <view class="check_item">
+            <view class="kind require">
+                <text>销假人</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.applycancelman?info.applycancelman:'请选择'}}" bind:click="showPopup2">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show2 }}" round position="bottom" bind:close="onClose2">
+                <van-picker data-name="applycancelman" show-toolbar columns="{{section1}}" bind:cancel="onClose2" bind:confirm="onConfirm2" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>公司抬头</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.Companytitle?info.Companytitle:'请选择'}}" bind:click="showPopup_4">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show_nature }}" round position="bottom" bind:close="onClose_4">
+                <van-picker data-name="Companytitle" show-toolbar columns="{{nature}}" bind:cancel="onClose_4" bind:confirm="onConfirm_4" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>部门</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.department?info.department:'请选择'}}" bind:click="showPopup1">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show1 }}" round position="bottom" bind:close="onClose1">
+                <van-picker data-name="department" show-toolbar columns="{{sections}}" bind:cancel="onClose1" bind:confirm="onConfirm1" />
+            </van-popup>
+        </view>
+        <!-- <view class="check_item">
+            <view class="kind require">
+                <text>费用对象</text>
+                 <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.usechargeman?info.usechargeman:'请选择'}}" bind:click="showPopup3">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show3 }}" round position="bottom" bind:close="onClose3">
+                <van-picker data-name="usechargeman" show-toolbar columns="{{section2}}" bind:cancel="onClose3" bind:confirm="onConfirm3" />
+            </van-popup>
+        </view> -->
+        <view class="check_item">
+            <view class="kind require">
+                <text>销假日期</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.leavecancedate?info.leavecancedate:'请选择'}}" is-link bind:click="showPopup_time1" icon="clock-o" />
+            <van-popup show="{{show_time1 }}" round position="bottom" bind:close="onClose_time1">
+                <van-datetime-picker data-name="leavecancedate" value="{{ currentDate1 }}" bind:cancel="onClose_time1" bind:confirm="onConfirm_time1" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>结束日期</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.leaveenddate?info.leaveenddate:'请选择'}}" is-link bind:click="showPopup_time" icon="clock-o" />
+            <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
+                <van-datetime-picker data-name="leaveenddate" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>请假日期</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.leavedate?info.leavedate:'请选择'}}" is-link bind:click="showPopup_time2" icon="clock-o" />
+            <van-popup show="{{ show_time3 }}" round position="bottom" bind:close="onClose_time2">
+                <van-datetime-picker data-name="leavedate" value="{{ currentDate2 }}" bind:cancel="onClose_time2" bind:confirm="onConfirm_time2" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>事由</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="cancelreason" value="{{info.cancelreason}}" placeholder="请输入" bind:blur="projectnameblur" />
+            </van-cell-group>
+        </view>
+    </view>
+</view>

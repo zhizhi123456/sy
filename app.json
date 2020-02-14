@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/hot/lead/lead",
     "pages/contracts/contracts",
     "pages/secondary/secondary",
     "pages/login/login",
@@ -187,7 +188,13 @@
         "pages/payment/pact/pact",
         "pages/payment/detail/detail",
         "pages/payment/new/new",
-        "pages/receive/pact/pact"
+        "pages/receive/pact/pact",
+        "pages/supply/pact/pact",
+        "pages/supply/detail/detail",
+        "pages/supply/new/new",
+        "pages/resumption/pact/pact",
+        "pages/resumption/detail/detail",
+        "pages/resumption/new/new"
       ]
     }
   ],
