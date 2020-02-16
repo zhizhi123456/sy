@@ -196,7 +196,8 @@
         "pages/supply/new/new",
         "pages/resumption/pact/pact",
         "pages/resumption/detail/detail",
-        "pages/resumption/new/new"
+        "pages/resumption/new/new",
+        "pages/designp/pact/pact"
       ]
     }
   ],

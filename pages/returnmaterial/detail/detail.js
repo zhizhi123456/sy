@@ -31,7 +31,7 @@ Page({
     // })
     if (wx.getStorageSync('urgent')) {
       wx.redirectTo({
-        url: '/pages/hot/lead/lead'
+        url: '/pages/hot/mself/mself'
       })
       wx.removeStorageSync('urgent');
     } else {
