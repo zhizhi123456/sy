@@ -54,7 +54,7 @@ Page({
           //列表
           let mid = res.Item.formid;
           if (mid) {
-            util.workList(this, mid)
+            util.workList(this, mid, 'projectsupervision')
           }
           util.checkState(this, mid, 'projectsupervision', item.CurStepbh);
         }

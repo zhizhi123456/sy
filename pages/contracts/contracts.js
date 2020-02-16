@@ -5,7 +5,9 @@ import {
   getapplyNEWinfo,
   getNEWinfo,
   getLeader,
-  hotjob
+  hotjob,
+  getdep,
+  leadership
 } from "../../service/getData";
 var app = getApp();
 let userinfo = wx.getStorageSync("myInfo");
@@ -22,7 +24,8 @@ Page({
     num: 1000,
     login: true,
     exist: '',
-    deng: ''
+    deng: '',
+    dephot:false
 
   },
   deal() {
@@ -40,9 +43,9 @@ Page({
       s[0] = s[1]
       s[1] = w
       var t = s
-      var t = s.filter((a, index) => {
-        return index != 3
-      })
+      // var t = s.filter((a, index) => {
+      //   return index != 3
+      // })
 
       this.setData({
         tags: t,
@@ -137,8 +140,18 @@ Page({
             icon: "icon-weiwangguanicon-defuben-",
             menuId: null,
             name: "紧急任务",
-            pageaddres: "/pages/hot/lead/lead",
+            pageaddres: "/pages/hot/self/self",
             hot :true
+          })
+          zong.push({
+            ID: 1044,
+            PID: 10224,
+            control: true,
+            icon: "icon-jinji",
+            menuId: null,
+            name: "紧急任务(部门)",
+            pageaddres: "/pages/hot/lead/lead",
+            dephot :true
           })
          
         }
@@ -319,7 +332,7 @@ Page({
       hotjob({
         UserName: userinfo.UserName
       }).then(res=>{
-        if(res.code=10000){
+        if(res.code==10000){
           if(res.urgentTaskList.Num == 0){
             this.setData({
               hotnum:false
@@ -331,6 +344,30 @@ Page({
           }
         }
       })
+
+      getdep({
+        UserName: userinfo.UserName
+      }).then(res => {
+        var s = JSON.parse(res)
+        leadership({
+          departmentID: s[0].ID
+        }).then(res => {
+          if (res.code == 10000) {
+            if(res.urgentTaskList.Num == 0){
+              this.setData({
+                depnum:false
+              })
+            }else{
+              this.setData({
+                depnum:res.urgentTaskList.Num
+              })
+            }
+  
+          }
+        })
+  
+      })
+  
 
     }
   },

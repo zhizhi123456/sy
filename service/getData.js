@@ -1011,4 +1011,7 @@ export const delresumption = (params) => http.post("/api/leavecancelform/Delete"
 export const qgroupresumption = (params) => http.post("/api/leavecancelform/Querygroup", params);
 // 紧急任务
 
-export const hotjob = (params) => http.post("/api/TaskList/UrgentTask", params);
+export const hotjob = (params) => http.post("/api/TaskList/UrgentTask", params)
+// leadership   领导 
+export const leadership = (params) => http.post("/api/TaskList/UrgentTaskEnquiry", params);
+export const leadership1 = (params) => http.post("/api/getmaterial/detail", params);

@@ -12,7 +12,7 @@
         <van-tabs active="{{tab}}">
             <van-tab title="详细资料" name="a">
                 <view class="content">
-                <view class="c_item">
+                    <view class="c_item">
                         <view class="kind">项目名称</view>
                         <view class="check">{{info.projectname}}</view>
                     </view>
@@ -56,8 +56,8 @@
                         <view class="kind">负责人</view>
                         <view class="check">{{info.charageman}}</view>
                     </view>
-                      <!-- 图片 -->
-                       <view class="c_item">
+                    <!-- 图片 -->
+                    <view class="c_item">
                         <view class="kind">照片</view>
                         <view wx:if="{{info.API_Picurl}}" class="detpic_show">
                             <block wx:for="{{info.API_Picurl}}" wx:key="index">
@@ -101,10 +101,7 @@
             </van-tab>
             <van-tab title="动态" name="b">
                 <van-cell title="动态({{Workstate}})" />
-                <block wx:if="{{info.formid}}">
-                    <van-steps steps="{{ steps }}" active="{{ active }}" direction="vertical" />
-                </block>
-                <view class="dynamic_state" wx:else>暂无动态</view>
+                <van-steps steps="{{ steps }}" active="{{ actived }}" direction="vertical" active-color="#008080" inactive-icon="stop-circle" />
             </van-tab>
         </van-tabs>
     </view>

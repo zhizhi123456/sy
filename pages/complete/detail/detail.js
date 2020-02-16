@@ -55,7 +55,7 @@ Page({
 
           let mid = res.Item.Formid; 
           if (mid) {
-            util.workList(this, mid)
+            util.workList(this, mid, 'EngineerCompleteRpt')
             // console.log(this.data.steps)
           }
            //处理状态判断

@@ -13,7 +13,7 @@
             <van-tab title="详细资料" name="a">
                 <view class="content">
                     <view class="c_item">
-                        <view class="kind">领料单名称</view>
+                        <view class="kind">退料单名称</view>
                         <view class="check">{{info.losematerialName}}</view>
                     </view>
                     <view class="c_item">

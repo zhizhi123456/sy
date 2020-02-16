@@ -322,6 +322,37 @@ App({
     }, {
       text: "非工程",
       value: "1"
-    }]
+    }],
+    table: [{
+      value:'subproject',
+      text:'分包项目'
+    }, 
+    {
+      value:'subcontact',
+      text:'分包合同'
+     
+    },
+    {
+      value:'prjassignbook',
+      text:'任务书'
+    },
+    {
+      value:'charge',
+      text:'费用'
+     
+    },
+    {
+      value:'getmaterial',
+      text:'领料单'
+    },
+    {
+      value:'losematerial',
+      text:'退料单'
+    },
+    {
+      value:'subprjcodeapply',
+      text:'分包编号'
+    }
+  ]
   }
 })

@@ -76,12 +76,9 @@
                     </view>
                 </view>
             </van-tab>
-            <van-tab title="动态" name="b">
-                <block wx:if="{{info.formid}}">
-                    <van-cell title="动态({{Workstate}})" />
-                    <van-steps steps="{{ steps }}" active="{{ active }}" direction="vertical" />
-                </block>
-                <view class="dynamic_state" wx:else>暂无动态</view>
+           <van-tab title="动态" name="b">
+                <van-cell title="动态({{Workstate}})" />
+                <van-steps steps="{{ steps }}" active="{{ actived }}" direction="vertical" active-color="#008080" inactive-icon="stop-circle" />
             </van-tab>
               <van-tab title="修改记录" name="d">
                 <block wx:if="{{amendant}}">

@@ -1,7 +1,10 @@
 {
   "pages": [
-    "pages/hot/lead/lead",
     "pages/contracts/contracts",
+    
+  
+    "pages/hot/lead/lead",
+   
     "pages/secondary/secondary",
     "pages/login/login",
     "pages/current/current/current",
@@ -158,6 +161,7 @@
     "pages/bid/pact/pact",
     "pages/bid/new/new",
     "pages/bid/detail/detail"
+   
   ],
   "subpackages": [
     {

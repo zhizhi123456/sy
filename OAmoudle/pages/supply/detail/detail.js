@@ -56,7 +56,7 @@ Page({
           //列表
           let mid = res.Item.formid;
           if (mid) {
-            util.workList(this, mid)
+            util.workList(this, mid, 'OfficeCharge')
             // //console.log(this.data.steps)
           }
           //处理状态判断

@@ -1,4 +1,13 @@
-/* pages/hot/lead/lead.wxss */
+/* pages/hot/self/self.wxss */
+.search1{
+    margin-right: 20rpx;
+}
 .box{
     margin-top: 100rpx;
+}
+.detail{
+    margin: 100rpx
+}
+.detail  view{
+    margin-bottom: 20rpx;
 }

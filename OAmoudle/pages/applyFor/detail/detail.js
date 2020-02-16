@@ -68,7 +68,7 @@ Page({
           // 调取工作流记录
           let mid = res.Item.formid;
           if (mid) {
-            util.workList(this, mid)
+            util.workList(this, mid, 'applyform')
           }
            //处理状态判断
            util.checkState(this, mid, 'applyform', item.CurStepbh);

@@ -68,7 +68,7 @@ Page({
           // 调取工作流记录
           let mid = res.Item.formid;
           if (mid) {
-            util.workList(this, mid)
+            util.workList(this, mid, 'SecurityKgRecord')
             console.log(this.data.steps)
           }
           util.checkState(this, mid, 'SecurityKgRecord', item.CurStepbh);
