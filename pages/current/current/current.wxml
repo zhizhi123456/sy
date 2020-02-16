@@ -11,12 +11,12 @@
     <view class="main n_main cmain">
         <view wx:if="{{NAnum}}">
             <block wx:for="{{taskData}}" wx:key="index">
-                <van-cell is-link wx:if="{{item.Number}}" link-type="redirectTo" url="/pages/{{paths[index]}}/pact/pact?rid={{options.id}}&title={{options.title}}&{{userid?'userid='+userid+'&caption='+caption+'&dep='+dep+'&deptxt='+deptxt:''}}">
+                <van-cell is-link wx:if="{{item.Number}}" link-type="redirectTo" url="/pages/{{paths[item.TableName]}}/pact/pact?rid={{options.id}}&title={{options.title}}&{{userid?'userid='+userid+'&caption='+caption+'&dep='+dep+'&deptxt='+deptxt:''}}">
                     <view slot="title">
                         <van-tag wx:if="{{Nhint}}" round type="danger" class="fr">
                             {{item.Number}}
                         </van-tag>
-                        <van-tag wx:else class="fl kktag">共{{item.Number}}条</van-tag>
+                        <van-tag wx:else class="fl kktag">共{{item.Number}}条</van-tag>  
                         <view class="van-cell-text fl">{{item.Name}}</view>
                         <van-tag wx:if="{{NEWnum[index].Number}}" round type="danger" class="fr">
                             {{NEWnum[index].Number}}

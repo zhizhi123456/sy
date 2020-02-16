@@ -33,8 +33,15 @@ Page({
   // },
   // 返回
   return () {
-    util.returnPrev('subcontract', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
-      this.data.rid, this.data.title)
+    if (wx.getStorageSync('urgent')) {
+      wx.redirectTo({
+        url: '/pages/hot/mself/mself'
+      })
+      wx.removeStorageSync('urgent');
+    } else {
+      util.returnPrev('subcontract', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+        this.data.rid, this.data.title)
+    }
   },
   /**
    * 生命周期函数--监听页面加载
@@ -45,6 +52,9 @@ Page({
         rid: options.rid,
         title: options.title,
       })
+    }
+    if (options.urgent) {
+      wx.setStorageSync('urgent', '1')
     }
     // console.log(options)
     if (options.userid) {

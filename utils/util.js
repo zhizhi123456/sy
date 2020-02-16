@@ -1170,6 +1170,7 @@ const workList = (key, id, billname) => {
               })
             }
           })
+          // console.log(steps,longlength)
           // console.log(longlength)
           // console.log(steps.reverse())
           key.setData({

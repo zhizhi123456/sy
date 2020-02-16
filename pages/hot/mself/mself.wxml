@@ -1,0 +1,26 @@
+<!--pages/hot/mself/mself.wxml-->
+<view class="wraper">
+    <view class="header">
+        <view class="title">
+            <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
+            <view class="apply">
+                <text>紧急任务</text>
+            </view>
+        </view>
+    </view>
+    <view class="box">
+        <van-collapse value="{{ activeNames }}" bind:change="onChange" accordion>
+            <block wx:for="{{modulekinds}}" wx:key="index">
+                <van-collapse-item name="{{index+1}}">
+                    <view slot="title">
+                        <view class="fl">{{item.List[0].TableNameChinese}}</view>
+                        <van-tag round type="danger" class="fr">{{item.Number}}</van-tag>
+                    </view>
+                    <block wx:for="{{item.List}}" wx:key="index">
+                        <van-cell title="{{item.DataName}}" is-link value="创建人:{{item.CreateMan}}" link-type="redirectTo" url="/pages/{{paths[item.TableName]}}/detail/detail?id={{item.ID}}&urgent=1" />
+                    </block>
+                </van-collapse-item>
+            </block>
+        </van-collapse>
+    </view>
+</view>

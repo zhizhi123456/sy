@@ -1,0 +1,12 @@
+/* pages/hot/mself/mself.wxss */
+.box {
+    margin-top: 100rpx;
+}
+
+.van-cell__title {
+    min-width: 100rpx;
+}
+
+.box .van-collapse-item__content {
+    padding: 0 15px;
+}

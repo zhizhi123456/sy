@@ -25,7 +25,7 @@ Page({
     login: true,
     exist: '',
     deng: '',
-    dephot:false
+    dephot: false
 
   },
   deal() {
@@ -133,16 +133,18 @@ Page({
         })
         if (this.data.num == 1002) {
           // console.log(zong)
-          zong.push({
-            ID: 1099,
-            PID: 1099,
-            control: true,
-            icon: "icon-weiwangguanicon-defuben-",
-            menuId: null,
-            name: "紧急任务",
-            pageaddres: "/pages/hot/self/self",
-            hot :true
-          })
+          if (this.data.hotnum) {
+            zong.push({
+              ID: 1099,
+              PID: 1099,
+              control: true,
+              icon: "icon-weiwangguanicon-defuben-",
+              menuId: null,
+              name: "紧急任务",
+              pageaddres: "/pages/hot/mself/mself",
+              hot: true
+            })
+          }
           zong.push({
             ID: 1044,
             PID: 10224,
@@ -151,9 +153,8 @@ Page({
             menuId: null,
             name: "紧急任务(部门)",
             pageaddres: "/pages/hot/lead/lead",
-            dephot :true
+            dephot: true
           })
-         
         }
         this.setData({
           lists: zong
@@ -331,15 +332,15 @@ Page({
       })
       hotjob({
         UserName: userinfo.UserName
-      }).then(res=>{
-        if(res.code==10000){
-          if(res.urgentTaskList.Num == 0){
+      }).then(res => {
+        if (res.code == 10000) {
+          if (res.urgentTaskList.Num == 0) {
             this.setData({
-              hotnum:false
+              hotnum: false
             })
-          }else{
+          } else {
             this.setData({
-              hotnum:res.urgentTaskList.Num
+              hotnum: res.urgentTaskList.Num
             })
           }
         }
@@ -353,21 +354,21 @@ Page({
           departmentID: s[0].ID
         }).then(res => {
           if (res.code == 10000) {
-            if(res.urgentTaskList.Num == 0){
+            if (res.urgentTaskList.Num == 0) {
               this.setData({
-                depnum:false
+                depnum: false
               })
-            }else{
+            } else {
               this.setData({
-                depnum:res.urgentTaskList.Num
+                depnum: res.urgentTaskList.Num
               })
             }
-  
+
           }
         })
-  
+
       })
-  
+
 
     }
   },
