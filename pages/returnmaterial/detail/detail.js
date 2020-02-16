@@ -29,8 +29,15 @@ Page({
     // wx.redirectTo({
     //   url: "/pages/returnmaterial/pact/pact"
     // })
-    util.returnPrev('returnmaterial', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
-      this.data.rid, this.data.title)
+    if (wx.getStorageSync('urgent')) {
+      wx.redirectTo({
+        url: '/pages/hot/lead/lead'
+      })
+      wx.removeStorageSync('urgent');
+    } else {
+      util.returnPrev('returnmaterial', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+        this.data.rid, this.data.title)
+    }
   },
   tap_pic(e) {
     util.preview(this, e)
@@ -91,13 +98,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
     util.readRecord('losematerial', options.id, this, '退料单')
     if (options.id || options.rid) {
       this.setData({
         rid: options.rid,
         title: options.title,
       })
+    }
+    if (options.urgent) {
+      wx.setStorageSync('urgent', '1')
     }
     if (options.userid) {
       this.setData({
@@ -135,11 +144,11 @@ Page({
       }).then(res => {
         console.log(res)
         if (res.code == 10000) {
-          var data1 =res.Item
+          var data1 = res.Item
           var b = JSON.stringify(data1)
-          var c  = JSON.parse(b)
+          var c = JSON.parse(b)
           this.setData({
-            information:c
+            information: c
           })
           console.log(this.data.information)
           let item = res.Item;
@@ -202,14 +211,14 @@ Page({
 
     util.Triggerflow(this, 'return', 'losematerial', 'returnmaterial', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
       this.data.rid, this.data.title)
-      // util.ModifyRecord(this.data.information,"losematerial")
+    // util.ModifyRecord(this.data.information,"losematerial")
   },
   // 提交下步
   putin() {
     console.log(this.data.information)
     util.Triggerflow(this, 'next', 'losematerial', 'returnmaterial', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
       this.data.rid, this.data.title)
-      // util.ModifyRecord(this.data.information,"losematerial")
+    // util.ModifyRecord(this.data.information,"losematerial")
   },
 
 })

@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/hot/lead/lead",
     "pages/contracts/contracts",
+    "pages/hot/lead/lead",
+    "pages/hot/mself/mself",
     "pages/secondary/secondary",
     "pages/login/login",
     "pages/current/current/current",

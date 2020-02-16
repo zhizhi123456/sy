@@ -130,21 +130,22 @@ Page({
         })
         if (this.data.num == 1002) {
           // console.log(zong)
-          zong.push({
-            ID: 1099,
-            PID: 1099,
-            control: true,
-            icon: "icon-weiwangguanicon-defuben-",
-            menuId: null,
-            name: "紧急任务",
-            pageaddres: "/pages/hot/lead/lead",
-            hot :true
-          })
-         
+            if(this.data.hotnum){
+              zong.push({
+                ID: 1099,
+                PID: 1099,
+                control: true,
+                icon: "icon-weiwangguanicon-defuben-",
+                menuId: null,
+                name: "紧急任务",
+                pageaddres: "/pages/hot/mself/mself",
+                hot :true
+              })
+            }
         }
         this.setData({
           lists: zong
-        })
+        })  
         // 测试
         // this.setData({
         //   lists: this.data.list.reverse()

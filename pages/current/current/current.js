@@ -14,7 +14,15 @@ Page({
    * 页面的初始数据
    */
   data: {
-    paths: ['subcontract', 'contract', 'task', 'cost', 'bill', 'returnmaterial', 'pointsnumber']
+    paths: {
+      subproject: 'subcontract',
+      subcontact: 'contract',
+      prjassignbook: 'task',
+      charge: 'cost',
+      getmaterial: 'bill',
+      losematerial: 'returnmaterial',
+      subprjcodeapply: 'pointsnumber'
+    }
   },
   return () {
     util.returnMenu(1002);
@@ -23,6 +31,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     wx.showLoading({
       title: '加载中',
     });
@@ -58,7 +67,7 @@ Page({
         getTaskTNUm({
           UserName: userinfo.UserName
         }).then(res => {
-          // console.log(res)
+          console.log(res)
           if (res.code == 10000) {
             let item = res.List;
             this.setData({

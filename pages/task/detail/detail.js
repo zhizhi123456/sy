@@ -20,8 +20,15 @@ Page({
   },
   // 返回
   return () {
-    util.returnPrev('task', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
-      this.data.rid, this.data.title)
+    if (wx.getStorageSync('urgent')) {
+      wx.redirectTo({
+        url: '/pages/hot/lead/lead'
+      })
+      wx.removeStorageSync('urgent');
+    } else {
+      util.returnPrev('task', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+        this.data.rid, this.data.title)
+    }
   },
   /**
    * 生命周期函数--监听页面加载
@@ -32,6 +39,9 @@ Page({
         rid: options.rid,
         title: options.title,
       })
+    }
+    if (options.urgent) {
+      wx.setStorageSync('urgent', '1')
     }
     if (options.userid) {
       this.setData({
@@ -90,7 +100,7 @@ Page({
           // 调取工作流记录
           // console.log(res.Item.formid)
           let mid = res.Item.formid;
-            util.workList(this, mid,'prjassignbook');
+          util.workList(this, mid, 'prjassignbook');
           //处理状态判断
           util.checkState(this, mid, 'prjassignbook', item.CurStepbh);
         }

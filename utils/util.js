@@ -1166,7 +1166,7 @@ const workList = (key, id, billname) => {
               })
             }
           })
-          // console.log(longlength)
+          console.log(steps,longlength)
           key.setData({
             steps: steps.reverse(),
             actived: longlength == 1 ? 0 : longlength

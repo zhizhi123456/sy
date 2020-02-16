@@ -25,8 +25,15 @@ Page({
   },
   // 返回
   return () {
-    util.returnPrev('bill', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
-      this.data.rid, this.data.title)
+    if (wx.getStorageSync('urgent')) {
+      wx.redirectTo({
+        url: '/pages/hot/lead/lead'
+      })
+      wx.removeStorageSync('urgent');
+    } else {
+      util.returnPrev('bill', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+        this.data.rid, this.data.title)
+    }
   },
   // add_speak() {
   //   this.setData({
@@ -92,6 +99,9 @@ Page({
         rid: options.rid,
         title: options.title,
       })
+    }
+    if (options.urgent) {
+      wx.setStorageSync('urgent', '1')
     }
     if (options.userid) {
       this.setData({

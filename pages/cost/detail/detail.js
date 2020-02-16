@@ -23,7 +23,12 @@ Page({
   },
   // 返回
   return () {
-    if (this.data.nape) {
+    if (wx.getStorageSync('urgent')) {
+      wx.redirectTo({
+        url: '/pages/hot/lead/lead'
+      })
+      wx.removeStorageSync('urgent');
+    } else if (this.data.nape) {
       wx.redirectTo({
         url: '/pages/' + this.data.nape + '/detail/detail?tab=c&id=' + this.data.returnid
       })
@@ -50,6 +55,9 @@ Page({
         rid: options.rid,
         title: options.title,
       })
+    }
+    if (options.urgent) {
+      wx.setStorageSync('urgent', '1')
     }
     if (options.userid) {
       this.setData({

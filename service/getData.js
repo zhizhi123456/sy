@@ -1010,5 +1010,4 @@ export const delresumption = (params) => http.post("/api/leavecancelform/Delete"
 // 综合查询
 export const qgroupresumption = (params) => http.post("/api/leavecancelform/Querygroup", params);
 // 紧急任务
-
 export const hotjob = (params) => http.post("/api/TaskList/UrgentTask", params);

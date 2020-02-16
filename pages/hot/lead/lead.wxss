@@ -1,4 +1,0 @@
-/* pages/hot/lead/lead.wxss */
-.box{
-    margin-top: 100rpx;
-}
