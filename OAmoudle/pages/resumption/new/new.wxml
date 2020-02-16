@@ -13,7 +13,6 @@
     <view class="main n_main">
         <van-toast id="van-toast" />
         <view class="check_item">
-        
             <view class="kind require">
                 <text>销假人</text>
                 <text class="required">*</text>

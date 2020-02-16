@@ -70,7 +70,6 @@ Page({
       section3: app.globalData.Principal,
       section4: app.globalData.costkind,
     })
-    
     wx.showLoading({
       title: '加载中',
     });
