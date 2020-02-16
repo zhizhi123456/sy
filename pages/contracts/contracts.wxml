@@ -19,6 +19,9 @@
        <van-tag wx:if="{{item.hot&&hotnum}}" round type="danger" class="HINT">
         {{hotnum}}
       </van-tag>
+        <van-tag wx:if="{{item.dephot&&depnum}}" round type="danger" class="HINT">
+        {{depnum}}
+      </van-tag>
       <icon class="{{' red  icon iconfont '+ item.icon + (item.control ?'':' c') }}"></icon>
       <text class="{{item.control ?'':'c'}}">{{item.name}}</text>
       <!-- <navigator url="{{ item.three?item.path +'?menuId='+ item.menuId:(item.control ? '/pages/secondarys/secondarys?id='+item.ID+'&title='+item.nametext :'#')}}"></navigator> -->

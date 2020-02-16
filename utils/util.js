@@ -1138,9 +1138,13 @@ const returnMenu2 = (id, title) => {
   })
 }
 const workList = (key, id, billname) => {
-  console.log(key, id, billname)
+  console.log(id, billname)
   let userinfo = wx.getStorageSync("myInfo");
   if (id) {
+    console.log({
+      formName: billname,
+      formid: id
+    })
     referflow({
       formName: billname,
       formid: id
@@ -1166,7 +1170,9 @@ const workList = (key, id, billname) => {
               })
             }
           })
-          console.log(steps,longlength)
+          // console.log(steps,longlength)
+          // console.log(longlength)
+          // console.log(steps.reverse())
           key.setData({
             steps: steps.reverse(),
             actived: longlength == 1 ? 0 : longlength
@@ -1994,7 +2000,7 @@ const qgroupdeliver = (funcname, that, hadNew, hadMy) => {
   // 判断是否全部为空
   var zhen = []
   let info = that.data.info;
-  console.log(info)
+  // console.log(info)
   for (var t in info) {
     if (info[t]) {
       zhen.push(true)

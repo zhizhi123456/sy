@@ -114,8 +114,8 @@ Page({
           wx.hideLoading();
           // 调取工作流记录
           if (res.Item.formid) {
-            util.workList(this, res.Item.formid)
-            util.checkState(this, res.Item.formid, 'project', item.CurStepbh);
+            util.workList(this, res.Item.formid, 'buildingAcceptance')
+            util.checkState(this, res.Item.formid, 'buildingAcceptance', item.CurStepbh);
           }
 
         }

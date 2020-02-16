@@ -159,6 +159,7 @@
     "pages/bid/pact/pact",
     "pages/bid/new/new",
     "pages/bid/detail/detail"
+   
   ],
   "subpackages": [
     {
