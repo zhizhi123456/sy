@@ -56,6 +56,9 @@ Page({
         if (s.name == "销假") {
           s.pageaddres = '/OAmoudle/pages/resumption/pact/pact'
         }
+        if (s.name == "市场设计绩效") {
+          s.pageaddres = '/OAmoudle/pages/designp/pact/pact'
+        }
       })
       // 请求当前用户模块
       queryMenu({

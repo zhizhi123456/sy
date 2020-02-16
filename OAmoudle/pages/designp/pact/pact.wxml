@@ -1,2 +1,52 @@
-<!--OAmoudle/pages/designp/pact/pact.wxml-->
-<text>OAmoudle/pages/designp/pact/pact.wxml</text>
+<!-- textages/textact/textact.wxml -->
+<view class="wraper">
+    <!-- 头部 -->
+    <view class="header">
+        <view class="title">
+            <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
+            <view class="apply">{{top}}</view>
+        </view>
+        <view class="seach">
+            <icon class="iconfont icon-guanyu fl s-sort"></icon>
+            <icon class="iconfont icon-sousuo fr" bindtap="seachInfo"></icon>
+            <view class="data_list">
+                <input value="{{seach}}" bindblur="setSeach" />
+                <view class="number" wx:if="{{!seach}}">
+                    <icon class="iconfont icon-sousuo"></icon>
+                    <text wx:if="{{InfoList.length}}">共{{item.length}}条</text>
+                    <text wx:else>搜索</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="main">
+        <view class="list" wx:for="{{InfoList}}" wx:key="index">
+            <view>
+                <text class="caption">{{item.designman}}</text>
+            </view>
+            <view>
+                <text class="info">设计人员名称</text>
+                <text>{{item.designman}}</text>
+            </view>
+            <view>
+                <text class="info">在做任务</text>
+                <text>{{item.doing}}</text>
+            </view>
+            <view>
+                <text class="info">已完成任务</text>
+                <text>{{item.Completed}}</text>
+            </view>
+            <view>
+                <text class="info">平均难度系数</text>
+                <text>{{item.difficulty}}</text>
+            </view>
+            <view>
+                <text class="info">平均综合积分</text>
+                <text>{{item.Comprehensive}}</text>
+            </view>
+        </view>
+        <view wx:if="{{loading&&InfoList.length}}" class="end">加载中...</view>
+        <view wx:if="{{!loading&&InfoList.length}}" class="end">已经到底了</view>
+        <view class="no_more" wx:if="{{!InfoList.length}}">暂无内容</view>
+    </view>
+</view>

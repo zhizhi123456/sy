@@ -1014,3 +1014,5 @@ export const hotjob = (params) => http.post("/api/TaskList/UrgentTask", params)
 // leadership   领导 
 export const leadership = (params) => http.post("/api/TaskList/UrgentTaskEnquiry", params);
 export const leadership1 = (params) => http.post("/api/getmaterial/detail", params);
+// 市场设计绩效
+export const designP = (params) => http.post("/api/designtaskSynthesize/Query", params)
