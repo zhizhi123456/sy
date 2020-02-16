@@ -50,15 +50,15 @@ Page({
         if (s.name == "材料领用查询") {
           s.pageaddres = '/OAmoudle/pages/receive/pact/pact'
         }
-        if (s.name == "办公物品") {
-          s.pageaddres = '/OAmoudle/pages/supply/pact/pact'
-        }
-        if (s.name == "销假") {
-          s.pageaddres = '/OAmoudle/pages/resumption/pact/pact'
-        }
-        if (s.name == "市场设计绩效") {
-          s.pageaddres = '/OAmoudle/pages/designp/pact/pact'
-        }
+        // if (s.name == "办公物品") {
+        //   s.pageaddres = '/OAmoudle/pages/supply/pact/pact'
+        // }
+        // if (s.name == "销假") {
+        //   s.pageaddres = '/OAmoudle/pages/resumption/pact/pact'
+        // }
+        // if (s.name == "市场设计绩效") {
+        //   s.pageaddres = '/OAmoudle/pages/designp/pact/pact'
+        // }
       })
       // 请求当前用户模块
       queryMenu({

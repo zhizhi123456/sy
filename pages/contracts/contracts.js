@@ -46,6 +46,10 @@ Page({
       // var t = s.filter((a, index) => {
       //   return index != 3
       // })
+      var  q = res.List
+      var p = q[3]
+      q[3] = q[2]
+      q[2] = p
 
       this.setData({
         tags: t,
