@@ -1,10 +1,9 @@
 <!-- textages/textact/textact.wxml -->
-
 <view class="wraper">
     <view class="header">
         <view class="title">
             <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
-            <navigator open-type="redirect" url="/OAmoudle/pages/payment/new/new" hover-class="none" class="fr newCreate">
+            <navigator open-type="redirect" url="/OAmoudle/pages/overtime/new/new" hover-class="none" class="fr newCreate">
                 新建
             </navigator>
             <view class="apply">{{top}}</view>
@@ -22,13 +21,16 @@
                 <van-popup show="{{ show }}" bind:close="onClose" position="right" custom-style="height: 100vh;color:#333">
                     <view class="seach_item">
                         <van-cell-group>
-                            <van-field data-name="payapproveformname" value="{{info.payapproveformname}}" placeholder="请输入" bind:blur="payapproveformnameblur" label="付款签报名称" />
+                            <van-field data-name="applyman" value="{{info.applyman}}" placeholder="请输入" bind:blur="applymanblur" label="申请人" />
                         </van-cell-group>
                     </view>
                     <view class="seach_item">
                         <van-cell-group>
-                            <van-field data-name="createman" value="{{info.createman}}" placeholder="请输入" bind:blur="createmanblur" label="创建人" />
+                            <van-field value="{{info.overworktype}}" placeholder="请选择" bindtap="showPopup_1" label="加班类型" disabled />
                         </van-cell-group>
+                        <van-popup show="{{ show_1 }}" round position="bottom" bind:close="onClose_1">
+                            <van-picker data-name="overworktype" show-toolbar columns="{{GetOverworktype}}" bind:cancel="onClose_1" bind:confirm="onConfirm_1" />
+                        </van-popup>
                     </view>
                     <view class="seach_item">
                         <van-cell-group>
@@ -40,10 +42,18 @@
                     </view>
                     <view class="seach_item">
                         <van-cell-group>
-                            <van-field value="{{info.starttime}}" placeholder="请选择" label="开始时间" bindtap="showPopup_time" disabled />
+                            <van-field value="{{info.overtimeperiod}}" placeholder="请选择" bindtap="showPopup_2" label="加班时期" disabled />
+                        </van-cell-group>
+                        <van-popup show="{{ show_2 }}" round position="bottom" bind:close="onClose_2">
+                            <van-picker data-name="overtimeperiod" show-toolbar columns="{{GetOvertimeperiod}}" bind:cancel="onClose_2" bind:confirm="onConfirm_2" />
+                        </van-popup>
+                    </view>
+                    <view class="seach_item">
+                        <van-cell-group>
+                            <van-field value="{{info.begintime}}" placeholder="请选择" label="开始时间" bindtap="showPopup_time" disabled />
                         </van-cell-group>
                         <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
-                            <van-datetime-picker data-name="starttime" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
+                            <van-datetime-picker data-name="begintime" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
                         </van-popup>
                     </view>
                     <view class="seach_item">
@@ -54,14 +64,14 @@
                             <van-datetime-picker data-name="endtime" value="{{ currentDate }}" bind:cancel="onClose_endtime" bind:confirm="onConfirm_endtime" />
                         </van-popup>
                     </view>
-                    <view class="seach_item">
+                    <!-- <view class="seach_item">
                         <van-cell-group>
-                            <van-field value="{{info.processstate}}" placeholder="请选择" bindtap="showPopup_3" label="状态" disabled />
+                            <van-field value="{{info.state}}" placeholder="请选择" bindtap="showPopup_3" label="状态" disabled />
                         </van-cell-group>
                         <van-popup show="{{ show_3 }}" round position="bottom" bind:close="onClose_3">
-                            <van-picker data-name="processstate" show-toolbar columns="{{ states }}" bind:cancel="onClose_3" bind:confirm="onConfirm_3" />
+                            <van-picker data-name="state" show-toolbar columns="{{ states }}" bind:cancel="onClose_3" bind:confirm="onConfirm_3" />
                         </van-popup>
-                    </view>
+                    </view> -->
                     <view class="checkkind">
                         <text bindtap="onClose">取消</text>
                         <text bindtap="onConfirm_seach">查询</text>
@@ -72,25 +82,29 @@
     </view>
     <view class="main">
         <view class="list" wx:for="{{InfoList}}" wx:key="index">
-            <navigator open-type="redirect" url="/OAmoudle/pages/payment/detail/detail?id={{item.ID}}" hover-class="none">
+            <navigator open-type="redirect" url="/OAmoudle/pages/overtime/detail/detail?id={{item.ID}}" hover-class="none">
                 <view>
-                    <text class="caption">{{item.payapproveformname}}</text>
+                    <text class="caption">{{item.applyman}}</text>
                 </view>
                 <view>
                     <text class="info">当前任务状态</text>
                     <text class="caution">{{Workstates[index]}}</text>
                 </view>
                 <view>
-                    <text class="info">签报名称</text>
-                    <text>{{item.payapproveformname}}</text>
+                    <text class="info">加班事由</text>
+                    <text>{{item.workoverreason}}</text>
                 </view>
                 <view>
-                    <text class="info">付款金额</text>
-                    <text>{{item.payammount}}</text>
+                    <text class="info">加班类型</text>
+                    <text>{{item.overworktype}}</text>
                 </view>
                 <view>
-                    <text class="info">公司</text>
-                    <text>{{item.Companytitle}}</text>
+                    <text class="info">申请人</text>
+                    <text>{{item.applyman}}</text>
+                </view>
+                <view>
+                    <text class="info">所属部门</text>
+                    <text>{{item.department}}</text>
                 </view>
                 <view>
                     <text class="info">创建人</text>
@@ -99,6 +113,14 @@
                 <view>
                     <text class="info">创建时间</text>
                     <text>{{item.createtime}}</text>
+                </view>
+                <view>
+                    <text class="info">修改人</text>
+                    <text>{{item.updateman}}</text>
+                </view>
+                <view>
+                    <text class="info">修改时间</text>
+                    <text>{{item.updatetime}}</text>
                 </view>
                 <view>
                     <text class="info">当前步骤名称</text>

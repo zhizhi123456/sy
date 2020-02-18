@@ -197,7 +197,10 @@
         "pages/resumption/pact/pact",
         "pages/resumption/detail/detail",
         "pages/resumption/new/new",
-        "pages/designp/pact/pact"
+        "pages/designp/pact/pact",
+        "pages/overtime/pact/pact",
+        "pages/overtime/detail/detail",
+        "pages/overtime/new/new"
       ]
     }
   ],

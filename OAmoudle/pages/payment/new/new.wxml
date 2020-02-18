@@ -1,4 +1,5 @@
 <!-- pages/new/new.wxml -->
+
 <view class="wraper">
     <view class="header d_header" wx:if="{{info.ID}}">
         <icon class="iconfont icon-jiantou2 fl" bindtap="editreturn"></icon>

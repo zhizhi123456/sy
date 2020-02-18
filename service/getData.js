@@ -108,6 +108,10 @@ export const getName = (params) => http.post("/api/MethodOfDataService/GetUserNa
 export const getLeader = (params) => http.post("/api/MethodOfDataService/GetDepartmentPrincipal", params);
 //请假类别
 export const Leavetypelist = (params) => http.post("/api/MethodOfDataService/Leavetypelist", params);
+//加班类别
+export const GetOverworktype = (params) => http.post("/api/MethodOfDataService/GetOverworktype", params);
+//加班时段
+export const GetOvertimeperiod = (params) => http.post("/api/MethodOfDataService/GetOvertimeperiod", params);
 //已提交流转
 export const referflow = (params) => http.post("/api/SubmitWorkFlowService/GetWorkflowRecord2", params);
 //未提交流转
@@ -1015,4 +1019,17 @@ export const hotjob = (params) => http.post("/api/TaskList/UrgentTask", params)
 export const leadership = (params) => http.post("/api/TaskList/UrgentTaskEnquiry", params);
 export const leadership1 = (params) => http.post("/api/getmaterial/detail", params);
 // 市场设计绩效
-export const designP = (params) => http.post("/api/designtaskSynthesize/Query", params)
+export const designP = (params) => http.post("/api/designtaskSynthesize/Query", params);
+// 加班
+// 查询
+export const getOvertime = (params) => http.post("/api/workovertime/Query", params);
+// 根据id查询
+export const referOvertime = (params) => http.post("/api/workovertime/Detail", params);
+// 组合查询
+export const groupOvertime = (params) => http.post("/api/workovertime/Querygroup", params);
+// 添加
+export const addOvertime = (params) => http.post("/api/workovertime/Insert", params);
+// 修改
+export const amendOvertime = (params) => http.post("/api/workovertime/Update", params);
+// 删除
+export const cancelOvertime = (params) => http.post("/api/workovertime/Delete", params);

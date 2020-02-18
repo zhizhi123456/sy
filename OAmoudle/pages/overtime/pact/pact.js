@@ -1,7 +1,7 @@
 // pages/pact/pact.js
 import {
-  getPayment,
-  groupPayment,
+  getOvertime,
+  groupOvertime,
 } from '../../../../service/getData';
 var app = getApp();
 var util = require("../../../../utils/util");
@@ -11,11 +11,10 @@ Page({
   /**
    * 页面的初始数据
    */
-  
   data: {
     seach: '',
     loading: false,
-    top: '付款签报',
+    top: '加班',
     currentDate: new Date().getTime(),
     InfoList: [],
     item: [],
@@ -43,13 +42,13 @@ Page({
     this.setData({
       pages: 1
     })
-    getPayment({
+    getOvertime({
       applyman: this.data.seach
     }).then(res => {
       // console.log(res)
       if (res.code == 10000) {
         item = res.List;
-        list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list,this,'paymentapproval');
+        list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list, this, 'workovertime');
         this.setData({
           InfoList: list,
           item,
@@ -72,11 +71,11 @@ Page({
       title: '加载中',
     });
     // 调用查询
-    getPayment().then(res => {
+    getOvertime().then(res => {
       // console.log(res.List)
       if (res.code == 10000) {
         item = res.List;
-        list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list,this,'paymentapproval');
+        list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list, this, 'workovertime');
         this.setData({
           InfoList: list,
           item
@@ -89,14 +88,16 @@ Page({
     if (app.globalData.CountItem) {
       this.setData({
         sections: app.globalData.department,
-        states: app.globalData.states
+        GetOverworktype: app.globalData.GetOverworktype,
+        GetOvertimeperiod: app.globalData.GetOvertimeperiod,
       })
     } else {
       app.DataCallback = employ => {
         if (employ != '') {
           this.setData({
             sections: app.globalData.department,
-            states: app.globalData.states
+            GetOverworktype: app.globalData.GetOverworktype,
+            GetOvertimeperiod: app.globalData.GetOvertimeperiod,
           })
         }
       }
@@ -121,11 +122,29 @@ Page({
     this.setData({
       pages: 1
     })
-    if (this.data.info.payapproveformname || this.data.info.createman || this.data.info.department || this.data.info.starttime || this.data.info.endtime || this.data.info.processstate) {
-      groupPayment(this.data.info).then(res => {
+    if (this.data.info.applyman || this.data.info.overworktype || this.data.info.department || this.data.info.overtimeperiod || this.data.info.begintime) {
+      let info = this.data.info;
+      if (info.overworktype) {
+        this.data.GetOverworktype.forEach(res => {
+          if (info.overworktype == res.text) {
+            info.overworktype = res.value;
+          }
+        })
+      }
+      if (info.overtimeperiod) {
+        this.data.GetOvertimeperiod.forEach(res => {
+          if (info.overtimeperiod == res.text) {
+            info.overtimeperiod = res.value;
+          }
+        })
+      }
+      this.setData({
+        info
+      })
+      groupOvertime(this.data.info).then(res => {
         if (res.code == 10000) {
           item = res.List;
-          list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list,this,'paymentapproval');
+          list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list, this, 'workovertime');
           this.setData({
             InfoList: list,
             item,
@@ -147,17 +166,28 @@ Page({
       })
     )
   },
-  // 付款签报名称
-  payapproveformnameblur(e) {
+  // 申请人
+  applymanblur(e) {
     let info = util.editInfo(e, this, e.detail.value);
     this.setData({
       info
     })
   },
-  // 创建人
-  createmanblur(e) {
-    let info = util.editInfo(e, this, e.detail.value);
+  // 加班类型
+  showPopup_1() {
     this.setData({
+      show_1: true
+    })
+  },
+  onClose_1() {
+    this.setData({
+      show_1: false
+    })
+  },
+  onConfirm_1(e) {
+    let info = util.editInfo(e, this, e.detail.value.text);
+    this.setData({
+      show_1: false,
       info
     })
   },
@@ -180,6 +210,24 @@ Page({
       show_0: false,
       info,
       departmenttext: e.detail.value.text
+    })
+  },
+  // 加班时期
+  showPopup_2() {
+    this.setData({
+      show_2: true
+    })
+  },
+  onClose_2() {
+    this.setData({
+      show_2: false
+    })
+  },
+  onConfirm_2(e) {
+    let info = util.editInfo(e, this, e.detail.value.text);
+    this.setData({
+      show_2: false,
+      info
     })
   },
   // 开始时间
@@ -216,35 +264,6 @@ Page({
     this.setData({
       info,
       show_endtime: false
-    })
-  },
-  // 状态
-  showPopup_3() {
-    if (userinfo) {
-      let info = this.data.info;
-      info.UserName = userinfo.UserName;
-      this.setData({
-        show_3: true,
-        info
-      })
-    } else {
-      wx.showToast({
-        title: '请登录',
-        icon: 'none',
-        duration: 2000
-      })
-    }
-  },
-  onClose_3() {
-    this.setData({
-      show_3: false
-    })
-  },
-  onConfirm_3(e) {
-    let info = util.editInfo(e, this, e.detail.value.text);
-    this.setData({
-      show_3: false,
-      info
     })
   },
   /**

@@ -52,7 +52,9 @@ import {
   Team,
   employee,
   projectall,
-  Leavetypelist
+  Leavetypelist,
+  GetOverworktype,
+  GetOvertimeperiod
 } from "./service/getData";
 var util = require("./utils/util");
 App({
@@ -167,6 +169,8 @@ App({
       util.sumup(CountItem, this, 'CountItem', "Text", "Value");
       util.sumup(Team, this, 'Team', "ConstructionName", "ID");
       util.sumup(Leavetypelist, this, 'Leavetypelist', "Value", "Key");
+      util.sumup(GetOverworktype, this, 'GetOverworktype', "Value", "Key");
+      util.sumup(GetOvertimeperiod, this, 'GetOvertimeperiod', "Value", "Key");
       Engineer({
         ID: 3209
       }).then(res => {
@@ -287,6 +291,8 @@ App({
     employee: '',
     projectall: '',
     Leavetypelist: '',
+    GetOverworktype: '',
+    GetOvertimeperiod: '',
     states: [{
       text: '所有'
     }, {

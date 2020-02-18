@@ -108,6 +108,18 @@ const checkContent = (value, key) => {
       value.leavetype = res.value
     }
   })
+  // 加班类型
+  app.globalData.GetOverworktype.forEach(res => {
+    if (value.overworktype == res.text) {
+      value.overworktype = res.value
+    }
+  })
+  // 加班时段
+  app.globalData.GetOvertimeperiod.forEach(res => {
+    if (value.overtimeperiod == res.text) {
+      value.overtimeperiod = res.value
+    }
+  })
   // 付款方式
   app.globalData.PayType.forEach(res => {
     if (value.paytype == res.text) {
@@ -354,6 +366,18 @@ const checkChange = (value, key, dep) => {
       value.leavetype = res.value
     }
   })
+  // 加班类型
+  app.globalData.GetOverworktype.forEach(res => {
+    if (value.overworktype == res.text) {
+      value.overworktype = res.value
+    }
+  })
+  // 加班时段
+  app.globalData.GetOvertimeperiod.forEach(res => {
+    if (value.overtimeperiod == res.text) {
+      value.overtimeperiod = res.value
+    }
+  })
   // 用章类别
   app.globalData.Usesealtype.forEach(res => {
     if (value.usesealtype == res.text) {
@@ -573,6 +597,18 @@ const handleData = (data, key, dep) => {
   app.globalData.Leavetypelist.forEach(depart => {
     if (data.leavetype == depart.value) {
       data.leavetype = depart.text
+    }
+  })
+  // 加班类型
+  app.globalData.GetOverworktype.forEach(res => {
+    if (data.overworktype == res.value) {
+      data.overworktype = res.text
+    }
+  })
+  // 加班时段
+  app.globalData.GetOvertimeperiod.forEach(res => {
+    if (data.overtimeperiod == res.value) {
+      data.overtimeperiod = res.text
     }
   })
   // 付款方式
@@ -851,6 +887,18 @@ const listData = (data, dep, page, list, key, billname) => {
     app.globalData.Leavetypelist.forEach(depart => {
       if (value.leavetype == depart.value) {
         value.leavetype = depart.text
+      }
+    })
+    // 加班类型
+    app.globalData.GetOverworktype.forEach(res => {
+      if (value.overworktype == res.value) {
+        value.overworktype = res.text
+      }
+    })
+    // 加班时段
+    app.globalData.GetOvertimeperiod.forEach(res => {
+      if (value.overtimeperiod == res.value) {
+        value.overtimeperiod = res.text
       }
     })
     // 付款方式
