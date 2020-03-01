@@ -1,0 +1,87 @@
+<!-- pages/detail/detail.wxml -->
+<view wx:if="{{info}}">
+    <view class="header d_header">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="delete">删除</text>
+        <view class="apply">资料详情</view>
+    </view>
+    <view class="card">
+        <van-card title="{{info.materialname}}"  />
+    </view>
+    <view class="main_nav">
+        <view class="content">
+            <view class="c_item">
+                <view class="kind">耗材物品名称</view>
+                <view class="check">{{info.materialname}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">所属类别</view>
+                <view class="check">{{info.classID}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">品牌Id</view>
+                <view class="check">{{info.BrandID}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">购入价格</view>
+                <view class="check">{{info.cityID}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">开始使用时间</view>
+                <view class="check">{{info.districtID}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">使用时长</view>
+                <view class="check">{{info.position}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">维修次数</view>
+                <view class="check">{{info.cluesource}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">维修总费用</view>
+                <view class="check">{{info.Companyname}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">总成本</view>
+                <view class="check">{{info.mobilephone}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">价格评分</view>
+                <view class="check">{{info.address}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">使用时长评分</view>
+                <view class="check">{{info.email}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">使用感受评分</view>
+                <view class="check">{{info.Chargeman}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">创建人</view>
+                <view class="check">{{info.createman}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">创建时间</view>
+                <view class="check">{{info.createtime}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">修改人</view>
+                <view class="check">{{info.updateman}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">修改时间</view>
+                <view class="check">{{info.updatetime}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="footer">
+        <view>
+            <navigator open-type="redirect" url="/OAmoudle/pages/consump/new/new?id={{info.ID}}" hover-class="none">
+                <icon class="iconfont icon-bianji"></icon>
+                <text>编辑</text>
+            </navigator>
+        </view>
+    </view>
+</view>

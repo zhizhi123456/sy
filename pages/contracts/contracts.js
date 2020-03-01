@@ -46,7 +46,7 @@ Page({
       // var t = s.filter((a, index) => {
       //   return index != 3
       // })
-      var  q = res.List
+      var q = res.List
       var p = q[3]
       q[3] = q[2]
       q[2] = p
@@ -354,30 +354,39 @@ Page({
         UserName: userinfo.UserName
       }).then(res => {
         var s = JSON.parse(res)
-        leadership({
-          departmentID: s[0].ID
-        }).then(res => {
-          if (res.code == 10000) {
-            if (res.urgentTaskList.Num == 0) {
-              this.setData({
-                depnum: false
-              })
-            } else {
-              this.setData({
-                depnum: res.urgentTaskList.Num
-              })
+        // console.log(s)
+        if (s.length) {
+          leadership({
+            departmentID: s[0].ID
+          }).then(res => {
+            if (res.code == 10000) {
+              if (res.urgentTaskList.Num == 0) {
+                this.setData({
+                  depnum: false
+                })
+              } else {
+                this.setData({
+                  depnum: res.urgentTaskList.Num
+                })
+              }
             }
-
-          }
-        })
-
+          })
+        }
       })
-
-
     }
   },
   onShow: function () {
     userinfo = wx.getStorageSync("myInfo");
   },
 
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+    return {
+      title: '尚雍工程建设平台',
+      path: '/pages/contracts/contracts?from_uid=' + userinfo.id,
+      success: function (res) {}
+    }
+  }
 })

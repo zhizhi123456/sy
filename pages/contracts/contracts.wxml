@@ -25,7 +25,7 @@
       <navigator open-type="redirect" url="{{(!item.control)?'':(item.pageaddres +'?menuId='+ item.menuId+'&id='+item.ID+'&title='+item.name)+'&num='+num}}" open-type="redirect"></navigator>
     </view>
   </view>
-  <view wx:if="{{num==1001}}"><navigator open-type="redirect" url="/OAmoudle/pages/overtime/pact/pact">加班</navigator></view>
+  <!-- <view wx:if="{{num==1001}}"><navigator open-type="redirect" url="/OAmoudle/pages/repair/pact/pact">测试</navigator></view> -->
   <view wx:if="{{entered&&num==1002}}" class="haDquit">
     <view bindtap="out">切换账号</view>
     <view bindtap="out">退出</view>

@@ -116,7 +116,15 @@ export const GetOvertimeperiod = (params) => http.post("/api/MethodOfDataService
 export const referflow = (params) => http.post("/api/SubmitWorkFlowService/GetWorkflowRecord2", params);
 //未提交流转
 export const unreferflow = (params) => http.post("/api/SubmitWorkFlowService/GetWorkflowRecord3", params);
-// =================================================================================================================================================================
+//根据项目编号获取项目信息
+export const GetProjectInformation = (params) => http.post("/api/MethodOfDataService/GetProjectInformation", params);
+//根据框架协议编号获取此条框架协议信息
+export const GetFrameProtocol = (params) => http.post("/api/MethodOfDataService/GetFrameProtocol", params);
+//分包合同类型
+export const contractType = () => http.get("/api/MethodOfDataService/contractType");
+// 框架协议编号及名称
+export const getframeProtocolCode = () => http.get("/api/MethodOfDataService/getframeProtocolCode");
+//=================================================================================================================================================================
 // 工作流接口
 // 工作流流转
 export const flow = (params) => http.post("/api/SubmitWorkFlowService/SubmitWorkFlow", params)
@@ -1033,3 +1041,137 @@ export const addOvertime = (params) => http.post("/api/workovertime/Insert", par
 export const amendOvertime = (params) => http.post("/api/workovertime/Update", params);
 // 删除
 export const cancelOvertime = (params) => http.post("/api/workovertime/Delete", params);
+// 项目深化设计
+// 查询
+export const getDeepdesign = (params) => http.post("/api/DeepDesign/Query", params);
+// 根据id查询
+export const referDeepdesign = (params) => http.post("/api/DeepDesign/Edit", params);
+// 组合查询
+export const groupDeepdesign = (params) => http.post("/api/DeepDesign/GroupQuery", params);
+// 添加
+export const addDeepdesign = (params) => http.post("/api/DeepDesign/Insert", params);
+// 修改
+export const amendDeepdesign = (params) => http.post("/api/DeepDesign/EditInfo", params);
+// 删除
+export const cancelDeepdesign = (params) => http.post("/api/DeepDesign/Delete", params);
+// 深化设计明细表
+// 查询
+export const getDeepddetail = (params) => http.post('/api/DeepDesigndetail/Query', params);
+// 根据id查询
+export const referDeepddetail = (params) => http.post('/api/DeepDesigndetail/Edit', params);
+// 添加
+export const addDeepddetail = (params) => http.post('/api/DeepDesigndetail/Insert', params);
+// 修改
+export const amendDeepddetail = (params) => http.post('/api/DeepDesigndetail/EditInfo', params);
+// 删除
+export const cancelDeepddetail = (params) => http.post('/api/DeepDesigndetail/Delete', params);
+// 耗材
+// 查询
+export const getConsump = (params) => http.post("/api/consump_materialUse/Query", params);
+// 根据id查询
+export const referConsump = (params) => http.post("/api/consump_materialUse/Detail", params);
+// 组合查询
+export const groupConsump = (params) => http.post("/api/consump_materialUse/Querygroup", params);
+// 添加
+export const addConsump = (params) => http.post("/api/consump_materialUse/Insert", params);
+// 修改
+export const amendConsump = (params) => http.post("/api/consump_materialUse/Update", params);
+// 删除
+export const cancelConsump = (params) => http.post("/api/consump_materialUse/Delete", params);
+// 快递发货
+// 查询
+export const getExpressSent = (params) => http.post("/api/ExpressSent/Query", params);
+// 根据id查询
+export const referExpressSent = (params) => http.post("/api/ExpressSent/Detail", params);
+// 组合查询
+export const groupExpressSent = (params) => http.post("/api/ExpressSent/Querygroup", params);
+// 添加
+export const addExpressSent = (params) => http.post("/api/ExpressSent/Insert", params);
+// 修改
+export const amendExpressSent = (params) => http.post("/api/ExpressSent/Update", params);
+// 删除
+export const cancelExpressSent = (params) => http.post("/api/ExpressSent/Delete", params);
+// 快递收货
+// 查询
+export const getExpressReceive = (params) => http.post("/api/ExpressReceive/Query", params);
+// 根据id查询
+export const referExpressReceive = (params) => http.post("/api/ExpressReceive/Detail", params);
+// 组合查询
+export const groupExpressReceive = (params) => http.post("/api/ExpressReceive/Querygroup", params);
+// 添加
+export const addExpressReceive = (params) => http.post("/api/ExpressReceive/Insert", params);
+// 修改
+export const amendExpressReceive = (params) => http.post("/api/ExpressReceive/Update", params);
+// 删除
+export const cancelExpressReceive = (params) => http.post("/api/ExpressReceive/Delete", params);
+// 部门员工奖金
+// 查询
+export const getMemberBounus = (params) => http.post("/api/MemberBounus/Query", params);
+// 根据id查询
+export const referMemberBounus = (params) => http.post("/api/MemberBounus/Detail", params);
+// 组合查询
+export const groupMemberBounus = (params) => http.post("/api/MemberBounus/Querygroup", params);
+// 添加
+export const addMemberBounus = (params) => http.post("/api/MemberBounus/Insert", params);
+// 修改
+export const amendMemberBounus = (params) => http.post("/api/MemberBounus/Update", params);
+// 删除
+export const cancelMemberBounus = (params) => http.post("/api/MemberBounus/Delete", params);
+// 项目总奖金
+export const TotalBonus = (params) => http.post("/api/CalculateBonusController/TotalBonus", params);
+// 各部门总奖金
+export const ProjectDeptBonus = (params) => http.post("/api/CalculateBonusController/ProjectDeptBonus", params);
+// 部门员工奖金
+export const DeptMemberBounus = (params) => http.post("/api/CalculateBonusController/DeptMemberBounus", params);
+// 办公费用节约
+// 查询
+export const getSave = (params) => http.post("/api/OfficeChargeSave/Query", params);
+// 根据id查询
+export const referSave = (params) => http.post("/api/OfficeChargeSave/Edit", params);
+// 组合查询
+export const groupSave = (params) => http.post("/api/OfficeChargeSave/GroupQuery", params);
+// 添加
+export const addSave = (params) => http.post("/api/OfficeChargeSave/Insert", params);
+// 修改
+export const amendSave = (params) => http.post("/api/OfficeChargeSave/EditInfo", params);
+// 删除
+export const cancelSave = (params) => http.post("/api/OfficeChargeSave/Delete", params);
+// 办公费用节约明细表
+// 查询
+export const getSaveDetail = (params) => http.post('/api/OfficeChargeSaveDetail/Query', params);
+// 根据id查询
+export const referSaveDetail = (params) => http.post('/api/OfficeChargeSaveDetail/Edit', params);
+// 组合查询
+export const groupSaveDetail = (params) => http.post('/api/OfficeChargeSaveDetail/GroupQuery', params);
+// 添加
+export const addSaveDetail = (params) => http.post('/api/OfficeChargeSaveDetail/Insert', params);
+// 修改
+export const amendSaveDetail = (params) => http.post('/api/OfficeChargeSaveDetail/EditInfo', params);
+// 删除
+export const cancelSaveDetail = (params) => http.post('/api/OfficeChargeSaveDetail/Delete', params);
+// 返修项目
+// 查询
+export const getRepair = (params) => http.post("/api/RepairProject/Query", params);
+// 根据id查询
+export const referRepair = (params) => http.post("/api/RepairProject/Edit", params);
+// 组合查询
+export const groupRepair = (params) => http.post("/api/RepairProject/GroupQuery", params);
+// 添加
+export const addRepair = (params) => http.post("/api/RepairProject/Insert", params);
+// 修改
+export const amendRepair = (params) => http.post("/api/RepairProject/EditInfo", params);
+// 删除
+export const cancelRepair = (params) => http.post("/api/RepairProject/Delete", params);
+// 办公费用节约明细表
+// 查询
+export const getRDetail = (params) => http.post('/api/RepairProjectdetail/Query', params);
+// 根据id查询
+export const referRDetail = (params) => http.post('/api/RepairProjectdetail/Edit', params);
+// 组合查询
+export const groupRDetail = (params) => http.post('/api/RepairProjectdetail/GroupQuery', params);
+// 添加
+export const addRDetail = (params) => http.post('/api/RepairProjectdetail/Insert', params);
+// 修改
+export const amendRDetail = (params) => http.post('/api/RepairProjectdetail/EditInfo', params);
+// 删除
+export const cancelRDetail = (params) => http.post('/api/RepairProjectdetail/Delete', params);

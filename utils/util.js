@@ -108,6 +108,24 @@ const checkContent = (value, key) => {
       value.leavetype = res.value
     }
   })
+  // 分包合同类型
+  app.globalData.contractType.forEach(res => {
+    if (value.contractType == res.text) {
+      value.contractType = res.value
+    }
+  })
+  // 快递类别
+  app.globalData.ExpressageType.forEach(res => {
+    if (value.classID == res.text) {
+      value.classID = res.value
+    }
+  })
+  // 耗材类型
+  app.globalData.SuppliesType.forEach(res => {
+    if (value.classID == res.text) {
+      value.classID = res.value
+    }
+  })
   // 加班类型
   app.globalData.GetOverworktype.forEach(res => {
     if (value.overworktype == res.text) {
@@ -366,6 +384,24 @@ const checkChange = (value, key, dep) => {
       value.leavetype = res.value
     }
   })
+   // 分包合同类型
+   app.globalData.contractType.forEach(res => {
+    if (value.contractType == res.text) {
+      value.contractType = res.value
+    }
+  })
+   // 快递类别
+   app.globalData.ExpressageType.forEach(res => {
+    if (value.classID == res.text) {
+      value.classID = res.value
+    }
+  })
+  // 耗材类型
+  app.globalData.SuppliesType.forEach(res => {
+    if (value.classID == res.text) {
+      value.classID = res.value
+    }
+  })
   // 加班类型
   app.globalData.GetOverworktype.forEach(res => {
     if (value.overworktype == res.text) {
@@ -599,6 +635,24 @@ const handleData = (data, key, dep) => {
       data.leavetype = depart.text
     }
   })
+   // 分包合同类型
+   app.globalData.contractType.forEach(res => {
+    if (data.contractType == res.value) {
+      data.contractType = res.text
+    }
+  })
+   // 快递类别
+   app.globalData.ExpressageType.forEach(res => {
+    if (data.classID == res.value) {
+      data.classID = res.text
+    }
+  })
+  // 耗材类型
+  app.globalData.SuppliesType.forEach(res => {
+    if (data.classID == res.value) {
+      data.classID = res.text
+    }
+  })
   // 加班类型
   app.globalData.GetOverworktype.forEach(res => {
     if (data.overworktype == res.value) {
@@ -646,6 +700,12 @@ const handleData = (data, key, dep) => {
     if (data.departmentId == depart.value || data.department == depart.value) {
       data.department = depart.text;
       data.departmentId = depart.text;
+      key.setData({
+        departmenttext: depart.text
+      })
+    }
+    if (data.Department == depart.value) {
+      data.Department = depart.text;
       key.setData({
         departmenttext: depart.text
       })
@@ -889,6 +949,24 @@ const listData = (data, dep, page, list, key, billname) => {
         value.leavetype = depart.text
       }
     })
+    // 分包合同类型
+   app.globalData.contractType.forEach(res => {
+    if (value.contractType == res.value) {
+      value.contractType = res.text
+    }
+  })
+    // 快递类别
+   app.globalData.ExpressageType.forEach(res => {
+    if (value.classID == res.value) {
+      value.classID = res.text
+    }
+  })
+    // 耗材类型
+    app.globalData.SuppliesType.forEach(res => {
+      if (value.classID == res.value) {
+        value.classID = res.text
+      }
+    })
     // 加班类型
     app.globalData.GetOverworktype.forEach(res => {
       if (value.overworktype == res.value) {
@@ -926,6 +1004,9 @@ const listData = (data, dep, page, list, key, billname) => {
       }
       if (value.department == depart.value) {
         value.department = depart.text
+      }
+      if (value.Department == depart.value) {
+        value.Department = depart.text
       }
     })
     //公司

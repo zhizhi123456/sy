@@ -1,0 +1,86 @@
+<!-- pages/detail/detail.wxml -->
+<view wx:if="{{info}}">
+    <view class="header d_header">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="delete">删除</text>
+        <view class="apply">资料详情</view>
+    </view>
+    <view class="card">
+        <van-card title="{{info.ChargeYM}}"  />
+    </view>
+    <view class="main_nav">
+        <van-tabs active="{{tab}}">
+            <van-tab title="详细资料" name="a">
+                <view class="content">
+                    <view class="c_item">
+                        <view class="kind">计费年月</view>
+                        <view class="check">{{info.ChargeYM}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">规划总费用</view>
+                        <view class="check">{{info.plancharge}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">实际总费用</view>
+                        <view class="check">{{info.actcharge}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">实际节约费用</view>
+                        <view class="check">{{info.savecharge}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">办公领导奖金</view>
+                        <view class="check">{{info.Leaderreward}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">创建人</view>
+                        <view class="check">{{info.createman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">创建时间</view>
+                        <view class="check">{{info.createtime}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">修改人</view>
+                        <view class="check">{{info.updateman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">修改时间</view>
+                        <view class="check">{{info.updatetime}}</view>
+                    </view>
+                </view>
+            </van-tab>
+            <van-tab title="费用节约明细" name="b">
+                <van-cell title="费用节约明细({{material_list.length}})" bindtap="addndlink">
+                    <icon class="iconfont icon-icon-test"></icon>
+                </van-cell>
+                <block wx:for="{{material_list}}" wx:key="index">
+                    <view class="material">
+                        <navigator open-type="redirect" url="/OAmoudle/pages/save/detaillink/detaillink?detailid={{item.ID}}&id={{info.ID}}" hover-class="none">
+                            <view class="m_item">
+                                <text class="m_info">办公项目名称</text>
+                                <text>{{item.itemname}}</text>
+                            </view>
+                            <view class="m_item">
+                                <text class="m_info">规划金额</text>
+                                <text>{{item.plancharge}}</text>
+                            </view>
+                            <view class="m_item">
+                                <text class="m_info">实际金额</text>
+                                <text>{{item.actcharge}}</text>
+                            </view>
+                        </navigator>
+                    </view>
+                </block>
+            </van-tab>
+        </van-tabs>
+    </view>
+    <view class="footer">
+        <view>
+            <navigator open-type="redirect" url="/OAmoudle/pages/save/new/new?id={{info.ID}}" hover-class="none">
+                <icon class="iconfont icon-bianji"></icon>
+                <text>编辑</text>
+            </navigator>
+        </view>
+    </view>
+</view>

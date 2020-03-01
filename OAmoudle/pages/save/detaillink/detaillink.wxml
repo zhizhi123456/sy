@@ -1,0 +1,63 @@
+<!-- pages/bill/detaillink/detaillink.wxml -->
+<view wx:if="{{info}}">
+    <view class="header d_header">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="delete">删除</text>
+        <view class="apply">资料详情</view>
+    </view>
+    <view class="card">
+        <van-card title="{{info.itemname}}"  />
+    </view>
+    <view class="main_nav">
+        <view class="content">
+            <view class="c_item">
+                <view class="kind">办公项目名称</view>
+                <view class="check">{{info.itemname}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">编号</view>
+                <view class="check">{{info.itemno}}</view>
+            </view>
+             <view class="c_item">
+                <view class="kind">计费年月</view>
+                <view class="check">{{info.ChargeYM}}</view>
+            </view>
+             <view class="c_item">
+                <view class="kind">规划金额</view>
+                <view class="check">{{info.plancharge}}</view>
+            </view>
+             <view class="c_item">
+                <view class="kind">实际金额</view>
+                <view class="check">{{info.actcharge}}</view>
+            </view>
+             <view class="c_item">
+                <view class="kind">节约金额</view>
+                <view class="check">{{info.savechargee}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">创建人</view>
+                <view class="check">{{info.createman}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">创建时间</view>
+                <view class="check">{{info.createtime}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">修改人</view>
+                <view class="check">{{info.updateman}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">修改时间</view>
+                <view class="check">{{info.updatetime}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="footer">
+        <view>
+            <navigator open-type="redirect" url="/OAmoudle/pages/save/newlink/newlink?detailid={{info.ID}}" hover-class="none">
+                <icon class="iconfont icon-bianji"></icon>
+                <text>编辑</text>
+            </navigator>
+        </view>
+    </view>
+</view>

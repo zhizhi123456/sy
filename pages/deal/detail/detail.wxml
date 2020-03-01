@@ -2,11 +2,11 @@
 <view wx:if="{{info}}">
     <view class="header d_header">
         <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
-        <text class="fr newCreate" bindtap="delete">删除</text>
+        <text wx:if="{{!returnid}}" class="fr newCreate" bindtap="delete">删除</text>
         <view class="apply">资料详情</view>
     </view>
     <view class="card">
-        <van-card title="{{info.frameProtocolname}}" tag="资料详情" />
+        <van-card title="{{info.frameProtocolname}}"  />
     </view>
     <view class="main_nav">
         <van-tabs active="{{tab}}">
@@ -92,7 +92,7 @@
             </van-tab>
         </van-tabs>
     </view>
-    <view class="footer">
+    <view class="footer" wx:if="{{!returnid}}">
         <view bindtap="sendback" wx:if="{{info.formid&&isnext&&returned&&isreturn}}">
             <icon class="iconfont icon-wj-thwj"></icon>
             <text>退回上步</text>

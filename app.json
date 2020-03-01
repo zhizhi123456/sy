@@ -200,7 +200,34 @@
         "pages/designp/pact/pact",
         "pages/overtime/pact/pact",
         "pages/overtime/detail/detail",
-        "pages/overtime/new/new"
+        "pages/overtime/new/new",
+        "pages/deepdesign/pact/pact",
+        "pages/deepdesign/new/new",
+        "pages/deepdesign/detail/detail",
+        "pages/deepdesign/newlink/newlink",
+        "pages/deepdesign/detaillink/detaillink",
+        "pages/consump/pact/pact",
+        "pages/consump/detail/detail",
+        "pages/consump/new/new",
+        "pages/expresssent/pact/pact",
+        "pages/expresssent/detail/detail",
+        "pages/expresssent/new/new",
+        "pages/expressreceive/pact/pact",
+        "pages/expressreceive/detail/detail",
+        "pages/expressreceive/new/new",
+        "pages/bounus/pact/pact",
+        "pages/bounus/detail/detail",
+        "pages/bounus/new/new",
+        "pages/save/pact/pact",
+        "pages/save/detail/detail",
+        "pages/save/new/new",
+        "pages/save/newlink/newlink",
+        "pages/save/detaillink/detaillink", 
+        "pages/repair/pact/pact",
+        "pages/repair/detail/detail",
+        "pages/repair/new/new",
+        "pages/repair/newlink/newlink",
+        "pages/repair/detaillink/detaillink"
       ]
     }
   ],
@@ -242,6 +269,7 @@
     "van-sidebar": "vant-weapp/dist/sidebar/index",
     "van-sidebar-item": "vant-weapp/dist/sidebar-item/index",
     "van-tag": "vant-weapp/dist/tag/index",
-    "van-divider": "vant-weapp/dist/divider/index"
+    "van-divider": "vant-weapp/dist/divider/index",
+    "van-area": "vant-weapp/dist/area/index"
   }
 }

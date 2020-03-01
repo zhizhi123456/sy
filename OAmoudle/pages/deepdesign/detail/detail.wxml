@@ -1,0 +1,118 @@
+<!-- pages/detail/detail.wxml -->
+<view wx:if="{{info}}">
+    <view class="header d_header">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="delete">删除</text>
+        <view class="apply">资料详情</view>
+    </view>
+    <view class="card">
+        <van-card title="{{info.projectname}}"  />
+    </view>
+    <view class="main_nav">
+        <van-tabs active="{{tab}}">
+            <van-tab title="详细资料" name="a">
+                <view class="content">
+                    <view class="c_item">
+                        <view class="kind">项目名称</view>
+                        <view class="check">{{info.projectname}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">项目编号</view>
+                        <view class="check">{{info.projcectCode}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">设计材料种类数</view>
+                        <view class="check">{{info.goodskinds}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">设计材料总数量</view>
+                        <view class="check">{{info.goodsqty}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">材料预估总金额</view>
+                        <view class="check">{{info.goodsamount}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">当前处理人</view>
+                        <view class="check">{{info.CurDealer}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">当前步骤名称</view>
+                        <view class="check">{{info.CurStepName}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">当前步骤编号</view>
+                        <view class="check">{{info.CurStepbh}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">步骤是否完成</view>
+                        <view class="check">{{info.IfWfComplete?'是':'否'}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">创建人</view>
+                        <view class="check">{{info.createman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">创建时间</view>
+                        <view class="check">{{info.createtime}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">修改人</view>
+                        <view class="check">{{info.updateman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">修改时间</view>
+                        <view class="check">{{info.updatetime}}</view>
+                    </view>
+                </view>
+            </van-tab>
+            <van-tab title="动态" name="b">
+                <van-cell title="动态({{Workstate}})" />
+                <van-steps steps="{{ steps }}" active="{{ actived }}" direction="vertical" active-color="#008080" inactive-icon="stop-circle" />
+            </van-tab>
+            <van-tab title="设计材料明细" name="c">
+                <van-cell title="设计材料明细({{material_list.length}})" bindtap="addndlink">
+                    <icon class="iconfont icon-icon-test"></icon>
+                </van-cell>
+                <block wx:for="{{material_list}}" wx:key="index">
+                    <view class="material">
+                        <navigator open-type="redirect" url="/OAmoudle/pages/deepdesign/detaillink/detaillink?detailid={{item.ID}}" hover-class="none">
+                            <view class="m_item">
+                                <text class="m_info">材料名称</text>
+                                <text>{{item.goodsname}}</text>
+                            </view>
+                            <view class="m_item">
+                                <text class="m_info">材料编码</text>
+                                <text>{{item.goodscode}}</text>
+                            </view>
+                            <view class="m_item">
+                                <text class="m_info">规格型号</text>
+                                <text>{{item.specifications}}</text>
+                            </view>
+                            <view class="m_item">
+                                <text class="m_info">数量</text>
+                                <text>{{item.quantity}}</text>
+                            </view>
+                        </navigator>
+                    </view>
+                </block>
+            </van-tab>
+        </van-tabs>
+    </view>
+    <view class="footer">
+        <view bindtap="sendback" wx:if="{{info.formid&&isnext&&returned&&isreturn}}">
+            <icon class="iconfont icon-wj-thwj"></icon>
+            <text>退回上步</text>
+        </view>
+        <view>
+            <navigator open-type="redirect" url="/OAmoudle/pages/deepdesign/new/new?id={{info.ID}}" hover-class="none">
+                <icon class="iconfont icon-bianji"></icon>
+                <text>编辑</text>
+            </navigator>
+        </view>
+        <view bindtap="putin" wx:if="{{isnext&&returned}}">
+            <icon class="iconfont icon-tijiao"></icon>
+            <text>提交下步</text>
+        </view>
+    </view>
+</view>

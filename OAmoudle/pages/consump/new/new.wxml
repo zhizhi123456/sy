@@ -1,0 +1,95 @@
+<!-- pages/new/new.wxml -->
+<view class="wraper">
+    <view class="header d_header" wx:if="{{info.ID}}">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="editreturn"></icon>
+        <text class="fr newCreate" bindtap="editconfirm">确定</text>
+        <view class="apply">编辑耗材用品</view>
+    </view>
+    <view class="header d_header" wx:else>
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="confirm">确定</text>
+        <view class="apply">新建耗材用品</view>
+    </view>
+    <view class="main n_main">
+        <van-toast id="van-toast" />
+        <view class="check_item">
+            <view class="kind require">
+                <text>耗材物品名称</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="materialname" value="{{info.materialname}}" placeholder="请输入" bind:blur="materialnameblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">所属类别</text>
+            <van-cell title="{{info.classID?info.classID:'请选择'}}" bind:click="showPopup">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show }}" round position="bottom" bind:close="onClose">
+                <van-picker data-name="classID" show-toolbar columns="{{ SuppliesType }}" bind:cancel="onClose" bind:confirm="onConfirm" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <text class="kind">品牌Id</text>
+            <van-cell-group>
+                <van-field data-name="BrandID" value="{{info.BrandID}}" placeholder="请输入" bind:blur="BrandIDblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">购入价格</text>
+            <van-cell-group>
+                <van-field data-name="cityID" value="{{info.cityID}}" placeholder="请输入" bind:blur="cityIDblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">开始使用时间</text>
+            <van-cell title="{{info.districtID?info.districtID:'请选择'}}" is-link bind:click="showPopup_time" />
+            <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
+                <van-datetime-picker data-name="districtID" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <text class="kind">使用时长</text>
+            <van-cell-group>
+                <van-field data-name="position" value="{{info.position}}" placeholder="请输入" bind:blur="positionblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">维修次数</text>
+            <van-cell-group>
+                <van-field data-name="cluesource" value="{{info.cluesource}}" placeholder="请输入" bind:blur="cluesourceblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">维修总费用</text>
+            <van-cell-group>
+                <van-field data-name="Companyname" value="{{info.Companyname}}" placeholder="请输入" bind:blur="Companynameblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">总成本</text>
+            <van-cell-group>
+                <van-field data-name="mobilephone" value="{{info.mobilephone}}" placeholder="请输入" bind:blur="mobilephoneblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">价格评分</text>
+            <van-cell-group>
+                <van-field data-name="address" value="{{info.address}}" placeholder="请输入" bind:blur="addressblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">使用时长评分</text>
+            <van-cell-group>
+                <van-field data-name="email" value="{{info.email}}" placeholder="请输入" bind:blur="emailblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">使用感受评分</text>
+            <van-cell-group>
+                <van-field data-name="Chargeman" value="{{info.Chargeman}}" placeholder="请输入" bind:blur="Chargemanblur" />
+            </van-cell-group>
+        </view>
+    </view>
+</view>

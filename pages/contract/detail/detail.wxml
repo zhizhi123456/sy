@@ -6,7 +6,7 @@
         <view class="apply">资料详情</view>
     </view>
     <view class="card">
-        <van-card title="{{info.subcontactname}}" tag="资料详情" />
+        <van-card title="{{info.subcontactname}}"  />
     </view>
     <view class="main_nav">
         <van-tabs active="{{tab}}">
@@ -25,8 +25,16 @@
                         <view class="check">{{info.subcontactname}}</view>
                     </view>
                     <view class="c_item">
+                        <view class="kind">分包合同类型</view>
+                        <view class="check">{{info.contractType}}</view>
+                    </view>
+                    <view class="c_item">
                         <view class="kind">分包项目</view>
                         <view class="check">{{info.subprojcectCode}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">框架协议编号</view>
+                        <view class="check">{{info.frameProtocolCode}}</view>
                     </view>
                     <view class="c_item">
                         <view class="kind">签订时间</view>
@@ -93,6 +101,57 @@
                 </block>
                 <view class="dynamic_state" wx:else>暂无动态</view> -->
                 <van-steps steps="{{ steps }}" active="{{ actived }}" direction="vertical" active-color="#008080" inactive-icon="stop-circle" />
+            </van-tab>
+            <van-tab title="框架协议" name="c">
+                <block wx:if="{{InfoList.length}}">
+                    <view class="material" wx:for="{{InfoList}}" wx:key="index">
+                        <navigator open-type="redirect" url="/pages/deal/detail/detail?nape=generalcontract&returnid={{info.ID}}&id={{item.ID}}" hover-class="none">
+                            <view class="m_item">
+                                <text class="m_info">框架协议名称</text>
+                                <text>{{item.frameProtocolname}}</text>
+                            </view>
+                            <view class="m_item">
+                                <text class="m_info">框架协议编号</text>
+                                <text>{{item.frameProtocolCode}}</text>
+                            </view>
+                            <view class="m_item">
+                                <text class="m_info">所属类别</text>
+                                <text>{{item.classname}}</text>
+                            </view>
+                            <view class="m_item">
+                                <text class="m_info">公司抬头</text>
+                                <text>{{item.Companytitle}}</text>
+                            </view>
+                            <view class="m_item">
+                                <text class="m_info">对方单位</text>
+                                <text>{{item.CompanyID}}</text>
+                            </view>
+                            <view class="m_item">
+                                <text class="m_info">签订时间</text>
+                                <text>{{item.signdate}}</text>
+                            </view>
+                            <view class="m_item">
+                                <text class="m_info">创建人</text>
+                                <text>{{item.createman}}</text>
+                            </view>
+                            <view class="m_item">
+                                <text class="m_info">创建时间</text>
+                                <text>{{item.createtime}}</text>
+                            </view>
+                            <view class="m_item">
+                                <text class="m_info">当前步骤名称</text>
+                                <text>{{item.CurStepName}}</text>
+                            </view>
+                            <view class="m_item">
+                                <text class="m_info">流程是否已结束</text>
+                                <text>{{item.IfWfComplete?'是':'否'}}</text>
+                            </view>
+                        </navigator>
+                    </view>
+                    <view wx:if="{{loading}}" class="end">加载中...</view>
+                    <view wx:if="{{!loading}}" class="end">已经到底了</view>
+                </block>
+                <view class="dynamic_state" wx:else>暂无内容</view>
             </van-tab>
         </van-tabs>
     </view>
