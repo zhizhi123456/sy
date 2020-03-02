@@ -159,7 +159,6 @@
     "pages/bid/pact/pact",
     "pages/bid/new/new",
     "pages/bid/detail/detail"
-   
   ],
   "subpackages": [
     {
@@ -200,7 +199,31 @@
         "pages/designp/pact/pact",
         "pages/overtime/pact/pact",
         "pages/overtime/detail/detail",
-        "pages/overtime/new/new"
+        "pages/overtime/new/new",
+        "pages/iou/pact/pact",
+        "pages/iou/detail/detail",
+        "pages/iou/new/new",
+        "pages/notice/pact/pact",
+        "pages/notice/detail/detail",
+        "pages/notice/new/new",
+        "pages/purchase/pact/pact",
+        "pages/purchase/new/new",
+        "pages/purchase/detail/detail",
+        "pages/purchase/newlink/newlink",
+        "pages/purchase/detaillink/detaillink",
+        "pages/ProjectPay/pact/pact",
+        "pages/ProjectPay/new/new",
+        "pages/ProjectPay/detail/detail",
+        "pages/ProjectPay/newlink/newlink",
+        "pages/ProjectPay/detaillink/detaillink",
+        "pages/plot/pact/pact",
+        "pages/plot/detail/detail",
+        "pages/plot/new/new",
+        "pages/maintenance/pact/pact",
+        "pages/maintenance/new/new",
+        "pages/maintenance/detail/detail",
+        "pages/maintenance/newlink/newlink",
+        "pages/maintenance/detaillink/detaillink"
       ]
     }
   ],

@@ -1,0 +1,211 @@
+<!-- pages/new/new.wxml -->
+<view class="wraper">
+    <view class="header d_header" wx:if="{{info.ID}}">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="editreturn"></icon>
+        <text class="fr newCreate" bindtap="editconfirm">确定</text>
+        <view class="apply">编辑小区维保台账</view>
+    </view>
+    <view class="header d_header" wx:else>
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="confirm">确定</text>
+        <view class="apply">新建小区维保台账</view>
+    </view>
+    <view class="main n_main">
+        <van-toast id="van-toast" />
+        <view class="check_item">
+            <view class="kind require">
+                <text>小区名称</text>
+                 <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="blockname" value="{{info.blockname}}" placeholder="请输入" bind:blur="projectnameblur" />
+            </van-cell-group>
+        </view>
+          <view class="check_item">
+            <view class="kind require">
+                <text>物业</text>
+                 <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="Property" value="{{info.Property}}" placeholder="请输入" bind:blur="projectnameblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>地址</text>
+                 <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="Address" value="{{info.Address}}" placeholder="请输入" bind:blur="projectnameblur" />
+            </van-cell-group>
+        </view>
+
+          <view class="check_item">
+            <view class="kind require">
+                <text>维保时间安排</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.MaintenanceDate?info.MaintenanceDate:'请选择'}}" is-link bind:click="showPopup_time1" icon="clock-o" />
+            <van-popup show="{{show_time1 }}" round position="bottom" bind:close="onClose_time1">
+                <van-datetime-picker data-name="MaintenanceDate" value="{{ currentDate1 }}" bind:cancel="onClose_time1" bind:confirm="onConfirm_time1" />
+            </van-popup>
+        </view>
+          <view class="check_item">
+            <view class="kind require">
+                <text>维保合同金额</text>
+            </view>
+            <van-cell-group>
+                <van-field type="number" data-name="MaintencontractMoney" value="{{info.MaintencontractMoney}}" placeholder="请输入" bind:blur="projectnameblur" />
+            </van-cell-group>
+        </view>
+         <view class="check_item">
+            <view class="kind require">
+                <text>收款情况</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="ReceiptSituation" value="{{info.ReceiptSituation}}" placeholder="请输入" bind:blur="projectnameblur" />
+            </van-cell-group>
+        </view>
+         <view class="check_item">
+            <view class="kind require">
+                <text>质保金进度款</text>
+            </view>
+            <van-cell-group>
+                <van-field type="number" data-name="guaranteemoneyRate" value="{{info.guaranteemoneyRate}}" placeholder="请输入" bind:blur="projectnameblur" />
+            </van-cell-group>
+        </view>
+         <view class="check_item">
+            <view class="kind require">
+                <text>维保系统情况</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="MaintenSystemSituation" value="{{info.MaintenSystemSituation}}" placeholder="请输入" bind:blur="projectnameblur" />
+            </van-cell-group>
+        </view>
+       <view class="check_item">
+            <view class="kind require">
+                <text>维保期限</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.Maintenduetime?info.Maintenduetime:'请选择'}}" is-link bind:click="showPopup_time" icon="clock-o" />
+            <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
+                <van-datetime-picker data-name="Maintenduetime" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
+            </van-popup>
+        </view>
+          <view class="check_item">
+            <view class="kind require">
+                <text>物业经理以及联系方式</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="PropertyContact" value="{{info.PropertyContact}}" placeholder="请输入" bind:blur="projectnameblur" />
+            </van-cell-group>
+        </view>
+          <view class="check_item">
+            <view class="kind require">
+                <text>物业工程联系人以及方式</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="EngineerContact" value="{{info.EngineerContact}}" placeholder="请输入" bind:blur="projectnameblur" />
+            </van-cell-group>
+        </view>
+          <view class="check_item">
+            <view class="kind require">
+                <text>系统供应商联系方式</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="SystemapplierContact" value="{{info.SystemapplierContact}}" placeholder="请输入" bind:blur="projectnameblur" />
+            </van-cell-group>
+        </view>
+         <view class="check_item">
+            <view class="kind require">
+                <text>备注</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="Remarks" value="{{info.Remarks}}" placeholder="请输入" bind:blur="projectnameblur" />
+            </van-cell-group>
+        </view>
+
+        <!-- <view class="check_item">
+            <view class="kind require">
+                <text>部门</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.department?info.department:'请选择'}}" bind:click="showPopup1">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show1 }}" round position="bottom" bind:close="onClose1">
+                <van-picker data-name="department" show-toolbar columns="{{sections}}" bind:cancel="onClose1" bind:confirm="onConfirm1" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>公司抬头</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.Companytitle?info.Companytitle:'请选择'}}" bind:click="showPopup_4">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show_nature }}" round position="bottom" bind:close="onClose_4">
+                <van-picker data-name="Companytitle" show-toolbar columns="{{nature}}" bind:cancel="onClose_4" bind:confirm="onConfirm_4" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>借条类型</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.debitnotetype?info.debitnotetype:'请选择'}}" bind:click="showPopup2">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show2 }}" round position="bottom" bind:close="onClose2">
+                <van-picker data-name="debitnotetype" show-toolbar columns="{{section1}}" bind:cancel="onClose2" bind:confirm="onConfirm2" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>用章类别</text>
+            </view>
+            <van-cell title="{{info.usesealtype?info.usesealtype:'请选择'}}" bind:click="showPopup3">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show3 }}" round position="bottom" bind:close="onClose3">
+                <van-picker data-name="usesealtype" show-toolbar columns="{{section2}}" bind:cancel="onClose3" bind:confirm="onConfirm3" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>项目编号</text>
+            </view>
+            <van-cell title="{{info.projectcode?info.projectcode:'请选择'}}" bind:click="showPopup6">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show6 }}" round position="bottom" bind:close="onClose6">
+                <van-picker data-name="projectcode" show-toolbar columns="{{section6}}" bind:cancel="onClose6" bind:confirm="onConfirm6" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>分包项目编号</text>
+            </view>
+            <van-cell title="{{info.subprojectcode?info.subprojectcode:'请选择'}}" bind:click="showPopup5">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show5 }}" round position="bottom" bind:close="onClose5">
+                <van-picker data-name="subprojectcode" show-toolbar columns="{{section5}}" bind:cancel="onClose5" bind:confirm="onConfirm5" />
+            </van-popup>
+        </view> -->
+        <!-- <view class="check_item">
+            <text class="kind">图片</text>
+            <van-cell title="请选择" is-link bind:click="showPopup_photo" />
+            <van-action-sheet show="{{ show_photo }}" actions="{{ check_photo }}" bind:cancel="onClose_photo" bind:click-overlay="onClose_photo" bind:select="onSelect_photo" cancel-text="取消" />
+            <view wx:if="{{upimg}}" class="datumimgbox">
+                <block wx:for="{{info.API_Picurl}}" wx:key="index">
+                    <view class="upimgbox">
+                        <image src="{{item}}" bindtap="tap_pic" data-index="{{index}}" />
+                        <icon class="iconfont icon-jianhao-tianchong delimg" data-i="{{index}}" bindtap="delimg" />
+                    </view>
+                </block>
+            </view>
+        </view> -->
+    </view>
+</view>

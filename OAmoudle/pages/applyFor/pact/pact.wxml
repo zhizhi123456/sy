@@ -26,13 +26,6 @@
                 <van-toast id="van-toast" />
                 <view class="seachif scroll-view" scroll-y="true">
                     <view>
-                    
-                        <view class="seach_item">
-                            <van-field value="{{info.createman}}" bind:focus="showPopup2" class="time1" title-class="time1" label="创建人" placeholder="请选择" />
-                            <van-popup show="{{show2}}" round position="bottom" bind:close="onClose2">
-                                <van-picker data-name="createman" show-toolbar columns="{{ section2 }}" bind:cancel="onClose2" bind:confirm="onConfirm2" />
-                            </van-popup>
-                        </view>
                         <view class="seach_item">
                             <van-field value="{{info.Companytitle}}" bind:focus="showPopup3" class="time1" title-class="time1" label="公司抬头" placeholder="请选择" />
                             <van-popup show="{{show3}}" round position="bottom" bind:close="onClose3">

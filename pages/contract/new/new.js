@@ -260,7 +260,7 @@ Page({
       Citems: app.globalData.MainSubproject,
     })
     groupSubItems({
-      chargemanName: userinfo.UserName
+    
     }).then(res => {
       // console.log(res)
       if (res.code == 10000 && res.List) {

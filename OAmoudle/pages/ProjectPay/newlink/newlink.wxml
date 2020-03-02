@@ -1,0 +1,72 @@
+<!-- pages/bill/newlink/newlink.wxml -->
+<view class="wraper">
+    <view class="header d_header" wx:if="{{materials[0].ID}}">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="linkreturn"></icon>
+        <text class="fr newCreate" bindtap="linkconfirm">确定</text>
+        <view class="apply">编辑项目收款明细</view>
+    </view>
+    <view class="header d_header" wx:else>
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="confirm">确定</text>
+        <view class="apply">新建项目收款明细</view>
+    </view>
+    <view class="main n_main">
+        <van-toast id="van-toast" />
+        <view class="check_item">
+            <view class="kind">
+                <text>项目编号</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{materials[0].projcectCode?materials[0].projcectCode:'请选择'}}" data-i='{{index}}' is-link data-name='projcectCode' bind:click="showPopup6" />
+            <van-popup show="{{show6}}" round position="bottom" bind:close="onClose6">
+                <van-picker data-name="projcectCode" show-toolbar columns="{{ section5 }}" bind:cancel="onClose6" bind:confirm="onConfirm6" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <view class="kind">
+                <text>项目名称</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field value="{{materials[0].projectname}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' data-name='projectname' />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>到账日期</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{materials[0].trsferAcoutDate?materials[0].trsferAcoutDate:'请选择'}}" data-i='{{index}}' is-link bind:click="showPopup_time1" is-link data-name='projcectCode' icon="clock-o" />
+            <van-popup show="{{show_time1 }}" round position="bottom" bind:close="onClose_time1">
+                <van-datetime-picker data-name="trsferAcoutDate" value="{{ currentDate1 }}" bind:cancel="onClose_time1" bind:confirm="onConfirm_time1" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <view class="kind">
+                <text>到账金额</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field value="{{materials[0].trsferAcoutCharge}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' data-name='trsferAcoutCharge' />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <view class="kind">
+                <text>对方单位名称</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field value="{{materials[0].companyname}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' data-name='companyname' />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <view class="kind">
+                <text>账单号码</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field value="{{materials[0].billno}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' data-name='billno' />
+            </van-cell-group>
+        </view>
+    </view>
+</view>

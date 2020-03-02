@@ -46,7 +46,7 @@ Page({
       // var t = s.filter((a, index) => {
       //   return index != 3
       // })
-      var  q = res.List
+      var q = res.List
       var p = q[3]
       q[3] = q[2]
       q[2] = p
@@ -81,7 +81,12 @@ Page({
         if (s.name == '我的申请') {
           s.ANUm = true
         }
-
+        if (s.name == '我的申请') {
+          s.pageaddres = '/OAmoudle/pages/maintenance/pact/pact'
+        }
+        if (s.name == "招投标") {
+          s.name = '投标'
+        }
         var path = s.pageaddres
         // ////console.log(path)
         if (path) {
@@ -353,23 +358,31 @@ Page({
       getdep({
         UserName: userinfo.UserName
       }).then(res => {
+         
         var s = JSON.parse(res)
-        leadership({
-          departmentID: s[0].ID
-        }).then(res => {
-          if (res.code == 10000) {
-            if (res.urgentTaskList.Num == 0) {
-              this.setData({
-                depnum: false
-              })
-            } else {
-              this.setData({
-                depnum: res.urgentTaskList.Num
-              })
-            }
+        if (s[0]) {
+          leadership({
+            departmentID: s[0].ID
+          }).then(res => {
+            if (res.code == 10000) {
+              if (res.urgentTaskList.Num == 0) {
+                this.setData({
+                  depnum: false
+                })
+              } else {
+                this.setData({
+                  depnum: res.urgentTaskList.Num
+                })
+              }
 
-          }
-        })
+            }
+          })
+        } else {
+          this.setData({
+            depnum: false
+          })
+        }
+
 
       })
 

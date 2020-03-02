@@ -1,0 +1,113 @@
+<!-- textages/textact/textact.wxml -->
+<view class="wraper">
+    <!-- 头部 -->
+    <view class="header">
+        <view class="title">
+            <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
+            <navigator open-type="redirect" url="/OAmoudle/pages/maintenance/new/new" hover-class="none" class="fr newCreate">
+                新建
+            </navigator>
+            <view class="apply">
+              <text>{{top}}</text>
+            </view>
+        </view>
+        <view class="seach">
+            <icon class="iconfont icon-fuxuananniu fl s-sort" bindtap="change"></icon>
+            <icon class="iconfont icon-sousuo fr" bindtap="seachInfo"></icon>
+            <view class="data_list">
+                <input value="{{seach}}" bindblur="setSeach" />
+                <view class="number" wx:if="{{!seach}}">
+                    <icon class="iconfont icon-sousuo"></icon>
+                    <text wx:if="{{InfoList.length}}">共{{InfoList.length}}条</text>
+                    <text wx:else>搜索</text>
+                </view>
+            </view>
+           <van-popup show="{{ show }}" bind:close="onClose" position="right" overlay="{{ true }}" custom-style="height: 100vh;color:#333" custom-class="pullpo" bind:click-overlay="onClose">
+                <van-toast id="van-toast" />
+                <view class="seachif scroll-view" scroll-y="true">
+                    <view>
+                    
+                     <view class="seach_item">
+                            <van-cell-group>
+                                <van-field data-name="projectname" value="{{info.projectname}}" placeholder="请输入" bind:blur="meetplaceblur" label="采购项目名称" />
+                            </van-cell-group>
+                        </view>
+                         <view class="seach_item">
+                            <van-cell-group>
+                                <van-field data-name="company" value="{{info.company}}" placeholder="请输入" bind:blur="meetplaceblur" label="对方单位" />
+                            </van-cell-group>
+                        </view>
+                           <view class="seach_item">
+                            <van-field value="{{info.createman }}" bind:focus="showPopup6" class="time1" title-class="time1" label="创建人" placeholder="请选择" />
+                            <van-popup show="{{show6}}" round position="bottom" bind:close="onClose6">
+                                <van-picker data-name="createman" show-toolbar columns="{{ section7 }}" bind:cancel="onClose6" bind:confirm="onConfirm6" />
+                            </van-popup>
+                        </view>
+                        <view class="seach_item">
+                            <van-field value="{{info.begintime}}" bind:focus="showPopup_time" class="time1" label="采购日期开始时间" placeholder="请选择" />
+                            <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
+                                <van-datetime-picker data-name="begintime" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
+                            </van-popup>
+                        </view>
+                        <view class="seach_item">
+                            <van-field value="{{info.endtime}}" bind:focus="showPopup_endtime" class="time1" label="采购日期结束时间" placeholder="请选择" />
+                            <van-popup show="{{ show_endtime }}" round position="bottom" bind:close="onClose_endtime">
+                                <van-datetime-picker data-name="endtime" value="{{ currentDate1 }}" bind:cancel="onClose_endtime" bind:confirm="onConfirm_endtime" />
+                            </van-popup>
+                        </view>
+                         <!-- <view class="seach_item">
+                            <van-field value="{{info.state}}" bind:focus="showPopup1" class="time1" title-class="time1" label="状态" placeholder="请选择" />
+                            <van-popup show="{{show1}}" round position="bottom" bind:close="onClose1">
+                                <van-picker data-name="state" show-toolbar columns="{{ section1 }}" bind:cancel="onClose1" bind:confirm="onConfirm1" />
+                            </van-popup>
+                        </view> -->
+                        <view class="checkkind">
+                            <text bind:tap="onClose">取消</text>
+                            <text bind:tap="seachqur">确认</text>
+                        </view>
+                    </view>
+                </view>
+            </van-popup>
+        </view>
+    </view>
+    <view class="main">
+        <view class="list" wx:for="{{InfoList}}" wx:key="{{index}}">
+            <navigator open-type="redirect" url="/OAmoudle/pages/maintenance/detail/detail?id={{item.ID}}" hover-class="none">
+                <!-- <view>
+                    <text class="caption">{{item.purchasecontactCode}}</text>
+                </view> -->
+                <view>
+                    <text class="info">采购项目编号</text>
+                    <text>{{item.projcectCode}}</text>
+                </view>
+                <view>
+                    <text class="info">采购项目名称</text>
+                    <text>{{item.projectname}}</text>
+                </view>
+                <view>
+                    <text class="info">采购日期</text>
+                    <text>{{item.PurchaseDate}}</text>
+                </view>
+                <view>
+                    <text class="info">对方单位</text>
+                    <text>{{item.company}}</text>
+                </view>
+                 <view>
+                    <text class="info">总金额</text>
+                    <text>{{item.goodsamount}}</text>
+                </view>
+                <view>
+                    <text class="info">创建人</text>
+                    <text>{{item.createman}}</text>
+                </view>
+                <view>
+                    <text class="info">创建时间</text>
+                    <text>{{item.createtime}}</text>
+                </view>
+            </navigator>
+        </view>
+        <view wx:if="{{loading&&InfoList.length}}" class="end">加载中...</view>
+        <view wx:if="{{!loading&&InfoList.length}}" class="end">已经到底了</view>
+        <view class="no_more" wx:if="{{!InfoList.length}}">暂无内容</view>
+    </view>
+</view>

@@ -6,7 +6,7 @@
         <view class="apply">资料详情</view>
     </view>
     <view class="card">
-        <van-card title="{{info.projectname}}" tag="资料详情" />
+        <van-card title="{{info.projectname}}"   />
     </view>
     <view class="main_nav">
         <van-tabs active="{{tab}}">
@@ -29,7 +29,7 @@
                         <view class="check">{{info.ApprovalStatusint}}</view>
                     </view>
                     <view class="c_item">
-                        <view class="kind">招投标编号</view>
+                        <view class="kind">投标编号</view>
                         <view class="check">{{info.bidprojectcode}}</view>
                     </view>
                     <view class="c_item">
@@ -103,6 +103,16 @@
                 <van-cell title="动态({{Workstate}})" />
                 <van-steps steps="{{ steps }}" active="{{ actived }}" direction="vertical" active-color="#008080" inactive-icon="stop-circle" />
             </van-tab>
+            <van-tab title="附件" name="c">
+                <!-- <van-cell title="文件" is-link bind:click="up_file" /> -->
+               
+                 <van-cell title="文件" is-link bind:click="up_file" />
+                 <block wx:for="{{info.API_uploadfile}}" wx:key="index" >
+                    <van-cell title="{{item.name}}"  bind:click="down"  data-down="{{item.path}}" />
+                 </block>
+              
+               
+            </van-tab>
         </van-tabs>
     </view>
     <view class="footer">
@@ -110,12 +120,12 @@
             <icon class="iconfont icon-wj-thwj"></icon>
             <text>退回上步</text>
         </view>
-        <view>
+        <!-- <view>
             <navigator open-type="redirect" url="/pages/bid/new/new?id={{info.ID}}" hover-class="none">
                 <icon class="iconfont icon-bianji"></icon>
                 <text>编辑</text>
             </navigator>
-        </view>
+        </view> -->
         <view bindtap="putin" wx:if="{{isnext&&returned}}">
             <icon class="iconfont icon-tijiao"></icon>
             <text>提交下步</text>

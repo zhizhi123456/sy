@@ -6,8 +6,8 @@
         <view class="apply">资料详情</view>
     </view>
     <view class="card">
-        <van-card desc="{{info.createman}}" title="{{info.projectname}}" tag="资料详情" />
-        <!-- <van-card desc="{{info.contcactamount?info.contcactamount+'元':''}} | {{info.createman}}" title="{{info.projectname}}" tag="资料详情" /> -->
+        <van-card desc="{{info.createman}}" title="{{info.projectname}}"   />
+        <!-- <van-card desc="{{info.contcactamount?info.contcactamount+'元':''}} | {{info.createman}}" title="{{info.projectname}}"   /> -->
     </view>
     <view class="main_nav">
         <van-tabs active="{{tab}}">

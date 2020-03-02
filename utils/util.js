@@ -77,6 +77,7 @@ const datefom = value => {
 };
 // 判断新增选项内容...
 const checkContent = (value, key) => {
+  // console.log(typeof value.API_Picurl)
   for (let i in value) {
     if (!value[i]) {
       value[i] = "";
@@ -93,7 +94,6 @@ const checkContent = (value, key) => {
     value.applyman = user.UserName;
     value.belongtoman = user.UserName;
   }
-  // console.log(value.API_Picurl)
   if (value.API_Picurl) {
     // console.log("tupian")
     key.setData({
@@ -1036,8 +1036,9 @@ const pageScrollToBottom1 = () => {
 // 实现材料明细部分的数据的双向绑定
 const updateValue = (e, key) => {
   let name = e.currentTarget.dataset.name,
-    i = e.currentTarget.dataset.i;
+   i = e.currentTarget.dataset.i;
   let materials = key.data.materials;
+  console.log(name,i,materials)
   if (i) {
     materials[i][name] = e.detail && e.detail.value;
   } else {
@@ -1068,6 +1069,14 @@ const editInfo = (e, key, val) => {
   info[name] = val;
   // key.setData(info);
   return info;
+}
+//实现类似总包合同的数据绑定
+const editInfosmall = (e, key, val) => {
+  let name = e.currentTarget.dataset.name;
+  let small = key.data.small;
+  small[name] = val;
+  // key.setData(info);
+  return small;
 }
 // oa的返回
 const OAreturn = (kind, key, id, cap, dep, dert) => {
@@ -1119,6 +1128,7 @@ const upImage = (key, way) => {
             name: 'img_data',
             success(res) {
               uploadImgCount++;
+              console.log("https://shangyongren.com:9098" + res.data.replace(/"/g, ""))
               // //console.log(res)
               if (res.statusCode == 200) {
                 info.API_Picurl.push("https://shangyongren.com:9098" + res.data.replace(/"/g, ""))
@@ -1625,6 +1635,9 @@ const intro = (data, that) => {
     if (s.text == data.projecttype) {
       data.projecttype = s.value
     }
+    if (s.text == data.ProjectKind) {
+      data.ProjectKind = s.value
+    }
   })
   app.globalData.Ifmakecontactlist.forEach((s) => {
     if (s.text == data.Ifmakecontact) {
@@ -1808,6 +1821,26 @@ const intro = (data, that) => {
       data.classID = s.value
     }
   })
+  // 借条类型
+  app.globalData.Debitnotetype.forEach(s => {
+    if (s.text == data.debitnotetype) {
+      data.debitnotetype = s.value
+    }
+  })
+   // 用章类型
+   app.globalData.Usesealtype.forEach(s => {
+    if (s.text == data.usesealtype) {
+      data.usesealtype = s.value
+    }
+  })
+  // 公告
+  app.globalData.AnnouncementType.forEach(s=>{
+    if (s.text == data.type) {
+      data.type = s.value
+    }
+  })
+  data.isstick = whether(data.isstick)
+  data.issubdivision = whether(data.issubdivision)
 }
 const outflow = (data, that) => {
   // 合同签订情况
@@ -1825,6 +1858,9 @@ const outflow = (data, that) => {
     }
     if (s.value == data.projecttype) {
       data.projecttype = s.text
+    }
+    if (s.value == data.ProjectKind) {
+      data.ProjectKind = s.text
     }
 
   })
@@ -2000,6 +2036,8 @@ const outflow = (data, that) => {
     if (s.value == data.ifpurchase) {
       data.ifpurchase = s.text
     }
+    
+
   })
   app.globalData.costobj.forEach(s => {
     if (s.value == data.usechargeman) {
@@ -2016,6 +2054,26 @@ const outflow = (data, that) => {
       data.classID = s.text
     }
   })
+  // 借条类型
+  app.globalData.Debitnotetype.forEach(s => {
+    if (s.value == data.debitnotetype) {
+      data.debitnotetype = s.text
+    }
+  })
+   // 用章类型
+   app.globalData.Usesealtype.forEach(s => {
+    if (s.value == data.usesealtype) {
+      data.usesealtype = s.text
+    }
+  })
+  // 公告
+  app.globalData.AnnouncementType.forEach(s=>{
+    if (s.value == data.type) {
+      data.type = s.text
+    }
+  })
+  data.isstick = whethercontent(data.isstick)
+  data.issubdivision = whethercontent(data.issubdivision)
   data.IfWfComplete = whethercontent(data.IfWfComplete)
   return data
 
@@ -2110,7 +2168,7 @@ const qgroupdeliver = (funcname, that, hadNew, hadMy) => {
         funcname(
           infodata
         ).then(res => {
-          //console.log(res)
+          console.log(res)
           wx.showLoading({
             title: '加载中',
           });
@@ -2557,7 +2615,7 @@ module.exports = {
   deleteImgs,
   handleData,
   checkChange,
-  preview,
+  previews,
   deleteImg,
   listData,
   returnMenu,
@@ -2580,5 +2638,6 @@ module.exports = {
   back,
   sumup,
   qgroupdeliver,
-  OAreturn
+  OAreturn,
+  editInfosmall
 }

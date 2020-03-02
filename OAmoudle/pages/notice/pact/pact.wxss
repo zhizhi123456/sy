@@ -1,0 +1,18 @@
+.van-popup--bottom {
+    bottom: -56rpx;
+}
+
+.checkro12 text {
+    display: inline-block;
+}
+
+.checkro12 {
+
+    display: inline-block;
+}
+
+.checkro2 {
+    position: absolute;
+    top: -69rpx;
+    right: 89rpx
+}

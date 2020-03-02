@@ -6,10 +6,16 @@ import {
   addapply,
   updateapply,
   addapplysmall,
-  staff
+  staff,
+  qgroupdeep,
+  querydeepsmall,
+  queryapplysmall,
+  updateapplysmall,
+  delapplysmall
 } from "../../../../service/getData";
 var util = require("../../../../utils/util");
 var app = getApp();
+let userinfo = wx.getStorageSync("myInfo");
 Page({
   /**
    * 页面的初始数据
@@ -50,7 +56,8 @@ Page({
     section3: [],
     section4: [],
     materials: [],
-    section5: []
+    section5: [],
+    detailID: null
   },
   // 公司抬头
   showPopup_o() {
@@ -87,6 +94,52 @@ Page({
       info,
       show1: false,
       // departmenttext: e.detail.value.text
+    })
+    console.log(e.detail.value.value)
+    querydeepsmall({
+      inwarehouseID: e.detail.value.value
+    }).then(res => {
+      console.log(res)
+      if (res.code == 10000) {
+        if (res.List) {
+          if ("p") {
+            // this.data.materials
+            var materials = res.List
+            var m = this.data.materials
+            materials.forEach((s, index) => {
+              s.num = index + this.data.materials.length
+              s.buyitemname = s.goodsname
+              s.ID = ''
+              var news = {}
+              news.applybuyid = this.data.detailID;
+              news.chargeman = s.chargeman
+              news.buyitemname = s.goodsname
+              news.specifications = s.specifications
+              news.brand = s.brand
+              news.unit = s.unit
+              news.quantity = s.quantity
+              news.demo = s.demo
+              m.push(news)
+            })
+
+
+            this.setData({
+              materials: m
+            })
+          // } else {
+          //   // this.data.materials
+          //   var materials = res.List
+          //   materials.forEach((s, index) => {
+          //     s.num = index + this.data.materials.length
+          //     s.buyitemname = s.goodsname
+          //   })
+          //   this.setData({
+          //     materials
+          //   })
+          }
+
+        }
+      }
     })
   },
   // 部门
@@ -267,14 +320,17 @@ Page({
               this.setData({
                 materials
               })
-              // console.log(JSON.stringify(materials))
+              console.log({
+                adate: JSON.stringify(materials)
+              })
               return addapplysmall({
                 adate: JSON.stringify(materials)
               })
             }
           }).then(res => {
+              console.log(res)
             if (res.code == 10000) {
-              // console.log(res)
+            
               wx.showToast({
                 title: '新建成功',
                 icon: 'success',
@@ -324,25 +380,174 @@ Page({
     util.OAreturn('apply', this);
   },
   editconfirm() {
-    let info = this.data.info;
-    util.checkChange(info, this, app.globalData.department);
-
-    util.intro(info, this)
-    this.setData({
-      info
-    })
-    updateapply(this.data.info).then(res => {
-      // console.log(res)
-      if (res.code == 10000) {
-        wx.showToast({
-          title: '编辑成功',
-          icon: 'success',
-          duration: 3000
+    var materials = this.data.materials
+    console.log(materials)
+    if (materials) {
+      var gather = []
+      materials.forEach(material => {
+        console.log(material)
+        if (!(material.chargeman && material.buyitemname && material.specifications && material.brand &&
+            material.unit && material.quantity !== '' && material.demo)) {
+          gather.push(true)
+        } else {
+          material.quantity = parseInt(material.quantity);
+          for (let k in material) {
+            if (material[k] == '请选择') {
+              material[k] = ""
+            }
+            if (material[k] == null) {
+              material[k] = ""
+            }
+          }
+          gather.push(false)
+        }
+      })
+      var gathers = gather.some(d => {
+        return d === true
+      })
+      if (gathers) {
+        Toast({
+          message: '请填写明细表必填项',
+          mask: true
+        });
+      } else {
+        console.log("11")
+        var assemble = []
+        let info = this.data.info;
+        util.checkChange(info, this, app.globalData.department);
+        util.intro(info, this)
+        this.setData({
+          info
         })
-        util.ModifyRecord(this.data.information,"applybuyform")
-        util.OAreturn('apply', this);
+        updateapply(this.data.info).then(res => {
+          // console.log(res)
+          if (res.code == 10000) {
+            wx.showToast({
+              title: '编辑成功',
+              icon: 'success',
+              duration: 3000
+            })
+            util.ModifyRecord(this.data.information, "applybuyform")
+            assemble.push(false)
+            // util.OAreturn('apply', this);
+          } else {
+            assemble.push(true)
+          }
+          console.log(this.data.materials)
+          if (this.data.materials) {
+            var materials = this.data.materials
+            materials.forEach(s => {
+              if (s.ID) {
+                var arr = []
+                arr.push(s)
+                updateapplysmall({
+                  ID: s.ID,
+                  uptdate: JSON.stringify(arr)
+                }).then(res => {
+                  console.log(res)
+                  if (res.code == 10000) {
+                    wx.showToast({
+                      title: '修改成功',
+                      icon: 'success',
+                      duration: 3000
+                    })
+                    assemble.push(false)
+                  } else {
+                    assemble.push(true)
+                  }
+                })
+                arr = []
+              } else {
+                var news = {}
+                news.applybuyid = this.data.detailID;
+                news.chargeman = s.chargeman
+                news.buyitemname = s.buyitemname
+                news.specifications = s.specifications
+                news.brand = s.brand
+                news.unit = s.unit
+                news.quantity = s.quantity
+                news.demo = s.demo
+                console.log(s)
+                // s.ID = ''
+                // s.applybuyid = this.data.detailID;
+                var arr1 = []
+                arr1.push(news)
+                console.log(JSON.stringify(arr1))
+                addapplysmall({
+                  adate: JSON.stringify(arr1)
+                }).then(res => {
+                  console.log(res)
+                  console.log("新建成功")
+                  if (res.code == 10000) {
+                    wx.showToast({
+                      title: '新建成功',
+                      icon: 'success',
+                      duration: 3000
+                    })
+                    assemble.push(false)
+                  } else {
+                    assemble.push(true)
+                  }
+                })
+                arr1 = []
+              }
+            })
+          }
+
+        })
+        var that = this
+        var i = setInterval(function () {
+          console.log(materials.length + 1 == assemble.length)
+          if (materials.length + 1 == assemble.length) {
+            console.log(assemble)
+            console.log(assemble.length)
+            var assembles = assemble.some((p, l) => {
+              return p
+            })
+            console.log(assembles)
+            if (assembles) {
+              wx.showToast({
+                title: '请输入正确内容',
+                icon: 'none',
+                duration: 3000
+              })
+            } else {
+              util.OAreturn('apply', that);
+            }
+            clearInterval(i)
+
+          }
+
+        }, 2000);
+
+
       }
-    })
+
+
+    } else {
+      let info = this.data.info;
+      util.checkChange(info, this, app.globalData.department);
+      util.intro(info, this)
+      this.setData({
+        info
+      })
+      updateapply(this.data.info).then(res => {
+        // console.log(res)
+        if (res.code == 10000) {
+          wx.showToast({
+            title: '编辑成功',
+            icon: 'success',
+            duration: 3000
+          })
+          util.ModifyRecord(this.data.information, "applybuyform")
+          util.OAreturn('apply', this);
+        }
+      })
+    }
+
+
+
+
   },
   // 获取采购明细输入框中的数据并设置给data
   getgcode(e) {
@@ -366,7 +571,7 @@ Page({
   // 添加材料明细
   add_more() {
     let add_detail = {
-      num: this.data.materials.length + 1,
+      num: this.data.materials.length,
       chargeman: '',
       buyitemname: '',
       specifications: '',
@@ -380,24 +585,66 @@ Page({
     this.setData({
       materials
     })
-    // 页面滚动到底部
-    if (this.data.materials.length < 2) {
-      util.pageScrollToBottom1();
+    if (!this.data.detailID) {
+      // 页面滚动到底部
+      console.log("xinjian")
+      if (this.data.materials.length < 2) {
+        util.pageScrollToBottom1();
+      }
     }
+
   },
   // 删除材料明细
   reduce_detail(e) {
-    let materials = this.data.materials,
-      i = e.currentTarget.dataset.i;
-    materials.splice(i, 1);
-    materials.forEach((item, index, arr) => {
-      if (i > index) {
-        item.num = item.num - 1
-      };
-    });
-    this.setData({
-      materials
-    })
+    console.log(e)
+    var that = this
+    if (e.currentTarget.dataset.id) {
+      wx.showModal({
+        content: '确定删除吗？',
+        success(res) {
+          console.log(e.currentTarget.dataset.id)
+          if (res.confirm) {
+            delapplysmall({
+              ID: e.currentTarget.dataset.id
+            }).then(res => {
+              if (res.code === 10000) {
+                wx.showToast({
+                  title: '删除成功',
+                  icon: 'success',
+                  duration: 3000
+                })
+                let materials = that.data.materials,
+                  i = e.currentTarget.dataset.i;
+                materials.splice(i, 1);
+                materials.forEach((item, index, arr) => {
+                  if (i > index) {
+                    item.num = item.num - 1
+                  };
+                });
+                that.setData({
+                  materials
+                })
+              }
+
+            })
+          }
+        }
+      })
+
+    } else {
+      let materials = this.data.materials,
+        i = e.currentTarget.dataset.i;
+      materials.splice(i, 1);
+      materials.forEach((item, index, arr) => {
+        if (i > index) {
+          item.num = item.num - 1
+        };
+      });
+      this.setData({
+        materials
+      })
+
+    }
 
   },
   /**
@@ -408,7 +655,7 @@ Page({
       section1: app.globalData.Principal,
       section2: app.globalData.Companytitle,
       section3: app.globalData.department,
-      section4: app.globalData.projectall
+      section4: app.globalData.projectall1
     })
     var c = app.globalData.Principal
     var a = c.map(s => {
@@ -417,17 +664,37 @@ Page({
     this.setData({
       section5: a
     })
+    qgroupdeep({
+    
+    }).then(res => {
+      console.log(res)
+      if (res.code == 10000 && res.List) {
+        var res1 = JSON.stringify(res.List)
+        let bidlist = JSON.parse(res1.replace(/ID/g, 'value').replace(/projcectCode/g, 'text'));
+        this.setData({
+          section22: bidlist
+        })
+        console.log(this.data.section22)
+      } else {
+        this.setData({
+          section22: []
+        })
+      }
+    })
     if (options.id) {
+      this.setData({
+        detailID: options.id
+      })
       detailapply({
         ID: options.id
       }).then(res => {
         // console.log(res)
         let item = res.Item;
-        var data1 =res.Item
+        var data1 = res.Item
         var b = JSON.stringify(data1)
-        var c  = JSON.parse(b)
+        var c = JSON.parse(b)
         this.setData({
-          information:c
+          information: c
         })
         util.handleData(item, this, app.globalData.department);
         util.outflow(item, this)
@@ -435,6 +702,24 @@ Page({
           info: item
         })
       })
+      queryapplysmall({
+        applybuyid: options.id
+      }).then(res => {
+        console.log(res)
+        if (res.code == 10000) {
+          if (res.List) {
+            // this.data.materials
+            var materials = res.List
+            materials.forEach((s, index) => {
+              s.num = index + this.data.materials.length
+            })
+            this.setData({
+              materials
+            })
+          }
+        }
+      })
+
     }
   },
 

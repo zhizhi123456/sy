@@ -1,0 +1,130 @@
+<!-- pages/detail/detail.wxml -->
+<view wx:if="{{info}}">
+    <view class="header d_header">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="delete">删除</text>
+        <view class="apply">资料详情</view>
+    </view>
+    <view class="card">
+        <van-card title="{{info.projcectCode}}"   />
+    </view>
+    <view class="main_nav">
+        <van-tabs active="{{table}}">
+            <van-tab title="详细资料" name="a">
+                <view class="content">
+                    <view class="c_item">
+                        <view class="kind">采购项目编号</view>
+                        <view class="check">{{info.projcectCode}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">采购项目名称</view>
+                        <view class="check">{{info.projectname}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">采购日期</view>
+                        <view class="check">{{info.PurchaseDate}}</view>
+                    </view>
+                     <view class="c_item">
+                        <view class="kind">对方单位</view>
+                        <view class="check">{{info.company}}</view>
+                    </view>
+
+                    <view class="c_item">
+                        <view class="kind">总金额</view>
+                        <view class="check">{{info.goodsamount}}</view>
+                    </view>
+                    
+                      <!-- <view class="c_item">
+                        <view class="kind">照片</view>
+                        <view wx:if="{{info.API_Picurl}}" class="detpic_show">
+                            <block wx:for="{{info.API_Picurl}}" wx:key="index">
+                                <image src="{{item}}" bindtap="tap_pic" data-index="{{index}}" binderror="defaultimg" />
+                            </block>
+                        </view>
+                    </view> -->
+                    <view class="c_item">
+                        <view class="kind">创建人</view>
+                        <view class="check">{{info.createman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">创建时间</view>
+                        <view class="check">{{info.createtime}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">修改人</view>
+                        <view class="check">{{info.updateman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">修改时间</view>
+                        <view class="check">{{info.updatetime}}</view>
+                    </view>
+                    <!-- <view class="c_item">
+                        <view class="kind">当前步骤名称</view>
+                        <view class="check">{{info.CurStepName}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">当前处理人</view>
+                        <view class="check">{{info.CurDealer}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">步骤是否完成</view>
+                        <view class="check">{{info.IfWfComplete}}</view>
+                    </view> -->
+                </view>
+            </van-tab>
+           <!-- <van-tab title="动态" name="b">
+                <van-cell title="动态({{Workstate}})" />
+                <van-steps steps="{{ steps }}" active="{{ actived }}" direction="vertical" active-color="#008080" inactive-icon="stop-circle" />
+            </van-tab>
+              <van-tab title="修改记录" name="d">
+                <block wx:if="{{amendant}}">
+                    <van-cell title="记录({{amendant.length}})" />
+                    <van-steps steps="{{ amendant }}" active="{{ active }}" direction="vertical" />
+                </block>
+                <view class="dynamic_state" wx:else>暂无记录</view>
+            </van-tab> -->
+            <van-tab title="申领明细" name="c">
+                <van-cell title="申领明细({{material_list.length}})" bindtap="addndlink">
+                    <icon class="iconfont icon-icon-test"></icon>
+                </van-cell>
+                <block wx:for="{{material_list}}" wx:key="{{index}}">
+                    <view class="material">
+                        <navigator open-type="redirect" url="/OAmoudle/pages/maintenance/detaillink/detaillink?detailid={{item.ID}}" hover-class="none">
+                            <!-- <view>
+                                <text class="m_caption">{{item.caption}}</text>
+                            </view> -->
+                            <view class="m_item">
+                                <text class="m_info"> 明细名称</text>
+                                <text>{{item.detailname}}</text>
+                            </view>
+                            <view class="m_item">
+                                <text class="m_info">类型</text>
+                                <text>{{item.type}}</text>
+                            </view>
+                              <view class="m_item">
+                                <text class="m_info">数量</text>
+                                <text>{{item.quantity}}</text>
+                            </view>
+                        </navigator>
+                    </view>
+                </block>
+            </van-tab>
+        </van-tabs>
+    </view>
+    <view class="footer">
+        <!-- <view bindtap="sendback" wx:if="{{info.formid}}">
+            <icon class="iconfont icon-wj-thwj"></icon>
+            <text>退回上步</text>
+        </view> -->
+        <view>
+            <navigator open-type="redirect" url="/OAmoudle/pages/maintenance/new/new?id={{info.ID}}" hover-class="none">
+                <icon class="iconfont icon-bianji"></icon>
+                <text>编辑</text>
+            </navigator>
+        </view>
+        <!-- <view bindtap="putin" wx:if="{{isnext}}">
+            <icon class="iconfont icon-tijiao"></icon>
+            <text>提交下步</text>
+        </view> -->
+    </view>
+</view>
