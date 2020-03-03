@@ -13,16 +13,6 @@ Page({
     show_o: false,
     seach: '',
     loading: false,
-    val: 0,
-    pact: [{
-        text: '全部台账',
-        value: 0
-      },
-      {
-        text: '我的台账',
-        value: 1
-      }
-    ],
     InfoList: [],
     info: {
       keyword: "",

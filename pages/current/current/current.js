@@ -21,7 +21,9 @@ Page({
       charge: 'cost',
       getmaterial: 'bill',
       losematerial: 'returnmaterial',
-      subprjcodeapply: 'pointsnumber'
+      subprjcodeapply: 'pointsnumber',
+      paymentapproval: 'payment',
+      leaveapplyform: 'vacate',
     }
   },
   return () {
@@ -46,12 +48,11 @@ Page({
       getdep({
         UserName: userinfo.UserName
       }).then(res => {
-        // console.log(res);
         let resData = JSON.parse(res);
         this.setData({
           userinfo,
         })
-        if (options.id) {
+        if (options.id&&resData.length) {
           this.setData({
             userid: userinfo.UserName,
             dep: resData[0].ID,
@@ -67,7 +68,7 @@ Page({
         getTaskTNUm({
           UserName: userinfo.UserName
         }).then(res => {
-          console.log(res)
+          // console.log(res)
           if (res.code == 10000) {
             let item = res.List;
             this.setData({

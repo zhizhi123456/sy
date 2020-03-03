@@ -12,7 +12,7 @@ Page({
   /**
    * 页面的初始数据
    */
-  
+
   data: {
     info: {
       API_Picurl: [],
@@ -27,6 +27,20 @@ Page({
     }, {
       name: "从相册选择"
     }],
+  },
+  checknum(e) {
+    let info = this.data.info;
+    info.payammount = e.detail.replace(/[^\d]/g, '')
+    this.setData({
+      info
+    })
+  },
+  checknum1(e) {
+    let info = this.data.info;
+    info.havepaidammount = e.detail.replace(/[^\d]/g, '')
+    this.setData({
+      info
+    })
   },
   // 签报名称
   payapproveformnameblur(e) {
@@ -273,6 +287,17 @@ Page({
     // console.log(this.data.info)
     if (this.data.info.payapproveformname && this.data.info.department && this.data.info.Companytitle && this.data.info.paytype && this.data.info.payammount && this.data.info.mainprojectcode && this.data.info.projecttype && this.data.info.maincontactcode && this.data.info.subprojectcode && this.data.info.subcontactcode && this.data.info.purchasecontactcode && this.data.info.suppliercode && this.data.info.havepaidammount && this.data.info.payamtexplain) {
       let info = this.data.info;
+      getdep({
+        UserName: userinfo.UserName
+      }).then(res => {
+        let resData = JSON.parse(res);
+        if (resData.length) {
+          info.department = resData[0].ID,
+            this.setData({
+              departmenttext: resData[0].techofficename,
+            })
+        }
+      })
       util.checkContent(info, this);
       this.setData({
         info

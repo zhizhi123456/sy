@@ -16,7 +16,7 @@
                 <input value="{{seach}}" bindblur="setSeach" />
                 <view class="number" wx:if="{{!seach}}">
                     <icon class="iconfont icon-sousuo"></icon>
-                    <text wx:if="{{InfoList.length}}">共{{item.length}}条</text>
+                    <text wx:if="{{InfoList.length}}">共{{InfoList.length}}条</text>
                     <text wx:else>搜索</text>
                 </view>
                 <van-popup show="{{ show }}" bind:close="onClose" position="right" custom-style="height: 100vh;color:#333">
@@ -43,7 +43,7 @@
                             <van-field value="{{info.starttime}}" placeholder="请选择" label="开始时间" bindtap="showPopup_time" disabled />
                         </van-cell-group>
                         <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
-                            <van-datetime-picker data-name="starttime" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
+                            <van-datetime-picker data-name="starttime" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" max-date="{{ maxDate }}"/>
                         </van-popup>
                     </view>
                     <view class="seach_item">
@@ -51,7 +51,7 @@
                             <van-field value="{{info.endtime}}" placeholder="请选择" label="结束时间" bindtap="showPopup_endtime" disabled />
                         </van-cell-group>
                         <van-popup show="{{ show_endtime }}" round position="bottom" bind:close="onClose_endtime">
-                            <van-datetime-picker data-name="endtime" value="{{ currentDate }}" bind:cancel="onClose_endtime" bind:confirm="onConfirm_endtime" />
+                            <van-datetime-picker data-name="endtime" value="{{ currentDate }}" bind:cancel="onClose_endtime" bind:confirm="onConfirm_endtime" min-date="{{ minDate }}"/>
                         </van-popup>
                     </view>
                     <view class="seach_item">

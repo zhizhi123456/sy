@@ -1,26 +1,24 @@
 // pages/pact/pact.js
 import {
-  getPayment,
-  groupPayment,
+  getConstructionTask,
+  groupConstructionTask,
 } from '../../../../service/getData';
 var app = getApp();
 var util = require("../../../../utils/util");
-// let item, list;
+let item, list;
 let userinfo = wx.getStorageSync("myInfo");
 Page({
   /**
    * 页面的初始数据
    */
-
   data: {
     seach: '',
     loading: false,
-    top: '付款签报',
+    top: '施工设计任务书',
     currentDate: new Date().getTime(),
-    maxDate: new Date().getTime(),
     InfoList: [],
-    // item: [],
-    // pages: 1,
+    item: [],
+    pages: 1,
     hadNew: 1,
     info: {}
   },
@@ -37,25 +35,23 @@ Page({
   },
   // 模糊查询
   seachInfo() {
-    // list = [];
+    list = [];
     wx.showLoading({
       title: '加载中',
     });
-    // this.setData({
-    //   pages: 1
-    // })
-    getPayment({
-      applyman: this.data.seach
+    this.setData({
+      pages: 1
+    })
+    getConstructionTask({
+      proassignbookcode: this.data.seach
     }).then(res => {
       // console.log(res)
       if (res.code == 10000) {
-        // item = res.List;
-        // list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list,this,'paymentapproval');
-        let item = res.List;
-        util.listData(item, app.globalData.department, '', '', this, 'paymentapproval');
+        item = res.List;
+        list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list, this, 'prjassignbookConstruction');
         this.setData({
-          InfoList: item.reverse(),
-          // item,
+          InfoList: list,
+          item,
           seach: ''
         })
         wx.hideLoading();
@@ -70,42 +66,35 @@ Page({
     if (options.id) {
       wx.setStorageSync('menus', options)
     }
-    // list = [];
+    list = [];
     wx.showLoading({
       title: '加载中',
     });
     // 调用查询
-    getPayment().then(res => {
+    getConstructionTask().then(res => {
       // console.log(res.List)
       if (res.code == 10000) {
-        // item = res.List;
-        // list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list,this,'paymentapproval');
-        let item = res.List;
-        util.listData(item, app.globalData.department, '', '', this, 'paymentapproval');
+        item = res.List;
+        list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list, this, 'prjassignbookConstruction');
         this.setData({
-          InfoList: item.reverse(),
-          // item
+          InfoList: list,
+          item
         })
         wx.hideLoading();
       }
     }).catch(err => {
       console.log(err)
     })
-    let info = this.data.info;
-    info.createman = userinfo.UserName;
-    this.setData({
-      info
-    })
     if (app.globalData.CountItem) {
       this.setData({
-        sections: app.globalData.department,
+        props: app.globalData.Projectprop,
         states: app.globalData.states
       })
     } else {
       app.DataCallback = employ => {
         if (employ != '') {
           this.setData({
-            sections: app.globalData.department,
+            props: app.globalData.Projectprop,
             states: app.globalData.states
           })
         }
@@ -124,25 +113,33 @@ Page({
     })
   },
   onConfirm_seach() {
-    // list = [];
+    list = [];
     wx.showLoading({
       title: '加载中',
     });
-    // this.setData({
-    //   pages: 1
-    // })
-    if (this.data.info.payapproveformname || this.data.info.createman || this.data.info.department || this.data.info.starttime || this.data.info.endtime || this.data.info.processstate) {
-      groupPayment(this.data.info).then(res => {
+    this.setData({
+      pages: 1
+    })
+    if (this.data.info.keyword || this.data.info.Type || this.data.info.chargemanName || this.data.info.StartTime || this.data.info.state || this.data.info.UserId) {
+      let info = this.data.info;
+      if (info.Type) {
+        this.data.props.forEach(res => {
+          if (info.Type == res.text) {
+            info.Type = res.value;
+          }
+        })
+        this.setData({
+          info
+        })
+      }
+      groupConstructionTask(this.data.info).then(res => {
         if (res.code == 10000) {
-          // item = res.List;
-          // list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list, this, 'paymentapproval');
-          let item = res.List;
-          util.listData(item, app.globalData.department, '', '', this, 'paymentapproval');
+          item = res.List;
+          list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list, this, 'prjassignbookConstruction');
           this.setData({
-            InfoList: item.reverse(),
-            // item,
+            InfoList: list,
+            item,
             info: {},
-            'info.createman':userinfo.UserName,
             loading: false,
             departmenttext: ''
           })
@@ -160,39 +157,43 @@ Page({
       })
     )
   },
-  // 付款签报名称
-  payapproveformnameblur(e) {
+  // 任务书编号
+  keywordblur(e) {
+    let info = util.editInfo(e, this, e.detail.value);
+    this.setData({
+      info
+    })
+  },
+  // 总包项目属性
+  showPopup_2() {
+    this.setData({
+      show_2: true
+    })
+  },
+  onClose_2() {
+    this.setData({
+      show_2: false
+    })
+  },
+  onConfirm_2(e) {
+    let info = util.editInfo(e, this, e.detail.value.text);
+    this.setData({
+      show_2: false,
+      info
+    })
+  },
+  // 联系人
+  chargemanNameblur(e) {
     let info = util.editInfo(e, this, e.detail.value);
     this.setData({
       info
     })
   },
   // 创建人
-  createmanblur(e) {
+  UserIdblur(e) {
     let info = util.editInfo(e, this, e.detail.value);
     this.setData({
       info
-    })
-  },
-  // 部门
-  showPopup_0() {
-    if (this.data.hadNew) {
-      this.setData({
-        show_0: true
-      })
-    }
-  },
-  onClose_0() {
-    this.setData({
-      show_0: false
-    })
-  },
-  onConfirm_0(e) {
-    let info = util.editInfo(e, this, e.detail.value.value);
-    this.setData({
-      show_0: false,
-      info,
-      departmenttext: e.detail.value.text
     })
   },
   // 开始时间
@@ -210,8 +211,7 @@ Page({
     let info = util.editInfo(e, this, util.datefomate(e.detail));
     this.setData({
       info,
-      show_time: false,
-      minDate: e.detail
+      show_time: false
     })
   },
   // 结束时间
@@ -298,27 +298,27 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    // if (item.length > 5 && list.length < item.length) {
-    //   this.setData({
-    //     loading: true
-    //   })
-    //   let pages = this.data.pages,
-    //     n = Math.ceil(item.length / 5);
-    //   if (n > pages) {
-    //     setTimeout(() => {
-    //       pages = pages + 1;
-    //       list = util.listData(item, app.globalData.department, pages, list);
-    //       this.setData({
-    //         pages,
-    //         InfoList: list,
-    //       })
-    //     }, 1000)
-    //   }
-    // } else {
-    //   this.setData({
-    //     loading: false
-    //   })
-    // }
+    if (item.length > 5 && list.length < item.length) {
+      this.setData({
+        loading: true
+      })
+      let pages = this.data.pages,
+        n = Math.ceil(item.length / 5);
+      if (n > pages) {
+        setTimeout(() => {
+          pages = pages + 1;
+          list = util.listData(item, app.globalData.department, pages, list);
+          this.setData({
+            pages,
+            InfoList: list,
+          })
+        }, 1000)
+      }
+    } else {
+      this.setData({
+        loading: false
+      })
+    }
   },
 
   /**

@@ -1,5 +1,4 @@
 <!-- pages/detail/detail.wxml -->
-
 <view wx:if="{{info}}">
     <view class="header d_header">
         <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
@@ -7,79 +6,75 @@
         <view class="apply">资料详情</view>
     </view>
     <view class="card">
-        <van-card title="{{info.leavetype}}"  />
+        <van-card title="{{info.proassignbookcode}}"  />
     </view>
-    <view class="main_nav">
+     <view class="main_nav">
         <van-tabs active="{{tab}}">
             <van-tab title="详细资料" name="a">
                 <view class="content">
                     <view class="c_item">
-                        <view class="kind">付款签报名称</view>
-                        <view class="check">{{info.payapproveformname}}</view>
+                        <view class="kind">项目名称</view>
+                        <view class="check">{{info.projectname}}</view>
                     </view>
                     <view class="c_item">
-                        <view class="kind">公司</view>
-                        <view class="check">{{info.Companytitle}}</view>
+                        <view class="kind">任务书编号</view>
+                        <view class="check">{{info.proassignbookcode}}</view>
                     </view>
                     <view class="c_item">
-                        <view class="kind">部门</view>
-                        <view class="check">{{info.department}}</view>
+                        <view class="kind">建设单位名称</view>
+                        <view class="check">{{info.bulidcompanyname}}</view>
                     </view>
                     <view class="c_item">
-                        <view class="kind">付款方式</view>
-                        <view class="check">{{info.paytype}}</view>
+                        <view class="kind">总包项目属性</view>
+                        <view class="check">{{info.mainprojectprop}}</view>
                     </view>
                     <view class="c_item">
-                        <view class="kind">付款金额(元)</view>
-                        <view class="check">{{info.payammount}}</view>
+                        <view class="kind">总包项目类型</view>
+                        <view class="check">{{info.mainprojecttype}}</view>
                     </view>
                     <view class="c_item">
-                        <view class="kind">已支付金额(元)</view>
-                        <view class="check">{{info.havepaidammount}}</view>
+                        <view class="kind">我公司项目编号</view>
+                        <view class="check">{{info.mycompanyprocode}}</view>
                     </view>
                     <view class="c_item">
-                        <view class="kind">付款说明</view>
-                        <view class="check">{{info.payamtexplain}}</view>
+                        <view class="kind">甲方报建编号</view>
+                        <view class="check">{{info.firstrptprjcode}}</view>
                     </view>
                     <view class="c_item">
-                        <view class="kind">项目类型</view>
-                        <view class="check">{{info.projecttype}}</view>
+                        <view class="kind">项目地址以及建筑面积</view>
+                        <view class="check">{{info.prjaddresssquare}}</view>
                     </view>
                     <view class="c_item">
-                        <view class="kind">采购合同编号</view>
-                        <view class="check">{{info.purchasecontactcode}}</view>
+                        <view class="kind">主要施工内容</view>
+                        <view class="check">{{info.projectcontext}}</view>
                     </view>
                     <view class="c_item">
-                        <view class="kind">总包合同编号</view>
-                        <view class="check">{{info.maincontactcode}}</view>
+                        <view class="kind">合同签订情况</view>
+                        <view class="check">{{info.contactbookstate}}</view>
                     </view>
                     <view class="c_item">
-                        <view class="kind">总包项目编号</view>
-                        <view class="check">{{info.mainprojectcode}}</view>
+                        <view class="kind">项目联系人</view>
+                        <view class="check">{{info.procontactman}}</view>
                     </view>
                     <view class="c_item">
-                        <view class="kind">分包项目编号</view>
-                        <view class="check">{{info.subcontactcode}}</view>
+                        <view class="kind">联系方式</view>
+                        <view class="check">{{info.contactway}}</view>
                     </view>
                     <view class="c_item">
-                        <view class="kind">分包合同编号</view>
-                        <view class="check">{{info.subprojectcode}}</view>
+                        <view class="kind">计划开工日期</view>
+                        <view class="check">{{info.planbegindate}}</view>
                     </view>
                     <view class="c_item">
-                        <view class="kind">供应商编号</view>
-                        <view class="check">{{info.suppliercode}}</view>
+                        <view class="kind">计划完工日期</view>
+                        <view class="check">{{info.planenddate}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">附件内容情况说明</view>
+                        <view class="check">{{info.attactfileexplain}}</view>
                     </view>
                     <view class="c_item">
                         <view class="kind">备注</view>
                         <view class="check">{{info.remark}}</view>
-                    </view>
-                    <view class="c_item">
-                        <view class="kind">图片</view>
-                        <view wx:if="{{info.API_Picurl}}" class="detpic_show">
-                            <block wx:for="{{info.API_Picurl}}" wx:key="index">
-                                <image src="{{item}}" bindtap="tap_pic" data-index="{{index}}" binderror="defaultimg" />
-                            </block>
-                        </view>
                     </view>
                     <view class="c_item">
                         <view class="kind">当前处理人</view>
@@ -117,11 +112,7 @@
             </van-tab>
             <van-tab title="动态" name="b">
                 <van-cell title="动态({{Workstate}})" />
-                <!-- <block wx:if="{{info.formid}}">
-                    <van-steps steps="{{ steps }}" active="{{ active }}" direction="vertical" />
-                </block>
-                <view class="dynamic_state" wx:else>暂无动态</view> -->
-                <van-steps steps="{{ steps }}" active="{{ actived }}" direction="vertical" active-color="#008080" inactive-icon="stop-circle" />
+                 <van-steps steps="{{ steps }}" active="{{ actived }}" direction="vertical" active-color="#008080" inactive-icon="stop-circle" />
             </van-tab>
         </van-tabs>
     </view>
@@ -131,7 +122,7 @@
             <text>退回上步</text>
         </view>
         <view>
-            <navigator open-type="redirect" url="/OAmoudle/pages/payment/new/new?id={{info.ID}}" hover-class="none">
+            <navigator open-type="redirect" url="/OAmoudle/pages/ConstructionTask/new/new?id={{info.ID}}" hover-class="none">
                 <icon class="iconfont icon-bianji"></icon>
                 <text>编辑</text>
             </navigator>

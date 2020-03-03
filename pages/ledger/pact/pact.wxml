@@ -8,7 +8,7 @@
                 新建
             </navigator>
             <view class="apply">
-               <text>台账</text>
+               <text>工程台账</text>
             </view>
         </view>
         <view class="seach">

@@ -1,32 +1,24 @@
 // pages/new/new.js
 import Toast from 'vant-weapp/dist/toast/toast';
 import {
-  addTask,
-  referTask,
-  amendTask
-} from "../../../service/getData";
-var util = require("../../../utils/util");
+  addConstructionTask,
+  referConstructionTask,
+  amendConstructionTask
+} from "../../../../service/getData";
+var util = require("../../../../utils/util");
 var app = getApp();
+let user = wx.getStorageSync("myInfo");
 Page({
   /**
    * 页面的初始数据
    */
   data: {
     info: {},
-    currentDate: new Date().getTime(),
     show: false,
-    show_nature: false,
-    show_state: false,
-    show_time: false,
-    show_endtime: false,
-    show_kind: false,
-    show_6: false,
     firms: [],
     totals: [],
-    result: [],
-    allkinds: [],
-    nature: [],
-    concludesign: [],
+    currentDate: new Date().getTime(),
+    departmenttext: "请选择",
   },
   // 建设单位名称
   showPopup() {
@@ -228,14 +220,13 @@ Page({
   },
   confirm() {
     // console.log(this.data.info)
-    if (this.data.info.planbegindate && this.data.info.planenddate && this.data.info.projectname && this.data.info.proassignbookcode) {
+    if(this.data.info.projectname && this.data.info.proassignbookcode){
       let info = this.data.info;
       util.checkContent(info, this);
       this.setData({
         info
       })
-      // console.log(infodata)
-      addTask(this.data.info).then(res => {
+      addConstructionTask(this.data.info).then(res => {
         // console.log(res)
         if (res.code == 10000) {
           wx.showToast({
@@ -243,8 +234,7 @@ Page({
             icon: 'success',
             duration: 3000
           })
-          util.returnPrev('task', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
-            this.data.rid, this.data.title)
+          util.OAreturn('ConstructionTask');
         }
       })
     } else {
@@ -256,13 +246,11 @@ Page({
   },
   // 返回
   return () {
-    util.returnPrev('task', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
-      this.data.rid, this.data.title)
+    util.OAreturn('ConstructionTask');
   },
-  // 编辑的确定和返回
+  // 编辑页面的确定和返回
   editreturn() {
-    util.returnPrev('task', this, this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
-      this.data.rid, this.data.title)
+    util.OAreturn('ConstructionTask', this);
   },
   editconfirm() {
     let info = this.data.info;
@@ -270,7 +258,8 @@ Page({
     this.setData({
       info
     })
-    amendTask(this.data.info).then(res => {
+    // console.log(infodata)
+    amendConstructionTask(this.data.info).then(res => {
       // console.log(res)
       if (res.code == 10000) {
         wx.showToast({
@@ -278,8 +267,7 @@ Page({
           icon: 'success',
           duration: 3000
         })
-        util.returnPrev('task', this, this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
-          this.data.rid, this.data.title)
+        util.OAreturn('ConstructionTask', this);
       }
     })
   },
@@ -287,20 +275,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if (options.id || options.rid) {
-      this.setData({
-        rid: options.rid,
-        title: options.title,
-      })
-    }
-    if (options.userid) {
-      this.setData({
-        userid: options.userid,
-        caption: options.caption,
-        dep: options.dep,
-        deptxt: options.deptxt,
-      })
-    }
     this.setData({
       firms: app.globalData.Companytitle,
       totals: app.globalData.MainProject,
@@ -309,7 +283,7 @@ Page({
       concludesign: app.globalData.Ifmakecontactlist
     })
     if (options.id) {
-      referTask({
+      referConstructionTask({
         ID: options.id
       }).then(res => {
         // console.log(res)
@@ -320,6 +294,7 @@ Page({
         })
       })
     }
+    user = wx.getStorageSync("myInfo");
   },
 
   /**
@@ -333,7 +308,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    user = wx.getStorageSync("myInfo");
   },
 
   /**

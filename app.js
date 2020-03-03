@@ -56,7 +56,8 @@ import {
   GetOverworktype,
   GetOvertimeperiod,
   contractType,
-  getframeProtocolCode
+  getframeProtocolCode,
+  valid
 } from "./service/getData";
 var util = require("./utils/util");
 App({
@@ -297,8 +298,8 @@ App({
     Leavetypelist: '',
     GetOverworktype: '',
     GetOvertimeperiod: '',
-    contractType:'',
-    getframeProtocolCode:'',
+    contractType: '',
+    getframeProtocolCode: '',
     states: [{
       text: '所有'
     }, {
@@ -336,35 +337,35 @@ App({
       value: "1"
     }],
     table: [{
-      value:'subproject',
-      text:'分包项目'
-    }, 
-    {
-      value:'subcontact',
-      text:'分包合同'
-     
-    },
-    {
-      value:'prjassignbook',
-      text:'任务书'
-    },
-    {
-      value:'charge',
-      text:'费用'
-     
-    },
-    {
-      value:'getmaterial',
-      text:'领料单'
-    },
-    {
-      value:'losematerial',
-      text:'退料单'
-    },
-    {
-      value:'subprjcodeapply',
-      text:'分包编号'
-    }
-  ]
+        value: 'subproject',
+        text: '分包项目'
+      },
+      {
+        value: 'subcontact',
+        text: '分包合同'
+
+      },
+      {
+        value: 'prjassignbook',
+        text: '任务书'
+      },
+      {
+        value: 'charge',
+        text: '费用'
+
+      },
+      {
+        value: 'getmaterial',
+        text: '领料单'
+      },
+      {
+        value: 'losematerial',
+        text: '退料单'
+      },
+      {
+        value: 'subprjcodeapply',
+        text: '分包编号'
+      }
+    ]
   }
 })

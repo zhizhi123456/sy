@@ -1,0 +1,6 @@
+.cfile{
+    font-size: 32rpx;
+    line-height: 3em;
+    padding: 0 40rpx;
+    border-bottom: 1rpx solid #fafafa;
+}

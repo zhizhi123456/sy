@@ -370,6 +370,9 @@ const checkChange = (value, key, dep) => {
     })
     value.API_Picurl = value.API_Picurl.join(",")
   }
+  if (value.Minutesofmeeting) {
+    value.Minutesofmeeting = JSON.stringify(value.Minutesofmeeting);
+  }
   if (typeof value.department == 'string' && value.department) {
     dep.forEach(depart => {
       if (value.department == depart.text) {
@@ -384,14 +387,14 @@ const checkChange = (value, key, dep) => {
       value.leavetype = res.value
     }
   })
-   // 分包合同类型
-   app.globalData.contractType.forEach(res => {
+  // 分包合同类型
+  app.globalData.contractType.forEach(res => {
     if (value.contractType == res.text) {
       value.contractType = res.value
     }
   })
-   // 快递类别
-   app.globalData.ExpressageType.forEach(res => {
+  // 快递类别
+  app.globalData.ExpressageType.forEach(res => {
     if (value.classID == res.text) {
       value.classID = res.value
     }
@@ -635,14 +638,14 @@ const handleData = (data, key, dep) => {
       data.leavetype = depart.text
     }
   })
-   // 分包合同类型
-   app.globalData.contractType.forEach(res => {
+  // 分包合同类型
+  app.globalData.contractType.forEach(res => {
     if (data.contractType == res.value) {
       data.contractType = res.text
     }
   })
-   // 快递类别
-   app.globalData.ExpressageType.forEach(res => {
+  // 快递类别
+  app.globalData.ExpressageType.forEach(res => {
     if (data.classID == res.value) {
       data.classID = res.text
     }
@@ -905,6 +908,11 @@ const handleData = (data, key, dep) => {
   } else {
     data.API_Picurl = [];
   }
+  if (data.Minutesofmeeting) {
+    data.Minutesofmeeting = JSON.parse(data.Minutesofmeeting);
+  } else {
+    data.Minutesofmeeting = [];
+  }
 }
 //列表页展示数据的格式化
 const listData = (data, dep, page, list, key, billname) => {
@@ -950,17 +958,17 @@ const listData = (data, dep, page, list, key, billname) => {
       }
     })
     // 分包合同类型
-   app.globalData.contractType.forEach(res => {
-    if (value.contractType == res.value) {
-      value.contractType = res.text
-    }
-  })
+    app.globalData.contractType.forEach(res => {
+      if (value.contractType == res.value) {
+        value.contractType = res.text
+      }
+    })
     // 快递类别
-   app.globalData.ExpressageType.forEach(res => {
-    if (value.classID == res.value) {
-      value.classID = res.text
-    }
-  })
+    app.globalData.ExpressageType.forEach(res => {
+      if (value.classID == res.value) {
+        value.classID = res.text
+      }
+    })
     // 耗材类型
     app.globalData.SuppliesType.forEach(res => {
       if (value.classID == res.value) {
@@ -1223,6 +1231,64 @@ const upImage = (key, way) => {
     })
   }
 }
+
+// 上传文件
+const upFile = (key) => {
+  if (key.data.info.Minutesofmeeting.length < 9) {
+    let that = key;
+    wx.chooseMessageFile({
+      count: 9, //能选择文件的数量
+      success(res) {
+        let filedata = res.tempFiles;
+        filedata.forEach(element => {
+          if (element.size < 1024) {
+            element.size = element.size + 'B';
+          } else if (element.size < 1048576) {
+            element.size = ((element.size) / 1024).toFixed(2) + 'KB';
+          } else if (element.size < 1073741824) {
+            element.size = ((element.size) / 1048576).toFixed(2) + 'MB';
+          }
+        });
+        wx.showToast({
+          title: '正在上传...',
+          icon: 'loading',
+          mask: true,
+          duration: 10000
+        })
+        let info=that.data.info;
+        var uploadImgCount = 0;
+        for (let i = 0; i < filedata.length; i++) {
+          wx.uploadFile({
+            url: 'https://shangyongren.com:9098/api/record/Get_rec',
+            filePath: filedata[i].path,
+            name: 'file_data',
+            success(res) {
+              uploadImgCount++;
+              // console.log(res)
+              if (res.statusCode == 200) {
+                // console.log(res.data)
+                info.Minutesofmeeting.push({
+                  name:filedata[i].name,
+                  size:filedata[i].size,
+                  url:"https://shangyongren.com:9098" + res.data.replace(/"/g, "")})
+                that.setData({
+                  info
+                })
+              }
+              //如果是最后一张,则隐藏等待中  
+              if (uploadImgCount == filedata.length) {
+                wx.hideToast();
+              }
+            },
+            fail: err => {
+              //console.log(err)
+            }
+          })
+        }
+      }
+    })
+  }
+}
 // 图片的删除
 const deleteImg = (key, e) => {
   let info = key.data.info,
@@ -1385,12 +1451,22 @@ const workList = (key, id, billname) => {
 const checkState = (key, id, chart, bh, Workstates) => {
   let userinfo = wx.getStorageSync("myInfo");
   if (userinfo) {
-    valid({
-      formName: chart,
-      currowbh: bh,
-      userName: userinfo.UserName,
-      formid: id
-    }).then(res => {
+    let param;
+    if(id){
+      param={
+        formName: chart,
+        currowbh: bh,
+        userName: userinfo.UserName,
+        formid: id 
+      }
+    }else{
+       param={
+        formName: chart,
+        currowbh: bh,
+        userName: userinfo.UserName,
+      }
+    }
+    valid(param).then(res => {
       if (res.code == 10000) {
         if (Workstates && key) {
           Workstates.push(res.Isvalidtime.True || res.Isvalidtime.False);
@@ -2661,5 +2737,6 @@ module.exports = {
   back,
   sumup,
   qgroupdeliver,
-  OAreturn
+  OAreturn,
+  upFile
 }
