@@ -35,6 +35,7 @@ Page({
       API_Picurl: []
     },
     currentDate: new Date().getTime(),
+  
     show: false,
     show1: false,
     show_o: false,

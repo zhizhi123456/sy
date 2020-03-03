@@ -858,7 +858,7 @@ const listData = (data, dep, page, list, key, billname) => {
   }
   let Workstates = [];
   data.forEach((value, index) => {
-    checkState(key, (value.formid || value.Formid), billname, value.CurStepbh, Workstates);
+    // checkState(key, (value.formid || value.Formid), billname, value.CurStepbh, Workstates);
     // 工程类别
     app.globalData.EngineerClass.forEach(res => {
       if (value.EngineerClass == res.value) {
@@ -1036,9 +1036,9 @@ const pageScrollToBottom1 = () => {
 // 实现材料明细部分的数据的双向绑定
 const updateValue = (e, key) => {
   let name = e.currentTarget.dataset.name,
-   i = e.currentTarget.dataset.i;
+    i = e.currentTarget.dataset.i;
   let materials = key.data.materials;
-  console.log(name,i,materials)
+  console.log(name, i, materials)
   if (i) {
     materials[i][name] = e.detail && e.detail.value;
   } else {
@@ -1312,48 +1312,67 @@ const workList = (key, id, billname) => {
 }
 //处理状态判断
 const checkState = (key, id, chart, bh, Workstates) => {
+
   let userinfo = wx.getStorageSync("myInfo");
-  if (userinfo) {
-    valid({
-      formName: chart,
-      currowbh: bh,
-      userName: userinfo.UserName,
-      formid: id
-    }).then(res => {
-      if (res.code == 10000) {
-        if (Workstates && key) {
-          Workstates.push(res.Isvalidtime.True || res.Isvalidtime.False);
-          key.setData({
-            Workstates
-          })
-        } else if (key) {
-          key.setData({
-            Workstate: (res.Isvalidtime.True || res.Isvalidtime.False),
-          })
-          if (res.Isvalidtime.True) {
-            key.setData({
-              isnext: false
-            })
-          } else {
-            key.setData({
-              isnext: true
-            })
-          }
-        }
-        returned({
+  console.log(chart && userinfo.UserName)
+  var i = setInterval(function () {
+      
+  
+    if (!(chart && userinfo.UserName)) {
+      console.log("数据未载入")
+    } else {
+      clearInterval(i)
+      if (userinfo) {
+        console.log({
           formName: chart,
+          currowbh: bh,
           userName: userinfo.UserName,
           formid: id
-        }).then(rtn => {
-          if (!rtn.value) {
-            key.setData({
-              isreturn: false
+        })
+        valid({
+          formName: chart,
+          currowbh: bh,
+          userName: userinfo.UserName,
+          formid: id
+        }).then(res => {
+          console.log(res)
+          if (res.code == 10000) {
+            if (Workstates && key) {
+              Workstates.push(res.Isvalidtime.True || res.Isvalidtime.False);
+              key.setData({
+                Workstates
+              })
+            } else if (key) {
+              key.setData({
+                Workstate: (res.Isvalidtime.True || res.Isvalidtime.False),
+              })
+              if (res.Isvalidtime.True) {
+                key.setData({
+                  isnext: false
+                })
+              } else {
+                key.setData({
+                  isnext: true
+                })
+              }
+            }
+            returned({
+              formName: chart,
+              userName: userinfo.UserName,
+              formid: id
+            }).then(rtn => {
+              if (!rtn.value) {
+                key.setData({
+                  isreturn: false
+                })
+              }
             })
           }
         })
       }
-    })
-  }
+    }
+
+  }, 1000);
 }
 // 工作流流转
 const Triggerflow = (key, direction, sheet, piece, id, cap, dep, dert, rid, tit, oa) => {
@@ -1827,14 +1846,14 @@ const intro = (data, that) => {
       data.debitnotetype = s.value
     }
   })
-   // 用章类型
-   app.globalData.Usesealtype.forEach(s => {
+  // 用章类型
+  app.globalData.Usesealtype.forEach(s => {
     if (s.text == data.usesealtype) {
       data.usesealtype = s.value
     }
   })
   // 公告
-  app.globalData.AnnouncementType.forEach(s=>{
+  app.globalData.AnnouncementType.forEach(s => {
     if (s.text == data.type) {
       data.type = s.value
     }
@@ -2036,7 +2055,7 @@ const outflow = (data, that) => {
     if (s.value == data.ifpurchase) {
       data.ifpurchase = s.text
     }
-    
+
 
   })
   app.globalData.costobj.forEach(s => {
@@ -2060,14 +2079,14 @@ const outflow = (data, that) => {
       data.debitnotetype = s.text
     }
   })
-   // 用章类型
-   app.globalData.Usesealtype.forEach(s => {
+  // 用章类型
+  app.globalData.Usesealtype.forEach(s => {
     if (s.value == data.usesealtype) {
       data.usesealtype = s.text
     }
   })
   // 公告
-  app.globalData.AnnouncementType.forEach(s=>{
+  app.globalData.AnnouncementType.forEach(s => {
     if (s.value == data.type) {
       data.type = s.text
     }

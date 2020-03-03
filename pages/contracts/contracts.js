@@ -81,9 +81,9 @@ Page({
         if (s.name == '我的申请') {
           s.ANUm = true
         }
-        if (s.name == '我的申请') {
-          s.pageaddres = '/OAmoudle/pages/maintenance/pact/pact'
-        }
+        // if (s.name == '我的申请') {
+        //   s.pageaddres = '/OAmoudle/pages/maintenance/pact/pact'
+        // }
         if (s.name == "招投标") {
           s.name = '投标'
         }
