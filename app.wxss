@@ -721,8 +721,11 @@ van-checkbox {
     background-color: rgba(0, 128, 128, 0.342);
 } */
 
-.van-picker-column__item--selected {
+/* .van-picker-column__item--selected {
     background-color: #ccc;
+} */
+.van-picker__frame {
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .navigator-hover_style {
