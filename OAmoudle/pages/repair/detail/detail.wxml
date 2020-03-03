@@ -1,0 +1,90 @@
+<!-- pages/detail/detail.wxml -->
+<view wx:if="{{info}}">
+    <view class="header d_header">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="delete">删除</text>
+        <view class="apply">资料详情</view>
+    </view>
+    <view class="card">
+        <van-card title="{{info.projectname}}"/>
+    </view>
+    <view class="main_nav">
+        <van-tabs active="{{tab}}">
+            <van-tab title="详细资料" name="a">
+                <view class="content">
+                    <view class="c_item">
+                        <view class="kind">返修项目编号</view>
+                        <view class="check">{{info.projcectCode}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">返修项目名称</view>
+                        <view class="check">{{info.projectname}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">对方返修单位</view>
+                        <view class="check">{{info.company}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">返修预估总金额</view>
+                        <view class="check">{{info.goodsamount}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">项目日期</view>
+                        <view class="check">{{info.repairdate}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">创建人</view>
+                        <view class="check">{{info.createman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">创建时间</view>
+                        <view class="check">{{info.createtime}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">修改人</view>
+                        <view class="check">{{info.updateman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">修改时间</view>
+                        <view class="check">{{info.updatetime}}</view>
+                    </view>
+                </view>
+            </van-tab>
+            <van-tab title="返修材料明细" name="b">
+                <van-cell title="返修材料明细({{material_list.length}})" bindtap="addndlink">
+                    <icon class="iconfont icon-icon-test"></icon>
+                </van-cell>
+                <block wx:for="{{material_list}}" wx:key="index">
+                    <view class="material">
+                        <navigator open-type="redirect" url="/OAmoudle/pages/repair/detaillink/detaillink?detailid={{item.ID}}" hover-class="none">
+                            <view class="m_item">
+                                <text class="m_info">返修材料编码</text>
+                                <text>{{item.materialcode}}</text>
+                            </view>
+                            <view class="m_item">
+                                <text class="m_info">返修材料名称</text>
+                                <text>{{item.materialname}}</text>
+                            </view>
+                            <view class="m_item">
+                                <text class="m_info">数量</text>
+                                <text>{{item.quantity}}</text>
+                            </view>
+                            <view class="m_item">
+                                <text class="m_info">实际总费用</text>
+                                <text>{{item.actcharge}}</text>
+                            </view>
+                        </navigator>
+                    </view>
+                </block>
+            </van-tab>
+        </van-tabs>
+    </view>
+    <view class="footer">
+        <view>
+            <navigator open-type="redirect" url="/OAmoudle/pages/repair/new/new?id={{info.ID}}" hover-class="none">
+                <icon class="iconfont icon-bianji"></icon>
+                <text>编辑</text>
+            </navigator>
+        </view>
+    </view>
+</view>

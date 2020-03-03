@@ -19,7 +19,13 @@ Page({
   },
   // 返回
   return () {
-    util.returnPrev('deal');
+    if (this.data.returnid) {
+      wx.redirectTo({
+        url: '/pages/contract/detail/detail?tab=c&id=' + this.data.returnid
+      })
+    } else {
+      util.returnPrev('deal');
+    }
   },
   /**
    * 生命周期函数--监听页面加载
@@ -28,6 +34,11 @@ Page({
     wx.showLoading({
       title: '加载中',
     });
+    if (options.returnid) {
+      this.setData({
+        returnid: options.returnid
+      })
+    }
     if (options.id) {
       referDeal({
         ID: options.id
@@ -43,7 +54,7 @@ Page({
           // 调取工作流记录
           // console.log(res.Item.formid)
           let mid = res.Item.formid;
-            util.workList(this, mid,'frameProtocol');
+          util.workList(this, mid, 'frameProtocol');
           //处理状态判断
           util.checkState(this, mid, 'frameProtocol', item.CurStepbh);
         }

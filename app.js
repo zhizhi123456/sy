@@ -55,7 +55,9 @@ import {
   Leavetypelist,
   GetOverworktype,
   GetOvertimeperiod,
-  AnnouncementType
+  AnnouncementType,
+  contractType,
+  getframeProtocolCode
 } from "./service/getData";
 var util = require("./utils/util");
 App({
@@ -179,8 +181,10 @@ App({
       util.sumup(Team, this, 'Team', "ConstructionName", "ID");
       util.sumup(Leavetypelist, this, 'Leavetypelist', "Value", "Key");
       util.sumup(GetOverworktype, this, 'GetOverworktype', "Value", "Key");
-      util.sumup(GetOvertimeperiod, this, 'GetOvertimeperiod', "Value", "Key");
       util.sumup(AnnouncementType, this, 'AnnouncementType', "Value", "Key");
+      util.sumup(GetOvertimeperiod, this, 'GetOvertimeperiod', "Value", "ID");
+      util.sumup(contractType, this, 'contractType', "Value", "Key");
+      util.sumup(getframeProtocolCode, this, 'getframeProtocolCode', "frameProtocolCode", "frameProtocolname");
       Engineer({
         ID: 3209
       }).then(res => {
@@ -305,6 +309,8 @@ App({
     GetOvertimeperiod: '',
     AnnouncementType:'',
     projectall1:'',
+    contractType:'',
+    getframeProtocolCode:'',
     states: [{
       text: '所有'
     }, {

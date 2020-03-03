@@ -1,0 +1,142 @@
+<!-- textages/textact/textact.wxml -->
+<view class="wraper">
+    <view class="header">
+        <view class="title">
+            <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
+            <navigator open-type="redirect" url="/OAmoudle/pages/bounus/new/new" hover-class="none" class="fr newCreate">
+                新建
+            </navigator>
+            <view class="apply">{{top}}</view>
+        </view>
+        <view class="seach">
+            <icon class="iconfont icon-fuxuananniu fl s-sort" bindtap="showgroup"></icon>
+            <icon class="iconfont icon-sousuo fr" bindtap="seachInfo"></icon>
+            <view class="data_list">
+                <input value="{{seach}}" bindblur="setSeach" />
+                <view class="number" wx:if="{{!seach}}">
+                    <icon class="iconfont icon-sousuo"></icon>
+                    <text wx:if="{{InfoList.length}}">共{{item.length}}条</text>
+                    <text wx:else>搜索</text>
+                </view>
+                <van-popup show="{{ show }}" bind:close="onClose" position="right" custom-style="height: 100vh;color:#333">
+                    <view class="seach_item">
+                        <van-cell-group>
+                            <van-field value="{{info.projectname}}" placeholder="请选择" bindtap="showPopup_1" label="项目名称" disabled />
+                        </van-cell-group>
+                        <van-popup show="{{ show_1 }}" round position="bottom" bind:close="onClose_1">
+                            <van-picker data-name="projectname" show-toolbar columns="{{MainProject}}" bind:cancel="onClose_1" bind:confirm="onConfirm_1" />
+                        </van-popup>
+                    </view>
+                    <view class="seach_item">
+                        <van-cell-group>
+                            <van-field data-name="BonusKind" value="{{info.BonusKind}}" placeholder="请输入" bind:blur="BonusKindblur" label="奖金种类" />
+                        </van-cell-group>
+                    </view>
+                    <view class="seach_item">
+                        <van-cell-group>
+                            <van-field value="{{departmenttext}}" placeholder="请选择" bindtap="showPopup_0" label="部门" disabled />
+                        </van-cell-group>
+                        <van-popup show="{{ show_0 }}" round position="bottom" bind:close="onClose_0">
+                            <van-picker data-name="Department" show-toolbar columns="{{ sections }}" bind:cancel="onClose_0" bind:confirm="onConfirm_0" />
+                        </van-popup>
+                    </view>
+                    <view class="seach_item">
+                        <van-cell-group>
+                            <van-field data-name="DepartmentMan" value="{{info.DepartmentMan}}" placeholder="请输入" bind:blur="DepartmentManblur" label="员工姓名" />
+                        </van-cell-group>
+                    </view>
+                    <view class="seach_item">
+                        <van-cell-group>
+                            <van-field data-name="MemberLevel" value="{{info.MemberLevel}}" placeholder="请输入" bind:blur="MemberLevelblur" label="员工级别" />
+                        </van-cell-group>
+                    </view>
+                    <view class="seach_item">
+                        <van-cell-group>
+                            <van-field data-name="BonusLevel" value="{{info.BonusLevel}}" placeholder="请输入" bind:blur="BonusLevelblur" label="奖金级别" />
+                        </van-cell-group>
+                    </view>
+                    <view class="seach_item">
+                        <van-cell-group>
+                            <van-field value="{{info.begintime}}" placeholder="请选择" label="开始时间" bindtap="showPopup_time" disabled />
+                        </van-cell-group>
+                        <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
+                            <van-datetime-picker data-name="begintime" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
+                        </van-popup>
+                    </view>
+                    <view class="seach_item">
+                        <van-cell-group>
+                            <van-field value="{{info.endtime}}" placeholder="请选择" label="结束时间" bindtap="showPopup_endtime" disabled />
+                        </van-cell-group>
+                        <van-popup show="{{ show_endtime }}" round position="bottom" bind:close="onClose_endtime">
+                            <van-datetime-picker data-name="endtime" value="{{ currentDate }}" bind:cancel="onClose_endtime" bind:confirm="onConfirm_endtime" />
+                        </van-popup>
+                    </view>
+                    <view class="checkkind">
+                        <text bindtap="onClose">取消</text>
+                        <text bindtap="onConfirm_seach">查询</text>
+                    </view>
+                </van-popup>
+            </view>
+        </view>
+    </view>
+    <view class="main">
+        <view class="list" wx:for="{{InfoList}}" wx:key="index">
+            <navigator open-type="redirect" url="/OAmoudle/pages/bounus/detail/detail?id={{item.ID}}" hover-class="none">
+                <view>
+                    <text class="caption">{{item.projectname}}</text>
+                </view>
+                <view>
+                    <text class="info">项目编号</text>
+                    <text>{{item.projcectCode}}</text>
+                </view>
+                <view>
+                    <text class="info">项目名称</text>
+                    <text>{{item.projectname}}</text>
+                </view>
+                <view>
+                    <text class="info">奖金种类</text>
+                    <text>{{item.BonusKind}}</text>
+                </view>
+                <view>
+                    <text class="info">部门</text>
+                    <text>{{item.Department}}</text>
+                </view>
+                <view>
+                    <text class="info">员工姓名</text>
+                    <text>{{item.DepartmentMan}}</text>
+                </view>
+                <view>
+                    <text class="info">员工级别</text>
+                    <text>{{item.MemberLevel}}</text>
+                </view>
+                <view>
+                    <text class="info">占部门员工比例</text>
+                    <text>{{item.Percenttodept}}</text>
+                </view>
+                <view>
+                    <text class="info">奖金额</text>
+                    <text>{{item.Bounusamounts}}</text>
+                </view>
+                <view>
+                    <text class="info">创建人</text>
+                    <text>{{item.createman}}</text>
+                </view>
+                <view>
+                    <text class="info">创建时间</text>
+                    <text>{{item.createtime}}</text>
+                </view>
+                <view>
+                    <text class="info">修改人</text>
+                    <text>{{item.updateman}}</text>
+                </view>
+                <view>
+                    <text class="info">修改时间</text>
+                    <text>{{item.updatetime}}</text>
+                </view>
+            </navigator>
+        </view>
+        <view wx:if="{{loading&&InfoList.length}}" class="end">加载中...</view>
+        <view wx:if="{{!loading&&InfoList.length}}" class="end">已经到底了</view>
+        <view class="no_more" wx:if="{{!InfoList.length}}">暂无内容</view>
+    </view>
+</view>

@@ -385,12 +385,20 @@ Page({
 
 
       })
-
-
     }
   },
   onShow: function () {
     userinfo = wx.getStorageSync("myInfo");
   },
 
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+    return {
+      title: '尚雍工程建设平台',
+      path: '/pages/contracts/contracts?from_uid=' + userinfo.id,
+      success: function (res) {}
+    }
+  }
 })

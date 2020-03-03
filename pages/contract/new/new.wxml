@@ -53,6 +53,18 @@
                 <van-picker data-name="department" show-toolbar columns="{{ sections }}" bind:cancel="onClose_o" bind:confirm="onConfirm_o" />
             </van-popup>
         </view>
+         <view class="check_item">
+            <view class="kind require">
+                <text>框架协议编号</text>
+                <text class="required">*</text>
+            </view>
+             <van-cell title="{{info.frameProtocolCode?info.frameProtocolCode:'请选择'}}" bind:click="showPopup_2">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show_2 }}" round position="bottom" bind:close="onClose_2">
+                <van-picker data-name="frameProtocolCode" show-toolbar columns="{{ getframeProtocolCode }}" bind:cancel="onClose_2" bind:confirm="onConfirm_2" />
+            </van-popup>
+        </view>
         <view class="check_item">
             <view class="kind require">
                 <text>分包合同名称</text>
@@ -61,6 +73,18 @@
             <van-cell-group>
                 <van-field data-name="subcontactname" value="{{info.subcontactname}}" placeholder="请输入" bind:blur="subcontactnameblur" />
             </van-cell-group>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>分包合同类型</text>
+                <text class="required">*</text>
+            </view>
+             <van-cell title="{{info.contractType?info.contractType:'请选择'}}" bind:click="showPopup_1">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show_1 }}" round position="bottom" bind:close="onClose_1">
+                <van-picker data-name="contractType" show-toolbar columns="{{ contractType }}" bind:cancel="onClose_1" bind:confirm="onConfirm_1" />
+            </van-popup>
         </view>
         <view class="check_item">
             <text class="kind">签订时间</text>

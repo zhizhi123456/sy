@@ -5,7 +5,7 @@ import {
   referContract,
   amendContract,
   groupSubItems,
-  referSubItems
+  referSubItems,
 } from "../../../service/getData";
 var util = require("../../../utils/util");
 let userinfo = wx.getStorageSync("myInfo");
@@ -73,11 +73,47 @@ Page({
       departmenttext: e.detail.value.text
     })
   },
+   // 框架协议编号
+   showPopup_2() {
+    this.setData({
+      show_2: true
+    });
+  },
+  onClose_2() {
+    this.setData({
+      show_2: false
+    });
+  },
+  onConfirm_2(e) {
+    let info = util.editInfo(e, this, e.detail.value.text);
+    this.setData({
+      info,
+      show_2: false
+    })
+  },
   // 分包合同名称
   subcontactnameblur(e) {
     let info = util.editInfo(e, this, e.detail.value);
     this.setData({
       info
+    })
+  },
+   // 分包合同类型
+   showPopup_1() {
+    this.setData({
+      show_1: true
+    });
+  },
+  onClose_1() {
+    this.setData({
+      show_1: false
+    });
+  },
+  onConfirm_1(e) {
+    let info = util.editInfo(e, this, e.detail.value.text);
+    this.setData({
+      info,
+      show_1: false
     })
   },
   // 分包项目
@@ -114,7 +150,6 @@ Page({
           'info.contcactamount': item.contcactamount,
           // 合同照片
           'info.API_Picurl': item.API_Picurl
-         
         })
       }
     })
@@ -178,7 +213,7 @@ Page({
   },
   confirm() {
     // console.log(this.data.info)
-    if (this.data.info.Companytitle && this.data.info.department && this.data.info.subcontactname && this.data.info.subprojcectCode && this.data.info.demo) {
+    if (this.data.info.Companytitle && this.data.info.department && this.data.info.subcontactname && this.data.info.subprojcectCode && this.data.info.demo&& this.data.info.frameProtocolCode&& this.data.info.contractType) {
       let info = this.data.info;
       util.checkContent(info, this);
       util.intro(info,this)
@@ -238,6 +273,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    userinfo = wx.getStorageSync("myInfo");
     if (options.id || options.rid) {
       this.setData({
         rid: options.rid,
@@ -258,6 +294,8 @@ Page({
       firms: app.globalData.Companytitle,
       totals: app.globalData.MainProject,
       Citems: app.globalData.MainSubproject,
+      contractType: app.globalData.contractType,
+      getframeProtocolCode: app.globalData.getframeProtocolCode,
     })
     groupSubItems({
     
@@ -289,5 +327,7 @@ Page({
       })
     }
   },
-
+  onShow: function () {
+    userinfo = wx.getStorageSync("myInfo");
+  },
 })

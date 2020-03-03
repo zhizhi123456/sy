@@ -1,0 +1,59 @@
+<!-- pages/bill/detaillink/detaillink.wxml -->
+<view wx:if="{{info}}">
+    <view class="header d_header">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="delete">删除</text>
+        <view class="apply">资料详情</view>
+    </view>
+    <view class="card">
+        <van-card title="{{info.goodsname}}"  />
+    </view>
+    <view class="main_nav">
+        <view class="content">
+            <view class="c_item">
+                <view class="kind">材料名称</view>
+                <view class="check">{{info.goodsname}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">材料编码</view>
+                <view class="check">{{info.goodscode}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">规格型号</view>
+                <view class="check">{{info.specifications}}</view>
+            </view>
+             <view class="c_item">
+                <view class="kind"> 单位</view>
+                <view class="check">{{info.unit}}</view>
+            </view>
+             <view class="c_item">
+                <view class="kind"> 数量</view>
+                <view class="check">{{info.quantity}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">创建人</view>
+                <view class="check">{{info.createman}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">创建时间</view>
+                <view class="check">{{info.createtime}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">修改人</view>
+                <view class="check">{{info.updateman}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">修改时间</view>
+                <view class="check">{{info.updatetime}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="footer">
+        <view>
+            <navigator open-type="redirect" url="/OAmoudle/pages/deepdesign/newlink/newlink?detailid={{info.ID}}" hover-class="none">
+                <icon class="iconfont icon-bianji"></icon>
+                <text>编辑</text>
+            </navigator>
+        </view>
+    </view>
+</view>

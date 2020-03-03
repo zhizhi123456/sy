@@ -1,0 +1,69 @@
+<!-- pages/bill/newlink/newlink.wxml -->
+<view class="wraper">
+    <view class="header d_header" wx:if="{{materials[0].ID}}">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="linkreturn"></icon>
+        <text class="fr newCreate" bindtap="linkconfirm">确定</text>
+        <view class="apply">编辑费用节约明细</view>
+    </view>
+    <view class="header d_header" wx:else>
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="confirm">确定</text>
+        <view class="apply">新建费用节约明细</view>
+    </view>
+    <view class="main n_main">
+        <view class="check_item">
+            <view class="kind">
+                <text>办公项目名称</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field value="{{materials[0].itemname}}" placeholder="请输入" bind:blur="getitemname" data-i='{{index}}' data-name='itemname' />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <view class="kind">
+                <text>编号</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field value="{{materials[0].itemno}}" placeholder="请输入" bind:blur="getitemno" data-i='{{index}}' data-name='itemno' />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <view class="kind">
+                <text>计费年月</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field value="{{materials[0].ChargeYM}}" placeholder="请输入" bind:blur="getYM" data-i='{{index}}' data-name='ChargeYM' />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <view class="kind">
+                <text>规划金额</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field value="{{materials[0].plancharge}}" placeholder="请输入" bind:blur="getplancharge" data-i='{{index}}' data-name='plancharge' />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <view class="kind">
+                <text>实际金额</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field value="{{materials[0].actcharge}}" placeholder="请输入" bind:blur="getactcharge" data-i='{{index}}' data-name='actcharge' />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <view class="kind">
+                <text>节约金额</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field value="{{materials[0].savechargee}}" placeholder="请输入" bind:blur="getsavechargee" data-i='{{index}}' data-name='savechargee' />
+            </van-cell-group>
+        </view>
+    </view>
+</view>

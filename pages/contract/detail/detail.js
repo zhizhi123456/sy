@@ -2,7 +2,8 @@
 import {
   referContract,
   cancelContract,
-  amendContract
+  amendContract,
+  GetFrameProtocol
 } from '../../../service/getData.js';
 var app = getApp();
 var util = require("../../../utils/util");
@@ -80,6 +81,17 @@ Page({
           this.setData({
             info: item
           })
+          if (this.data.info.frameProtocolCode) {
+            GetFrameProtocol({
+              keyword: this.data.info.frameProtocolCode
+            }).then(res => {
+                let item = JSON.parse(res);
+                util.listData(item, app.globalData.department)
+                this.setData({
+                  InfoList: item
+                })
+            })
+          }
           if (this.data.applyT && this.data.info.ApplygetNew) {
             let info = this.data.info;
             info.ApplygetNew = false;
@@ -151,5 +163,4 @@ Page({
       info
     })
   },
-
 })

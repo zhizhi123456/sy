@@ -1,0 +1,105 @@
+<!-- pages/new/new.wxml -->
+<view class="wraper">
+    <view class="header d_header" wx:if="{{info.ID}}">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="editreturn"></icon>
+        <text class="fr newCreate" bindtap="editconfirm">确定</text>
+        <view class="apply">编辑项目深化设计</view>
+    </view>
+    <view class="header d_header" wx:else>
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="confirm">确定</text>
+        <view class="apply">新建项目深化设计</view>
+    </view>
+    <view class="main n_main">
+        <van-toast id="van-toast" />
+        <view class="check_item">
+            <view class="kind require">
+                <text>项目编号</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.projcectCode?info.projcectCode:'请选择'}}" bind:click="showPopup">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show }}" round position="bottom" bind:close="onClose">
+                <van-picker data-name="projcectCode" show-toolbar columns="{{ totals }}" bind:cancel="onClose" bind:confirm="onConfirm" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>项目名称</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="projectname" value="{{info.projectname}}" placeholder="请输入" disabled />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>设计材料种类数</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="goodskinds" value="{{info.goodskinds}}" placeholder="请输入数字" bind:blur="goodskindsblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>设计材料总数量</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="goodsqty" value="{{info.goodsqty}}" placeholder="请输入数字" bind:blur="goodsqtyblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>材料预估总金额</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="goodsamount" value="{{info.goodsamount}}" placeholder="请输入数字" bind:blur="goodsamountblur" />
+            </van-cell-group>
+        </view>
+        <!-- <block wx:if="{{!info.ID}}">
+            <view class="add_detail add_title">
+                <van-cell title="设计材料明细" icon="records" />
+                <icon class="iconfont icon-jia" bindtap="add_more"></icon>
+            </view>
+            <block wx:for="{{materials}}" wx:key="index" wx:if="{{materials.length}}">
+                <view class="add_detail detail_title">
+                    <van-cell title="设计材料明细{{item.num}}" icon="close" data-i="{{index}}" bindtap="reduce_detail" />
+                </view>
+                <view class="check_item">
+                    <text class="kind">材料编号</text>
+                    <van-cell-group>
+                        <van-field value="{{item.goodscode}}" placeholder="请输入" bind:blur="getgcode" data-i='{{index}}' data-name='goodscode' />
+                    </van-cell-group>
+                </view>
+                <view class="check_item">
+                    <text class="kind">材料名称</text>
+                    <van-cell-group>
+                        <van-field value="{{item.goodsname}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' data-name='goodsname' />
+                    </van-cell-group>
+                </view>
+                <view class="check_item">
+                    <text class="kind">规格</text>
+                    <van-cell-group>
+                        <van-field value="{{item.specifications}}" placeholder="请输入" bind:blur="getSize" data-i='{{index}}' data-name='specifications' />
+                    </van-cell-group>
+                </view>
+                <view class="check_item">
+                    <text class="kind">单位</text>
+                    <van-cell-group>
+                        <van-field value="{{item.unit}}" placeholder="请输入" bind:blur="getUnit" data-i='{{index}}' data-name='unit' />
+                    </van-cell-group>
+                </view>
+                <view class="check_item">
+                    <text class="kind">数量</text>
+                    <van-cell-group>
+                        <van-field type="number" value="{{item.quantity}}" placeholder="请输入数字" bind:blur="getQuantity" data-i='{{index}}' data-name='quantity' />
+                    </van-cell-group>
+                </view>
+            </block>
+        </block> -->
+    </view>
+</view>
