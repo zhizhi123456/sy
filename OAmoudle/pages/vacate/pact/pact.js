@@ -35,28 +35,49 @@ Page({
   },
   // 模糊查询
   seachInfo() {
-    list = [];
-    wx.showLoading({
-      title: '加载中',
-    });
-    this.setData({
-      pages: 1
-    })
-    getVacate({
-      applyman: this.data.seach
-    }).then(res => {
-      // console.log(res)
-      if (res.code == 10000) {
-        item = res.List;
-        list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list,this,'leaveapplyform');
-        this.setData({
-          InfoList: list,
-          item,
-          seach: ''
-        })
-        wx.hideLoading();
-      }
-    })
+    if (!(userinfo.UserName=='任涛')) {
+      wx.showLoading({
+        title: '加载中',
+      });
+      groupVacate({state:'所有',UserName:userinfo.UserName}).then(res => {
+        if (res.code == 10000) {
+          item = res.List;
+          list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list, this, 'leaveapplyform');
+          this.setData({
+            InfoList: list,
+            item,
+            info: {},
+            loading: false,
+            departmenttext: ''
+          })
+          wx.hideLoading();
+        }
+      })
+    } else {
+      list = [];
+      wx.showLoading({
+        title: '加载中',
+      });
+      this.setData({
+        pages: 1
+      })
+      getVacate({
+        applyman: this.data.seach
+      }).then(res => {
+        // console.log(res)
+        if (res.code == 10000) {
+          item = res.List;
+          list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list, this, 'leaveapplyform');
+          this.setData({
+            InfoList: list,
+            item,
+            seach: ''
+          })
+          wx.hideLoading();
+        }
+      })
+    }
+
   },
   /**
    * 生命周期函数--监听页面加载
@@ -71,24 +92,11 @@ Page({
       title: '加载中',
     });
     // 调用查询
-    getVacate().then(res => {
-      // console.log(res.List)
-      if (res.code == 10000) {
-        item = res.List;
-        list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list,this,'leaveapplyform');
-        this.setData({
-          InfoList: list,
-          item
-        })
-        wx.hideLoading();
-      }
-    }).catch(err => {
-      console.log(err)
-    })
+    this.seachInfo()
     if (app.globalData.CountItem) {
       this.setData({
         sections: app.globalData.department,
-        Leavetypelist:app.globalData.Leavetypelist,
+        Leavetypelist: app.globalData.Leavetypelist,
         states: app.globalData.states
       })
     } else {
@@ -96,7 +104,7 @@ Page({
         if (employ != '') {
           this.setData({
             sections: app.globalData.department,
-            Leavetypelist:app.globalData.Leavetypelist,
+            Leavetypelist: app.globalData.Leavetypelist,
             states: app.globalData.states
           })
         }
@@ -122,7 +130,15 @@ Page({
     this.setData({
       pages: 1
     })
-    if (this.data.info.applyman || this.data.info.leavetype || this.data.info.department || this.data.info.leavereason || this.data.info.leavedays || this.data.info.begintime|| this.data.info.state) {
+    if (!(userinfo.UserName=='任涛')) {
+      var info = this.data.info
+      info.state='所有',
+      info.UserName = userinfo.UserName
+      this.setData({
+        info
+      })
+    }
+    if (this.data.info.applyman || this.data.info.leavetype || this.data.info.department || this.data.info.leavereason || this.data.info.leavedays || this.data.info.begintime || this.data.info.state) {
       let info = this.data.info;
       if (info.leavetype) {
         this.data.Leavetypelist.forEach(res => {
@@ -137,14 +153,25 @@ Page({
       groupVacate(this.data.info).then(res => {
         if (res.code == 10000) {
           item = res.List;
-          list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list,this,'leaveapplyform');
+          list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list, this, 'leaveapplyform');
           this.setData({
             InfoList: list,
             item,
-            info: {},
             loading: false,
             departmenttext: ''
           })
+          if (!(userinfo.UserName=='任涛')) {
+            var info = this.data.info
+            info.state='所有',
+            info.UserName = userinfo.UserName
+            this.setData({
+              info
+            })
+          }else{
+            this.setData({
+              info:{}
+            })
+          }
           wx.hideLoading();
         }
       })
@@ -159,13 +186,13 @@ Page({
       })
     )
   },
-    // 申请人
-    applymanblur(e) {
-      let info = util.editInfo(e, this, e.detail.value);
-      this.setData({
-        info
-      })
-    },
+  // 申请人
+  applymanblur(e) {
+    let info = util.editInfo(e, this, e.detail.value);
+    this.setData({
+      info
+    })
+  },
   // 请假类型
   showPopup_1() {
     this.setData({

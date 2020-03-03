@@ -77,6 +77,7 @@ const datefom = value => {
 };
 // 判断新增选项内容...
 const checkContent = (value, key) => {
+  // console.log(typeof value.API_Picurl)
   for (let i in value) {
     if (!value[i]) {
       value[i] = "";
@@ -93,7 +94,6 @@ const checkContent = (value, key) => {
     value.applyman = user.UserName;
     value.belongtoman = user.UserName;
   }
-  // console.log(value.API_Picurl)
   if (value.API_Picurl) {
     // console.log("tupian")
     key.setData({
@@ -926,7 +926,7 @@ const listData = (data, dep, page, list, key, billname) => {
   }
   let Workstates = [];
   data.forEach((value, index) => {
-    checkState(key, (value.formid || value.Formid), billname, value.CurStepbh, Workstates);
+    // checkState(key, (value.formid || value.Formid), billname, value.CurStepbh, Workstates);
     // 工程类别
     app.globalData.EngineerClass.forEach(res => {
       if (value.EngineerClass == res.value) {
@@ -1127,6 +1127,7 @@ const updateValue = (e, key) => {
   let name = e.currentTarget.dataset.name,
     i = e.currentTarget.dataset.i;
   let materials = key.data.materials;
+  console.log(name, i, materials)
   if (i) {
     materials[i][name] = e.detail && e.detail.value;
   } else {
@@ -1157,6 +1158,14 @@ const editInfo = (e, key, val) => {
   info[name] = val;
   // key.setData(info);
   return info;
+}
+//实现类似总包合同的数据绑定
+const editInfosmall = (e, key, val) => {
+  let name = e.currentTarget.dataset.name;
+  let small = key.data.small;
+  small[name] = val;
+  // key.setData(info);
+  return small;
 }
 // oa的返回
 const OAreturn = (kind, key, id, cap, dep, dert) => {
@@ -1208,6 +1217,7 @@ const upImage = (key, way) => {
             name: 'img_data',
             success(res) {
               uploadImgCount++;
+              console.log("https://shangyongren.com:9098" + res.data.replace(/"/g, ""))
               // //console.log(res)
               if (res.statusCode == 200) {
                 info.API_Picurl.push("https://shangyongren.com:9098" + res.data.replace(/"/g, ""))
@@ -1255,7 +1265,7 @@ const upFile = (key) => {
           mask: true,
           duration: 10000
         })
-        let info=that.data.info;
+        let info = that.data.info;
         var uploadImgCount = 0;
         for (let i = 0; i < filedata.length; i++) {
           wx.uploadFile({
@@ -1268,9 +1278,10 @@ const upFile = (key) => {
               if (res.statusCode == 200) {
                 // console.log(res.data)
                 info.Minutesofmeeting.push({
-                  name:filedata[i].name,
-                  size:filedata[i].size,
-                  url:"https://shangyongren.com:9098" + res.data.replace(/"/g, "")})
+                  name: filedata[i].name,
+                  size: filedata[i].size,
+                  url: "https://shangyongren.com:9098" + res.data.replace(/"/g, "")
+                })
                 that.setData({
                   info
                 })
@@ -1449,59 +1460,106 @@ const workList = (key, id, billname) => {
 }
 //处理状态判断
 const checkState = (key, id, chart, bh, Workstates) => {
-  let userinfo = wx.getStorageSync("myInfo");
-  if (userinfo) {
-    let param;
-    if(id){
-      param={
-        formName: chart,
-        currowbh: bh,
-        userName: userinfo.UserName,
-        formid: id 
-      }
-    }else{
-       param={
-        formName: chart,
-        currowbh: bh,
-        userName: userinfo.UserName,
-      }
+
+let userinfo = wx.getStorageSync("myInfo");
+if (userinfo) {
+  let param;
+  if (id) {
+    param = {
+      formName: chart,
+      currowbh: bh,
+      userName: userinfo.UserName,
+      formid: id
     }
-    valid(param).then(res => {
-      if (res.code == 10000) {
-        if (Workstates && key) {
-          Workstates.push(res.Isvalidtime.True || res.Isvalidtime.False);
-          key.setData({
-            Workstates
-          })
-        } else if (key) {
-          key.setData({
-            Workstate: (res.Isvalidtime.True || res.Isvalidtime.False),
-          })
-          if (res.Isvalidtime.True) {
-            key.setData({
-              isnext: false
-            })
-          } else {
-            key.setData({
-              isnext: true
-            })
-          }
-        }
-        returned({
-          formName: chart,
-          userName: userinfo.UserName,
-          formid: id
-        }).then(rtn => {
-          if (!rtn.value) {
-            key.setData({
-              isreturn: false
-            })
-          }
-        })
-      }
-    })
+  } else {
+    param = {
+      formName: chart,
+      currowbh: bh,
+      userName: userinfo.UserName,
+    }
   }
+  valid(param).then(res => {
+    if (res.code == 10000) {
+      if (Workstates && key) {
+        Workstates.push(res.Isvalidtime.True || res.Isvalidtime.False);
+        key.setData({
+          Workstates
+        })
+      } else if (key) {
+        key.setData({
+          Workstate: (res.Isvalidtime.True || res.Isvalidtime.False),
+        })
+        if (res.Isvalidtime.True) {
+          key.setData({
+            isnext: false
+          })
+        } else {
+          key.setData({
+            isnext: true
+          })
+        }
+      }
+      // returned({
+      // console.log(chart && userinfo.UserName)
+      // var i = setInterval(function () {
+
+
+      //   if (!(chart && userinfo.UserName)) {
+      //     console.log("数据未载入")
+      //   } else {
+      //     clearInterval(i)
+      //     if (userinfo) {
+      //       console.log({
+      //         formName: chart,
+      //         currowbh: bh,
+      //         userName: userinfo.UserName,
+      //         formid: id
+      //       })
+      // valid({
+      //   formName: chart,
+      //   currowbh: bh,
+      //   userName: userinfo.UserName,
+      //   formid: id
+      // }).then(res => {
+      //   console.log(res)
+      //   if (res.code == 10000) {
+      //     if (Workstates && key) {
+      //       Workstates.push(res.Isvalidtime.True || res.Isvalidtime.False);
+      //       key.setData({
+      //         Workstates
+      //       })
+      //     } else if (key) {
+      //       key.setData({
+      //         Workstate: (res.Isvalidtime.True || res.Isvalidtime.False),
+      //       })
+      //       if (res.Isvalidtime.True) {
+      //         key.setData({
+      //           isnext: false
+      //         })
+      //       } else {
+      //         key.setData({
+      //           isnext: true
+      //         })
+      //       }
+      //     }
+      returned({
+        formName: chart,
+        userName: userinfo.UserName,
+        formid: id
+      }).then(rtn => {
+        if (!rtn.value) {
+          key.setData({
+            isreturn: false
+          })
+        }
+      })
+    }
+  })
 }
+}
+
+// }, 1000);
+// }
 // 工作流流转
 const Triggerflow = (key, direction, sheet, piece, id, cap, dep, dert, rid, tit, oa) => {
   let userinfo = wx.getStorageSync("myInfo");
@@ -1782,6 +1840,9 @@ const intro = (data, that) => {
     if (s.text == data.projecttype) {
       data.projecttype = s.value
     }
+    if (s.text == data.ProjectKind) {
+      data.ProjectKind = s.value
+    }
   })
   app.globalData.Ifmakecontactlist.forEach((s) => {
     if (s.text == data.Ifmakecontact) {
@@ -1965,6 +2026,26 @@ const intro = (data, that) => {
       data.classID = s.value
     }
   })
+  // 借条类型
+  app.globalData.Debitnotetype.forEach(s => {
+    if (s.text == data.debitnotetype) {
+      data.debitnotetype = s.value
+    }
+  })
+  // 用章类型
+  app.globalData.Usesealtype.forEach(s => {
+    if (s.text == data.usesealtype) {
+      data.usesealtype = s.value
+    }
+  })
+  // 公告
+  app.globalData.AnnouncementType.forEach(s => {
+    if (s.text == data.type) {
+      data.type = s.value
+    }
+  })
+  data.isstick = whether(data.isstick)
+  data.issubdivision = whether(data.issubdivision)
 }
 const outflow = (data, that) => {
   // 合同签订情况
@@ -1982,6 +2063,9 @@ const outflow = (data, that) => {
     }
     if (s.value == data.projecttype) {
       data.projecttype = s.text
+    }
+    if (s.value == data.ProjectKind) {
+      data.ProjectKind = s.text
     }
 
   })
@@ -2157,6 +2241,8 @@ const outflow = (data, that) => {
     if (s.value == data.ifpurchase) {
       data.ifpurchase = s.text
     }
+
+
   })
   app.globalData.costobj.forEach(s => {
     if (s.value == data.usechargeman) {
@@ -2173,6 +2259,26 @@ const outflow = (data, that) => {
       data.classID = s.text
     }
   })
+  // 借条类型
+  app.globalData.Debitnotetype.forEach(s => {
+    if (s.value == data.debitnotetype) {
+      data.debitnotetype = s.text
+    }
+  })
+  // 用章类型
+  app.globalData.Usesealtype.forEach(s => {
+    if (s.value == data.usesealtype) {
+      data.usesealtype = s.text
+    }
+  })
+  // 公告
+  app.globalData.AnnouncementType.forEach(s => {
+    if (s.value == data.type) {
+      data.type = s.text
+    }
+  })
+  data.isstick = whethercontent(data.isstick)
+  data.issubdivision = whethercontent(data.issubdivision)
   data.IfWfComplete = whethercontent(data.IfWfComplete)
   return data
 
@@ -2267,7 +2373,7 @@ const qgroupdeliver = (funcname, that, hadNew, hadMy) => {
         funcname(
           infodata
         ).then(res => {
-          //console.log(res)
+          console.log(res)
           wx.showLoading({
             title: '加载中',
           });
@@ -2714,7 +2820,7 @@ module.exports = {
   deleteImgs,
   handleData,
   checkChange,
-  preview,
+  previews,
   deleteImg,
   listData,
   returnMenu,
@@ -2738,5 +2844,6 @@ module.exports = {
   sumup,
   qgroupdeliver,
   OAreturn,
-  upFile
+  upFile,
+  editInfosmall
 }

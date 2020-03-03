@@ -116,6 +116,9 @@ export const GetOvertimeperiod = (params) => http.post("/api/MethodOfDataService
 export const referflow = (params) => http.post("/api/SubmitWorkFlowService/GetWorkflowRecord2", params);
 //未提交流转
 export const unreferflow = (params) => http.post("/api/SubmitWorkFlowService/GetWorkflowRecord3", params);
+// 公告类型
+export const AnnouncementType = (params) => http.post("/api/MethodOfDataService/AnnouncementType", params);
+// =================================================================================================================================================================
 //根据项目编号获取项目信息
 export const GetProjectInformation = (params) => http.post("/api/MethodOfDataService/GetProjectInformation", params);
 //根据框架协议编号获取此条框架协议信息
@@ -251,7 +254,7 @@ export const addShelter = (params) => http.post("/api/hideprojectrecord/Insert",
 export const amendShelter = (params) => http.post("/api/hideprojectrecord/EditInfo", params);
 // 删除
 export const cancelShelter = (params) => http.post("/api/hideprojectrecord/Delete", params);
-// 项目例会
+// 公司例会
 // 查询
 export const getProjectmeet = (params) => http.post("/api/projectweeklymeet/Query", params);
 // 根据id查询
@@ -886,7 +889,7 @@ export const addapplyForsmall = (params) => http.post("/api/applyforminfo/Insert
 // 根据id查询
 export const detailapplyForsmall = (params) => http.post("/api/applyforminfo/Detail", params);
 // 更新
-export const updateapplyForsmall = (params) => http.post("/api/applyforminfo/Detail", params);
+export const updateapplyForsmall = (params) => http.post("/api/applyforminfo/Update", params);
 // 删除
 export const delapplyForsmall = (params) => http.post("/api/applyforminfo/Delete", params);
 
@@ -917,7 +920,7 @@ export const updatedesign = (params) => http.post("/api/designtask/Update", para
 export const deldesign = (params) => http.post("/api/designtask/Delete", params);
 // 综合查询
 export const qgroupdesign = (params) => http.post("/api/designtask/MulticonditionalQuery", params);
-// 招投标
+// 投标
 // 查询
 export const querybid = (params) => http.post("/api/bidtoproject/Query", params);
 // 添加
@@ -1021,6 +1024,8 @@ export const updateresumption = (params) => http.post("/api/leavecancelform/Upda
 export const delresumption = (params) => http.post("/api/leavecancelform/Delete", params);
 // 综合查询
 export const qgroupresumption = (params) => http.post("/api/leavecancelform/Querygroup", params);
+
+
 // 紧急任务
 export const hotjob = (params) => http.post("/api/TaskList/UrgentTask", params)
 // leadership   领导 
@@ -1041,6 +1046,126 @@ export const addOvertime = (params) => http.post("/api/workovertime/Insert", par
 export const amendOvertime = (params) => http.post("/api/workovertime/Update", params);
 // 删除
 export const cancelOvertime = (params) => http.post("/api/workovertime/Delete", params);
+
+// 借条
+// 查询
+export const queryiou= (params) => http.post("/api/debitnote/Query", params);
+// 添加
+export const addiou = (params) => http.post("/api/debitnote/Insert", params);
+// 根据id查询
+export const detailiou = (params) => http.post("/api/debitnote/Detail", params);
+// 更新
+export const updateiou = (params) => http.post("/api/debitnote/Update", params);
+// 删除
+export const deliou = (params) => http.post("/api/debitnote/Delete", params);
+// 综合查询
+export const qgroupiou = (params) => http.post("/api/debitnote/Querygroup", params);
+
+// 公告
+// 查询
+export const querynotice= (params) => http.post("/api/notice/Query", params);
+// 添加
+export const addnotice = (params) => http.post("/api/notice/Insert", params);
+// 根据id查询
+export const detailnotice = (params) => http.post("/api/notice/Detail", params);
+// 更新
+export const updatenotice = (params) => http.post("/api/notice/Update", params);
+// 删除
+export const delnotice = (params) => http.post("/api/notice/Delete", params);
+// 综合查询
+export const qgroupnotice = (params) => http.post("/api/notice/Querygroup", params);
+//  项目深化设计
+// 综合查询
+export const qgroupdeep = (params) => http.post("/api/DeepDesign/GroupQuery", params);
+// 根据id查询
+export const detaildeep = (params) => http.post("/api/DeepDesign/Edit", params);
+
+// 项目深化设计明细
+// 查询
+export const querydeepsmall = (params) => http.post("/api/DeepDesigndetail/Query", params);
+// 添加
+export const adddeepsmall = (params) => http.post("/api/DeepDesigndetail/Insert", params);
+// 根据id查询
+export const detaildeepsmall = (params) => http.post("/api/DeepDesigndetail/Edit", params);
+// 更新
+export const updatedeepsmall = (params) => http.post("/api/DeepDesigndetail/EditInfo", params);
+// 删除
+export const deldeepsmall = (params) => http.post("/api/DeepDesigndetail/Delete", params);
+
+
+
+// 项目收款
+// 查询
+export const queryProjectPay = (params) => http.post("/api/transferAccount/Query", params);
+// 添加
+export const addProjectPay = (params) => http.post("/api/transferAccount/Insert", params);
+// 根据id查询
+export const detailProjectPay = (params) => http.post("/api/transferAccount/Detail", params);
+// 更新
+export const updateProjectPay = (params) => http.post("/api/transferAccount/Update", params);
+// 删除
+export const delProjectPay = (params) => http.post("/api/transferAccount/Delete", params);
+// 综合查询
+export const qgroupProjectPay = (params) => http.post("/api/transferAccount/Querygroup", params);
+// 项目收款明细
+// 查询
+export const queryProjectPaysmall = (params) => http.post("/api/transferAccountDetail/Query", params);
+// 添加
+export const addProjectPaysmall = (params) => http.post("/api/transferAccountDetail/Insert", params);
+// 根据id查询
+export const detailProjectPaysmall = (params) => http.post("/api/transferAccountDetail/Detail", params);
+// 更新
+export const updateProjectPaysmall = (params) => http.post("/api/transferAccountDetail/Update", params);
+// 删除
+export const delProjectPaysmall = (params) => http.post("/api/transferAccountDetail/Delete", params);
+// 综合查询
+export const qgroupProjectPaysmall = (params) => http.post("/api/transferAccountDetail/Querygroup", params);
+
+
+
+// 小区维保台账
+// 查询
+export const queryplot= (params) => http.post("/api/MaintenanceStandBook/Query", params);
+// 添加
+export const addplot = (params) => http.post("/api/MaintenanceStandBook/Insert", params);
+// 根据id查询
+export const detailplot = (params) => http.post("/api/MaintenanceStandBook/Edit", params);
+// 更新
+export const updateplot = (params) => http.post("/api/MaintenanceStandBook/EditInfo", params);
+// 删除
+export const delplot = (params) => http.post("/api/MaintenanceStandBook/Delete", params);
+// 综合查询
+export const qgroupplot = (params) => http.post("/api/debitnote/Querygroup", params);
+
+
+// 维保采购
+// 查询
+export const querymaintenance = (params) => http.post("/api/RepairPrjpurchase/Query", params);
+// 添加
+export const addmaintenance = (params) => http.post("/api/RepairPrjpurchase/Insert", params);
+// 根据id查询
+export const detailmaintenance = (params) => http.post("/api/RepairPrjpurchase/Detail", params);
+// 更新
+export const updatemaintenance = (params) => http.post("/api/RepairPrjpurchase/Update", params);
+// 删除
+export const delmaintenance = (params) => http.post("/api/RepairPrjpurchase/Delete", params);
+// 综合查询
+export const qgroupmaintenance = (params) => http.post("/api/RepairPrjpurchase/Querygroup", params);
+// 维保采购明细
+// 查询
+export const querymaintenancesmall = (params) => http.post("/api/RepairPrjpurchaseDetail/Query", params);
+// 添加
+export const addmaintenancesmall = (params) => http.post("/api/RepairPrjpurchaseDetail/Insert", params);
+// 根据id查询
+export const detailmaintenancesmall = (params) => http.post("/api/RepairPrjpurchaseDetail/Detail", params);
+// 更新
+export const updatemaintenancesmall = (params) => http.post("/api/RepairPrjpurchaseDetail/Update", params);
+// 删除
+export const delmaintenancesmall = (params) => http.post("/api/RepairPrjpurchaseDetail/Delete", params);
+// 综合查询
+export const qgroupmaintenancesmall = (params) => http.post("/api/RepairPrjpurchaseDetail/Querygroup", params);
+
+
 // 项目深化设计
 // 查询
 export const getDeepdesign = (params) => http.post("/api/DeepDesign/Query", params);

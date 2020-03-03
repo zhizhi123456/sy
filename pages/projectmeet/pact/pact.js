@@ -13,7 +13,7 @@ Page({
   data: {
     seach: '',
     loading: false,
-    top: '项目例会',
+    top: '公司例会',
     InfoList: [],
     item: [],
     pages: 1,

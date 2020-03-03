@@ -93,6 +93,9 @@ Page({
   },
   editconfirm() {
     let info = this.data.info;
+    if(info.username){
+      wx.setStorageSync("username", info.username)
+    }
     if (info.Password) {
       if (info.Password != this.data.password) {
         // 改变密码
@@ -102,6 +105,7 @@ Page({
         // 没有改变密码
         info.Password = this.data.password
       }
+
       info.IslockedOut = util.whether(info.IslockedOut)
       // console.log("12")
       // console.log(info.IslockedOut != this.data.IslockedOut)

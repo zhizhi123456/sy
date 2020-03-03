@@ -14,13 +14,23 @@
         <van-toast id="van-toast" />
         <view class="check_item">
             <view class="kind require">
-                <text>总包项目</text>
-                <text class="required">*</text>
+                <text>总包项目选择</text>
             </view>
             <van-cell title="{{info.projcectCode?info.projcectCode:'请选择'}}" is-link bind:click="showPopup_3" />
             <van-popup show="{{ show_3 }}" round position="bottom" bind:close="onClose_3">
-                <van-picker data-name="projcectCode" show-toolbar columns="{{ section22 }}" bind:cancel="onClose_3" bind:confirm="onConfirm_3" />
+              
+                <van-picker wx:if="{{section22}}" data-name="projcectCode" show-toolbar columns="{{ section22 }}" bind:cancel="onClose_3" bind:confirm="onConfirm_3" />
+                <van-field wx:else data-name="projcectCode" value="{{info.projcectCode}}" placeholder="请填写" bind:blur="maincontactnameblur" type="textarea" autosize />
             </van-popup>
+        </view>
+           <view class="check_item">
+            <view class="kind require">
+                <text>总包项目</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="projcectCode" value="{{info.projcectCode}}" placeholder="请填写" bind:blur="maincontactnameblur" type="textarea" autosize />
+            </van-cell-group>
         </view>
         <view class="check_item">
             <text class="kind">部门</text>

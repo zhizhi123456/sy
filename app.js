@@ -55,6 +55,7 @@ import {
   Leavetypelist,
   GetOverworktype,
   GetOvertimeperiod,
+  AnnouncementType,
   contractType,
   getframeProtocolCode,
   valid
@@ -119,8 +120,16 @@ App({
           })
           var n = JSON.stringify(m)
           let projectall = JSON.parse(n.replace(/projcectCode/g, 'value').replace(/projectname/g, 'text'));
+          let projectall1 = JSON.parse(n.replace(/projectname/g, 'value').replace(/projcectCode/g, 'text'));
           this.globalData.projectall = projectall;
+          this.globalData.projectall1 = projectall1;
+        }else{
+          this.globalData.projectall = []
+          this.globalData.projectall1 = []
         }
+      })
+      AnnouncementType().then(res=>{
+        console.log(res)
       })
       util.sumup(department, this, 'department', "techofficename", "ID");
       util.sumup(Companytitle, this, 'Companytitle', "Value", "Key");
@@ -173,6 +182,7 @@ App({
       util.sumup(Team, this, 'Team', "ConstructionName", "ID");
       util.sumup(Leavetypelist, this, 'Leavetypelist', "Value", "Key");
       util.sumup(GetOverworktype, this, 'GetOverworktype', "Value", "Key");
+      util.sumup(AnnouncementType, this, 'AnnouncementType', "Value", "Key");
       util.sumup(GetOvertimeperiod, this, 'GetOvertimeperiod', "Value", "ID");
       util.sumup(contractType, this, 'contractType', "Value", "Key");
       util.sumup(getframeProtocolCode, this, 'getframeProtocolCode', "frameProtocolCode", "frameProtocolname");
@@ -298,8 +308,10 @@ App({
     Leavetypelist: '',
     GetOverworktype: '',
     GetOvertimeperiod: '',
-    contractType: '',
-    getframeProtocolCode: '',
+    AnnouncementType:'',
+    projectall1:'',
+    contractType:'',
+    getframeProtocolCode:'',
     states: [{
       text: '所有'
     }, {

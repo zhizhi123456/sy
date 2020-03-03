@@ -298,7 +298,7 @@ Page({
       getframeProtocolCode: app.globalData.getframeProtocolCode,
     })
     groupSubItems({
-      chargemanName: userinfo.UserName
+    
     }).then(res => {
       // console.log(res)
       if (res.code == 10000 && res.List) {

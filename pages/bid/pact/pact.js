@@ -15,7 +15,7 @@ Page({
     item: [],
     seach: '',
     loading: false,
-    top: '招投标',
+    top: '投标',
     currentDate: new Date().getTime(),
     pages: 1,
     InfoList: [],

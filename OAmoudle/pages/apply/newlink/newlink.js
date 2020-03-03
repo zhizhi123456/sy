@@ -144,6 +144,10 @@ Page({
         }
       }
     }
+    console.log({
+      ID: this.data.materials[0].ID,
+      uptdate: JSON.stringify(this.data.materials)
+    })
     updateapplysmall({
       ID: this.data.materials[0].ID,
       uptdate: JSON.stringify(this.data.materials)

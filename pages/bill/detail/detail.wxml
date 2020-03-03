@@ -6,7 +6,7 @@
         <view class="apply">资料详情</view>
     </view>
     <view class="card">
-        <van-card title="{{info.getmaterialName}}"  />
+        <van-card title="{{info.getmaterialName}}"   />
     </view>
     <view class="main_nav">
         <van-tabs active="{{tab}}">

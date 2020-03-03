@@ -940,7 +940,7 @@ Page({
         section13: q
       })
     })
-    qgroupbid({charageman:userinfo.UserName}).then(res=>{
+    qgroupbid().then(res=>{
       console.log(res)
       if(res.code==10000&&res.List){
         var res1 = JSON.stringify(res.List)
@@ -948,12 +948,13 @@ Page({
         this.setData({
           section22 : bidlist
         })
-        console.log(this.data.section22)
+     
       }else{
         this.setData({
           section22 :[]
         })
       }
+      console.log(this.data.section22)
     })
   },
 

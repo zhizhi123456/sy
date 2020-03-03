@@ -124,25 +124,19 @@ Page({
             var content = ''
             if (news.TableName == 'subproject') {
               content = Item.subprojectname
-            }else if (news.TableName == 'subcontact') {
+            } else if (news.TableName == 'subcontact') {
               content = Item.subcontactname
-            }
-            else if (news.TableName == 'prjassignbook') {
+            } else if (news.TableName == 'prjassignbook') {
               content = Item.projectname
-            }
-            else if (news.TableName == 'charge') {
+            } else if (news.TableName == 'charge') {
               content = Item.chargename
-            }
-            else if (news.TableName == 'getmaterial') {
+            } else if (news.TableName == 'getmaterial') {
               content = Item.getmaterialName
-            }
-            else if (news.TableName == 'losematerial') {
+            } else if (news.TableName == 'losematerial') {
               content = Item.losematerialName
-            }
-            else if (news.TableName == 'subprjcodeapply') {
+            } else if (news.TableName == 'subprjcodeapply') {
               content = Item.subprojectname
-            }
-            else{
+            } else {
               content = news.DataName
             }
             that.setData({
@@ -173,20 +167,22 @@ Page({
     }).then(res => {
       // console.log(res)
       var s = JSON.parse(res)
-      leadership({
-        departmentID: s[0].ID
-      }).then(res => {
-        // console.log(res)
-        if (res.code == 10000) {
-          this.dispose(res)
+      if (s[0]) {
+        leadership({
+          departmentID: s[0].ID
+        }).then(res => {
+          // console.log(res)
+          if (res.code == 10000) {
+            this.dispose(res)
 
-        }
-      })
-      leadership({
-        departmentID: s[0].ID
-      }).then(res => {
-        console.log(res)
-      })
+          }
+        })
+        leadership({
+          departmentID: s[0].ID
+        }).then(res => {
+          console.log(res)
+        })
+      }
 
     })
   },

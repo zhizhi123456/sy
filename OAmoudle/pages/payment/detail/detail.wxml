@@ -7,7 +7,7 @@
         <view class="apply">资料详情</view>
     </view>
     <view class="card">
-        <van-card title="{{info.leavetype}}"  />
+        <van-card title="{{info.leavetype}}"   />
     </view>
     <view class="main_nav">
         <van-tabs active="{{tab}}">

@@ -146,7 +146,7 @@ Page({
   },
 
   meetplaceblur(e) {
-    let small = util.editInfo(e, this, e.detail.value);
+    let small = util.editInfosmall(e, this, e.detail.value);
     this.setData({
       small
     })
@@ -163,7 +163,7 @@ Page({
     })
   },
   onConfirm_time(e) {
-    let info = util.editInfo(e, this, util.datefomate(e.detail));
+    let info = util.editInfosmall(e, this, util.datefomate(e.detail));
     this.setData({
       info,
       show_time: false
@@ -183,7 +183,7 @@ Page({
   onConfirm_endtime(e) {
     // console.log(e)
     // console.log(util.datefomate(e.detail))
-    let info = util.editInfo(e, this, util.datefomate(e.detail));
+    let info = util.editInfosmall(e, this, util.datefomate(e.detail));
     this.setData({
       info,
       show_endtime: false

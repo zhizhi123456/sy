@@ -268,8 +268,8 @@ Page({
       firms: app.globalData.Companytitle,
       totals: app.globalData.MainProject,
     })
-    qgroupproject({createman:userinfo.UserName}).then(res=>{
-      console.log(res)
+    
+    qgroupproject().then(res=>{
       if(res.code==10000&&res.List){
         var res1 = JSON.stringify(res.List)
         let bidlist = JSON.parse(res1.replace(/ID/g, 'value').replace(/projcectCode/g, 'text'));
@@ -283,6 +283,7 @@ Page({
         })
       }
     })
+    console.log(this.data.section22)
     if (options.id) {
       referId({
         ID: options.id

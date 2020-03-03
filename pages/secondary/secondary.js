@@ -47,8 +47,14 @@ Page({
         if (s.name == '我的设计任务') {
           s.pageaddres = path + '?hadMy=1'
         }
-        if (s.name == "材料领用查询") {
-          s.pageaddres = '/OAmoudle/pages/receive/pact/pact'
+        if (s.name == "项目例会") {
+          s.name = '公司例会'
+        }
+        if (s.name == "项目例会") {
+          s.name = '公司例会'
+        }
+        if (s.name == "招投标") {
+          s.name = '投标'
         }
         // if (s.name == "办公物品") {
         //   s.pageaddres = '/OAmoudle/pages/supply/pact/pact'

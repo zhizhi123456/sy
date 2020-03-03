@@ -68,7 +68,7 @@
             </view>
             <van-cell title="{{info.leavebegintime?info.leavebegintime:'请选择'}}" is-link bind:click="showPopup_time" />
             <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
-                <van-datetime-picker data-name="leavebegintime" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
+                <van-datetime-picker  min-date="{{ mindata }}"  max-date="{{maxdata}}" data-name="leavebegintime" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
             </van-popup>
         </view>
         <view class="check_item">
@@ -78,7 +78,7 @@
             </view>
             <van-cell title="{{info.leaveendtime?info.leaveendtime:'请选择'}}" is-link bind:click="showPopup_endtime" />
             <van-popup show="{{ show_endtime }}" round position="bottom" bind:close="onClose_endtime">
-                <van-datetime-picker data-name="leaveendtime" value="{{ currentDate }}" bind:cancel="onClose_endtime" bind:confirm="onConfirm_endtime" />
+                <van-datetime-picker  min-date="{{ mindata }}" max-date="{{maxdata}}" data-name="leaveendtime" value="{{ currentDate }}" bind:cancel="onClose_endtime" bind:confirm="onConfirm_endtime" />
             </van-popup>
         </view>
         <view class="check_item">
@@ -87,7 +87,15 @@
                 <text class="required">*</text>
             </view>
             <van-cell-group>
-                <van-field data-name="leavedays" value="{{info.leavedays}}" placeholder="请输入" bind:blur="leavedaysblur" />
+                <van-field data-name="leavedays" value="{{info.leavedays}}" placeholder="请输入" bind:blur="leavedaysblur"disabled />
+            </van-cell-group>
+        </view>
+         <view class="check_item">
+            <view class="kind require">
+                <text>请假小时</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="leavehours" value="{{info.leavehours}}" placeholder="请输入" bind:blur="leavedaysblur" disabled />
             </van-cell-group>
         </view>
         <view class="check_item">

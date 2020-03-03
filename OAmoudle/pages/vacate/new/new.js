@@ -3,7 +3,8 @@ import Toast from 'vant-weapp/dist/toast/toast';
 import {
   addVacate,
   referVacate,
-  amendVacate
+  amendVacate,
+  getdep
 } from "../../../../service/getData";
 var util = require("../../../../utils/util");
 var app = getApp();
@@ -17,6 +18,7 @@ Page({
       API_Picurl: [],
     },
     show: false,
+    departmenttext:'',
     firms: [],
     totals: [],
     currentDate: new Date().getTime(),
@@ -26,6 +28,8 @@ Page({
     }, {
       name: "从相册选择"
     }],
+    mindata: new Date().getTime(),
+    maxdata: (new Date().getTime()) + 60 * 60 * 1000 * 24 * 30,
   },
   // 请假事由
   leavereasonblur(e) {
@@ -106,6 +110,28 @@ Page({
       info,
       show_time: false
     })
+    this.setData({
+      mindata: e.detail
+    })
+
+    if (this.data.info.leaveendtime && this.data.info.leavebegintime) {
+
+      var duration = (new Date(this.data.info.leaveendtime).getTime()) - (new Date(this.data.info.leavebegintime).getTime())
+      if (duration < 0) {
+        wx.showToast({
+          title: '请假开始时间应小于请假结束时间',
+          icon: 'none',
+          duration: 3000
+        })
+        this.setData({
+          "info.leavebegintime": util.datefomate(new Date().getTime()),
+          "info.leaveendtime": util.datefomate(new Date().getTime())
+        })
+        this.number()
+      } else {
+        this.number()
+      }
+    }
   },
   // 请假结束时间
   showPopup_endtime() {
@@ -124,6 +150,29 @@ Page({
       info,
       show_endtime: false
     })
+    if (this.data.info.leaveendtime && this.data.info.leavebegintime) {
+      this.number()
+
+    }
+  },
+  number() {
+    var duration = (new Date(this.data.info.leaveendtime).getTime()) - (new Date(this.data.info.leavebegintime).getTime())
+    // console.log(duration / (60 * 60 * 1000))
+    // console.log(Math.round((duration / (60 * 60 * 1000))))
+    var hours = Math.round((duration / (60 * 60 * 1000)))
+    var day
+    if (hours < 24) {
+      day = 0
+      this.setData({
+        "info.leavedays": 0,
+        "info.leavehours": hours,
+      })
+    } else {
+      this.setData({
+        "info.leavedays": parseInt(hours / 24),
+        "info.leavehours": hours % 24,
+      })
+    }
   },
   // 请假天数
   leavedaysblur(e) {
@@ -159,12 +208,18 @@ Page({
 
   confirm() {
     // console.log(this.data.info)
-    if (this.data.info.leavereason && this.data.info.applyman && this.data.info.department && this.data.info.Companytitle && this.data.info.leavebegintime && this.data.info.leaveendtime && this.data.info.leavedays) {
+    if (this.data.info.leavereason && this.data.info.applyman && this.data.info.department && this.data.info.Companytitle && this.data.info.leavebegintime && this.data.info.leaveendtime &&
+
+      (this.data.info.leavedays !== '') && (!(this.data.info.leavedays == "0" && this.data.info.leavehours == "0"))
+
+    ) {
       let info = this.data.info;
       util.checkContent(info, this);
+      util.intro(info, this)
       this.setData({
         info
       })
+      console.log(this.data.info)
       addVacate(this.data.info).then(res => {
         // console.log(res)
         if (res.code == 10000) {
@@ -178,7 +233,7 @@ Page({
       })
     } else {
       Toast({
-        message: '请填写必填项',
+        message: '请填写必填项或请假日期时间不能为0',
         mask: true
       });
     }
@@ -194,6 +249,7 @@ Page({
   editconfirm() {
     let info = this.data.info;
     util.checkChange(info, this, app.globalData.department);
+    util.intro(info, this)
     this.setData({
       info
     })
@@ -219,6 +275,7 @@ Page({
       sections: app.globalData.department,
       Leavetypelist: app.globalData.Leavetypelist,
     })
+
     if (options.id) {
       referVacate({
         ID: options.id
@@ -232,6 +289,23 @@ Page({
       })
     }
     user = wx.getStorageSync("myInfo");
+    if (user) {
+      getdep({
+        UserName: user.UserName
+      }).then(res => {
+        console.log(res)
+        if (res) {
+          var s = JSON.parse(res)
+          let info = this.data.info;
+          info.department =s[0].techofficename
+          info.Companytitle = s[0].value
+          this.setData({
+            info,
+            departmenttext: s[0].techofficename,
+          })
+        }
+      })
+    }
     let info = this.data.info;
     if (!info.applyman) {
       info.applyman = user.UserName;

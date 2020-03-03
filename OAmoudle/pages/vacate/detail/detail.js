@@ -32,7 +32,7 @@ Page({
       referVacate({
         ID: options.id
       }).then(res => {
-        // console.log(res)
+        console.log(res)
         if (res.code == 10000) {
           let item = res.Item;
           util.handleData(item, this, app.globalData.department);
@@ -44,7 +44,7 @@ Page({
           let mid = res.Item.formid;
           util.workList(this, mid, 'leaveapplyform');
           //处理状态判断
-          util.checkState(this, mid, 'leaveapplyform', item.CurStepbh);
+          util.checkState(this, res.Item.formid || res.Item.Formid, 'leaveapplyform', item.CurStepbh);
         }
       })
     }
