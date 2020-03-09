@@ -23,7 +23,6 @@
                         </van-tag>
                     </view>
                 </van-cell>
-                 <van-cell is-link wx:if="{{item.Number&&(paths[item.TableName]=='vacate')}}" link-type="redirectTo" url="/OAmoudle/pages/{{paths[item.TableName]}}/pact/pact?rid={{options.id}}&title={{options.title}}&{{userid?'userid='+userid+'&caption='+caption+'&dep='+dep+'&deptxt='+deptxt:''}}">
                 <van-cell is-link wx:if="{{item.Number}}" link-type="redirectTo" url="{{(paths[item.TableName]=='payment')||(paths[item.TableName]=='vacate')?'/OAmoudle':''}}/pages/{{paths[item.TableName]}}/pact/pact?rid={{options.id}}&title={{options.title}}&{{userid?'userid='+userid+'&caption='+caption+'&dep='+dep+'&deptxt='+deptxt:''}}">
                     <view slot="title">
                         <van-tag wx:if="{{Nhint}}" round type="danger" class="fr">
