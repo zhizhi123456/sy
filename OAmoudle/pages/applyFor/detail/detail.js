@@ -15,7 +15,9 @@ Page({
     info: {},
     steps: [],
     material_list: [],
-    table: "a"
+    table: "a",
+    returned: true,
+    isreturn: true,
   },
   // 文件
   up_photo() {
@@ -31,7 +33,11 @@ Page({
   },
   // 返回
   return () {
-    util.OAreturn('applyFor')
+    if (this.data.history) {
+      util.OAreturn('applyFor', this);
+    } else {
+      util.OAreturn('applyFor');
+    }
   },
   // 新增明细表
   addndlink() {
@@ -48,17 +54,28 @@ Page({
         table: options.table
       })
     }
+    if (!options.history) {
+      wx.setStorageSync('history', '')
+    }
+    this.setData({
+      history: options.history
+    })
     wx.showLoading({
       title: '加载中',
     });
-    util.readRecord('applyform', options.id, this,'申领')
+    util.readRecordlist('applyform', options.id, this,'申领')
     if (options.id) {
       detailapplyFor({
         ID: options.id
       }).then(res => {
         // console.log(res)
         if (res.code == 10000) {
+          var history = wx.getStorageSync("history")
+          console.log(history)
           let item = res.Item;
+          if (history) {
+            item = history
+          }
           util.handleData(item, this, app.globalData.department);
           util.outflow(item,this)
           this.setData({
@@ -67,11 +84,12 @@ Page({
           wx.hideLoading();
           // 调取工作流记录
           let mid = res.Item.formid;
-          if (mid) {
-            util.workList(this, mid, 'applyform')
-          }
+         
+            util.workList(this, mid, 'applyform', options.id)
+      
            //处理状态判断
-           util.checkState(this, mid, 'applyform', item.CurStepbh);
+           util.checkState(this, res.Item.formid || res.Item.Formid, 'applyform', item.CurStepbh,'');
+           console.log(this.data.info.formid,this.data.isnext,this.data.returned,this.data.isreturn)
         }
       })
       // 调取明细表
@@ -113,5 +131,15 @@ Page({
       info
     })
   },
+  change12(e) {
+    console.log(e)
+    if (e.currentTarget.dataset.i) {
+      // console.log(JSON.parse(e.currentTarget.dataset.i))
+      wx.setStorageSync('history', JSON.parse(e.currentTarget.dataset.i))
+      wx.redirectTo({
+        url: '/OAmoudle/pages/applyFor/detail/detail?history=5&id=' + JSON.parse(e.currentTarget.dataset.i).ID
+      })
+    }
+  }
 
 })

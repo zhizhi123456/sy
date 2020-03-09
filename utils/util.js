@@ -1568,6 +1568,7 @@ const returnMenu2 = (id, title) => {
     url: `/pages/secondary/secondary?id=${id}&title=${title}`
   })
 }
+
 const workList = (key, id, billname, bID) => {
   let userinfo = wx.getStorageSync("myInfo");
   if (id) {
@@ -1576,6 +1577,7 @@ const workList = (key, id, billname, bID) => {
       formid: id,
       ID: bID
     }).then(res => {
+      console.log(res)
       if (res.code == 10000) {
         let result = res.WorkflowRecordList;
         if (result && result.length) {
@@ -1585,7 +1587,6 @@ const workList = (key, id, billname, bID) => {
             if (res.ApplyTime) {
               longlength--;
             }
-            var t = res.NewApplyStats + (res.ApprovalOpinion ? ('\n' + '审批意见: ' + res.ApprovalOpinion) : '') + (res.state ? ('\n' + '是否退回: ' + res.state) : '')
             steps.push({
               text: (res.state ? res.state : '') + ' ' + res.NewApplyStats,
               desc: (res.ApplyTime ? (res.Curdealuser ? ('●处理人:' + res.Curdealuser) : '') : '') + ' ' + (res.ApplyTime ? res.ApplyTime.replace(/[ ]/g, "-") : '')
@@ -1610,7 +1611,6 @@ const workList = (key, id, billname, bID) => {
     record({
       formid: id
     }).then(res => {
-      console.log(res)
       if (res.code == 10000) {
         console.log(res)
         let step = res.list;
@@ -1666,7 +1666,7 @@ const workList = (key, id, billname, bID) => {
     unreferflow({
       formName: billname,
       userName: userinfo.UserName,
-      ID
+      ID:bID
     }).then(res => {
       console.log(res)
       if (res.code == 10000) {
@@ -1694,6 +1694,7 @@ const workList = (key, id, billname, bID) => {
     })
   }
 }
+
 //处理状态判断
 const checkState = (key, id, chart, bh, Workstates) => {
   let userinfo = wx.getStorageSync("myInfo");
@@ -1713,7 +1714,9 @@ const checkState = (key, id, chart, bh, Workstates) => {
         userName: userinfo.UserName,
       }
     }
+    console.log(param)
     valid(param).then(res => {
+      console.log(res)
       if (res.code == 10000) {
         if (Workstates && key) {
           Workstates.push(res.Isvalidtime.True || res.Isvalidtime.False);
@@ -1739,6 +1742,7 @@ const checkState = (key, id, chart, bh, Workstates) => {
           userName: userinfo.UserName,
           formid: id
         }).then(rtn => {
+          console.log(rtn)
           if (!rtn.value) {
             key.setData({
               isreturn: false
@@ -1746,9 +1750,11 @@ const checkState = (key, id, chart, bh, Workstates) => {
           }
         })
       }
+      // console.log()
     })
   }
 }
+
 const userdep = (user, key) => {
   getdep({
     UserName: user.UserName
@@ -1773,8 +1779,7 @@ const Triggerflow = (key, direction, sheet, piece, id, cap, dep, dert, rid, tit,
     ID: key.data.info.ID,
     mark: direction,
     userName: userinfo.UserName,
-    formName: sheet,
-    ApprovalOpinion
+    formName: sheet
   })
   if (userinfo) {
     flow({
@@ -1786,7 +1791,7 @@ const Triggerflow = (key, direction, sheet, piece, id, cap, dep, dert, rid, tit,
       API_Picurl: pic,
       API_Fileurl: file
     }).then(res => {
-      // console.log(res)
+      console.log(res)
       if (res.code == 10000) {
         if (direction == "next") {
           wx.showToast({

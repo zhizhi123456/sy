@@ -2,7 +2,7 @@
 <view wx:if="{{info}}">
     <view class="header d_header">
         <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
-        <text class="fr newCreate" bindtap="delete">删除</text>
+        <text class="fr newCreate" bindtap="delete" bindtap="delete"wx:if="{{(!history)&&(!info.formid)}}">删除</text>
         <view class="apply">资料详情</view>
     </view>
     <view class="card">
@@ -76,18 +76,21 @@
                     </view>
                 </view>
             </van-tab>
-           <van-tab title="动态" name="b">
+           <van-tab title="动态" name="b" wx:if="{{!history}}">
                 <van-cell title="动态({{Workstate}})" />
                 <van-steps steps="{{ steps }}" active="{{ actived }}" direction="vertical" active-color="#008080" inactive-icon="stop-circle" />
             </van-tab>
-              <van-tab title="修改记录" name="d">
+                <van-tab title="修改记录" name="d" wx:if="{{(!history)&&amendant.length}}">
                 <block wx:if="{{amendant}}">
                     <van-cell title="记录({{amendant.length}})" />
-                    <van-steps steps="{{ amendant }}" active="{{ active }}" direction="vertical" />
+                    <!-- <van-steps steps="{{ amendant }}" active="{{ active }}" direction="vertical" bind:tap="change12" /> -->
+                    <block wx:for="{{amendant}}" wx:key="index"> 
+                          <van-cell title="{{item.text}}" label="{{item.desc}}" data-i='{{item.oldcontext}}' bind:tap="change12"/>
+                    </block>
                 </block>
                 <view class="dynamic_state" wx:else>暂无记录</view>
             </van-tab>
-            <van-tab title="申领明细" name="c">
+            <van-tab title="申领明细" name="c" wx:if="{{!history}}">
                 <van-cell title="申领明细({{material_list.length}})" bindtap="addndlink">
                     <icon class="iconfont icon-icon-test"></icon>
                 </van-cell>
@@ -115,18 +118,18 @@
             </van-tab>
         </van-tabs>
     </view>
-    <view class="footer">
-        <view bindtap="sendback" wx:if="{{info.formid}}">
+    <view class="footer" wx:if="{{((info.formid&&isnext&&returned&&isreturn)||(!info.formid)||(isnext&&returned))&&(!history)}}">
+        <view bindtap="sendback" wx:if="{{info.formid&&isnext&&returned&&isreturn}}">
             <icon class="iconfont icon-wj-thwj"></icon>
             <text>退回</text>
         </view>
-        <view>
+        <view wx:if="{{!info.formid}}">
             <navigator open-type="redirect" url="/OAmoudle/pages/applyFor/new/new?id={{info.ID}}" hover-class="none">
                 <icon class="iconfont icon-bianji"></icon>
                 <text>编辑</text>
             </navigator>
         </view>
-        <view bindtap="putin" wx:if="{{isnext}}">
+        <view bindtap="putin" wx:if="{{isnext&&returned}}">
             <icon class="iconfont icon-tijiao"></icon>
             <text>审核通过</text>
         </view>
