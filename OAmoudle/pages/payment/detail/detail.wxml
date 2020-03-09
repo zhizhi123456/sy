@@ -128,6 +128,9 @@
                         <view class="m_item">
                             <text class="ideatitle">{{item.createman}}({{item.stepname}})</text>
                         </view>
+                        <view class="m_item ideatitle" wx:if="{{item.stepid!=1}}">
+                            {{item.stepid<item.nextstepid?'审核通过':'退回'}}
+                        </view>
                         <view class="m_item">
                             <text>{{item.createtime}}</text>
                         </view>
@@ -139,20 +142,19 @@
                             <text>图片</text>
                             <view wx:if="{{item.API_Picurl.length}}" class="detpic_show">
                                 <block wx:for="{{item.API_Picurl}}" wx:key="index">
-                                    <image src="{{item}}" bindtap="tap_pic" data-index="{{index}}" binderror="defaultimg" data-url="{{item}}"  />
+                                    <image src="{{item}}" bindtap="tap_pic1" data-index="{{index}}" binderror="defaultimg" data-url="{{item}}" />
                                 </block>
                             </view>
                         </view>
                         <view class="m_item" wx:if="{{item.stepid!=1}}">
                             <text>文件</text>
-                            <view wx:if="{{item.API_Fileurl.length}}" class="ideafile">
+                            <view wx:if="{{item.API_Fileurl.length}}" class="fileLIST">
                                 <block wx:for="{{item.API_Fileurl}}" wx:key="index">
                                     <view class="cfile">
-                                        <text>{{item.name}}</text>
+                                        <text class="filename">{{item.name}}</text>
                                         <text class="filesize">{{item.size}}</text>
                                         <icon class="iconfont icon-shengou fr" bindtap="downF" data-index="{{index}}" data-url="{{item.url}}" />
                                     </view>
-                                    <!-- <view>{{item.url}}</view> -->
                                 </block>
                             </view>
                         </view>
@@ -187,13 +189,12 @@
             </view>
             <view class="seach_item">
                 <van-cell title="文件" is-link bindtap="up_file" />
-                <view wx:if="{{info.Minutesofmeeting.length}}">
-                    <block wx:for="{{info.Minutesofmeeting}}" wx:key="index">
+                <view wx:if="{{idea.API_Fileurl.length}}">
+                    <block wx:for="{{idea.API_Fileurl}}" wx:key="index">
                         <view class="cfile">
-                            <text>{{item.name}}</text>
+                            <text class="filename">{{item.name}}</text>
                             <text class="filesize">{{item.size}}</text>
                             <icon class="iconfont icon-shanchu-tianchong fr" wx:if="{{up_F}}" bindtap="delF" data-index="{{index}}" />
-                            <!-- <icon class="iconfont icon-shengou fr" bindtap="downF" data-index="{{index}}" /> -->
                         </view>
                     </block>
                 </view>
@@ -202,9 +203,9 @@
                 <van-cell title="上传图片" is-link bind:click="showPopup_photo" />
                 <van-action-sheet show="{{ show_photo }}" actions="{{ check_photo }}" bind:cancel="onClose_photo" bind:click-overlay="onClose_photo" bind:select="onSelect_photo" cancel-text="取消" />
                 <view wx:if="{{upimg}}" class="datumimgbox">
-                    <block wx:for="{{info.API_Picurl}}" wx:key="index">
+                    <block wx:for="{{idea.API_Picurl}}" wx:key="index">
                         <view class="upimgbox">
-                            <image src="{{item}}" bindtap="tap_pic" data-index="{{index}}" />
+                            <image src="{{item}}" bindtap="tap_pic1" data-index="{{index}}" />
                             <icon class="iconfont icon-jianhao-tianchong delimg" data-i="{{index}}" bindtap="delimg" />
                         </view>
                     </block>
@@ -225,13 +226,12 @@
             </view>
             <view class="seach_item">
                 <van-cell title="文件" is-link bindtap="up_file" />
-                <view wx:if="{{info.Minutesofmeeting.length}}">
-                    <block wx:for="{{info.Minutesofmeeting}}" wx:key="index">
+                <view wx:if="{{idea.API_Fileurl.length}}">
+                    <block wx:for="{{idea.API_Fileurl}}" wx:key="index">
                         <view class="cfile">
-                            <text>{{item.name}}</text>
+                            <text class="filename">{{item.name}}</text>
                             <text class="filesize">{{item.size}}</text>
                             <icon class="iconfont icon-shanchu-tianchong fr" wx:if="{{up_F}}" bindtap="delF" data-index="{{index}}" />
-                            <!-- <icon class="iconfont icon-shengou fr" bindtap="downF" data-index="{{index}}" /> -->
                         </view>
                     </block>
                 </view>
@@ -240,9 +240,9 @@
                 <van-cell title="上传图片" is-link bind:click="showPopup_photo" />
                 <van-action-sheet show="{{ show_photo }}" actions="{{ check_photo }}" bind:cancel="onClose_photo" bind:click-overlay="onClose_photo" bind:select="onSelect_photo" cancel-text="取消" />
                 <view wx:if="{{upimg}}" class="datumimgbox">
-                    <block wx:for="{{info.API_Picurl}}" wx:key="index">
+                    <block wx:for="{{idea.API_Picurl}}" wx:key="index">
                         <view class="upimgbox">
-                            <image src="{{item}}" bindtap="tap_pic" data-index="{{index}}" />
+                            <image src="{{item}}" bindtap="tap_pic1" data-index="{{index}}" />
                             <icon class="iconfont icon-jianhao-tianchong delimg" data-i="{{index}}" bindtap="delimg" />
                         </view>
                     </block>

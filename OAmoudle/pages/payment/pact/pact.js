@@ -165,7 +165,6 @@ Page({
         })
         groupPayment(this.data.info).then(res => {
           if (res.code == 10000) {
-            console.log(res.List)
             let item = res.List;
             util.listData(item, app.globalData.department, '', '', this, 'paymentapproval');
             this.setData({

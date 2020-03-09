@@ -298,6 +298,7 @@
 
 .m_item text:nth-child(1) {
     margin-right: 50rpx;
+    min-width: 52rpx;
 }
 
 .m_item text:nth-child(2) {
@@ -730,11 +731,12 @@ van-checkbox {
 .cfile .filesize {
     font-size: 28rpx;
     color: #777;
-    margin-left: 20rpx;
+    vertical-align: top;
 }
 
 .cfile .iconfont {
     padding: 0 50rpx;
+    color: teal;
 }
 
 .main .overcaution {
@@ -763,6 +765,18 @@ button.van-button {
     padding: 0 40rpx;
 }
 
+.seach_item .cfile .filename {
+    max-width: 400rpx;
+}
+
+.ideainfo .cfile {
+    padding: 0 20rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+    background-color: #fafafa;
+    border-radius: 20rpx;
+}
+
 .ideainfo .m_info {
     color: #333;
 }
@@ -771,5 +785,21 @@ button.van-button {
     font-size: 24rpx;
     color: teal;
     font-weight: bold;
+}
 
+.cfile .filename {
+    max-width: 220rpx;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.fileLIST {
+    width: 100%;
+}
+
+.fileLIST .cfile {
+    margin-bottom: 10rpx;
 }
