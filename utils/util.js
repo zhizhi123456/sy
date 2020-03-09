@@ -1128,7 +1128,6 @@ const updateValue = (e, key) => {
   let name = e.currentTarget.dataset.name,
     i = e.currentTarget.dataset.i;
   let materials = key.data.materials;
-  console.log(name, i, materials)
   if (i) {
     materials[i][name] = e.detail && e.detail.value;
   } else {
@@ -1242,7 +1241,190 @@ const upImage = (key, way) => {
     })
   }
 }
-
+// 工作流上传图片
+const upImageIDEA = (key, way) => {
+  // 图片请求-最多上传9张图
+  if (key.data.idea.API_Picurl.length < 9) {
+    wx.chooseImage({
+      count: 9,
+      sizeType: ['original'],
+      sourceType: way ? ['camera'] : ["album"],
+      success: res => {
+        let tempFilePaths = res.tempFilePaths,
+          idea = key.data.idea,
+          that = key;
+        wx.showToast({
+          title: '正在上传...',
+          icon: 'loading',
+          mask: true,
+          duration: 10000
+        })
+        var uploadImgCount = 0;
+        for (let i = 0; i < tempFilePaths.length; i++) {
+          wx.uploadFile({
+            url: 'https://shangyongren.com:9098/api/image/Get_photo',
+            filePath: tempFilePaths[i],
+            name: 'img_data',
+            success(res) {
+              uploadImgCount++;
+              // //console.log(res)
+              if (res.statusCode == 200) {
+                idea.API_Picurl.push("https://shangyongren.com:9098" + res.data.replace(/"/g, ""))
+                that.setData({
+                  upimg: true,
+                  show_photo: false,
+                  idea
+                })
+              }
+              //如果是最后一张,则隐藏等待中  
+              if (uploadImgCount == tempFilePaths.length) {
+                wx.hideToast();
+              }
+            },
+            fail: err => {
+              //console.log(err)
+            }
+          })
+        }
+      }
+    })
+  }
+}
+//工作流预览图片
+const lookimgIDEA = (e) => {
+  let pic_arr = [],
+    index = e.currentTarget.dataset.index;
+  pic_arr.push(e.currentTarget.dataset.url);
+  if (pic_arr.length) {
+    wx.previewImage({
+      urls: pic_arr, //需要预览的图片http链接列表，注意是数组
+      current: pic_arr[index], // 当前显示图片的http链接，默认是第一个
+      success: function (res) {},
+      fail: function (res) {},
+      complete: function (res) {},
+    })
+  }
+}
+// 工作流图片的删除
+const deleteImgIDEA = (key, e) => {
+  let idea = key.data.idea,
+    i = e.currentTarget.dataset.i;
+  idea.API_Picurl.splice(i, 1);
+  key.setData({
+    idea
+  })
+}
+// 工作流上传文件
+const upFileIDEA = (key) => {
+  if (key.data.idea.API_Fileurl.length < 9) {
+    let that = key;
+    wx.chooseMessageFile({
+      count: 9, //能选择文件的数量
+      type: 'file',
+      success(res) {
+        console.log(res)
+        let filedata = res.tempFiles;
+        filedata.forEach(element => {
+          if (element.size < 1024) {
+            element.size = element.size + 'B';
+          } else if (element.size < 1048576) {
+            element.size = ((element.size) / 1024).toFixed(2) + 'KB';
+          } else if (element.size < 1073741824) {
+            element.size = ((element.size) / 1048576).toFixed(2) + 'MB';
+          }
+        });
+        wx.showToast({
+          title: '正在上传...',
+          icon: 'loading',
+          mask: true,
+          duration: 10000
+        })
+        let idea = that.data.idea;
+        var uploadImgCount = 0;
+        for (let i = 0; i < filedata.length; i++) {
+          wx.uploadFile({
+            url: 'https://shangyongren.com:9098/api/record/Get_rec',
+            filePath: filedata[i].path,
+            name: 'file_data',
+            success(res) {
+              uploadImgCount++;
+              console.log(res)
+              if (res.statusCode == 200) {
+                console.log(idea)
+                idea.API_Fileurl.push({
+                  name: filedata[i].name,
+                  size: filedata[i].size,
+                  url: "https://shangyongren.com:9098" + res.data.replace(/"/g, "")
+                })
+                that.setData({
+                  idea,
+                  up_F: true
+                })
+              }
+              //如果是最后一张,则隐藏等待中  
+              if (uploadImgCount == filedata.length) {
+                wx.hideToast();
+              }
+            },
+            fail: err => {
+              //console.log(err)
+            }
+          })
+        }
+      }
+    })
+  }
+}
+//工作流删除文件
+const delFileIDEA = (key, e) => {
+  let idea = key.data.idea,
+    i = e.currentTarget.dataset.index;
+  idea.API_Fileurl.splice(i, 1);
+  key.setData({
+    idea
+  })
+}
+//工作流预览文件
+const lookFileIDEA = (e) => {
+  wx.downloadFile({
+    url: e.currentTarget.dataset.url,
+    success: function (res) {
+      if (res.statusCode === 200) {
+        wx.showToast({
+          title: '已下载，预览中',
+          icon: 'loading',
+          mask: true,
+          duration: 10000
+        })
+        var Path = res.tempFilePath; //返回的文件临时地址，用于后面打开本地预览所用
+        var index = Path.lastIndexOf(".");
+        var fileType = Path.substring(index + 1).toLowerCase();
+        wx.openDocument({
+          filePath: Path,
+          fileType: fileType,
+          success: function (res) {
+            console.log('打开文档成功');
+            wx.hideToast();
+          },
+          fail: function (res) {
+            wx.showToast({
+              title: '预览文档失败,仅支持doc,docx,xls,xlsx,ppt,pptx,pdf',
+              icon: "none",
+              duration: 3000
+            });
+          }
+        })
+      }
+    },
+    fail(err) {
+      wx.showToast({
+        title: '下载文件失败',
+        icon: "none",
+        duration: 3000
+      });
+    }
+  })
+}
 // 上传文件
 const upFile = (key) => {
   if (key.data.info.Minutesofmeeting.length < 9) {
@@ -1508,49 +1690,6 @@ const checkState = (key, id, chart, bh, Workstates) => {
             })
           }
         }
-        // returned({
-        // console.log(chart && userinfo.UserName)
-        // var i = setInterval(function () {
-
-
-        //   if (!(chart && userinfo.UserName)) {
-        //     console.log("数据未载入")
-        //   } else {
-        //     clearInterval(i)
-        //     if (userinfo) {
-        //       console.log({
-        //         formName: chart,
-        //         currowbh: bh,
-        //         userName: userinfo.UserName,
-        //         formid: id
-        //       })
-        // valid({
-        //   formName: chart,
-        //   currowbh: bh,
-        //   userName: userinfo.UserName,
-        //   formid: id
-        // }).then(res => {
-        //   console.log(res)
-        //   if (res.code == 10000) {
-        //     if (Workstates && key) {
-        //       Workstates.push(res.Isvalidtime.True || res.Isvalidtime.False);
-        //       key.setData({
-        //         Workstates
-        //       })
-        //     } else if (key) {
-        //       key.setData({
-        //         Workstate: (res.Isvalidtime.True || res.Isvalidtime.False),
-        //       })
-        //       if (res.Isvalidtime.True) {
-        //         key.setData({
-        //           isnext: false
-        //         })
-        //       } else {
-        //         key.setData({
-        //           isnext: true
-        //         })
-        //       }
-        //     }
         returned({
           formName: chart,
           userName: userinfo.UserName,
@@ -2869,5 +3008,11 @@ module.exports = {
   OAreturn,
   upFile,
   editInfosmall,
-  userdep
+  userdep,
+  upFileIDEA,
+  upImageIDEA,
+  delFileIDEA,
+  lookFileIDEA,
+  lookimgIDEA,
+  deleteImgIDEA
 }
