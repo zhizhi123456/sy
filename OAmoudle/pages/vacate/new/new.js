@@ -4,8 +4,10 @@ import {
   addVacate,
   referVacate,
   amendVacate,
-  getdep
-} from "../../../../service/getData";
+  getdep,
+  Leavetypelist,
+
+} from "../../../../service/getData.js";
 var util = require("../../../../utils/util");
 var app = getApp();
 let user = wx.getStorageSync("myInfo");
@@ -18,7 +20,7 @@ Page({
       API_Picurl: [],
     },
     show: false,
-    departmenttext:'',
+    departmenttext: '',
     firms: [],
     totals: [],
     currentDate: new Date().getTime(),
@@ -28,6 +30,7 @@ Page({
     }, {
       name: "从相册选择"
     }],
+    leavetypetext: '',
     mindata: new Date().getTime(),
     maxdata: (new Date().getTime()) + 60 * 60 * 1000 * 24 * 30,
   },
@@ -38,6 +41,60 @@ Page({
       info
     })
   },
+  // 项目类型
+  showPopup1() {
+    this.setData({
+      show1: true
+    });
+  },
+  onClose1() {
+    this.setData({
+      show1: false
+    });
+  },
+  onConfirm1(e) {
+    let info = util.editInfo(e, this, e.detail.value);
+    this.setData({
+      info,
+      show1: false,
+    })
+  },
+  // onConfirm1(e) {
+  //   console.log("1")
+  //   var s = this.data.section1
+  //   var t = s.filter((y) => {
+  //     return y.show
+  //   })
+  //   var p
+  //   p = t.map((x) => {
+  //     return x.Value
+  //   })
+  //   p = p.join(",")
+  //   t = t.map((x) => {
+  //     return x.Key
+  //   })
+  //   t = t.join(",")
+  //   console.log(t)
+  //   let info = util.editInfo(e, this, t);
+  //   this.setData({
+  //     info,
+  //     show1: false,
+  //     leavetypetext: p
+  //   })
+  // },
+  // onChange(event) {
+  //   console.log(event)
+  //   var s = this.data.section1
+  //   var y = s.findIndex((r) => {
+  //     return r.Value == event.currentTarget.dataset.name
+  //   })
+  //   // console.log(y)
+  //   s[y].show = !s[y].show
+  //   this.setData({
+  //     section1: s
+  //   })
+
+  // },
   // 部门
   showPopup_o() {
     this.setData({
@@ -115,7 +172,6 @@ Page({
     })
 
     if (this.data.info.leaveendtime && this.data.info.leavebegintime) {
-
       var duration = (new Date(this.data.info.leaveendtime).getTime()) - (new Date(this.data.info.leavebegintime).getTime())
       if (duration < 0) {
         wx.showToast({
@@ -157,8 +213,6 @@ Page({
   },
   number() {
     var duration = (new Date(this.data.info.leaveendtime).getTime()) - (new Date(this.data.info.leavebegintime).getTime())
-    // console.log(duration / (60 * 60 * 1000))
-    // console.log(Math.round((duration / (60 * 60 * 1000))))
     var hours = Math.round((duration / (60 * 60 * 1000)))
     var day
     if (hours < 24) {
@@ -262,6 +316,7 @@ Page({
           icon: 'success',
           duration: 3000
         })
+        util.ModifyRecord(this.data.information, "leaveapplyform")
         util.OAreturn('vacate', this);
       }
     })
@@ -275,14 +330,47 @@ Page({
       sections: app.globalData.department,
       Leavetypelist: app.globalData.Leavetypelist,
     })
-
+    // //项目类型请求
+    // Leavetypelist().then(res => {
+    //   console.log(res)
+    //   var w = JSON.parse(res)
+    //   var q = w.map(s => {
+    //     s.show = false
+    //     return s
+    //   })
+    //   this.setData({
+    //     section1: q
+    //   })
+    //   console.log(this.data.section1)
+    // })
     if (options.id) {
       referVacate({
         ID: options.id
       }).then(res => {
         // console.log(res)
         let item = res.Item;
+        var data1 = res.Item
+        var b = JSON.stringify(data1)
+        var c = JSON.parse(b)
+        this.setData({
+          information: c
+        })
         util.handleData(item, this, app.globalData.department);
+        // var t = this.data.section1
+        // var q = item.leavetype
+        // q = q.split(",")
+        // let y
+        // q.forEach((s) => {
+        //   y = t.map((w) => {
+        //     if (w.Key == s) {
+        //       w.show = true
+        //       return w
+        //     }
+        //   })
+        // })
+        // this.setData({
+        //   section1: t,
+        // })
         this.setData({
           info: item
         })
@@ -297,7 +385,7 @@ Page({
         if (res) {
           var s = JSON.parse(res)
           let info = this.data.info;
-          info.department =s[0].techofficename
+          info.department = s[0].techofficename
           info.Companytitle = s[0].value
           this.setData({
             info,
@@ -314,7 +402,6 @@ Page({
       })
     }
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

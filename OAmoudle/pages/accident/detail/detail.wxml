@@ -1,0 +1,71 @@
+<!-- pages/detail/detail.wxml -->
+<view wx:if="{{info}}">
+    <view class="header d_header">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="delete">删除</text>
+        <view class="apply">资料详情</view>
+    </view>
+    <view class="card">
+        <van-card title="{{info.projectcode}}"   />
+    </view>
+    <view class="main_nav">
+        <van-tabs active="a">
+            <van-tab title="详细资料" name="a">
+                <view class="content">
+                    <view class="c_item">
+                        <view class="kind">工程编号</view>
+                        <view class="check">{{info.projectcode}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">地点</view>
+                        <view class="check">{{info.sites}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">设计单位</view>
+                        <view class="check">{{info.architect}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">发生事故时间</view>
+                        <view class="check">{{info.timeOfAccident}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">施工单位</view>
+                        <view class="check">{{info.Constructionunit}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">事故情况</view>
+                        <view class="check">{{info.condition}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">填报单位</view>
+                        <view class="check">{{info.Companytitle}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">创建人</view>
+                        <view class="check">{{info.createman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">创建时间</view>
+                        <view class="check">{{info.createtime}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">修改人</view>
+                        <view class="check">{{info.updateman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">修改时间</view>
+                        <view class="check">{{info.updatetime}}</view>
+                    </view>
+                </view>
+            </van-tab>
+        </van-tabs>
+    </view>
+    <view class="footer">
+        <view>
+            <navigator open-type="redirect" url="/OAmoudle/pages/accident/new/new?id={{info.ID}}" hover-class="none">
+                <icon class="iconfont icon-bianji"></icon>
+                <text>编辑</text>
+            </navigator>
+        </view>
+    </view>
+</view>

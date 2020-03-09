@@ -163,7 +163,7 @@
     <view class="footer">
         <view bindtap="sendback" wx:if="{{info.formid&&isnext&&returned&&isreturn}}">
             <icon class="iconfont icon-wj-thwj"></icon>
-            <text>退回上步</text>
+            <text>退回</text>
         </view>
         <view>
             <navigator open-type="redirect" url="/pages/adopt/new/new?id={{info.ID}}" hover-class="none">
@@ -173,7 +173,7 @@
         </view>
         <view bindtap="putin" wx:if="{{isnext&&returned}}">
             <icon class="iconfont icon-tijiao"></icon>
-            <text>提交下步</text>
+            <text>审核通过</text>
         </view>
     </view>
 </view>

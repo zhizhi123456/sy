@@ -56,6 +56,16 @@ Page({
         if (s.name == "招投标") {
           s.name = '投标'
         }
+        if (s.name == '重大事故报告') {
+          s.pageaddres = '/OAmoudle/pages/accident/pact/pact'
+        }
+        if (s.name == '安防质量验收') {
+          s.pageaddres = '/OAmoudle/pages/security/pact/pact'
+        }
+        if (s.name == '工程质量报告') {
+          s.pageaddres = '/OAmoudle/pages/quality/pact/pact'
+        }
+        
         // if (s.name == "办公物品") {
         //   s.pageaddres = '/OAmoudle/pages/supply/pact/pact'
         // }

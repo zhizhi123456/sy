@@ -108,12 +108,12 @@ Page({
     }
   },
   // 工作流流转
-  // 退回上步
+  // 退回
   sendback() {
     util.Triggerflow(this, 'return', 'prjassignbook', 'task', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
       this.data.rid, this.data.title)
   },
-  // 提交下步
+  // 审核通过
   putin() {
     util.Triggerflow(this, 'next', 'prjassignbook', 'task', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
       this.data.rid, this.data.title)

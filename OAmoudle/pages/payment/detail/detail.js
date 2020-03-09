@@ -154,7 +154,7 @@ Page({
   sconfirm() {
     util.Triggerflow(this, 'next', 'paymentapproval', 'payment', '', '', '', '', '', '', 'oa', this.data.ApprovalOpinion ? this.data.ApprovalOpinion : '同意。', JSON.stringify(this.data.idea.API_Picurl), JSON.stringify(this.data.idea.API_Fileurl))
   },
-  // 提交下步
+  // 审核通过
   putin() {
     if (this.data.info.formid) {
       this.setData({

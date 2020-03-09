@@ -66,11 +66,11 @@ Page({
     }
   },
   // 工作流流转
-  // 退回上步
+  // 退回
   sendback() {
     util.Triggerflow(this, 'return', 'leavecancelform', 'resumption', '', '', '', '', '', '', 'oa')
   },
-  // 提交下步
+  // 审核通过
   putin() {
     util.Triggerflow(this, 'next', 'leavecancelform', 'resumption', '', '', '', '', '', '', 'oa')
   },

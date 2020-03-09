@@ -48,6 +48,7 @@ Page({
       getdep({
         UserName: userinfo.UserName
       }).then(res => {
+        console.log(res);
         let resData = JSON.parse(res);
         this.setData({
           userinfo,
@@ -92,7 +93,7 @@ Page({
         getapply({
           UserName: userinfo.UserName
         }).then(res => {
-          // console.log(res)
+          console.log(res)
           let ele = res.List || [];
           this.setData({
             taskData: ele
@@ -108,7 +109,6 @@ Page({
         getapplyNEWinfo({
           UserName: userinfo.UserName
         }).then(res => {
-          // console.log(res)
           if (res.code == 10000) {
             this.setData({
               NEWnum: res.List

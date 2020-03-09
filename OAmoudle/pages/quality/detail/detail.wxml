@@ -1,0 +1,135 @@
+<!-- pages/detail/detail.wxml -->
+<view wx:if="{{info}}">
+    <view class="header d_header">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="delete">删除</text>
+        <view class="apply">资料详情</view>
+    </view>
+    <view class="card">
+        <van-card title="{{info.subprojectname}}"  />
+    </view>
+    <view class="main_nav">
+        <van-tabs active="a">
+            <van-tab title="详细资料" name="a">
+                <view class="content">
+                    <view class="c_item">
+                        <view class="kind">工程名称</view>
+                        <view class="check">{{info.projectcode}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">单位</view>
+                        <view class="check">{{info.commpanytitle}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">分部分项工程名称</view>
+                        <view class="check">{{info.subprojectname}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">事故性质</view>
+                        <view class="check">{{info.characterAccident}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">部位</view>
+                        <view class="check">{{info.part}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">发生日期</view>
+                        <view class="check">{{info.dateString}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">事故情况</view>
+                        <view class="check">{{info.accconditions}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">事故原因</view>
+                        <view class="check">{{info.acccause}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">事故处理</view>
+                        <view class="check">{{info.acctrouble}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">事故工程量</view>
+                        <view class="check">{{info.accquantity}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">材料费</view>
+                        <view class="check">{{info.materialsExpenses}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">人工费</view>
+                        <view class="check">{{info.costOfLabor}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">其他费用</view>
+                        <view class="check">{{info.otherCharges}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">耽误工作日</view>
+                        <view class="check">{{info.lateWorkingDay}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">备注</view>
+                        <view class="check">{{info.remark}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">施工单位负责人</view>
+                        <view class="check">{{info.ConstructionunitCheckMan}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">监理单位</view>
+                        <view class="check">{{info.supervisionunit}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">创建人</view>
+                        <view class="check">{{info.createman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">创建时间</view>
+                        <view class="check">{{info.createtime}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">修改人</view>
+                        <view class="check">{{info.updateman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">修改时间</view>
+                        <view class="check">{{info.updatetime}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">当前步骤名称</view>
+                        <view class="check">{{info.CurStepName}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">当前处理人</view>
+                        <view class="check">{{info.CurDealer}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">步骤是否完成</view>
+                        <view class="check">{{info.IfWfComplete}}</view>
+                    </view>
+                </view>
+            </van-tab>
+        <van-tab title="动态" name="b">
+                <van-cell title="动态({{Workstate}})" />
+                <van-steps steps="{{ steps }}" active="{{ actived }}" direction="vertical" active-color="#008080" inactive-icon="stop-circle" />
+            </van-tab>
+        </van-tabs>
+    </view>
+    <view class="footer">
+        <view bindtap="sendback" wx:if="{{info.formid}}">
+            <icon class="iconfont icon-wj-thwj"></icon>
+            <text>退回上步</text>
+        </view>
+        <view>
+            <navigator open-type="redirect" url="/OAmoudle/pages/quality/new/new?id={{info.ID}}" hover-class="none">
+                <icon class="iconfont icon-bianji"></icon>
+                <text>编辑</text>
+            </navigator>
+        </view>
+        <view bindtap="putin" wx:if="{{isnext}}">
+            <icon class="iconfont icon-tijiao"></icon>
+            <text>提交下步</text>
+        </view>
+    </view>
+</view>

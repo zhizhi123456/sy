@@ -1,0 +1,167 @@
+<!-- pages/detail/detail.wxml -->
+<view wx:if="{{info}}">
+    <view class="header d_header">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="delete">删除</text>
+        <view class="apply">资料详情</view>
+    </view>
+    <view class="card">
+        <van-card title="{{info.projectName}}"  />
+    </view>
+    <view class="main_nav">
+        <van-tabs active="{{table}}">
+            <van-tab title="详细资料" name="a">
+                <view class="content">
+                    <view class="c_item">
+                        <view class="kind">工程名称</view>
+                        <view class="check">{{info.projectName}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">分项工程名称</view>
+                        <view class="check">{{info.subentryProjectName}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">项目经理</view>
+                        <view class="check">{{info.itemManage}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">施工单位</view>
+                        <view class="check">{{info.constructCompany}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">验收部位</view>
+                        <view class="check">{{info.checkPart}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">施工执行标准</view>
+                        <view class="check">{{info.number}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">专业工长</view>
+                        <view class="check">{{info.majorChief}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">技术操作要点</view>
+                        <view class="check">{{info.constructOperateGist}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">质量检查记录</view>
+                        <view class="check">{{info.qualityCheckRecord}}</view>
+                    </view>
+                    <!-- <view class="c_item">
+                        <view class="kind">照片</view>
+                        <view wx:if="{{info.picurl}}" class="detpic_show">
+                            <block wx:for="{{info.picurl}}" wx:key="{{index}}">
+                                <image src="{{item}}" bindtap="tap_pic" data-index="{{index}}" binderror="defaultimg" />
+                            </block>
+                        </view>
+                    </view> -->
+                    <view class="c_item">
+                        <view class="kind">质量检查员</view>
+                        <view class="check">{{info.constructChcekUser}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">技术负责人</view>
+                        <view class="check">{{info.constructTechnologyUser}}</view>
+                    </view>
+                      <view class="c_item">
+                        <view class="kind">建造日期</view>
+                        <view class="check">{{info.constructDate}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">监理验收结论</view>
+                        <view class="check">{{info.supervisorCheckVerdict}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">监理工程师</view>
+                        <view class="check">{{info.supervisorUser}}</view>
+                    </view>
+
+                     <view class="c_item">
+                        <view class="kind">监理时间</view>
+                        <view class="check">{{info.supervisorDate}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">备注</view>
+                        <view class="check">{{info.remark}}</view>
+                    </view>
+                     
+                    <view class="c_item">
+                        <view class="kind">创建人</view>
+                        <view class="check">{{info.createman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">创建时间</view>
+                        <view class="check">{{info.createtime}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">修改人</view>
+                        <view class="check">{{info.updateman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">修改时间</view>
+                        <view class="check">{{info.updatetime}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">当前步骤名称</view>
+                        <view class="check">{{info.CurStepName}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">当前处理人</view>
+                        <view class="check">{{info.CurDealer}}</view>
+                    </view>
+                      <view class="c_item">
+                        <view class="kind">步骤是否完成</view>
+                        <view class="check">{{info.IfWfComplete}}</view>
+                    </view>
+                </view>
+            </van-tab>
+            <van-tab title="动态" name="b">
+                <van-cell title="动态({{Workstate}})" />
+                <van-steps steps="{{ steps }}" active="{{ actived }}" direction="vertical" active-color="#008080" inactive-icon="stop-circle" />
+            </van-tab>
+            <van-tab title="项目选择" name="c">
+                <van-cell title="项目选择({{material_list.length}})" bindtap="addndlink">
+                    <icon class="iconfont icon-icon-test"></icon>
+                </van-cell>
+                <block wx:for="{{material_list}}" wx:key="{{index}}">
+                    <view class="material">
+                        <navigator open-type="redirect" url="/OAmoudle/pages/security/detaillink/detaillink?detailid={{item.ID}}" hover-class="none">
+                            <!-- <view>
+                                <text class="m_caption">{{item.caption}}</text>
+                            </view> -->
+                            <view class="m_item">
+                                <text class="m_info">项目类型</text>
+                                <text>{{item.projectType}}</text>
+                            </view>
+                            <view class="m_item">
+                                <text class="m_info">质量验收规范的规定</text>
+                                <text>{{item.stipulateContent}}</text>
+                            </view>
+                            <view class="m_item">
+                                <text class="m_info">施工单位自检记录</text>
+                                <text>{{item.selfInspectionRecord}}</text>
+                            </view>
+                        </navigator>
+                    </view>
+                </block>
+            </van-tab>
+        </van-tabs>
+    </view>
+    <view class="footer">
+        <view bindtap="sendback" wx:if="{{info.formid}}">
+            <icon class="iconfont icon-wj-thwj"></icon>
+            <text>退回上步</text>
+        </view>
+        <view>
+            <navigator open-type="redirect" url="/OAmoudle/pages/security/new/new?id={{info.ID}}" hover-class="none">
+                <icon class="iconfont icon-bianji"></icon>
+                <text>编辑</text>
+            </navigator>
+        </view>
+         <view bindtap="putin" wx:if="{{isnext}}">
+            <icon class="iconfont icon-tijiao"></icon>
+            <text>提交下步</text>
+        </view>
+    </view>
+</view>

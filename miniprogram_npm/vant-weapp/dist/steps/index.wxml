@@ -8,7 +8,7 @@
       class="{{ utils.bem('step', [direction, status(index, active)]) }} van-hairline"
     >
       <view class="van-step__title" style="{{ index>=active ? 'color: ' + activeColor : '' }}">
-        <view>{{ item.text }}</view>
+        <text>{{ item.text }}</text>
         <view>{{ item.desc }}</view>
       </view>
       <view class="van-step__circle-container">

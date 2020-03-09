@@ -162,29 +162,31 @@ Page({
       section3: app.globalData.table,
       section2: app.globalData.Principal
     })
-    getdep({
-      UserName: userinfo.UserName
-    }).then(res => {
-      // console.log(res)
-      var s = JSON.parse(res)
-      if (s[0]) {
-        leadership({
-          departmentID: s[0].ID
-        }).then(res => {
-          // console.log(res)
-          if (res.code == 10000) {
-            this.dispose(res)
+    var user = wx.getStorageSync("myInfo");
+    if (user) {
+      getdep({
+        UserName: user.UserName
+      }).then(res => {
+        console.log(res)
+        var s = JSON.parse(res)
+        if (s[0]) {
+          leadership({
+            departmentID: s[0].ID
+          }).then(res => {
+            console.log(res)
+            if (res.code == 10000) {
+              this.dispose(res)
+            }
+          })
+        }
 
-          }
-        })
-        leadership({
-          departmentID: s[0].ID
-        }).then(res => {
-          console.log(res)
-        })
-      }
+      })
+    }else{
+      this.setData({
+        news: false
+      })
+    }
 
-    })
   },
 
   // 综合搜索
