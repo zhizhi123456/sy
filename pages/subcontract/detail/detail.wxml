@@ -123,7 +123,7 @@
     <view class="footer" wx:if="{{hadNew||me||applyT||ISconduct}}">
         <view bindtap="sendback" wx:if="{{info.formid&&isnext&&returned&&isreturn}}">
             <icon class="iconfont icon-wj-thwj"></icon>
-            <text>退回上步</text>
+            <text>退回</text>
         </view>
         <view>
             <navigator open-type="redirect" url="/pages/subcontract/new/new?id={{info.ID}}&rid={{rid}}&title={{title}}&{{userid?'userid='+userid+'&caption='+caption+'&dep='+dep+'&deptxt='+deptxt+'&ISconduct='+ISconduct:''}}" hover-class="none">
@@ -133,7 +133,7 @@
         </view>
         <view bindtap="putin" wx:if="{{isnext&&returned}}">
             <icon class="iconfont icon-tijiao"></icon>
-            <text>提交下步</text>
+            <text>审核通过</text>
         </view>
     </view>
 </view>

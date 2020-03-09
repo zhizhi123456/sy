@@ -2,6 +2,8 @@
 import {
   referVacate,
   cancelVacate,
+  amendVacate,
+  Leavetypelist
 } from '../../../../service/getData.js';
 var app = getApp();
 var util = require("../../../../utils/util");
@@ -16,10 +18,19 @@ Page({
     tab: 'a',
     returned: true,
     isreturn: true,
+    leavetypetext: '',
+    small: {
+      ApprovalOpinion: ""
+    }
   },
   // 返回
   return () {
-    util.OAreturn('vacate');
+
+    if (this.data.history) {
+      util.OAreturn('vacate', this);
+    } else {
+      util.OAreturn('vacate');
+    }
   },
   /**
    * 生命周期函数--监听页面加载
@@ -28,35 +39,85 @@ Page({
     wx.showLoading({
       title: '加载中',
     });
+    if (!options.history) {
+      wx.setStorageSync('history', '')
+    }
+    this.setData({
+      history: options.history
+    })
+    util.readRecordlist('leaveapplyform', options.id, this, '请假')
     if (options.id) {
       referVacate({
         ID: options.id
       }).then(res => {
         console.log(res)
         if (res.code == 10000) {
+          var history = wx.getStorageSync("history")
+          console.log(history)
           let item = res.Item;
+          if (history) {
+            item = history
+          }
           util.handleData(item, this, app.globalData.department);
           this.setData({
-            info: item
+            info: item,
+            applyT: Number(options.applyT)
           })
+          // amendVacate
+          if (this.data.applyT && this.data.info.ApplygetNew) {
+            let info = this.data.info;
+            info.ApplygetNew = false;
+            util.checkContent(info, this);
+            this.setData({
+              info
+            })
+            amendVacate(this.data.info).then(res => {
+              if (res.code == 10000) {
+                console.log('已查看')
+              }
+            })
+          }
           wx.hideLoading();
           // 调取工作流记录
           let mid = res.Item.formid;
-          util.workList(this, mid, 'leaveapplyform');
+          util.workList(this, mid, 'leaveapplyform', options.id);
           //处理状态判断
-          util.checkState(this, res.Item.formid || res.Item.Formid, 'leaveapplyform', item.CurStepbh);
+          util.checkState(this, res.Item.formid || res.Item.Formid, 'leaveapplyform', item.CurStepbh, '');
         }
       })
     }
   },
   // 工作流流转
-  // 退回上步
-  sendback() {
-    util.Triggerflow(this, 'return', 'leaveapplyform', 'vacate', '', '', '', '', '', '', 'oa')
+  // 退回
+  sendback(e) {
+    this.setData({
+      state: e.currentTarget.dataset.state
+    })
+    if (this.data.info.formid) {
+      this.setData({
+        pull: true,
+        show: true,
+      })
+    } else {
+      util.Triggerflow(this, 'return', 'leaveapplyform', 'vacate', '', '', '', '', '', '', 'oa')
+    }
   },
-  // 提交下步
-  putin() {
-    util.Triggerflow(this, 'next', 'leaveapplyform', 'vacate', '', '', '', '', '', '', 'oa')
+  // 审核通过
+  putin(e) {
+    console.log(e.currentTarget.dataset.state)
+    this.setData({
+      state: e.currentTarget.dataset.state
+    })
+    if (this.data.info.formid) {
+      this.setData({
+        pull: true,
+        show: true,
+      })
+    } else {
+      util.Triggerflow(this, 'next', 'leaveapplyform', 'vacate', '', '', '', '', '', '', 'oa')
+    }
+
+
   },
   // 删除
   delete() {
@@ -93,50 +154,36 @@ Page({
       info
     })
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {},
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  change() {
+    this.setData({
+      pull: true,
+      show: true,
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
+  onClose() {
+    this.setData({
+      show: false
+    });
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
+  meetplaceblur(e) {
+    let small = util.editInfosmall(e, this, e.detail.value);
+    this.setData({
+      small
+    })
   },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
+  // 组合查询
+  seachqur() {
+    console.log(this.data.small, this.data.state)
+    util.Triggerflow(this, this.data.state, 'leaveapplyform', 'vacate', '', '', '', '', '', '', 'oa', this.data.small.ApprovalOpinion)
   },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  change12(e) {
+    console.log(e)
+    if (e.currentTarget.dataset.i) {
+      // console.log(JSON.parse(e.currentTarget.dataset.i))
+      wx.setStorageSync('history', JSON.parse(e.currentTarget.dataset.i))
+      wx.redirectTo({
+        url: '/OAmoudle/pages/vacate/detail/detail?history=5&id=' + JSON.parse(e.currentTarget.dataset.i).ID
+      })
+    }
   }
 })

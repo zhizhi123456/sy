@@ -6,7 +6,12 @@
             <navigator open-type="redirect" url="/OAmoudle/pages/vacate/new/new" hover-class="none" class="fr newCreate">
                 新建
             </navigator>
-            <view class="apply">{{top}}</view>
+            <view class="apply" wx:if="{{ISconduct}}">
+                <van-dropdown-menu active-color="red">
+                    <van-dropdown-item value="{{val}}" options="{{pact}}" bindchange="changeItem" />
+                </van-dropdown-menu>
+            </view>
+            <view class="apply" wx:else>{{top}}</view>
         </view>
         <view class="seach">
             <icon class="iconfont icon-fuxuananniu fl s-sort" bindtap="showgroup"></icon>
@@ -15,7 +20,7 @@
                 <input value="{{seach}}" bindblur="setSeach" />
                 <view class="number" wx:if="{{!seach}}">
                     <icon class="iconfont icon-sousuo"></icon>
-                    <text wx:if="{{InfoList.length}}">共{{item.length}}条</text>
+                    <text wx:if="{{InfoList.length}}">共{{InfoList.length}}条</text>
                     <text wx:else>搜索</text>
                 </view>
                 <van-popup show="{{ show }}" bind:close="onClose" position="right" custom-style="height: 100vh;color:#333">
@@ -84,13 +89,19 @@
     </view>
     <view class="main">
         <view class="list" wx:for="{{InfoList}}" wx:key="index">
-            <navigator open-type="redirect" url="/OAmoudle/pages/vacate/detail/detail?id={{item.ID}}" hover-class="none">
-                <view>
+        <van-tag class="linkLThint" round type="danger" size="large" wx:if="{{(item.ApplygetNew&&item.ApplygetNew!=' ')&&applyT&&(index>1)}}" bindtap="findnew" data-index="{{index}}">
+                ↓↓
+            </van-tag>
+            <van-tag class="LThint" round type="danger" size="large" wx:if="{{(item.ApplygetNew&&item.ApplygetNew!=' ')&&applyT}}">
+                new
+            </van-tag>
+            <navigator open-type="redirect" url="/OAmoudle/pages/vacate/detail/detail?id={{item.ID}}&applyT={{applyT}}" hover-class="none">
+                <view id="{{'new'+index}}">
                     <text class="caption">{{item.leavetype}}</text>
                 </view>
                 <view>
                     <text class="info">当前任务状态</text>
-                    <text class="caution">{{Workstates[index]}}</text>
+                    <text class="caution">{{item.CurStepName}}</text>
                 </view>
                 <view>
                     <text class="info">请假类型</text>
@@ -115,10 +126,6 @@
                 <view>
                     <text class="info">创建时间</text>
                     <text>{{item.createtime}}</text>
-                </view>
-                <view>
-                    <text class="info">当前步骤名称</text>
-                    <text>{{item.CurStepName}}</text>
                 </view>
             </navigator>
         </view>

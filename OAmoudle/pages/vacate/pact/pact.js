@@ -2,10 +2,10 @@
 import {
   getVacate,
   groupVacate,
-} from '../../../../service/getData';
+  Leavetypelist
+} from '../../../../service/getData.js';
 var app = getApp();
 var util = require("../../../../utils/util");
-let item, list;
 let userinfo = wx.getStorageSync("myInfo");
 Page({
   /**
@@ -20,12 +20,20 @@ Page({
     item: [],
     pages: 1,
     hadNew: 1,
-    info: {}
+    info: {},
+    applyT: 0,
+    leavetypetext:''
   },
   // 返回
   return () {
     let menus = wx.getStorageSync('menus');
-    util.returnMenu2(menus.id, menus.title);
+    if (menus.title =='我的申请'|| menus.title=='当前任务') {
+      wx.redirectTo({
+        url: "/pages/current/current/current?title=" + this.data.options.title + '&id=' + (this.data.options.id || this.data.options.rid)
+      });
+    } else {
+      util.returnMenu2(menus.id, menus.title);
+    }
   },
   setSeach(e) {
     // console.log(e)
@@ -35,59 +43,103 @@ Page({
   },
   // 模糊查询
   seachInfo() {
-    if (!(userinfo.UserName=='任涛')) {
-      wx.showLoading({
-        title: '加载中',
-      });
-      groupVacate({state:'所有',UserName:userinfo.UserName}).then(res => {
-        if (res.code == 10000) {
-          item = res.List;
-          list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list, this, 'leaveapplyform');
-          this.setData({
-            InfoList: list,
-            item,
-            info: {},
-            loading: false,
-            departmenttext: ''
-          })
-          wx.hideLoading();
-        }
-      })
-    } else {
-      list = [];
-      wx.showLoading({
-        title: '加载中',
-      });
-      this.setData({
-        pages: 1
-      })
-      getVacate({
-        applyman: this.data.seach
-      }).then(res => {
-        // console.log(res)
-        if (res.code == 10000) {
-          item = res.List;
-          list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list, this, 'leaveapplyform');
-          this.setData({
-            InfoList: list,
-            item,
-            seach: ''
-          })
-          wx.hideLoading();
-        }
-      })
-    }
+    wx.showLoading({
+      title: '加载中',
+    });
+    groupVacate(this.data.info).then(res => {
+      if (res.code == 10000) {
+        let item = res.List;
+        util.listData(item, app.globalData.department);
+        this.setData({
+          InfoList: item.reverse()
+        })
+        wx.hideLoading();
+      }
+    })
+  },
+  changeItem(e) {
+    console.log(e)
+    let StateStr = (this.data.pact[e.detail].text).slice(0, 3);
+    let info = this.data.info;
+    info = {}
+    info.UserName = userinfo.UserName
+    info.state = StateStr;
+    this.setData({
+      info
+    })
+    this.seachInfo()
+
 
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function (option) {
+    console.log(option)
     userinfo = wx.getStorageSync("myInfo");
-    if (options.id) {
-      wx.setStorageSync('menus', options)
+    if (option.id || option.caption) {
+      wx.setStorageSync('menus', option)
     }
-    list = [];
+    var options = wx.getStorageSync("menus")
+    this.setData({
+      options
+    })
+    if (options.title == '当前任务') {
+      let info = this.data.info;
+      info = {}
+      info.UserName = userinfo.UserName
+      info.state = '未处理'
+      this.setData({
+        info,
+        options,
+        ISconduct: 1,
+        val: 0,
+        pact: [{
+            text: '未处理的请假',
+            value: 0
+          },
+          {
+            text: '已处理的请假',
+            value: 1
+          },
+          {
+            text: '已超时的请假',
+            value: 2
+          }
+        ]
+      })
+    }
+    if (options.title == '我的申请') {
+      let info = this.data.info;
+      info = {}
+      info.applyman = userinfo.UserName
+      this.setData({
+        info,
+        options,
+        top: '我申请的请假',
+        applyT: 1
+      })
+    }
+    if (options.title == '我的信息') {
+      let info = this.data.info;
+      info = {}
+      info.applyman = userinfo.UserName
+      this.setData({
+        info,
+        options,
+        top: '我的请假'
+      })
+    }
+    if (options.id == '2055') {
+      let info = this.data.info;
+      info = {}
+      info.UserName = userinfo.UserName
+      this.setData({
+        options,
+        info
+      })
+    }
+
     wx.showLoading({
       title: '加载中',
     });
@@ -111,80 +163,60 @@ Page({
       }
     }
   },
+  showgroup(){
+    this.setData({
+      show: true,
+    })
+    this.showgroup11()
+  },
   // 组合查询
-  showgroup() {
-    this.setData({
-      show: true
-    })
-  },
-  onClose() {
-    this.setData({
-      show: false
-    })
-  },
-  onConfirm_seach() {
-    list = [];
-    wx.showLoading({
-      title: '加载中',
-    });
-    this.setData({
-      pages: 1
-    })
-    if (!(userinfo.UserName=='任涛')) {
-      var info = this.data.info
-      info.state='所有',
+  showgroup11() {
+   
+    var options = this.data.options
+    if (options.title == '当前任务') {
+      let info = this.data.info;
+      info = {}
+      info.UserName = userinfo.UserName
+      info.state = '未处理'
+      this.setData({
+        info
+      })
+    }
+    if (options.title == '我的申请') {
+      let info = this.data.info;
+      info = {}
+      info.applyman = userinfo.UserName
+      this.setData({
+        info
+      })
+    }
+    if (options.title == '我的信息') {
+      let info = this.data.info;
+      info = {}
+      info.applyman = userinfo.UserName
+      this.setData({
+        info
+      })
+    }
+    if (options.id == '2055') {
+      let info = this.data.info;
+      info = {}
       info.UserName = userinfo.UserName
       this.setData({
         info
       })
     }
-    if (this.data.info.applyman || this.data.info.leavetype || this.data.info.department || this.data.info.leavereason || this.data.info.leavedays || this.data.info.begintime || this.data.info.state) {
-      let info = this.data.info;
-      if (info.leavetype) {
-        this.data.Leavetypelist.forEach(res => {
-          if (info.leavetype == res.text) {
-            info.leavetype = res.value;
-          }
-        })
-        this.setData({
-          info
-        })
-      }
-      groupVacate(this.data.info).then(res => {
-        if (res.code == 10000) {
-          item = res.List;
-          list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list, this, 'leaveapplyform');
-          this.setData({
-            InfoList: list,
-            item,
-            loading: false,
-            departmenttext: ''
-          })
-          if (!(userinfo.UserName=='任涛')) {
-            var info = this.data.info
-            info.state='所有',
-            info.UserName = userinfo.UserName
-            this.setData({
-              info
-            })
-          }else{
-            this.setData({
-              info:{}
-            })
-          }
-          wx.hideLoading();
-        }
-      })
-      this.setData({
-        show: false
-      })
-    } else(
-      wx.showToast({
-        title: '请至少输入一项内容',
-        icon: 'none',
-        duration: 3000
-      })
-    )
+
+  },
+  onClose() {
+    this.setData({
+      show: false
+    })
+    this.showgroup11()
+  },
+  onConfirm_seach() {
+    console.log(this.data.applyT)
+    util.qgroupdeliver(groupVacate, this,'','',this.showgroup11)
   },
   // 申请人
   applymanblur(e) {
@@ -311,6 +343,14 @@ Page({
       info
     })
   },
+  findnew(e) {
+    console.log(e)
+    let index = e.currentTarget.dataset.index - 1;
+    wx.pageScrollTo({
+      selector: '#new' + index,
+      duration: 500
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -347,29 +387,7 @@ Page({
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
-    if (item.length > 5 && list.length < item.length) {
-      this.setData({
-        loading: true
-      })
-      let pages = this.data.pages,
-        n = Math.ceil(item.length / 5);
-      if (n > pages) {
-        setTimeout(() => {
-          pages = pages + 1;
-          list = util.listData(item, app.globalData.department, pages, list);
-          this.setData({
-            pages,
-            InfoList: list,
-          })
-        }, 1000)
-      }
-    } else {
-      this.setData({
-        loading: false
-      })
-    }
-  },
+  onReachBottom: function () {},
 
   /**
    * 用户点击右上角分享

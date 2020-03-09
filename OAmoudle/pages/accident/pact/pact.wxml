@@ -1,0 +1,120 @@
+<!-- textages/textact/textact.wxml -->
+<view class="wraper">
+    <!-- 头部 -->
+    <view class="header">
+        <view class="title">
+            <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
+            <navigator open-type="redirect" url="/OAmoudle/pages/accident/new/new" hover-class="none" class="fr newCreate">
+                新建
+            </navigator>
+            <view class="apply">
+               <text>重大工程质量事故报告</text>
+            </view>
+        </view>
+        <view class="seach">
+            <icon class="iconfont icon-fuxuananniu fl s-sort" bindtap="change"></icon>
+            <icon class="iconfont icon-sousuo fr"bindtap="seachInfo"></icon>
+            <view class="data_list">
+                <input value="{{seach}}" bindblur="setSeach" />
+                <view class="number" wx:if="{{!seach}}">
+                    <icon class="iconfont icon-sousuo"></icon>
+                    <text wx:if="{{InfoList.length}}">共{{InfoList.length}}条</text>
+                    <text wx:else>搜索</text>
+                </view>
+            </view>
+              <van-popup show="{{ show }}" bind:close="onClose" position="right" overlay="{{ true }}" custom-style="height: 100vh;color:#333" custom-class="pullpo" bind:click-overlay="onClose">
+                <van-toast id="van-toast" />
+                <view class="seachif scroll-view" scroll-y="true">
+                    <view>
+                        <view class="seach_item">
+                            <van-field value="{{info.projectcode}}" bind:focus="showPopup_o" class="time1" title-class="time1" label="工程编号" placeholder="请选择" />
+                            <van-popup show="{{show_o}}" round position="bottom" bind:close="onClose_o">
+                                <van-picker data-name="projectcode" show-toolbar columns="{{ section10 }}" bind:cancel="onClose_o" bind:confirm="onConfirm_o" />
+                            </van-popup>
+                        </view>
+                          <view class="seach_item">
+                            <van-field value="{{info.architect}}" bind:focus="showPopup2" class="time1" title-class="time1" label="设计单位" placeholder="请选择" />
+                            <van-popup show="{{show2}}" round position="bottom" bind:close="onClose2">
+                                <van-picker data-name="architect" show-toolbar columns="{{ sections }}" bind:cancel="onClose2" bind:confirm="onConfirm2" />
+                            </van-popup>
+                        </view>
+                          <view class="seach_item">
+                            <van-field value="{{info.Constructionunit}}" bind:focus="showPopup3" class="time1" title-class="time1" label="施工单位" placeholder="请选择" />
+                            <van-popup show="{{show3}}" round position="bottom" bind:close="onClose3">
+                                <van-picker data-name="Constructionunit" show-toolbar columns="{{ sections }}" bind:cancel="onClose3" bind:confirm="onConfirm3" />
+                            </van-popup>
+                        </view>
+                         <view class="seach_item">
+                            <van-field value="{{info.Companytitle}}" bind:focus="showPopup4" class="time1" title-class="time1" label="填报单位" placeholder="请选择" />
+                            <van-popup show="{{show4}}" round position="bottom" bind:close="onClose4">
+                                <van-picker data-name="Companytitle" show-toolbar columns="{{ sections }}" bind:cancel="onClose4" bind:confirm="onConfirm4" />
+                            </van-popup>
+                        </view>
+                          <view class="seach_item">
+                            <van-field value="{{info.createman }}" bind:focus="showPopup5" class="time1" title-class="time1" label="创建人" placeholder="请选择" />
+                            <van-popup show="{{show5}}" round position="bottom" bind:close="onClose5">
+                                <van-picker data-name="createman" show-toolbar columns="{{ section5 }}" bind:cancel="onClose5" bind:confirm="onConfirm5" />
+                            </van-popup>
+                        </view>
+                        <view class="seach_item">
+                            <van-field value="{{info.begintime}}" bind:focus="showPopup_time" class="time1" label="发生事故时间开始时间" placeholder="请选择" />
+                            <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
+                                <van-datetime-picker data-name="begintime" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
+                            </van-popup>
+                        </view>
+                        <view class="seach_item">
+                            <van-field value="{{info.endtime}}" bind:focus="showPopup_endtime" class="time1" label="发生事故时间结束时间" placeholder="请选择" />
+                            <van-popup show="{{ show_endtime }}" round position="bottom" bind:close="onClose_endtime">
+                                <van-datetime-picker data-name="endtime" value="{{ currentDate1 }}" bind:cancel="onClose_endtime" bind:confirm="onConfirm_endtime" />
+                            </van-popup>
+                        </view>
+                        <view class="checkkind">
+                            <text bind:tap="onClose">取消</text>
+                            <text bind:tap="seachqur">确认</text>
+                        </view>
+                    </view>
+                </view>
+            </van-popup>
+        </view>
+    </view>
+    <view class="main">
+        <view class="list" wx:for="{{InfoList}}" wx:key="{{index}}">
+            <navigator open-type="redirect" url="/OAmoudle/pages/accident/detail/detail?id={{item.ID}}" hover-class="none">
+                <!-- <view>
+                    <text class="caption">{{item.verifysubprocode}}</text>
+                </view> -->
+                <view>
+                    <text class="info">工程编号</text>
+                    <text>{{item.projectcode}}</text>
+                </view>
+                <view>
+                    <text class="info">地点</text>
+                    <text>{{item.sites}}</text>
+                </view>
+                <view>
+                    <text class="info">发生事故时间</text>
+                    <text>{{item.timeOfAccident}}</text>
+                </view>
+                <view>
+                    <text class="info">创建人</text>
+                    <text>{{item.createman}}</text>
+                </view>
+                <view>
+                    <text class="info">创建时间</text>
+                    <text>{{item.createtime}}</text>
+                </view>
+                <view>
+                    <text class="info">修改人</text>
+                    <text>{{item.updateman}}</text>
+                </view>
+                <view>
+                    <text class="info">修改时间</text>
+                    <text>{{item.updatetime}}</text>
+                </view>
+            </navigator>
+        </view>
+        <view wx:if="{{loading&&InfoList.length}}" class="end">加载中...</view>
+        <view wx:if="{{!loading&&InfoList.length}}" class="end">已经到底了</view>
+        <view class="no_more" wx:if="{{!InfoList.length}}">暂无内容</view>
+    </view>
+</view>

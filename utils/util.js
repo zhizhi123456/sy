@@ -86,7 +86,7 @@ const checkContent = (value, key) => {
   if (!value.formid) {
     value.formid = null;
   }
-  // //console.log("0")
+  // console.log("0")
   value.createtime = format(new Date());
   let user = wx.getStorageSync("myInfo");
   if (user) {
@@ -102,12 +102,12 @@ const checkContent = (value, key) => {
     value.API_Picurl = value.API_Picurl.join(",")
   }
   var app = getApp();
-  // 请假类别
-  app.globalData.Leavetypelist.forEach(res => {
-    if (value.leavetype == res.text) {
-      value.leavetype = res.value
-    }
-  })
+  // // 请假类别
+  // app.globalData.Leavetypelist.forEach(res => {
+  //   if (value.leavetype == res.text) {
+  //     value.leavetype = res.value
+  //   }
+  // })
   // 分包合同类型
   app.globalData.contractType.forEach(res => {
     if (value.contractType == res.text) {
@@ -378,20 +378,20 @@ const checkChange = (value, key, dep) => {
     })
   }
   var app = getApp();
-  // 请假类别
-  app.globalData.Leavetypelist.forEach(res => {
-    if (value.leavetype == res.text) {
-      value.leavetype = res.value
-    }
-  })
-   // 分包合同类型
-   app.globalData.contractType.forEach(res => {
+  // // 请假类别
+  // app.globalData.Leavetypelist.forEach(res => {
+  //   if (value.leavetype == res.text) {
+  //     value.leavetype = res.value
+  //   }
+  // })
+  // 分包合同类型
+  app.globalData.contractType.forEach(res => {
     if (value.contractType == res.text) {
       value.contractType = res.value
     }
   })
-   // 快递类别
-   app.globalData.ExpressageType.forEach(res => {
+  // 快递类别
+  app.globalData.ExpressageType.forEach(res => {
     if (value.classID == res.text) {
       value.classID = res.value
     }
@@ -629,20 +629,20 @@ const handleData = (data, key, dep) => {
       data[i] = ""
     }
   }
-  // 请假类别
+  // // 请假类别
   app.globalData.Leavetypelist.forEach(depart => {
     if (data.leavetype == depart.value) {
       data.leavetype = depart.text
     }
   })
-   // 分包合同类型
-   app.globalData.contractType.forEach(res => {
+  // 分包合同类型
+  app.globalData.contractType.forEach(res => {
     if (data.contractType == res.value) {
       data.contractType = res.text
     }
   })
-   // 快递类别
-   app.globalData.ExpressageType.forEach(res => {
+  // 快递类别
+  app.globalData.ExpressageType.forEach(res => {
     if (data.classID == res.value) {
       data.classID = res.text
     }
@@ -889,6 +889,22 @@ const handleData = (data, key, dep) => {
     }
     data.mainprojecttype = kinds.join(",");
   }
+  // if (data.leavetype) {
+  //   var kinds = [];
+  //   data.leavetype.split(",").forEach(res => {
+  //     app.globalData.Leavetypelist.forEach(depart => {
+  //       if (res == depart.value) {
+  //         if (kinds.indexOf(depart.text) == -1) {
+  //           kinds.push(depart.text)
+  //         }
+  //       }
+  //     })
+  //   })
+  //   if (data.leavetype && data.leavetype.split(",").length > kinds.length) {
+  //     kinds.push("**");
+  //   }
+  //   data.leavetype = kinds.join(",");
+  // }
 
   if (data.amountPlan && data.amountQuantity) {
     let num = (data.amountPlan - data.amountQuantity) / data.amountPlan * 100;
@@ -943,24 +959,24 @@ const listData = (data, dep, page, list, key, billname) => {
         value.EngineerProgress = res.text;
       }
     })
-    // 请假类别
-    app.globalData.Leavetypelist.forEach(depart => {
-      if (value.leavetype == depart.value) {
-        value.leavetype = depart.text
+    // // 请假类别
+    // app.globalData.Leavetypelist.forEach(depart => {
+    //   if (value.leavetype == depart.value) {
+    //     value.leavetype = depart.text
+    //   }
+    // })
+    // 分包合同类型
+    app.globalData.contractType.forEach(res => {
+      if (value.contractType == res.value) {
+        value.contractType = res.text
       }
     })
-    // 分包合同类型
-   app.globalData.contractType.forEach(res => {
-    if (value.contractType == res.value) {
-      value.contractType = res.text
-    }
-  })
     // 快递类别
-   app.globalData.ExpressageType.forEach(res => {
-    if (value.classID == res.value) {
-      value.classID = res.text
-    }
-  })
+    app.globalData.ExpressageType.forEach(res => {
+      if (value.classID == res.value) {
+        value.classID = res.text
+      }
+    })
     // 耗材类型
     app.globalData.SuppliesType.forEach(res => {
       if (value.classID == res.value) {
@@ -1085,6 +1101,23 @@ const listData = (data, dep, page, list, key, billname) => {
         })
       })
     }
+
+    if (value.leavetype) {
+      var kinds = [];
+      value.leavetype.split(",").forEach(res => {
+        app.globalData.Leavetypelist.forEach(depart => {
+          if (res == depart.value) {
+            if (kinds.indexOf(depart.text) == -1) {
+              kinds.push(depart.text)
+            }
+            // if (value.mainprojecttype && value.mainprojecttype.split(",").length > kinds.length) {
+            //   kinds.push("**");
+            // }
+            value.leavetype = kinds.join(",");
+          }
+        })
+      })
+    }
   });
   if (page) {
     let num = Math.ceil(data.length / 5);
@@ -1119,7 +1152,7 @@ const updateValue = (e, key) => {
   let name = e.currentTarget.dataset.name,
     i = e.currentTarget.dataset.i;
   let materials = key.data.materials;
-  console.log(name, i, materials)
+  // console.log(name, i, materials)
   if (i) {
     materials[i][name] = e.detail && e.detail.value;
   } else {
@@ -1209,8 +1242,8 @@ const upImage = (key, way) => {
             name: 'img_data',
             success(res) {
               uploadImgCount++;
-              console.log("https://shangyongren.com:9098" + res.data.replace(/"/g, ""))
-              // //console.log(res)
+              // console.log("https://shangyongren.com:9098" + res.data.replace(/"/g, ""))
+              // console.log(res)
               if (res.statusCode == 200) {
                 info.API_Picurl.push("https://shangyongren.com:9098" + res.data.replace(/"/g, ""))
                 that.setData({
@@ -1225,7 +1258,7 @@ const upImage = (key, way) => {
               }
             },
             fail: err => {
-              //console.log(err)
+              console.log(err)
             }
           })
         }
@@ -1276,17 +1309,19 @@ const returnMenu2 = (id, title) => {
     url: `/pages/secondary/secondary?id=${id}&title=${title}`
   })
 }
-const workList = (key, id, billname) => {
-  console.log(id, billname)
+const workList = (key, id, billname, ID) => {
+  // console.log(id, billname)
   let userinfo = wx.getStorageSync("myInfo");
   if (id) {
     console.log({
       formName: billname,
-      formid: id
+      formid: id,
+      ID
     })
     referflow({
       formName: billname,
-      formid: id
+      formid: id,
+      ID
     }).then(res => {
       console.log(res)
       if (res.code == 10000) {
@@ -1298,8 +1333,9 @@ const workList = (key, id, billname) => {
             if (res.ApplyTime) {
               longlength--;
             }
+            var t = res.NewApplyStats + (res.ApprovalOpinion ? ('\n' + '审批意见: ' + res.ApprovalOpinion) : '') + (res.state ? ('\n' + '是否退回: ' + res.state) : '')
             steps.push({
-              text: res.NewApplyStats,
+              text: t,
               desc: res.ApplyTime ? res.ApplyTime : ''
             })
             if (steps.length == result.length) {
@@ -1322,8 +1358,9 @@ const workList = (key, id, billname) => {
     record({
       formid: id
     }).then(res => {
+      console.log(res)
       if (res.code == 10000) {
-        //console.log(res)
+        console.log(res)
         let step = res.list;
         // if (step.length) {
         //   step.forEach(item => {
@@ -1364,8 +1401,10 @@ const workList = (key, id, billname) => {
   } else {
     unreferflow({
       formName: billname,
-      userName: userinfo.UserName
+      userName: userinfo.UserName,
+      ID
     }).then(res => {
+      console.log(res)
       if (res.code == 10000) {
         let result = res.WorkflowRecordList;
         if (result.length) {
@@ -1392,13 +1431,10 @@ const workList = (key, id, billname) => {
   }
 }
 //处理状态判断
-const checkState = (key, id, chart, bh, Workstates) => {
-
+const checkState = (key, id, chart, bh, Workstates, ID) => {
   let userinfo = wx.getStorageSync("myInfo");
   console.log(chart && userinfo.UserName)
   var i = setInterval(function () {
-      
-  
     if (!(chart && userinfo.UserName)) {
       console.log("数据未载入")
     } else {
@@ -1408,13 +1444,13 @@ const checkState = (key, id, chart, bh, Workstates) => {
           formName: chart,
           currowbh: bh,
           userName: userinfo.UserName,
-          formid: id
+          formid: id,
         })
         valid({
           formName: chart,
           currowbh: bh,
           userName: userinfo.UserName,
-          formid: id
+          formid: id,
         }).then(res => {
           console.log(res)
           if (res.code == 10000) {
@@ -1456,21 +1492,28 @@ const checkState = (key, id, chart, bh, Workstates) => {
   }, 1000);
 }
 // 工作流流转
-const Triggerflow = (key, direction, sheet, piece, id, cap, dep, dert, rid, tit, oa) => {
+const Triggerflow = (key, direction, sheet, piece, id, cap, dep, dert, rid, tit, oa, ApprovalOpinion) => {
   let userinfo = wx.getStorageSync("myInfo");
-  // //console.log(userinfo)
+  console.log({
+    ID: key.data.info.ID,
+    mark: direction,
+    userName: userinfo.UserName,
+    formName: sheet,
+    ApprovalOpinion
+  })
   if (userinfo) {
     flow({
       ID: key.data.info.ID,
       mark: direction,
       userName: userinfo.UserName,
-      formName: sheet
+      formName: sheet,
+      ApprovalOpinion
     }).then(res => {
-      // //console.log(res)
+      // console.log(res)
       if (res.code == 10000) {
         if (direction == "next") {
           wx.showToast({
-            title: '提交下步成功',
+            title: '审核通过成功',
             icon: 'success',
             duration: 2000
           })
@@ -1591,7 +1634,7 @@ const upImages = (key, img) => {
             name: 'img_data',
             success(res) {
               uploadImgCount++;
-              // //console.log(res)
+              // console.log(res)
               if (res.statusCode == 200) {
                 img.push("https://shangyongren.com:9098" + res.data.replace(/"/g, ""))
                 that.setData({
@@ -1606,7 +1649,7 @@ const upImages = (key, img) => {
               }
             },
             fail: err => {
-              //console.log(err)
+              console.log(err)
             }
           })
         }
@@ -1645,7 +1688,7 @@ const defaultimgs = (e, key, img) => {
 // 是否
 
 const whether = (content) => {
-  // //console.log(content)
+  // console.log(content)
   if (content == "是") {
     var c = true
     return c
@@ -1664,7 +1707,7 @@ const whether = (content) => {
     return c
   }
   if (content === null) {
-    // //console.log("1")
+    // console.log("1")
     var c = ''
     return c
   }
@@ -1776,7 +1819,7 @@ const intro = (data, that) => {
     }
   })
   // accident
-  // //console.log(app.globalData.Companytitle)
+  // console.log(app.globalData.Companytitle)
   app.globalData.Companytitle.forEach(s => {
     if (s.text == data.architect) {
       data.architect = s.value
@@ -1832,7 +1875,7 @@ const intro = (data, that) => {
       data.bulidcompanyname = s.value
     }
   })
-  // //console.log("2")
+  // console.log("2")
   app.globalData.IntentionClass.forEach(s => {
     if (s.text == data.TellIntentionClass) {
       data.TellIntentionClass = s.value
@@ -1939,12 +1982,18 @@ const intro = (data, that) => {
       data.type = s.value
     }
   })
+  // // 请假类别
+  app.globalData.Leavetypelist.forEach(depart => {
+    if (data.leavetype == depart.text) {
+      data.leavetype = depart.value
+    }
+  })
   data.isstick = whether(data.isstick)
   data.issubdivision = whether(data.issubdivision)
 }
 const outflow = (data, that) => {
   // 合同签订情况
-  // //console.log(data)
+  // console.log(data)
   var app = getApp()
   app.globalData.department.forEach((s) => {
     if (s.value == data.department) {
@@ -2172,6 +2221,12 @@ const outflow = (data, that) => {
       data.type = s.text
     }
   })
+  // // 请假类别
+  app.globalData.Leavetypelist.forEach(depart => {
+    if (data.leavetype == depart.value) {
+      data.leavetype = depart.text
+    }
+  })
   data.isstick = whethercontent(data.isstick)
   data.issubdivision = whethercontent(data.issubdivision)
   data.IfWfComplete = whethercontent(data.IfWfComplete)
@@ -2183,7 +2238,7 @@ const outflowlist = (list, that) => {
 
   if (list) {
     list.forEach(data => {
-      // //console.log(data)
+      // console.log(data)
       outflow(data)
       // 
     })
@@ -2194,14 +2249,14 @@ const introlist = (list, that) => {
   var that = this
   if (list) {
     list.forEach(data => {
-      // //console.log(data)
+      // console.log(data)
       intro(data)
       // 
     })
   }
 }
 // 组合查询
-const qgroupdeliver = (funcname, that, hadNew, hadMy) => {
+const qgroupdeliver = (funcname, that, hadNew, hadMy, fun) => {
   var app = getApp();
   // 判断是否全部为空
   var zhen = []
@@ -2290,6 +2345,7 @@ const qgroupdeliver = (funcname, that, hadNew, hadMy) => {
               item = res.List;
             }
             outflowlist(item, this)
+            // console.log(item)
             for (let k of item) {
               for (let i in k) {
                 if (k[i] == null || k[i] == "null" || !k[i]) {
@@ -2328,7 +2384,7 @@ const qgroupdeliver = (funcname, that, hadNew, hadMy) => {
             } else {
               // 进入部门看
               for (var key in info) {
-                // //console.log(key)
+                // console.log(key)
                 if (!(key == 'chargemanName') && !(key == 'designman')) {
                   info[key] = ''
                 }
@@ -2340,6 +2396,10 @@ const qgroupdeliver = (funcname, that, hadNew, hadMy) => {
             that.setData({
               InfoList: item
             })
+            if (fun) {
+              fun()
+            }
+
             wx.hideLoading();
           } else {
             // 请求失败
@@ -2364,7 +2424,8 @@ const qgroupdeliver = (funcname, that, hadNew, hadMy) => {
                 info
               })
             }
-            // //console.log(info)
+            fun()
+            // console.log(info)
           }
         })
       }
@@ -2395,7 +2456,7 @@ const qgroupsmall = (funcname, that) => {
       duration: 2000
     })
   } else {
-    // //console.log(that.data.small)
+    // console.log(that.data.small)
     let small = that.data.small;
     for (let i in small) {
       if (small[i] == "请选择" || !small[i] || small[i] == "") {
@@ -2416,7 +2477,7 @@ const qgroupsmall = (funcname, that) => {
     funcname(
       infodata
     ).then(res => {
-      // //console.log(res)
+      // console.log(res)
       wx.showLoading({
         title: '加载中',
       });
@@ -2470,7 +2531,7 @@ const qgroupsmall = (funcname, that) => {
 }
 const title = (() => {
   Companytitle().then(res => {
-    //console.log(res)
+    console.log(res)
   })
 })
 const expurgate = ((that, funcname, section) => {
@@ -2503,12 +2564,12 @@ const OAexpurgate = ((that, funcname, section) => {
   wx.showModal({
     content: '确定删除吗？',
     success(res) {
-      //console.log(that.data.info.ID)
+      console.log(that.data.info.ID)
       if (res.confirm) {
         funcname({
           ID: that.data.info.ID
         }).then(res => {
-          //console.log(res)
+          console.log(res)
           if (res.code == 10000) {
             wx.showToast({
               title: '删除成功',
@@ -2596,12 +2657,43 @@ const ModifyRecord = ((oldrecord, sheet) => {
     }
   })
 })
+const readRecordlist = ((sheet, datum, that, datumname) => {
+  qgroupfile({
+    Timestamp: format(new Date()),
+    TableName: sheet,
+    Form_id: datum
+  }).then(res => {
+    console.log(res)
+    var record = []
+    var modification = res.List.reverse()
+    // contrastfile
+    var record = []
+    if (modification) {
+      modification.forEach(item => {
+        // console.log(item)
+        var oldcontext = item.oldcontext
+        var a = {
+          text: item.updateman + ' '+datumname + '资料变更',
+          desc: item.updatetime,
+          oldcontext
+        }
+        record.push(a)
+      })
+      that.setData({
+        amendant: record
+      })
+    }
+    // console.log(record)
+  })
+})
+
 const readRecord = ((sheet, datum, that, datumname) => {
   qgroupfile({
     Timestamp: format(new Date()),
     TableName: sheet,
     Form_id: datum
   }).then(res => {
+    console.log(res)
     var record = []
     var modification = res.List.reverse()
     // contrastfile
@@ -2681,9 +2773,27 @@ const readRecord = ((sheet, datum, that, datumname) => {
     }
     // console.log(record)
   })
-
 })
+const multiple = (that, field, fieldtext) => {
+
+  var t = that.data.section1
+  var q = field
+  q = q.split(",")
+  q.forEach(qs => {
+    t.forEach(ts => {
+      if (qs == ts.Key) {
+        console.log(ts.Value)
+        qs = ts.Value
+      }
+    })
+  })
+  q = q.join(",")
+  field = q
+  console.log(q)
+}
 module.exports = {
+  readRecordlist,
+  multiple,
   readRecord,
   ModifyRecord,
   OAexpurgateDetail,

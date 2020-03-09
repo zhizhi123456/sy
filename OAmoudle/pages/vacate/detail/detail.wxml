@@ -2,11 +2,11 @@
 <view wx:if="{{info}}">
     <view class="header d_header">
         <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
-        <text class="fr newCreate" bindtap="delete">删除</text>
+        <text class="fr newCreate" bindtap="delete"wx:if="{{(!history)&&(!info.formid)}}">删除</text>
         <view class="apply">资料详情</view>
     </view>
     <view class="card">
-        <van-card title="{{info.leavetype}}"   />
+        <van-card title="{{info.leavetype}}" />
     </view>
     <view class="main_nav">
         <van-tabs active="{{tab}}">
@@ -35,6 +35,10 @@
                     <view class="c_item">
                         <view class="kind">请假天数</view>
                         <view class="check">{{info.leavedays}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">请假小时</view>
+                        <view class="check">{{info.leavehours}}</view>
                     </view>
                     <view class="c_item">
                         <view class="kind">请假开始时间</view>
@@ -86,7 +90,7 @@
                     </view>
                 </view>
             </van-tab>
-            <van-tab title="动态" name="b">
+            <van-tab title="动态" name="b" wx:if="{{!history}}">
                 <van-cell title="动态({{Workstate}})" />
                 <!-- <block wx:if="{{info.formid}}">
                     <van-steps steps="{{ steps }}" active="{{ active }}" direction="vertical" />
@@ -94,22 +98,50 @@
                 <view class="dynamic_state" wx:else>暂无动态</view> -->
                 <van-steps steps="{{ steps }}" active="{{ actived }}" direction="vertical" active-color="#008080" inactive-icon="stop-circle" />
             </van-tab>
+            <van-tab title="修改记录" name="d" wx:if="{{(!history)&&amendant.length}}">
+                <block wx:if="{{amendant}}">
+                    <van-cell title="记录({{amendant.length}})" />
+                    <!-- <van-steps steps="{{ amendant }}" active="{{ active }}" direction="vertical" bind:tap="change12" /> -->
+                    <block wx:for="{{amendant}}" wx:key="index"> 
+                          <van-cell title="{{item.text}}" label="{{item.desc}}" data-i='{{item.oldcontext}}' bind:tap="change12"/>
+                    </block>
+                </block>
+                <view class="dynamic_state" wx:else>暂无记录</view>
+            </van-tab>
         </van-tabs>
     </view>
-    <view class="footer">
-        <view bindtap="sendback" wx:if="{{info.formid&&isnext&&returned&&isreturn}}">
+    <view class="footer" wx:if="{{((info.formid&&isnext&&returned&&isreturn)||(!info.formid)||(isnext&&returned))&&(!history)}}">
+        <view bindtap="sendback" wx:if="{{info.formid&&isnext&&returned&&isreturn}}" data-state='return'>
             <icon class="iconfont icon-wj-thwj"></icon>
-            <text>退回上步</text>
+            <text>退回</text>
         </view>
-        <view>
+        <view wx:if="{{!info.formid}}">
             <navigator open-type="redirect" url="/OAmoudle/pages/vacate/new/new?id={{info.ID}}" hover-class="none">
                 <icon class="iconfont icon-bianji"></icon>
                 <text>编辑</text>
             </navigator>
         </view>
-        <view bindtap="putin" wx:if="{{isnext&&returned}}">
+        <view bindtap="putin" wx:if="{{isnext&&returned}}" data-state='next'>
             <icon class="iconfont icon-tijiao"></icon>
-            <text>提交下步</text>
+            <text>审核通过</text>
         </view>
+    </view>
+    <view class="seach">
+        <van-popup show="{{ show }}" bind:close="onClose" position="bottom" overlay="{{ true }}" bind:click-overlay="onClose">
+            <van-toast id="van-toast" />
+            <view scroll-y="true">
+                <view>
+                    <view class="seach_item">
+                        <van-cell-group>
+                            <van-field data-name="ApprovalOpinion" value="{{small.ApprovalOpinion}}" placeholder="请输入" bind:blur="meetplaceblur" label="审批意见" />
+                        </van-cell-group>
+                    </view>
+                    <view class="checkkind">
+                        <text bind:tap="onClose">取消</text>
+                        <text bind:tap="seachqur">确认</text>
+                    </view>
+                </view>
+            </view>
+        </van-popup>
     </view>
 </view>

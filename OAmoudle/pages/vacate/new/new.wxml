@@ -35,25 +35,21 @@
                 <text>部门</text>
                 <text class="required">*</text>
             </view>
-            <van-cell title="{{departmenttext}}" is-link bind:click="showPopup_o" />
-            <van-popup show="{{show_o}}" round position="bottom" bind:close="onClose_o">
-                <van-picker data-name="department" show-toolbar columns="{{ sections }}" bind:cancel="onClose_o" bind:confirm="onConfirm_o" />
-            </van-popup>
+            <van-cell-group>
+                <van-field value="{{departmenttext}}" disabled />
+            </van-cell-group>
         </view>
         <view class="check_item">
             <view class="kind require">
                 <text>公司抬头</text>
                 <text class="required">*</text>
             </view>
-            <van-cell title="{{info.Companytitle?info.Companytitle:'请选择'}}" bind:click="showPopup">
-                <icon class="iconfont icon-jiantou" />
-            </van-cell>
-            <van-popup show="{{ show }}" round position="bottom" bind:close="onClose">
-                <van-picker data-name="Companytitle" show-toolbar columns="{{ firms }}" bind:cancel="onClose" bind:confirm="onConfirm" />
-            </van-popup>
+            <van-cell-group>
+                <van-field value="{{info.Companytitle}}" disabled />
+            </van-cell-group>
         </view>
         <view class="check_item">
-             <text class="kind">请假类别</text>
+            <text class="kind">请假类别</text>
             <van-cell title="{{info.leavetype?info.leavetype:'请选择'}}" bind:click="showPopup_1">
                 <icon class="iconfont icon-jiantou" />
             </van-cell>
@@ -61,6 +57,22 @@
                 <van-picker data-name="leavetype" show-toolbar columns="{{ Leavetypelist }}" bind:cancel="onClose_1" bind:confirm="onConfirm_1" />
             </van-popup>
         </view>
+        <!-- <view class="check_item checkro8">
+            <view class="kind require">
+                <text>请假类别</text>
+            </view>
+            <van-cell title="{{leavetypetext?leavetypetext:'请选择'}}" is-link bind:click="showPopup1" />
+            <van-popup show="{{show1}}" round position="bottom" bind:close="onClose1">
+                <view class="checkro10">
+                    <text bind:tap="onClose1">取消</text>
+                    <text class="checkro2" bind:tap="onConfirm1" data-name="leavetype">确认</text>
+                </view>
+                <view class="checkro9"></view>
+                <van-checkbox wx:for="{{ section1 }}" wx:key="index" name="{{ item.Value }}" value="{{ item.show }}" bind:tap="onChange" data-name="{{item.Value}}" class="checkro">
+                    {{ item.Value }}
+                </van-checkbox>
+            </van-popup>
+        </view> -->
         <view class="check_item">
             <view class="kind require">
                 <text>请假开始时间</text>
@@ -68,7 +80,7 @@
             </view>
             <van-cell title="{{info.leavebegintime?info.leavebegintime:'请选择'}}" is-link bind:click="showPopup_time" />
             <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
-                <van-datetime-picker  min-date="{{ mindata }}"  max-date="{{maxdata}}" data-name="leavebegintime" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
+                <van-datetime-picker min-date="{{ mindata }}" max-date="{{maxdata}}" data-name="leavebegintime" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
             </van-popup>
         </view>
         <view class="check_item">
@@ -78,7 +90,7 @@
             </view>
             <van-cell title="{{info.leaveendtime?info.leaveendtime:'请选择'}}" is-link bind:click="showPopup_endtime" />
             <van-popup show="{{ show_endtime }}" round position="bottom" bind:close="onClose_endtime">
-                <van-datetime-picker  min-date="{{ mindata }}" max-date="{{maxdata}}" data-name="leaveendtime" value="{{ currentDate }}" bind:cancel="onClose_endtime" bind:confirm="onConfirm_endtime" />
+                <van-datetime-picker min-date="{{ mindata }}" max-date="{{maxdata}}" data-name="leaveendtime" value="{{ currentDate }}" bind:cancel="onClose_endtime" bind:confirm="onConfirm_endtime" />
             </van-popup>
         </view>
         <view class="check_item">
@@ -87,10 +99,10 @@
                 <text class="required">*</text>
             </view>
             <van-cell-group>
-                <van-field data-name="leavedays" value="{{info.leavedays}}" placeholder="请输入" bind:blur="leavedaysblur"disabled />
+                <van-field data-name="leavedays" value="{{info.leavedays}}" placeholder="请输入" bind:blur="leavedaysblur" disabled />
             </van-cell-group>
         </view>
-         <view class="check_item">
+        <view class="check_item">
             <view class="kind require">
                 <text>请假小时</text>
             </view>

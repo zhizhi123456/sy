@@ -50,11 +50,11 @@ Page({
     }
   },
   // 工作流流转
-  // 退回上步
+  // 退回
   sendback() {
     util.Triggerflow(this, 'return', 'usesealform', 'chapter', '', '', '', '', '', '', 'oa')
   },
-  // 提交下步
+  // 审核通过
   putin() {
     util.Triggerflow(this, 'next', 'usesealform', 'chapter', '', '', '', '', '', '', 'oa')
   },

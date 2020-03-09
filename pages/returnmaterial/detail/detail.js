@@ -206,14 +206,14 @@ Page({
   },
   // 工作流流转
   // 工作流流转
-  // 退回上步
+  // 退回
   sendback() {
 
     util.Triggerflow(this, 'return', 'losematerial', 'returnmaterial', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
       this.data.rid, this.data.title)
     // util.ModifyRecord(this.data.information,"losematerial")
   },
-  // 提交下步
+  // 审核通过
   putin() {
     console.log(this.data.information)
     util.Triggerflow(this, 'next', 'losematerial', 'returnmaterial', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
