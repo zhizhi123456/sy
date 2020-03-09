@@ -21,6 +21,15 @@ Page({
     leavetypetext: '',
     small: {
       ApprovalOpinion: ""
+    },
+    check_photo: [{
+      name: "拍照"
+    }, {
+      name: "从相册选择"
+    }],
+    idea: {
+      API_Picurl: [],
+      API_Fileurl: []
     }
   },
   // 返回
@@ -88,38 +97,36 @@ Page({
       })
     }
   },
-  // 工作流流转
-  // 退回
-  sendback(e) {
-    this.setData({
-      state: e.currentTarget.dataset.state
-    })
-    if (this.data.info.formid) {
-      this.setData({
-        pull: true,
-        show: true,
-      })
-    } else {
-      util.Triggerflow(this, 'return', 'leaveapplyform', 'vacate', '', '', '', '', '', '', 'oa')
-    }
-  },
-  // 审核通过
-  putin(e) {
-    console.log(e.currentTarget.dataset.state)
-    this.setData({
-      state: e.currentTarget.dataset.state
-    })
-    if (this.data.info.formid) {
-      this.setData({
-        pull: true,
-        show: true,
-      })
-    } else {
-      util.Triggerflow(this, 'next', 'leaveapplyform', 'vacate', '', '', '', '', '', '', 'oa')
-    }
-
-
-  },
+  // // 工作流流转
+  // // 退回
+  // sendback(e) {
+  //   this.setData({
+  //     state: e.currentTarget.dataset.state
+  //   })
+  //   if (this.data.info.formid) {
+  //     this.setData({
+  //       pull: true,
+  //       show: true,
+  //     })
+  //   } else {
+  //     util.Triggerflow(this, 'return', 'leaveapplyform', 'vacate', '', '', '', '', '', '', 'oa')
+  //   }
+  // },
+  // // 审核通过
+  // putin(e) {
+  //   console.log(e.currentTarget.dataset.state)
+  //   this.setData({
+  //     state: e.currentTarget.dataset.state
+  //   })
+  //   if (this.data.info.formid) {
+  //     this.setData({
+  //       pull: true,
+  //       show: true,
+  //     })
+  //   } else {
+  //     util.Triggerflow(this, 'next', 'leaveapplyform', 'vacate', '', '', '', '', '', '', 'oa')
+  //   }
+  // },
   // 删除
   delete() {
     let that = this;
@@ -172,11 +179,6 @@ Page({
       small
     })
   },
-  // 组合查询
-  seachqur() {
-    console.log(this.data.small, this.data.state)
-    util.Triggerflow(this, this.data.state, 'leaveapplyform', 'vacate', '', '', '', '', '', '', 'oa', this.data.small.ApprovalOpinion)
-  },
   change12(e) {
     console.log(e)
     if (e.currentTarget.dataset.i) {
@@ -186,5 +188,90 @@ Page({
         url: '/OAmoudle/pages/vacate/detail/detail?history=5&id=' + JSON.parse(e.currentTarget.dataset.i).ID
       })
     }
-  }
+  },
+  // 工作流流转
+  onClose() {
+    this.setData({
+      show: false
+    })
+  },
+  onClose1() {
+    this.setData({
+      show1: false
+    })
+  },
+  delF(e) {
+    util.delFileIDEA(this, e);
+  },
+  downF(e) {
+    util.lookFileIDEA(e);
+  },
+  // 文件上传
+  up_file() {
+    util.upFileIDEA(this);
+  },
+  //图片上传
+  // 照片
+  showPopup_photo() {
+    this.setData({
+      show_photo: true
+    })
+  },
+  onClose_photo() {
+    this.setData({
+      show_photo: false
+    })
+  },
+  onSelect_photo(e) {
+    if (e.detail.name == "拍照") {
+      util.upImageIDEA(this, 1);
+    } else {
+      util.upImageIDEA(this, 0);
+    }
+  },
+  // 点击图片放大预览
+  tap_pic1(e) {
+    util.lookimgIDEA(e);
+  },
+  delimg(e) {
+    util.deleteImgIDEA(this, e);
+  },
+  // 退回上步
+  sendback() {
+    this.setData({
+      show1: true
+    })
+    // util.Triggerflow(this, 'return', 'paymentapproval', 'payment', '', '', '', '', '', '', 'oa')
+  },
+  ApprovalOpinionblur(e) {
+    this.setData({
+      ApprovalOpinion: e.detail
+    })
+  },
+  tconfirm() {
+    util.Triggerflow(this, 'return', 'leaveapplyform', 'vacate', '', '', '', '', '', '', 'oa', this.data.ApprovalOpinion ? this.data.ApprovalOpinion : '不同意。', JSON.stringify(this.data.idea.API_Picurl), JSON.stringify(this.data.idea.API_Fileurl))
+  },
+  sconfirm() {
+    util.Triggerflow(this, 'next', 'leaveapplyform', 'vacate', '', '', '', '', '', '', 'oa', this.data.ApprovalOpinion ? this.data.ApprovalOpinion : '同意。', JSON.stringify(this.data.idea.API_Picurl), JSON.stringify(this.data.idea.API_Fileurl))
+  },
+  // 审核通过
+  putin() {
+    if (this.data.info.formid) {
+      this.setData({
+        show: true
+      })
+    } else {
+      util.Triggerflow(this, 'next', 'leaveapplyform', 'vacate', '', '', '', '', '', '', 'oa')
+    }
+  },
+    // 点击图片放大预览
+    tap_pic(e) {
+      util.preview(this, e)
+    },
+    defaultimg(e) {
+      let info = util.defaultimg(e, this);
+      this.setData({
+        info
+      })
+    },
 })
