@@ -521,10 +521,12 @@ van-checkbox {
 .pullpo .check .kind {
     margin: 0;
 }
+
 .pullpo12 {
     width: 100%;
     height: 40%;
 }
+
 .pullpo {
     width: 90%;
     height: 100%;
@@ -721,7 +723,9 @@ van-checkbox {
 }
 
 .van-picker__frame {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: teal;
+    position: absolute;
+    z-index: 1;
 }
 
 .navigator-hover_style {

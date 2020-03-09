@@ -6,6 +6,8 @@
     color: #000;
     color: var(--picker-option-text-color, #000);
     font-size: 16px;
+    position: relative;
+    z-index: 100;
     font-size: var(--picker-option-font-size, 16px)
 }
 
@@ -17,7 +19,7 @@
     font-weight: 500;
     font-weight: var(--font-weight-bold, 500);
     color: #323233;
-    color: var(--picker-option-selected-text-color, #008080)
+    color: var(--picker-option-selected-text-color, #fff);
 }
 
 .van-picker-column__item--disabled {
