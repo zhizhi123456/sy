@@ -6,7 +6,8 @@ import {
   addapplyFor,
   updateapplyFor,
   addapplyForsmall,
-  staff
+  staff,
+  getdep
 } from "../../../../service/getData";
 var util = require("../../../../utils/util");
 var app = getApp();
@@ -447,6 +448,24 @@ Page({
         this.setData({
           info: item
         })
+      })
+    }
+    var user = wx.getStorageSync("myInfo");
+    if (user) {
+      getdep({
+        UserName: user.UserName
+      }).then(res => {
+        console.log(res)
+        if (res) {
+          var s = JSON.parse(res)
+          let info = this.data.info;
+          info.department = s[0].techofficename
+          info.Companytitle = s[0].value
+          this.setData({
+            info,
+            departmenttext: s[0].techofficename,
+          })
+        }
       })
     }
   },

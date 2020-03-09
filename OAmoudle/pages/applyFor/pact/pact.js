@@ -6,6 +6,7 @@ import {
 } from '../../../../service/getData.js';
 var app = getApp();
 var util = require("../../../../utils/util");
+let userinfo = wx.getStorageSync("myInfo");
 Page({
   /**
    * 页面的初始数据
@@ -32,12 +33,12 @@ Page({
     section3: '',
     section4: '',
     section5: "",
-    show6:false
-   
+    show6: false
+
   },
   // 返回
   return () {
-    util.returnMenu2(2055,"日常办公")
+    util.returnMenu2(2055, "日常办公")
   },
   setSeach(e) {
     // console.log(e)
@@ -47,32 +48,41 @@ Page({
   },
   // 模糊查询
   seachInfo() {
-    wx.showLoading({
-      title: '加载中',
-    });
-    queryapplyFor({
-      itemnumber:this.data.seach
-    }).then(res => {
-      console.log(res)
-      if (res.code == 10000) {
-        let item = res.List;
-        util.listData(item, app.globalData.department);
-        util.outflowlist(item, this)
-        let Times = this.data.Times;
-        item.forEach(res => {
-          // console.log(res.makecontactdate)
-          if (Times.indexOf(res.makecontactdate) == -1) {
-            Times.push(res.makecontactdate)
-          }
-        })
-        this.setData({
-          InfoList: item.reverse(),
-          Times
-        })
-        // console.log(this.data.Times)
-        wx.hideLoading();
-      }
+    var info = this.data.info
+    info.itemnumber = this.data.seach
+    var user = wx.getStorageSync("myInfo");
+    info.UserName = user.UserName
+    info.state = '所有'
+    this.setData({
+      info
     })
+    util.qgroupdeliver(qgroupapplyFor, this, '', '1')
+    // wx.showLoading({
+    //   title: '加载中',
+    // });
+    // queryapplyFor({
+    //   itemnumber:this.data.seach
+    // }).then(res => {
+    //   console.log(res)
+    //   if (res.code == 10000) {
+    //     let item = res.List;
+    //     util.listData(item, app.globalData.department);
+    //     util.outflowlist(item, this)
+    //     let Times = this.data.Times;
+    //     item.forEach(res => {
+    //       // console.log(res.makecontactdate)
+    //       if (Times.indexOf(res.makecontactdate) == -1) {
+    //         Times.push(res.makecontactdate)
+    //       }
+    //     })
+    //     this.setData({
+    //       InfoList: item.reverse(),
+    //       Times
+    //     })
+    //     // console.log(this.data.Times)
+    //     wx.hideLoading();
+    //   }
+    // })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -83,9 +93,10 @@ Page({
       section2: app.globalData.Principal,
       section3: app.globalData.Companytitle,
       section4: app.globalData.department,
-      section5:app.globalData.projectall,
-      section6:app.globalData.YesOrNo,
+      section5: app.globalData.projectall,
+      section6: app.globalData.YesOrNo,
       section7: app.globalData.Principal,
+      states: app.globalData.states
     })
     // console.log(app.globalData.projectall)
     wx.showLoading({
@@ -163,7 +174,7 @@ Page({
     });
   },
   onConfirm1(e) {
-    let info = util.editInfo(e, this, e.detail.value);
+    let info = util.editInfo(e, this, e.detail.value.text);
     this.setData({
       info,
       show1: false,
@@ -283,8 +294,11 @@ Page({
   },
   // 组合查询
   seachqur() {
+    var info = this.data.info
+    info.UserName = userinfo.UserName
+    this.setData({
+      info
+    })
     util.qgroupdeliver(qgroupapplyFor, this)
   },
-
-
 })

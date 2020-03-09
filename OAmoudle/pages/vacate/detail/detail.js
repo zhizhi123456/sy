@@ -83,6 +83,7 @@ Page({
           util.workList(this, mid, 'leaveapplyform', options.id);
           //处理状态判断
           util.checkState(this, res.Item.formid || res.Item.Formid, 'leaveapplyform', item.CurStepbh, '');
+          console.log(this.data.info.formid,this.data.isnext,this.data.returned,this.data.isreturn)
         }
       })
     }

@@ -31,7 +31,12 @@ Page({
   },
   // 返回
   return () {
-    util.OAreturn('apply')
+    // util.OAreturn('apply')
+    if (this.data.history) {
+      util.OAreturn('apply', this);
+    } else {
+      util.OAreturn('apply');
+    }
   },
   // 新增明细表
   addndlink() {
@@ -51,7 +56,13 @@ Page({
     wx.showLoading({
       title: '加载中',
     });
-    util.readRecord('applybuyform', options.id, this,'申购')
+    if (!options.history) {
+      wx.setStorageSync('history', '')
+    }
+    this.setData({
+      history: options.history
+    })
+    util.readRecordlist('applybuyform', options.id, this,'申购')
     if (options.id) {
       detailapply({
         ID: options.id
@@ -59,6 +70,10 @@ Page({
         // console.log(res)
         if (res.code == 10000) {
           let item = res.Item;
+          var history = wx.getStorageSync("history")
+          if (history) {
+            item = history
+          }
           util.handleData(item, this, app.globalData.department);
           util.outflow(item,this)
           this.setData({
@@ -112,5 +127,14 @@ Page({
       info
     })
   },
-
+  change12(e) {
+    console.log(e)
+    if (e.currentTarget.dataset.i) {
+      // console.log(JSON.parse(e.currentTarget.dataset.i))
+      wx.setStorageSync('history', JSON.parse(e.currentTarget.dataset.i))
+      wx.redirectTo({
+        url: '/OAmoudle/pages/apply/detail/detail?history=5&id=' + JSON.parse(e.currentTarget.dataset.i).ID
+      })
+    }
+  }
 })
