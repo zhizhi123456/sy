@@ -6,10 +6,10 @@
         <view class="apply">资料详情</view>
     </view>
     <view class="card">
-        <van-card title="{{info.projectname}}"   />
+        <van-card title="{{info.projectname}}" />
     </view>
     <view class="main_nav">
-        <van-tabs active="a">
+        <van-tabs active="a" bind:change="onChange">
             <van-tab title="详细资料" name="a">
                 <view class="content">
                     <view class="c_item">
@@ -177,6 +177,27 @@
                         <view class="check">{{info.address}}</view>
                     </view>
                     <view class="c_item">
+                        <view class="kind">照片</view>
+                        <view wx:if="{{info.API_Picurl}}" class="detpic_show">
+                            <block wx:for="{{info.API_Picurl}}" wx:key="index">
+                                <image src="{{item}}" bindtap="tap_pic" data-index="{{index}}" binderror="defaultimg" />
+                            </block>
+                        </view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">会议纪要文件</view>
+                        <view class="check">
+                            <view wx:if="{{info.Minutesofmeeting.length}}">
+                                <block wx:for="{{info.Minutesofmeeting}}" wx:key="index">
+                                    <view class="cfile">
+                                        <text>{{item.name}}</text>
+                                        <text class="filesize">{{item.size}}</text>
+                                    </view>
+                                </block>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="c_item">
                         <view class="kind">当面需解决问题</view>
                         <view class="check">{{info.currentquestion}}</view>
                     </view>
@@ -202,14 +223,44 @@
                     </view>
                 </view>
             </van-tab>
+            <van-tab title="会议纪要文件" name="b">
+                <van-cell title="上传会议纪要文件" is-link bindtap="up_file" />
+                <view wx:if="{{info.Minutesofmeeting.length}}">
+                    <block wx:for="{{info.Minutesofmeeting}}" wx:key="index">
+                        <view class="cfile">
+                            <text>{{item.name}}</text>
+                            <text class="filesize">{{item.size}}</text>
+                            <icon class="iconfont icon-shanchu-tianchong fr" wx:if="{{up_F}}" bindtap="delF" data-index="{{index}}"/>
+                            <icon class="iconfont icon-shengou fr" bindtap="downF" data-index="{{index}}"/>
+                        </view>
+                    </block>
+                </view>
+            </van-tab>
+            <van-tab title="图片" name="c">
+                <view class="check_item">
+                    <van-cell title="上传图片" is-link bind:click="showPopup_photo" />
+                    <van-action-sheet show="{{ show_photo }}" actions="{{ check_photo }}" bind:cancel="onClose_photo" bind:click-overlay="onClose_photo" bind:select="onSelect_photo" cancel-text="取消" />
+                    <view wx:if="{{upimg}}" class="datumimgbox">
+                        <block wx:for="{{info.API_Picurl}}" wx:key="index">
+                            <view class="upimgbox">
+                                <image src="{{item}}" bindtap="tap_pic" data-index="{{index}}" />
+                                <icon class="iconfont icon-jianhao-tianchong delimg" data-i="{{index}}" bindtap="delimg" />
+                            </view>
+                        </block>
+                    </view>
+                </view>
+            </van-tab>
         </van-tabs>
     </view>
-    <view class="footer">
+    <view class="footer" wx:if="{{(tab=='b'||tab=='c')&&(isup||up_F)}}" bindtap="upp_f">
+        <view>确定上传</view>
+    </view>
+    <!-- <view class="footer">
         <view>
             <navigator open-type="redirect" url="/pages/ledger/new/new?id={{info.ID}}" hover-class="none">
                 <icon class="iconfont icon-bianji"></icon>
                 <text>编辑</text>
             </navigator>
         </view>
-    </view>
+    </view> -->
 </view>

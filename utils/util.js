@@ -9,7 +9,8 @@ import {
   qgroupfile,
   referflow,
   unreferflow,
-  contrastfile
+  contrastfile,
+  getdep
 } from "../service/getData";
 var app = getApp();
 const formatTime = date => {
@@ -338,7 +339,7 @@ const checkContent = (value, key) => {
     var kinds = [];
     value.mainprojecttype.split(",").forEach(res => {
       app.globalData.Projecttype.forEach(depart => {
-        if (res == depart.text.substr(-1)) {
+        if (res == depart.text) {
           if (kinds.indexOf(depart.value.substr(-1)) == -1) {
             kinds.push(depart.value.substr(-1))
           }
@@ -370,6 +371,9 @@ const checkChange = (value, key, dep) => {
     })
     value.API_Picurl = value.API_Picurl.join(",")
   }
+  if (value.Minutesofmeeting) {
+    value.Minutesofmeeting = JSON.stringify(value.Minutesofmeeting);
+  }
   if (typeof value.department == 'string' && value.department) {
     dep.forEach(depart => {
       if (value.department == depart.text) {
@@ -378,12 +382,12 @@ const checkChange = (value, key, dep) => {
     })
   }
   var app = getApp();
-  // // 请假类别
-  // app.globalData.Leavetypelist.forEach(res => {
-  //   if (value.leavetype == res.text) {
-  //     value.leavetype = res.value
-  //   }
-  // })
+  // 请假类别
+  app.globalData.Leavetypelist.forEach(res => {
+    if (value.leavetype == res.text) {
+      value.leavetype = res.value
+    }
+  })
   // 分包合同类型
   app.globalData.contractType.forEach(res => {
     if (value.contractType == res.text) {
@@ -921,6 +925,11 @@ const handleData = (data, key, dep) => {
   } else {
     data.API_Picurl = [];
   }
+  if (data.Minutesofmeeting) {
+    data.Minutesofmeeting = JSON.parse(data.Minutesofmeeting);
+  } else {
+    data.Minutesofmeeting = [];
+  }
 }
 //列表页展示数据的格式化
 const listData = (data, dep, page, list, key, billname) => {
@@ -965,6 +974,12 @@ const listData = (data, dep, page, list, key, billname) => {
     //     value.leavetype = depart.text
     //   }
     // })
+    // 分包合同类型
+    app.globalData.contractType.forEach(res => {
+      if (value.contractType == res.value) {
+        value.contractType = res.text
+      }
+    })
     // 分包合同类型
     app.globalData.contractType.forEach(res => {
       if (value.contractType == res.value) {
@@ -1266,6 +1281,67 @@ const upImage = (key, way) => {
     })
   }
 }
+
+// 上传文件
+const upFile = (key) => {
+  if (key.data.info.Minutesofmeeting.length < 9) {
+    let that = key;
+    wx.chooseMessageFile({
+      count: 9, //能选择文件的数量
+      type: 'file',
+      success(res) {
+        let filedata = res.tempFiles;
+        filedata.forEach(element => {
+          if (element.size < 1024) {
+            element.size = element.size + 'B';
+          } else if (element.size < 1048576) {
+            element.size = ((element.size) / 1024).toFixed(2) + 'KB';
+          } else if (element.size < 1073741824) {
+            element.size = ((element.size) / 1048576).toFixed(2) + 'MB';
+          }
+        });
+        wx.showToast({
+          title: '正在上传...',
+          icon: 'loading',
+          mask: true,
+          duration: 10000
+        })
+        let info = that.data.info;
+        var uploadImgCount = 0;
+        for (let i = 0; i < filedata.length; i++) {
+          wx.uploadFile({
+            url: 'https://shangyongren.com:9098/api/record/Get_rec',
+            filePath: filedata[i].path,
+            name: 'file_data',
+            success(res) {
+              uploadImgCount++;
+              // console.log(res)
+              if (res.statusCode == 200) {
+                // console.log(res.data)
+                info.Minutesofmeeting.push({
+                  name: filedata[i].name,
+                  size: filedata[i].size,
+                  url: "https://shangyongren.com:9098" + res.data.replace(/"/g, "")
+                })
+                that.setData({
+                  info,
+                  up_F: true
+                })
+              }
+              //如果是最后一张,则隐藏等待中  
+              if (uploadImgCount == filedata.length) {
+                wx.hideToast();
+              }
+            },
+            fail: err => {
+              //console.log(err)
+            }
+          })
+        }
+      }
+    })
+  }
+}
 // 图片的删除
 const deleteImg = (key, e) => {
   let info = key.data.info,
@@ -1309,21 +1385,14 @@ const returnMenu2 = (id, title) => {
     url: `/pages/secondary/secondary?id=${id}&title=${title}`
   })
 }
-const workList = (key, id, billname, ID) => {
-  // console.log(id, billname)
+const workList = (key, id, billname, bID) => {
   let userinfo = wx.getStorageSync("myInfo");
   if (id) {
-    console.log({
-      formName: billname,
-      formid: id,
-      ID
-    })
     referflow({
       formName: billname,
       formid: id,
-      ID
+      ID: bID
     }).then(res => {
-      console.log(res)
       if (res.code == 10000) {
         let result = res.WorkflowRecordList;
         if (result && result.length) {
@@ -1335,8 +1404,8 @@ const workList = (key, id, billname, ID) => {
             }
             var t = res.NewApplyStats + (res.ApprovalOpinion ? ('\n' + '审批意见: ' + res.ApprovalOpinion) : '') + (res.state ? ('\n' + '是否退回: ' + res.state) : '')
             steps.push({
-              text: t,
-              desc: res.ApplyTime ? res.ApplyTime : ''
+              text: (res.state ? res.state : '') + ' ' + res.NewApplyStats,
+              desc: (res.ApplyTime ? (res.Curdealuser ? ('●处理人:' + res.Curdealuser) : '') : '') + ' ' + (res.ApplyTime ? res.ApplyTime.replace(/[ ]/g, "-") : '')
             })
             if (steps.length == result.length) {
               steps.push({
@@ -1362,6 +1431,17 @@ const workList = (key, id, billname, ID) => {
       if (res.code == 10000) {
         console.log(res)
         let step = res.list;
+        step.forEach(res => {
+          if (res.API_Picurl) {
+            res.API_Picurl = JSON.parse(res.API_Picurl);
+          }
+          if (res.API_Fileurl) {
+            res.API_Fileurl = JSON.parse(res.API_Fileurl);
+          }
+        })
+        key.setData({
+          stepLIst: step.reverse()
+        })
         // if (step.length) {
         //   step.forEach(item => {
         //     if (item.nextstepid == 0 && !item.nextstepname && !item.nextdealrole && !item.nextdealuser) {
@@ -1382,6 +1462,7 @@ const workList = (key, id, billname, ID) => {
         //   steps
         // })
         if (step[0]) {
+          // if (step[0].nextstepid > step[0].stepid) {
           if (step[0].nextstepid > step[0].stepid) {
             key.setData({
               returned: true
@@ -1431,68 +1512,122 @@ const workList = (key, id, billname, ID) => {
   }
 }
 //处理状态判断
-const checkState = (key, id, chart, bh, Workstates, ID) => {
+const checkState = (key, id, chart, bh, Workstates) => {
   let userinfo = wx.getStorageSync("myInfo");
-  console.log(chart && userinfo.UserName)
-  var i = setInterval(function () {
-    if (!(chart && userinfo.UserName)) {
-      console.log("数据未载入")
+  if (userinfo) {
+    let param;
+    if (id) {
+      param = {
+        formName: chart,
+        currowbh: bh,
+        userName: userinfo.UserName,
+        formid: id
+      }
     } else {
-      clearInterval(i)
-      if (userinfo) {
-        console.log({
+      param = {
+        formName: chart,
+        currowbh: bh,
+        userName: userinfo.UserName,
+      }
+    }
+    valid(param).then(res => {
+      if (res.code == 10000) {
+        if (Workstates && key) {
+          Workstates.push(res.Isvalidtime.True || res.Isvalidtime.False);
+          key.setData({
+            Workstates
+          })
+        } else if (key) {
+          key.setData({
+            Workstate: (res.Isvalidtime.True || res.Isvalidtime.False),
+          })
+          if (res.Isvalidtime.True) {
+            key.setData({
+              isnext: false
+            })
+          } else {
+            key.setData({
+              isnext: true
+            })
+          }
+        }
+        // returned({
+        // console.log(chart && userinfo.UserName)
+        // var i = setInterval(function () {
+
+
+        //   if (!(chart && userinfo.UserName)) {
+        //     console.log("数据未载入")
+        //   } else {
+        //     clearInterval(i)
+        //     if (userinfo) {
+        //       console.log({
+        //         formName: chart,
+        //         currowbh: bh,
+        //         userName: userinfo.UserName,
+        //         formid: id
+        //       })
+        // valid({
+        //   formName: chart,
+        //   currowbh: bh,
+        //   userName: userinfo.UserName,
+        //   formid: id
+        // }).then(res => {
+        //   console.log(res)
+        //   if (res.code == 10000) {
+        //     if (Workstates && key) {
+        //       Workstates.push(res.Isvalidtime.True || res.Isvalidtime.False);
+        //       key.setData({
+        //         Workstates
+        //       })
+        //     } else if (key) {
+        //       key.setData({
+        //         Workstate: (res.Isvalidtime.True || res.Isvalidtime.False),
+        //       })
+        //       if (res.Isvalidtime.True) {
+        //         key.setData({
+        //           isnext: false
+        //         })
+        //       } else {
+        //         key.setData({
+        //           isnext: true
+        //         })
+        //       }
+        //     }
+        returned({
           formName: chart,
-          currowbh: bh,
           userName: userinfo.UserName,
-          formid: id,
-        })
-        valid({
-          formName: chart,
-          currowbh: bh,
-          userName: userinfo.UserName,
-          formid: id,
-        }).then(res => {
-          console.log(res)
-          if (res.code == 10000) {
-            if (Workstates && key) {
-              Workstates.push(res.Isvalidtime.True || res.Isvalidtime.False);
-              key.setData({
-                Workstates
-              })
-            } else if (key) {
-              key.setData({
-                Workstate: (res.Isvalidtime.True || res.Isvalidtime.False),
-              })
-              if (res.Isvalidtime.True) {
-                key.setData({
-                  isnext: false
-                })
-              } else {
-                key.setData({
-                  isnext: true
-                })
-              }
-            }
-            returned({
-              formName: chart,
-              userName: userinfo.UserName,
-              formid: id
-            }).then(rtn => {
-              if (!rtn.value) {
-                key.setData({
-                  isreturn: false
-                })
-              }
+          formid: id
+        }).then(rtn => {
+          if (!rtn.value) {
+            key.setData({
+              isreturn: false
             })
           }
         })
       }
-    }
-
-  }, 1000);
+    })
+  }
 }
+const userdep = (user, key) => {
+  getdep({
+    UserName: user.UserName
+  }).then(res => {
+    let d = JSON.parse(res);
+    let info = key.data.info;
+    info.createman = user.UserName;
+    info.department = d[0].ID;
+    info.Companytitle = d[0].value;
+    key.setData({
+      info,
+      departmenttext: d[0].techofficename
+    })
+  })
+}
+// }, 1000);
+// }
 // 工作流流转
-const Triggerflow = (key, direction, sheet, piece, id, cap, dep, dert, rid, tit, oa, ApprovalOpinion) => {
+const Triggerflow = (key, direction, sheet, piece, id, cap, dep, dert, rid, tit, oa, speak, pic, file) => {
   let userinfo = wx.getStorageSync("myInfo");
   console.log({
     ID: key.data.info.ID,
@@ -1507,7 +1642,9 @@ const Triggerflow = (key, direction, sheet, piece, id, cap, dep, dert, rid, tit,
       mark: direction,
       userName: userinfo.UserName,
       formName: sheet,
-      ApprovalOpinion
+      ApprovalOpinion: speak,
+      API_Picurl: pic,
+      API_Fileurl: file
     }).then(res => {
       // console.log(res)
       if (res.code == 10000) {
@@ -2527,7 +2664,6 @@ const qgroupsmall = (funcname, that) => {
       }
     })
   }
-
 }
 const title = (() => {
   Companytitle().then(res => {
@@ -2823,8 +2959,6 @@ module.exports = {
   deleteImg,
   deleteImg1,
   deleteImgs,
-  handleData,
-  checkChange,
   previews,
   deleteImg,
   listData,
@@ -2849,5 +2983,7 @@ module.exports = {
   sumup,
   qgroupdeliver,
   OAreturn,
-  editInfosmall
+  upFile,
+  editInfosmall,
+  userdep
 }

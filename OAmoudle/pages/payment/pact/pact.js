@@ -2,90 +2,216 @@
 import {
   getPayment,
   groupPayment,
+  getdep,
 } from '../../../../service/getData';
 var app = getApp();
 var util = require("../../../../utils/util");
-let item, list;
+// let item, list;
 let userinfo = wx.getStorageSync("myInfo");
 Page({
   /**
    * 页面的初始数据
    */
-  
+
   data: {
     seach: '',
     loading: false,
     top: '付款签报',
     currentDate: new Date().getTime(),
+    maxDate: new Date().getTime(),
     InfoList: [],
-    item: [],
-    pages: 1,
+    // item: [],
+    // pages: 1,
     hadNew: 1,
     info: {}
   },
   // 返回
   return () {
     let menus = wx.getStorageSync('menus');
-    util.returnMenu2(menus.id, menus.title);
+    if (this.data.applyT || this.data.ISconduct) {
+      wx.redirectTo({
+        url: "/pages/current/current/current?title=" + menus.title + '&id=' + menus.rid
+      });
+    } else {
+      util.returnMenu2(menus.id, menus.title);
+    }
   },
   setSeach(e) {
-    // console.log(e)
     this.setData({
       seach: e.detail.value
     })
   },
   // 模糊查询
   seachInfo() {
-    list = [];
+    let menus = wx.getStorageSync('menus');
     wx.showLoading({
       title: '加载中',
     });
-    this.setData({
-      pages: 1
-    })
-    getPayment({
-      applyman: this.data.seach
-    }).then(res => {
-      // console.log(res)
-      if (res.code == 10000) {
-        item = res.List;
-        list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list,this,'paymentapproval');
-        this.setData({
-          InfoList: list,
-          item,
-          seach: ''
+    if (this.data.ISconduct) {
+      if (this.data.seach) {
+        groupPayment({
+          processstate: menus.caption,
+          createman: userinfo.UserName,
+          payapproveformname: this.data.seach
+        }).then(res => {
+          // console.log(res.List)
+          if (res.code == 10000) {
+            let item = res.List;
+            util.listData(item, app.globalData.department, '', '', this, 'paymentapproval');
+            this.setData({
+              InfoList: item.reverse(),
+              seach: ''
+            })
+            wx.hideLoading();
+          }
+        }).catch(err => {
+          console.log(err)
         })
-        wx.hideLoading();
+      } else {
+        groupPayment({
+          processstate: menus.caption,
+          createman: userinfo.UserName
+        }).then(res => {
+          // console.log(res.List)
+          if (res.code == 10000) {
+            let item = res.List;
+            util.listData(item, app.globalData.department, '', '', this, 'paymentapproval');
+            this.setData({
+              InfoList: item.reverse(),
+              seach: ''
+            })
+            wx.hideLoading();
+          }
+        }).catch(err => {
+          console.log(err)
+        })
       }
-    })
+    } else {
+      groupPayment({
+        department: this.data.userdep[0].ID,
+        createman: userinfo.UserName,
+        payapproveformname: this.data.seach,
+      }).then(res => {
+        // console.log(res.List)
+        if (res.code == 10000) {
+          let item = res.List;
+          util.listData(item, app.globalData.department, '', '', this, 'paymentapproval');
+          this.setData({
+            InfoList: item.reverse(),
+            seach: ''
+          })
+          wx.hideLoading();
+        }
+      }).catch(err => {
+        console.log(err)
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     userinfo = wx.getStorageSync("myInfo");
-    if (options.id) {
+    getdep({
+      UserName: userinfo.UserName
+    }).then(res => {
+      this.setData({
+        userdep: JSON.parse(res),
+      })
+    })
+    if (options.id || options.rid) {
       wx.setStorageSync('menus', options)
     }
-    list = [];
     wx.showLoading({
       title: '加载中',
     });
-    // 调用查询
-    getPayment().then(res => {
-      // console.log(res.List)
-      if (res.code == 10000) {
-        item = res.List;
-        list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list,this,'paymentapproval');
+    let menus = wx.getStorageSync('menus');
+    if (menus.userid) {
+      this.setData({
+        top: menus.caption + '的付款签报',
+        hadNew: 0,
+      })
+      if (menus.caption == '我') {
         this.setData({
-          InfoList: list,
-          item
+          me: 1,
         })
-        wx.hideLoading();
       }
-    }).catch(err => {
-      console.log(err)
-    })
+      if (menus.caption == '我申请') {
+        this.setData({
+          applyT: 1
+        })
+      }
+      if (menus.caption == '未处理') {
+        let info = this.data.info;
+        info.processstate = menus.caption;
+        info.createman = userinfo.UserName;
+        this.setData({
+          info,
+          val: 0,
+          ISconduct: 1,
+          pact: [{
+              text: '未处理的付款签报',
+              value: 0
+            },
+            {
+              text: '已处理的付款签报',
+              value: 1
+            },
+            {
+              text: '已超时的付款签报',
+              value: 2
+            }
+          ],
+        })
+        groupPayment(this.data.info).then(res => {
+          if (res.code == 10000) {
+            console.log(res.List)
+            let item = res.List;
+            util.listData(item, app.globalData.department, '', '', this, 'paymentapproval');
+            this.setData({
+              InfoList: item.reverse(),
+              loading: false,
+            })
+            wx.hideLoading();
+          }
+        })
+      } else {
+        let info = this.data.info;
+        info.createman = menus.userid;
+        info.department = menus.dep;
+        this.setData({
+          info,
+          departmenttext: menus.deptxt
+        })
+        groupPayment(this.data.info).then(res => {
+          if (res.code == 10000) {
+            console.log(res.List)
+            let item = res.List;
+            util.listData(item, app.globalData.department, '', '', this, 'paymentapproval');
+            this.setData({
+              InfoList: item.reverse(),
+              loading: false,
+            })
+            wx.hideLoading();
+          }
+        })
+      }
+    } else {
+      // 调用查询
+      getPayment().then(res => {
+        if (res.code == 10000) {
+          let item = res.List;
+          util.listData(item, app.globalData.department, '', '', this, 'paymentapproval');
+          this.setData({
+            InfoList: item.reverse(),
+            // item
+          })
+          wx.hideLoading();
+        }
+      }).catch(err => {
+        console.log(err)
+      })
+    }
     if (app.globalData.CountItem) {
       this.setData({
         sections: app.globalData.department,
@@ -114,25 +240,39 @@ Page({
     })
   },
   onConfirm_seach() {
-    list = [];
     wx.showLoading({
       title: '加载中',
     });
-    this.setData({
-      pages: 1
-    })
     if (this.data.info.payapproveformname || this.data.info.createman || this.data.info.department || this.data.info.starttime || this.data.info.endtime || this.data.info.processstate) {
+      let menus = wx.getStorageSync('menus');
       groupPayment(this.data.info).then(res => {
         if (res.code == 10000) {
-          item = res.List;
-          list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list,this,'paymentapproval');
+          let item = res.List;
+          util.listData(item, app.globalData.department, '', '', this, 'paymentapproval');
           this.setData({
-            InfoList: list,
-            item,
+            InfoList: item.reverse(),
+            // item,
             info: {},
             loading: false,
+            'info.createman': menus.userid,
+            'info.department': menus.dep,
             departmenttext: ''
           })
+          if (!this.data.hadNew) {
+            let info = this.data.info;
+            info.createman = menus.userid;
+            if (this.data.ISconduct) {
+              delete info.department
+              info.processstate = '未处理';
+              info.createman = userinfo.UserName;
+              this.setData({
+                departmenttext: ''
+              })
+            }
+            this.setData({
+              info,
+            })
+          }
           wx.hideLoading();
         }
       })
@@ -146,6 +286,33 @@ Page({
         duration: 3000
       })
     )
+  },
+  changeItem(e) {
+    let StateStr = (this.data.pact[e.detail].text).slice(0, 3);
+    let info = this.data.info;
+    info.processstate = StateStr;
+    this.setData({
+      info
+    })
+    wx.showLoading({
+      title: "加载中..."
+    })
+    groupPayment({
+      processstate: StateStr,
+      createman: userinfo.UserName
+    }).then(res => {
+      // console.log(res.List)
+      if (res.code == 10000) {
+        let item = res.List;
+        util.listData(item, app.globalData.department, '', '', this, 'paymentapproval');
+        this.setData({
+          InfoList: item.reverse(),
+        })
+        wx.hideLoading();
+      }
+    }).catch(err => {
+      console.log(err)
+    })
   },
   // 付款签报名称
   payapproveformnameblur(e) {
@@ -163,11 +330,9 @@ Page({
   },
   // 部门
   showPopup_0() {
-    if (this.data.hadNew) {
-      this.setData({
-        show_0: true
-      })
-    }
+    this.setData({
+      show_0: true
+    })
   },
   onClose_0() {
     this.setData({
@@ -194,6 +359,9 @@ Page({
     })
   },
   onConfirm_time(e) {
+    this.setData({
+      minDate: e.detail
+    })
     let info = util.editInfo(e, this, util.datefomate(e.detail));
     this.setData({
       info,
@@ -202,9 +370,17 @@ Page({
   },
   // 结束时间
   showPopup_endtime() {
-    this.setData({
-      show_endtime: true
-    })
+    if (this.data.info.starttime) {
+      this.setData({
+        show_endtime: true
+      })
+    } else {
+      wx.showToast({
+        title: '请先选择开始时间',
+        icon: 'none',
+        duration: 3000
+      })
+    }
   },
   onClose_endtime() {
     this.setData({
@@ -222,11 +398,13 @@ Page({
   showPopup_3() {
     if (userinfo) {
       let info = this.data.info;
-      info.UserName = userinfo.UserName;
-      this.setData({
-        show_3: true,
-        info
-      })
+      info.createman = userinfo.UserName;
+      if (!this.data.ISconduct) {
+        this.setData({
+          show_3: true,
+          info
+        })
+      }
     } else {
       wx.showToast({
         title: '请登录',
@@ -245,6 +423,13 @@ Page({
     this.setData({
       show_3: false,
       info
+    })
+  },
+  findnew(e) {
+    let index = e.currentTarget.dataset.index - 1;
+    wx.pageScrollTo({
+      selector: '#new' + index,
+      duration: 500
     })
   },
   /**
@@ -283,29 +468,7 @@ Page({
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
-    if (item.length > 5 && list.length < item.length) {
-      this.setData({
-        loading: true
-      })
-      let pages = this.data.pages,
-        n = Math.ceil(item.length / 5);
-      if (n > pages) {
-        setTimeout(() => {
-          pages = pages + 1;
-          list = util.listData(item, app.globalData.department, pages, list);
-          this.setData({
-            pages,
-            InfoList: list,
-          })
-        }, 1000)
-      }
-    } else {
-      this.setData({
-        loading: false
-      })
-    }
-  },
+  onReachBottom: function () {},
 
   /**
    * 用户点击右上角分享

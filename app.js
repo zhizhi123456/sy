@@ -57,7 +57,8 @@ import {
   GetOvertimeperiod,
   AnnouncementType,
   contractType,
-  getframeProtocolCode
+  getframeProtocolCode,
+  getdep
 } from "./service/getData";
 var util = require("./utils/util");
 App({
@@ -122,12 +123,12 @@ App({
           let projectall1 = JSON.parse(n.replace(/projectname/g, 'value').replace(/projcectCode/g, 'text'));
           this.globalData.projectall = projectall;
           this.globalData.projectall1 = projectall1;
-        }else{
+        } else {
           this.globalData.projectall = []
           this.globalData.projectall1 = []
         }
       })
-      AnnouncementType().then(res=>{
+      AnnouncementType().then(res => {
         console.log(res)
       })
       util.sumup(department, this, 'department', "techofficename", "ID");
@@ -207,6 +208,7 @@ App({
           this.globalData.MainSubproject = MainSubproject;
         }
       })
+
       // 施工队id
       ConstructionTeam().then(res => {
         let ConstructionTeam = JSON.parse(res.replace(/ID/g, 'value').replace(/ConstructionName/g, 'text'));
@@ -217,7 +219,6 @@ App({
   globalData: {
     mapadress: "",
     pic: [],
-    userInfo: null,
     time: util.format(new Date()),
     mapadress: "",
     pic: [],
@@ -253,6 +254,7 @@ App({
       value: 3105,
       text: "否"
     }],
+    userdep: '',
     department: '',
     Companytitle: '',
     staff: '',
@@ -307,10 +309,10 @@ App({
     Leavetypelist: '',
     GetOverworktype: '',
     GetOvertimeperiod: '',
-    AnnouncementType:'',
-    projectall1:'',
-    contractType:'',
-    getframeProtocolCode:'',
+    AnnouncementType: '',
+    projectall1: '',
+    contractType: '',
+    getframeProtocolCode: '',
     states: [{
       text: '所有'
     }, {
@@ -334,10 +336,10 @@ App({
     // 付款方式
     PayType: [{
       text: "转账",
-      value: "0"
+      value: "1"
     }, {
       text: "抵借条",
-      value: "1"
+      value: "2"
     }],
     // 项目类型
     ItemType: [{
@@ -348,35 +350,35 @@ App({
       value: "1"
     }],
     table: [{
-      value:'subproject',
-      text:'分包项目'
-    }, 
-    {
-      value:'subcontact',
-      text:'分包合同'
-     
-    },
-    {
-      value:'prjassignbook',
-      text:'任务书'
-    },
-    {
-      value:'charge',
-      text:'费用'
-     
-    },
-    {
-      value:'getmaterial',
-      text:'领料单'
-    },
-    {
-      value:'losematerial',
-      text:'退料单'
-    },
-    {
-      value:'subprjcodeapply',
-      text:'分包编号'
-    }
-  ]
+        value: 'subproject',
+        text: '分包项目'
+      },
+      {
+        value: 'subcontact',
+        text: '分包合同'
+
+      },
+      {
+        value: 'prjassignbook',
+        text: '任务书'
+      },
+      {
+        value: 'charge',
+        text: '费用'
+
+      },
+      {
+        value: 'getmaterial',
+        text: '领料单'
+      },
+      {
+        value: 'losematerial',
+        text: '退料单'
+      },
+      {
+        value: 'subprjcodeapply',
+        text: '分包编号'
+      }
+    ]
   }
 })

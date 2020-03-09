@@ -114,6 +114,8 @@ export const GetOverworktype = (params) => http.post("/api/MethodOfDataService/G
 export const GetOvertimeperiod = (params) => http.post("/api/MethodOfDataService/GetOvertimeperiod", params);
 //已提交流转
 export const referflow = (params) => http.post("/api/SubmitWorkFlowService/GetWorkflowRecord2_1", params);
+// //已提交流转
+// export const referflow = (params) => http.post("api/SubmitWorkFlowService/GetWorkflowRecord2", params);
 //未提交流转
 export const unreferflow = (params) => http.post("/api/SubmitWorkFlowService/GetWorkflowRecord3_1", params);
 // 公告类型
@@ -1300,3 +1302,16 @@ export const addRDetail = (params) => http.post('/api/RepairProjectdetail/Insert
 export const amendRDetail = (params) => http.post('/api/RepairProjectdetail/EditInfo', params);
 // 删除
 export const cancelRDetail = (params) => http.post('/api/RepairProjectdetail/Delete', params);
+// 施工设计任务书
+// 查询
+export const getConstructionTask = (params) => http.post("/api/prjassignbookConstruction/Query", params);
+// 根据id查询
+export const referConstructionTask = (params) => http.post("/api/prjassignbookConstruction/Edit", params);
+// 组合查询
+export const groupConstructionTask = (params) => http.post("/api/prjassignbookConstruction/GroupQue", params);
+// 添加
+export const addConstructionTask = (params) => http.post("/api/prjassignbookConstruction/Insert", params);
+// 修改
+export const amendConstructionTask = (params) => http.post("/api/prjassignbookConstruction/EditInfo", params);
+// 删除
+export const cancelConstructionTask = (params) => http.post("/api/prjassignbookConstruction/Insert", params);

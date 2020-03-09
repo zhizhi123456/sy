@@ -12,7 +12,7 @@ Page({
   /**
    * 页面的初始数据
    */
-  
+
   data: {
     info: {
       API_Picurl: [],
@@ -27,6 +27,30 @@ Page({
     }, {
       name: "从相册选择"
     }],
+  },
+  formatNum(e) { //正则验证金额输入框格式
+    e.detail = e.detail.replace(/^(\-)*(\d+)\.(\d{6}).*$/, '$1$2.$3')
+    e.detail = e.detail.replace(/[\u4e00-\u9fa5]+/g, ""); //清除汉字
+    e.detail = e.detail.replace(/[^\d.]/g, ""); //清楚非数字和小数点
+    e.detail = e.detail.replace(/^\./g, ""); //验证第一个字符是数字 
+    e.detail = e.detail.replace(".", "$#$").replace(/\./g, "").replace("$#$", "."); //只保留第一个小数点, 清除多余的 
+    e.detail = e.detail.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3');
+  },
+  checknum(e) {
+    let info = this.data.info;
+    this.formatNum(e);
+    info.payammount = e.detail;
+    this.setData({
+      info
+    })
+  },
+  checknum1(e) {
+    let info = this.data.info;
+    this.formatNum(e);
+    info.havepaidammount = e.detail;
+    this.setData({
+      info
+    })
   },
   // 签报名称
   payapproveformnameblur(e) {
@@ -309,7 +333,6 @@ Page({
     this.setData({
       info
     })
-    // console.log(infodata)
     amendPayment(this.data.info).then(res => {
       // console.log(res)
       if (res.code == 10000) {
@@ -336,7 +359,8 @@ Page({
       Subcontact: app.globalData.Subcontact,
       Purchasecontact: app.globalData.Purchasecontact,
       Supplier: app.globalData.Supplier,
-      MainSubproject: app.globalData.MainSubproject
+      MainSubproject: app.globalData.MainSubproject,
+      userdep: app.globalData.userdep
     })
     if (options.id) {
       referPayment({
@@ -348,16 +372,18 @@ Page({
         this.setData({
           info: item
         })
+        user = wx.getStorageSync("myInfo");
+        let info = this.data.info;
+        if (!info.department || !info.Companytitle) {
+          util.userdep(user, this);
+        }
       })
     }
-    user = wx.getStorageSync("myInfo");
-    let info = this.data.info;
-    if (!info.applyman) {
-      info.applyman = user.UserName;
-      this.setData({
-        info
-      })
-    }
+     user = wx.getStorageSync("myInfo");
+        let info = this.data.info;
+        if (!info.department || !info.Companytitle) {
+          util.userdep(user, this);
+        }
   },
 
   /**
