@@ -1,13 +1,17 @@
 <!-- textages/textact/textact.wxml -->
-
 <view class="wraper">
     <view class="header">
         <view class="title">
             <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
-            <navigator open-type="redirect" url="/OAmoudle/pages/payment/new/new" hover-class="none" class="fr newCreate">
+            <navigator open-type="redirect" url="/OAmoudle/pages/payment/new/new?rid={{options.id||options.rid}}&title={{options.title}}&{{userid?'userid='+userid+'&caption='+caption+'&dep='+dep+'&deptxt='+deptxt:''}}" hover-class="none" class="fr newCreate" wx:if="{{!ISconduct}}">
                 新建
             </navigator>
-            <view class="apply">{{top}}</view>
+            <view class="apply" wx:if="{{ISconduct}}">
+                <van-dropdown-menu active-color="red">
+                    <van-dropdown-item value="{{val}}" options="{{pact}}" bindchange="changeItem" />
+                </van-dropdown-menu>
+            </view>
+            <view class="apply" wx:else>{{top}}</view>
         </view>
         <view class="seach">
             <icon class="iconfont icon-fuxuananniu fl s-sort" bindtap="showgroup"></icon>
@@ -32,7 +36,8 @@
                     </view>
                     <view class="seach_item">
                         <van-cell-group>
-                            <van-field value="{{departmenttext}}" placeholder="请选择" bindtap="showPopup_0" label="部门" disabled />
+                            <!-- bindtap="showPopup_0" -->
+                            <van-field value="{{departmenttext}}" placeholder="请选择" label="部门" disabled bindtap="showPopup_0" />
                         </van-cell-group>
                         <van-popup show="{{ show_0 }}" round position="bottom" bind:close="onClose_0">
                             <van-picker data-name="department" show-toolbar columns="{{ sections }}" bind:cancel="onClose_0" bind:confirm="onConfirm_0" />
@@ -43,7 +48,7 @@
                             <van-field value="{{info.starttime}}" placeholder="请选择" label="开始时间" bindtap="showPopup_time" disabled />
                         </van-cell-group>
                         <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
-                            <van-datetime-picker data-name="starttime" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" max-date="{{ maxDate }}"/>
+                            <van-datetime-picker data-name="starttime" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" max-date="{{ maxDate }}" />
                         </van-popup>
                     </view>
                     <view class="seach_item">
@@ -51,7 +56,7 @@
                             <van-field value="{{info.endtime}}" placeholder="请选择" label="结束时间" bindtap="showPopup_endtime" disabled />
                         </van-cell-group>
                         <van-popup show="{{ show_endtime }}" round position="bottom" bind:close="onClose_endtime">
-                            <van-datetime-picker data-name="endtime" value="{{ currentDate }}" bind:cancel="onClose_endtime" bind:confirm="onConfirm_endtime" min-date="{{ minDate }}"/>
+                            <van-datetime-picker data-name="endtime" value="{{ minDate }}" bind:cancel="onClose_endtime" bind:confirm="onConfirm_endtime" min-date="{{ minDate }}" max-date="{{ currentDate }}" />
                         </van-popup>
                     </view>
                     <view class="seach_item">
@@ -72,8 +77,14 @@
     </view>
     <view class="main">
         <view class="list" wx:for="{{InfoList}}" wx:key="index">
-            <navigator open-type="redirect" url="/OAmoudle/pages/payment/detail/detail?id={{item.ID}}" hover-class="none">
-                <view>
+            <van-tag class="linkLThint" round type="danger" size="large" wx:if="{{item.ApplygetNew&&applyT&&(index>1)}}" bindtap="findnew" data-index="{{index}}">
+                ↓↓
+            </van-tag>
+            <van-tag class="LThint" round type="danger" size="large" wx:if="{{(item.ApplygetNew&&applyT)}}">
+                new
+            </van-tag>
+            <navigator open-type="redirect" url="/OAmoudle/pages/payment/detail/detail?id={{item.ID}}&hadNew={{hadNew}}&rid={{options.id||options.rid}}&title={{options.title}}&{{userid?'userid='+userid+'&caption='+caption+'&dep='+dep+'&deptxt='+deptxt+'&me='+me+'&applyT='+applyT+'&ISconduct='+ISconduct:''}}" hover-class="none">
+                <view id="{{'new'+index}}">
                     <text class="caption">{{item.payapproveformname}}</text>
                 </view>
                 <!-- <view>
@@ -81,12 +92,16 @@
                     <text class="caution">{{Workstates[index]}}</text>
                 </view> -->
                 <view>
+                    <text class="info">当前步骤名称</text>
+                    <text class="{{item.IfWfComplete?'overcaution':'caution'}}">{{item.IfWfComplete?'流程结束':item.CurStepName?item.CurStepName:'未提交申请'}}</text>
+                </view>
+                <view>
                     <text class="info">签报名称</text>
                     <text>{{item.payapproveformname}}</text>
                 </view>
                 <view>
-                    <text class="info">付款金额</text>
-                    <text>{{item.payammount}}</text>
+                    <text class="info">付款金额(元)</text>
+                    <text>{{item.payammount+'元'}}</text>
                 </view>
                 <view>
                     <text class="info">公司</text>
@@ -99,10 +114,6 @@
                 <view>
                     <text class="info">创建时间</text>
                     <text>{{item.createtime}}</text>
-                </view>
-                <view>
-                    <text class="info">当前步骤名称</text>
-                    <text>{{item.CurStepName}}</text>
                 </view>
             </navigator>
         </view>

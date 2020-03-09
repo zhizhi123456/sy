@@ -358,7 +358,6 @@ Page({
       getdep({
         UserName: userinfo.UserName
       }).then(res => {
-         
         var s = JSON.parse(res)
         if (s[0]) {
           leadership({

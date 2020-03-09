@@ -83,6 +83,7 @@ Page({
       info,
       show_kind: false
     })
+    console.log(this.data.info)
   },
   // 总包项目属性
   showPopup_4() {
@@ -227,14 +228,14 @@ Page({
     })
   },
   confirm() {
-    // console.log(this.data.info)
+    console.log(this.data.info)
     if (this.data.info.planbegindate && this.data.info.planenddate && this.data.info.projectname && this.data.info.proassignbookcode) {
       let info = this.data.info;
       util.checkContent(info, this);
       this.setData({
         info
       })
-      // console.log(infodata)
+      console.log(this.data.info)
       addTask(this.data.info).then(res => {
         // console.log(res)
         if (res.code == 10000) {

@@ -20,6 +20,68 @@ Page({
       name: "从相册选择"
     }],
   },
+  onChange(e) {
+    this.setData({
+      tab: e.detail.name
+    })
+  },
+  upp_f() {
+    if (this.data.info.Minutesofmeeting.length || this.data.info.API_Picurl.length) {
+      let info = this.data.info;
+      util.checkChange(info, this, app.globalData.department);
+      this.setData({
+        info
+      })
+      amendLedger(this.data.info).then(res => {
+        // console.log(res)
+        if (res.code == 10000) {
+          wx.showToast({
+            title: '编辑成功',
+            icon: 'success',
+            duration: 3000
+          })
+          util.returnPrev('ledger', this);
+          this.setData({
+            isup: true
+          })
+        }
+      })
+    } else {
+      wx.showToast({
+        title: '请先选择文件',
+        icon: 'none',
+        duration: 2000
+      })
+    }
+  },
+  delF(e) {
+    console.log(e)
+    let info = this.data.info,
+      i = e.currentTarget.dataset.index;
+    info.Minutesofmeeting.splice(i, 1);
+    this.setData({
+      info
+    })
+  },
+  downF(e) {
+    console.log(e)
+    wx.downloadFile({
+      url: this.data.info.Minutesofmeeting[e.currentTarget.dataset.index].url,
+      success: function (res) {
+        console.log(res)
+        var Path = res.tempFilePath //返回的文件临时地址，用于后面打开本地预览所用
+        wx.openDocument({
+          filePath: Path,
+          success: function (res) {
+            console.log('打开文档成功')
+          }
+        })
+      },
+      fail: function (res) {
+        console.log(res)
+      }
+    })
+  },
   // 文件上传
   up_file() {
     util.upFile(this);
