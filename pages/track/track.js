@@ -38,6 +38,9 @@ Page({
     if (options.id) {
       wx.setStorageSync('menus', options)
     }
+    if (options.source) {
+      wx.setStorageSync('carte', options)
+    }
     let that = this;
     wx.showLoading({
       title: "加载中"

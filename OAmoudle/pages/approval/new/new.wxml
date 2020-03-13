@@ -1,0 +1,131 @@
+<!-- pages/new/new.wxml -->
+<view class="wraper">
+    <view class="header d_header" wx:if="{{info.ID}}">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="editreturn"></icon>
+        <text class="fr newCreate" bindtap="editconfirm">确定</text>
+        <view class="apply">编辑支付审批</view>
+    </view>
+    <view class="header d_header" wx:else>
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="confirm">确定</text>
+        <view class="apply">新建支付审批</view>
+    </view>
+    <view class="main n_main">
+        <van-toast id="van-toast" />
+        <view class="check_item">
+            <view class="kind require">
+                <text>支付审批单名称</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="payapproveformname" value="{{info.payapproveformname?info.payapproveformname:'请选择'}}" placeholder="请输入" bind:blur="payapproveformname" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>部门</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field value="{{info.department}}" disabled />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>公司抬头</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field value="{{info.Companytitle}}" disabled />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>付款方式</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{paytype?paytype:'请选择'}}" bind:click="showPopup2">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show2 }}" round position="bottom" bind:close="onClose2">
+                <van-picker data-name="paytype" show-toolbar columns="{{ section6 }}" bind:cancel="onClose2" bind:confirm="onConfirm2" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>项目编号</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.projectcode?info.projectcode:'请选择'}}" bind:click="showPopup1">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show1 }}" round position="bottom" bind:close="onClose1">
+                <van-picker data-name="projectcode" show-toolbar columns="{{ section4 }}" bind:cancel="onClose1" bind:confirm="onConfirm1" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <text class="kind">相关照片</text>
+            <van-cell title="请选择" is-link bind:click="showPopup_photo" />
+            <van-action-sheet show="{{ show_photo }}" actions="{{ check_photo }}" bind:cancel="onClose_photo" bind:click-overlay="onClose_photo" bind:select="onSelect_photo" cancel-text="取消" />
+            <view wx:if="{{upimg}}" class="datumimgbox">
+                <block wx:for="{{info.API_Picurl}}" wx:key="index">
+                    <view class="upimgbox">
+                        <image src="{{item}}" bindtap="tap_pic" data-index="{{index}}" />
+                        <icon class="iconfont icon-jianhao-tianchong delimg" data-i="{{index}}" bindtap="delimg" />
+                    </view>
+                </block>
+            </view>
+        </view>
+        <view class="check_item">
+            <text class="kind">发票图片</text>
+            <van-cell title="请选择" is-link bind:click="showPopup_photo1" />
+            <van-action-sheet show="{{ show_photo1 }}" actions="{{ check_photo1 }}" bind:cancel="onClose_photo1" bind:click-overlay="onClose_photo1" bind:select="onSelect_photo1" cancel-text="取消" />
+            <view wx:if="{{upimg1}}" class="datumimgbox">
+                <block wx:for="{{info.invoiceurl}}" wx:key="index">
+                    <view class="upimgbox">
+                        <image src="{{item}}" bindtap="tap_pic1" data-index="{{index}}" />
+                        <icon class="iconfont icon-jianhao-tianchong delimg" data-i="{{index}}" bindtap="delimg1" />
+                    </view>
+                </block>
+            </view>
+        </view>
+        <block wx:if="{{!info.ID}}">
+            <view class="add_detail add_title">
+                <van-cell title="支付审批明细" icon="records" />
+                <icon class="iconfont icon-jia" bindtap="add_more"></icon>
+            </view>
+            <block wx:for="{{materials}}" wx:key="{{index}}" wx:if="{{materials.length}}">
+                <view class="add_detail detail_title">
+                    <van-cell title="支付审批明细{{item.num}}" icon="close" data-i="{{index}}" bindtap="reduce_detail" />
+                </view>
+                <view class="check_item">
+                    <view class="kind">
+                        <text>序号</text>
+                        <text class="required">*</text>
+                    </view>
+                    <van-cell-group>
+                        <van-field value="{{item.detailxh}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' data-name='detailxh' />
+                    </van-cell-group>
+                </view>
+                <view class="check_item">
+                    <view class="kind">
+                        <text>支付审批明细内容</text>
+                        <text class="required">*</text>
+                    </view>
+                    <van-cell-group>
+                        <van-field value="{{item.detailcontext}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' data-name='detailcontext' />
+                    </van-cell-group>
+                </view>
+                <view class="check_item">
+                    <view class="kind">
+                        <text>金额</text>
+                        <text class="required">*</text>
+                    </view>
+                    <van-cell-group>
+                        <van-field value="{{item.amount}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' data-name='amount' bind:input="checknum" />
+                    </van-cell-group>
+                </view>
+            </block>
+        </block>
+    </view>
+</view>

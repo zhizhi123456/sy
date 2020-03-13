@@ -72,7 +72,9 @@ Page({
       section6:app.globalData.MainProject1,
       section7:app.globalData.MainSubproject
     })
-
+    if (options.source) {
+      wx.setStorageSync('carte', options)
+    }
     
     wx.showLoading({
       title: '加载中',

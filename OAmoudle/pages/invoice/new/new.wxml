@@ -17,22 +17,18 @@
                 <text>部门</text>
                 <text class="required">*</text>
             </view>
-            <van-cell title="{{departmenttext}}" is-link bind:click="showPopup_o" />
-            <van-popup show="{{show_o}}" round position="bottom" bind:close="onClose_o">
-                <van-picker data-name="department" show-toolbar columns="{{ sections }}" bind:cancel="onClose_o" bind:confirm="onConfirm_o" />
-            </van-popup>
+            <van-cell-group>
+                <van-field value="{{departmenttext}}" disabled />
+            </van-cell-group>
         </view>
         <view class="check_item">
             <view class="kind require">
                 <text>公司抬头</text>
                 <text class="required">*</text>
             </view>
-            <van-cell title="{{info.Companytitle?info.Companytitle:'请选择'}}" bind:click="showPopup">
-                <icon class="iconfont icon-jiantou" />
-            </van-cell>
-            <van-popup show="{{ show }}" round position="bottom" bind:close="onClose">
-                <van-picker data-name="Companytitle" show-toolbar columns="{{ firms }}" bind:cancel="onClose" bind:confirm="onConfirm" />
-            </van-popup>
+            <van-cell-group>
+                <van-field value="{{info.Companytitle}}" disabled />
+            </van-cell-group>
         </view>
         <view class="check_item">
             <view class="kind require">
@@ -121,7 +117,7 @@
         <view class="check_item">
             <text class="kind">含税金额</text>
             <van-cell-group>
-                <van-field data-name="includetaxamont" value="{{info.includetaxamont}}" placeholder="请输入" bind:blur="includetaxamontblur" />
+                <van-field data-name="includetaxamont" value="{{info.includetaxamont}}" placeholder="请输入" bind:blur="includetaxamontblur" bind:input="checknum" />
             </van-cell-group>
         </view>
         <view class="check_item">

@@ -21,31 +21,25 @@
                 <van-field data-name="chargename" value="{{info.chargename}}" placeholder="请输入" bind:blur="projectnameblur" />
             </van-cell-group>
         </view>
-        <view class="check_item">
+         <view class="check_item">
             <view class="kind require">
                 <text>公司抬头</text>
                 <text class="required">*</text>
             </view>
-            <van-cell title="{{info.Companytitle?info.Companytitle:'请选择'}}" bind:click="showPopup_4">
-                <icon class="iconfont icon-jiantou" />
-            </van-cell>
-            <van-popup show="{{ show_nature }}" round position="bottom" bind:close="onClose_4">
-                <van-picker data-name="Companytitle" show-toolbar columns="{{nature}}" bind:cancel="onClose_4" bind:confirm="onConfirm_4" />
-            </van-popup>
+            <van-cell-group>
+                <van-field value="{{info.Companytitle}}" disabled />
+            </van-cell-group>
         </view>
-        <view class="check_item">
+          <view class="check_item">
             <view class="kind require">
                 <text>部门</text>
-                 <text class="required">*</text>
+                <text class="required">*</text>
             </view>
-            <van-cell title="{{info.department?info.department:'请选择'}}" bind:click="showPopup1">
-                <icon class="iconfont icon-jiantou" />
-            </van-cell>
-            <van-popup show="{{ show1 }}" round position="bottom" bind:close="onClose1">
-                <van-picker data-name="department" show-toolbar columns="{{sections}}" bind:cancel="onClose1" bind:confirm="onConfirm1" />
-            </van-popup>
+            <van-cell-group>
+                <van-field value="{{info.department}}" disabled />
+            </van-cell-group>
         </view>
-        <view class="check_item">
+        <!-- <view class="check_item">
             <view class="kind require">
                 <text>所有人</text>
                  <text class="required">*</text>
@@ -56,6 +50,15 @@
             <van-popup show="{{ show2 }}" round position="bottom" bind:close="onClose2">
                 <van-picker data-name="belongtoman" show-toolbar columns="{{section1}}" bind:cancel="onClose2" bind:confirm="onConfirm2" />
             </van-popup>
+        </view> -->
+         <view class="check_item">
+            <view class="kind require">
+                <text>所有人</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field value="{{info.belongtoman}}" disabled />
+            </van-cell-group>
         </view>
         <view class="check_item">
             <view class="kind require">
@@ -72,7 +75,7 @@
         <view class="check_item">
             <text class="kind">费用金额</text>
             <van-cell-group>
-                <van-field data-name="chargeamount" value="{{info.chargeamount}}" placeholder="请输入" bind:blur="projectnameblur" />
+                <van-field data-name="chargeamount" value="{{info.chargeamount}}" placeholder="请输入" bind:blur="projectnameblur" bind:input="checknum" />
             </van-cell-group>
         </view>
         <view class="check_item">

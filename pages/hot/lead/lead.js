@@ -162,6 +162,9 @@ Page({
       section3: app.globalData.table,
       section2: app.globalData.Principal
     })
+    if (options.source) {
+      wx.setStorageSync('carte', options)
+    }
     var user = wx.getStorageSync("myInfo");
     if (user) {
       getdep({

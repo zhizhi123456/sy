@@ -59,10 +59,10 @@ Page({
       referVacate({
         ID: options.id
       }).then(res => {
-        console.log(res)
+        // console.log(res)
         if (res.code == 10000) {
           var history = wx.getStorageSync("history")
-          console.log(history)
+          // console.log(history)
           let item = res.Item;
           if (history) {
             item = history

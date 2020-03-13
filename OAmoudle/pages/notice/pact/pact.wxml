@@ -8,7 +8,7 @@
                 新建
             </navigator>
             <view class="apply">
-                <text>借条</text>
+                <text>公告</text>
             </view>
         </view>
         <view class="seach">
@@ -130,7 +130,7 @@
                 </view>
                 <view>
                     <text class="info">是否置顶</text>
-                    <text>{{item.isstick}}</text>
+                    <text>{{item.isstick?'是':'否'}}</text>
                 </view>
                 <view>
                     <text class="info">创建人</text>

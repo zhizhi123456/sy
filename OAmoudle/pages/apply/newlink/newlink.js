@@ -182,6 +182,16 @@ Page({
     this.setData({
       section5: a
     })
+    var user = wx.getStorageSync("myInfo");
+    if (user) {
+      var message = wx.getStorageSync("message");
+      console.log(message)
+      let  materials = this.data.materials;
+      materials[0].chargeman = message.userId
+      this.setData({
+        materials
+      })
+    }
     // 明细表id
     if (options.detailid) {
       detailapplysmall({

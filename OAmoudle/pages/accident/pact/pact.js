@@ -70,6 +70,9 @@ Page({
     wx.showLoading({
       title: '加载中',
     });
+    if (options.source) {
+      wx.setStorageSync('carte', options)
+    }
     this.setData({
       sections: app.globalData.Companytitle,
       section1:app.globalData.states,

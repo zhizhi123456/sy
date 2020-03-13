@@ -87,6 +87,9 @@ Page({
       section6:app.globalData.YesOrNo,
       section7: app.globalData.Principal,
     })
+    if (options.source) {
+      wx.setStorageSync('carte', options)
+    }
     // console.log(app.globalData.projectall)
     wx.showLoading({
       title: '加载中',

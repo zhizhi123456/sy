@@ -101,18 +101,11 @@ Page({
     projectone({
       ID: e.detail.value.value
     }).then(res => {
-      console.log(res)
-      console.log(e.detail.value.value)
       if (res.code == 10000 && res.Item) {
         var item = util.outflow(res.Item)
         util.handleData(item, this, app.globalData.department);
         // console.log(item)
         this.setData({
-          // 公司抬头
-          'info.Companytitle': item.Companytitle,
-          'info.department': item.department,
-          departmenttext: item.department,
-          // 部门
           // 合同照片
           'info.API_Picurl': item.API_Picurl,
           // 总包项目编号
@@ -124,23 +117,26 @@ Page({
           'info.planenddate': item.planenddate,// 计划完工时间
           'info.demo': item.demo,// 备注
           'info.mainbuildcontext': item.mainbuildcontext,//主要施工内容
-          'info.chiefcontactman': item.chiefcontactman,//主要联系人
-          'info.chargeman': item.chargeman,//负责人
-        
+          'info.chiefcontactman': item.chiefcontactman,//主要联系人,
+          'info.projcectCode':e.detail.value.text
         })
-        console.log(item.API_Picurl)
+        // console.log(item.API_Picurl)
       }
     })
-
-
-
-
-
 
   },
   // 金额
   contcactamountblur(e) {
     let info = util.editInfo(e, this, e.detail.value);
+    this.setData({
+      info
+    })
+  },
+   // 数字筛选
+   checknum(e) {
+    let info = this.data.info;
+    util.formatNum(e);
+    info.contcactamount = e.detail;
     this.setData({
       info
     })
@@ -212,7 +208,7 @@ Page({
       this.setData({
         info
       })
-      console.log(this.data.info)
+      // console.log(this.data.info)
       addPact(info).then(res => {
         // console.log(res)
         if (res.code == 10000) {
@@ -221,6 +217,7 @@ Page({
             icon: 'success',
             duration: 3000
           })
+         
           util.returnPrev('generalcontract')
         }
       })
@@ -247,14 +244,16 @@ Page({
     this.setData({
       info
     })
+    console.log(this.data.info)
     amend(this.data.info).then(res => {
-      // console.log(res)
+      console.log(res)
       if (res.code == 10000) {
         wx.showToast({
           title: '编辑成功',
           icon: 'success',
           duration: 3000
         })
+        util.ModifyRecord(this.data.information,"maincontact")
         util.returnPrev('generalcontract', this)
       }
     })
@@ -283,12 +282,29 @@ Page({
         })
       }
     })
-    console.log(this.data.section22)
+    // 固定部门及公司负责人
+    var user = wx.getStorageSync("myInfo");
+    if (user) {
+      var message = wx.getStorageSync("message");
+      let info = this.data.info;
+      info.department = message.department
+      info.Companytitle = message.Companytitletext
+      this.setData({
+        info,
+        departmenttext:message.departmenttext
+      })
+    }
     if (options.id) {
       referId({
         ID: options.id
       }).then(res => {
         let item = res.Item;
+        var data1 =res.Item
+        var b = JSON.stringify(data1)
+        var c  = JSON.parse(b)
+        this.setData({
+          information:c
+        })
         util.handleData(item, this, app.globalData.department);
         this.setData({
           info: item

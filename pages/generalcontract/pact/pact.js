@@ -5,7 +5,7 @@ import {
 } from '../../../service/getData.js';
 var app = getApp();
 var util = require("../../../utils/util");
-let item, list;
+let userinfo = wx.getStorageSync("myInfo");
 Page({
   /**
    * 页面的初始数据
@@ -42,57 +42,44 @@ Page({
   },
   // 模糊查询
   seachInfo() {
-    list = [];
-    wx.showLoading({
-      title: '加载中',
-    });
-    this.setData({
-      pages: 1
-    })
-    getQuery({
-      maincontactname: this.data.seach
-    }).then(res => {
-      console.log(res)
-      if (res.code == 10000) {
-        item = res.List;
-        list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list,this,'maincontact');
-        this.setData({
-          InfoList: list,
-          item,
-          seach: ''
-        })
-        wx.hideLoading();
-      }
-    })
+   // list = [];
+   wx.showLoading({
+    title: '加载中',
+  });
+
+  var info = this.data.info
+  info.keyword = this.data.seach
+  var user = wx.getStorageSync("myInfo");
+  info.UserName = user.UserName
+  info.state = '所有'
+  this.setData({
+    info
+  })
+  util.qgroupdeliver(groupId, this, '', '1')
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    list = [];
+    console.log(options.source);
+    if (options.source) {
+      wx.setStorageSync('carte', options)
+    }
+    // 调用查询
     wx.showLoading({
       title: '加载中',
     });
     // 调用查询
-    getQuery().then(res => {
-      // console.log(res.List)
-      if (res.code == 10000) {
-        item = res.List;
-        list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list,this,'maincontact');
-        this.setData({
-          InfoList: list,
-          item
-        })
-        wx.hideLoading();
-      }
-    }).catch(err => {
-      console.log(err)
+    this.setData({
+      seach: ""
     })
+    this.seachInfo()
     if (app.globalData.CountItem) {
       this.setData({
-        sections: app.globalData.department,
+        sections: app.globalData.getdept,
         firms: app.globalData.Companytitle,
-        states: app.globalData.states
+        states: app.globalData.states,
+        section1:app.globalData.getstaff
       })
     } else {
       app.DataCallback = employ => {
@@ -100,7 +87,8 @@ Page({
           this.setData({
             sections: app.globalData.department,
             firms: app.globalData.Companytitle,
-            states: app.globalData.states
+            states: app.globalData.states,
+            section1:app.globalData.getstaff
           })
         }
       }
@@ -118,41 +106,13 @@ Page({
     })
   },
   onConfirm_seach() {
-    list = [];
-    wx.showLoading({
-      title: '加载中',
-    });
+    var info = this.data.info
+    info.state = '所有'
+    info.UserName = userinfo.UserName
     this.setData({
-      pages: 1
+      info
     })
-    if (this.data.info.keyword || this.data.info.departmentID || this.data.info.chargemanName || this.data.info.StartTime) {
-      let info = this.data.info;
-      util.checkContent(info, this);
-      this.setData({
-        info
-      })
-      groupId(this.data.info).then(res => {
-        if (res.code == 10000) {
-          item = res.List;
-          list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list,this,'maincontact');
-          this.setData({
-            InfoList: list,
-            item,
-            info: {}
-          })
-          wx.hideLoading();
-        }
-      })
-      this.setData({
-        show: false
-      })
-    } else(
-      wx.showToast({
-        title: '请至少输入一项内容',
-        icon: 'none',
-        duration: 3000
-      })
-    )
+    util.qgroupdeliver(groupId, this)
   },
   // 费用名称
   keywordblur(e) {
@@ -246,7 +206,7 @@ Page({
     let userinfo = wx.getStorageSync("myInfo");
     if (userinfo) {
       let info = this.data.info;
-      info[UserName] = userinfo.UserName;
+      info.UserName = userinfo.UserName;
       this.setData({
         show_3: true,
         info
@@ -271,70 +231,21 @@ Page({
       info
     })
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  showPopup_5() {
+    this.setData({
+      show_5: true
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  onClose_5() {
+    this.setData({
+      show_5: false
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
+  onConfirm_5(e) {
+    let info = util.editInfo(e, this, e.detail.value.value);
+    this.setData({
+      show_5: false,
+      info
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {},
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-    if (item.length > 5 && list.length < item.length) {
-      this.setData({
-        loading: true
-      })
-      let pages = this.data.pages,
-        n = Math.ceil(item.length / 5);
-      if (n > pages) {
-        setTimeout(() => {
-          pages = pages + 1;
-          list = util.listData(item, app.globalData.department, pages, list);
-          this.setData({
-            pages,
-            InfoList: list,
-          })
-        }, 1000)
-      }
-    } else {
-      this.setData({
-        loading: false
-      })
-    }
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

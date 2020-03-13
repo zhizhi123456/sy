@@ -250,7 +250,12 @@
         "pages/security/detaillink/detaillink",
         "pages/quality/pact/pact",
         "pages/quality/detail/detail",
-        "pages/quality/new/new"
+        "pages/quality/new/new",
+        "pages/approval/pact/pact",
+        "pages/approval/detail/detail",
+        "pages/approval/new/new",
+        "pages/approval/newlink/newlink",
+        "pages/approval/detaillink/detaillink"
       ]
     }
   ],
@@ -293,6 +298,9 @@
     "van-sidebar-item": "vant-weapp/dist/sidebar-item/index",
     "van-tag": "vant-weapp/dist/tag/index",
     "van-divider": "vant-weapp/dist/divider/index",
-    "van-area": "vant-weapp/dist/area/index"
+    "van-area": "vant-weapp/dist/area/index",
+    "van-notice-bar": "vant-weapp/dist/notice-bar/index",
+    "van-radio": "vant-weapp/dist/radio/index",
+    "van-radio-group": "vant-weapp/dist/radio-group/index"
   }
 }

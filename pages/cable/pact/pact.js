@@ -78,6 +78,9 @@ Page({
       section3: app.globalData.Principal,
       section4: app.globalData.MainSubproject,
     })
+    if (options.source) {
+      wx.setStorageSync('carte', options)
+    }
     // console.log(this.data.section4)
     this.setData({
       Supplier: app.globalData.Supplier

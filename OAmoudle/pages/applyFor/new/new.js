@@ -382,6 +382,21 @@ Page({
   getRecord(e) {
     util.updateValue(e, this);
   },
+  // 数字筛选
+  checknum(e) {
+    let name = e.currentTarget.dataset.name,
+      i = e.currentTarget.dataset.i
+    let materials = this.data.materials;
+    util.formatNum(e);
+    if (i) {
+      materials[i][name] = e.detail;
+    } else {
+      materials[0][name] = e.detail;
+    }
+    this.setData({
+      materials
+    })
+  },
   // 添加材料明细
   add_more() {
     let add_detail = {
@@ -458,6 +473,7 @@ Page({
         console.log(res)
         if (res) {
           var s = JSON.parse(res)
+          console.log(s)
           let info = this.data.info;
           info.department = s[0].techofficename
           info.Companytitle = s[0].value

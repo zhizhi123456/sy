@@ -202,24 +202,16 @@ Page({
       show1: false
     });
   },
-  // onConfirm1(e) {
-  //   let info = util.editInfo(e, this, e.detail.value);
-  //   this.setData({
-  //     info,
-  //     show1: false,
-  //   })
-  // },
   onConfirm1(e) {
-    //console.log("1")
     var s = this.data.section1
     var t = s.filter((y) => {
       return y.show
     })
+    console.log(t)
     t = t.map((x) => {
-      return x.Value
+      return x.text
     })
     t = t.join(",")
-    //console.log(t)
     let info = util.editInfo(e, this, t);
     this.setData({
       info,
@@ -227,15 +219,10 @@ Page({
     })
   },
   onChange(event) {
-    // //console.log(this.data.section4)
-    //console.log(event)
-    // //console.log(event.currentTarget.dataset.name)
-    // //console.log(this.data.section4)
     var s = this.data.section1
     var y = s.findIndex((r) => {
       return r.Value == event.currentTarget.dataset.name
     })
-    // //console.log(y)
     s[y].show = !s[y].show
     this.setData({
       section1: s
@@ -276,7 +263,6 @@ Page({
     var y = s.findIndex((r) => {
       return r.userName == event.currentTarget.dataset.name
     })
-    // //console.log(y)
     s[y].show = !s[y].show
     this.setData({
       section4: s
@@ -286,7 +272,7 @@ Page({
   confirm() {
     // ////console.log(this.data.info)
     if (this.data.info.type && this.data.info.name &&
-      this.data.info.isstick) {
+      this.data.info.isstick!=='') {
       let info = this.data.info;
       if (info.cover) {
         // console.log("tupian")
@@ -335,7 +321,7 @@ Page({
       })
       info.cover = info.cover.join(",")
     }
-    util.checkChange(info, this, app.globalData.department);
+    // util.checkChange(info, this, app.globalData.department);
     util.intro(info, this)
     this.setData({
       info
@@ -422,22 +408,17 @@ Page({
             s.show = false
             return s
           })
-          //console.log(q)
           this.setData({
             section1: q
           })
-          //console.log(this.data.section1)
           var t = this.data.section1
           var q = item.receivedepartment
-          console.log(q)
-          console.log(typeof q)
           if (q) {
             q = q.split(",")
             let y
-            console.log(q)
             q.forEach((s) => {
               y = t.map((w) => {
-                if (w.Value == s) {
+                if (w.text == s) {
                   w.show = true
                   return w
                 }
@@ -447,8 +428,6 @@ Page({
               section1: t
             })
           }
-
-
         })
         var t = this.data.section4
         var q = item.receivestaff

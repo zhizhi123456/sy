@@ -47,6 +47,15 @@ Page({
       info
     })
   },
+  // 数字筛选
+  checknum(e) {
+    let info = this.data.info;
+    util.formatNum(e);
+    info.chargeamount = e.detail;
+    this.setData({
+      info
+    })
+  },
   // 公司抬头
   showPopup_4() {
     this.setData({
@@ -154,7 +163,7 @@ Page({
         info
       })
       addofficeCost(this.data.info).then(res => {
-        // //console.log(res)
+        console.log(res)
         if (res.code == 10000) {
           wx.showToast({
             title: '新建成功',
@@ -210,6 +219,18 @@ Page({
       section2: app.globalData.costobj,
       section3: app.globalData.costkind,
     })
+    var user = wx.getStorageSync("myInfo");
+    if (user) {
+      var message = wx.getStorageSync("message");
+      console.log(message)
+      let info = this.data.info;
+      info.department = message.departmenttext
+      info.Companytitle = message.Companytitletext
+      info.belongtoman = message.userId
+      this.setData({
+        info
+      })
+    }
     if (options.id) {
       detailofficeCost({
         ID: options.id

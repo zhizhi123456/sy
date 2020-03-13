@@ -129,6 +129,10 @@ export const GetFrameProtocol = (params) => http.post("/api/MethodOfDataService/
 export const contractType = () => http.get("/api/MethodOfDataService/contractType");
 // 框架协议编号及名称
 export const getframeProtocolCode = () => http.get("/api/MethodOfDataService/getframeProtocolCode");
+// 得到下属员工
+export const getstaff = (params) => http.post("/api/MethodOfDataService/GetSubordinateStaff",params);
+// 得到下属部门
+export const getdept = (params) => http.post("/api/MethodOfDataService/GetSubordinateDepartment",params);
 //=================================================================================================================================================================
 // 工作流接口
 // 工作流流转
@@ -1315,3 +1319,30 @@ export const addConstructionTask = (params) => http.post("/api/prjassignbookCons
 export const amendConstructionTask = (params) => http.post("/api/prjassignbookConstruction/EditInfo", params);
 // 删除
 export const cancelConstructionTask = (params) => http.post("/api/prjassignbookConstruction/Insert", params);
+// 支付审批
+// 查询
+export const queryapproval = (params) => http.post("/api/payapproval/Query", params);
+// 添加
+export const addapproval = (params) => http.post("/api/payapproval/Insert", params);
+// 根据id查询
+export const detailapproval = (params) => http.post("/api/payapproval/Detail", params);
+// 更新
+export const updateapproval = (params) => http.post("/api/payapproval/Update", params);
+// 删除
+export const delapproval = (params) => http.post("/api/payapproval/Delete", params);
+// 综合查询
+export const qgroupapproval = (params) => http.post("/api/payapproval/Querygroup", params);
+// 项目收款明细                                       
+// 查询
+export const queryapprovalsmall = (params) => http.post("/api/payapprovalDetail/Query", params);
+// 添加
+export const addapprovalsmall = (params) => http.post("/api/payapprovalDetail/Insert", params);
+// 根据id查询
+export const detailapprovalsmall = (params) => http.post("/api/payapprovalDetail/Detail", params);
+// 更新
+export const updateapprovalsmall = (params) => http.post("/api/payapprovalDetail/Update", params);
+// 删除
+export const delapprovalsmall = (params) => http.post("/api/payapprovalDetail/Delete", params);
+// 综合查询
+export const qgroupapprovalsmall = (params) => http.post("/api/payapprovalDetail/Querygroup", params);
+

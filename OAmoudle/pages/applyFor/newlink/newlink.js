@@ -26,8 +26,8 @@ Page({
     show6: false,
     show5: false,
     show4: false,
-    show6:false,
-    section5: ["红酒","购物卡","食品","烟","电脑"],
+    show6: false,
+    section5: ["红酒", "购物卡", "食品", "烟", "电脑"],
   },
   // 返回
   return () {
@@ -60,7 +60,21 @@ Page({
       info
     })
   },
-  
+  // 数字筛选
+  checknum(e) {
+    let name = e.currentTarget.dataset.name,
+      i = e.currentTarget.dataset.i
+    let materials = this.data.materials;
+    util.formatNum(e);
+    if (i) {
+      materials[i][name] = e.detail;
+    } else {
+      materials[0][name] = e.detail;
+    }
+    this.setData({
+      materials
+    })
+  },
   // 负责人
   showPopup6() {
     this.setData({
@@ -92,8 +106,8 @@ Page({
         }
       }
     }
-    if (!( materials[0].type && materials[0].quantity && materials[0].unitprice &&
-      materials[0].detailname)) {
+    if (!(materials[0].type && materials[0].quantity && materials[0].unitprice &&
+        materials[0].detailname)) {
       Toast({
         message: '请填写明细表必填项',
         mask: true

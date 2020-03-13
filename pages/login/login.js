@@ -2,7 +2,8 @@
 import {
   login,
   register,
-  only
+  only,
+  getdep
 } from "../../service/getData";
 var app = getApp();
 var util = require("../../utils/util");
@@ -156,10 +157,31 @@ Page({
         if (res.code == 10000) {
           // app.globalData.userInfo = res.Item;
           wx.setStorageSync("myInfo", res.Item)
-          wx.setStorageSync("username",this.data.username)
-          wx.setStorageSync("password",this.data.password)
+          wx.setStorageSync("username", this.data.username)
+          wx.setStorageSync("password", this.data.password)
           // 跳转到首页
+          var user = wx.getStorageSync("myInfo");
+          if (user) {
+            getdep({
+              UserName: user.UserName
+            }).then(res => {
+              // console.log(res)
+              if (res) {
+                var s = JSON.parse(res)
+                var info = {
+                  Companytitle:s[0].company,
+                  Companytitletext:s[0].value,
+                  department: s[0].ID,
+                  departmenttext: s[0].techofficename,
+                  userId:s[0].userId
+                }
+                wx.setStorageSync("message",info)
+
+              }
+            })
+          }
           util.returnMenu();
+
         } else {
           wx.showToast({
             title: '用户名或密码错误',

@@ -37,10 +37,6 @@
                         <view class="kind">施工地点</view>
                         <view class="check">{{info.workplace}}</view>
                     </view>
-                    <!-- <view class="c_item">
-                        <view class="kind">建筑面积</view>
-                        <view class="check">{{info.material}}</view>
-                    </view> -->
                     <view class="c_item">
                         <view class="kind">甲方项目编号</view>
                         <view class="check">{{info.FirstReportPrjcode}}</view>
@@ -51,9 +47,6 @@
                     </view>
                     <view class="c_item">
                         <view class="kind">项目类型</view>
-                        <!-- <block wx:for="{{picurl}}" wx:key="index">
-                            <image wx:if="{{item}}" src="{{item}}" mode="scaleToFill"></image>
-                        </block> -->
                         <view class="check">{{info.projecttype}}</view>
                     </view>
                     <view class="c_item">
@@ -72,34 +65,7 @@
                         <view class="kind">备注</view>
                         <view class="check">{{info.demo}}</view>
                     </view>
-                    <!-- <view class="c_item">
-                        <view class="kind">工程进度一</view>
-                        <view class="check">{{info.progress1}}</view>
-                    </view>
-                    <view class="c_item">
-                        <view class="kind">工程进度二</view>
-                        <view class="check">{{info.progress2}}</view>
-                    </view>
-                    <view class="c_item">
-                        <view class="kind">工程进度三</view>
-                        <view class="check">{{info.progress3}}</view>
-                    </view>
-                    <view class="c_item">
-                        <view class="kind">是否中标</view>
-                        <view class="check">{{info.ifwinbid}}</view>
-                    </view> -->
-                    <!-- <view class="c_item">
-                        <view class="kind">市场部邮箱</view>
-                        <view class="check">{{info.marketemail}}</view>
-                    </view>
-                    <view class="c_item">
-                        <view class="kind">成本核算部邮箱</view>
-                        <view class="check">{{info.costacountemail}}</view>
-                    </view>
-                    <view class="c_item">
-                        <view class="kind">工程部邮箱</view>
-                        <view class="check">{{info.engineeremail}}</view>
-                    </view> -->
+                   
                     <view class="c_item">
                         <view class="kind">合同照片</view>
                         <view wx:if="{{info.API_Picurl}}" class="detpic_show">
@@ -162,7 +128,7 @@
                         <view class="check">{{info.ifbindtoproject}}</view>
                     </view>
                     <view class="c_item">
-                        <view class="kind">招投标编号</view>
+                        <view class="kind">投标编号</view>
                         <view class="check">{{info.bindtoprojectcode}}</view>
                     </view>
                     <view class="c_item">

@@ -260,6 +260,9 @@ Page({
    */
   onLoad: function (options) {
     userinfo = wx.getStorageSync("myInfo");
+    if (options.source) {
+      wx.setStorageSync('carte', options)
+    }
     this.getLIST(options);
     if (app.globalData.CountItem) {
       this.setData({

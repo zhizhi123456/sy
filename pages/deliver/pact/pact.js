@@ -120,6 +120,9 @@ Page({
       section5: app.globalData.Principal,
       firms: app.globalData.Customer,
     })
+    if (options.source) {
+      wx.setStorageSync('carte', options)
+    }
     // 列表
     this.setData({
       seach: ""

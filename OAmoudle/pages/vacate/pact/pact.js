@@ -27,7 +27,7 @@ Page({
   // 返回
   return () {
     let menus = wx.getStorageSync('menus');
-    if (menus.title =='我的申请'|| menus.title=='当前任务') {
+    if (menus.title =='我的申请'|| menus.title=='我的任务') {
       wx.redirectTo({
         url: "/pages/current/current/current?title=" + this.data.options.title + '&id=' + (this.data.options.id || this.data.options.rid)
       });
@@ -80,11 +80,15 @@ Page({
     if (option.id || option.caption) {
       wx.setStorageSync('menus', option)
     }
+    if(option.source){
+      wx.setStorageSync('carte', option)
+    }
     var options = wx.getStorageSync("menus")
     this.setData({
-      options
+      options,
+      section1:app.globalData.getstaff
     })
-    if (options.title == '当前任务') {
+    if (options.title == '我的任务') {
       let info = this.data.info;
       info = {}
       info.UserName = userinfo.UserName
@@ -109,6 +113,7 @@ Page({
         ]
       })
     }
+    console.log(options.title == '我的申请')
     if (options.title == '我的申请') {
       let info = this.data.info;
       info = {}
@@ -130,7 +135,7 @@ Page({
         top: '我的请假'
       })
     }
-    if (options.id == '2055') {
+    if (options.id == '2110') {
       let info = this.data.info;
       info = {}
       info.UserName = userinfo.UserName
@@ -147,7 +152,7 @@ Page({
     this.seachInfo()
     if (app.globalData.CountItem) {
       this.setData({
-        sections: app.globalData.department,
+        sections: app.globalData.getdept,
         Leavetypelist: app.globalData.Leavetypelist,
         states: app.globalData.states
       })
@@ -157,7 +162,8 @@ Page({
           this.setData({
             sections: app.globalData.department,
             Leavetypelist: app.globalData.Leavetypelist,
-            states: app.globalData.states
+            states: app.globalData.states,
+           
           })
         }
       }
@@ -198,7 +204,7 @@ Page({
         info
       })
     }
-    if (options.id == '2055') {
+    if (options.id == '2110') {
       let info = this.data.info;
       info = {}
       info.UserName = userinfo.UserName
@@ -243,6 +249,24 @@ Page({
       info
     })
   },
+    // 请假类型
+    showPopup_2() {
+      this.setData({
+        show_2: true
+      })
+    },
+    onClose_2() {
+      this.setData({
+        show_2: false
+      })
+    },
+    onConfirm_2(e) {
+      let info = util.editInfo(e, this, e.detail.value.value);
+      this.setData({
+        show_2: false,
+        info
+      })
+    },
   // 部门
   showPopup_0() {
     if (this.data.hadNew) {
@@ -358,41 +382,4 @@ Page({
 
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    userinfo = wx.getStorageSync("myInfo");
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {},
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {},
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

@@ -29,6 +29,9 @@ Page({
    */
   onLoad: function (options) {
     userinfo = wx.getStorageSync("myInfo");
+    if (options.source) {
+      wx.setStorageSync('carte', options)
+    }
     hotjob({
       UserName: userinfo.UserName
     }).then(res => {

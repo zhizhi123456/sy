@@ -7,10 +7,12 @@ import {
   getLeader,
   hotjob,
   getdep,
-  leadership
+  leadership,
+  querynotice
 } from "../../service/getData";
 var app = getApp();
 let userinfo = wx.getStorageSync("myInfo");
+
 Page({
   /**
    * 页面的初始数据
@@ -25,8 +27,8 @@ Page({
     login: true,
     exist: '',
     deng: '',
-    dephot: false
-
+    dephot: false,
+    news: false
   },
   deal() {
     // 请求一级菜单
@@ -35,21 +37,17 @@ Page({
     })
     queryMenu({
       Timestamp: app.globalData.time,
-      pid: 0,
+      pid: 1,
     }).then(res => {
       // //console.log(res)
       var s = res.List
-      var w = s[0]
-      s[0] = s[1]
-      s[1] = w
+      var w = s[1]
+      s[1] = s[0]
+      s[0] = w
       var t = s
       // var t = s.filter((a, index) => {
       //   return index != 3
       // })
-      var q = res.List
-      var p = q[3]
-      q[3] = q[2]
-      q[2] = p
 
       this.setData({
         tags: t,
@@ -75,18 +73,7 @@ Page({
       zong = res.List
       zong.forEach(s => {
         s.control = true
-        if (s.name == '当前任务') {
-          s.TNUm = true
-        }
-        if (s.name == '我的申请') {
-          s.ANUm = true
-        }
-        // if (s.name == '我的申请') {
-        //   s.pageaddres = '/OAmoudle/pages/maintenance/pact/pact'
-        // }
-        if (s.name == "招投标") {
-          s.name = '投标'
-        }
+
         var path = s.pageaddres
         // ////console.log(path)
         if (path) {
@@ -94,10 +81,24 @@ Page({
           if (a != '/') {
             s.pageaddres = '/' + path
           }
-          // ////console.log(path == "/pages/secondary/secondary")
           s.pageaddres = path.replace(/[\r\n]/g, "");
         }
-        ////console.log(path)
+        s.name = s.name.replace(/[\r\n]/g, "");
+        if (s.name == '当前任务') {
+          s.TNUm = true
+        }
+        if (s.name == '我的申请') {
+          s.ANUm = true
+        }
+        // if (s.name == '我的申请') {
+        //   s.pageaddres = '/OAmoudle/pages/approval/pact/pact'
+        // }
+        if (s.name == "招投标") {
+          s.name = '投标'
+        }
+        if (s.name == "考勤") {
+          s.pageaddres = ''
+        }
 
       })
       // 有用户限制的菜单 
@@ -140,7 +141,7 @@ Page({
             }
           }
         })
-        if (this.data.num == 1002) {
+        if (this.data.num == 2091) {
           // console.log(zong)
           if (this.data.hotnum) {
             zong.push({
@@ -199,7 +200,7 @@ Page({
                   tags: s
                 })
               }
-              if (that.data.num == 1002) {
+              if (that.data.num == 2091) {
                 let item = that.data.lists;
                 item.shift();
                 that.setData({
@@ -228,6 +229,28 @@ Page({
                   }
                 }
               }
+            }
+            console.log(that.data.num)
+            if (that.data.num == '2090') {
+              querynotice().then(res => {
+                console.log(res)
+                if (res.code == 10000) {
+                  var item = res.List.reverse()
+                  if (item) {
+                    var news = item.map(s => ({
+                      name: s.name,
+                      time: s.createtime.slice(5, 10),
+                    }))
+                    console.log()
+                    if (news.length > 3) {
+                      news = news.slice(0, 3)
+                    }
+                    that.setData({
+                      news
+                    })
+                  }
+                }
+              })
             }
           },
           fail(res) {
@@ -289,6 +312,11 @@ Page({
       }
     })
   },
+  message() {
+    wx.redirectTo({
+      url: `/OAmoudle/pages/notice/pact/pact?menuId=null&id=2113&title=新闻公告&num=2090&mtitle=公司oa项目&source=index`
+    })
+  },
   // 90
   /**
    * 生命周期函数--监听页面加载
@@ -301,10 +329,15 @@ Page({
       this.setData({
         num: options.grading
       })
+      if (options.title) {
+        this.setData({
+          title: options.title
+        })
+      }
     } else {
       this.setData({
-        num: 1001,
-        title: '项目合同'
+        num: 2089,
+        title: '项目管理'
       })
     }
     this.deal()
@@ -327,7 +360,7 @@ Page({
       getTaskTNUm({
         UserName: userinfo.UserName
       }).then(res => {
-        // ////console.log(res)
+        console.log(res)
         if (res.code == 10000) {
           let item = res.List,
             TaskTNUm = 0;
@@ -381,8 +414,6 @@ Page({
             depnum: false
           })
         }
-
-
       })
     }
   },

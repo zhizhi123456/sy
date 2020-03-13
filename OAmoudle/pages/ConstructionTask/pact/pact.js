@@ -66,6 +66,9 @@ Page({
     if (options.id) {
       wx.setStorageSync('menus', options)
     }
+    if (options.source) {
+      wx.setStorageSync('carte', options)
+    }
     list = [];
     wx.showLoading({
       title: '加载中',

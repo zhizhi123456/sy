@@ -79,6 +79,12 @@ Page({
    */
   onLoad: function (options) {
     list = [];
+    if (options.source) {
+      wx.setStorageSync('carte', options)
+    }
+    if (options.source) {
+      wx.setStorageSync('carte', options)
+    }
     wx.showLoading({
       title: '加载中',
     });

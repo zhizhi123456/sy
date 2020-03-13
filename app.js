@@ -58,7 +58,9 @@ import {
   AnnouncementType,
   contractType,
   getframeProtocolCode,
-  getdep
+  getdep,
+  getstaff,
+  getdept
 } from "./service/getData";
 var util = require("./utils/util");
 App({
@@ -128,9 +130,8 @@ App({
           this.globalData.projectall1 = []
         }
       })
-      AnnouncementType().then(res => {
-        console.log(res)
-      })
+      util.sumup1(getstaff, this, 'getstaff', "name", "userId");
+      util.sumup1(getdept, this, 'getdept', "techofficename", "id");
       util.sumup(department, this, 'department', "techofficename", "ID");
       util.sumup(Companytitle, this, 'Companytitle', "Value", "Key");
       util.sumup(staff, this, 'staff', "Name", "ID");
@@ -217,6 +218,8 @@ App({
     }
   },
   globalData: {
+    getdept,
+    getstaff,
     mapadress: "",
     pic: [],
     time: util.format(new Date()),

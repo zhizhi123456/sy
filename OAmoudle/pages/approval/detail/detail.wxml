@@ -1,0 +1,255 @@
+<!-- pages/detail/detail.wxml -->
+<view wx:if="{{info}}">
+    <view class="header d_header">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="delete" bindtap="delete" wx:if="{{(!history)&&(!info.formid)}}">
+            删除
+        </text>
+        <view class="apply">资料详情</view>
+    </view>
+    <view class="card">
+        <van-card title="{{info.purpose}}" />
+    </view>
+    <view class="main_nav">
+        <van-tabs active="{{table}}">
+            <van-tab title="详细资料" name="a">
+                <view class="content">
+                    <view class="c_item">
+                        <view class="kind">支付审批单名称</view>
+                        <view class="check">{{info.payapproveformname}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">部门</view>
+                        <view class="check">{{info.department}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">公司抬头</view>
+                        <view class="check">{{info.Companytitle}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">付款方式</view>
+                        <view class="check">{{info.paytype}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">项目编号</view>
+                        <view class="check">{{info.projectcode}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">相关照片</view>
+                        <view wx:if="{{info.API_Picurl}}" class="detpic_show">
+                            <block wx:for="{{info.API_Picurl}}" wx:key="index">
+                                <image src="{{item}}" bindtap="tap_pic" data-index="{{index}}" binderror="defaultimg" />
+                            </block>
+                        </view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">发票图片</view>
+                        <view wx:if="{{info.invoiceurl}}" class="detpic_show">
+                            <block wx:for="{{info.invoiceurl}}" wx:key="index">
+                                <image src="{{item}}" bindtap="tap_pic" data-index="{{index}}" binderror="defaultimg" />
+                            </block>
+                        </view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">创建人</view>
+                        <view class="check">{{info.createman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">创建时间</view>
+                        <view class="check">{{info.createtime}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">修改人</view>
+                        <view class="check">{{info.updateman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">修改时间</view>
+                        <view class="check">{{info.updatetime}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">当前步骤名称</view>
+                        <view class="check">{{info.CurStepName}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">当前处理人</view>
+                        <view class="check">{{info.CurDealer}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">步骤是否完成</view>
+                        <view class="check">{{info.IfWfComplete}}</view>
+                    </view>
+                </view>
+            </van-tab>
+            <van-tab title="动态" name="b" wx:if="{{!history}}">
+                <van-cell title="动态({{Workstate}})" />
+                <van-steps steps="{{ steps }}" active="{{ actived }}" direction="vertical" active-color="#008080" inactive-icon="stop-circle" />
+            </van-tab>
+            <van-tab title="修改记录" name="d" wx:if="{{(!history)&&amendant.length}}">
+                <block wx:if="{{amendant}}">
+                    <van-cell title="记录({{amendant.length}})" />
+                    <!-- <van-steps steps="{{ amendant }}" active="{{ active }}" direction="vertical" bind:tap="change12" /> -->
+                    <block wx:for="{{amendant}}" wx:key="index">
+                        <van-cell title="{{item.text}}" label="{{item.desc}}" data-i='{{item.oldcontext}}' bind:tap="change12" />
+                    </block>
+                </block>
+                <view class="dynamic_state" wx:else>暂无记录</view>
+            </van-tab>
+            <van-tab title="支付审批明细" name="c" wx:if="{{!history}}">
+                <van-cell title="支付审批明细({{material_list.length}})" bindtap="addndlink">
+                    <icon class="iconfont icon-icon-test"></icon>
+                </van-cell>
+                <block wx:for="{{material_list}}" wx:key="{{index}}">
+                    <view class="material">
+                        <navigator open-type="redirect" url="/OAmoudle/pages/approval/detaillink/detaillink?detailid={{item.ID}}" hover-class="none">
+                            <!-- <view>
+                                <text class="m_caption">{{item.caption}}</text>
+                            </view> -->
+                            <view class="m_item">
+                                <text class="m_info">序号</text>
+                                <text>{{item.detailxh}}</text>
+                            </view>
+                            <view class="m_item">
+                                <text class="m_info">支付审批明细内容</text>
+                                <text>{{item.detailcontext}}</text>
+                            </view>
+                            <view class="m_item">
+                                <text class="m_info">金额</text>
+                                <text>{{item.amount}}</text>
+                            </view>
+                        </navigator>
+                    </view>
+                </block>
+            </van-tab>
+            <van-tab title="具体动态" name="e" wx:if="{{!history}}">
+                <view wx:if="{{stepLIst.length}}" class="ideainfo">
+                    <view class="material" wx:for="{{stepLIst}}" wx:key="index">
+                        <view class="m_item">
+                            <text class="ideatitle">{{item.createman}}({{item.stepname}})</text>
+                        </view>
+                        <view class="m_item ideatitle" wx:if="{{item.stepid!=1}}">
+                            {{item.stepid<item.nextstepid?'审核通过':'退回'}}
+                        </view>
+                        <view class="m_item">
+                            <text>{{item.createtime}}</text>
+                        </view>
+                        <view class="m_item" wx:if="{{item.stepid!=1}}">
+                            <text>审批意见</text>
+                            <text>{{item.ApprovalOpinion}}</text>
+                        </view>
+                        <view class="m_item" wx:if="{{item.stepid!=1}}">
+                            <text>图片</text>
+                            <view wx:if="{{item.API_Picurl.length}}" class="detpic_show">
+                                <block wx:for="{{item.API_Picurl}}" wx:key="index">
+                                    <image src="{{item}}" bindtap="tap_pic1" data-index="{{index}}" binderror="defaultimg" data-url="{{item}}" />
+                                </block>
+                            </view>
+                        </view>
+                        <view class="m_item" wx:if="{{item.stepid!=1}}">
+                            <text>文件</text>
+                            <view wx:if="{{item.API_Fileurl.length}}" class="fileLIST">
+                                <block wx:for="{{item.API_Fileurl}}" wx:key="index">
+                                    <view class="cfile">
+                                        <text class="filename">{{item.name}}</text>
+                                        <text class="filesize">{{item.size}}</text>
+                                        <icon class="iconfont icon-shengou fr" bindtap="downF" data-index="{{index}}" data-url="{{item.url}}" />
+                                    </view>
+                                </block>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view class="dynamic_state" wx:else>暂无内容</view>
+            </van-tab>
+        </van-tabs>
+    </view>
+    <view class="footer" wx:if="{{((info.formid&&isnext&&returned&&isreturn)||(!info.formid)||(isnext&&returned))&&(!history)}}">
+        <view bindtap="sendback" wx:if="{{info.formid&&isnext&&returned&&isreturn}}">
+            <icon class="iconfont icon-wj-thwj"></icon>
+            <text>退回</text>
+        </view>
+        <view wx:if="{{!info.formid}}">
+            <navigator open-type="redirect" url="/OAmoudle/pages/approval/new/new?id={{info.ID}}" hover-class="none">
+                <icon class="iconfont icon-bianji"></icon>
+                <text>编辑</text>
+            </navigator>
+        </view>
+        <view bindtap="putin" wx:if="{{isnext&&returned}}">
+            <icon class="iconfont icon-tijiao"></icon>
+            <text>审核通过</text>
+        </view>
+    </view>
+    <view class="seach" wx:if="{{show1}}">
+        <van-popup show="{{ show1 }}" bind:close="onClose1" round position="bottom" custom-style="height: 50vh;color:#333">
+            <view class="seach_item">
+                <van-cell-group>
+                    <van-field value="{{ ApprovalOpinion }}" type="textarea" placeholder="同意。" autosize border="{{ false }}" bind:input="ApprovalOpinionblur" label="审批意见" input-class="idea_in" />
+                </van-cell-group>
+            </view>
+            <view class="seach_item">
+                <van-cell title="文件" is-link bindtap="up_file" />
+                <view wx:if="{{idea.API_Fileurl.length}}">
+                    <block wx:for="{{idea.API_Fileurl}}" wx:key="index">
+                        <view class="cfile">
+                            <text class="filename">{{item.name}}</text>
+                            <text class="filesize">{{item.size}}</text>
+                            <icon class="iconfont icon-shanchu-tianchong fr" wx:if="{{up_F}}" bindtap="delF" data-index="{{index}}" />
+                        </view>
+                    </block>
+                </view>
+            </view>
+            <view class="seach_item">
+                <van-cell title="上传图片" is-link bind:click="showPopup_photo" />
+                <van-action-sheet show="{{ show_photo }}" actions="{{ check_photo }}" bind:cancel="onClose_photo" bind:click-overlay="onClose_photo" bind:select="onSelect_photo" cancel-text="取消" />
+                <view wx:if="{{upimg}}" class="datumimgbox">
+                    <block wx:for="{{idea.API_Picurl}}" wx:key="index">
+                        <view class="upimgbox">
+                            <image src="{{item}}" bindtap="tap_pic1" data-index="{{index}}" />
+                            <icon class="iconfont icon-jianhao-tianchong delimg" data-i="{{index}}" bindtap="delimg" />
+                        </view>
+                    </block>
+                </view>
+            </view>
+            <view class="checkkind">
+                <text bindtap="onClose1">取消</text>
+                <text bindtap="tconfirm">退回</text>
+            </view>
+        </van-popup>
+    </view>
+    <view class="seach" wx:if="{{show}}">
+        <van-popup show="{{ show }}" bind:close="onClose" round position="bottom" custom-style="height: 50vh;color:#333">
+            <view class="seach_item">
+                <van-cell-group>
+                    <van-field value="{{ ApprovalOpinion }}" type="textarea" placeholder="同意。" autosize border="{{ false }}" bind:input="ApprovalOpinionblur" label="审批意见" input-class="idea_in" />
+                </van-cell-group>
+            </view>
+            <view class="seach_item">
+                <van-cell title="文件" is-link bindtap="up_file" />
+                <view wx:if="{{idea.API_Fileurl.length}}">
+                    <block wx:for="{{idea.API_Fileurl}}" wx:key="index">
+                        <view class="cfile">
+                            <text class="filename">{{item.name}}</text>
+                            <text class="filesize">{{item.size}}</text>
+                            <icon class="iconfont icon-shanchu-tianchong fr" wx:if="{{up_F}}" bindtap="delF" data-index="{{index}}" />
+                        </view>
+                    </block>
+                </view>
+            </view>
+            <view class="seach_item">
+                <van-cell title="上传图片" is-link bind:click="showPopup_photo" />
+                <van-action-sheet show="{{ show_photo }}" actions="{{ check_photo }}" bind:cancel="onClose_photo" bind:click-overlay="onClose_photo" bind:select="onSelect_photo" cancel-text="取消" />
+                <view wx:if="{{upimg}}" class="datumimgbox">
+                    <block wx:for="{{idea.API_Picurl}}" wx:key="index">
+                        <view class="upimgbox">
+                            <image src="{{item}}" bindtap="tap_pic1" data-index="{{index}}" />
+                            <icon class="iconfont icon-jianhao-tianchong delimg" data-i="{{index}}" bindtap="delimg" />
+                        </view>
+                    </block>
+                </view>
+            </view>
+            <view class="checkkind">
+                <text bindtap="onClose">取消</text>
+                <text bindtap="sconfirm">审核通过</text>
+            </view>
+        </van-popup>
+    </view>
+</view>

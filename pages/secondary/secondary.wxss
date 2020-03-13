@@ -33,7 +33,7 @@
   width: 185rpx;
   height: 185rpx;
   /* border: 1px solid #cccc; */
-  margin: 30rpx 31rpx;
+  margin: 30rpx 0rpx;
   position: relative;
   text-align: center;
   padding: 20rpx 0;
