@@ -16,10 +16,9 @@
                 <text>负责人</text>
                 <text class="required">*</text>
             </view>
-            <van-cell title="{{materials[0].chargeman?materials[0].chargeman:'请选择'}}" data-i='{{index}}' is-link data-name='projectType' bind:click="showPopup6" />
-            <van-popup show="{{show6}}" round position="bottom" bind:close="onClose6">
-                <van-picker data-name="chargeman" show-toolbar columns="{{ section5 }}" bind:cancel="onClose6" bind:confirm="onConfirm6" />
-            </van-popup>
+            <van-cell-group>
+                <van-field value="{{materials[0].chargeman}}" bind:blur="getgname" disabled data-i='{{index}}' data-name='buyitemname' />
+            </van-cell-group>
         </view>
         <view class="check_item">
             <view class="kind">

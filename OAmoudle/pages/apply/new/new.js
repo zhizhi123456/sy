@@ -35,7 +35,7 @@ Page({
       API_Picurl: []
     },
     currentDate: new Date().getTime(),
-  
+
     show: false,
     show1: false,
     show_o: false,
@@ -113,7 +113,7 @@ Page({
               s.ID = ''
               var news = {}
               news.applybuyid = this.data.detailID;
-              news.chargeman = s.chargeman
+              news.chargeman = userinfo.UserName
               news.buyitemname = s.goodsname
               news.specifications = s.specifications
               news.brand = s.brand
@@ -127,16 +127,16 @@ Page({
             this.setData({
               materials: m
             })
-          // } else {
-          //   // this.data.materials
-          //   var materials = res.List
-          //   materials.forEach((s, index) => {
-          //     s.num = index + this.data.materials.length
-          //     s.buyitemname = s.goodsname
-          //   })
-          //   this.setData({
-          //     materials
-          //   })
+            // } else {
+            //   // this.data.materials
+            //   var materials = res.List
+            //   materials.forEach((s, index) => {
+            //     s.num = index + this.data.materials.length
+            //     s.buyitemname = s.goodsname
+            //   })
+            //   this.setData({
+            //     materials
+            //   })
           }
 
         }
@@ -329,9 +329,9 @@ Page({
               })
             }
           }).then(res => {
-              console.log(res)
+            console.log(res)
             if (res.code == 10000) {
-            
+
               wx.showToast({
                 title: '新建成功',
                 icon: 'success',
@@ -461,7 +461,7 @@ Page({
               } else {
                 var news = {}
                 news.applybuyid = this.data.detailID;
-                news.chargeman = s.chargeman
+                news.chargeman = userinfo.UserName
                 news.buyitemname = s.buyitemname
                 news.specifications = s.specifications
                 news.brand = s.brand
@@ -569,11 +569,36 @@ Page({
   getRecord(e) {
     util.updateValue(e, this);
   },
+  // 数字筛选
+  checknum(e) {
+    let name = e.currentTarget.dataset.name,
+      i = e.currentTarget.dataset.i
+    let materials = this.data.materials;
+    util.formatNum(e);
+    if (i) {
+      materials[i][name] = e.detail;
+    } else {
+      materials[0][name] = e.detail;
+    }
+    this.setData({
+      materials
+    })
+  },
+  // 数字筛选
+  checknum1(e) {
+    let info = this.data.info;
+    util.formatNum(e);
+    info.receivephone = e.detail;
+    this.setData({
+      info
+    })
+  },
+
   // 添加材料明细
   add_more() {
     let add_detail = {
       num: this.data.materials.length,
-      chargeman: '',
+      chargeman: this.data.info.applyman,
       buyitemname: '',
       specifications: '',
       brand: '',
@@ -665,8 +690,20 @@ Page({
     this.setData({
       section5: a
     })
+    var user = wx.getStorageSync("myInfo");
+    if (user) {
+      var message = wx.getStorageSync("message");
+      console.log(message)
+      let info = this.data.info;
+      info.department = message.departmenttext
+      info.Companytitle = message.Companytitletext
+      info.applyman = message.userId
+      this.setData({
+        info
+      })
+    }
     qgroupdeep({
-    
+
     }).then(res => {
       console.log(res)
       if (res.code == 10000 && res.List) {

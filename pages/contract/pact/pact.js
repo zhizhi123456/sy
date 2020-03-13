@@ -151,6 +151,9 @@ Page({
         options: options
       })
     }
+    if (options.source) {
+      wx.setStorageSync('carte', options)
+    }
     list = [];
     wx.showLoading({
       title: '加载中',

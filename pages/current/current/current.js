@@ -33,11 +33,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (options.source) {
+      wx.setStorageSync('carte', options)
+    }
     console.log(options)
     wx.showLoading({
       title: '加载中',
     });
-    userinfo = wx.getStorageSync("myInfo");
+   var userinfo = wx.getStorageSync("myInfo");
     // console.log(options)
     if (options.title) {
       this.setData({
@@ -62,14 +65,14 @@ Page({
         }
       })
       let NAnum = 0;
-      if (options.id == 1058) {
+      if (options.id == 2124) {
         this.setData({
           caption: '未处理',
         })
         getTaskTNUm({
           UserName: userinfo.UserName
         }).then(res => {
-          // console.log(res)
+          console.log(res)
           if (res.code == 10000) {
             let item = res.List;
             this.setData({
@@ -86,7 +89,7 @@ Page({
           }
         })
       }
-      if (options.id == 1056) {
+      if (options.id == 2123) {
         this.setData({
           caption: '我申请',
         })

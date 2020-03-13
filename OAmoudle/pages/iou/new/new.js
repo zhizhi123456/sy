@@ -75,6 +75,15 @@ Page({
       info
     })
   },
+   // 数字筛选
+   checknum(e) {
+    let info = this.data.info;
+    util.formatNum(e);
+    info.amount = e.detail;
+    this.setData({
+      info
+    })
+  },
   // 公司抬头
   showPopup_4() {
     this.setData({
@@ -259,7 +268,7 @@ onConfirm6(e) {
           icon: 'success',
           duration: 3000
         })
-        // util.ModifyRecord(this.data.information,"OfficeCharge")
+        util.ModifyRecord(this.data.information,"debitnote")
         util.OAreturn('iou', this)
       }
     })
@@ -276,6 +285,17 @@ onConfirm6(e) {
       section6: app.globalData.MainProject1,
       section5: app.globalData.MainSubproject
     })
+    var user = wx.getStorageSync("myInfo");
+    if (user) {
+      var message = wx.getStorageSync("message");
+      console.log(message)
+      let info = this.data.info;
+      info.department = message.departmenttext
+      info.Companytitle = message.Companytitletext
+      this.setData({
+        info
+      })
+    }
     if (options.id) {
       detailiou({
         ID: options.id

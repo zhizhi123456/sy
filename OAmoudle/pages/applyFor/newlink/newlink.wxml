@@ -45,7 +45,7 @@
                 <text class="required">*</text>
             </view>
             <van-cell-group>
-                <van-field value="{{materials[0].quantity}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' data-name='quantity' />
+                <van-field value="{{materials[0].quantity}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}'   bind:input="checknum"  data-name='quantity' />
             </van-cell-group>
         </view>
         <view class="check_item">
@@ -54,7 +54,7 @@
                 <text class="required">*</text>
             </view>
             <van-cell-group>
-                <van-field value="{{materials[0].unitprice}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' data-name='unitprice' />
+                <van-field value="{{materials[0].unitprice}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}'  bind:input="checknum"  data-name='unitprice' />
             </van-cell-group>
         </view>
     </view>

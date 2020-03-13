@@ -92,6 +92,9 @@ Page({
     wx.showLoading({
       title: '加载中',
     });
+    if (options.source) {
+      wx.setStorageSync('carte', options)
+    }
     this.setData({
       sections: app.globalData.MainProject,
       section1:app.globalData.states,

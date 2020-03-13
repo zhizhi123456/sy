@@ -7,6 +7,7 @@ import {
 } from "../../../../service/getData";
 var util = require("../../../../utils/util");
 var app = getApp();
+let userinfo = wx.getStorageSync("myInfo");
 Page({
   /**
    * 页面的初始数据
@@ -65,6 +66,15 @@ Page({
   // 发票名称
   invoicenameblur(e) {
     let info = util.editInfo(e, this, e.detail.value);
+    this.setData({
+      info
+    })
+  },
+  // 数字筛选
+  checknum(e) {
+    let info = this.data.info;
+    util.formatNum(e);
+    info.includetaxamont = e.detail;
     this.setData({
       info
     })
@@ -207,7 +217,7 @@ Page({
 
   confirm() {
     // console.log(this.data.info)
-    if (this.data.info.department && this.data.info.Companytitle && this.data.info.invoicename && this.data.info.contactid&& this.data.info.projectid&& this.data.info.projectaddress&& this.data.info.invoicetype&& this.data.info.invoicefeerate&& this.data.info.invoicecontext) {
+    if (this.data.info.department && this.data.info.Companytitle && this.data.info.invoicename && this.data.info.contactid && this.data.info.projectid && this.data.info.projectaddress && this.data.info.invoicetype && this.data.info.invoicefeerate && this.data.info.invoicecontext) {
       let info = this.data.info;
       util.checkContent(info, this);
       this.setData({
@@ -254,6 +264,7 @@ Page({
           icon: 'success',
           duration: 3000
         })
+        util.ModifyRecord(this.data.information,"invoice")
         util.OAreturn('invoice', this);
       }
     })
@@ -271,12 +282,30 @@ Page({
       Invoicefeerate: app.globalData.Invoicefeerate,
       billing: app.globalData.billing
     })
+    var user = wx.getStorageSync("myInfo");
+    if (user) {
+      var message = wx.getStorageSync("message");
+      console.log(message)
+      let info = this.data.info;
+      info.department = message.department
+      info.Companytitle = message.Companytitletext
+      this.setData({
+        info,
+        departmenttext:message.departmenttext
+      })
+    }
     if (options.id) {
       referInvoice({
         ID: options.id
       }).then(res => {
         // console.log(res)
         let item = res.Item;
+        var data1 =res.Item
+        var b = JSON.stringify(data1)
+        var c  = JSON.parse(b)
+        this.setData({
+          information:c
+        })
         util.handleData(item, this, app.globalData.department);
         this.setData({
           info: item

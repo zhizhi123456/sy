@@ -110,6 +110,9 @@ Page({
    */
   onLoad: function (options) {
     userinfo = wx.getStorageSync("myInfo");
+    if (options.source) {
+      wx.setStorageSync('carte', options)
+    }
     // console.log(options)
     if (userinfo) {
       let resStr = wx.getStorageSync("principal");

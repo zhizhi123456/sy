@@ -5,6 +5,7 @@ import {
 } from '../../../../service/getData';
 var app = getApp();
 var util = require("../../../../utils/util");
+let userinfo = wx.getStorageSync("myInfo");
 Page({
   /**
    * 页面的初始数据
@@ -48,20 +49,32 @@ Page({
     wx.showLoading({
       title: '加载中',
     });
-    queryofficeCost({
-      chargename: this.data.seach
-    }).then(res => {
-      // //console.log(res)
-      if (res.code == 10000) {
-        let item = res.List;
-        util.listData(item, app.globalData.department);
-        util.outflowlist(item, this)
-        this.setData({
-          InfoList: item.reverse()
-        })
-        wx.hideLoading();
-      }
+    var info = this.data.info
+    info.chargename = this.data.seach
+    var user = wx.getStorageSync("myInfo");
+    info.UserName = user.UserName
+    info.state = '所有'
+    this.setData({
+      info
     })
+    util.qgroupdeliver(qgroupofficeCost, this, '', '1')
+    // wx.showLoading({
+    //   title: '加载中',
+    // });
+    // queryofficeCost({
+    //   chargename: this.data.seach
+    // }).then(res => {
+    //   // //console.log(res)
+    //   if (res.code == 10000) {
+    //     let item = res.List;
+    //     util.listData(item, app.globalData.department);
+    //     util.outflowlist(item, this)
+    //     this.setData({
+    //       InfoList: item.reverse()
+    //     })
+    //     wx.hideLoading();
+    //   }
+    // })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -70,11 +83,14 @@ Page({
     this.setData({
       sections: app.globalData.Companytitle,
       section1:app.globalData.states,
-      section2: app.globalData.department,
-      section5: app.globalData.Principal,
+      section2: app.globalData.getdept,
+      section5: app.globalData.getstaff,
       section3: app.globalData.costobj,
       section4: app.globalData.costkind,
     })
+    if (options.source) {
+      wx.setStorageSync('carte', options)
+    }
     wx.showLoading({
       title: '加载中',
     });
@@ -256,6 +272,11 @@ Page({
   },
   // 组合查询
   seachqur() {
+    var info = this.data.info
+    info.UserName = userinfo.UserName
+    this.setData({
+      info
+    })
     util.qgroupdeliver(qgroupofficeCost, this)
   },
 })

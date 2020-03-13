@@ -14,7 +14,7 @@
                 <input value="{{seach}}" bindblur="setSeach" />
                 <view class="number" wx:if="{{!seach}}">
                     <icon class="iconfont icon-sousuo"></icon>
-                    <text wx:if="{{InfoList.length}}">共{{item.length}}条</text>
+                    <text wx:if="{{InfoList.length}}">共{{InfoList.length}}条</text>
                     <text wx:else>搜索</text>
                 </view>
                 <van-popup show="{{ show }}" bind:close="onClose" position="right" custom-style="height: 100vh;color:#333">
@@ -39,10 +39,13 @@
                             <van-picker data-name="departmentID" show-toolbar columns="{{ sections }}" bind:cancel="onClose_0" bind:confirm="onConfirm_0" />
                         </van-popup>
                     </view>
-                    <view class="seach_item">
+                      <view class="seach_item">
                         <van-cell-group>
-                            <van-field data-name="chargemanName" value="{{info.chargemanName}}" placeholder="请输入" bind:blur="chargemanNameblur" label="创建人" />
+                            <van-field value="{{info.chargemanName}}" placeholder="请选择" bindtap="showPopup_5" label="创建人" disabled />
                         </van-cell-group>
+                        <van-popup show="{{ show_5 }}" round position="bottom" bind:close="onClose_5">
+                            <van-picker data-name="chargemanName" show-toolbar columns="{{ section1 }}" bind:cancel="onClose_5" bind:confirm="onConfirm_5" />
+                        </van-popup>
                     </view>
                     <view class="seach_item">
                         <van-cell-group>

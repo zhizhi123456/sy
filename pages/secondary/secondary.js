@@ -1,7 +1,8 @@
 // pages/secondary/secondary.js
 import {
   queryMenu,
-  getdep
+  getdep,
+  querynotice
 } from "./../../service/getData";
 var app = getApp();
 var util = require("../../utils/util");
@@ -16,7 +17,9 @@ Page({
     title: "",
     chuancan: 1003,
     small: [],
-    smalls: []
+    smalls: [],
+    show: false,
+    news: []
   },
   screen() {
     wx.showLoading({
@@ -65,7 +68,7 @@ Page({
         if (s.name == '工程质量报告') {
           s.pageaddres = '/OAmoudle/pages/quality/pact/pact'
         }
-        
+
         // if (s.name == "办公物品") {
         //   s.pageaddres = '/OAmoudle/pages/supply/pact/pact'
         // }
@@ -137,6 +140,7 @@ Page({
       })
     }
   },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -189,8 +193,9 @@ Page({
         title: options.title
       })
     }
-
     this.screen()
+    console.log(this.data.chuancan)
+    
   },
   /**
    * 生命周期函数--监听页面显示

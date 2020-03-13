@@ -68,6 +68,9 @@ Page({
     if (options.id) {
       wx.setStorageSync('menus', options)
     }
+    if (options.source) {
+      wx.setStorageSync('carte', options)
+    }
     list = [];
     if (app.globalData.CountItem) {
       this.setData({

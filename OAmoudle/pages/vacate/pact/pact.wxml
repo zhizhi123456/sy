@@ -24,10 +24,14 @@
                     <text wx:else>搜索</text>
                 </view>
                 <van-popup show="{{ show }}" bind:close="onClose" position="right" custom-style="height: 100vh;color:#333">
-                    <view class="seach_item">
+                
+                     <view class="seach_item">
                         <van-cell-group>
-                            <van-field data-name="applyman" value="{{info.applyman}}" placeholder="请输入" bind:blur="applymanblur" label="申请人" />
+                            <van-field value="{{info.applyman}}" placeholder="请选择" bindtap="showPopup_2" label="申请人" disabled />
                         </van-cell-group>
+                        <van-popup show="{{ show_2 }}" round position="bottom" bind:close="onClose_2">
+                            <van-picker data-name="applyman" show-toolbar columns="{{ section1 }}" bind:cancel="onClose_2" bind:confirm="onConfirm_2" />
+                        </van-popup>
                     </view>
                     <view class="seach_item">
                         <van-cell-group>

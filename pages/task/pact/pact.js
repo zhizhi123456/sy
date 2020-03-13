@@ -142,6 +142,9 @@ Page({
    */
   onLoad: function (options) {
     // console.log(options)
+    if (options.source) {
+      wx.setStorageSync('carte', options)
+    }
     userinfo = wx.getStorageSync("myInfo");
     list = [];
     wx.showLoading({

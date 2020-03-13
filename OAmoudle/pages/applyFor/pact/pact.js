@@ -2,7 +2,8 @@
 import {
   queryapplyFor,
   qgroupapplyFor,
-  projectall
+  projectall,
+  getstaff
 } from '../../../../service/getData.js';
 var app = getApp();
 var util = require("../../../../utils/util");
@@ -88,14 +89,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
+    if (options.source) {
+      wx.setStorageSync('carte', options)
+    }
+    
     this.setData({
       Supplier: app.globalData.Supplier,
       section2: app.globalData.Principal,
       section3: app.globalData.Companytitle,
-      section4: app.globalData.department,
+      section4: app.globalData.getdept,
       section5: app.globalData.projectall,
       section6: app.globalData.YesOrNo,
-      section7: app.globalData.Principal,
+      section7: app.globalData.getstaff,
       states: app.globalData.states
     })
     // console.log(app.globalData.projectall)

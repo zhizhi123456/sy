@@ -136,6 +136,9 @@ onConfirm_endtime(e) {
     wx.showLoading({
       title: '加载中',
     });
+    if (options.source) {
+      wx.setStorageSync('carte', options)
+    }
     // 调用查询
     querymaterial().then(res => {
       // console.log(res.List)

@@ -91,6 +91,9 @@ Page({
     this.setData({
       seach: ""
     })
+    if (options.source) {
+      wx.setStorageSync('carte', options)
+    }
     // 调用模糊查询
     this.seachInfo()
   },

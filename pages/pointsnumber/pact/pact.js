@@ -172,6 +172,9 @@ Page({
    */
   onLoad: function (options) {
     userinfo = wx.getStorageSync("myInfo");
+    if (options.source) {
+      wx.setStorageSync('carte', options)
+    }
     list = [];
     wx.showLoading({
       title: '加载中',

@@ -16,11 +16,11 @@
             <view class="kind require">
                 <text>总包项目选择</text>
             </view>
-            <van-cell title="{{info.projcectCode?info.projcectCode:'请选择'}}" is-link bind:click="showPopup_3" />
+            <van-cell title="{{info.projcectCodes?info.projcectCodes:'请选择'}}" is-link bind:click="showPopup_3" />
             <van-popup show="{{ show_3 }}" round position="bottom" bind:close="onClose_3">
               
-                <van-picker wx:if="{{section22}}" data-name="projcectCode" show-toolbar columns="{{ section22 }}" bind:cancel="onClose_3" bind:confirm="onConfirm_3" />
-                <van-field wx:else data-name="projcectCode" value="{{info.projcectCode}}" placeholder="请填写" bind:blur="maincontactnameblur" type="textarea" autosize />
+                <van-picker wx:if="{{section22}}" data-name="projcectCodes" show-toolbar columns="{{ section22 }}" bind:cancel="onClose_3" bind:confirm="onConfirm_3" />
+                <van-field wx:else data-name="projcectCodes" value="{{info.projcectCode}}" placeholder="请填写" bind:blur="maincontactnameblur" type="textarea" autosize />
             </van-popup>
         </view>
            <view class="check_item">
@@ -32,19 +32,22 @@
                 <van-field data-name="projcectCode" value="{{info.projcectCode}}" placeholder="请填写" bind:blur="maincontactnameblur" type="textarea" autosize />
             </van-cell-group>
         </view>
-        <view class="check_item">
-            <text class="kind">部门</text>
-            <van-cell title="{{departmenttext}}" is-link bind:click="showPopup_o" />
-            <van-popup show="{{show_o}}" round position="bottom" bind:close="onClose_o">
-                <van-picker data-name="department" show-toolbar columns="{{ sections }}" bind:cancel="onClose_o" bind:confirm="onConfirm_o" />
-            </van-popup>
+          <view class="check_item">
+            <view class="kind require">
+                <text>部门</text>
+            </view>
+            <van-cell-group>
+                <van-field value="{{departmenttext}}" disabled />
+            </van-cell-group>
         </view>
-        <view class="check_item">
-            <text class="kind">公司抬头</text>
-            <van-cell title="{{info.Companytitle?info.Companytitle:'请选择'}}" is-link bind:click="showPopup" />
-            <van-popup show="{{ show }}" round position="bottom" bind:close="onClose">
-                <van-picker data-name="Companytitle" show-toolbar columns="{{ firms }}" bind:cancel="onClose" bind:confirm="onConfirm" />
-            </van-popup>
+       <view class="check_item">
+            <view class="kind require">
+                <text>公司抬头</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field value="{{info.Companytitle}}" disabled />
+            </van-cell-group>
         </view>
         <view class="check_item">
             <view class="kind require">
@@ -59,7 +62,7 @@
         <view class="check_item">
             <text class="kind">总包合同金额</text>
             <van-cell-group>
-                <van-field data-name="contcactamount" value="{{info.contcactamount}}" placeholder="请输入" bind:blur="contcactamountblur" />
+                <van-field data-name="contcactamount" value="{{info.contcactamount}}"bind:input="checknum"  placeholder="请输入" bind:blur="contcactamountblur" />
             </van-cell-group>
         </view>
         <view class="check_item">

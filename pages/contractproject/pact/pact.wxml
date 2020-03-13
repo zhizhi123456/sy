@@ -39,8 +39,6 @@
                             <van-picker data-name="department" show-toolbar columns="{{ sections }}" bind:cancel="onClose_o" bind:confirm="onConfirm_o" />
                         </van-popup>
                     </view>
-                  
-                 
                     <view class="seach_item">
                         <van-field value="{{info.planbegindate}}"  bind:focus="showPopup_time" class="time1"label="开始时间" placeholder="请选择" />
                         <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">

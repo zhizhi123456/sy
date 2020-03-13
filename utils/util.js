@@ -12,6 +12,7 @@ import {
   contrastfile,
   getdep
 } from "../service/getData";
+let userinfo = wx.getStorageSync("myInfo");
 var app = getApp();
 const formatTime = date => {
   const year = date.getFullYear();
@@ -79,11 +80,6 @@ const datefom = value => {
 // 判断新增选项内容...
 const checkContent = (value, key) => {
   // console.log(typeof value.API_Picurl)
-  for (let i in value) {
-    if (!value[i]) {
-      value[i] = "";
-    }
-  }
   if (!value.formid) {
     value.formid = null;
   }
@@ -360,15 +356,24 @@ const checkContent = (value, key) => {
     })
     value.mainprojecttype = kinds.join(",");
   }
+  // 项目类型
+  if (value.receivedepartment) {
+    var kinds = [];
+    value.receivedepartment.split(",").forEach(res => {
+      app.globalData.department.forEach(depart => {
+        if (res == depart.text) {
+          if (kinds.indexOf(depart.value) == -1) {
+            kinds.push(depart.value)
+          }
+        }
+      })
+    })
+    value.receivedepartment = kinds.join(",");
+  }
 };
 
 // 判断更改内容...
 const checkChange = (value, key, dep) => {
-  for (let i in value) {
-    if (!value[i]) {
-      value[i] = '';
-    }
-  }
   if (!value.formid) {
     value.formid = null;
   }
@@ -648,12 +653,26 @@ const checkChange = (value, key, dep) => {
     })
     value.mainprojecttype = kinds.join(",");
   }
+  // 项目类型
+  if (value.receivedepartment) {
+    var kinds = [];
+    value.receivedepartment.split(",").forEach(res => {
+      app.globalData.department.forEach(depart => {
+        if (res == depart.text) {
+          if (kinds.indexOf(depart.value) == -1) {
+            kinds.push(depart.value)
+          }
+        }
+      })
+    })
+    value.receivedepartment = kinds.join(",");
+  }
 };
 // 处理显示数据
 const handleData = (data, key, dep) => {
   var app = getApp();
   for (let i in data) {
-    if (data[i] == null || data[i] == "null" || data[i] == 'NULL' || data[i] == ' ') {
+    if (data[i] === null || data[i] === "null" || data[i] === 'NULL' || data[i] === ' ') {
       data[i] = ""
     }
   }
@@ -945,7 +964,22 @@ const handleData = (data, key, dep) => {
   //   }
   //   data.leavetype = kinds.join(",");
   // }
-
+  if (data.receivedepartment) {
+    var kinds = [];
+    data.receivedepartment.split(",").forEach(res => {
+      app.globalData.department.forEach(depart => {
+        if (res == depart.value) {
+          if (kinds.indexOf(depart.text) == -1) {
+            kinds.push(depart.text)
+          }
+          // if (value.mainprojecttype && value.mainprojecttype.split(",").length > kinds.length) {
+          //   kinds.push("**");
+          // }
+          data.receivedepartment = kinds.join(",");
+        }
+      })
+    })
+  }
   if (data.amountPlan && data.amountQuantity) {
     let num = (data.amountPlan - data.amountQuantity) / data.amountPlan * 100;
     data.offset = num.toFixed(2) + "%";
@@ -1181,6 +1215,22 @@ const listData = (data, dep, page, list, key, billname) => {
         })
       })
     }
+    if (value.receivedepartment) {
+      var kinds = [];
+      value.receivedepartment.split(",").forEach(res => {
+        app.globalData.department.forEach(depart => {
+          if (res == depart.value) {
+            if (kinds.indexOf(depart.text) == -1) {
+              kinds.push(depart.text)
+            }
+            // if (value.mainprojecttype && value.mainprojecttype.split(",").length > kinds.length) {
+            //   kinds.push("**");
+            // }
+            value.receivedepartment = kinds.join(",");
+          }
+        })
+      })
+    }
   });
   if (page) {
     let num = Math.ceil(data.length / 5);
@@ -1410,7 +1460,7 @@ const upFileIDEA = (key) => {
       count: 9, //能选择文件的数量
       type: 'file',
       success(res) {
-        console.log(res)
+        // console.log(res)
         let filedata = res.tempFiles;
         filedata.forEach(element => {
           if (element.size < 1024) {
@@ -1436,7 +1486,7 @@ const upFileIDEA = (key) => {
             name: 'file_data',
             success(res) {
               uploadImgCount++;
-              console.log(res)
+              // console.log(res)
               if (res.statusCode == 200) {
                 console.log(idea)
                 idea.API_Fileurl.push({
@@ -1491,7 +1541,7 @@ const lookFileIDEA = (e) => {
           filePath: Path,
           fileType: fileType,
           success: function (res) {
-            console.log('打开文档成功');
+            // console.log('打开文档成功');
             wx.hideToast();
           },
           fail: function (res) {
@@ -1606,19 +1656,37 @@ const defaultimg = (e, key) => {
 // 1001  项目合同
 // 1002  我的
 const returnMenu = (id) => {
-  wx.reLaunch({
-    url: `/pages/contracts/contracts?grading=${id}`
-  })
+  let carte = wx.getStorageSync('carte');
+  if (carte) {
+    if (carte.source == 'index') {
+      wx.reLaunch({
+        url: `/pages/contracts/contracts?grading=${carte.num}&title=${carte.mtitle}`
+      })
+    }
+  }
 }
 // 返回三级菜单
 const returnMenu2 = (id, title) => {
-  wx.reLaunch({
-    url: `/pages/secondary/secondary?id=${id}&title=${title}`
-  })
+  // wx.reLaunch({
+  //   url: `/pages/secondary/secondary?id=${id}&title=${title}`
+  // })
+  let carte = wx.getStorageSync('carte');
+  if (carte) {
+    if (carte.source == 'index') {
+      wx.reLaunch({
+        url: `/pages/contracts/contracts?grading=${carte.num}&title=${carte.mtitle}`
+      })
+    }
+  }
 }
 
 const workList = (key, id, billname, bID) => {
   let userinfo = wx.getStorageSync("myInfo");
+  console.log({
+    formName: billname,
+    formid: id,
+    ID: bID
+  })
   if (id) {
     referflow({
       formName: billname,
@@ -1660,7 +1728,7 @@ const workList = (key, id, billname, bID) => {
       formid: id
     }).then(res => {
       if (res.code == 10000) {
-        console.log(res)
+        // console.log(res)
         let step = res.list;
         step.forEach(res => {
           if (res.API_Picurl) {
@@ -1716,7 +1784,7 @@ const workList = (key, id, billname, bID) => {
       userName: userinfo.UserName,
       ID: bID
     }).then(res => {
-      console.log(res)
+      // console.log(res)
       if (res.code == 10000) {
         let result = res.WorkflowRecordList;
         if (result.length) {
@@ -1762,9 +1830,9 @@ const checkState = (key, id, chart, bh, Workstates) => {
         userName: userinfo.UserName,
       }
     }
-    console.log(param)
+    // console.log(param)
     valid(param).then(res => {
-      console.log(res)
+      // console.log(res)
       if (res.code == 10000) {
         if (Workstates && key) {
           Workstates.push(res.Isvalidtime.True || res.Isvalidtime.False);
@@ -1785,10 +1853,17 @@ const checkState = (key, id, chart, bh, Workstates) => {
             })
           }
         }
+        console.log({
+          formName: chart,
+          userName: userinfo.UserName,
+          formid: id,
+          ID: key.data.info.ID
+        })
         returned({
           formName: chart,
           userName: userinfo.UserName,
-          formid: id
+          formid: id,
+          ID: key.data.info.ID
         }).then(rtn => {
           console.log(rtn)
           if (!rtn.value) {
@@ -1827,7 +1902,10 @@ const Triggerflow = (key, direction, sheet, piece, id, cap, dep, dert, rid, tit,
     ID: key.data.info.ID,
     mark: direction,
     userName: userinfo.UserName,
-    formName: sheet
+    formName: sheet,
+    ApprovalOpinion: speak,
+    API_Picurl: pic,
+    API_Fileurl: file
   })
   if (userinfo) {
     flow({
@@ -1909,6 +1987,15 @@ const sumup = (port, key, value, text, val) => {
     back(key, result);
   })
 }
+const sumup1 = (port, key, value, text, val) => {
+  port({
+    UserName: userinfo.UserName
+  }).then(res => {
+    let result = getBase(res, text, val);
+    key.globalData[value] = result;
+    back(key, result);
+  })
+}
 // 图片的删除
 const deleteImg1 = (key, e) => {
   let info = key.data.info,
@@ -1939,7 +2026,7 @@ const defaultimg1 = (e, key) => {
 }
 
 // 上传图片  key  img = this.data.info.picurl
-const upImages = (key, img) => {
+const upImages = (key, img,upimg1) => {
   // 图片请求-最多上传9张图
   if (img.length < 9) {
     wx.chooseImage({
@@ -1970,6 +2057,7 @@ const upImages = (key, img) => {
                 that.setData({
                   upimg: true,
                   show_photo: false,
+                  upimg1:true,
                   info
                 })
               }
@@ -2018,7 +2106,7 @@ const defaultimgs = (e, key, img) => {
 // 是否
 
 const whether = (content) => {
-  // console.log(content)
+  console.log(content)
   if (content == "是") {
     var c = true
     return c
@@ -2318,6 +2406,26 @@ const intro = (data, that) => {
       data.leavetype = depart.value
     }
   })
+  //开票类别
+  app.globalData.Invoicetype.forEach(res => {
+    if (data.invoicetype == res.text) {
+      data.invoicetype = res.value;
+    }
+  })
+  // 项目类型
+  if (data.receivedepartment) {
+    var kinds = [];
+    data.receivedepartment.split(",").forEach(res => {
+      app.globalData.department.forEach(depart => {
+        if (res == depart.text) {
+          if (kinds.indexOf(depart.value) == -1) {
+            kinds.push(depart.value)
+          }
+        }
+      })
+    })
+    data.receivedepartment = kinds.join(",");
+  }
   data.isstick = whether(data.isstick)
   data.issubdivision = whether(data.issubdivision)
 }
@@ -2557,6 +2665,12 @@ const outflow = (data, that) => {
       data.leavetype = depart.text
     }
   })
+  //开票类别
+  app.globalData.Invoicetype.forEach(res => {
+    if (data.invoicetype == res.value) {
+      data.invoicetype = res.text;
+    }
+  })
   data.isstick = whethercontent(data.isstick)
   data.issubdivision = whethercontent(data.issubdivision)
   data.IfWfComplete = whethercontent(data.IfWfComplete)
@@ -2754,7 +2868,9 @@ const qgroupdeliver = (funcname, that, hadNew, hadMy, fun) => {
                 info
               })
             }
-            fun()
+            if (fun) {
+              fun()
+            }
             // console.log(info)
           }
         })
@@ -2893,12 +3009,12 @@ const OAexpurgate = ((that, funcname, section) => {
   wx.showModal({
     content: '确定删除吗？',
     success(res) {
-      console.log(that.data.info.ID)
+      // console.log(that.data.info.ID)
       if (res.confirm) {
         funcname({
           ID: that.data.info.ID
         }).then(res => {
-          console.log(res)
+          // console.log(res)
           if (res.code == 10000) {
             wx.showToast({
               title: '删除成功',
@@ -2968,7 +3084,7 @@ const OAexpurgateDetail = ((that, funcname, section, MasterDetailID) => {
   })
 })
 const ModifyRecord = ((oldrecord, sheet) => {
-  console.log(oldrecord)
+  // console.log(oldrecord)
   var userinfo = wx.getStorageSync("myInfo");
   var id = userinfo.UserName
   var oldcontext = JSON.stringify(oldrecord)
@@ -3022,7 +3138,7 @@ const readRecord = ((sheet, datum, that, datumname) => {
     TableName: sheet,
     Form_id: datum
   }).then(res => {
-    console.log(res)
+    // console.log(res)
     var record = []
     var modification = res.List.reverse()
     // contrastfile
@@ -3111,16 +3227,25 @@ const multiple = (that, field, fieldtext) => {
   q.forEach(qs => {
     t.forEach(ts => {
       if (qs == ts.Key) {
-        console.log(ts.Value)
+        // console.log(ts.Value)
         qs = ts.Value
       }
     })
   })
   q = q.join(",")
   field = q
-  console.log(q)
+  // console.log(q)
+}
+const formatNum = (k) => { //正则验证金额输入框格式
+  k.detail = k.detail.replace(/^(\-)*(\d+)\.(\d{6}).*$/, '$1$2.$3')
+  k.detail = k.detail.replace(/[\u4e00-\u9fa5]+/g, ""); //清除汉字
+  k.detail = k.detail.replace(/[^\d.]/g, ""); //清楚非数字和小数点
+  k.detail = k.detail.replace(/^\./g, ""); //验证第一个字符是数字 
+  k.detail = k.detail.replace(".", "$#$").replace(/\./g, "").replace("$#$", "."); //只保留第一个小数点, 清除多余的 
+  k.detail = k.detail.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3');
 }
 module.exports = {
+  formatNum,
   readRecordlist,
   multiple,
   readRecord,
@@ -3174,6 +3299,7 @@ module.exports = {
   getBase,
   back,
   sumup,
+  sumup1,
   qgroupdeliver,
   OAreturn,
   upFile,

@@ -74,6 +74,9 @@ Page({
       section6:app.globalData.MainProject1,
       section7:app.globalData.MainSubproject
     })
+    if (options.source) {
+      wx.setStorageSync('carte', options)
+    }
     department().then(res => {
       //console.log(res)
       var w = JSON.parse(res.replace(/ID/g, 'Value').replace(/techofficename/g, 'text'));
@@ -123,7 +126,7 @@ Page({
       return y.show
     })
     t = t.map((x) => {
-      return x.Value
+      return x.text
     })
     t = t.join(",")
     //console.log(t)

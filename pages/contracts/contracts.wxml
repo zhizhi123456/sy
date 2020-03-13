@@ -24,12 +24,12 @@
       <text class="{{item.control ?'':'c'}}">{{item.name}}</text>
       <!-- <navigator url="{{ item.three?item.path +'?menuId='+ item.menuId:(item.control ? '/pages/secondarys/secondarys?id='+item.ID+'&title='+item.nametext :'#')}}"></navigator> -->
       <!-- <navigator url="{{(!item.control)?'':(item.three?(item.pageaddres +'?menuId='+ item.menuId+'&id='+item.ID+'&title='+item.name):('/pages/secondarys/secondarys?id='+item.ID+'&title='+item.name))}}"></navigator> -->
-      <navigator open-type="redirect" url="{{(!item.control)?'':(item.pageaddres +'?menuId='+ item.menuId+'&id='+item.ID+'&title='+item.name)+'&num='+num}}" open-type="redirect" hover-class="navigator-hover_style"></navigator>
+      <navigator open-type="redirect" url="{{(!item.control)?'':(item.pageaddres +'?menuId='+ item.menuId+'&id='+item.ID+'&title='+item.name)+'&num='+num+'&mtitle='+title+'&source=index'}}" open-type="redirect" hover-class="navigator-hover_style"></navigator>
     </view>
   </view>
-  <view wx:if="{{num==1001}}"><navigator open-type="redirect" url="/OAmoudle/pages/member/pact/pact">测试1</navigator></view>
-  <!-- <view wx:if="{{num==1001}}"><navigator open-type="redirect" url="/pages/ledger/pact/pact">测试</navigator></view> -->
-  <view wx:if="{{entered&&num==1002}}" class="haDquit">
+  <!-- <view wx:if="{{num==1001}}"><navigator open-type="redirect" url="/OAmoudle/pages/payment/pact/pact">测试1</navigator></view>
+  <view wx:if="{{num==1001}}"><navigator open-type="redirect" url="/pages/ledger/pact/pact">测试</navigator></view> -->
+  <view wx:if="{{entered&&num==2091}}" class="haDquit">
     <view bindtap="out">切换账号</view>
     <view bindtap="out">退出</view>
   </view>
@@ -37,12 +37,26 @@
   <view class="tabarcontent">
     <view class="tabar">
       <view class="{{'box'+ (num==item.ID?' active':'')}}" wx:for="{{tags}}" wx:key='index' catchtap="change" data-change="{{item.ID}}">
-        <van-tag wx:if="{{item.ID=='1002'&&(TaskTNUm||applyNUM)}}" round type="danger" class="HINT">
+        <van-tag wx:if="{{item.ID==2091&&(TaskTNUm||applyNUM)}}" round type="danger" class="HINT">
           new
         </van-tag>
         <icon class="{{'tab iconfont '+ item.icon+(num==item.ID?' active':'') }}"></icon>
         <text>{{item.name}}</text>
       </view>
     </view>
+  </view>
+  <view class="news" wx:if="{{num=='2090'}}">
+    <view class="head">
+      <text>资讯中心</text>
+      <text bind:tap="message">更多></text>
+    </view>
+    <block wx:if="{{news}}">
+      <view wx:for="{{news}}" wx:key="index">
+        <van-notice-bar text="{{item.name}}" backgroundColor="teal" color="white" left-icon="volume-o" speed='70'>
+          <text slot="right-icon">{{item.time}}</text>
+        </van-notice-bar>
+      </view>
+    </block>
+    <view wx:else class="no_more"></view>
   </view>
 </view>

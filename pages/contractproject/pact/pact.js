@@ -5,6 +5,7 @@ import {
 } from '../../../service/getData.js';
 var util = require("../../../utils/util");
 var app = getApp();
+let userinfo = wx.getStorageSync("myInfo");
 Page({
   /**
    * 页面的初始数据
@@ -57,20 +58,33 @@ Page({
     wx.showLoading({
       title: '加载中',
     });
-    projectall({
-      Timestamp: app.globalData.time,
-      projectname: this.data.seach,
-    }).then(res => {
-      console.log(res)
-      if (res.code == 10000) {
-        let item = res.List;
-        util.listData(item, app.globalData.department);
-        this.setData({
-          InfoList: item.reverse()
-        })
-        wx.hideLoading();
-      }
+
+    var info = this.data.info
+    info.projectname = this.data.seach
+    var user = wx.getStorageSync("myInfo");
+    info.UserName = user.UserName
+    info.state = '所有'
+    this.setData({
+      info
     })
+    util.qgroupdeliver(qgroupproject, this, '', '1')
+    // wx.showLoading({
+    //   title: '加载中',
+    // });
+    // projectall({
+    //   Timestamp: app.globalData.time,
+    //   projectname: this.data.seach,
+    // }).then(res => {
+    //   console.log(res)
+    //   if (res.code == 10000) {
+    //     let item = res.List;
+    //     util.listData(item, app.globalData.department);
+    //     this.setData({
+    //       InfoList: item.reverse()
+    //     })
+    //     wx.hideLoading();
+    //   }
+    // })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -79,13 +93,16 @@ Page({
     wx.showLoading({
       title: '加载中',
     });
+    if (options.source) {
+      wx.setStorageSync('carte', options)
+    }
     //调用查询
     this.setData({
       seach: ""
     })
     this.seachInfo()
     // 对基础数据的处理
-    var s = app.globalData.department
+    var s = app.globalData.getdept
     s = s.map(r => {
       return r.text
     })
@@ -99,6 +116,15 @@ Page({
       info
     })
   },
+    // 数字筛选
+    checknum(e) {
+      let info = this.data.info;
+      util.formatNum(e);
+      info.projectpercent = e.detail;
+      this.setData({
+        info
+      })
+    } , 
   // 计划开工时间
   showPopup_time() {
     this.setData({
@@ -169,6 +195,12 @@ Page({
   },
   // 组合查询
   seachqur() {
+    var info = this.data.info
+    info.state = '所有'
+    info.UserName = userinfo.UserName
+    this.setData({
+      info
+    })
     util.qgroupdeliver(qgroupproject, this)
   },
 })

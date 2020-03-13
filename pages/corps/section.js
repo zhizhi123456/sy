@@ -124,6 +124,9 @@ Page({
   onLoad: function (options) {
     var a
     var that = this
+    if (options.source) {
+      wx.setStorageSync('carte', options)
+    }
     wx.getStorage({
       key: 'myInfo',
       success(res) {

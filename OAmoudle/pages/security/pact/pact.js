@@ -76,6 +76,9 @@ Page({
     this.setData({
       Supplier: app.globalData.Supplier
     })
+    if (options.source) {
+      wx.setStorageSync('carte', options)
+    }
     wx.showLoading({
       title: '加载中',
     });

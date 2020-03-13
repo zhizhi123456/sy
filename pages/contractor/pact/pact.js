@@ -75,6 +75,9 @@ Page({
     wx.showLoading({
       title: '加载中',
     });
+    if (options.source) {
+      wx.setStorageSync('carte', options)
+    }
     var b = app.globalData.staff.map(q=>{
       return q.text
     })
