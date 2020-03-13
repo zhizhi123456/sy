@@ -104,9 +104,9 @@ Page({
         if (s.name == "招投标") {
           s.name = '投标'
         }
-        if (s.name == "考勤") {
-          s.pageaddres = ''
-        }
+        // if (s.name == "考勤") {
+        //   s.pageaddres = ''
+        // }
 
       })
       // 有用户限制的菜单 

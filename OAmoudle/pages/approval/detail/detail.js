@@ -41,6 +41,15 @@ Page({
       }
     })
   },
+  tap_pic1(e) {
+    util.previews(this, e, this.data.info.invoiceurl)
+  },
+  defaultimg1(e) {
+    let info = util.defaultimg(e, this);
+    this.setData({
+      info
+    })
+  },
   // 返回
   return () {
     if (this.data.history) {
@@ -85,6 +94,14 @@ Page({
           let item = res.Item;
           if (history) {
             item = history
+          }
+          if (item.invoiceurl) {
+            item.invoiceurl = item.invoiceurl.split(",");
+            this.setData({
+              upimg1: true
+            })
+          } else {
+            item.cover = [];
           }
           util.handleData(item, this, app.globalData.department);
           util.outflow(item, this)

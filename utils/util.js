@@ -1784,7 +1784,7 @@ const workList = (key, id, billname, bID) => {
       userName: userinfo.UserName,
       ID: bID
     }).then(res => {
-      // console.log(res)
+      console.log(res)
       if (res.code == 10000) {
         let result = res.WorkflowRecordList;
         if (result.length) {
@@ -2026,7 +2026,7 @@ const defaultimg1 = (e, key) => {
 }
 
 // 上传图片  key  img = this.data.info.picurl
-const upImages = (key, img,upimg1) => {
+const upImages = (key, img) => {
   // 图片请求-最多上传9张图
   if (img.length < 9) {
     wx.chooseImage({
@@ -2057,7 +2057,6 @@ const upImages = (key, img,upimg1) => {
                 that.setData({
                   upimg: true,
                   show_photo: false,
-                  upimg1:true,
                   info
                 })
               }
@@ -2356,12 +2355,6 @@ const intro = (data, that) => {
       data.ifwinbid = s.value
     }
   })
-  // 总包项目
-  app.globalData.projectall.forEach(s => {
-    if (s.text == data.itemnumber) {
-      data.itemnumber = s.value
-    }
-  })
   app.globalData.YesOrNo1.forEach(s => {
     if (s.text == data.ifpurchase) {
       data.ifpurchase = s.value
@@ -2410,6 +2403,12 @@ const intro = (data, that) => {
   app.globalData.Invoicetype.forEach(res => {
     if (data.invoicetype == res.text) {
       data.invoicetype = res.value;
+    }
+  })
+  //付款方式
+  app.globalData.PayType.forEach(res => {
+    if (data.paytype == res.text) {
+      data.paytype = res.value;
     }
   })
   // 项目类型
@@ -2612,12 +2611,6 @@ const outflow = (data, that) => {
       data.ConstructionTeamID = s.text
     }
   })
-  // 总包项目
-  app.globalData.projectall.forEach(s => {
-    if (s.value == data.itemnumber) {
-      data.itemnumber = s.text
-    }
-  })
   // 
   app.globalData.YesOrNo1.forEach(s => {
     if (s.value == data.ifpurchase) {
@@ -2669,6 +2662,12 @@ const outflow = (data, that) => {
   app.globalData.Invoicetype.forEach(res => {
     if (data.invoicetype == res.value) {
       data.invoicetype = res.text;
+    }
+  })
+  //付款方式
+  app.globalData.PayType.forEach(res => {
+    if (data.paytype == res.value) {
+      data.paytype = res.text;
     }
   })
   data.isstick = whethercontent(data.isstick)

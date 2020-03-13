@@ -88,11 +88,11 @@
         </block>
         <view class="check_item">
             <text class="kind">项目深化设计项目编号</text>
-            <van-cell title="{{info.itemnumber?info.itemnumber:'请选择'}}" bind:click="showPopup1">
+            <van-cell title="{{info.itemnumbers?info.itemnumbers:'请选择'}}" bind:click="showPopup1">
                 <icon class="iconfont icon-jiantou" />
             </van-cell>
             <van-popup show="{{ show1 }}" round position="bottom" bind:close="onClose1">
-                <van-picker data-name="itemnumber" show-toolbar columns="{{ section22 }}" bind:cancel="onClose1" bind:confirm="onConfirm1" />
+                <van-picker data-name="itemnumbers" show-toolbar columns="{{ section22 }}" bind:cancel="onClose1" bind:confirm="onConfirm1" />
             </van-popup>
         </view>
         <view class="check_item">
@@ -167,6 +167,18 @@
             <van-cell-group>
                 <van-field data-name="enterstate" value="{{info.enterstate}}" placeholder="请输入" bind:blur="subprojectnameblur" />
             </van-cell-group>
+        </view>
+         <view class="check_item">
+            <view class="kind require">
+                <text>项目编号</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.itemnumber?info.itemnumber:'请选择'}}" bind:click="showPopup2">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show2 }}" round position="bottom" bind:close="onClose2">
+                <van-picker data-name="itemnumber" show-toolbar columns="{{ section2 }}" bind:cancel="onClose2" bind:confirm="onConfirm2" />
+            </van-popup>
         </view>
         <view class="check_item">
             <text class="kind">资料图片</text>

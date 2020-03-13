@@ -1,6 +1,5 @@
 // pages/generalcontract/pact/pact.js
 import {
-  projectall,
   qgroupproject
 } from '../../../service/getData.js';
 var util = require("../../../utils/util");
@@ -68,23 +67,6 @@ Page({
       info
     })
     util.qgroupdeliver(qgroupproject, this, '', '1')
-    // wx.showLoading({
-    //   title: '加载中',
-    // });
-    // projectall({
-    //   Timestamp: app.globalData.time,
-    //   projectname: this.data.seach,
-    // }).then(res => {
-    //   console.log(res)
-    //   if (res.code == 10000) {
-    //     let item = res.List;
-    //     util.listData(item, app.globalData.department);
-    //     this.setData({
-    //       InfoList: item.reverse()
-    //     })
-    //     wx.hideLoading();
-    //   }
-    // })
   },
   /**
    * 生命周期函数--监听页面加载

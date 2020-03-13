@@ -204,7 +204,7 @@ Page({
           //列表
           let mid = res.Item.formid;
           if (mid) {
-            util.workList(this, mid, 'bidtoproject')
+            util.workList(this, mid, 'bidtoproject',options.id)
           }
           //处理状态判断
           util.checkState(this, mid, 'bidtoproject', item.CurStepbh);

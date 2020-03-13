@@ -290,7 +290,6 @@ Page({
       section1: app.globalData.Principal,
       section2: app.globalData.Companytitle,
       section3: app.globalData.department,
-      section4: app.globalData.projectall,
       section6: app.globalData.YesOrNo1
     })
     if (options.id) {

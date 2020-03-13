@@ -18,7 +18,7 @@
                 <text class="required">*</text>
             </view>
             <van-cell-group>
-                <van-field data-name="payapproveformname" value="{{info.payapproveformname?info.payapproveformname:'请选择'}}" placeholder="请输入" bind:blur="payapproveformname" />
+                <van-field data-name="payapproveformname" value="{{info.payapproveformname}}" placeholder="请输入" bind:blur="purchasecontactCodeblur" />
             </van-cell-group>
         </view>
         <view class="check_item">
@@ -42,9 +42,8 @@
         <view class="check_item">
             <view class="kind require">
                 <text>付款方式</text>
-                <text class="required">*</text>
             </view>
-            <van-cell title="{{paytype?paytype:'请选择'}}" bind:click="showPopup2">
+            <van-cell title="{{info.paytype?info.paytype:'请选择'}}" bind:click="showPopup2">
                 <icon class="iconfont icon-jiantou" />
             </van-cell>
             <van-popup show="{{ show2 }}" round position="bottom" bind:close="onClose2">
@@ -54,7 +53,6 @@
         <view class="check_item">
             <view class="kind require">
                 <text>项目编号</text>
-                <text class="required">*</text>
             </view>
             <van-cell title="{{info.projectcode?info.projectcode:'请选择'}}" bind:click="showPopup1">
                 <icon class="iconfont icon-jiantou" />

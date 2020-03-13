@@ -1331,20 +1331,20 @@ export const updateapproval = (params) => http.post("/api/payapproval/Update", p
 // 删除
 export const delapproval = (params) => http.post("/api/payapproval/Delete", params);
 // 综合查询
-export const qgroupapproval = (params) => http.post("/api/payapproval/Querygroup", params);
-// 项目收款明细                                       
+export const qgroupapproval = (params) => http.post("/api/payapproval/Querygroup", params);                                     
 // 查询
-export const queryapprovalsmall = (params) => http.post("/api/payapprovalDetail/Query", params);
+export const queryapprovalsmall = (params) => http.post("/api/payappdetail/Query", params);
 // 添加
-export const addapprovalsmall = (params) => http.post("/api/payapprovalDetail/Insert", params);
+export const addapprovalsmall = (params) => http.post("/api/payappdetail/Insert", params);
 // 根据id查询
-export const detailapprovalsmall = (params) => http.post("/api/payapprovalDetail/Detail", params);
+export const detailapprovalsmall = (params) => http.post("/api/payappdetail/Detail", params);
 // 更新
-export const updateapprovalsmall = (params) => http.post("/api/payapprovalDetail/Update", params);
+export const updateapprovalsmall = (params) => http.post("/api/payappdetail/Update", params);
 // 删除
-export const delapprovalsmall = (params) => http.post("/api/payapprovalDetail/Delete", params);
+export const delapprovalsmall = (params) => http.post("/api/payappdetail/Delete", params);
 // 综合查询
-export const qgroupapprovalsmall = (params) => http.post("/api/payapprovalDetail/Querygroup", params);
+export const qgroupapprovalsmall = (params) => http.post("/api/payappdetail/Querygroup", params);
+
 //用户管理
 export const getuser = (params) => http.post("/api/User/Query", params);
 //重置密码

@@ -55,25 +55,8 @@ Page({
     materials: [],
     section5: ["红酒", "购物卡", "食品", "烟", "电脑"],
     section6: [],
-    ifpurchasetext: ''
-  },
-  // 公司抬头
-  showPopup_o() {
-    this.setData({
-      show_o: true
-    });
-  },
-  onClose_o() {
-    this.setData({
-      show_o: false
-    });
-  },
-  onConfirm_o(e) {
-    let info = util.editInfo(e, this, e.detail.value.text);
-    this.setData({
-      info,
-      show_o: false,
-    })
+    ifpurchasetext: '',
+    upimg1:false
   },
   // 项目编号
   showPopup1() {
@@ -87,7 +70,7 @@ Page({
     });
   },
   onConfirm1(e) {
-    let info = util.editInfo(e, this, e.detail.value.text);
+    let info = util.editInfo(e, this, e.detail.value.value);
     this.setData({
       info,
       show1: false,
@@ -106,29 +89,10 @@ Page({
     });
   },
   onConfirm2(e) {
-    let info = util.editInfo(e, this, e.detail.value.value);
-    this.setData({
-      info,
-      show2: false,
-      ifpurchasetext: e.detail.value.text
-    })
-  },
-  // 部门
-  showPopup() {
-    this.setData({
-      show: true
-    });
-  },
-  onClose() {
-    this.setData({
-      show: false
-    });
-  },
-  onConfirm(e) {
     let info = util.editInfo(e, this, e.detail.value.text);
     this.setData({
       info,
-      show: false
+      show2: false,
     })
   },
   // 采购合同编号
@@ -138,47 +102,11 @@ Page({
       info
     })
   },
-  // 申请人
-  showPopup_3() {
-    this.setData({
-      show_3: true
-    });
-  },
-  onClose_3() {
-    this.setData({
-      show_3: false
-    });
-  },
-  onConfirm_3(e) {
-    let info = util.editInfo(e, this, e.detail.value.text);
-    this.setData({
-      info,
-      show_3: false
-    })
-  },
   // 采购合同名称
   subprojectnameblur(e) {
     let info = util.editInfo(e, this, e.detail.value);
     this.setData({
       info
-    })
-  },
-  // 进场日期
-  showPopup_time() {
-    this.setData({
-      show_time: true
-    })
-  },
-  onClose_time() {
-    this.setData({
-      show_time: false
-    })
-  },
-  onConfirm_time(e) {
-    let info = util.editInfo(e, this, util.datefomate(e.detail));
-    this.setData({
-      info,
-      show_time: false
     })
   },
   // 采购内容
@@ -215,26 +143,30 @@ Page({
   tap_pic(e) {
     util.preview(this, e)
   },
-    // 照片
-    showPopup_photo1() {
-      this.setData({
-        show_photo1: true
-      })
-    },
-    onClose_photo1() {
-      this.setData({
-        show_photo1: false
-      })
-    },
-    onSelect_photo1(e) {
-      util.upImages(this,this.data.info.invoiceurl);
-    },
-    delimg1(e) {
-      util.deleteImgs(this, e,this.data.info.invoiceurl)
-    },
-    tap_pic1(e) {
-      util.previews(this, e,this.data.info.invoiceurl)
-    },
+  // 照片
+  showPopup_photo1() {
+    this.setData({
+      show_photo1: true
+    })
+  },
+  onClose_photo1() {
+    this.setData({
+      show_photo1: false
+    })
+  },
+  onSelect_photo1(e) {
+    util.upImages(this, this.data.info.invoiceurl,'upimg1');
+    this.setData({
+      upimg1:true,
+      show_photo1: false
+    })
+  },
+  delimg1(e) {
+    util.deleteImgs(this, e, this.data.info.invoiceurl)
+  },
+  tap_pic1(e) {
+    util.previews(this, e, this.data.info.invoiceurl)
+  },
 
   // 明细表
 
@@ -261,7 +193,7 @@ Page({
   confirm() {
     let info = this.data.info;
     // console.log(this.data.info)
-    if (info.purpose && info.Companytitle && info.department && info.ifpurchase !== '' && info.itemnumber) {
+    if (info.payapproveformname && info.Companytitle && info.department) {
       var materials = this.data.materials;
       for (let k of materials) {
         for (let i in k) {
@@ -272,13 +204,19 @@ Page({
       }
       // console.log("1")
       if (this.data.materials[0]) {
-        if (!(materials[0].type && materials[0].quantity && materials[0].unitprice &&
-            materials[0].detailname)) {
+        if (!(materials[0].detailxh != '' && materials[0].detailcontext && materials[0].amount != '')) {
           Toast({
             message: '请填写明细表必填项',
             mask: true
           });
         } else {
+          if (info.invoiceurl) {
+            // console.log("tupian")
+            this.setData({
+              upimg1: false
+            })
+            info.invoiceurl = info.invoiceurl.join(",")
+          }
           util.checkContent(info, this);
           util.intro(info, this)
           this.setData({
@@ -337,6 +275,13 @@ Page({
       } else {
         util.checkContent(info, this);
         util.intro(info, this)
+        if (info.invoiceurl) {
+          // console.log("tupian")
+          this.setData({
+            upimg1: false
+          })
+          info.invoiceurl = info.invoiceurl.join(",")
+        }
         this.setData({
           info
         })
@@ -373,6 +318,13 @@ Page({
     util.checkChange(info, this, app.globalData.department);
 
     util.intro(info, this)
+    if (info.invoiceurl) {
+      // console.log("tupian")
+      this.setData({
+        upimg1: false
+      })
+      info.invoiceurl = info.invoiceurl.join(",")
+    }
     this.setData({
       info
     })
@@ -462,11 +414,8 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      section1: app.globalData.Principal,
-      section2: app.globalData.Companytitle,
-      section3: app.globalData.department,
-      section4: app.globalData.projectall,
-      section6: app.globalData.YesOrNo1
+      section4: app.globalData.MainProject1,
+      section6: app.globalData.PayType
     })
     if (options.id) {
       detailapproval({
@@ -480,6 +429,14 @@ Page({
         this.setData({
           information: c
         })
+        if (item.invoiceurl) {
+          item.invoiceurl = item.invoiceurl.split(",");
+          this.setData({
+            upimg1: true
+          })
+        } else {
+          item.cover = [];
+        }
         util.handleData(item, this, app.globalData.department);
         util.outflow(item, this)
         this.setData({

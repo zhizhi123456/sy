@@ -6,6 +6,7 @@ import {
 } from "../../../../service/getData";
 var util = require("../../../../utils/util");
 var app = getApp();
+import Toast from 'vant-weapp/dist/toast/toast';
 Page({
 
   /**

@@ -2,8 +2,6 @@
 import {
   queryapplyFor,
   qgroupapplyFor,
-  projectall,
-  getstaff
 } from '../../../../service/getData.js';
 var app = getApp();
 var util = require("../../../../utils/util");
@@ -99,12 +97,11 @@ Page({
       section2: app.globalData.Principal,
       section3: app.globalData.Companytitle,
       section4: app.globalData.getdept,
-      section5: app.globalData.projectall,
+      section5: app.globalData.MainProject1,
       section6: app.globalData.YesOrNo,
       section7: app.globalData.getstaff,
       states: app.globalData.states
     })
-    // console.log(app.globalData.projectall)
     wx.showLoading({
       title: '加载中',
     });

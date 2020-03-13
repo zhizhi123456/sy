@@ -91,8 +91,10 @@
                 <view class="dynamic_state" wx:else>暂无记录</view>
             </van-tab>
             <van-tab title="申领明细" name="c" wx:if="{{!history}}">
-                <van-cell title="申领明细({{material_list.length}})" bindtap="addndlink">
+                <van-cell title="申领明细({{material_list.length}})" bindtap="addndlink" wx:if="{{!info.formid}}">
                     <icon class="iconfont icon-icon-test"></icon>
+                </van-cell>
+                 <van-cell title="申领明细({{material_list.length}})" wx:else>
                 </van-cell>
                 <block wx:for="{{material_list}}" wx:key="{{index}}">
                     <view class="material">

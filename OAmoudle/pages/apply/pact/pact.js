@@ -1,8 +1,7 @@
 // pages/pact/pact.js
 import {
   queryapply,
-  qgroupapply,
-  projectall
+  qgroupapply
 } from '../../../../service/getData.js';
 var app = getApp();
 var util = require("../../../../utils/util");
@@ -96,9 +95,9 @@ Page({
       section2: app.globalData.getstaff,
       section3: app.globalData.Companytitle,
       section4: app.globalData.getdept,
-      section5:app.globalData.projectall
+      section5:app.globalData.MainProject1,
+      section1:app.globalData.states
     })
-    // console.log(app.globalData.projectall)
     wx.showLoading({
       title: '加载中',
     });
@@ -174,7 +173,7 @@ Page({
     });
   },
   onConfirm1(e) {
-    let info = util.editInfo(e, this, e.detail.value);
+    let info = util.editInfo(e, this, e.detail.value.text);
     this.setData({
       info,
       show1: false,
