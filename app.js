@@ -51,7 +51,6 @@ import {
   CountItem,
   Team,
   employee,
-  projectall,
   Leavetypelist,
   GetOverworktype,
   GetOvertimeperiod,
@@ -106,29 +105,6 @@ App({
 
         this.globalData.Principal = t;
         // console.log(this.globalData.Principal)
-      })
-      // 总包项目
-      projectall().then(res => {
-        // console.log(res.List)
-        if (res.code == 10000) {
-          // var c = JSON.stringify(res.List) 
-          var c = res.List
-          var m = []
-          c.forEach(s => {
-            m.push({
-              projcectCode: s.projcectCode,
-              projectname: s.projectname
-            })
-          })
-          var n = JSON.stringify(m)
-          let projectall = JSON.parse(n.replace(/projcectCode/g, 'value').replace(/projectname/g, 'text'));
-          let projectall1 = JSON.parse(n.replace(/projectname/g, 'value').replace(/projcectCode/g, 'text'));
-          this.globalData.projectall = projectall;
-          this.globalData.projectall1 = projectall1;
-        } else {
-          this.globalData.projectall = []
-          this.globalData.projectall1 = []
-        }
       })
       util.sumup1(getstaff, this, 'getstaff', "name", "userId");
       util.sumup1(getdept, this, 'getdept', "techofficename", "id");
@@ -308,12 +284,10 @@ App({
     CountItem: '',
     Team: '',
     employee: '',
-    projectall: '',
     Leavetypelist: '',
     GetOverworktype: '',
     GetOvertimeperiod: '',
     AnnouncementType: '',
-    projectall1: '',
     contractType: '',
     getframeProtocolCode: '',
     states: [{

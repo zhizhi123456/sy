@@ -2,7 +2,6 @@
 import {
   queryProjectPay,
   qgroupProjectPay,
-  projectall
 } from '../../../../service/getData.js';
 var app = getApp();
 var util = require("../../../../utils/util");
@@ -83,14 +82,12 @@ Page({
       section2: app.globalData.Principal,
       section3: app.globalData.Companytitle,
       section4: app.globalData.Projecttype,
-      section5:app.globalData.projectall,
       section6:app.globalData.YesOrNo,
       section7: app.globalData.Principal,
     })
     if (options.source) {
       wx.setStorageSync('carte', options)
     }
-    // console.log(app.globalData.projectall)
     wx.showLoading({
       title: '加载中',
     });

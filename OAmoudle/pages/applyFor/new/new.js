@@ -81,7 +81,7 @@ Page({
     });
   },
   onConfirm1(e) {
-    let info = util.editInfo(e, this, e.detail.value.text);
+    let info = util.editInfo(e, this, e.detail.value.value);
     this.setData({
       info,
       show1: false,
@@ -440,7 +440,7 @@ Page({
       section1: app.globalData.Principal,
       section2: app.globalData.Companytitle,
       section3: app.globalData.department,
-      section4: app.globalData.projectall,
+      section4: app.globalData.MainProject1,
       section6: app.globalData.YesOrNo1
     })
     if (options.id) {

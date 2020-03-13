@@ -103,10 +103,10 @@
                 <view id="{{'new'+index}}">
                     <text class="caption">{{item.leavetype}}</text>
                 </view>
-                <view>
+                <!-- <view>
                     <text class="info">当前任务状态</text>
                     <text class="caution">{{item.CurStepName}}</text>
-                </view>
+                </view> -->
                 <view>
                     <text class="info">请假类型</text>
                     <text>{{item.leavetype}}</text>

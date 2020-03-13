@@ -41,7 +41,7 @@ Page({
     });
 
     var info = this.data.info
-    info.keyword = this.data.seach
+    info.invoicename = this.data.seach
     var user = wx.getStorageSync("myInfo");
     info.UserName = user.UserName
     info.state = '所有'

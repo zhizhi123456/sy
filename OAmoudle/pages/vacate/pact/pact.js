@@ -46,6 +46,11 @@ Page({
     wx.showLoading({
       title: '加载中',
     });
+    if(this.data.seach){
+     this.setData({
+       'info.leavereason':this.data.seach
+     })
+    }
     groupVacate(this.data.info).then(res => {
       if (res.code == 10000) {
         let item = res.List;

@@ -54,7 +54,7 @@ Page({
           // 调取工作流记录
           // console.log(res.Item.formid)
           let mid = res.Item.formid;
-          util.workList(this, mid, 'frameProtocol');
+          util.workList(this, mid, 'frameProtocol',options.id);
           //处理状态判断
           util.checkState(this, mid, 'frameProtocol', item.CurStepbh);
         }

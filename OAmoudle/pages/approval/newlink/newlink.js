@@ -6,6 +6,7 @@ import {
 } from "../../../../service/getData";
 var util = require("../../../../utils/util");
 var app = getApp();
+import Toast from 'vant-weapp/dist/toast/toast';
 Page({
 
   /**
@@ -14,13 +15,9 @@ Page({
   data: {
     materials: [{
       payapproveid: '',
-      chargeman: '',
-      buyitemname: '',
-      specifications: '',
-      brand: '',
-      unit: '',
-      quantity: '',
-      demo: ''
+      detailxh: '',
+      detailcontext: '',
+      amount: ''
     }],
     billid: 0,
     show6: false,
@@ -106,8 +103,7 @@ Page({
         }
       }
     }
-    if (!(materials[0].type && materials[0].quantity && materials[0].unitprice &&
-        materials[0].detailname)) {
+    if (!(materials[0].detailxh!='' && materials[0].detailcontext && materials[0].amount!='')) {
       Toast({
         message: '请填写明细表必填项',
         mask: true

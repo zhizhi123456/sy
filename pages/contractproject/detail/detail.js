@@ -99,7 +99,7 @@ Page({
             }
           })
           if (res.Item.formid) {
-            util.workList(this, res.Item.formid, 'project')
+            util.workList(this, res.Item.formid, 'project',options.id)
           }
           util.checkState(this, res.Item.formid, 'project', item.CurStepbh);
         }

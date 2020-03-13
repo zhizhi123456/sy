@@ -20,8 +20,6 @@ Page({
     Times: [],
     Supplier: [],
     info: {
-    
-      
     },
     top: "支付审批",
     section2: "",
@@ -74,7 +72,6 @@ Page({
       states: app.globalData.states,
       section8:app.globalData.MainProject1
     })
-    // console.log(app.globalData.projectall)
     wx.showLoading({
       title: '加载中',
     });
@@ -232,7 +229,7 @@ Page({
     });
   },
   onConfirm5(e) {
-    let info = util.editInfo(e, this, e.detail.value.value);
+    let info = util.editInfo(e, this, e.detail.value.text);
     this.setData({
       info,
       show5: false,

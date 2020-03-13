@@ -11,6 +11,7 @@
         <view class="apply">新建申购明细</view>
     </view>
     <view class="main n_main">
+        <van-toast id="van-toast" />
         <view class="check_item">
             <view class="kind">
                 <text>负责人</text>

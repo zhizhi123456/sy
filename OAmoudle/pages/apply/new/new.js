@@ -60,24 +60,7 @@ Page({
     section5: [],
     detailID: null
   },
-  // 公司抬头
-  showPopup_o() {
-    this.setData({
-      show_o: true
-    });
-  },
-  onClose_o() {
-    this.setData({
-      show_o: false
-    });
-  },
-  onConfirm_o(e) {
-    let info = util.editInfo(e, this, e.detail.value.text);
-    this.setData({
-      info,
-      show_o: false,
-    })
-  },
+
   // 项目编号
   showPopup1() {
     this.setData({
@@ -92,8 +75,8 @@ Page({
   onConfirm1(e) {
     let info = util.editInfo(e, this, e.detail.value.text);
     this.setData({
-      info,
       show1: false,
+      info
       // departmenttext: e.detail.value.text
     })
     console.log(e.detail.value.value)
@@ -159,6 +142,24 @@ Page({
     this.setData({
       info,
       show: false
+    })
+  },
+  // 部门
+  showPopup2() {
+    this.setData({
+      show2: true
+    });
+  },
+  onClose2() {
+    this.setData({
+      show2: false
+    });
+  },
+  onConfirm2(e) {
+    let info = util.editInfo(e, this, e.detail.value.value);
+    this.setData({
+      info,
+      show2: false
     })
   },
   // 采购合同编号
@@ -245,29 +246,6 @@ Page({
   tap_pic(e) {
     util.preview(this, e)
   },
-
-  // 明细表
-
-  // 负责人
-  showPopup6() {
-    this.setData({
-      show6: true
-    });
-  },
-  onClose6() {
-    this.setData({
-      show6: false
-    });
-  },
-  onConfirm6(e) {
-    let materials = util.updateValue(e, this);
-    // console.log(materials)
-    this.setData({
-      materials,
-      show6: false
-    })
-  },
-
   confirm() {
     let info = this.data.info;
     // console.log(this.data.info)
@@ -678,17 +656,7 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      section1: app.globalData.Principal,
-      section2: app.globalData.Companytitle,
-      section3: app.globalData.department,
-      section4: app.globalData.projectall1
-    })
-    var c = app.globalData.Principal
-    var a = c.map(s => {
-      return s.text
-    })
-    this.setData({
-      section5: a
+      section2:app.globalData.MainProject1
     })
     var user = wx.getStorageSync("myInfo");
     if (user) {

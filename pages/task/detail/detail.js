@@ -100,7 +100,7 @@ Page({
           // 调取工作流记录
           // console.log(res.Item.formid)
           let mid = res.Item.formid;
-          util.workList(this, mid, 'prjassignbook');
+          util.workList(this, mid, 'prjassignbook', options.id);
           //处理状态判断
           util.checkState(this, mid, 'prjassignbook', item.CurStepbh);
         }

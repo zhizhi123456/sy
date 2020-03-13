@@ -11,6 +11,7 @@
         <view class="apply">新建采购明细</view>
     </view>
     <view class="main n_main">
+        <van-toast id="van-toast" />
         <view class="check_item">
             <text class="kind">商品编号</text>
             <van-cell-group>

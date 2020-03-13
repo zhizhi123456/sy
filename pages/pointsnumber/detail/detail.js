@@ -97,7 +97,7 @@ Page({
           // 调取工作流记录
           //列表
           let mid = res.Item.formid;
-          util.workList(this, mid, 'subprjcodeapply');
+          util.workList(this, mid, 'subprjcodeapply',options.id);
           //处理状态判断
           util.checkState(this, mid, 'subprjcodeapply', item.CurStepbh);
         }
