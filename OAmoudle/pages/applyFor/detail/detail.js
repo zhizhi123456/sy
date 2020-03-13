@@ -1,6 +1,6 @@
 // pages/generalcontract/detail/detail.js
 import {
-  detailapplyFor ,
+  detailapplyFor,
   delapplyFor,
   queryapplyForsmall
 } from '../../../../service/getData.js';
@@ -18,6 +18,16 @@ Page({
     table: "a",
     returned: true,
     isreturn: true,
+    check_photo: [{
+      name: "拍照"
+    }, {
+      name: "从相册选择"
+    }],
+    idea: {
+      API_Picurl: [],
+      API_Fileurl: []
+    },
+    stepLIst: []
   },
   // 文件
   up_photo() {
@@ -63,7 +73,7 @@ Page({
     wx.showLoading({
       title: '加载中',
     });
-    util.readRecordlist('applyform', options.id, this,'申领')
+    util.readRecordlist('applyform', options.id, this, '申领')
     if (options.id) {
       detailapplyFor({
         ID: options.id
@@ -77,19 +87,19 @@ Page({
             item = history
           }
           util.handleData(item, this, app.globalData.department);
-          util.outflow(item,this)
+          util.outflow(item, this)
           this.setData({
             info: item
           })
           wx.hideLoading();
           // 调取工作流记录
           let mid = res.Item.formid;
-         
-            util.workList(this, mid, 'applyform', options.id)
-      
-           //处理状态判断
-           util.checkState(this, res.Item.formid || res.Item.Formid, 'applyform', item.CurStepbh,'');
-           console.log(this.data.info.formid,this.data.isnext,this.data.returned,this.data.isreturn)
+
+          util.workList(this, mid, 'applyform', options.id)
+
+          //处理状态判断
+          util.checkState(this, res.Item.formid || res.Item.Formid, 'applyform', item.CurStepbh, '');
+          console.log(this.data.info.formid, this.data.isnext, this.data.returned, this.data.isreturn)
         }
       })
       // 调取明细表
@@ -106,15 +116,6 @@ Page({
         }
       })
     }
-  },
-  // 工作流流转
-  // 退回
-  sendback() {
-    util.Triggerflow(this, 'return', 'applyform', 'applyFor', '', '', '', '', '', '', 'oa')
-  },
-  // 审核通过
-  putin() {
-    util.Triggerflow(this, 'next', 'applyform', 'applyFor', '', '', '', '', '', '', 'oa')
   },
   // 删除
   delete() {
@@ -140,6 +141,92 @@ Page({
         url: '/OAmoudle/pages/applyFor/detail/detail?history=5&id=' + JSON.parse(e.currentTarget.dataset.i).ID
       })
     }
-  }
-
+  },
+  // 工作流流转
+  onClose() {
+    this.setData({
+      show: false
+    })
+  },
+  onClose1() {
+    this.setData({
+      show1: false
+    })
+  },
+  delF(e) {
+    util.delFileIDEA(this, e);
+  },
+  downF(e) {
+    util.lookFileIDEA(e);
+  },
+  // 文件上传
+  up_file() {
+    util.upFileIDEA(this);
+  },
+  //图片上传
+  // 照片
+  showPopup_photo() {
+    this.setData({
+      show_photo: true
+    })
+  },
+  onClose_photo() {
+    this.setData({
+      show_photo: false
+    })
+  },
+  onSelect_photo(e) {
+    if (e.detail.name == "拍照") {
+      util.upImageIDEA(this, 1);
+    } else {
+      util.upImageIDEA(this, 0);
+    }
+  },
+  // 点击图片放大预览
+  tap_pic1(e) {
+    util.lookimgIDEA(e);
+  },
+  delimg(e) {
+    util.deleteImgIDEA(this, e);
+  },
+  // 退回上步
+  sendback() {
+    this.setData({
+      show1: true
+    })
+    // util.Triggerflow(this, 'return', 'paymentapproval', 'payment', '', '', '', '', '', '', 'oa')
+  },
+  ApprovalOpinionblur(e) {
+    this.setData({
+      ApprovalOpinion: e.detail
+    })
+  },
+  tconfirm() {
+    util.Triggerflow(this, 'return', 'applyform', 'applyFor', '', '', '', '', '', '', 'oa', this.data.ApprovalOpinion ? this.data.ApprovalOpinion : '不同意。', JSON.stringify(this.data.idea.API_Picurl), JSON.stringify(this.data.idea.API_Fileurl))
+  },
+  sconfirm() {
+    util.Triggerflow(this, 'next', 'applyform', 'applyFor', '', '', '', '', '', '', 'oa', this.data.ApprovalOpinion ? this.data.ApprovalOpinion : '同意。', JSON.stringify(this.data.idea.API_Picurl), JSON.stringify(this.data.idea.API_Fileurl))
+  },
+  // 审核通过
+  putin() {
+    console.log("1")
+    console.log(this.data.info.formid)
+    if (this.data.info.formid) {
+      this.setData({
+        show: true
+      })
+    } else {
+      util.Triggerflow(this, 'next', 'applyform', 'applyFor', '', '', '', '', '', '', 'oa')
+    }
+  },
+  // 点击图片放大预览
+  tap_pic(e) {
+    util.preview(this, e)
+  },
+  defaultimg(e) {
+    let info = util.defaultimg(e, this);
+    this.setData({
+      info
+    })
+  },
 })
