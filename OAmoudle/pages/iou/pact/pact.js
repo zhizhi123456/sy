@@ -18,8 +18,8 @@ Page({
       applycancelman: "",
       Companytitle: "",
       department: "",
-      begintime:"",
-      endtime:""
+      begintime: "",
+      endtime: ""
     },
     sections: '',
     pull: false,
@@ -31,7 +31,7 @@ Page({
   },
   // 返回
   return () {
-    util.returnMenu2(2055,"日常办公")
+    util.returnMenu2(2055, "日常办公")
   },
   setSeach(e) {
     // //console.log(e)
@@ -77,28 +77,62 @@ Page({
   onLoad: function (options) {
     this.setData({
       sections: app.globalData.Companytitle,
-      section1:app.globalData.states,
+      section1: app.globalData.states,
       section2: app.globalData.getdept,
       section5: app.globalData.getstaff,
       section4: app.globalData.Usesealtype,
-      section3:app.globalData.Debitnotetype,
-      section6:app.globalData.MainProject1,
-      section7:app.globalData.MainSubproject
+      section3: app.globalData.Debitnotetype,
+      section6: app.globalData.MainProject1,
+      section7: app.globalData.MainSubproject
     })
     if (options.source) {
       wx.setStorageSync('carte', options)
     }
-    
+    if (options.id || options.rid) {
+      wx.setStorageSync('menus', options)
+    }
     wx.showLoading({
       title: '加载中',
     });
     this.setData({
-      seach:""
+      seach: ""
     })
-    this.seachInfo()
-   
-    //console.log(this.data.section3)
-
+    let menus = wx.getStorageSync('menus');
+    if (menus.caption == '未处理') {
+      let info = this.data.info;
+      info.state = menus.caption;
+      info.UserName = userinfo.UserName;
+      this.setData({
+        info,
+        val: 0,
+        ISconduct: 1,
+        pact: [{
+            text: '未处理的借条',
+            value: 0
+          },
+          {
+            text: '已处理的借条',
+            value: 1
+          },
+          {
+            text: '已超时的借条',
+            value: 2
+          }
+        ],
+      })
+      util.qgroupdeliver(qgroupiou, this, '', '1')
+    } else {
+      this.seachInfo()
+    }
+  },
+  changeItem(e) {
+    let StateStr = (this.data.pact[e.detail].text).slice(0, 3);
+    let info = this.data.info;
+    info.state = StateStr;
+    this.setData({
+      info
+    })
+    util.qgroupdeliver(qgroupiou, this, '', '1')
   },
   meetplaceblur(e) {
     let info = util.editInfo(e, this, e.detail.value);
@@ -124,8 +158,8 @@ Page({
       // departmenttext: e.detail.value.text
     })
   },
-   // 部门
-   showPopup2() {
+  // 部门
+  showPopup2() {
     this.setData({
       show2: true
     })
@@ -181,63 +215,63 @@ Page({
       show4: false
     })
   },
-    // 创建人
-    showPopup5() {
-      this.setData({
-        show5: true
-      })
-    },
-    onClose5() {
-      this.setData({
-        show5: false
-      })
-    },
-    onConfirm5(e) {
-      // //console.log(e)
-      let info = util.editInfo(e, this, e.detail.value.value);
-      this.setData({
-        info,
-        show5: false
-      })
-    },
-      // 项目编号
-      showPopup6() {
-        this.setData({
-          show6: true
-        })
-      },
-      onClose6() {
-        this.setData({
-          show6: false
-        })
-      },
-      onConfirm6(e) {
-        // //console.log(e)
-        let info = util.editInfo(e, this, e.detail.value.value);
-        this.setData({
-          info,
-          show6: false
-        })
-      },
-        // 
-    showPopup7() {
-      this.setData({
-        show7: true
-      })
-    },
-    onClose7() {
-      this.setData({
-        show7: false
-      })
-    },
-    onConfirm7(e) {
-      // //console.log(e)
-      let info = util.editInfo(e, this, e.detail.value.value);
-      this.setData({
-        info,
-        show7: false
-      })
-    },
+  // 创建人
+  showPopup5() {
+    this.setData({
+      show5: true
+    })
+  },
+  onClose5() {
+    this.setData({
+      show5: false
+    })
+  },
+  onConfirm5(e) {
+    // //console.log(e)
+    let info = util.editInfo(e, this, e.detail.value.value);
+    this.setData({
+      info,
+      show5: false
+    })
+  },
+  // 项目编号
+  showPopup6() {
+    this.setData({
+      show6: true
+    })
+  },
+  onClose6() {
+    this.setData({
+      show6: false
+    })
+  },
+  onConfirm6(e) {
+    // //console.log(e)
+    let info = util.editInfo(e, this, e.detail.value.value);
+    this.setData({
+      info,
+      show6: false
+    })
+  },
+  // 
+  showPopup7() {
+    this.setData({
+      show7: true
+    })
+  },
+  onClose7() {
+    this.setData({
+      show7: false
+    })
+  },
+  onConfirm7(e) {
+    // //console.log(e)
+    let info = util.editInfo(e, this, e.detail.value.value);
+    this.setData({
+      info,
+      show7: false
+    })
+  },
   // 计划开工时间
   showPopup_time() {
     this.setData({

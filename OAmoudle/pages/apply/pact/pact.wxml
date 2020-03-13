@@ -7,9 +7,12 @@
             <navigator open-type="redirect" url="/OAmoudle/pages/apply/new/new" hover-class="none" class="fr newCreate">
                 新建
             </navigator>
-            <view class="apply">
-              <text>{{top}}</text>
+            <view class="apply" wx:if="{{ISconduct}}">
+                <van-dropdown-menu active-color="red">
+                    <van-dropdown-item value="{{val}}" options="{{pact}}" bindchange="changeItem" />
+                </van-dropdown-menu>
             </view>
+            <view class="apply" wx:else>{{top}}</view>
         </view>
         <view class="seach">
             <icon class="iconfont icon-fuxuananniu fl s-sort" bindtap="change"></icon>
@@ -22,11 +25,11 @@
                     <text wx:else>搜索</text>
                 </view>
             </view>
-           <van-popup show="{{ show }}" bind:close="onClose" position="right" overlay="{{ true }}" custom-style="height: 100vh;color:#333" custom-class="pullpo" bind:click-overlay="onClose">
+            <van-popup show="{{ show }}" bind:close="onClose" position="right" overlay="{{ true }}" custom-style="height: 100vh;color:#333" custom-class="pullpo" bind:click-overlay="onClose">
                 <van-toast id="van-toast" />
                 <view class="seachif scroll-view" scroll-y="true">
                     <view>
-                     <view class="seach_item">
+                        <view class="seach_item">
                             <van-cell-group>
                                 <van-field data-name="applybuyname" value="{{info.applybuyname}}" placeholder="请输入" bind:blur="meetplaceblur" label="申购名" />
                             </van-cell-group>
@@ -43,13 +46,13 @@
                                 <van-picker data-name="Companytitle" show-toolbar columns="{{ section3 }}" bind:cancel="onClose3" bind:confirm="onConfirm3" />
                             </van-popup>
                         </view>
-                         <view class="seach_item">
+                        <view class="seach_item">
                             <van-field value="{{info.department}}" bind:focus="showPopup4" class="time1" title-class="time1" label="部门" placeholder="请选择" />
                             <van-popup show="{{show4}}" round position="bottom" bind:close="onClose4">
                                 <van-picker data-name="department" show-toolbar columns="{{ section4 }}" bind:cancel="onClose4" bind:confirm="onConfirm4" />
                             </van-popup>
                         </view>
-                          <view class="seach_item">
+                        <view class="seach_item">
                             <van-field value="{{info.itemnumber}}" bind:focus="showPopup5" class="time1" title-class="time1" label="项目编号" placeholder="请选择" />
                             <van-popup show="{{show5}}" round position="bottom" bind:close="onClose5">
                                 <van-picker data-name="itemnumber" show-toolbar columns="{{ section5 }}" bind:cancel="onClose5" bind:confirm="onConfirm5" />
@@ -67,7 +70,7 @@
                                 <van-datetime-picker data-name="endtime" value="{{ currentDate1 }}" bind:cancel="onClose_endtime" bind:confirm="onConfirm_endtime" />
                             </van-popup>
                         </view>
-                         <!-- <view class="seach_item">
+                        <!-- <view class="seach_item">
                             <van-field value="{{info.state}}" bind:focus="showPopup1" class="time1" title-class="time1" label="状态" placeholder="请选择" />
                             <van-popup show="{{show1}}" round position="bottom" bind:close="onClose1">
                                 <van-picker data-name="state" show-toolbar columns="{{ section1 }}" bind:cancel="onClose1" bind:confirm="onConfirm1" />

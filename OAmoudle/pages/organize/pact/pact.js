@@ -2,7 +2,8 @@
 import {
   getStruct,
   getStructLevel,
-  getStructCode
+  getStructCode,
+  cancelStruct
 } from '../../../../service/getData.js';
 var app = getApp();
 var util = require("../../../../utils/util");
@@ -49,21 +50,13 @@ Page({
       }
     })
   },
-  // ID: 10004
-  // 组织架构编码 OrganizStructCode: "11"
-  // 组织架构名称 OrganizStructName: "尚雍"
-  // 父组织架构 ParentCode: null
-  // 组织架构类型 StructKind: 0
-  // 组织架构层级 StructLevel: 1
-  // createman: "root3"
-  // createtime: "2020-03-10 14:25:46"
-  // 是否启用 ifenable: true
-  // updateman: null
-  // updatetime: null
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (options.id || options.rid) {
+      wx.setStorageSync('menus', options)
+    }
     this.seachInfo();
     getStructLevel().then(res => {
       if (res.code == 10000) {
@@ -110,6 +103,34 @@ Page({
         activeNames: i
       })
     }
+  },
+  delItem(e) {
+    let that = this;
+    wx.showModal({
+      content: '确认要删除吗？',
+      success(res) {
+        if (res.confirm) {
+          cancelStruct({
+            ID: e.currentTarget.dataset.i
+          }).then(res => {
+            if (res.code == 10000) {
+              wx.showToast({
+                title: '删除成功',
+                icon: 'success',
+                duration: 3000
+              })
+              setTimeout(function () {
+                util.OAreturn('organize');
+              }, 1000)
+            }
+          })
+        }
+      }
+    })
+  },
+  return () {
+    let menus = wx.getStorageSync('menus');
+    util.returnMenu2(menus.id, menus.title);
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

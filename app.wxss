@@ -426,6 +426,7 @@ jian .apply .van-dropdown-menu__title {
 
 .apply .van-ellipsis {
     overflow: visible;
+    color: white;
 }
 
 .card .van-tag--danger {

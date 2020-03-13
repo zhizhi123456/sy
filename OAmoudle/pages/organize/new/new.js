@@ -1,227 +1,92 @@
 // pages/new/new.js
 import Toast from 'vant-weapp/dist/toast/toast';
 import {
-  addInvoice,
-  referInvoice,
-  amendInvoice
+  addStruct,
+  referStruct,
+  amendStruct
 } from "../../../../service/getData";
 var util = require("../../../../utils/util");
 var app = getApp();
+let userinfo = wx.getStorageSync("myInfo");
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    info: {
-      API_Picurl: [],
-    },
-    show: false,
-    firms: [],
-    totals: [],
-    departmenttext: "请选择",
-    check_photo: [{
-      name: "拍照"
-    }, {
-      name: "从相册选择"
-    }],
+    info: {},
   },
-  // 部门
-  showPopup_o() {
+  // ID: 10004
+  // 组织架构编码 OrganizStructCode: "11"
+  // 组织架构名称 OrganizStructName: "尚雍"
+  // 父组织架构 ParentCode: null
+  // 组织架构类型 StructKind: 0
+  // 组织架构层级 StructLevel: 1
+  // createman: "root3"
+  // createtime: "2020-03-10 14:25:46"
+  // 是否启用 ifenable: true
+  // updateman: null
+  // updatetime: null
+  checknum(e) {
+    let info = this.data.info;
+    info.OrganizStructCode = e.detail.replace(/[^\d]/g, '');
     this.setData({
-      show_o: true
-    });
-  },
-  onClose_o() {
-    this.setData({
-      show_o: false
-    });
-  },
-  onConfirm_o(e) {
-    let info = util.editInfo(e, this, e.detail.value.value);
-    this.setData({
-      info,
-      show_o: false,
-      departmenttext: e.detail.value.text
+      info
     })
   },
-  // 公司
-  showPopup() {
-    this.setData({
-      show: true
-    });
-  },
-  onClose() {
-    this.setData({
-      show: false
-    });
-  },
-  onConfirm(e) {
-    let info = util.editInfo(e, this, e.detail.value.text);
-    this.setData({
-      info,
-      show: false
-    })
-  },
-  // 发票名称
-  invoicenameblur(e) {
+  // 组织架构编码
+  OrganizStructCodeblur(e) {
     let info = util.editInfo(e, this, e.detail.value);
     this.setData({
       info
     })
   },
-  // 合同
-  showPopup_1() {
-    this.setData({
-      show_1: true
-    });
-  },
-  onClose_1() {
-    this.setData({
-      show_1: false
-    });
-  },
-  onConfirm_1(e) {
-    let info = util.editInfo(e, this, e.detail.value.text);
-    this.setData({
-      info,
-      show_1: false
-    })
-  },
-  // 项目
-  showPopup_2() {
-    this.setData({
-      show_2: true
-    });
-  },
-  onClose_2() {
-    this.setData({
-      show_2: false
-    });
-  },
-  onConfirm_2(e) {
-    let info = util.editInfo(e, this, e.detail.value.text);
-    this.setData({
-      info,
-      show_2: false
-    })
-  },
-  // 项目地址
-  projectaddressblur(e) {
+  // 组织架构名称
+  OrganizStructNameblur(e) {
     let info = util.editInfo(e, this, e.detail.value);
     this.setData({
       info
     })
   },
-  // 开票类别
-  showPopup_3() {
-    this.setData({
-      show_3: true
-    });
-  },
-  onClose_3() {
-    this.setData({
-      show_3: false
-    });
-  },
-  onConfirm_3(e) {
-    let info = util.editInfo(e, this, e.detail.value.text);
-    this.setData({
-      info,
-      show_3: false
-    })
-  },
-  // 票率
-  showPopup_4() {
-    this.setData({
-      show_4: true
-    });
-  },
-  onClose_4() {
-    this.setData({
-      show_4: false
-    });
-  },
-  onConfirm_4(e) {
-    let info = util.editInfo(e, this, e.detail.value.text);
-    this.setData({
-      info,
-      show_4: false
-    })
-  },
-  // 发票内容
-  invoicecontextblur(e) {
+  // 上级组织架构层级
+  ParentCodeblur(e) {
     let info = util.editInfo(e, this, e.detail.value);
     this.setData({
       info
     })
   },
-  // 开票信息
-  showPopup_5() {
-    this.setData({
-      show_5: true
-    });
-  },
-  onClose_5() {
-    this.setData({
-      show_5: false
-    });
-  },
-  onConfirm_5(e) {
-    let info = util.editInfo(e, this, e.detail.value.text);
-    this.setData({
-      info,
-      show_5: false
-    })
-  },
-  // 含税金额
-  includetaxamontblur(e) {
+  // 本组织架构层级
+  StructLevelblur(e) {
     let info = util.editInfo(e, this, e.detail.value);
     this.setData({
       info
     })
   },
-  // 照片
-  showPopup_photo() {
-    this.setData({
-      show_photo: true
-    })
-  },
-  onClose_photo() {
-    this.setData({
-      show_photo: false
-    })
-  },
-  onSelect_photo(e) {
-    if (e.detail.name == "拍照") {
-      util.upImage(this, 1);
-    } else {
-      util.upImage(this, 0);
-    }
-  },
-  delimg(e) {
-    util.deleteImg(this, e)
-  },
-  tap_pic(e) {
-    util.preview(this, e)
-  },
-
   confirm() {
-    // console.log(this.data.info)
-    if (this.data.info.department && this.data.info.Companytitle && this.data.info.invoicename && this.data.info.contactid&& this.data.info.projectid&& this.data.info.projectaddress&& this.data.info.invoicetype&& this.data.info.invoicefeerate&& this.data.info.invoicecontext) {
-      let info = this.data.info;
-      util.checkContent(info, this);
+    this.setData({
+      'info.createman': userinfo.UserName,
+      'info.createtime': util.format(new Date()),
+      'info.ifenable': 1
+    })
+    if (this.data.next) {
       this.setData({
-        info
+        'info.StructLevel': this.data.pevInfo.StructLevel + 1,
+        'info.ParentCode': this.data.pevInfo.OrganizStructCode,
+        'info.OrganizStructCode': this.data.pevInfo.OrganizStructCode + this.data.info.OrganizStructCode
       })
-      addInvoice(this.data.info).then(res => {
-        // console.log(res)
+    } else {
+      this.setData({
+        'info.StructLevel': 1,
+      })
+    }
+    if (this.data.info.OrganizStructCode && this.data.info.OrganizStructName) {
+      addStruct(this.data.info).then(res => {
         if (res.code == 10000) {
           wx.showToast({
             title: '新建成功',
             icon: 'success',
             duration: 3000
           })
-          util.OAreturn('invoice');
+          util.OAreturn('organize');
         }
       })
     } else {
@@ -233,28 +98,25 @@ Page({
   },
   // 返回
   return () {
-    util.OAreturn('invoice');
+    util.OAreturn('organize');
   },
   // 编辑页面的确定和返回
   editreturn() {
-    util.OAreturn('invoice', this);
+    util.OAreturn('organize', this);
   },
   editconfirm() {
-    let info = this.data.info;
-    util.checkChange(info, this, app.globalData.department);
     this.setData({
-      info
+      'info.updateman': userinfo.UserName,
+      'info.updatetime': util.format(new Date())
     })
-    // console.log(infodata)
-    amendInvoice(this.data.info).then(res => {
-      // console.log(res)
+    amendStruct(this.data.info).then(res => {
       if (res.code == 10000) {
         wx.showToast({
           title: '编辑成功',
           icon: 'success',
           duration: 3000
         })
-        util.OAreturn('invoice', this);
+        util.OAreturn('organize', this);
       }
     })
   },
@@ -262,22 +124,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      firms: app.globalData.Companytitle,
-      sections: app.globalData.department,
-      Invoicetype: app.globalData.Invoicetype,
-      MaincontactAll: app.globalData.MaincontactAll,
-      MainProject: app.globalData.MainProject,
-      Invoicefeerate: app.globalData.Invoicefeerate,
-      billing: app.globalData.billing
-    })
-    if (options.id) {
-      referInvoice({
+    userinfo = wx.getStorageSync("myInfo");
+    if (options.next && options.id) {
+      this.setData({
+        next: true
+      })
+      referStruct({
         ID: options.id
       }).then(res => {
-        // console.log(res)
         let item = res.Item;
-        util.handleData(item, this, app.globalData.department);
+        this.setData({
+          pevInfo: item,
+        })
+      })
+    } else if (options.id) {
+      referStruct({
+        ID: options.id
+      }).then(res => {
+        let item = res.Item;
         this.setData({
           info: item
         })
@@ -296,7 +160,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    userinfo = wx.getStorageSync("myInfo");
   },
 
   /**

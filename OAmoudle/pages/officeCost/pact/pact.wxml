@@ -7,7 +7,12 @@
             <navigator open-type="redirect" url="/OAmoudle/pages/officeCost/new/new" hover-class="none" class="fr newCreate">
                 新建
             </navigator>
-            <view class="apply">
+            <view class="apply" wx:if="{{ISconduct}}">
+                <van-dropdown-menu active-color="red">
+                    <van-dropdown-item value="{{val}}" options="{{pact}}" bindchange="changeItem" />
+                </van-dropdown-menu>
+            </view>
+            <view class="apply" wx:else>
                 <text>办公费用</text>
             </view>
         </view>
@@ -37,31 +42,31 @@
                                 <van-picker data-name="Companytitle" show-toolbar columns="{{ sections }}" bind:cancel="onClose_o" bind:confirm="onConfirm_o" />
                             </van-popup>
                         </view>
-                          <view class="seach_item">
+                        <view class="seach_item">
                             <van-field value="{{info.department}}" bind:focus="showPopup2" class="time1" title-class="time1" label="部门" placeholder="请选择" />
                             <van-popup show="{{show2}}" round position="bottom" bind:close="onClose2">
                                 <van-picker data-name="department" show-toolbar columns="{{ section2 }}" bind:cancel="onClose2" bind:confirm="onConfirm2" />
                             </van-popup>
                         </view>
-                          <view class="seach_item">
+                        <view class="seach_item">
                             <van-field value="{{info.usechargeman}}" bind:focus="showPopup3" class="time1" title-class="time1" label="费用对象" placeholder="请选择" />
                             <van-popup show="{{show3}}" round position="bottom" bind:close="onClose3">
                                 <van-picker data-name="usechargeman" show-toolbar columns="{{ section3 }}" bind:cancel="onClose3" bind:confirm="onConfirm3" />
                             </van-popup>
                         </view>
-                         <view class="seach_item">
+                        <view class="seach_item">
                             <van-field value="{{info.chargetype}}" bind:focus="showPopup4" class="time1" title-class="time1" label="费用类型" placeholder="请选择" />
                             <van-popup show="{{show4}}" round position="bottom" bind:close="onClose4">
                                 <van-picker data-name="chargetype" show-toolbar columns="{{ section4 }}" bind:cancel="onClose4" bind:confirm="onConfirm4" />
                             </van-popup>
                         </view>
-                          <view class="seach_item">
+                        <view class="seach_item">
                             <van-field value="{{info.createman }}" bind:focus="showPopup5" class="time1" title-class="time1" label="创建人" placeholder="请选择" />
                             <van-popup show="{{show5}}" round position="bottom" bind:close="onClose5">
                                 <van-picker data-name="createman" show-toolbar columns="{{ section5 }}" bind:cancel="onClose5" bind:confirm="onConfirm5" />
                             </van-popup>
                         </view>
-                          <view class="seach_item">
+                        <view class="seach_item">
                             <van-field value="{{info.state}}" bind:focus="showPopup1" class="time1" title-class="time1" label="状态" placeholder="请选择" />
                             <van-popup show="{{show1}}" round position="bottom" bind:close="onClose1">
                                 <van-picker data-name="state" show-toolbar columns="{{ section1 }}" bind:cancel="onClose1" bind:confirm="onConfirm1" />

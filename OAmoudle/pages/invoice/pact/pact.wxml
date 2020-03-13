@@ -6,7 +6,12 @@
             <navigator open-type="redirect" url="/OAmoudle/pages/invoice/new/new" hover-class="none" class="fr newCreate">
                 新建
             </navigator>
-            <view class="apply">{{top}}</view>
+            <view class="apply" wx:if="{{ISconduct}}">
+                <van-dropdown-menu active-color="red">
+                    <van-dropdown-item value="{{val}}" options="{{pact}}" bindchange="changeItem" />
+                </van-dropdown-menu>
+            </view>
+            <view class="apply" wx:else>{{top}}</view>
         </view>
         <view class="seach">
             <icon class="iconfont icon-fuxuananniu fl s-sort" bindtap="showgroup"></icon>
@@ -48,7 +53,7 @@
                             <van-picker data-name="projectid" show-toolbar columns="{{ MainProject }}" bind:cancel="onClose_4" bind:confirm="onConfirm_4" />
                         </van-popup>
                     </view>
-                      <view class="seach_item">
+                    <view class="seach_item">
                         <van-cell-group>
                             <van-field value="{{info.createman}}" placeholder="请选择" bindtap="showPopup_5" label="创建人" disabled />
                         </van-cell-group>
@@ -56,7 +61,6 @@
                             <van-picker data-name="createman" show-toolbar columns="{{ section1 }}" bind:cancel="onClose_5" bind:confirm="onConfirm_5" />
                         </van-popup>
                     </view>
-                  
                     <view class="seach_item">
                         <van-cell-group>
                             <van-field value="{{info.invoicetype}}" placeholder="请选择" bindtap="showPopup_1" label="开票类别" disabled />

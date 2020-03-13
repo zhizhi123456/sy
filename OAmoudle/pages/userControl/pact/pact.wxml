@@ -3,7 +3,7 @@
     <view class="header">
         <view class="title">
             <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
-            <view class="apply">{{top}}</view>
+            <view class="apply">用户管理</view>
         </view>
         <view class="seach">
             <icon class="iconfont icon-guanyu fl s-sort"></icon>

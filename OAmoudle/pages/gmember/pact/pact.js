@@ -2,9 +2,6 @@
 import {
   getMembernew,
   groupMembernew,
-  getdep,
-  getLeader,
-  employee
 } from '../../../../service/getData';
 var app = getApp();
 var util = require("../../../../utils/util");
@@ -16,7 +13,7 @@ Page({
   data: {
     seach: '',
     loading: false,
-    top: '员工管理',
+    // top: '员工管理',
     currentDate: new Date().getTime(),
     maxDate: new Date().getTime(),
     InfoList: [],
@@ -44,7 +41,7 @@ Page({
         let item = res.List;
         util.listData(item, app.globalData.department);
         this.setData({
-          InfoList: item,
+          InfoList: item.reverse(),
         })
         wx.hideLoading();
       }
@@ -62,16 +59,14 @@ Page({
     if (app.globalData.CountItem) {
       this.setData({
         sections: app.globalData.department,
-        GetOverworktype: app.globalData.GetOverworktype,
-        GetOvertimeperiod: app.globalData.GetOvertimeperiod,
+        state: app.globalData.state,
       })
     } else {
       app.DataCallback = employ => {
         if (employ != '') {
           this.setData({
             sections: app.globalData.department,
-            GetOverworktype: app.globalData.GetOverworktype,
-            GetOvertimeperiod: app.globalData.GetOvertimeperiod,
+            state: app.globalData.state,
           })
         }
       }
@@ -92,41 +87,28 @@ Page({
     wx.showLoading({
       title: '加载中',
     });
-    if (this.data.info.applyman || this.data.info.overworktype || this.data.info.department || this.data.info.overtimeperiod || this.data.info.begintime) {
+    if (this.data.info.name || this.data.info.position || this.data.info.state || this.data.info.department || this.data.info.begintime || this.data.info.endtime) {
       let info = this.data.info;
-      if (info.overworktype) {
-        this.data.GetOverworktype.forEach(res => {
-          if (info.overworktype == res.text) {
-            info.overworktype = res.value;
-          }
-        })
-      }
-      if (info.overtimeperiod) {
-        this.data.GetOvertimeperiod.forEach(res => {
-          if (info.overtimeperiod == res.text) {
-            info.overtimeperiod = res.value;
+      if (info.state) {
+        this.data.state.forEach(res => {
+          if (info.state == res.text) {
+            info.state = res.value;
           }
         })
       }
       this.setData({
         info
       })
-      groupOvertime(this.data.info).then(res => {
+      groupMembernew(this.data.info).then(res => {
         if (res.code == 10000) {
           let item = res.List;
-          util.listData(item, app.globalData.department,);
+          util.listData(item, app.globalData.department);
           this.setData({
             InfoList: item.reverse(),
             info: {},
-            'info.department': this.data.userdep[0].ID,
-            departmenttext: this.data.userdep[0].techofficename,
+            departmenttext: '',
             loading: false,
           })
-          if (!this.data.Leader.length) {
-            this.setData({
-              'info.applyman': userinfo.UserName,
-            })
-          }
           wx.hideLoading();
         }
       })
@@ -142,44 +124,34 @@ Page({
     )
   },
   // 申请人
-  // applymanblur(e) {
-  //   let info = util.editInfo(e, this, e.detail.value);
-  //   this.setData({
-  //     info
-  //   })
-  // },
-  showPopup_9() {
+  applymanblur(e) {
+    let info = util.editInfo(e, this, e.detail.value);
     this.setData({
-      show_9: true
-    })
-  },
-  onClose_9() {
-    this.setData({
-      show_9: false
-    })
-  },
-  onConfirm_9(e) {
-    let info = util.editInfo(e, this, e.detail.value.text);
-    this.setData({
-      show_9: false,
       info
     })
   },
-  // 加班类型
-  showPopup_1() {
+  // 职位
+  positionblur(e) {
+    let info = util.editInfo(e, this, e.detail.value);
     this.setData({
-      show_1: true
+      info
     })
   },
-  onClose_1() {
+  // 状态
+  showPopup_2() {
     this.setData({
-      show_1: false
+      show_2: true
     })
   },
-  onConfirm_1(e) {
+  onClose_2() {
+    this.setData({
+      show_2: false
+    })
+  },
+  onConfirm_2(e) {
     let info = util.editInfo(e, this, e.detail.value.text);
     this.setData({
-      show_1: false,
+      show_2: false,
       info
     })
   },
@@ -202,24 +174,6 @@ Page({
       show_0: false,
       info,
       departmenttext: e.detail.value.text
-    })
-  },
-  // 加班时期
-  showPopup_2() {
-    this.setData({
-      show_2: true
-    })
-  },
-  onClose_2() {
-    this.setData({
-      show_2: false
-    })
-  },
-  onConfirm_2(e) {
-    let info = util.editInfo(e, this, e.detail.value.text);
-    this.setData({
-      show_2: false,
-      info
     })
   },
   // 开始时间

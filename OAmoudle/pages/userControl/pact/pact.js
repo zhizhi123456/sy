@@ -14,7 +14,7 @@ Page({
   data: {
     seach: '',
     loading: false,
-    top: '用户管理',
+    // top: '用户管理',
     InfoList: [],
   },
   // 返回

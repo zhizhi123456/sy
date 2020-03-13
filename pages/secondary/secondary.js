@@ -117,18 +117,21 @@ Page({
     })
   },
   back() {
-    if (this.data.uponelevel) {
-      util.returnMenu(this.data.uponelevel);
-    } else if (this.data.chuancan == 1055) {
-      // 我的信息
-      util.returnMenu(1002);
-    } else if (this.data.chuancan == 2055 || this.data.chuancan == 2056 || this.data.chuancan == 2057 || this.data.chuancan == 2058) {
-      // 0
-      util.returnMenu(2054);
-    } else {
-      // 工程管理
-      util.returnMenu(1000);
-    }
+    // if (this.data.uponelevel) {
+    //   util.returnMenu(this.data.uponelevel);
+    // } else if (this.data.chuancan == 1055) {
+    //   // 我的信息
+    //   util.returnMenu(1002);
+    // } else if (this.data.chuancan == 2055 || this.data.chuancan == 2056 || this.data.chuancan == 2057 || this.data.chuancan == 2058) {
+    //   // 0
+    //   util.returnMenu(2054);
+    // } else {
+    //   // 工程管理
+    //   util.returnMenu(1000);
+    // }
+    wx.redirectTo({
+      url: "/pages/contracts/contracts?grading=2091"
+    });
 
   },
   checkperson() {
@@ -195,7 +198,7 @@ Page({
     }
     this.screen()
     console.log(this.data.chuancan)
-    
+
   },
   /**
    * 生命周期函数--监听页面显示

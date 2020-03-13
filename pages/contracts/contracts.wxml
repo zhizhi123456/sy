@@ -2,33 +2,42 @@
 <!-- pages/contract/contract.wxml -->
 <view wx:if="{{lists.length}}">
   <view class="header">
-    <icon wx:if="{{entered&&num==1002}}" class="iconfont icon-dianshi fl"></icon>
-    <text wx:if="{{entered&&num==1002}}" class="fr newCreate iconfont icon-wode">{{userinfo.UserName}}</text>
+    <navigator url='/pages/secondary/secondary?menuId=null&id=2129&title=后台管理&num=2091&mtitle=我的&source=index'>
+      <icon wx:if="{{entered&&num==2091}}" class="iconfont icon-dianshi fl"></icon>
+    </navigator>
+    <text wx:if="{{entered&&num==2091}}" class="fr newCreate iconfont icon-wode">{{userinfo.UserName}}</text>
     <view class="apply kapply">{{title}}</view>
     <!-- <van-icon name="orders-o" info="9" class="icon1" bind:click="task" /> -->
   </view>
   <view class="list">
-    <view class="box" wx:for="{{lists}}" wx:key="index">
-      <view class="{{'masked'+ (item.control ? '':' show') + (item.pageaddres?'':' show')}}">
-        <icon class="iconfont icon-mima"></icon>
+    <!-- <block class="box" wx:for="{{lists}}" wx:key="index"> -->
+    <block wx:for="{{lists}}" wx:key="index">
+      <view class="box" wx:if="{{item.ID!=2129}}">
+        <view class="{{'masked'+ (item.control ? '':' show') + (item.pageaddres?'':' show')}}">
+          <icon class="iconfont icon-mima"></icon>
+        </view>
+        <van-tag wx:if="{{item.TNUm&&TaskTNUm}}" round type="danger" class="HINT">
+          {{TaskTNUm}}
+        </van-tag>
+        <van-tag wx:if="{{item.ANUm&&applyNUM}}" round type="danger" class="HINT">
+          {{applyNUM}}
+        </van-tag>
+        <van-tag wx:if="{{item.hot&&hotnum}}" round type="danger" class="HINT">{{hotnum}}</van-tag>
+        <van-tag wx:if="{{item.dephot&&depnum}}" round type="danger" class="HINT">
+          {{depnum}}
+        </van-tag>
+        <icon class="{{' red  icon iconfont '+ item.icon + (item.control ?'':' c') }}"></icon>
+        <text class="{{item.control ?'':'c'}}">{{item.name}}</text>
+        <!-- <navigator url="{{ item.three?item.path +'?menuId='+ item.menuId:(item.control ? '/pages/secondarys/secondarys?id='+item.ID+'&title='+item.nametext :'#')}}"></navigator> -->
+        <!-- <navigator url="{{(!item.control)?'':(item.three?(item.pageaddres +'?menuId='+ item.menuId+'&id='+item.ID+'&title='+item.name):('/pages/secondarys/secondarys?id='+item.ID+'&title='+item.name))}}"></navigator> -->
+        <navigator open-type="redirect" url="{{(!item.control)?'':(item.pageaddres +'?menuId='+ item.menuId+'&id='+item.ID+'&title='+item.name)+'&num='+num+'&mtitle='+title+'&source=index'}}" open-type="redirect" hover-class="navigator-hover_style"></navigator>
       </view>
-      <van-tag wx:if="{{item.TNUm&&TaskTNUm}}" round type="danger" class="HINT">
-        {{TaskTNUm}}
-      </van-tag>
-      <van-tag wx:if="{{item.ANUm&&applyNUM}}" round type="danger" class="HINT">
-        {{applyNUM}}
-      </van-tag>
-      <van-tag wx:if="{{item.hot&&hotnum}}" round type="danger" class="HINT">{{hotnum}}</van-tag>
-      <van-tag wx:if="{{item.dephot&&depnum}}" round type="danger" class="HINT">{{depnum}}</van-tag>
-      <icon class="{{' red  icon iconfont '+ item.icon + (item.control ?'':' c') }}"></icon>
-      <text class="{{item.control ?'':'c'}}">{{item.name}}</text>
-      <!-- <navigator url="{{ item.three?item.path +'?menuId='+ item.menuId:(item.control ? '/pages/secondarys/secondarys?id='+item.ID+'&title='+item.nametext :'#')}}"></navigator> -->
-      <!-- <navigator url="{{(!item.control)?'':(item.three?(item.pageaddres +'?menuId='+ item.menuId+'&id='+item.ID+'&title='+item.name):('/pages/secondarys/secondarys?id='+item.ID+'&title='+item.name))}}"></navigator> -->
-      <navigator open-type="redirect" url="{{(!item.control)?'':(item.pageaddres +'?menuId='+ item.menuId+'&id='+item.ID+'&title='+item.name)+'&num='+num+'&mtitle='+title+'&source=index'}}" open-type="redirect" hover-class="navigator-hover_style"></navigator>
-    </view>
+    </block>
   </view>
-  <!-- <view wx:if="{{num==1001}}"><navigator open-type="redirect" url="/OAmoudle/pages/payment/pact/pact">测试1</navigator></view>
-  <view wx:if="{{num==1001}}"><navigator open-type="redirect" url="/pages/ledger/pact/pact">测试</navigator></view> -->
+  <!-- <view wx:if="{{num==2088}}">
+    <navigator open-type="redirect" url="/OAmoudle/pages/gmember/pact/pact">测试1</navigator>
+  </view> -->
+  <!-- <view wx:if="{{num==1001}}"><navigator open-type="redirect" url="/pages/ledger/pact/pact">测试</navigator></view> -->
   <view wx:if="{{entered&&num==2091}}" class="haDquit">
     <view bindtap="out">切换账号</view>
     <view bindtap="out">退出</view>

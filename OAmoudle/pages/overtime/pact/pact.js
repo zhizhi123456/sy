@@ -39,19 +39,56 @@ Page({
     wx.showLoading({
       title: '加载中',
     });
-    getOvertime({
-      applyman: this.data.seach
-    }).then(res => {
-      // console.log(res)
+    if (this.data.ISconduct) {
+      groupOvertime(this.data.info).then(res => {
+        if (res.code == 10000) {
+          let item = res.List;
+          util.listData(item, app.globalData.department, '', '', this, 'workovertime');
+          this.setData({
+            InfoList: item.reverse(),
+          })
+          wx.hideLoading();
+        }
+      })
+    } else {
+      getOvertime({
+        applyman: this.data.seach
+      }).then(res => {
+        // console.log(res)
+        if (res.code == 10000) {
+          let item = res.List;
+          util.listData(item, app.globalData.department, '', '', this, 'workovertime');
+          this.setData({
+            InfoList: item.reverse(),
+            seach: ''
+          })
+          wx.hideLoading();
+        }
+      })
+    }
+  },
+  changeItem(e) {
+    let StateStr = (this.data.pact[e.detail].text).slice(0, 3);
+    let info = this.data.info;
+    info.state = StateStr;
+    this.setData({
+      info
+    })
+    wx.showLoading({
+      title: "加载中..."
+    })
+    groupOvertime(this.data.info).then(res => {
+      // console.log(res.List)
       if (res.code == 10000) {
         let item = res.List;
         util.listData(item, app.globalData.department, '', '', this, 'workovertime');
         this.setData({
           InfoList: item.reverse(),
-          seach: ''
         })
         wx.hideLoading();
       }
+    }).catch(err => {
+      console.log(err)
     })
   },
   /**
@@ -62,8 +99,61 @@ Page({
     if (options.source) {
       wx.setStorageSync('carte', options)
     }
-    if (options.id) {
+    if (options.id || options.rid) {
       wx.setStorageSync('menus', options)
+    }
+    let menus = wx.getStorageSync('menus');
+    console.log(menus)
+    if (menus.caption == '未处理') {
+      let info = this.data.info;
+      info.state = menus.caption;
+      info.UserName = userinfo.UserName;
+      this.setData({
+        info,
+        val: 0,
+        ISconduct: 1,
+        pact: [{
+            text: '未处理的加班',
+            value: 0
+          },
+          {
+            text: '已处理的加班',
+            value: 1
+          },
+          {
+            text: '已超时的加班',
+            value: 2
+          }
+        ],
+      })
+      groupOvertime(this.data.info).then(res => {
+        if (res.code == 10000) {
+          let item = res.List;
+          util.listData(item, app.globalData.department, '', '', this, 'workovertime');
+          this.setData({
+            InfoList: item.reverse(),
+          })
+          wx.hideLoading();
+        }
+      })
+    } else {
+      wx.showLoading({
+        title: '加载中',
+      });
+      // 调用查询
+      getOvertime().then(res => {
+        // console.log(res.List)
+        if (res.code == 10000) {
+          let item = res.List;
+          util.listData(item, app.globalData.department, '', '', this, 'workovertime');
+          this.setData({
+            InfoList: item.reverse(),
+          })
+          wx.hideLoading();
+        }
+      }).catch(err => {
+        console.log(err)
+      })
     }
     getdep({
       UserName: userinfo.UserName
@@ -98,23 +188,6 @@ Page({
         })
       }
     })
-    wx.showLoading({
-      title: '加载中',
-    });
-    // 调用查询
-    getOvertime().then(res => {
-      // console.log(res.List)
-      if (res.code == 10000) {
-        let item = res.List;
-        util.listData(item, app.globalData.department, '', '', this, 'workovertime');
-        this.setData({
-          InfoList: item.reverse(),
-        })
-        wx.hideLoading();
-      }
-    }).catch(err => {
-      console.log(err)
-    })
     if (app.globalData.CountItem) {
       this.setData({
         sections: app.globalData.department,
@@ -132,6 +205,7 @@ Page({
         }
       }
     }
+
   },
   // 组合查询
   showgroup() {
@@ -307,11 +381,13 @@ Page({
           duration: 3000
         })
         this.setData({
-          "info.begintime":'',
-          "info.endtime":'',
+          "info.begintime": '',
+          "info.endtime": '',
           currentDate: new Date().getTime(),
           maxDate: new Date().getTime(),
-        })}}
+        })
+      }
+    }
   },
   // 结束时间
   showPopup_endtime() {

@@ -98,6 +98,9 @@ Page({
       section4: app.globalData.getdept,
       section5:app.globalData.projectall
     })
+    if (options.id || options.rid) {
+      wx.setStorageSync('menus', options)
+    }
     // console.log(app.globalData.projectall)
     wx.showLoading({
       title: '加载中',
@@ -106,8 +109,43 @@ Page({
     this.setData({
       seach: ''
     })
-    this.seachInfo()
-
+    
+    let menus = wx.getStorageSync('menus');
+    if (menus.caption == '未处理') {
+      let info = this.data.info;
+      info.state = menus.caption;
+      info.UserName = userinfo.UserName;
+      this.setData({
+        info,
+        val: 0,
+        ISconduct: 1,
+        pact: [{
+            text: '未处理的申购单',
+            value: 0
+          },
+          {
+            text: '已处理的申购单',
+            value: 1
+          },
+          {
+            text: '已超时的申购单',
+            value: 2
+          }
+        ],
+      })
+      util.qgroupdeliver(qgroupapply, this, '', '1')
+    } else {
+      this.seachInfo()
+    }
+  },
+  changeItem(e) {
+    let StateStr = (this.data.pact[e.detail].text).slice(0, 3);
+    let info = this.data.info;
+    info.state = StateStr;
+    this.setData({
+      info
+    })
+    util.qgroupdeliver(qgroupapply, this, '', '1')
   },
   meetplaceblur(e) {
     let info = util.editInfo(e, this, e.detail.value);

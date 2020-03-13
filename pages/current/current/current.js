@@ -9,21 +9,32 @@ import {
 let userinfo = wx.getStorageSync("myInfo");
 var app = getApp();
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
     paths: {
-      subproject: 'subcontract',
-      subcontact: 'contract',
-      prjassignbook: 'task',
-      charge: 'cost',
-      getmaterial: 'bill',
-      losematerial: 'returnmaterial',
-      subprjcodeapply: 'pointsnumber',
-      paymentapproval: 'payment',
-      leaveapplyform: 'vacate',
+      subproject: '/pages/subcontract',
+      subcontact: '/pages/contract',
+      prjassignbook: '/pages/task',
+      charge: '/pages/cost',
+      getmaterial: '/pages/bill',
+      losematerial: '/pages/returnmaterial',
+      subprjcodeapply: '/pages/pointsnumber',
+      paymentapproval: '/OAmoudle/pages/payment',
+      leaveapplyform: '/OAmoudle/pages/vacate',
+
+
+      workovertime: '/OAmoudle/pages/overtime',
+      applybuyform: '/OAmoudle/pages/apply',
+
+      usesealform: '/OAmoudle/pages/chapter',
+      applyform: '/OAmoudle/pages/applyFor',
+      invoice: '/OAmoudle/pages/invoice',
+      
+      debitnote: '/OAmoudle/pages/iou',
+      OfficeCharge: '/OAmoudle/pages/officeCost',
+      maincontact: '/pages/generalcontract',
     }
   },
   return () {
@@ -40,7 +51,7 @@ Page({
     wx.showLoading({
       title: '加载中',
     });
-   var userinfo = wx.getStorageSync("myInfo");
+    var userinfo = wx.getStorageSync("myInfo");
     // console.log(options)
     if (options.title) {
       this.setData({
@@ -56,7 +67,7 @@ Page({
         this.setData({
           userinfo,
         })
-        if (options.id&&resData.length) {
+        if (options.id && resData.length) {
           this.setData({
             userid: userinfo.UserName,
             dep: resData[0].ID,

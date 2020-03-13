@@ -57,12 +57,12 @@ Page({
    */
   onLoad: function (options) {
     userinfo = wx.getStorageSync("myInfo");
-    if (options.id) {
+    if (options.id || options.rid) {
       wx.setStorageSync('menus', options)
     }
     this.setData({
-      'info.state':'所有',
-      'info.UserName':userinfo.UserName
+      'info.state': '所有',
+      'info.UserName': userinfo.UserName
     })
     getdep({
       UserName: userinfo.UserName
@@ -97,9 +97,31 @@ Page({
         })
       }
     })
-    wx.showLoading({
-      title: '加载中',
-    });
+    let menus = wx.getStorageSync('menus');
+    console.log(menus)
+    if (menus.caption == '未处理') {
+      let info = this.data.info;
+      info.state = menus.caption;
+      info.UserName = userinfo.UserName;
+      this.setData({
+        info,
+        val: 0,
+        ISconduct: 1,
+        pact: [{
+            text: '未处理的用章',
+            value: 0
+          },
+          {
+            text: '已处理的用章',
+            value: 1
+          },
+          {
+            text: '已超时的用章',
+            value: 2
+          }
+        ],
+      })
+    }
     // 调用查询
     this.seachInfo();
     if (app.globalData.CountItem) {
@@ -119,6 +141,18 @@ Page({
         }
       }
     }
+  },
+  changeItem(e) {
+    let StateStr = (this.data.pact[e.detail].text).slice(0, 3);
+    let info = this.data.info;
+    info.state = StateStr;
+    this.setData({
+      info
+    })
+    wx.showLoading({
+      title: "加载中..."
+    })
+    this.seachInfo();
   },
   // 组合查询
   showgroup() {
@@ -154,8 +188,8 @@ Page({
           this.setData({
             InfoList: item.reverse(),
             info: {},
-            'info.state':'所有',
-            'info.UserName':userinfo.UserName,
+            'info.state': '所有',
+            'info.UserName': userinfo.UserName,
             'info.departmentID': this.data.userdep[0].ID,
             departmenttext: this.data.userdep[0].techofficename,
             loading: false,
@@ -278,11 +312,13 @@ Page({
           duration: 3000
         })
         this.setData({
-          "info.StartTime":'',
-          "info.EndTime":'',
+          "info.StartTime": '',
+          "info.EndTime": '',
           currentDate: new Date().getTime(),
           maxDate: new Date().getTime(),
-        })}}
+        })
+      }
+    }
   },
   // 结束时间
   showPopup_endtime() {

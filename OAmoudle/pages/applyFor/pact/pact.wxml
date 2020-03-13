@@ -7,9 +7,12 @@
             <navigator open-type="redirect" url="/OAmoudle/pages/applyFor/new/new" hover-class="none" class="fr newCreate">
                 新建
             </navigator>
-            <view class="apply">
-              <text>{{top}}</text>
+             <view class="apply" wx:if="{{ISconduct}}">
+                <van-dropdown-menu active-color="red">
+                    <van-dropdown-item value="{{val}}" options="{{pact}}" bindchange="changeItem" />
+                </van-dropdown-menu>
             </view>
+            <view class="apply" wx:else>{{top}}</view>
         </view>
         <view class="seach">
             <icon class="iconfont icon-fuxuananniu fl s-sort" bindtap="change"></icon>

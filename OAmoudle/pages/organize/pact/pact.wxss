@@ -46,6 +46,7 @@
 .zlist text {
     font-size: 28rpx;
 }
+
 .list .Ninfo,
 .zlist .Ninfo {
     font-size: 36rpx;
@@ -62,5 +63,9 @@
     background-color: teal;
     border-radius: 10rpx;
     color: white;
+}
 
+.Sbut .itext {
+    padding: 15rpx 20rpx;
+    margin-top: 2rpx;
 }

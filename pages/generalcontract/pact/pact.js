@@ -42,20 +42,20 @@ Page({
   },
   // 模糊查询
   seachInfo() {
-   // list = [];
-   wx.showLoading({
-    title: '加载中',
-  });
+    // list = [];
+    wx.showLoading({
+      title: '加载中',
+    });
 
-  var info = this.data.info
-  info.keyword = this.data.seach
-  var user = wx.getStorageSync("myInfo");
-  info.UserName = user.UserName
-  info.state = '所有'
-  this.setData({
-    info
-  })
-  util.qgroupdeliver(groupId, this, '', '1')
+    var info = this.data.info
+    info.keyword = this.data.seach
+    var user = wx.getStorageSync("myInfo");
+    info.UserName = user.UserName
+    info.state = '所有'
+    this.setData({
+      info
+    })
+    util.qgroupdeliver(groupId, this, '', '1')
   },
   /**
    * 生命周期函数--监听页面加载
@@ -65,6 +65,9 @@ Page({
     if (options.source) {
       wx.setStorageSync('carte', options)
     }
+    if (options.id || options.rid) {
+      wx.setStorageSync('menus', options)
+    }
     // 调用查询
     wx.showLoading({
       title: '加载中',
@@ -73,13 +76,43 @@ Page({
     this.setData({
       seach: ""
     })
-    this.seachInfo()
+    let menus = wx.getStorageSync('menus');
+    if (menus.caption == '未处理') {
+      let info = this.data.info;
+      info.state = menus.caption;
+      info.UserName = userinfo.UserName;
+      this.setData({
+        info,
+        val: 0,
+        ISconduct: 1,
+        pact: [{
+            text: '未处理的总包合同',
+            value: 0
+          },
+          {
+            text: '已处理的总包合同',
+            value: 1
+          },
+          {
+            text: '已超时的总包合同',
+            value: 2
+          }
+        ],
+      })
+      util.qgroupdeliver(groupId, this, '', '1')
+    } else if (menus.caption == '我申请') {
+      this.setData({
+        'info.state': ''
+      })
+    } else {
+      this.seachInfo()
+    }
     if (app.globalData.CountItem) {
       this.setData({
         sections: app.globalData.getdept,
         firms: app.globalData.Companytitle,
         states: app.globalData.states,
-        section1:app.globalData.getstaff
+        section1: app.globalData.getstaff
       })
     } else {
       app.DataCallback = employ => {
@@ -88,11 +121,20 @@ Page({
             sections: app.globalData.department,
             firms: app.globalData.Companytitle,
             states: app.globalData.states,
-            section1:app.globalData.getstaff
+            section1: app.globalData.getstaff
           })
         }
       }
     }
+  },
+  changeItem(e) {
+    let StateStr = (this.data.pact[e.detail].text).slice(0, 3);
+    let info = this.data.info;
+    info.state = StateStr;
+    this.setData({
+      info
+    })
+    util.qgroupdeliver(groupId, this, '', '1')
   },
   // 组合查询
   showgroup() {

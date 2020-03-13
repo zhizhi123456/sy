@@ -92,7 +92,7 @@ Page({
           s.pageaddres = path.replace(/[\r\n]/g, "");
         }
         s.name = s.name.replace(/[\r\n]/g, "");
-        if (s.name == '当前任务') {
+        if (s.name == '我的任务') {
           s.TNUm = true
         }
         if (s.name == '我的申请') {

@@ -91,16 +91,51 @@ Page({
     if (options.source) {
       wx.setStorageSync('carte', options)
     }
+    if (options.id || options.rid) {
+      wx.setStorageSync('menus', options)
+    }
     wx.showLoading({
       title: '加载中',
     });
     this.setData({
       seach:""
     })
-    this.seachInfo()
-   
-    //console.log(this.data.section3)
-
+    let menus = wx.getStorageSync('menus');
+    if (menus.caption == '未处理') {
+      let info = this.data.info;
+      info.state = menus.caption;
+      info.UserName = userinfo.UserName;
+      this.setData({
+        info,
+        val: 0,
+        ISconduct: 1,
+        pact: [{
+            text: '未处理的办公费用',
+            value: 0
+          },
+          {
+            text: '已处理的办公费用',
+            value: 1
+          },
+          {
+            text: '已超时的办公费用',
+            value: 2
+          }
+        ],
+      })
+      util.qgroupdeliver(qgroupofficeCost, this, '', '1')
+    } else {
+      this.seachInfo()
+    }
+  },
+  changeItem(e) {
+    let StateStr = (this.data.pact[e.detail].text).slice(0, 3);
+    let info = this.data.info;
+    info.state = StateStr;
+    this.setData({
+      info
+    })
+    util.qgroupdeliver(qgroupofficeCost, this, '', '1')
   },
   meetplaceblur(e) {
     let info = util.editInfo(e, this, e.detail.value);
