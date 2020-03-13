@@ -1345,8 +1345,6 @@ export const updateapprovalsmall = (params) => http.post("/api/payapprovalDetail
 export const delapprovalsmall = (params) => http.post("/api/payapprovalDetail/Delete", params);
 // 综合查询
 export const qgroupapprovalsmall = (params) => http.post("/api/payapprovalDetail/Querygroup", params);
-
-export const cancelConstructionTask = (params) => http.post("/api/prjassignbookConstruction/Delete", params);
 //用户管理
 export const getuser = (params) => http.post("/api/User/Query", params);
 //重置密码
