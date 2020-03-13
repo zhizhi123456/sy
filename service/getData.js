@@ -1318,7 +1318,7 @@ export const addConstructionTask = (params) => http.post("/api/prjassignbookCons
 // 修改
 export const amendConstructionTask = (params) => http.post("/api/prjassignbookConstruction/EditInfo", params);
 // 删除
-export const cancelConstructionTask = (params) => http.post("/api/prjassignbookConstruction/Insert", params);
+export const cancelConstructionTask = (params) => http.post("/api/prjassignbookConstruction/Delete", params);
 // 支付审批
 // 查询
 export const queryapproval = (params) => http.post("/api/payapproval/Query", params);
