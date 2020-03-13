@@ -7,6 +7,7 @@ import {
 } from "../../../../service/getData";
 var util = require("../../../../utils/util");
 var app = getApp();
+let user = wx.getStorageSync("myInfo");
 Page({
   /**
    * 页面的初始数据
@@ -24,6 +25,29 @@ Page({
     }, {
       name: "从相册选择"
     }],
+  },
+  formatNum(e) { //正则验证金额输入框格式
+    e.detail = e.detail.replace(/^(\-)*(\d+)\.(\d{6}).*$/, '$1$2.$3')
+    e.detail = e.detail.replace(/[\u4e00-\u9fa5]+/g, ""); //清除汉字
+    e.detail = e.detail.replace(/[^\d.]/g, ""); //清楚非数字和小数点
+    e.detail = e.detail.replace(/^\./g, ""); //验证第一个字符是数字 
+    e.detail = e.detail.replace(".", "$#$").replace(/\./g, "").replace("$#$", "."); //只保留第一个小数点, 清除多余的 
+    e.detail = e.detail.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3');
+  },
+  checknum(e) {
+    let info = this.data.info;
+    info.usenumber = e.detail.replace(/[^\d]/g,'');
+    this.setData({
+      info
+    })
+  },
+  checknum1(e) {
+    let info = this.data.info;
+    this.formatNum(e);
+    info.useamount = e.detail;
+    this.setData({
+      info
+    })
   },
   // 部门
   showPopup_o() {
@@ -175,6 +199,7 @@ Page({
           icon: 'success',
           duration: 3000
         })
+        util.ModifyRecord(this.data.information, "usesealform")
         util.OAreturn('chapter', this);
       }
     })
@@ -192,13 +217,26 @@ Page({
       referChapter({
         ID: options.id
       }).then(res => {
-        // console.log(res)
         let item = res.Item;
+        var data1 = res.Item
+        var b = JSON.stringify(data1)
+        var c = JSON.parse(b)
+        this.setData({
+          information: c
+        })
         util.handleData(item, this, app.globalData.department);
         this.setData({
           info: item
         })
+        let info = this.data.info;
+        if (!info.department || !info.Companytitle) {
+          util.userdep(user, this);
+        }
       })
+    }
+    let info = this.data.info;
+    if (!info.department || !info.Companytitle) {
+      util.userdep(user, this);
     }
   },
 
@@ -213,7 +251,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    user = wx.getStorageSync("myInfo");
   },
 
   /**

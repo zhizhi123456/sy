@@ -1,0 +1,59 @@
+<!-- textages/textact/textact.wxml -->
+<view class="wraper">
+    <view class="header">
+        <view class="title">
+            <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
+            <navigator open-type="redirect" url="/OAmoudle/pages/member/new/new" hover-class="none" class="fr newCreate">
+                新建
+            </navigator>
+            <view class="apply">{{top}}</view>
+        </view>
+        <view class="seach">
+            <icon class="iconfont icon-fuxuananniu fl s-sort" bindtap="showgroup"></icon>
+            <icon class="iconfont icon-sousuo fr" bindtap="seachInfo"></icon>
+            <view class="data_list">
+                <input value="{{info.name}}" bindblur="setSeach" placeholder="请输入姓名" />
+            </view>
+        </view>
+    </view>
+    <view class="main">
+        <view class="list" wx:for="{{InfoList}}" wx:key="index">
+            <navigator open-type="redirect" url="/OAmoudle/pages/member/detail/detail?id={{item.ID}}" hover-class="none">
+                <view>
+                    <text class="caption">{{item.name}}</text>
+                </view>
+                <view>
+                    <text class="info">姓名</text>
+                    <text>{{item.name}}</text>
+                </view>
+                <view>
+                    <text class="info">职位</text>
+                    <text>{{item.position}}</text>
+                </view>
+                <view>
+                    <text class="info">状态</text>
+                    <text>{{item.state}}</text>
+                </view>
+                <view>
+                    <text class="info">性别</text>
+                    <text>{{item.sex?'女':'男'}}</text>
+                </view>
+                <view>
+                    <text class="info">部门</text>
+                    <text>{{item.department}}</text>
+                </view>
+                <view>
+                    <text class="info">入职日期</text>
+                    <text>{{item.enterdate}}</text>
+                </view>
+                <view>
+                    <text class="info">手机号码</text>
+                    <text>{{item.mobilephone}}</text>
+                </view>
+            </navigator>
+        </view>
+        <view wx:if="{{loading&&InfoList.length}}" class="end">加载中...</view>
+        <view wx:if="{{!loading&&InfoList.length}}" class="end">已经到底了</view>
+        <view class="no_more" wx:if="{{!InfoList.length}}">暂无内容</view>
+    </view>
+</view>

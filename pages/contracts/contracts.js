@@ -39,6 +39,14 @@ Page({
       Timestamp: app.globalData.time,
       pid: 1,
     }).then(res => {
+//       {ID: 2088, name: "工程管理", menuId: null, icon: "icon-gongchengguanli-
+// ↵", PID: 1, pageaddres: null}
+// 1: {ID: 2089, name: "项目管理", menuId: null, icon: "icon-guanli
+// ↵", PID: 1, pageaddres: null}
+// 2: {ID: 2090, name: "公司oa项目", menuId: null, icon: "icon-OAshenpi
+// ↵", PID: 1, pageaddres: null}
+// 3: {ID: 2091, name: "我的/登录", menuId: null, icon: "icon-wode
+// ↵", PID: 1, pageaddres: null}
       // //console.log(res)
       var s = res.List
       var w = s[1]
@@ -324,6 +332,9 @@ Page({
   onLoad: function (options) {
     ////console.log(options)
     userinfo = wx.getStorageSync("myInfo");
+    this.setData({
+      userinfo: userinfo
+    })
     this.log() //判断是否登录
     if (options.grading !== undefined && options.grading !== "undefined") {
       this.setData({

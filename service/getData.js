@@ -104,7 +104,7 @@ export const userID = (params) => http.post("/api/MethodOfDataService/GetUserId"
 export const getdep = (params) => http.post("/api/MethodOfDataService/GetUserDepartment", params);
 //员工ID->姓名
 export const getName = (params) => http.post("/api/MethodOfDataService/GetUserNameAndEmpName", params);
-//员工ID->负责人
+//部门ID->负责人
 export const getLeader = (params) => http.post("/api/MethodOfDataService/GetDepartmentPrincipal", params);
 //请假类别
 export const Leavetypelist = (params) => http.post("/api/MethodOfDataService/Leavetypelist", params);
@@ -139,9 +139,9 @@ export const getdept = (params) => http.post("/api/MethodOfDataService/GetSubord
 export const flow = (params) => http.post("/api/SubmitWorkFlowService/SubmitWorkFlow", params)
 // 工作流记录
 export const record = (params) => http.post("/api/SubmitWorkFlowService/GetWorkflowRecord", params)
-// 获取工作流是否有效时间
-export const valid = (params) => http.post("/api/SubmitWorkFlowService/GetWorkflowIsvalidtime", params);
 // 工作流是否已处理
+export const valid = (params) => http.post("/api/SubmitWorkFlowService/GetWorkflowIsvalidtime", params);
+// 获取工作流是否有效时间
 export const past = (params) => http.post("/api/SubmitWorkFlowService/ConvertUseridToName", params);
 // 工作流可回退
 export const returned = (params) => http.post("/api/SubmitWorkFlowService/returned", params);
@@ -1055,7 +1055,7 @@ export const cancelOvertime = (params) => http.post("/api/workovertime/Delete", 
 
 // 借条
 // 查询
-export const queryiou= (params) => http.post("/api/debitnote/Query", params);
+export const queryiou = (params) => http.post("/api/debitnote/Query", params);
 // 添加
 export const addiou = (params) => http.post("/api/debitnote/Insert", params);
 // 根据id查询
@@ -1069,7 +1069,7 @@ export const qgroupiou = (params) => http.post("/api/debitnote/Querygroup", para
 
 // 公告
 // 查询
-export const querynotice= (params) => http.post("/api/notice/Query", params);
+export const querynotice = (params) => http.post("/api/notice/Query", params);
 // 添加
 export const addnotice = (params) => http.post("/api/notice/Insert", params);
 // 根据id查询
@@ -1131,7 +1131,7 @@ export const qgroupProjectPaysmall = (params) => http.post("/api/transferAccount
 
 // 小区维保台账
 // 查询
-export const queryplot= (params) => http.post("/api/MaintenanceStandBook/Query", params);
+export const queryplot = (params) => http.post("/api/MaintenanceStandBook/Query", params);
 // 添加
 export const addplot = (params) => http.post("/api/MaintenanceStandBook/Insert", params);
 // 根据id查询
@@ -1312,7 +1312,7 @@ export const getConstructionTask = (params) => http.post("/api/prjassignbookCons
 // 根据id查询
 export const referConstructionTask = (params) => http.post("/api/prjassignbookConstruction/Edit", params);
 // 组合查询
-export const groupConstructionTask = (params) => http.post("/api/prjassignbookConstruction/GroupQue", params);
+export const groupConstructionTask = (params) => http.post("/api/prjassignbookConstruction/GroupQuery", params);
 // 添加
 export const addConstructionTask = (params) => http.post("/api/prjassignbookConstruction/Insert", params);
 // 修改
@@ -1346,3 +1346,38 @@ export const delapprovalsmall = (params) => http.post("/api/payapprovalDetail/De
 // 综合查询
 export const qgroupapprovalsmall = (params) => http.post("/api/payapprovalDetail/Querygroup", params);
 
+export const cancelConstructionTask = (params) => http.post("/api/prjassignbookConstruction/Delete", params);
+//用户管理
+export const getuser = (params) => http.post("/api/User/Query", params);
+//重置密码
+export const Resetpassword = (params) => http.post("/api/User/Resetpassword", params);
+//锁定员工账号
+export const Islocked = (params) => http.post("/api/User/Islocked", params);
+// 组织机构
+// 查询
+export const getStruct = (params) => http.post("/api/OrganizStruct/Query", params);
+// 根据id查询
+export const referStruct = (params) => http.post("/api/OrganizStruct/Edit", params);
+// 添加
+export const addStruct = (params) => http.post("/api/OrganizStruct/Insert", params);
+// 修改
+export const amendStruct = (params) => http.post("/api/OrganizStruct/EditInfo", params);
+// 删除
+export const cancelStruct = (params) => http.post("/api/OrganizStruct/Delete", params);
+// 查询所有等级
+export const getStructLevel = (params) => http.post("/api/OrganizStruct/QueryStructLevel", params);
+// 根据某组织机构获取下级机构
+export const getStructCode = (params) => http.post("/api/OrganizStruct/QueryOrganizStructCode", params);
+// 员工管理
+// 查询
+export const getMembernew = (params) => http.post("/api/membernew/Query", params);
+// 根据id查询
+export const referMembernew = (params) => http.post("/api/membernew/Detail", params);
+// 组合查询
+export const groupMembernew = (params) => http.post("/api/membernew/Querygroup", params);
+// 添加
+export const addMembernew = (params) => http.post("/api/membernew/Insert", params);
+// 修改
+export const amendMembernew = (params) => http.post("/api/membernew/Update", params);
+// 删除
+export const cancelMembernew = (params) => http.post("/api/membernew/Delete", params);

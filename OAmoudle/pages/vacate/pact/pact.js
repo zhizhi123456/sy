@@ -68,14 +68,11 @@ Page({
       info
     })
     this.seachInfo()
-
-
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (option) {
-    console.log(option)
     userinfo = wx.getStorageSync("myInfo");
     if (option.id || option.caption) {
       wx.setStorageSync('menus', option)

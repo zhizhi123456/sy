@@ -1,0 +1,66 @@
+/* OAmoudle/pages/organize/pact/pact.wxss */
+.s-check {
+    /* min-width: 160rpx;
+    font-size: 36rpx;
+    padding: 0 20rpx;
+    text-align: right; */
+    min-width: 160rpx;
+    font-size: 36rpx;
+    padding: 0 0 0 40rpx;
+}
+
+.s-new {
+    margin: 18rpx 30rpx 0;
+    font-size: 32rpx;
+    width: 140rpx;
+    height: 50rpx;
+    border: 1rpx solid white;
+    border-radius: 10rpx;
+    text-align: center;
+    line-height: 50rpx;
+    padding: 6rpx 0;
+}
+
+.z_main {
+    margin-top: 300rpx;
+    padding-top: 20rpx;
+}
+
+.data_list .van-dropdown-menu {
+    height: 68%;
+    border-radius: 10rpx;
+    font-size: 19rpx;
+    margin-top: 20rpx;
+    width: 358rpx;
+}
+
+.zlist .van-collapse-item {
+    margin-bottom: 20rpx;
+}
+
+.zlist .zitem {
+    display: flex;
+    justify-content: space-between;
+}
+
+.zlist text {
+    font-size: 28rpx;
+}
+.list .Ninfo,
+.zlist .Ninfo {
+    font-size: 36rpx;
+    color: teal;
+    font-weight: bold;
+}
+
+.zlist .van-cell {
+    border-radius: 20rpx;
+}
+
+.Sbut text {
+    padding: 5rpx 20rpx;
+    background-color: teal;
+    border-radius: 10rpx;
+    color: white;
+
+}

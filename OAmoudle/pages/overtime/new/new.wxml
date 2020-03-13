@@ -35,22 +35,24 @@
                 <text>部门</text>
                 <text class="required">*</text>
             </view>
-            <van-cell title="{{departmenttext}}" is-link bind:click="showPopup_o" />
+             <van-field data-name="department" value="{{departmenttext}}" disabled />
+            <!-- <van-cell title="{{departmenttext}}" is-link bind:click="showPopup_o" />
             <van-popup show="{{show_o}}" round position="bottom" bind:close="onClose_o">
                 <van-picker data-name="department" show-toolbar columns="{{ sections }}" bind:cancel="onClose_o" bind:confirm="onConfirm_o" />
-            </van-popup>
+            </van-popup> -->
         </view>
         <view class="check_item">
             <view class="kind require">
                 <text>公司抬头</text>
                 <text class="required">*</text>
             </view>
-            <van-cell title="{{info.Companytitle?info.Companytitle:'请选择'}}" bind:click="showPopup">
+             <van-field data-name="Companytitle" value="{{info.Companytitle}}" disabled />
+            <!-- <van-cell title="{{info.Companytitle?info.Companytitle:'请选择'}}" bind:click="showPopup">
                 <icon class="iconfont icon-jiantou" />
             </van-cell>
             <van-popup show="{{ show }}" round position="bottom" bind:close="onClose">
                 <van-picker data-name="Companytitle" show-toolbar columns="{{ firms }}" bind:cancel="onClose" bind:confirm="onConfirm" />
-            </van-popup>
+            </van-popup> -->
         </view>
         <view class="check_item">
         <view class="kind require">
@@ -62,36 +64,6 @@
             </van-cell>
             <van-popup show="{{ show_1 }}" round position="bottom" bind:close="onClose_1">
                 <van-picker data-name="overworktype" show-toolbar columns="{{ GetOverworktype }}" bind:cancel="onClose_1" bind:confirm="onConfirm_1" />
-            </van-popup>
-        </view>
-        <view class="check_item">
-            <view class="kind require">
-                <text>计划加班时间</text>
-                <text class="required">*</text>
-            </view>
-            <van-cell title="{{info.planovertime?info.planovertime:'请选择'}}" is-link bind:click="showPopup_time" />
-            <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
-                <van-datetime-picker data-name="planovertime" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
-            </van-popup>
-        </view>
-        <view class="check_item">
-            <view class="kind require">
-                <text>实际加班时间</text>
-                <text class="required">*</text>
-            </view>
-            <van-cell title="{{info.actovertime?info.actovertime:'请选择'}}" is-link bind:click="showPopup_facttime" />
-            <van-popup show="{{ show_facttime }}" round position="bottom" bind:close="onClose_facttime">
-                <van-datetime-picker data-name="actovertime" value="{{ currentDate }}" bind:cancel="onClose_facttime" bind:confirm="onConfirm_facttime" />
-            </van-popup>
-        </view>
-        <view class="check_item">
-            <view class="kind require">
-                <text>加班结束时间</text>
-                <text class="required">*</text>
-            </view>
-            <van-cell title="{{info.overworkendtime?info.overworkendtime:'请选择'}}" is-link bind:click="showPopup_endtime" />
-            <van-popup show="{{ show_endtime }}" round position="bottom" bind:close="onClose_endtime">
-                <van-datetime-picker data-name="overworkendtime" value="{{ currentDate }}" bind:cancel="onClose_endtime" bind:confirm="onConfirm_endtime" />
             </van-popup>
         </view>
         <view class="check_item">
@@ -108,11 +80,41 @@
         </view>
         <view class="check_item">
             <view class="kind require">
-                <text>加班总工时</text>
+                <text>计划加班时间</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.planovertime?info.planovertime:'请选择'}}" is-link bind:click="showPopup_time" />
+            <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
+                <van-datetime-picker data-name="planovertime" value="{{ currentDate }}" min-date="{{ currentDate }}" max-date="{{maxdata}}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>实际加班时间</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.actovertime?info.actovertime:'请选择'}}" is-link bind:click="showPopup_facttime" />
+            <van-popup show="{{ show_facttime }}" round position="bottom" bind:close="onClose_facttime">
+                <van-datetime-picker data-name="actovertime" value="{{ currentDate }}" min-date="{{ mindata }}" max-date="{{maxdata}}" bind:cancel="onClose_facttime" bind:confirm="onConfirm_facttime" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>加班结束时间</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.overworkendtime?info.overworkendtime:'请选择'}}" is-link bind:click="showPopup_endtime" />
+            <van-popup show="{{ show_endtime }}" round position="bottom" bind:close="onClose_endtime">
+                <van-datetime-picker data-name="overworkendtime" value="{{ mindata }}" min-date="{{ mindata }}" max-date="{{maxdata}}" bind:cancel="onClose_endtime" bind:confirm="onConfirm_endtime" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>加班总工时(小时)</text>
                 <text class="required">*</text>
             </view>
             <van-cell-group>
-                <van-field data-name="overtimehours" value="{{info.overtimehours}}" placeholder="请输入" bind:blur="overtimehoursblur" />
+                <van-field data-name="overtimehours" value="{{info.overtimehours}}" placeholder="请输入" bind:blur="overtimehoursblur" disabled/>
             </van-cell-group>
         </view>
         <view class="check_item">

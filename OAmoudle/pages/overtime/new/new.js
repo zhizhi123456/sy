@@ -19,13 +19,15 @@ Page({
     show: false,
     firms: [],
     totals: [],
-    currentDate: new Date().getTime(),
     departmenttext: "请选择",
     check_photo: [{
       name: "拍照"
     }, {
       name: "从相册选择"
     }],
+    currentDate: new Date().getTime(),
+    mindata: (new Date().getTime())- 60 * 60 * 1000 * 24 * 7,
+    maxdata: (new Date().getTime()) + 60 * 60 * 1000 * 24 * 30,
   },
   // 加班事由
   workoverreasonblur(e) {
@@ -124,6 +126,29 @@ Page({
       info,
       show_facttime: false
     })
+    this.setData({
+      mindata: e.detail
+    })
+    if (this.data.info.actovertime && this.data.info.overworkendtime) {
+      var duration = (new Date(this.data.info.overworkendtime).getTime()) - (new Date(this.data.info.actovertime).getTime())
+      if (duration < 0) {
+        wx.showToast({
+          title: '加班开始时间应小于加班结束时间',
+          icon: 'none',
+          duration: 3000
+        })
+        this.setData({
+          "info.actovertime":'',
+          "info.overworkendtime":'',
+          currentDate: new Date().getTime(),
+    mindata: (new Date().getTime())- 60 * 60 * 1000 * 24 * 7,
+    maxdata: (new Date().getTime()) + 60 * 60 * 1000 * 24 * 30,
+        })
+        this.number()
+      } else {
+        this.number()
+      }
+    }
   },
   // 加班结束时间
   showPopup_endtime() {
@@ -142,6 +167,24 @@ Page({
       info,
       show_endtime: false
     })
+    if (this.data.info.actovertime && this.data.info.overworkendtime) {
+      this.number()
+    }
+  },
+  number() {
+    var duration = (new Date(this.data.info.overworkendtime).getTime()) - (new Date(this.data.info.actovertime).getTime())
+    var hours = Math.round((duration / (60 * 60 * 1000)))
+    // var day
+    // if (hours < 24) {
+    //   day = 0
+      this.setData({
+        "info.overtimehours": hours,
+      })
+    // } else {
+    //   this.setData({
+    //     "info.overtimehours": parseInt(hours / 24)+'天'+(hours % 24)+'小时',
+    //   })
+    // }
   },
    // 加班时期
    showPopup_2() {
@@ -242,6 +285,7 @@ Page({
           icon: 'success',
           duration: 3000
         })
+        util.ModifyRecord(this.data.information, "workovertime")
         util.OAreturn('overtime', this);
       }
     })
@@ -250,6 +294,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    user = wx.getStorageSync("myInfo");
     this.setData({
       firms: app.globalData.Companytitle,
       sections: app.globalData.department,
@@ -262,19 +307,31 @@ Page({
       }).then(res => {
         // console.log(res)
         let item = res.Item;
+        var data1 = res.Item
+        var b = JSON.stringify(data1)
+        var c = JSON.parse(b)
+        this.setData({
+          information: c
+        })
         util.handleData(item, this, app.globalData.department);
         this.setData({
           info: item
-        })
+        }) 
+        let info = this.data.info;
+        if (!info.department || !info.Companytitle) {
+          util.userdep(user, this);
+        }
       })
     }
-    user = wx.getStorageSync("myInfo");
     let info = this.data.info;
     if (!info.applyman) {
       info.applyman = user.UserName;
       this.setData({
         info
       })
+    }
+    if (!info.department || !info.Companytitle) {
+      util.userdep(user, this);
     }
   },
 

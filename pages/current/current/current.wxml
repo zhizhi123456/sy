@@ -16,7 +16,7 @@
                         <van-tag wx:if="{{Nhint}}" round type="danger" class="fr">
                             {{item.Number}}
                         </van-tag>
-                        <van-tag wx:else class="fl kktag">共{{item.Number}}条</van-tag>  
+                        <van-tag wx:else class="fl kktag">共{{item.Number}}条</van-tag>
                         <view class="van-cell-text fl">{{item.Name}}</view>
                         <van-tag wx:if="{{NEWnum[index].Number}}" round type="danger" class="fr">
                             {{NEWnum[index].Number}}

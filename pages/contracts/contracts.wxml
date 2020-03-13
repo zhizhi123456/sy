@@ -2,8 +2,10 @@
 <!-- pages/contract/contract.wxml -->
 <view wx:if="{{lists.length}}">
   <view class="header">
-    <text>{{title}}</text>
-    <van-icon name="orders-o" info="9" class="icon1" bind:click="task" />
+    <icon wx:if="{{entered&&num==1002}}" class="iconfont icon-dianshi fl"></icon>
+    <text wx:if="{{entered&&num==1002}}" class="fr newCreate iconfont icon-wode">{{userinfo.UserName}}</text>
+    <view class="apply kapply">{{title}}</view>
+    <!-- <van-icon name="orders-o" info="9" class="icon1" bind:click="task" /> -->
   </view>
   <view class="list">
     <view class="box" wx:for="{{lists}}" wx:key="index">

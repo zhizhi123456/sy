@@ -255,7 +255,14 @@
         "pages/approval/detail/detail",
         "pages/approval/new/new",
         "pages/approval/newlink/newlink",
-        "pages/approval/detaillink/detaillink"
+        "pages/approval/detaillink/detaillink",
+        "pages/userControl/pact/pact",
+        "pages/organize/pact/pact",
+        "pages/organize/detail/detail",
+        "pages/organize/new/new",
+        "pages/member/pact/pact",
+        "pages/member/detail/detail",
+        "pages/member/new/new"
       ]
     }
   ],

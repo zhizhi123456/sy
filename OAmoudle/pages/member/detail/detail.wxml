@@ -1,0 +1,143 @@
+<!-- pages/detail/detail.wxml -->
+<view wx:if="{{info}}">
+    <view class="header d_header">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="delete">删除</text>
+        <view class="apply">资料详情</view>
+    </view>
+    <view class="card">
+        <van-card title="{{info.name}}" />
+    </view>
+    <view class="main_nav">
+        <view class="content">
+            <view class="c_item">
+                <view class="kind">姓名</view>
+                <view class="check">{{info.name}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">职位</view>
+                <view class="check">{{info.position}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">性别</view>
+                <view class="check">{{info.sex?'女':'男'}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">部门</view>
+                <view class="check">{{info.department}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">状态</view>
+                <view class="check">{{info.state}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">学历</view>
+                <view class="check">{{info.learnrecord}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">户籍类型</view>
+                <view class="check">{{info.householdregister}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">出生日期</view>
+                <view class="check">{{info.birthday}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">民族</view>
+                <view class="check">{{info.nation}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">毕业院校</view>
+                <view class="check">{{info.graduateschool}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">毕业日期</view>
+                <view class="check">{{info.graduatedate}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">所学专业</view>
+                <view class="check">{{info.major}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">职称证(详细记录)</view>
+                <view class="check">{{info.Titlecertificate}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">婚姻状况</view>
+                <view class="check">{{info.marriage}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">职称</view>
+                <view class="check">{{info.memberrank}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">入职时期</view>
+                <view class="check">{{info.enterdate}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">离职时间</view>
+                <view class="check">{{info.onjobdate}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">身份证号码</view>
+                <view class="check">{{info.IDcardNo}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">年龄</view>
+                <view class="check">{{info.age}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">用工形式</view>
+                <view class="check">{{info.employmentform}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">手机号码</view>
+                <view class="check">{{info.mobilephone}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">身份证地址</view>
+                <view class="check">{{info.IDcardNoAddress}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">紧急联系人</view>
+                <view class="check">{{info.urgentcontactman}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">紧急联系电话</view>
+                <view class="check">{{info.urgentcontactphone}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">紧急联系人关系</view>
+                <view class="check">{{info.urgentcontmanrela}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">email</view>
+                <view class="check">{{info.email}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">持有资质证书</view>
+                <view class="check">{{info.qualicertifi}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">入司前工作经历</view>
+                <view class="check">{{info.workexperience}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">劳动手册相关</view>
+                <view class="check">{{info.labourmanual}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">公积金账号</view>
+                <view class="check">{{info.accumulatfundAccount}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="footer">
+        <view>
+            <navigator open-type="redirect" url="/OAmoudle/pages/member/new/new?id={{info.ID}}" hover-class="none">
+                <icon class="iconfont icon-bianji"></icon>
+                <text>编辑</text>
+            </navigator>
+        </view>
+    </view>
+</view>

@@ -3,6 +3,8 @@ import {
   getPayment,
   groupPayment,
   getdep,
+  getLeader,
+  employee
 } from '../../../../service/getData';
 var app = getApp();
 var util = require("../../../../utils/util");
@@ -118,9 +120,35 @@ Page({
     getdep({
       UserName: userinfo.UserName
     }).then(res => {
+      console.log(JSON.parse(res))
       this.setData({
         userdep: JSON.parse(res),
+        'info.department': JSON.parse(res)[0].ID,
+        departmenttext: JSON.parse(res)[0].techofficename
       })
+    })
+    getLeader({
+      UserName: userinfo.UserName
+    }).then(res => {
+      this.setData({
+        Leader: JSON.parse(res)
+      })
+      if (JSON.parse(res).length) {
+        employee({
+          ID: JSON.parse(res)[0].ID
+        }).then(res => {
+          console.log(res)
+          let person = res.replace(/name/g, 'text');
+          console.log(JSON.parse(person))
+          this.setData({
+            persons: JSON.parse(person)
+          })
+        })
+      } else {
+        this.setData({
+          'info.createman': userinfo.UserName,
+        })
+      }
     })
     if (options.id || options.rid) {
       wx.setStorageSync('menus', options)
@@ -258,15 +286,15 @@ Page({
             loading: false,
             'info.createman': menus.userid,
             'info.department': menus.dep,
-            departmenttext: ''
           })
           if (!this.data.hadNew) {
             let info = this.data.info;
             info.createman = menus.userid;
             if (this.data.ISconduct) {
-              delete info.department
+              delete info.department;
+              delete info.createman;
               info.processstate = '未处理';
-              info.createman = userinfo.UserName;
+              // info.createman = userinfo.UserName;
               this.setData({
                 departmenttext: ''
               })
@@ -274,6 +302,12 @@ Page({
             this.setData({
               info,
             })
+          } else {
+            if (!this.data.Leader.length) {
+              this.setData({
+                'info.createman': userinfo.UserName,
+              })
+            }
           }
           wx.hideLoading();
         }
