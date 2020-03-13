@@ -70,7 +70,6 @@
                                 <van-datetime-picker data-name="endtime" value="{{ currentDate1 }}" bind:cancel="onClose_endtime" bind:confirm="onConfirm_endtime" />
                             </van-popup>
                         </view>
-                        <!-- <view class="seach_item">
                          <view class="seach_item">
                             <van-field value="{{info.state}}" bind:focus="showPopup1" class="time1" title-class="time1" label="状态" placeholder="请选择" />
                             <van-popup show="{{show1}}" round position="bottom" bind:close="onClose1">
