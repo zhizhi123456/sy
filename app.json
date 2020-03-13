@@ -255,9 +255,9 @@
         "pages/organize/pact/pact",
         "pages/organize/detail/detail",
         "pages/organize/new/new",
-        "pages/member/pact/pact",
-        "pages/member/detail/detail",
-        "pages/member/new/new"
+        "pages/gmember/pact/pact",
+        "pages/gmember/detail/detail",
+        "pages/gmember/new/new"
       ]
     }
   ],

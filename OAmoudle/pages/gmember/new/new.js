@@ -349,7 +349,7 @@ Page({
             icon: 'success',
             duration: 3000
           })
-          util.OAreturn('member');
+          util.OAreturn('gmember');
         }
       })
     } else {
@@ -361,11 +361,11 @@ Page({
   },
   // 返回
   return () {
-    util.OAreturn('member');
+    util.OAreturn('gmember');
   },
   // 编辑页面的确定和返回
   editreturn() {
-    util.OAreturn('member', this);
+    util.OAreturn('gmember', this);
   },
   editconfirm() {
     let info = this.data.info;
@@ -380,7 +380,7 @@ Page({
           icon: 'success',
           duration: 3000
         })
-        util.OAreturn('member', this);
+        util.OAreturn('gmember', this);
       }
     })
   },

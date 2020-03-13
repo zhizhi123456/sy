@@ -16,7 +16,7 @@ Page({
   },
   // 返回
   return () {
-    util.OAreturn('member');
+    util.OAreturn('gmember');
   },
   /**
    * 生命周期函数--监听页面加载
@@ -32,7 +32,6 @@ Page({
       }).then(res => {
         // console.log(res)
         if (res.code == 10000) {
-          var history = wx.getStorageSync("history")
           // console.log(history)
           let item = res.Item;
           util.handleData(item, this, app.globalData.department);
@@ -61,7 +60,7 @@ Page({
                 duration: 3000
               })
               setTimeout(function () {
-                util.OAreturn('member');
+                util.OAreturn('gmember');
               }, 1000)
             }
           })

@@ -114,7 +114,7 @@ Page({
       groupOvertime(this.data.info).then(res => {
         if (res.code == 10000) {
           let item = res.List;
-          util.listData(item, app.globalData.department, '', '', this, 'workovertime');
+          util.listData(item, app.globalData.department,);
           this.setData({
             InfoList: item.reverse(),
             info: {},
