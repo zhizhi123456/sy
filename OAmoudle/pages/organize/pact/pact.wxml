@@ -1,0 +1,95 @@
+<!-- OAmoudle/pages/organize/pact/pact.wxml -->
+<view class="wraper">
+    <view class="header">
+        <view class="title">
+            <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
+            <view class="apply">组织机构管理</view>
+        </view>
+        <view class="seach z_seach">
+            <text class="fl s-check">选择层级</text>
+            <text class="fr s-new" bindtap="addInfo">新建</text>
+            <view class="data_list">
+                <van-dropdown-menu active-color="teal">
+                    <van-dropdown-item value="{{val}}" options="{{tier}}" bindchange="changeItem" />
+                </van-dropdown-menu>
+            </view>
+        </view>
+        <view class="seach">
+            <text class="fl s-check">关键字</text>
+            <!-- <icon class="iconfont icon-sousuo fr" bindtap="seachInfo"></icon> -->
+            <text class="fr s-new" bindtap="addInfo" bindtap="seachInfo">搜索</text>
+            <view class="data_list">
+                <input value="{{info.OrganizStructName}}" bindblur="setSeach" placeholder="请输入组织机构名称" />
+            </view>
+        </view>
+    </view>
+    <view class="main z_main">
+        <van-collapse value="{{ activeNames }}" accordion>
+            <block wx:for="{{InfoList}}" wx:key="index">
+                <van-collapse-item name="{{index+1}}" wx:if='{{item.StructLevel<2}}' data-code='{{item.OrganizStructCode}}' is-link="{{false}}" class="zlist">
+                    <view slot="title">
+                        <!-- <view class="fl">{{item.List[0].TableNameChinese}}</view> -->
+                        <view class="zitem">
+                            <text class="Ninfo">{{item.OrganizStructName}}</text>
+                            <text>组织架构编码：{{item.OrganizStructCode}}</text>
+                        </view>
+                        <view class="zitem">
+                            <text>组织层级：第{{item.StructLevel}}级</text>
+                            <text>{{item.ParentCode?'上级组织：'+item.StructLevel:''}}</text>
+                        </view>
+                        <view class="zitem Sbut">
+                            <text bindtap='newItem'>新建下层</text>
+                            <text bindtap='lookItem' data-code='{{item.OrganizStructCode}}' data-i="{{index+1}}">查看下层</text>
+                            <text bindtap='editItem'>编辑</text>
+                            <text bindtap='delItem'>删除</text>
+                        </view>
+                    </view>
+                    <block wx:for="{{depLIst}}" wx:key="index">
+                        <van-cell title="{{item.OrganizStructName}}" is-link  link-type="redirectTo" url="/OAmoudle/pages/organize/detail/detail?id={{item.ID}}" />
+                    </block>
+                </van-collapse-item>
+            </block>
+        </van-collapse>
+        <!-- <block wx:for="{{InfoList}}" wx:key="index">
+            <view class="list" wx:if='{{item.StructLevel<2}}' data-code='{{item.OrganizStructCode}}'>
+                <navigator open-type="redirect" hover-class="none" url="/OAmoudle/pages/">
+                    <view>
+                        <text class="Ninfo">{{item.OrganizStructName}}</text>
+                        <text>组织架构编码：{{item.OrganizStructCode}}</text>
+                    </view>
+                    <view>
+                        <text>组织层级：第{{item.StructLevel}}级</text>
+                        <text>{{item.ParentCode?'上级组织：'+item.StructLevel:''}}</text>
+                    </view> -->
+        <!-- <view class="Sbut">
+                        <text bindtap='newItem'>新建下层</text>
+                        <text bindtap='lookItem' data-code='{{item.OrganizStructCode}}'>查看下层</text>
+                        <text bindtap='editItem'>编辑</text>
+                        <text bindtap='delItem'>删除</text>
+                    </view> -->
+        <!-- </navigator>
+            </view>
+        </block> -->
+        <block wx:if="{{info.StructLevel>1||info.OrganizStructName}}">
+            <view class="list" wx:for="{{InfoList}}" wx:key="index">
+                <view>
+                    <text class="Ninfo">{{item.OrganizStructName}}</text>
+                    <text>组织架构编码：{{item.OrganizStructCode}}</text>
+                </view>
+                <view>
+                    <text>组织层级：第{{item.StructLevel}}级</text>
+                    <text>{{item.ParentCode?'上级组织：'+item.StructLevel:''}}</text>
+                </view>
+                <view class="Sbut">
+                    <!-- <text bindtap='newItem'>新建</text>
+                    <text bindtap='lookItem'>查看</text>
+                    <text bindtap='editItem'>编辑</text>
+                    <text bindtap='delItem'>删除</text> -->
+                </view>
+            </view>
+        </block>
+        <view wx:if="{{loading&&InfoList.length}}" class="end">加载中...</view>
+        <view wx:if="{{!loading&&InfoList.length}}" class="end">已经到底了</view>
+        <view class="no_more" wx:if="{{!InfoList.length}}">暂无内容</view>
+    </view>
+</view>

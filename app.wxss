@@ -34,6 +34,10 @@
     margin: 0 120rpx;
 }
 
+.header .kapply {
+    margin: 0 160rpx;
+}
+
 .title {
     border-bottom: 1rpx solid #ddd;
 }
@@ -49,7 +53,7 @@
     height: 100rpx;
 }
 
-.apply .van-dropdown-menu__title {
+jian .apply .van-dropdown-menu__title {
     color: white;
     font-size: 36rpx;
 }
@@ -62,6 +66,11 @@
 .header .icon-jiantou2 {
     font-size: 28rpx;
     padding: 0 30rpx;
+}
+
+.header .icon-dianshi {
+    font-size: 44rpx;
+    padding: 0 40rpx;
 }
 
 .header .icon-jiantou2 {
@@ -345,6 +354,9 @@
 
 .van-cell__title {
     min-width: 500rpx;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 /* 新增材料明细 */

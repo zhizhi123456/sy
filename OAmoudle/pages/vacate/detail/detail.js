@@ -73,7 +73,11 @@ Page({
             })
             amendVacate(this.data.info).then(res => {
               if (res.code == 10000) {
-                console.log('已查看')
+                wx.showToast({
+                  title: '已查看',
+                  icon: 'none',
+                  duration: 3000
+                })
               }
             })
           }

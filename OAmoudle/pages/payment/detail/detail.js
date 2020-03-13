@@ -36,6 +36,8 @@ Page({
       wx.redirectTo({
         url: '/OAmoudle/pages/payment/pact/pact'
       })
+    } else if (this.data.history) {
+      util.OAreturn('payment', this);
     } else {
       util.OAreturn('payment');
     }
@@ -48,6 +50,13 @@ Page({
     this.setData({
       userinfo: userinfo
     })
+    if (!options.history) {
+      wx.setStorageSync('history', '')
+    }
+    this.setData({
+      history: options.history
+    })
+    util.readRecordlist('paymentapproval', options.id, this, '付款签报')
     wx.showLoading({
       title: '加载中',
     });
@@ -60,7 +69,12 @@ Page({
       }).then(res => {
         // console.log(res)
         if (res.code == 10000) {
+          var history = wx.getStorageSync("history")
+          // console.log(history)
           let item = res.Item;
+          if (history) {
+            item = history
+          }
           util.handleData(item, this, app.globalData.department);
           this.setData({
             info: item
@@ -199,4 +213,14 @@ Page({
       info
     })
   },
+  change12(e) {
+    console.log(e)
+    if (e.currentTarget.dataset.i) {
+      // console.log(JSON.parse(e.currentTarget.dataset.i))
+      wx.setStorageSync('history', JSON.parse(e.currentTarget.dataset.i))
+      wx.redirectTo({
+        url: '/OAmoudle/pages/payment/detail/detail?history=5&id=' + JSON.parse(e.currentTarget.dataset.i).ID
+      })
+    }
+  }
 })

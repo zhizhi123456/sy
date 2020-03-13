@@ -250,7 +250,14 @@
         "pages/security/detaillink/detaillink",
         "pages/quality/pact/pact",
         "pages/quality/detail/detail",
-        "pages/quality/new/new"
+        "pages/quality/new/new",
+        "pages/userControl/pact/pact",
+        "pages/organize/pact/pact",
+        "pages/organize/detail/detail",
+        "pages/organize/new/new",
+        "pages/member/pact/pact",
+        "pages/member/detail/detail",
+        "pages/member/new/new"
       ]
     }
   ],

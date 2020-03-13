@@ -2,8 +2,10 @@
 <!-- pages/contract/contract.wxml -->
 <view wx:if="{{lists.length}}">
   <view class="header">
-    <text>{{title}}</text>
-    <van-icon name="orders-o" info="9" class="icon1" bind:click="task" />
+    <icon wx:if="{{entered&&num==1002}}" class="iconfont icon-dianshi fl"></icon>
+    <text wx:if="{{entered&&num==1002}}" class="fr newCreate iconfont icon-wode">{{userinfo.UserName}}</text>
+    <view class="apply kapply">{{title}}</view>
+    <!-- <van-icon name="orders-o" info="9" class="icon1" bind:click="task" /> -->
   </view>
   <view class="list">
     <view class="box" wx:for="{{lists}}" wx:key="index">
@@ -25,8 +27,8 @@
       <navigator open-type="redirect" url="{{(!item.control)?'':(item.pageaddres +'?menuId='+ item.menuId+'&id='+item.ID+'&title='+item.name)+'&num='+num}}" open-type="redirect" hover-class="navigator-hover_style"></navigator>
     </view>
   </view>
-  <!-- <view wx:if="{{num==1001}}"><navigator open-type="redirect" url="/OAmoudle/pages/payment/pact/pact">测试1</navigator></view>
-  <view wx:if="{{num==1001}}"><navigator open-type="redirect" url="/pages/ledger/pact/pact">测试</navigator></view> -->
+  <view wx:if="{{num==1001}}"><navigator open-type="redirect" url="/OAmoudle/pages/member/pact/pact">测试1</navigator></view>
+  <!-- <view wx:if="{{num==1001}}"><navigator open-type="redirect" url="/pages/ledger/pact/pact">测试</navigator></view> -->
   <view wx:if="{{entered&&num==1002}}" class="haDquit">
     <view bindtap="out">切换账号</view>
     <view bindtap="out">退出</view>

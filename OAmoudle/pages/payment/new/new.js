@@ -341,6 +341,7 @@ Page({
           icon: 'success',
           duration: 3000
         })
+        util.ModifyRecord(this.data.information, "paymentapproval")
         util.OAreturn('payment', this);
       }
     })
@@ -349,6 +350,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    user = wx.getStorageSync("myInfo");
     this.setData({
       firms: app.globalData.Companytitle,
       sections: app.globalData.department,
@@ -368,18 +370,22 @@ Page({
       }).then(res => {
         // console.log(res)
         let item = res.Item;
+        var data1 = res.Item
+        var b = JSON.stringify(data1)
+        var c = JSON.parse(b)
+        this.setData({
+          information: c
+        })
         util.handleData(item, this, app.globalData.department);
         this.setData({
           info: item
         })
-        user = wx.getStorageSync("myInfo");
         let info = this.data.info;
         if (!info.department || !info.Companytitle) {
           util.userdep(user, this);
         }
       })
     }
-     user = wx.getStorageSync("myInfo");
         let info = this.data.info;
         if (!info.department || !info.Companytitle) {
           util.userdep(user, this);

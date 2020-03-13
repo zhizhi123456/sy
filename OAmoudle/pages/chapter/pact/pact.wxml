@@ -15,7 +15,7 @@
                 <input value="{{seach}}" bindblur="setSeach" />
                 <view class="number" wx:if="{{!seach}}">
                     <icon class="iconfont icon-sousuo"></icon>
-                    <text wx:if="{{InfoList.length}}">共{{item.length}}条</text>
+                    <text wx:if="{{InfoList.length}}">共{{InfoList.length}}条</text>
                     <text wx:else>搜索</text>
                 </view>
                 <van-popup show="{{ show }}" bind:close="onClose" position="right" custom-style="height: 100vh;color:#333">
@@ -25,6 +25,14 @@
                         </van-cell-group>
                         <van-popup show="{{ show_1 }}" round position="bottom" bind:close="onClose_1">
                             <van-picker data-name="Type" show-toolbar columns="{{ Usesealtype }}" bind:cancel="onClose_1" bind:confirm="onConfirm_1" />
+                        </van-popup>
+                    </view>
+                    <view class="seach_item">
+                        <van-cell-group>
+                            <van-field data-name="chargemanName" value="{{info.chargemanName}}" placeholder="{{persons.length?'请选择':'请输入'}}" label="分包项目创建人" bindtap="{{persons.length?'showPopup_9':''}}" disabled/>
+                        </van-cell-group>
+                         <van-popup show="{{ show_9 }}" round position="bottom" bind:close="onClose_9">
+                            <van-picker data-name="chargemanName" show-toolbar columns="{{persons}}" bind:cancel="onClose_9" bind:confirm="onConfirm_9" />
                         </van-popup>
                     </view>
                     <view class="seach_item">
@@ -42,15 +50,10 @@
                     </view>
                     <view class="seach_item">
                         <van-cell-group>
-                            <van-field data-name="chargemanName" value="{{info.chargemanName}}" placeholder="请输入" bind:blur="chargemanNameblur" label="分包项目创建人"/>
-                        </van-cell-group>
-                    </view>
-                    <view class="seach_item">
-                        <van-cell-group>
                             <van-field value="{{info.StartTime}}" placeholder="请选择" label="开始时间" bindtap="showPopup_time" disabled />
                         </van-cell-group>
                         <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
-                            <van-datetime-picker data-name="StartTime" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
+                            <van-datetime-picker data-name="StartTime" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" max-date="{{ maxDate }}" />
                         </van-popup>
                     </view>
                     <view class="seach_item">
@@ -58,7 +61,7 @@
                             <van-field value="{{info.EndTime}}" placeholder="请选择" label="结束时间" bindtap="showPopup_endtime" disabled />
                         </van-cell-group>
                         <van-popup show="{{ show_endtime }}" round position="bottom" bind:close="onClose_endtime">
-                            <van-datetime-picker data-name="EndTime" value="{{ currentDate }}" bind:cancel="onClose_endtime" bind:confirm="onConfirm_endtime" />
+                            <van-datetime-picker data-name="EndTime" value="{{ minDate }}" bind:cancel="onClose_endtime" bind:confirm="onConfirm_endtime" min-date="{{ minDate }}" max-date="{{ currentDate }}" />
                         </van-popup>
                     </view>
                     <view class="seach_item">
@@ -83,9 +86,13 @@
                 <view>
                     <text class="caption">{{item.useInfo}}</text>
                 </view>
-                <view>
+                <!-- <view>
                     <text class="info">当前任务状态</text>
                     <text class="caution">{{Workstates[index]}}</text>
+                </view> -->
+                 <view>
+                    <text class="info">当前步骤名称</text>
+                    <text class="{{item.IfWfComplete?'overcaution':'caution'}}">{{item.IfWfComplete?'流程结束':item.CurStepName?item.CurStepName:'未提交申请'}}</text>
                 </view>
                 <view>
                     <text class="info">部门</text>
@@ -111,10 +118,10 @@
                     <text class="info">修改时间</text>
                     <text>{{item.updatetime}}</text>
                 </view>
-                <view>
+                <!-- <view>
                     <text class="info">当前步骤名称</text>
                     <text>{{item.CurStepName}}</text>
-                </view>
+                </view> -->
             </navigator>
         </view>
         <view wx:if="{{loading&&InfoList.length}}" class="end">加载中...</view>

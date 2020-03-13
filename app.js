@@ -379,6 +379,20 @@ App({
         value: 'subprjcodeapply',
         text: '分包编号'
       }
-    ]
+    ],
+    state:[{
+      text:'在职',
+      value:'state1'
+    },{
+      text:'离职',
+      value:'state2'
+    }],
+    householdregister:[{
+      text:'农村户口',
+      value:'householdregister1'
+    },{
+      text:'非农村户口',
+      value:'householdregister1'
+    }]
   }
 })

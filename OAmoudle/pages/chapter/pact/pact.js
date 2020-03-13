@@ -2,10 +2,12 @@
 import {
   getChapter,
   groupChapter,
+  getdep,
+  getLeader,
+  employee
 } from '../../../../service/getData';
 var app = getApp();
 var util = require("../../../../utils/util");
-let item, list;
 let userinfo = wx.getStorageSync("myInfo");
 Page({
   /**
@@ -16,11 +18,12 @@ Page({
     loading: false,
     top: '用章',
     currentDate: new Date().getTime(),
+    maxDate: new Date().getTime(),
     InfoList: [],
     item: [],
     pages: 1,
     hadNew: 1,
-    info:{}
+    info: {}
   },
   // 返回
   return () {
@@ -28,30 +31,21 @@ Page({
     util.returnMenu2(menus.id, menus.title);
   },
   setSeach(e) {
-    // console.log(e)
     this.setData({
       seach: e.detail.value
     })
   },
   // 模糊查询
   seachInfo() {
-    list = [];
     wx.showLoading({
       title: '加载中',
     });
-    this.setData({
-      pages: 1
-    })
-    getChapter({
-      useInfo: this.data.seach
-    }).then(res => {
-      // console.log(res)
+    groupChapter(this.data.info).then(res => {
       if (res.code == 10000) {
-        item = res.List;
-        list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list,this,'usesealform');
+        let item = res.List;
+        util.listData(item, app.globalData.department, '', '', this, 'usesealform');
         this.setData({
-          InfoList: list,
-          item,
+          InfoList: item.reverse(),
           seach: ''
         })
         wx.hideLoading();
@@ -66,25 +60,48 @@ Page({
     if (options.id) {
       wx.setStorageSync('menus', options)
     }
-    list = [];
+    this.setData({
+      'info.state':'所有',
+      'info.UserName':userinfo.UserName
+    })
+    getdep({
+      UserName: userinfo.UserName
+    }).then(res => {
+      console.log(JSON.parse(res))
+      this.setData({
+        userdep: JSON.parse(res),
+        'info.departmentID': JSON.parse(res)[0].ID,
+        departmenttext: JSON.parse(res)[0].techofficename
+      })
+    })
+    getLeader({
+      UserName: userinfo.UserName
+    }).then(res => {
+      this.setData({
+        Leader: JSON.parse(res)
+      })
+      if (JSON.parse(res).length) {
+        employee({
+          ID: JSON.parse(res)[0].ID
+        }).then(res => {
+          console.log(res)
+          let person = res.replace(/name/g, 'text');
+          console.log(JSON.parse(person))
+          this.setData({
+            persons: JSON.parse(person)
+          })
+        })
+      } else {
+        this.setData({
+          'info.chargemanName': userinfo.UserName,
+        })
+      }
+    })
     wx.showLoading({
       title: '加载中',
     });
     // 调用查询
-    getChapter().then(res => {
-      // console.log(res.List)
-      if (res.code == 10000) {
-        item = res.List;
-        list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list,this,'usesealform');
-        this.setData({
-          InfoList: list,
-          item
-        })
-        wx.hideLoading();
-      }
-    }).catch(err => {
-      console.log(err)
-    })
+    this.seachInfo();
     if (app.globalData.CountItem) {
       this.setData({
         sections: app.globalData.department,
@@ -115,13 +132,9 @@ Page({
     })
   },
   onConfirm_seach() {
-    list = [];
     wx.showLoading({
       title: '加载中',
     });
-    this.setData({
-      pages: 1
-    })
     if (this.data.info.Type || this.data.info.departmentID || this.data.info.keyword || this.data.info.chargemanName || this.data.info.StartTime || this.data.info.state) {
       let info = this.data.info;
       if (info.Type) {
@@ -136,15 +149,22 @@ Page({
       }
       groupChapter(this.data.info).then(res => {
         if (res.code == 10000) {
-          item = res.List;
-          list = util.listData(item.reverse(), app.globalData.department, this.data.pages, list,this,'usesealform');
+          let item = res.List;
+          util.listData(item, app.globalData.department, '', '', this, 'usesealform');
           this.setData({
-            InfoList: list,
-            item,
+            InfoList: item.reverse(),
             info: {},
+            'info.state':'所有',
+            'info.UserName':userinfo.UserName,
+            'info.departmentID': this.data.userdep[0].ID,
+            departmenttext: this.data.userdep[0].techofficename,
             loading: false,
-            departmenttext:''
           })
+          if (!this.data.Leader.length) {
+            this.setData({
+              'info.chargemanName': userinfo.UserName,
+            })
+          }
           wx.hideLoading();
         }
       })
@@ -179,7 +199,7 @@ Page({
   },
   // 部门
   showPopup_0() {
-    if (this.data.hadNew) {
+    if (!this.data.departmenttext) {
       this.setData({
         show_0: true
       })
@@ -206,9 +226,26 @@ Page({
     })
   },
   // 分包项目创建人
-  chargemanNameblur(e) {
-    let info = util.editInfo(e, this, e.detail.value);
+  // chargemanNameblur(e) {
+  //   let info = util.editInfo(e, this, e.detail.value);
+  //   this.setData({
+  //     info
+  //   })
+  // },
+  showPopup_9() {
     this.setData({
+      show_9: true
+    })
+  },
+  onClose_9() {
+    this.setData({
+      show_9: false
+    })
+  },
+  onConfirm_9(e) {
+    let info = util.editInfo(e, this, e.detail.value.text);
+    this.setData({
+      show_9: false,
       info
     })
   },
@@ -224,17 +261,42 @@ Page({
     })
   },
   onConfirm_time(e) {
+    this.setData({
+      minDate: e.detail
+    })
     let info = util.editInfo(e, this, util.datefomate(e.detail));
     this.setData({
       info,
       show_time: false
     })
+    if (this.data.info.StartTime && this.data.info.EndTime) {
+      var duration = (new Date(this.data.info.EndTime).getTime()) - (new Date(this.data.info.StartTime).getTime())
+      if (duration < 0) {
+        wx.showToast({
+          title: '开始时间应小于结束时间',
+          icon: 'none',
+          duration: 3000
+        })
+        this.setData({
+          "info.StartTime":'',
+          "info.EndTime":'',
+          currentDate: new Date().getTime(),
+          maxDate: new Date().getTime(),
+        })}}
   },
   // 结束时间
   showPopup_endtime() {
-    this.setData({
-      show_endtime: true
-    })
+    if (this.data.info.StartTime) {
+      this.setData({
+        show_endtime: true
+      })
+    } else {
+      wx.showToast({
+        title: '请先选择开始时间',
+        icon: 'none',
+        duration: 3000
+      })
+    }
   },
   onClose_endtime() {
     this.setData({
@@ -314,27 +376,27 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    if (item.length > 5 && list.length < item.length) {
-      this.setData({
-        loading: true
-      })
-      let pages = this.data.pages,
-        n = Math.ceil(item.length / 5);
-      if (n > pages) {
-        setTimeout(() => {
-          pages = pages + 1;
-          list = util.listData(item, app.globalData.department, pages, list);
-          this.setData({
-            pages,
-            InfoList: list,
-          })
-        }, 1000)
-      }
-    } else {
-      this.setData({
-        loading: false
-      })
-    }
+    // if (item.length > 5 && list.length < item.length) {
+    //   this.setData({
+    //     loading: true
+    //   })
+    //   let pages = this.data.pages,
+    //     n = Math.ceil(item.length / 5);
+    //   if (n > pages) {
+    //     setTimeout(() => {
+    //       pages = pages + 1;
+    //       list = util.listData(item, app.globalData.department, pages, list);
+    //       this.setData({
+    //         pages,
+    //         InfoList: list,
+    //       })
+    //     }, 1000)
+    //   }
+    // } else {
+    //   this.setData({
+    //     loading: false
+    //   })
+    // }
   },
 
   /**

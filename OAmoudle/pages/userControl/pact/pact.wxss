@@ -1,0 +1,17 @@
+.list text {
+    margin: 0 20rpx;
+    background-color: teal;
+    color: white;
+    min-width: 100rpx;
+    border-radius: 10rpx;
+    text-align: center;
+    padding: 10rpx;
+}
+
+.list {
+    font-size: 32rpx;
+}
+
+.username {
+    line-height: 1.7em;
+}

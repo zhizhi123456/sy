@@ -121,6 +121,18 @@ const checkContent = (value, key) => {
       value.classID = res.value
     }
   })
+  // 状态
+  app.globalData.state.forEach(res => {
+    if (value.state == res.text) {
+      value.state = res.value
+    }
+  })
+  // 户口类型
+  app.globalData.householdregister.forEach(res => {
+    if (value.householdregister == res.text) {
+      value.householdregister = res.value
+    }
+  })
   // 耗材类型
   app.globalData.SuppliesType.forEach(res => {
     if (value.classID == res.text) {
@@ -400,6 +412,18 @@ const checkChange = (value, key, dep) => {
       value.classID = res.value
     }
   })
+  // 状态
+  app.globalData.state.forEach(res => {
+    if (value.state == res.text) {
+      value.state = res.value
+    }
+  })
+  // 户口类型
+  app.globalData.householdregister.forEach(res => {
+    if (value.householdregister == res.text) {
+      value.householdregister = res.value
+    }
+  })
   // 耗材类型
   app.globalData.SuppliesType.forEach(res => {
     if (value.classID == res.text) {
@@ -649,6 +673,18 @@ const handleData = (data, key, dep) => {
   app.globalData.ExpressageType.forEach(res => {
     if (data.classID == res.value) {
       data.classID = res.text
+    }
+  })
+  // 状态
+  app.globalData.state.forEach(res => {
+    if (data.state == res.value) {
+      data.state = res.text
+    }
+  })
+  // 户口类型
+  app.globalData.householdregister.forEach(res => {
+    if (data.householdregister == res.value) {
+      data.householdregister = res.text
     }
   })
   // 耗材类型
@@ -990,6 +1026,18 @@ const listData = (data, dep, page, list, key, billname) => {
     app.globalData.ExpressageType.forEach(res => {
       if (value.classID == res.value) {
         value.classID = res.text
+      }
+    })
+    // 状态
+    app.globalData.state.forEach(res => {
+      if (value.state == res.value) {
+        value.state = res.text
+      }
+    })
+    // 户口类型
+    app.globalData.householdregister.forEach(res => {
+      if (value.householdregister == res.value) {
+        value.householdregister = res.text
       }
     })
     // 耗材类型
@@ -1666,7 +1714,7 @@ const workList = (key, id, billname, bID) => {
     unreferflow({
       formName: billname,
       userName: userinfo.UserName,
-      ID:bID
+      ID: bID
     }).then(res => {
       console.log(res)
       if (res.code == 10000) {
@@ -1795,7 +1843,7 @@ const Triggerflow = (key, direction, sheet, piece, id, cap, dep, dert, rid, tit,
       if (res.code == 10000) {
         if (direction == "next") {
           wx.showToast({
-            title: '审核通过成功',
+            title: '审核通过',
             icon: 'success',
             duration: 2000
           })
@@ -2954,7 +3002,7 @@ const readRecordlist = ((sheet, datum, that, datumname) => {
         // console.log(item)
         var oldcontext = item.oldcontext
         var a = {
-          text: item.updateman + ' '+datumname + '资料变更',
+          text: item.updateman + ' ' + datumname + '资料变更',
           desc: item.updatetime,
           oldcontext
         }

@@ -1,0 +1,30 @@
+<!-- textages/textact/textact.wxml -->
+<view class="wraper">
+    <view class="header">
+        <view class="title">
+            <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
+            <view class="apply">{{top}}</view>
+        </view>
+        <view class="seach">
+            <icon class="iconfont icon-guanyu fl s-sort"></icon>
+            <icon class="iconfont icon-sousuo fr" bindtap="seachInfo"></icon>
+            <view class="data_list">
+                <input value="{{seach}}" bindblur="setSeach" placeholder="请输入员工姓名" />
+            </view>
+        </view>
+    </view>
+    <view class="main">
+        <view class="list" wx:for="{{InfoList}}" wx:key="index">
+            <view>
+                <view class="username">{{item.UserName}}</view>
+                <view>
+                    <text bindtap="Reset" data-id='{{item.ID}}'>重置密码</text>
+                    <text bindtap='Islocked' data-id='{{item.ID}}' data-content="{{item.IslockedOut?'解除锁定成功！':'锁定账号成功！'}}">{{item.IslockedOut?'解除锁定':'锁定账号'}}</text>
+                </view>
+            </view>
+        </view>
+        <view wx:if="{{loading&&InfoList.length}}" class="end">加载中...</view>
+        <view wx:if="{{!loading&&InfoList.length}}" class="end">已经到底了</view>
+        <view class="no_more" wx:if="{{!InfoList.length}}">暂无内容</view>
+    </view>
+</view>
