@@ -26,7 +26,13 @@ Page({
   // 返回
   return () {
     let menus = wx.getStorageSync('menus');
-    util.returnMenu2(menus.id, menus.title);
+    if (menus.title == '我的申请' || menus.title == '我的任务') {
+      wx.redirectTo({
+        url: "/pages/current/current/current?title=" + menus.title + '&id=' + (menus.id || menus.rid)
+      });
+    } else {
+      util.returnMenu2(menus.id, menus.title);
+    }
   },
   setSeach(e) {
     // console.log(e)
@@ -34,12 +40,19 @@ Page({
       seach: e.detail.value
     })
   },
+  findnew(e) {
+    let index = e.currentTarget.dataset.index - 1;
+    wx.pageScrollTo({
+      selector: '#new' + index,
+      duration: 500
+    })
+  },
   // 模糊查询
   seachInfo() {
     wx.showLoading({
       title: '加载中',
     });
-    if (this.data.ISconduct) {
+    if (this.data.ISconduct|| this.data.applyT) {
       groupOvertime(this.data.info).then(res => {
         if (res.code == 10000) {
           let item = res.List;
@@ -71,6 +84,8 @@ Page({
     let StateStr = (this.data.pact[e.detail].text).slice(0, 3);
     let info = this.data.info;
     info.state = StateStr;
+    info.UserName=userinfo.UserName;
+    info.applyman=userinfo.UserName;
     this.setData({
       info
     })
@@ -103,29 +118,42 @@ Page({
       wx.setStorageSync('menus', options)
     }
     let menus = wx.getStorageSync('menus');
-    console.log(menus)
-    if (menus.caption == '未处理') {
-      let info = this.data.info;
-      info.state = menus.caption;
-      info.UserName = userinfo.UserName;
+    if (menus.userid) {
       this.setData({
-        info,
-        val: 0,
-        ISconduct: 1,
-        pact: [{
-            text: '未处理的加班',
-            value: 0
-          },
-          {
-            text: '已处理的加班',
-            value: 1
-          },
-          {
-            text: '已超时的加班',
-            value: 2
-          }
-        ],
+        top: menus.caption + '的加班',
+        hadNew: 0,
       })
+      if (menus.caption == '我申请') {
+        this.setData({
+          applyT: 1,
+          'info.UserName': userinfo.UserName,
+          'info.applyman': userinfo.UserName,
+          top:'我申请的加班'
+        })
+      }
+      if (menus.caption == '未处理') {
+        let info = this.data.info;
+        info.state = menus.caption;
+        info.UserName = userinfo.UserName;
+        this.setData({
+          info,
+          val: 0,
+          ISconduct: 1,
+          pact: [{
+              text: '未处理的加班',
+              value: 0
+            },
+            {
+              text: '已处理的加班',
+              value: 1
+            },
+            {
+              text: '已超时的加班',
+              value: 2
+            }
+          ],
+        })
+      }
       groupOvertime(this.data.info).then(res => {
         if (res.code == 10000) {
           let item = res.List;
@@ -253,6 +281,11 @@ Page({
             loading: false,
           })
           if (!this.data.Leader.length) {
+            this.setData({
+              'info.applyman': userinfo.UserName,
+            })
+          }
+          if(this.data.applyT){
             this.setData({
               'info.applyman': userinfo.UserName,
             })

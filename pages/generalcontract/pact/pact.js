@@ -32,7 +32,14 @@ Page({
   },
   // 返回
   return () {
-    util.returnMenu(1001);
+    let menus = wx.getStorageSync('menus');
+    if (menus.title == '我的申请' || menus.title == '我的任务') {
+      wx.redirectTo({
+        url: "/pages/current/current/current?title=" + menus.title + '&id=' + (menus.id || menus.rid)
+      });
+    } else {
+      util.returnMenu(1001);
+    }
   },
   setSeach(e) {
     // console.log(e)
@@ -102,8 +109,12 @@ Page({
       util.qgroupdeliver(groupId, this, '', '1')
     } else if (menus.caption == '我申请') {
       this.setData({
-        'info.state': ''
+        'info.state': '',
+        applyT: 1,
+        'info.UserName': userinfo.UserName,
+        top: '我申请的总包合同'
       })
+      util.qgroupdeliver(groupId, this, '', '1')
     } else {
       this.seachInfo()
     }

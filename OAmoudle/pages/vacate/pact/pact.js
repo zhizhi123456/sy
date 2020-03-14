@@ -181,7 +181,6 @@ Page({
   },
   // 组合查询
   showgroup11() {
-   
     var options = this.data.options
     if (options.title == '当前任务') {
       let info = this.data.info;

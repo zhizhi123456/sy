@@ -37,10 +37,10 @@
         </view>
         <!-- <view class="forgetpwd" wx:if="{{ifenter}}">忘记密码？</view> -->
         <button type="button" class="btn" wx:if="{{ifenter}}" bindtap="enter">登录</button>
-        <button type="button" class="btn" bindtap="enroll">注册</button>
-        <view class="returnlogin" wx:if="{{!ifenter}}" bindtap="returnlogin">
+        <!-- <button type="button" class="btn" bindtap="enroll">注册</button> -->
+        <!-- <view class="returnlogin" wx:if="{{!ifenter}}" bindtap="returnlogin">
             返回登录
             <icon class="iconfont icon-ai207" />
-        </view>
+        </view> -->
     </form>
 </view>

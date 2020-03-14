@@ -49,7 +49,7 @@
                     <text class="required">*</text>
                 </view>
                 <van-cell-group>
-                    <van-field data-name="OrganizStructCode" value="{{info.OrganizStructCode}}" placeholder="请输入" bind:blur="OrganizStructCodeblur" bind:input="checknum" maxlength="{{2}}"/>
+                    <van-field data-name="OrganizStructCode" value="{{info.OrganizStructCode}}" placeholder="请输入" bind:blur="OrganizStructCodeblur" bind:input="checknum" maxlength="{{2}}" />
                 </van-cell-group>
             </view>
             <view class="check_item">
@@ -89,7 +89,7 @@
                     <text class="required">*</text>
                 </view>
                 <van-cell-group>
-                    <van-field data-name="OrganizStructCode" value="{{info.OrganizStructCode}}" placeholder="请输入" bind:blur="OrganizStructCodeblur" bind:input="checknum" maxlength="{{2}}"/>
+                    <van-field data-name="OrganizStructCode" value="{{info.OrganizStructCode}}" placeholder="请输入" bind:blur="OrganizStructCodeblur" bind:input="checknum" maxlength="{{2}}" />
                 </van-cell-group>
             </view>
             <view class="check_item">
@@ -107,7 +107,7 @@
                     <text class="required">*</text>
                 </view>
                 <van-cell-group>
-                    <van-field data-name="ParentCode" placeholder="" bind:blur="ParentCodeblur" disabled />
+                    <van-field data-name="ParentCode" placeholder="" bind:blur="ParentCodeblur" disabled value="{{info.ParentCode?info.ParentCode:''}}" />
                 </van-cell-group>
             </view>
             <view class="check_item">

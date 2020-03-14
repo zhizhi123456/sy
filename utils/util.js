@@ -111,6 +111,12 @@ const checkContent = (value, key) => {
       value.contractType = res.value
     }
   })
+  // 性别
+  app.globalData.sexs.forEach(res => {
+    if (value.sex == res.text) {
+      value.sex = res.value
+    }
+  })
   // 快递类别
   app.globalData.ExpressageType.forEach(res => {
     if (value.classID == res.text) {
@@ -417,6 +423,12 @@ const checkChange = (value, key, dep) => {
       value.classID = res.value
     }
   })
+  // 性别
+  app.globalData.sexs.forEach(res => {
+    if (value.sex == res.text) {
+      value.sex = res.value
+    }
+  })
   // 状态
   app.globalData.state.forEach(res => {
     if (value.state == res.text) {
@@ -692,6 +704,12 @@ const handleData = (data, key, dep) => {
   app.globalData.ExpressageType.forEach(res => {
     if (data.classID == res.value) {
       data.classID = res.text
+    }
+  })
+  // 性别
+  app.globalData.sexs.forEach(res => {
+    if (data.sex == res.value) {
+      data.sex = res.text
     }
   })
   // 状态
@@ -1060,6 +1078,12 @@ const listData = (data, dep, page, list, key, billname) => {
     app.globalData.ExpressageType.forEach(res => {
       if (value.classID == res.value) {
         value.classID = res.text
+      }
+    })
+    // 性别
+    app.globalData.sexs.forEach(res => {
+      if (value.sex == res.value) {
+        value.sex = res.text
       }
     })
     // 状态

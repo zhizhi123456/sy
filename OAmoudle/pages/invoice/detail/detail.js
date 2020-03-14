@@ -2,6 +2,7 @@
 import {
   referInvoice,
   cancelInvoice,
+  amendInvoice
 } from '../../../../service/getData.js';
 var app = getApp();
 var util = require("../../../../utils/util");
@@ -63,6 +64,20 @@ Page({
           this.setData({
             info: item
           })
+          let menus = wx.getStorageSync('menus');
+          if (menus.caption == '我申请' && this.data.info.ApplygetNew) {
+            let info = this.data.info;
+            info.ApplygetNew = false;
+            util.checkChange(info, this, app.globalData.department);
+            this.setData({
+              info
+            })
+            amendInvoice(this.data.info).then(res => {
+              if (res.code == 10000) {
+                console.log('已查看')
+              }
+            })
+          }
           wx.hideLoading();
           // 调取工作流记录
           let mid = res.Item.formid;
@@ -158,7 +173,7 @@ Page({
     })
   },
   tconfirm() {
-    util.Triggerflow(this, 'return', 'invoice', 'invoice','', '', '', '', '', '', 'oa', this.data.ApprovalOpinion ? this.data.ApprovalOpinion : '不同意。', JSON.stringify(this.data.idea.API_Picurl), JSON.stringify(this.data.idea.API_Fileurl))
+    util.Triggerflow(this, 'return', 'invoice', 'invoice', '', '', '', '', '', '', 'oa', this.data.ApprovalOpinion ? this.data.ApprovalOpinion : '不同意。', JSON.stringify(this.data.idea.API_Picurl), JSON.stringify(this.data.idea.API_Fileurl))
   },
   sconfirm() {
     util.Triggerflow(this, 'next', 'invoice', 'invoice', '', '', '', '', '', '', 'oa', this.data.ApprovalOpinion ? this.data.ApprovalOpinion : '同意。', JSON.stringify(this.data.idea.API_Picurl), JSON.stringify(this.data.idea.API_Fileurl))

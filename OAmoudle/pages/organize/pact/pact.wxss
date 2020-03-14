@@ -59,13 +59,9 @@
 }
 
 .Sbut text {
+    display: inline-block;
     padding: 5rpx 20rpx;
     background-color: teal;
     border-radius: 10rpx;
     color: white;
-}
-
-.Sbut .itext {
-    padding: 15rpx 20rpx;
-    margin-top: 2rpx;
 }

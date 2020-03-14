@@ -20,12 +20,13 @@ Page({
       department: "",
       usechargeman: "",
       chargetype: '',
-      createman:"",
-      state:"",
-      UserName:"",
-      begintime:"",
-      endtime:""
+      createman: "",
+      state: "",
+      UserName: "",
+      begintime: "",
+      endtime: ""
     },
+    top:'办公费用',
     sections: '',
     pull: false,
     show: false,
@@ -36,7 +37,14 @@ Page({
   },
   // 返回
   return () {
-    util.returnMenu2(2055,"日常办公")
+    let menus = wx.getStorageSync('menus');
+    if (menus.title == '我的申请' || menus.title == '我的任务') {
+      wx.redirectTo({
+        url: "/pages/current/current/current?title=" + menus.title + '&id=' + (menus.id || menus.rid)
+      });
+    } else {
+      util.returnMenu2(menus.id, menus.title);
+    }
   },
   setSeach(e) {
     // //console.log(e)
@@ -82,7 +90,7 @@ Page({
   onLoad: function (options) {
     this.setData({
       sections: app.globalData.Companytitle,
-      section1:app.globalData.states,
+      section1: app.globalData.states,
       section2: app.globalData.getdept,
       section5: app.globalData.getstaff,
       section3: app.globalData.costobj,
@@ -98,7 +106,7 @@ Page({
       title: '加载中',
     });
     this.setData({
-      seach:""
+      seach: ""
     })
     let menus = wx.getStorageSync('menus');
     if (menus.caption == '未处理') {
@@ -122,6 +130,14 @@ Page({
             value: 2
           }
         ],
+      })
+      util.qgroupdeliver(qgroupofficeCost, this, '', '1')
+    } else if (menus.caption == '我申请') {
+      this.setData({
+        'info.state': '',
+        applyT: 1,
+        'info.UserName': userinfo.UserName,
+        top: '我申请的办公费用'
       })
       util.qgroupdeliver(qgroupofficeCost, this, '', '1')
     } else {
@@ -161,8 +177,8 @@ Page({
       // departmenttext: e.detail.value.text
     })
   },
-   // 部门
-   showPopup2() {
+  // 部门
+  showPopup2() {
     this.setData({
       show2: true
     })
@@ -218,25 +234,25 @@ Page({
       show4: false
     })
   },
-    // 创建人
-    showPopup5() {
-      this.setData({
-        show5: true
-      })
-    },
-    onClose5() {
-      this.setData({
-        show5: false
-      })
-    },
-    onConfirm5(e) {
-      // //console.log(e)
-      let info = util.editInfo(e, this, e.detail.value.value);
-      this.setData({
-        info,
-        show5: false
-      })
-    },
+  // 创建人
+  showPopup5() {
+    this.setData({
+      show5: true
+    })
+  },
+  onClose5() {
+    this.setData({
+      show5: false
+    })
+  },
+  onConfirm5(e) {
+    // //console.log(e)
+    let info = util.editInfo(e, this, e.detail.value.value);
+    this.setData({
+      info,
+      show5: false
+    })
+  },
   // 计划开工时间
   showPopup_time() {
     this.setData({

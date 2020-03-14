@@ -42,10 +42,27 @@ Page({
     })
   },
   // 性别
-  sexblur(e) {
-    let info = util.editInfo(e, this, e.detail.value);
+  // sexblur(e) {
+  //   let info = util.editInfo(e, this, e.detail.value);
+  //   this.setData({
+  //     info
+  //   })
+  // },  
+  showPopup_s() {
     this.setData({
-      info
+      show_s: true
+    });
+  },
+  onClose_s() {
+    this.setData({
+      show_s: false
+    });
+  },
+  onConfirm_s(e) {
+    let info = util.editInfo(e, this, e.detail.value.text);
+    this.setData({
+      info,
+      show_s: false
     })
   },
   // 部门
@@ -393,6 +410,7 @@ Page({
       sections: app.globalData.department,
       state: app.globalData.state,
       householdregister: app.globalData.householdregister,
+      sexs: app.globalData.sexs
     })
     if (options.id) {
       referMembernew({
