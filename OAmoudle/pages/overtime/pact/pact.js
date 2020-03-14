@@ -26,7 +26,13 @@ Page({
   // 返回
   return () {
     let menus = wx.getStorageSync('menus');
-    util.returnMenu2(menus.id, menus.title);
+    if (menus.title == '我的申请' || menus.title == '我的任务') {
+      wx.redirectTo({
+        url: "/pages/current/current/current?title=" + menus.title + '&id=' + (menus.id || menus.rid)
+      });
+    } else {
+      util.returnMenu2(menus.id, menus.title);
+    }
   },
   setSeach(e) {
     // console.log(e)
@@ -112,7 +118,7 @@ Page({
     let menus = wx.getStorageSync('menus');
     if (menus.userid) {
       this.setData({
-        top: menus.caption + '的付款签报',
+        top: menus.caption + '的加班',
         hadNew: 0,
       })
       if (menus.caption == '我申请') {

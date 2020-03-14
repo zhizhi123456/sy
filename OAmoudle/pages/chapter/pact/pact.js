@@ -28,7 +28,13 @@ Page({
   // 返回
   return () {
     let menus = wx.getStorageSync('menus');
-    util.returnMenu2(menus.id, menus.title);
+    if (menus.title == '我的申请' || menus.title == '我的任务') {
+      wx.redirectTo({
+        url: "/pages/current/current/current?title=" + menus.title + '&id=' + (menus.id || menus.rid)
+      });
+    } else {
+      util.returnMenu2(menus.id, menus.title);
+    }
   },
   setSeach(e) {
     this.setData({
@@ -98,7 +104,6 @@ Page({
       }
     })
     let menus = wx.getStorageSync('menus');
-    console.log(menus)
     if (menus.caption == '未处理') {
       let info = this.data.info;
       info.state = menus.caption;
@@ -120,6 +125,14 @@ Page({
             value: 2
           }
         ],
+      })
+    }
+    if (menus.caption == '我申请') {
+      this.setData({
+        'info.state': '',
+        applyT: 1,
+        'info.UserName': userinfo.UserName,
+        top: '我申请的用章'
       })
     }
     // 调用查询
@@ -194,6 +207,11 @@ Page({
             departmenttext: this.data.userdep[0].techofficename,
             loading: false,
           })
+          if (!ISconduct) {
+            this.setData({
+              'info.state': '所有',
+            })
+          }
           if (!this.data.Leader.length) {
             this.setData({
               'info.chargemanName': userinfo.UserName,

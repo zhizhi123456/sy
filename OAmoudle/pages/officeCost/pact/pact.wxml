@@ -13,7 +13,7 @@
                 </van-dropdown-menu>
             </view>
             <view class="apply" wx:else>
-                <text>办公费用</text>
+                <text>{{top}}</text>
             </view>
         </view>
         <view class="seach">
@@ -95,6 +95,12 @@
     </view>
     <view class="main">
         <view class="list" wx:for="{{InfoList}}" wx:key="{{index}}">
+            <van-tag class="linkLThint" round type="danger" size="large" wx:if="{{item.ApplygetNew&&applyT&&(index>1)}}" bindtap="findnew" data-index="{{index}}">
+                ↓↓
+            </van-tag>
+            <van-tag class="LThint" round type="danger" size="large" wx:if="{{(item.ApplygetNew&&applyT)}}">
+                new
+            </van-tag>
             <navigator open-type="redirect" url="/OAmoudle/pages/officeCost/detail/detail?id={{item.ID}}" hover-class="none">
                 <!-- <view>
                     <text class="caption">{{item.verifysubprocode}}</text>

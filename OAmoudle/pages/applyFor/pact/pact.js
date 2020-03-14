@@ -37,7 +37,14 @@ Page({
   },
   // 返回
   return () {
-    util.returnMenu2(2055, "日常办公")
+    let menus = wx.getStorageSync('menus');
+    if (menus.title == '我的申请' || menus.title == '我的任务') {
+      wx.redirectTo({
+        url: "/pages/current/current/current?title=" + menus.title + '&id=' + (menus.id || menus.rid)
+      });
+    } else {
+      util.returnMenu2(menus.id, menus.title);
+    }
   },
   setSeach(e) {
     // console.log(e)
@@ -135,7 +142,15 @@ Page({
         ],
       })
       util.qgroupdeliver(qgroupapplyFor, this, '', '1')
-    } else {
+    } else if (menus.caption == '我申请') {
+      this.setData({
+        'info.state': '',
+        applyT: 1,
+        'info.UserName': userinfo.UserName,
+        top: '我申请的申领单'
+      })
+      util.qgroupdeliver(qgroupapplyFor, this, '', '1')
+    }else {
       this.seachInfo()
     }
   },

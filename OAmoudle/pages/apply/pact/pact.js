@@ -37,7 +37,14 @@ Page({
   },
   // 返回
   return () {
-    util.returnMenu2(2055,"日常办公")
+    let menus = wx.getStorageSync('menus');
+    if (menus.title == '我的申请' || menus.title == '我的任务') {
+      wx.redirectTo({
+        url: "/pages/current/current/current?title=" + menus.title + '&id=' + (menus.id || menus.rid)
+      });
+    } else {
+      util.returnMenu2(menus.id, menus.title);
+    }
   },
   setSeach(e) {
     // console.log(e)
@@ -95,8 +102,8 @@ Page({
       section2: app.globalData.getstaff,
       section3: app.globalData.Companytitle,
       section4: app.globalData.getdept,
-      section5:app.globalData.MainProject1,
-      section1:app.globalData.states
+      section5: app.globalData.MainProject1,
+      section1: app.globalData.states
     })
     if (options.id || options.rid) {
       wx.setStorageSync('menus', options)
@@ -109,7 +116,7 @@ Page({
     this.setData({
       seach: ''
     })
-    
+
     let menus = wx.getStorageSync('menus');
     if (menus.caption == '未处理') {
       let info = this.data.info;
@@ -132,6 +139,14 @@ Page({
             value: 2
           }
         ],
+      })
+      util.qgroupdeliver(qgroupapply, this, '', '1')
+    } else if (menus.caption == '我申请') {
+      this.setData({
+        'info.state': '',
+        applyT: 1,
+        'info.UserName': userinfo.UserName,
+        top: '我申请的申购单'
       })
       util.qgroupdeliver(qgroupapply, this, '', '1')
     } else {

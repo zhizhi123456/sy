@@ -2,6 +2,7 @@
 import {
   detailapply,
   delapply,
+  updateapply,
   queryapplysmall
 } from '../../../../service/getData.js';
 var app = getApp();
@@ -90,6 +91,20 @@ Page({
           this.setData({
             info: item
           })
+          let menus = wx.getStorageSync('menus');
+          if (menus.caption == '我申请' && this.data.info.ApplygetNew) {
+            let info = this.data.info;
+            info.ApplygetNew = false;
+            util.checkChange(info, this, app.globalData.department);
+            this.setData({
+              info
+            })
+            updateapply(this.data.info).then(res => {
+              if (res.code == 10000) {
+                console.log('已查看')
+              }
+            })
+          }
           wx.hideLoading();
           // 调取工作流记录
           let mid = res.Item.formid;

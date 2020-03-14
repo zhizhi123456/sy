@@ -2,6 +2,7 @@
 import {
   cancel,
   referId,
+  amend,
   selectCost
 } from '../../../service/getData.js';
 var app = getApp();
@@ -68,6 +69,20 @@ Page({
             info: item
           })
           wx.hideLoading();
+          let menus = wx.getStorageSync('menus');
+          if (menus.caption == '我申请' && this.data.info.ApplygetNew) {
+            let info = this.data.info;
+            info.ApplygetNew = false;
+            util.checkChange(info, this, app.globalData.department);
+            this.setData({
+              info
+            })
+            amend(this.data.info).then(res => {
+              if (res.code == 10000) {
+                console.log('已查看')
+              }
+            })
+          }
           // 调取工作流记录
           // console.log(res.Item.formid)
           //列表
