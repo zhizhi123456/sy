@@ -102,8 +102,10 @@ Page({
       util.qgroupdeliver(groupId, this, '', '1')
     } else if (menus.caption == '我申请') {
       this.setData({
-        'info.state': ''
+        'info.state': '',
+        'info.UserName': userinfo.UserName
       })
+      util.qgroupdeliver(groupId, this, '', '1')
     } else {
       this.seachInfo()
     }

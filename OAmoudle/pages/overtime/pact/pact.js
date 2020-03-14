@@ -34,6 +34,13 @@ Page({
       seach: e.detail.value
     })
   },
+  findnew(e) {
+    let index = e.currentTarget.dataset.index - 1;
+    wx.pageScrollTo({
+      selector: '#new' + index,
+      duration: 500
+    })
+  },
   // 模糊查询
   seachInfo() {
     wx.showLoading({
@@ -103,29 +110,40 @@ Page({
       wx.setStorageSync('menus', options)
     }
     let menus = wx.getStorageSync('menus');
-    console.log(menus)
-    if (menus.caption == '未处理') {
-      let info = this.data.info;
-      info.state = menus.caption;
-      info.UserName = userinfo.UserName;
+    if (menus.userid) {
       this.setData({
-        info,
-        val: 0,
-        ISconduct: 1,
-        pact: [{
-            text: '未处理的加班',
-            value: 0
-          },
-          {
-            text: '已处理的加班',
-            value: 1
-          },
-          {
-            text: '已超时的加班',
-            value: 2
-          }
-        ],
+        top: menus.caption + '的付款签报',
+        hadNew: 0,
       })
+      if (menus.caption == '我申请') {
+        this.setData({
+          applyT: 1,
+          'info.UserName': userinfo.UserName
+        })
+      }
+      if (menus.caption == '未处理') {
+        let info = this.data.info;
+        info.state = menus.caption;
+        info.UserName = userinfo.UserName;
+        this.setData({
+          info,
+          val: 0,
+          ISconduct: 1,
+          pact: [{
+              text: '未处理的加班',
+              value: 0
+            },
+            {
+              text: '已处理的加班',
+              value: 1
+            },
+            {
+              text: '已超时的加班',
+              value: 2
+            }
+          ],
+        })
+      }
       groupOvertime(this.data.info).then(res => {
         if (res.code == 10000) {
           let item = res.List;
