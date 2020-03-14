@@ -53,6 +53,7 @@ Page({
     }
     groupVacate(this.data.info).then(res => {
       if (res.code == 10000) {
+        console.log(res)
         let item = res.List;
         util.listData(item, app.globalData.department);
         this.setData({
@@ -140,7 +141,8 @@ Page({
     if (options.id == '2110') {
       let info = this.data.info;
       info = {}
-      info.UserName = userinfo.UserName
+      info.UserName = userinfo.UserName,
+      info.state = '所有'
       this.setData({
         options,
         info
@@ -209,7 +211,8 @@ Page({
     if (options.id == '2110') {
       let info = this.data.info;
       info = {}
-      info.UserName = userinfo.UserName
+      info.UserName = userinfo.UserName,
+      info.state = '所有'
       this.setData({
         info
       })

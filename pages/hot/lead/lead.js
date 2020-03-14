@@ -173,6 +173,7 @@ Page({
         console.log(res)
         var s = JSON.parse(res)
         if (s[0]) {
+          console.log({  departmentID: s[0].ID})
           leadership({
             departmentID: s[0].ID
           }).then(res => {

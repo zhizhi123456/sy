@@ -7,9 +7,12 @@
             <navigator open-type="redirect" url="/OAmoudle/pages/approval/new/new" hover-class="none" class="fr newCreate">
                 新建
             </navigator>
-            <view class="apply">
-                <text>{{top}}</text>
+            <view class="apply" wx:if="{{ISconduct}}">
+                <van-dropdown-menu active-color="red">
+                    <van-dropdown-item value="{{val}}" options="{{pact}}" bindchange="changeItem" />
+                </van-dropdown-menu>
             </view>
+            <view class="apply" wx:else>{{top}}</view>
         </view>
         <view class="seach">
             <icon class="iconfont icon-fuxuananniu fl s-sort" bindtap="change"></icon>
@@ -90,11 +93,17 @@
     </view>
     <view class="main">
         <view class="list" wx:for="{{InfoList}}" wx:key="{{index}}">
-            <navigator open-type="redirect" url="/OAmoudle/pages/approval/detail/detail?id={{item.ID}}" hover-class="none">
+          <van-tag class="linkLThint" round type="danger" size="large" wx:if="{{(item.ApplygetNew&&item.ApplygetNew!=' ')&&applyT&&(index>1)}}" bindtap="findnew" data-index="{{index}}">
+                ↓↓
+            </van-tag>
+            <van-tag class="LThint" round type="danger" size="large" wx:if="{{(item.ApplygetNew&&item.ApplygetNew!=' ')&&applyT}}">
+                new
+            </van-tag>
+            <navigator open-type="redirect" url="/OAmoudle/pages/approval/detail/detail?id={{item.ID}}&applyT={{applyT}}" hover-class="none">
                 <!-- <view>
                     <text class="caption">{{item.purchasecontactCode}}</text>
                 </view> -->
-                <view>
+                <view id="{{'new'+index}}">
                     <text class="info">支付审批单名称</text>
                     <text>{{item.payapproveformname}}</text>
                 </view>

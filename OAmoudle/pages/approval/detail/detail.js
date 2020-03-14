@@ -2,7 +2,8 @@
 import {
   detailapproval,
   delapproval,
-  queryapprovalsmall
+  queryapprovalsmall,
+  updateapproval
 } from '../../../../service/getData.js';
 var app = getApp();
 var util = require("../../../../utils/util");
@@ -68,6 +69,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     if (options.table) {
       this.setData({
         table: options.table
@@ -106,8 +108,26 @@ Page({
           util.handleData(item, this, app.globalData.department);
           util.outflow(item, this)
           this.setData({
-            info: item
+            info: item,
+            applyT: Number(options.applyT)
           })
+          if (this.data.applyT && this.data.info.ApplygetNew) {
+            let info = this.data.info;
+            info.ApplygetNew = false;
+            util.checkContent(info, this);
+            this.setData({
+              info
+            })
+            updateapproval(this.data.info).then(res => {
+              if (res.code == 10000) {
+                wx.showToast({
+                  title: '已查看',
+                  icon: 'none',
+                  duration: 3000
+                })
+              }
+            })
+          }
           wx.hideLoading();
           // 调取工作流记录
           let mid = res.Item.formid;

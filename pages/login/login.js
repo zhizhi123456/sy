@@ -3,7 +3,9 @@ import {
   login,
   register,
   only,
-  getdep
+  getdep,
+  getstaff,
+  getdept
 } from "../../service/getData";
 var app = getApp();
 var util = require("../../utils/util");
@@ -141,6 +143,7 @@ Page({
   },
   // 登录
   enter() {
+    var that = this
     // console.log(this.data.username, this.data.password)
     if (!this.data.username || !this.data.password) {
       wx.showToast({
@@ -169,16 +172,18 @@ Page({
               if (res) {
                 var s = JSON.parse(res)
                 var info = {
-                  Companytitle:s[0].company,
-                  Companytitletext:s[0].value,
+                  Companytitle: s[0].company,
+                  Companytitletext: s[0].value,
                   department: s[0].ID,
                   departmenttext: s[0].techofficename,
-                  userId:s[0].userId
+                  userId: s[0].userId
                 }
-                wx.setStorageSync("message",info)
+                wx.setStorageSync("message", info)
 
               }
             })
+            util.sumup1(getstaff, app, 'getstaff', "name", "userId", user.UserName);
+            util.sumup1(getdept, app, 'getdept', "techofficename", "id", user.UserName);
           }
           util.returnMenu();
 

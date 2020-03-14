@@ -1664,6 +1664,11 @@ const returnMenu = (id) => {
       })
     }
   }
+  if (carte.source == 'sub') {
+    wx.reLaunch({
+      url: `/pages/secondary/secondary?id=${carte.id}&title=${carte.title}`
+    })
+  }
 }
 // 返回三级菜单
 const returnMenu2 = (id, title) => {
@@ -1677,6 +1682,12 @@ const returnMenu2 = (id, title) => {
         url: `/pages/contracts/contracts?grading=${carte.num}&title=${carte.mtitle}`
       })
     }
+    if (carte.source == 'sub') {
+      wx.reLaunch({
+        url: `/pages/secondary/secondary?id=${carte.id}&title=${carte.title}`
+      })
+    }
+
   }
 }
 
@@ -1987,10 +1998,11 @@ const sumup = (port, key, value, text, val) => {
     back(key, result);
   })
 }
-const sumup1 = (port, key, value, text, val) => {
+const sumup1 = (port, key, value, text, val, UserName) => {
   port({
-    UserName: userinfo.UserName
+    UserName: UserName
   }).then(res => {
+    console.log(res)
     let result = getBase(res, text, val);
     key.globalData[value] = result;
     back(key, result);

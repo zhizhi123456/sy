@@ -23,18 +23,15 @@ Page({
       subprjcodeapply: '/pages/pointsnumber',
       paymentapproval: '/OAmoudle/pages/payment',
       leaveapplyform: '/OAmoudle/pages/vacate',
-
-
       workovertime: '/OAmoudle/pages/overtime',
       applybuyform: '/OAmoudle/pages/apply',
-
       usesealform: '/OAmoudle/pages/chapter',
       applyform: '/OAmoudle/pages/applyFor',
       invoice: '/OAmoudle/pages/invoice',
-      
       debitnote: '/OAmoudle/pages/iou',
       OfficeCharge: '/OAmoudle/pages/officeCost',
       maincontact: '/pages/generalcontract',
+      PayApproval:'/OAmoudle/pages/approval'
     }
   },
   return () {

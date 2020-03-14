@@ -10,7 +10,7 @@
             <view class="apply">{{top}}</view>
         </view>
         <view class="seach">
-            <icon class="iconfont icon-fuxuananniu fl s-sort" bindtap="change"></icon>
+            <icon class="iconfont icon-fuxuananniu fl s-sort" bindtap="change" wx:if="{{!show22}}" ></icon>
             <view class="data_list">
                 <view class="number Nonumber">
                     <text wx:if="{{InfoList.length}}">共{{InfoList.length}}条</text>
@@ -27,10 +27,16 @@
                                 <van-picker data-name="department" show-toolbar columns="{{ sections }}" bind:cancel="onClose_0" bind:confirm="onConfirm_0" />
                             </van-popup>
                         </view>
-                        <view class="seach_item">
+                        <!-- <view class="seach_item">
                             <van-cell-group>
                                 <van-field data-name="name" value="{{info.name}}" placeholder="请输入" bind:blur="nameblur" label="创建人" disabled="{{!hadNew}}" />
                             </van-cell-group>
+                        </view> -->
+                          <view class="seach_item">
+                            <van-field value="{{info.name }}" bind:focus="showPopup6" class="time1" title-class="time1" label="创建人" placeholder="请选择" />
+                            <van-popup show="{{show6}}" round position="bottom" bind:close="onClose6">
+                                <van-picker data-name="name" show-toolbar columns="{{ section7 }}" bind:cancel="onClose6" bind:confirm="onConfirm6" />
+                            </van-popup>
                         </view>
                         <view class="seach_item">
                             <van-field  value="{{info.startdate}}"  bind:focus="showPopup_time" class="time1" label="开始时间" placeholder="请选择"  />

@@ -199,7 +199,7 @@ Page({
     this.setData({
       info,
       show_o: false,
-      // departmenttext: e.detail.value.text
+      departmenttext: e.detail.value.text
     })
   },
   showPopup1() {

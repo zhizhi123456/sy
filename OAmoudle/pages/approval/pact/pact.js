@@ -19,19 +19,27 @@ Page({
     InfoList: [],
     Times: [],
     Supplier: [],
-    info: {
-    },
+    info: {},
     top: "支付审批",
     section2: "",
     section3: '',
     section4: '',
     section5: "",
-    show6: false
+    show6: false,
+    applyT: 0,
+    leavetypetext: ''
 
   },
   // 返回
   return () {
-    util.returnMenu2(2055, "日常办公")
+    let menus = wx.getStorageSync('menus');
+    if (menus.title == '我的申请' || menus.title == '我的任务') {
+      wx.redirectTo({
+        url: "/pages/current/current/current?title=" + this.data.options.title + '&id=' + (this.data.options.id || this.data.options.rid)
+      });
+    } else {
+      util.returnMenu2(menus.id, menus.title);
+    }
   },
   setSeach(e) {
     // console.log(e)
@@ -41,27 +49,54 @@ Page({
   },
   // 模糊查询
   seachInfo() {
-    var info = this.data.info
-    info.payapproveformname = this.data.seach
-    var user = wx.getStorageSync("myInfo");
-    info.UserName = user.UserName
-    info.state = '所有'
+    if (this.data.seach) {
+      var info = this.data.info
+      info.payapproveformname = this.data.seach
+      this.setData({
+        info
+      })
+    }
+
+    qgroupapproval(this.data.info).then(res => {
+      if (res.code == 10000) {
+        console.log(res)
+        let item = res.List;
+        util.listData(item, app.globalData.department);
+        this.setData({
+          InfoList: item.reverse()
+        })
+        wx.hideLoading();
+      }
+    })
+
+  },
+  changeItem(e) {
+    console.log(e)
+    let StateStr = (this.data.pact[e.detail].text).slice(0, 3);
+    let info = this.data.info;
+    info = {}
+    info.UserName = userinfo.UserName
+    info.state = StateStr;
     this.setData({
       info
     })
-    util.qgroupdeliver(qgroupapproval, this, '', '1')
-    
+    this.seachInfo()
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    console.log(options)
-    if (options.source) {
-      wx.setStorageSync('carte', options)
+  onLoad: function (option) {
+    console.log(option)
+    if (option.source) {
+      wx.setStorageSync('carte', option)
     }
-    
+    userinfo = wx.getStorageSync("myInfo");
+    if (option.id || option.caption) {
+      wx.setStorageSync('menus', option)
+    }
+    var options = wx.getStorageSync("menus")
     this.setData({
+      options,
       Supplier: app.globalData.Supplier,
       section2: app.globalData.Principal,
       section3: app.globalData.Companytitle,
@@ -70,8 +105,55 @@ Page({
       section6: app.globalData.YesOrNo,
       section7: app.globalData.getstaff,
       states: app.globalData.states,
-      section8:app.globalData.MainProject1
+      section8: app.globalData.MainProject1
     })
+    if (options.title == '我的任务') {
+      let info = this.data.info;
+      info = {}
+      info.UserName = userinfo.UserName
+      info.state = '未处理'
+      this.setData({
+        info,
+        options,
+        ISconduct: 1,
+        val: 0,
+        pact: [{
+            text: '未处理的支付审批',
+            value: 0
+          },
+          {
+            text: '已处理的支付审批',
+            value: 1
+          },
+          {
+            text: '已超时的支付审批',
+            value: 2
+          }
+        ]
+      })
+    }
+    if (options.title == '我的申请') {
+      let info = this.data.info;
+      info = {}
+      info.createman = userinfo.UserName
+      this.setData({
+        info,
+        options,
+        top: '我申请的支付审批',
+        applyT: 1
+      })
+    }
+    if (options.title == '支付审批') {
+      let info = this.data.info;
+      info = {}
+      info.UserName = userinfo.UserName,
+      info.state = '所有'
+      this.setData({
+        options,
+        info
+      })
+    }
+
     wx.showLoading({
       title: '加载中',
     });
@@ -273,23 +355,60 @@ Page({
     })
   },
   change() {
+    this.showgroup11()
     this.setData({
       pull: true,
       show: true
     })
+   
   },
   onClose() {
     this.setData({
       show: false
     });
+    this.showgroup11()
+  },
+  findnew(e) {
+    console.log(e)
+    let index = e.currentTarget.dataset.index - 1;
+    wx.pageScrollTo({
+      selector: '#new' + index,
+      duration: 500
+    })
+  },
+  showgroup11() {
+    var options = this.data.options
+    console.log(options)
+    if (options.title == '我的任务') {
+      let info = this.data.info;
+      info = {}
+      info.UserName = userinfo.UserName
+      info.state = '未处理'
+      this.setData({
+        info
+      })
+    }
+    if (options.title == '我的申请') {
+      let info = this.data.info;
+      info = {}
+      info.createman = userinfo.UserName
+      this.setData({
+        info
+      })
+    }
+    if (options.title == '支付审批') {
+      let info = this.data.info;
+      info = {}
+      info.UserName = userinfo.UserName
+      info.state = '所有'
+      this.setData({
+        info
+      })
+    }
+
   },
   // 组合查询
   seachqur() {
-    var info = this.data.info
-    info.UserName = userinfo.UserName
-    this.setData({
-      info
-    })
-    util.qgroupdeliver(qgroupapproval, this)
+    util.qgroupdeliver(qgroupapproval, this, '', '', this.showgroup11)
   },
 })

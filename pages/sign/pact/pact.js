@@ -16,7 +16,7 @@ Page({
     top: '我的考勤打卡',
     info: {
       Company: "",
-      starttime: "请选择",
+      starttime: "",
       endtime: "",
       Token: "",
       TokenType: "",
@@ -35,7 +35,8 @@ Page({
     endtime: "",
     hadNew: 1,
     me: 0,
-    constructionteam: 0
+    constructionteam: 0,
+    show22:false
   },
   // 返回
   return () {
@@ -63,11 +64,23 @@ Page({
     if (options.source) {
       wx.setStorageSync('carte', options)
     }
+    console.log(options)
+    if(options.title!="后台管理"){
+      this.setData({
+         show22:true
+      })
+    }
     if (options.constructionteam) {
       this.setData({
         constructionteam: options.constructionteam
       })
     }
+    console.log(app.globalData.getdept)
+    this.setData({
+      sections:app.globalData.getdept,
+      section7:app.globalData.getstaff
+
+    })
     // 获取到  userid  token  tokrntype  开始时间 结束时间  设置给data
     // 获取到  userid  token  tokrntype   设置给info
     // this.setData({
@@ -211,6 +224,25 @@ Page({
       info
     })
   },
+  // 创建人
+  showPopup6() {
+    this.setData({
+      show6: true
+    });
+  },
+  onClose6() {
+    this.setData({
+      show6: false
+    });
+  },
+  onConfirm6(e) {
+    let info = util.editInfo(e, this, e.detail.value.value);
+    this.setData({
+      info,
+      show6: false,
+      // departmenttext: e.detail.value.text
+    })
+  },
   // 计划开工时间
   showPopup_time() {
     this.setData({
@@ -273,9 +305,11 @@ Page({
       this.setData({
         info
       })
+      console.log(this.data.info)
       groupSign(this.data.info).then(res => {
         if (res.code == 10000) {
           item = res.Lists;
+          console.log(item)
           this.setData({
             InfoList: item.reverse(),
             item,

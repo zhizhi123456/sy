@@ -142,38 +142,6 @@ Page({
             }
           }
         }
-        zong.forEach(d => {
-          if (d.name == '施工队管理') {
-            if (!this.data.deng) {
-              d.control = false
-            }
-          }
-        })
-        if (this.data.num == 2091) {
-          // console.log(zong)
-          if (this.data.hotnum) {
-            zong.push({
-              ID: 1099,
-              PID: 1099,
-              control: true,
-              icon: "icon-weiwangguanicon-defuben-",
-              menuId: null,
-              name: "紧急任务",
-              pageaddres: "/pages/hot/mself/mself",
-              hot: true
-            })
-          }
-          zong.push({
-            ID: 1044,
-            PID: 10224,
-            control: true,
-            icon: "icon-jinji",
-            menuId: null,
-            name: "紧急任务(部门)",
-            pageaddres: "/pages/hot/lead/lead",
-            dephot: true
-          })
-        }
         this.setData({
           lists: zong
         })

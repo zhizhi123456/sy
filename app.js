@@ -106,8 +106,9 @@ App({
         this.globalData.Principal = t;
         // console.log(this.globalData.Principal)
       })
-      util.sumup1(getstaff, this, 'getstaff', "name", "userId");
-      util.sumup1(getdept, this, 'getdept', "techofficename", "id");
+      let userinfo = wx.getStorageSync("myInfo");
+      util.sumup1(getstaff, this, 'getstaff', "name", "userId",userinfo.UserName);
+      util.sumup1(getdept, this, 'getdept', "techofficename", "id",userinfo.UserName);
       util.sumup(department, this, 'department', "techofficename", "ID");
       util.sumup(Companytitle, this, 'Companytitle', "Value", "Key");
       util.sumup(staff, this, 'staff', "Name", "ID");
@@ -194,8 +195,8 @@ App({
     }
   },
   globalData: {
-    getdept,
-    getstaff,
+    getdept:'',
+    getstaff:'',
     mapadress: "",
     pic: [],
     time: util.format(new Date()),

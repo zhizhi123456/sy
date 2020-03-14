@@ -471,9 +471,8 @@ Page({
         UserName: user.UserName
       }).then(res => {
         console.log(res)
-        if (res) {
           var s = JSON.parse(res)
-          console.log(s)
+          if (s.length) {
           let info = this.data.info;
           info.department = s[0].techofficename
           info.Companytitle = s[0].value
