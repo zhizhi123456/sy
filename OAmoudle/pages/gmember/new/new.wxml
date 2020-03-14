@@ -44,9 +44,15 @@
                 <text>性别</text>
                 <text class="required">*</text>
             </view>
-            <van-cell-group>
+            <van-cell title="{{info.sex?info.sex:'请选择'}}" bind:click="showPopup_s">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show_s }}" round position="bottom" bind:close="onClose_s">
+                <van-picker data-name="sex" show-toolbar columns="{{ sexs }}" bind:cancel="onClose_s" bind:confirm="onConfirm_s" />
+            </van-popup>
+            <!-- <van-cell-group>
                 <van-field data-name="sex" value="{{info.sex}}" placeholder="请输入" bind:blur="sexblur" />
-            </van-cell-group>
+            </van-cell-group> -->
         </view>
         <view class="check_item">
             <view class="kind require">

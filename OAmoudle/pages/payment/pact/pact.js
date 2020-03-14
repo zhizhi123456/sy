@@ -327,6 +327,7 @@ Page({
     let StateStr = (this.data.pact[e.detail].text).slice(0, 3);
     let info = this.data.info;
     info.processstate = StateStr;
+    info.createman=userinfo.UserName;
     this.setData({
       info
     })

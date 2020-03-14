@@ -52,7 +52,7 @@ Page({
     wx.showLoading({
       title: '加载中',
     });
-    if (this.data.ISconduct) {
+    if (this.data.ISconduct|| this.data.applyT) {
       groupOvertime(this.data.info).then(res => {
         if (res.code == 10000) {
           let item = res.List;
@@ -84,6 +84,8 @@ Page({
     let StateStr = (this.data.pact[e.detail].text).slice(0, 3);
     let info = this.data.info;
     info.state = StateStr;
+    info.UserName=userinfo.UserName;
+    info.applyman=userinfo.UserName;
     this.setData({
       info
     })
@@ -124,7 +126,9 @@ Page({
       if (menus.caption == '我申请') {
         this.setData({
           applyT: 1,
-          'info.UserName': userinfo.UserName
+          'info.UserName': userinfo.UserName,
+          'info.applyman': userinfo.UserName,
+          top:'我申请的加班'
         })
       }
       if (menus.caption == '未处理') {
@@ -277,6 +281,11 @@ Page({
             loading: false,
           })
           if (!this.data.Leader.length) {
+            this.setData({
+              'info.applyman': userinfo.UserName,
+            })
+          }
+          if(this.data.applyT){
             this.setData({
               'info.applyman': userinfo.UserName,
             })
