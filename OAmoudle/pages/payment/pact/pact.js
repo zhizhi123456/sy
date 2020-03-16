@@ -2,9 +2,9 @@
 import {
   getPayment,
   groupPayment,
-  // getdep,
-  // getLeader,
-  // employee
+  getdep,
+  getLeader,
+  employee
 } from '../../../../service/getData';
 var app = getApp();
 var util = require("../../../../utils/util");
@@ -117,16 +117,14 @@ Page({
     if (options.source) {
       wx.setStorageSync('carte', options)
     }
-    // getdep({
-    //   UserName: userinfo.UserName
-    // }).then(res => {
-    //   console.log(JSON.parse(res))
-    //   this.setData({
-    //     userdep: JSON.parse(res),
-    //     'info.department': JSON.parse(res)[0].ID,
-    //     departmenttext: JSON.parse(res)[0].techofficename
-    //   })
-    // })
+    getdep({
+      UserName: userinfo.UserName
+    }).then(res => {
+      console.log(JSON.parse(res))
+      this.setData({
+        userdep: JSON.parse(res),
+      })
+    })
     // getLeader({
     //   UserName: userinfo.UserName
     // }).then(res => {

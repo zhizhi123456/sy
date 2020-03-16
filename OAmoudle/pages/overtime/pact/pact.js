@@ -278,8 +278,6 @@ Page({
           this.setData({
             InfoList: item.reverse(),
             info: {},
-            'info.department': this.data.userdep[0].ID,
-            departmenttext: this.data.userdep[0].techofficename,
             loading: false,
           })
           if (!this.data.Leader.length) {

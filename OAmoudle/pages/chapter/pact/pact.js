@@ -206,8 +206,6 @@ Page({
             info: {},
             'info.state': '所有',
             'info.UserName': userinfo.UserName,
-            'info.departmentID': this.data.userdep[0].ID,
-            departmenttext: this.data.userdep[0].techofficename,
             loading: false,
           })
           if (!ISconduct) {
