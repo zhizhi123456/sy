@@ -31,8 +31,11 @@
                     </view>
                     <view class="seach_item">
                         <van-cell-group>
-                            <van-field data-name="createman" value="{{info.createman}}" placeholder="请输入" bind:blur="createmanblur" label="创建人" />
+                            <van-field data-name="createman" value="{{info.createman}}" placeholder="请输入" label="创建人" disabled bindtap="showPopup_9" />
                         </van-cell-group>
+                        <van-popup show="{{ show_9 }}" round position="bottom" bind:close="onClose_9">
+                            <van-picker data-name="createman" show-toolbar columns="{{ section1 }}" bind:cancel="onClose_9" bind:confirm="onConfirm_9" />
+                        </van-popup>
                     </view>
                     <view class="seach_item">
                         <van-cell-group>

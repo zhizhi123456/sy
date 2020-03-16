@@ -10,14 +10,14 @@
             <icon class="iconfont icon-wode"></icon>
         </view>
         <view class="import">
-            <input class="pwd" type="{{hidepwd?'password':'text'}}" value="{{password}}" name="password" placeholder="请输入密码" bindblur="setpwd" />
+            <input class="pwd" type="{{hidepwd?'password':'text'}}" value="{{password}}" name="password" placeholder="请输入密码" bindblur="setpwd" bindinput="getpwd" />
             <icon class="iconfont icon-yewu"></icon>
-            <view class="eyes">
+            <!-- <view class="eyes">
                 <icon wx:if="{{showpwd}}" class="iconfont icon-yanjing_kai" bindtap="showpwd"></icon>
                 <icon wx:if="{{hidepwd}}" class="iconfont icon-yanjing" bindtap="hidepwd"></icon>
-            </view>
+            </view> -->
         </view>
-        <view wx:if="{{!ifenter}}">
+        <!-- <view wx:if="{{!ifenter}}">
             <view class="import">
                 <input class="pwd" type="{{hidepwd1?'password':'text'}}" value="{{confirmpwd}}" name="password" placeholder="请再次输入密码" bindblur="setconfirmpwd" />
                 <icon class="iconfont icon-yewu"></icon>
@@ -34,7 +34,7 @@
                 <input name="email" value="{{Email}}" placeholder="请输入邮箱" bindblur="setemail" />
                 <icon class="iconfont icon-youxiang"></icon>
             </view>
-        </view>
+        </view> -->
         <!-- <view class="forgetpwd" wx:if="{{ifenter}}">忘记密码？</view> -->
         <button type="button" class="btn" wx:if="{{ifenter}}" bindtap="enter">登录</button>
         <!-- <button type="button" class="btn" bindtap="enroll">注册</button> -->

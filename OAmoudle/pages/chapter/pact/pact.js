@@ -2,9 +2,9 @@
 import {
   getChapter,
   groupChapter,
-  getdep,
-  getLeader,
-  employee
+  // getdep,
+  // getLeader,
+  // employee
 } from '../../../../service/getData';
 var app = getApp();
 var util = require("../../../../utils/util");
@@ -70,39 +70,39 @@ Page({
       'info.state': '所有',
       'info.UserName': userinfo.UserName
     })
-    getdep({
-      UserName: userinfo.UserName
-    }).then(res => {
-      console.log(JSON.parse(res))
-      this.setData({
-        userdep: JSON.parse(res),
-        'info.departmentID': JSON.parse(res)[0].ID,
-        departmenttext: JSON.parse(res)[0].techofficename
-      })
-    })
-    getLeader({
-      UserName: userinfo.UserName
-    }).then(res => {
-      this.setData({
-        Leader: JSON.parse(res)
-      })
-      if (JSON.parse(res).length) {
-        employee({
-          ID: JSON.parse(res)[0].ID
-        }).then(res => {
-          console.log(res)
-          let person = res.replace(/name/g, 'text');
-          console.log(JSON.parse(person))
-          this.setData({
-            persons: JSON.parse(person)
-          })
-        })
-      } else {
-        this.setData({
-          'info.chargemanName': userinfo.UserName,
-        })
-      }
-    })
+    // getdep({
+    //   UserName: userinfo.UserName
+    // }).then(res => {
+    //   console.log(JSON.parse(res))
+    //   this.setData({
+    //     userdep: JSON.parse(res),
+    //     'info.departmentID': JSON.parse(res)[0].ID,
+    //     departmenttext: JSON.parse(res)[0].techofficename
+    //   })
+    // })
+    // getLeader({
+    //   UserName: userinfo.UserName
+    // }).then(res => {
+    //   this.setData({
+    //     Leader: JSON.parse(res)
+    //   })
+    //   if (JSON.parse(res).length) {
+    //     employee({
+    //       ID: JSON.parse(res)[0].ID
+    //     }).then(res => {
+    //       console.log(res)
+    //       let person = res.replace(/name/g, 'text');
+    //       console.log(JSON.parse(person))
+    //       this.setData({
+    //         persons: JSON.parse(person)
+    //       })
+    //     })
+    //   } else {
+    //     this.setData({
+    //       'info.chargemanName': userinfo.UserName,
+    //     })
+    //   }
+    // })
     let menus = wx.getStorageSync('menus');
     if (menus.caption == '未处理') {
       let info = this.data.info;
@@ -139,7 +139,8 @@ Page({
     this.seachInfo();
     if (app.globalData.CountItem) {
       this.setData({
-        sections: app.globalData.department,
+        sections: app.globalData.getdept,
+        section1:app.globalData.getstaff,
         Usesealtype: app.globalData.Usesealtype,
         states: app.globalData.states
       })
@@ -147,7 +148,8 @@ Page({
       app.DataCallback = employ => {
         if (employ != '') {
           this.setData({
-            sections: app.globalData.department,
+            sections: app.globalData.getdept,
+            section1:app.globalData.getstaff,
             Usesealtype: app.globalData.Usesealtype,
             states: app.globalData.states
           })
@@ -213,11 +215,11 @@ Page({
               'info.state': '所有',
             })
           }
-          if (!this.data.Leader.length) {
-            this.setData({
-              'info.chargemanName': userinfo.UserName,
-            })
-          }
+          // if (!this.data.Leader.length) {
+          //   this.setData({
+          //     'info.chargemanName': userinfo.UserName,
+          //   })
+          // }
           wx.hideLoading();
         }
       })

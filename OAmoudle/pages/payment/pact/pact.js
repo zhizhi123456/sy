@@ -2,9 +2,9 @@
 import {
   getPayment,
   groupPayment,
-  getdep,
-  getLeader,
-  employee
+  // getdep,
+  // getLeader,
+  // employee
 } from '../../../../service/getData';
 var app = getApp();
 var util = require("../../../../utils/util");
@@ -117,39 +117,39 @@ Page({
     if (options.source) {
       wx.setStorageSync('carte', options)
     }
-    getdep({
-      UserName: userinfo.UserName
-    }).then(res => {
-      console.log(JSON.parse(res))
-      this.setData({
-        userdep: JSON.parse(res),
-        'info.department': JSON.parse(res)[0].ID,
-        departmenttext: JSON.parse(res)[0].techofficename
-      })
-    })
-    getLeader({
-      UserName: userinfo.UserName
-    }).then(res => {
-      this.setData({
-        Leader: JSON.parse(res)
-      })
-      if (JSON.parse(res).length) {
-        employee({
-          ID: JSON.parse(res)[0].ID
-        }).then(res => {
-          console.log(res)
-          let person = res.replace(/name/g, 'text');
-          console.log(JSON.parse(person))
-          this.setData({
-            persons: JSON.parse(person)
-          })
-        })
-      } else {
-        this.setData({
-          'info.createman': userinfo.UserName,
-        })
-      }
-    })
+    // getdep({
+    //   UserName: userinfo.UserName
+    // }).then(res => {
+    //   console.log(JSON.parse(res))
+    //   this.setData({
+    //     userdep: JSON.parse(res),
+    //     'info.department': JSON.parse(res)[0].ID,
+    //     departmenttext: JSON.parse(res)[0].techofficename
+    //   })
+    // })
+    // getLeader({
+    //   UserName: userinfo.UserName
+    // }).then(res => {
+    //   this.setData({
+    //     Leader: JSON.parse(res)
+    //   })
+    //   if (JSON.parse(res).length) {
+    //     employee({
+    //       ID: JSON.parse(res)[0].ID
+    //     }).then(res => {
+    //       console.log(res)
+    //       let person = res.replace(/name/g, 'text');
+    //       console.log(JSON.parse(person))
+    //       this.setData({
+    //         persons: JSON.parse(person)
+    //       })
+    //     })
+    //   } else {
+    //     this.setData({
+    //       'info.createman': userinfo.UserName,
+    //     })
+    //   }
+    // })
     if (options.id || options.rid) {
       wx.setStorageSync('menus', options)
     }
@@ -244,15 +244,17 @@ Page({
     }
     if (app.globalData.CountItem) {
       this.setData({
-        sections: app.globalData.department,
-        states: app.globalData.states
+        sections: app.globalData.getdept,
+        states: app.globalData.states,
+        section1: app.globalData.getstaff
       })
     } else {
       app.DataCallback = employ => {
         if (employ != '') {
           this.setData({
-            sections: app.globalData.department,
-            states: app.globalData.states
+            sections: app.globalData.getdept,
+            states: app.globalData.states,
+            section1: app.globalData.getstaff
           })
         }
       }
@@ -303,11 +305,11 @@ Page({
               info,
             })
           } else {
-            if (!this.data.Leader.length) {
-              this.setData({
-                'info.createman': userinfo.UserName,
-              })
-            }
+            // if (!this.data.Leader.length) {
+            //   this.setData({
+            //     'info.createman': userinfo.UserName,
+            //   })
+            // }
           }
           wx.hideLoading();
         }
@@ -327,7 +329,7 @@ Page({
     let StateStr = (this.data.pact[e.detail].text).slice(0, 3);
     let info = this.data.info;
     info.processstate = StateStr;
-    info.createman=userinfo.UserName;
+    info.createman = userinfo.UserName;
     this.setData({
       info
     })
@@ -359,10 +361,27 @@ Page({
     })
   },
   // 创建人
-  createmanblur(e) {
-    let info = util.editInfo(e, this, e.detail.value);
+  // createmanblur(e) {
+  //   let info = util.editInfo(e, this, e.detail.value);
+  //   this.setData({
+  //     info
+  //   })
+  // },
+  showPopup_9() {
     this.setData({
-      info
+      show_9: true
+    })
+  },
+  onClose_9() {
+    this.setData({
+      show_9: false
+    })
+  },
+  onConfirm_9(e) {
+    let info = util.editInfo(e, this, e.detail.value.text);
+    this.setData({
+      show_9: false,
+      info,
     })
   },
   // 部门

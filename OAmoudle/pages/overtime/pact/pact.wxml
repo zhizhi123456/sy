@@ -34,10 +34,10 @@
                     </view>
                     <view class="seach_item">
                         <van-cell-group>
-                            <van-field data-name="applyman" value="{{info.applyman}}" placeholder="{{persons.length?'请选择':'请输入'}}" bind:blur="applymanblur" label="申请人" bindtap="{{!applyT||persons.length?'showPopup_9':''}}" disabled/>
+                            <van-field data-name="applyman" value="{{info.applyman}}" placeholder="请选择" bind:blur="applymanblur" label="申请人" disabled bindtap="showPopup_9" />
                         </van-cell-group>
                          <van-popup show="{{ show_9 }}" round position="bottom" bind:close="onClose_9">
-                            <van-picker data-name="applyman" show-toolbar columns="{{persons}}" bind:cancel="onClose_9" bind:confirm="onConfirm_9" />
+                            <van-picker data-name="applyman" show-toolbar columns="{{section1}}" bind:cancel="onClose_9" bind:confirm="onConfirm_9" />
                         </van-popup>
                     </view>
                     <view class="seach_item">

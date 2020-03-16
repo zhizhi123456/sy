@@ -2,9 +2,9 @@
 import {
   getOvertime,
   groupOvertime,
-  getdep,
-  getLeader,
-  employee
+  // getdep,
+  // getLeader,
+  // employee
 } from '../../../../service/getData';
 var app = getApp();
 var util = require("../../../../utils/util");
@@ -183,42 +183,43 @@ Page({
         console.log(err)
       })
     }
-    getdep({
-      UserName: userinfo.UserName
-    }).then(res => {
-      console.log(JSON.parse(res))
-      this.setData({
-        userdep: JSON.parse(res),
-        'info.department': JSON.parse(res)[0].ID,
-        departmenttext: JSON.parse(res)[0].techofficename
-      })
-    })
-    getLeader({
-      UserName: userinfo.UserName
-    }).then(res => {
-      this.setData({
-        Leader: JSON.parse(res)
-      })
-      if (JSON.parse(res).length) {
-        employee({
-          ID: JSON.parse(res)[0].ID
-        }).then(res => {
-          console.log(res)
-          let person = res.replace(/name/g, 'text');
-          console.log(JSON.parse(person))
-          this.setData({
-            persons: JSON.parse(person)
-          })
-        })
-      } else {
-        this.setData({
-          'info.applyman': userinfo.UserName,
-        })
-      }
-    })
+    // getdep({
+    //   UserName: userinfo.UserName
+    // }).then(res => {
+    //   console.log(JSON.parse(res))
+    //   this.setData({
+    //     userdep: JSON.parse(res),
+    //     'info.department': JSON.parse(res)[0].ID,
+    //     departmenttext: JSON.parse(res)[0].techofficename
+    //   })
+    // })
+    // getLeader({
+    //   UserName: userinfo.UserName
+    // }).then(res => {
+    //   this.setData({
+    //     Leader: JSON.parse(res)
+    //   })
+    //   if (JSON.parse(res).length) {
+    //     employee({
+    //       ID: JSON.parse(res)[0].ID
+    //     }).then(res => {
+    //       console.log(res)
+    //       let person = res.replace(/name/g, 'text');
+    //       console.log(JSON.parse(person))
+    //       this.setData({
+    //         persons: JSON.parse(person)
+    //       })
+    //     })
+    //   } else {
+    //     this.setData({
+    //       'info.applyman': userinfo.UserName,
+    //     })
+    //   }
+    // })
     if (app.globalData.CountItem) {
       this.setData({
-        sections: app.globalData.department,
+        sections: app.globalData.getdept,
+        section1: app.globalData.getstaff,
         GetOverworktype: app.globalData.GetOverworktype,
         GetOvertimeperiod: app.globalData.GetOvertimeperiod,
       })
@@ -226,7 +227,8 @@ Page({
       app.DataCallback = employ => {
         if (employ != '') {
           this.setData({
-            sections: app.globalData.department,
+            sections: app.globalData.getdept,
+            section1: app.globalData.getstaff,
             GetOverworktype: app.globalData.GetOverworktype,
             GetOvertimeperiod: app.globalData.GetOvertimeperiod,
           })

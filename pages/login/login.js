@@ -46,6 +46,10 @@ Page({
                 icon: "none",
                 duration: 2000
               })
+              wx.setData({
+                username: "",
+                password: "",
+              })
             }
           }
         })
@@ -70,17 +74,24 @@ Page({
       }
     }
   },
+  getpwd(e) {
+    this.setData({
+      password: e.detail.value
+    })
+  },
   setpwd(e) {
-    if (e.detail.value) {
-      this.setData({
-        password: e.detail.value
-      })
-    } else {
-      wx.showToast({
-        title: '请输入密码',
-        icon: "none",
-        duration: 2000
-      })
+    if (!this.data.password) {
+      if (e.detail.value) {
+        this.setData({
+          password: e.detail.value
+        })
+      } else {
+        wx.showToast({
+          title: '请输入密码',
+          icon: "none",
+          duration: 2000
+        })
+      }
     }
   },
   setconfirmpwd(e) {
@@ -179,14 +190,14 @@ Page({
                   userId: s[0].userId
                 }
                 wx.setStorageSync("message", info)
-
               }
             })
             util.sumup1(getstaff, app, 'getstaff', "name", "userId", user.UserName);
             util.sumup1(getdept, app, 'getdept', "techofficename", "id", user.UserName);
           }
-          util.returnMenu();
-
+          wx.redirectTo({
+            url: '/pages/contracts/contracts?grading=2089&title=项目管理'
+          })
         } else {
           wx.showToast({
             title: '用户名或密码错误',
@@ -243,15 +254,15 @@ Page({
       })
     }
   },
-  // 返回登录页面
-  returnlogin() {
-    this.setData({
-      ifenter: true,
-      username: '',
-      password: '',
-      hidepwd: true
-    })
-  },
+  // // 返回登录页面
+  // returnlogin() {
+  //   this.setData({
+  //     ifenter: true,
+  //     username: '',
+  //     password: '',
+  //     hidepwd: true
+  //   })
+  // },
   //密码的显示隐藏
   showpwd() {
     this.setData({
