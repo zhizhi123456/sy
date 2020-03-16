@@ -208,11 +208,11 @@ Page({
             'info.UserName': userinfo.UserName,
             loading: false,
           })
-          if (!ISconduct) {
-            this.setData({
-              'info.state': '所有',
-            })
-          }
+          // if (!this.data.ISconduct) {
+          //   this.setData({
+          //     'info.state': '所有',
+          //   })
+          // }
           // if (!this.data.Leader.length) {
           //   this.setData({
           //     'info.chargemanName': userinfo.UserName,
