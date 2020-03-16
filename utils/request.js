@@ -24,7 +24,11 @@ function request(url, data, header, method) {
     var Willpass = {
       Timestamp: util.format(new Date()),
     }
-    
+    wx.showToast({
+      title: '请登录',
+      icon: 'none',
+      duration: 1000
+    })
   }
   return new Promise((resolve, reject) => {
     // 发起请求
