@@ -68,17 +68,38 @@ Page({
     wx.downloadFile({
       url: this.data.info.Minutesofmeeting[e.currentTarget.dataset.index].url,
       success: function (res) {
-        console.log(res)
-        var Path = res.tempFilePath //返回的文件临时地址，用于后面打开本地预览所用
-        wx.openDocument({
-          filePath: Path,
-          success: function (res) {
-            console.log('打开文档成功')
-          }
-        })
+        if (res.statusCode === 200) {
+          wx.showToast({
+            title: '已下载，预览中',
+            icon: 'loading',
+            duration: 10000
+          })
+          var Path = res.tempFilePath; //返回的文件临时地址，用于后面打开本地预览所用
+          var index = Path.lastIndexOf(".");
+          var fileType = Path.substring(index + 1).toLowerCase();
+          wx.openDocument({
+            filePath: Path,
+            fileType: fileType,
+            success: function (res) {
+              // console.log('打开文档成功');
+              wx.hideToast();
+            },
+            fail: function (res) {
+              wx.showToast({
+                title: '预览文档失败,仅支持doc,docx,xls,xlsx,ppt,pptx,pdf',
+                icon: "none",
+                duration: 3000
+              });
+            }
+          })
+        }
       },
-      fail: function (res) {
-        console.log(res)
+      fail(err) {
+        wx.showToast({
+          title: '下载文件失败',
+          icon: "none",
+          duration: 3000
+        });
       }
     })
   },

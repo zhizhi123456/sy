@@ -57,6 +57,9 @@ Page({
     if (options.id || options.rid) {
       wx.setStorageSync('menus', options)
     }
+    if (options.source) {
+      wx.setStorageSync('carte', options)
+    }
     this.seachInfo();
     getStructLevel().then(res => {
       if (res.code == 10000) {

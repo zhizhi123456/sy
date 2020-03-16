@@ -52,8 +52,11 @@ Page({
    */
   onLoad: function (options) {
     userinfo = wx.getStorageSync("myInfo");
-    if (options.id) {
+    if (options.id || options.rid) {
       wx.setStorageSync('menus', options)
+    }
+    if (options.source) {
+      wx.setStorageSync('carte', options)
     }
     this.seachInfo();
     if (app.globalData.CountItem) {
