@@ -1,6 +1,6 @@
 // pages/new/new.js
 import Toast from 'vant-weapp/dist/toast/toast';
-import { 
+import {
   addiou,
   detailiou,
   updateiou
@@ -21,7 +21,7 @@ Page({
       subprojectcode: '',
       amount: '',
       leavereason: '',
-      API_Picurl:[],
+      API_Picurl: [],
     },
     show_nature: false,
     nature: [],
@@ -35,8 +35,8 @@ Page({
     show2: false,
     show3: false,
     show4: false,
-    show5:false,
-    show6:false,
+    show5: false,
+    show6: false,
     currentDate: new Date().getTime(),
     currentDate1: new Date().getTime(),
     currentDate3: new Date().getTime(),
@@ -47,6 +47,9 @@ Page({
     }, {
       name: "从相册选择"
     }],
+    goods: true,
+    money: true,
+    chapter: true
   },
   // 图片
   showPopup_photo() {
@@ -75,8 +78,8 @@ Page({
       info
     })
   },
-   // 数字筛选
-   checknum(e) {
+  // 数字筛选
+  checknum(e) {
     let info = this.data.info;
     util.formatNum(e);
     info.amount = e.detail;
@@ -140,6 +143,24 @@ Page({
       info,
       show2: false
     })
+    if (e.detail.value.text == '物类') {
+      this.setData({
+        chapter: false,
+        money: false,
+      })
+    }
+    if (e.detail.value.text == '钱类') {
+      this.setData({
+        chapter: false,
+        money: true,
+      })
+    }
+    if (e.detail.value.text == '章类') {
+      this.setData({
+        chapter: true,
+        money: false,
+      })
+    }
   },
   // 用章类型
   showPopup3() {
@@ -198,29 +219,29 @@ Page({
       show5: false
     })
   },
- // 项目编号
- showPopup6() {
-  this.setData({
-    show6: true
-  })
-},
-onClose6() {
-  this.setData({
-    show6: false
-  })
-},
-onConfirm6(e) {
-  // //console.log(e)
-  let info = util.editInfo(e, this, e.detail.value.value);
-  this.setData({
-    info,
-    show6: false
-  })
-},
+  // 项目编号
+  showPopup6() {
+    this.setData({
+      show6: true
+    })
+  },
+  onClose6() {
+    this.setData({
+      show6: false
+    })
+  },
+  onConfirm6(e) {
+    // //console.log(e)
+    let info = util.editInfo(e, this, e.detail.value.value);
+    this.setData({
+      info,
+      show6: false
+    })
+  },
   confirm() {
     // //console.log(this.data.info)
-    if (this.data.info.debitnotetype && this.data.info.Companytitle 
-      && this.data.info.department) {
+    if (this.data.info.debitnotetype && this.data.info.Companytitle &&
+      this.data.info.department) {
       let info = this.data.info;
       util.checkContent(info, this);
       util.intro(info, this)
@@ -268,7 +289,7 @@ onConfirm6(e) {
           icon: 'success',
           duration: 3000
         })
-        util.ModifyRecord(this.data.information,"debitnote")
+        util.ModifyRecord(this.data.information, "debitnote")
         util.OAreturn('iou', this)
       }
     })
@@ -302,17 +323,36 @@ onConfirm6(e) {
       }).then(res => {
         // //console.log(res)
         let item = res.Item;
-        var data1 =res.Item
+        var data1 = res.Item
         var b = JSON.stringify(data1)
-        var c  = JSON.parse(b)
+        var c = JSON.parse(b)
         this.setData({
-          information:c
+          information: c
         })
         util.handleData(item, this, app.globalData.department);
         util.outflow(item, this)
         this.setData({
           info: item
         })
+        if (item.debitnotetype == '物类') {
+          this.setData({
+            chapter: false,
+            money: false,
+          })
+        }
+        if (item.debitnotetype == '钱类') {
+          this.setData({
+            chapter: false,
+            money: true,
+          })
+        }
+        if (item.debitnotetype == '章类') {
+          this.setData({
+            chapter: true,
+            money: false,
+          })
+        }
+       
       })
     }
   },

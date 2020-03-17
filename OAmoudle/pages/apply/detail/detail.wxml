@@ -56,10 +56,10 @@
                             </block>
                         </view>
                     </view>
-                    <view class="c_item">
+                    <!-- <view class="c_item">
                         <view class="kind">项目编号</view>
                         <view class="check">{{info.itemnumber}}</view>
-                    </view>
+                    </view> -->
                     <view class="c_item">
                         <view class="kind">创建人</view>
                         <view class="check">{{info.createman}}</view>
@@ -223,7 +223,7 @@
             </view>
             <view class="checkkind">
                 <text bindtap="onClose">取消</text>
-                <text bindtap="sconfirm">审核通过</text>
+                <text bindtap="sconfirm">确认</text>
             </view>
         </van-popup>
     </view>

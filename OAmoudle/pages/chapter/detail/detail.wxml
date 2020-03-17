@@ -36,6 +36,10 @@
                         <view class="kind">数量</view>
                         <view class="check">{{info.usenumber}}</view>
                     </view>
+                     <view class="c_item">
+                        <view class="kind">其他</view>
+                        <view class="check">{{info.Other}}</view>
+                    </view>
                     <view class="c_item">
                         <view class="kind">图片</view>
                         <view wx:if="{{info.API_Picurl}}" class="detpic_show">

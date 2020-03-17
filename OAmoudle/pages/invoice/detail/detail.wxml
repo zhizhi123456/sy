@@ -21,13 +21,17 @@
                         <view class="check">{{info.Companytitle}}</view>
                     </view>
                     <view class="c_item">
+                        <view class="kind">对方公司</view>
+                        <view class="check">{{info.Othercompany}}</view>
+                    </view>
+                    <view class="c_item">
                         <view class="kind">部门</view>
                         <view class="check">{{info.department}}</view>
                     </view>
-                    <view class="c_item">
+                    <!-- <view class="c_item">
                         <view class="kind">合同</view>
                         <view class="check">{{info.contactid}}</view>
-                    </view>
+                    </view> -->
                     <view class="c_item">
                         <view class="kind">开票类别</view>
                         <view class="check">{{info.invoicetype}}</view>
@@ -48,14 +52,14 @@
                         <view class="kind">票率</view>
                         <view class="check">{{info.invoicefeerate}}</view>
                     </view>
-                    <view class="c_item">
+                    <!-- <view class="c_item">
                         <view class="kind">项目</view>
                         <view class="check">{{info.projectid}}</view>
                     </view>
                     <view class="c_item">
                         <view class="kind">项目地址</view>
                         <view class="check">{{info.projectaddress}}</view>
-                    </view>
+                    </view> -->
                     <view class="c_item">
                         <view class="kind">图片</view>
                         <view wx:if="{{info.API_Picurl}}" class="detpic_show">
@@ -154,12 +158,12 @@
             </van-tab>
         </van-tabs>
     </view>
-     <view class="footer"  wx:if="{{((info.formid&&isnext&&returned&&isreturn)||(!info.formid)||(isnext&&returned))&&(!history)}}">
-        <view bindtap="sendback"wx:if="{{info.formid&&isnext&&returned&&isreturn}}" data-state='return' >
+    <view class="footer" wx:if="{{((info.formid&&isnext&&returned&&isreturn)||(!info.formid)||(isnext&&returned))&&(!history)}}">
+        <view bindtap="sendback" wx:if="{{info.formid&&isnext&&returned&&isreturn}}" data-state='return'>
             <icon class="iconfont icon-wj-thwj"></icon>
             <text>退回</text>
         </view>
-        <view  wx:if="{{!info.formid}}">
+        <view wx:if="{{!info.formid}}">
             <navigator open-type="redirect" url="/OAmoudle/pages/invoice/new/new?id={{info.ID}}" hover-class="none">
                 <icon class="iconfont icon-bianji"></icon>
                 <text>编辑</text>
@@ -167,10 +171,10 @@
         </view>
         <view bindtap="putin" wx:if="{{isnext&&returned}}">
             <icon class="iconfont icon-tijiao"></icon>
-            <text>{{info.formid?'审核通过':'确认提交'}}</text>   
+            <text>{{info.formid?'审核通过':'确认提交'}}</text>
         </view>
     </view>
-      <view class="seach" wx:if="{{show}}">
+    <view class="seach" wx:if="{{show}}">
         <van-popup show="{{ show }}" bind:close="onClose" round position="bottom" custom-style="height: 50vh;color:#333">
             <view class="seach_item">
                 <van-cell-group>
@@ -203,11 +207,11 @@
             </view>
             <view class="checkkind">
                 <text bindtap="onClose">取消</text>
-                <text bindtap="sconfirm">审核通过</text>
+                <text bindtap="sconfirm">确认</text>
             </view>
         </van-popup>
     </view>
-     <view class="seach" wx:if="{{show1}}">
+    <view class="seach" wx:if="{{show1}}">
         <van-popup show="{{ show1 }}" bind:close="onClose1" round position="bottom" custom-style="height: 50vh;color:#333">
             <view class="seach_item">
                 <van-cell-group>

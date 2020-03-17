@@ -51,15 +51,16 @@
                 <van-picker data-name="ifpurchase" show-toolbar columns="{{ section6 }}" bind:cancel="onClose2" bind:confirm="onConfirm2" />
             </van-popup>
         </view>
-        <view class="check_item">
+        <!-- 3.17 申领编号不需要 -->
+        <!-- <view class="check_item">
             <view class="kind">
                 <text>申领编号</text>
             </view>
             <van-cell-group>
                 <van-field data-name="applynumber" value="{{info.applynumber}}" placeholder="请输入" bind:blur="purchasecontactCodeblur" />
             </van-cell-group>
-        </view>
-        <view class="check_item">
+        </view> -->
+        <!-- <view class="check_item">
             <view class="kind require">
                 <text>项目编号</text>
                 <text class="required">*</text>
@@ -70,7 +71,7 @@
             <van-popup show="{{ show1 }}" round position="bottom" bind:close="onClose1">
                 <van-picker data-name="itemnumber" show-toolbar columns="{{ section4 }}" bind:cancel="onClose1" bind:confirm="onConfirm1" />
             </van-popup>
-        </view>
+        </view> -->
         <view class="check_item">
             <text class="kind">资料图片</text>
             <van-cell title="请选择" is-link bind:click="showPopup_photo" />

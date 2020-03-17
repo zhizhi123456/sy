@@ -21,7 +21,7 @@ Page({
       Companytitle: '',
       department: '',
       ifpurchase: "",
-      itemnumber: '',
+      itemnumber: '1',
       applynumber: "",
       API_Picurl: []
     },

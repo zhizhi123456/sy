@@ -139,7 +139,8 @@ Page({
       "info.CheckinCentPosi": jd,
       "info.ifeffective": true
     })
-    var reach = this.arrive()
+    // var reach = this.arrive()
+    var reach = true
     console.log(reach)
     if (!reach) {
       Toast({

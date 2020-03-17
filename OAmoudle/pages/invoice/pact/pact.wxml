@@ -37,7 +37,7 @@
                             <van-picker data-name="department" show-toolbar columns="{{ sections }}" bind:cancel="onClose_0" bind:confirm="onConfirm_0" />
                         </van-popup>
                     </view>
-                    <view class="seach_item">
+                    <!-- <view class="seach_item">
                         <van-cell-group>
                             <van-field value="{{info.contactid}}" placeholder="请选择" bindtap="showPopup_2" label="合同" disabled />
                         </van-cell-group>
@@ -52,7 +52,7 @@
                         <van-popup show="{{ show_4 }}" round position="bottom" bind:close="onClose_4">
                             <van-picker data-name="projectid" show-toolbar columns="{{ MainProject }}" bind:cancel="onClose_4" bind:confirm="onConfirm_4" />
                         </van-popup>
-                    </view>
+                    </view> -->
                     <view class="seach_item">
                         <van-cell-group>
                             <van-field value="{{info.createman}}" placeholder="请选择" bindtap="showPopup_5" label="创建人" disabled />
@@ -125,10 +125,10 @@
                     <text class="info">开票类别</text>
                     <text>{{item.invoicetype}}</text>
                 </view>
-                <view>
+                <!-- <view>
                     <text class="info">项目</text>
                     <text>{{item.projectid}}</text>
-                </view>
+                </view> -->
                 <view>
                     <text class="info">所属部门</text>
                     <text>{{item.department}}</text>

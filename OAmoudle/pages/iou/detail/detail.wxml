@@ -28,14 +28,14 @@
                         <view class="kind">用章类别</view>
                         <view class="check">{{info.usesealtype}}</view>
                     </view>
-                    <view class="c_item">
+                    <!-- <view class="c_item">
                         <view class="kind">项目编号</view>
                         <view class="check">{{info.projectcode}}</view>
                     </view>
                     <view class="c_item">
                         <view class="kind">分包项目编号</view>
                         <view class="check">{{info.subprojectcode}}</view>
-                    </view>
+                    </view> -->
                     <view class="c_item">
                         <view class="kind">金额</view>
                         <view class="check">{{info.amount}}</view>
@@ -187,7 +187,7 @@
             </view>
             <view class="checkkind">
                 <text bindtap="onClose">取消</text>
-                <text bindtap="sconfirm">审核通过</text>
+                <text bindtap="sconfirm">确认</text>
             </view>
         </van-popup>
     </view>

@@ -14,7 +14,7 @@ Page({
   data: {
     seach: '',
     loading: false,
-    top: '发票',
+    top: '开发票',
     currentDate: new Date().getTime(),
     InfoList: [],
     item: [],
@@ -103,15 +103,15 @@ Page({
         val: 0,
         ISconduct: 1,
         pact: [{
-            text: '未处理的发票',
+            text: '未处理的开发票',
             value: 0
           },
           {
-            text: '已处理的发票',
+            text: '已处理的开发票',
             value: 1
           },
           {
-            text: '已超时的发票',
+            text: '已超时的开发票',
             value: 2
           }
         ],
@@ -122,7 +122,7 @@ Page({
         'info.state': '',
         applyT: 1,
         'info.UserName': userinfo.UserName,
-        top: '我申请的发票'
+        top: '我申请的开发票'
       })
       util.qgroupdeliver(groupInvoice, this, '', '1')
     } else {

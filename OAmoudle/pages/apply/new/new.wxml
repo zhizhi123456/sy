@@ -168,7 +168,7 @@
                 <van-field data-name="enterstate" value="{{info.enterstate}}" placeholder="请输入" bind:blur="subprojectnameblur" />
             </van-cell-group>
         </view>
-         <view class="check_item">
+         <!-- <view class="check_item">
             <view class="kind require">
                 <text>项目编号</text>
                 <text class="required">*</text>
@@ -179,7 +179,7 @@
             <van-popup show="{{ show2 }}" round position="bottom" bind:close="onClose2">
                 <van-picker data-name="itemnumber" show-toolbar columns="{{ section2 }}" bind:cancel="onClose2" bind:confirm="onConfirm2" />
             </van-popup>
-        </view>
+        </view> -->
         <view class="check_item">
             <text class="kind">资料图片</text>
             <van-cell title="请选择" is-link bind:click="showPopup_photo" />

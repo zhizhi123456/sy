@@ -15,6 +15,9 @@ Page({
   data: {
     info: {
       API_Picurl: [],
+      contactid:'1',
+      projectid:'2',
+      projectaddress:'3'
     },
     show: false,
     firms: [],

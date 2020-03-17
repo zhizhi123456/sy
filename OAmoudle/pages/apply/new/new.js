@@ -31,7 +31,7 @@ Page({
       delievryaddress: '',
       enterdatetime: '',
       enterstate: '',
-      itemnumber: '',
+      itemnumber: '1',
       API_Picurl: []
     },
     currentDate: new Date().getTime(),

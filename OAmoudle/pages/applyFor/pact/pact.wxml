@@ -41,17 +41,17 @@
                                 <van-picker data-name="department" show-toolbar columns="{{ section4 }}" bind:cancel="onClose4" bind:confirm="onConfirm4" />
                             </van-popup>
                         </view>
-                        <view class="seach_item">
+                        <!-- <view class="seach_item">
                             <van-cell-group>
                                 <van-field data-name="applynumber" value="{{info.applynumber}}" placeholder="请输入" bind:blur="meetplaceblur" label="申领编号" />
                             </van-cell-group>
-                        </view>
-                          <view class="seach_item">
+                        </view> -->
+                          <!-- <view class="seach_item">
                             <van-field value="{{info.itemnumber}}" bind:focus="showPopup5" class="time1" title-class="time1" label="项目编号" placeholder="请选择" />
                             <van-popup show="{{show5}}" round position="bottom" bind:close="onClose5">
                                 <van-picker data-name="itemnumber" show-toolbar columns="{{ section5 }}" bind:cancel="onClose5" bind:confirm="onConfirm5" />
                             </van-popup>
-                        </view>
+                        </view> -->
                            <view class="seach_item">
                             <van-field value="{{info.createman }}" bind:focus="showPopup6" class="time1" title-class="time1" label="创建人" placeholder="请选择" />
                             <van-popup show="{{show6}}" round position="bottom" bind:close="onClose6">
@@ -113,10 +113,10 @@
                     <text class="info">是否需要采购</text>
                     <text>{{item.ifpurchase}}</text>
                 </view>
-                 <view>
+                 <!-- <view>
                     <text class="info">申领编号</text>
                     <text>{{item.applynumber}}</text>
-                </view>
+                </view> -->
                  <view>
                     <text class="info">项目编号</text>
                     <text>{{item.itemnumber}}</text>

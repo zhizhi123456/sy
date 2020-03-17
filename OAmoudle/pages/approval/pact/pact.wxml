@@ -52,12 +52,12 @@
                                 <van-picker data-name="paytype" show-toolbar columns="{{ section5 }}" bind:cancel="onClose5" bind:confirm="onConfirm5" />
                             </van-popup>
                         </view>
-                         <view class="seach_item">
+                         <!-- <view class="seach_item">
                             <van-field value="{{info.projectcode }}" bind:focus="showPopup7" class="time1" title-class="time1" label="项目编号" placeholder="请选择" />
                             <van-popup show="{{show7}}" round position="bottom" bind:close="onClose7">
                                 <van-picker data-name="projectcode" show-toolbar columns="{{ section8 }}" bind:cancel="onClose7" bind:confirm="onConfirm7" />
                             </van-popup>
-                        </view>
+                        </view> -->
                         <view class="seach_item">
                             <van-field value="{{info.createman }}" bind:focus="showPopup6" class="time1" title-class="time1" label="创建人" placeholder="请选择" />
                             <van-popup show="{{show6}}" round position="bottom" bind:close="onClose6">
@@ -119,10 +119,10 @@
                     <text class="info">付款方式</text>
                     <text>{{item.paytype}}</text>
                 </view>
-                <view>
+                <!-- <view>
                     <text class="info">项目编号</text>
                     <text>{{item.projectcode}}</text>
-                </view>
+                </view> -->
                 <view>
                     <text class="info">创建人</text>
                     <text>{{item.createman}}</text>

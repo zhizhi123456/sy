@@ -30,10 +30,10 @@
                         <view class="kind">付款方式</view>
                         <view class="check">{{info.paytype}}</view>
                     </view>
-                    <view class="c_item">
+                    <!-- <view class="c_item">
                         <view class="kind">项目编号</view>
                         <view class="check">{{info.projectcode}}</view>
-                    </view>
+                    </view> -->
                     <view class="c_item">
                         <view class="kind">相关照片</view>
                         <view wx:if="{{info.API_Picurl}}" class="detpic_show">
@@ -250,7 +250,7 @@
             </view>
             <view class="checkkind">
                 <text bindtap="onClose">取消</text>
-                <text bindtap="sconfirm">审核通过</text>
+                <text bindtap="sconfirm">确认</text>
             </view>
         </van-popup>
     </view>

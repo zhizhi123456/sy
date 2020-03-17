@@ -218,12 +218,12 @@ Page({
     if (hours < 24) {
       day = 0
       this.setData({
-        "info.leavedays": 0,
+        "info.leavedays": 0+1,
         "info.leavehours": hours,
       })
     } else {
       this.setData({
-        "info.leavedays": parseInt(hours / 24),
+        "info.leavedays": (parseInt(hours / 24))+1,
         "info.leavehours": hours % 24,
       })
     }
