@@ -40,15 +40,15 @@
                         <view class="kind">付款说明</view>
                         <view class="check">{{info.payamtexplain}}</view>
                     </view>
-                    <view class="c_item">
+                    <!-- <view class="c_item">
                         <view class="kind">项目类型</view>
                         <view class="check">{{info.projecttype}}</view>
-                    </view>
+                    </view> -->
                     <view class="c_item">
                         <view class="kind">采购合同编号</view>
                         <view class="check">{{info.purchasecontactcode}}</view>
                     </view>
-                    <view class="c_item">
+                    <!-- <view class="c_item">
                         <view class="kind">总包合同编号</view>
                         <view class="check">{{info.maincontactcode}}</view>
                     </view>
@@ -63,7 +63,7 @@
                     <view class="c_item">
                         <view class="kind">分包合同编号</view>
                         <view class="check">{{info.subprojectcode}}</view>
-                    </view>
+                    </view> -->
                     <view class="c_item">
                         <view class="kind">供应商编号</view>
                         <view class="check">{{info.suppliercode}}</view>

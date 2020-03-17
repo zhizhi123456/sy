@@ -34,7 +34,7 @@
                     </view>
                     <view class="seach_item">
                         <van-cell-group>
-                            <van-field data-name="chargemanName" value="{{info.chargemanName}}" placeholder="请选择" label="分包项目创建人" bindtap="showPopup_9" disabled/>
+                            <van-field data-name="chargemanName" value="{{info.chargemanName}}" placeholder="请选择" label="创建人" bindtap="showPopup_9" disabled/>
                         </van-cell-group>
                          <van-popup show="{{ show_9 }}" round position="bottom" bind:close="onClose_9">
                             <van-picker data-name="chargemanName" show-toolbar columns="{{section1}}" bind:cancel="onClose_9" bind:confirm="onConfirm_9" />
