@@ -3279,6 +3279,27 @@ const formatNum = (k) => { //正则验证金额输入框格式
   k.detail = k.detail.replace(".", "$#$").replace(/\./g, "").replace("$#$", "."); //只保留第一个小数点, 清除多余的 
   k.detail = k.detail.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3');
 }
+
+const findone = (get, data, key) => {
+  let newarr = [];
+  let reg = new RegExp(data, 'g');
+  // let newarr = reg.exec(get);
+  get.forEach((item, index) => {
+    if (reg.exec(JSON.stringify(item))) {
+      newarr.push(get[index])
+    }
+  })
+  if (newarr.length) {
+    return newarr;
+  } else {
+    wx.showToast({
+      title: '无查找结果',
+      icon: 'none',
+      duration: 3000
+    })
+    return get;
+  }
+}
 module.exports = {
   formatNum,
   readRecordlist,
@@ -3345,5 +3366,6 @@ module.exports = {
   delFileIDEA,
   lookFileIDEA,
   lookimgIDEA,
-  deleteImgIDEA
+  deleteImgIDEA,
+  findone
 }

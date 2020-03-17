@@ -52,6 +52,71 @@ Page({
       info
     })
   },
+  setSeach(e) {
+    this.setData({
+      seach: e.detail.value
+    })
+  },
+  finditem() {
+    if (this.data.seach) {
+      let arr = util.findone(app.globalData.PayType, this.data.seach);
+      this.setData({
+        PayType: arr,
+        seach: ''
+      })
+    } else {
+      wx.showToast({
+        title: '请输入搜索内容',
+        icon: 'none',
+        duration: 3000
+      })
+    }
+  },
+  finditem1() {
+    if (this.data.seach) {
+      let arr = util.findone(app.globalData.sections, this.data.seach);
+      this.setData({
+        sections: arr,
+        seach: ''
+      })
+    } else {
+      wx.showToast({
+        title: '请输入搜索内容',
+        icon: 'none',
+        duration: 3000
+      })
+    }
+  },
+  finditem2() {
+    if (this.data.seach) {
+      let arr = util.findone(app.globalData.Purchasecontact, this.data.seach);
+      this.setData({
+        Purchasecontact: arr,
+        seach: ''
+      })
+    } else {
+      wx.showToast({
+        title: '请输入搜索内容',
+        icon: 'none',
+        duration: 3000
+      })
+    }
+  },
+  finditem3() {
+    if (this.data.seach) {
+      let arr = util.findone(app.globalData.Supplier, this.data.seach);
+      this.setData({
+        Supplier: arr,
+        seach: ''
+      })
+    } else {
+      wx.showToast({
+        title: '请输入搜索内容',
+        icon: 'none',
+        duration: 3000
+      })
+    }
+  },
   // 签报名称
   payapproveformnameblur(e) {
     let info = util.editInfo(e, this, e.detail.value);
@@ -62,7 +127,8 @@ Page({
   // 部门
   showPopup_o() {
     this.setData({
-      show_o: true
+      show_o: true,
+      seach: ''
     });
   },
   onClose_o() {
@@ -99,7 +165,8 @@ Page({
   // 付款方式
   showPopup_1() {
     this.setData({
-      show_1: true
+      show_1: true,
+      seach: ''
     });
   },
   onClose_1() {
@@ -214,7 +281,8 @@ Page({
   // 采购合同
   showPopup_7() {
     this.setData({
-      show_7: true
+      show_7: true,
+      seach: ''
     });
   },
   onClose_7() {
@@ -232,7 +300,8 @@ Page({
   // 供应商
   showPopup_8() {
     this.setData({
-      show_8: true
+      show_8: true,
+      seach: ''
     });
   },
   onClose_8() {
@@ -295,11 +364,17 @@ Page({
 
   confirm() {
     // console.log(this.data.info)
-    if (this.data.info.payapproveformname && this.data.info.department && this.data.info.Companytitle && this.data.info.paytype && this.data.info.payammount && this.data.info.mainprojectcode && this.data.info.projecttype && this.data.info.maincontactcode && this.data.info.subprojectcode && this.data.info.subcontactcode && this.data.info.purchasecontactcode && this.data.info.suppliercode && this.data.info.havepaidammount && this.data.info.payamtexplain) {
+    // if (this.data.info.payapproveformname && this.data.info.department && this.data.info.Companytitle && this.data.info.paytype && this.data.info.payammount && this.data.info.mainprojectcode && this.data.info.projecttype && this.data.info.maincontactcode && this.data.info.subprojectcode && this.data.info.subcontactcode && this.data.info.purchasecontactcode && this.data.info.suppliercode && this.data.info.havepaidammount && this.data.info.payamtexplain) {
+    if (this.data.info.payapproveformname && this.data.info.department && this.data.info.Companytitle && this.data.info.paytype && this.data.info.payammount && this.data.info.purchasecontactcode && this.data.info.suppliercode && this.data.info.havepaidammount && this.data.info.payamtexplain) {
       let info = this.data.info;
       util.checkContent(info, this);
       this.setData({
-        info
+        info,
+        'info.mainprojectcode': '1',
+        'info.projecttype': '1',
+        'info.maincontactcode': '1',
+        'info.subprojectcode': '1',
+        'info.subcontactcode': '1',
       })
       addPayment(this.data.info).then(res => {
         // console.log(res)
@@ -386,10 +461,10 @@ Page({
         }
       })
     }
-        let info = this.data.info;
-        if (!info.department || !info.Companytitle) {
-          util.userdep(user, this);
-        }
+    let info = this.data.info;
+    if (!info.department || !info.Companytitle) {
+      util.userdep(user, this);
+    }
   },
 
   /**
