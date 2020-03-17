@@ -50,7 +50,7 @@
                 <van-picker data-name="paytype" show-toolbar columns="{{ section6 }}" bind:cancel="onClose2" bind:confirm="onConfirm2" />
             </van-popup>
         </view>
-        <view class="check_item">
+        <!-- <view class="check_item">
             <view class="kind require">
                 <text>项目编号</text>
             </view>
@@ -60,7 +60,7 @@
             <van-popup show="{{ show1 }}" round position="bottom" bind:close="onClose1">
                 <van-picker data-name="projectcode" show-toolbar columns="{{ section4 }}" bind:cancel="onClose1" bind:confirm="onConfirm1" />
             </van-popup>
-        </view>
+        </view> -->
         <view class="check_item">
             <text class="kind">相关照片</text>
             <van-cell title="请选择" is-link bind:click="showPopup_photo" />

@@ -242,7 +242,7 @@
             </view>
             <view class="checkkind">
                 <text bindtap="onClose">取消</text>
-                <text bindtap="sconfirm">审核通过</text>
+                <text bindtap="sconfirm">确认</text>
             </view>
         </van-popup>
     </view>

@@ -36,7 +36,7 @@
                 <van-picker data-name="Companytitle" show-toolbar columns="{{ firms }}" bind:cancel="onClose" bind:confirm="onConfirm" />
             </van-popup> -->
         </view>
-        <view class="check_item">
+        <!-- <view class="check_item">
             <view class="kind require">
                 <text>用章类型</text>
                 <text class="required">*</text>
@@ -46,6 +46,25 @@
             </van-cell>
             <van-popup show="{{ show_1 }}" round position="bottom" bind:close="onClose_1">
                 <van-picker data-name="usesealtype" show-toolbar columns="{{ Usesealtype }}" bind:cancel="onClose_1" bind:confirm="onConfirm_1" />
+            </van-popup>
+        </view> -->
+        <view class="check_item checkro8">
+            <view class="kind require">
+                <text>用章类型</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.usesealtype?info.usesealtype:'请选择'}}" is-link bind:click="showPopup1" />
+            <van-popup show="{{show1}}" round position="bottom" bind:close="onClose1">
+                <view class="checkro10">
+                    <text bind:tap="onClose1">取消</text>
+                    <text class="checkro2 checkro21" bind:tap="onConfirm1" data-name="usesealtype">
+                        确认
+                    </text>
+                </view>
+                <view class="checkro9"></view>
+                <van-checkbox wx:for="{{ section1 }}" wx:key="index" name="{{ item.value }}" value="{{ item.show }}" bind:tap="onChange" data-name="{{item.value}}" class="checkro">
+                    {{ item.text }}
+                </van-checkbox>
             </van-popup>
         </view>
         <view class="check_item">
@@ -67,6 +86,12 @@
             <text class="kind">金额(元)</text>
             <van-cell-group>
                 <van-field data-name="useamount" value="{{info.useamount}}" placeholder="请输入" bind:blur="useamountblur" bind:input="checknum1" />
+            </van-cell-group>
+        </view>
+         <view class="check_item">
+            <text class="kind">其他</text>
+            <van-cell-group>
+                <van-field data-name="Other" value="{{info.Other}}" placeholder="请输入" bind:blur="useamountblur" />
             </van-cell-group>
         </view>
         <view class="check_item">

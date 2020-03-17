@@ -114,7 +114,7 @@
                 <text class="required">*</text>
             </view>
             <van-cell-group>
-                <van-field data-name="overtimehours" value="{{info.overtimehours}}" placeholder="请输入" bind:blur="overtimehoursblur" disabled/>
+                <van-field data-name="overtimehours" value="{{info.overtimehours}}" placeholder="请输入" bind:blur="overtimehoursblur" />
             </van-cell-group>
         </view>
         <view class="check_item">

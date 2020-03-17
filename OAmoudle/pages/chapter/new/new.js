@@ -3,7 +3,7 @@ import Toast from 'vant-weapp/dist/toast/toast';
 import {
   addChapter,
   referChapter,
-  amendChapter
+  amendChapter,
 } from "../../../../service/getData";
 var util = require("../../../../utils/util");
 var app = getApp();
@@ -36,7 +36,7 @@ Page({
   },
   checknum(e) {
     let info = this.data.info;
-    info.usenumber = e.detail.replace(/[^\d]/g,'');
+    info.usenumber = e.detail.replace(/[^\d]/g, '');
     this.setData({
       info
     })
@@ -125,6 +125,44 @@ Page({
       info
     })
   },
+  // 部门
+  showPopup1() {
+    this.setData({
+      show1: true
+    })
+  },
+  onClose1() {
+    this.setData({
+      show1: false
+    });
+  },
+  onConfirm1(e) {
+    var s = this.data.section1
+    var t = s.filter((y) => {
+      return y.show
+    })
+    console.log(t)
+    t = t.map((x) => {
+      return x.text
+    })
+    t = t.join(",")
+    let info = util.editInfo(e, this, t);
+    this.setData({
+      info,
+      show1: false,
+    })
+  },
+  onChange(event) {
+    var s = this.data.section1
+    var y = s.findIndex((r) => {
+      return r.value == event.currentTarget.dataset.name
+    })
+    s[y].show = !s[y].show
+    this.setData({
+      section1: s
+    })
+  },
+
   // 照片
   showPopup_photo() {
     this.setData({
@@ -211,7 +249,14 @@ Page({
     this.setData({
       firms: app.globalData.Companytitle,
       sections: app.globalData.department,
-      Usesealtype: app.globalData.Usesealtype,
+      Usesealtype: app.globalData.Usesealtype
+    })
+    var w = app.globalData.Usesealtype.map(s => {
+      s.show = false
+      return s
+    })
+    this.setData({
+      section1: w
     })
     if (options.id) {
       referChapter({
@@ -225,8 +270,19 @@ Page({
           information: c
         })
         util.handleData(item, this, app.globalData.department);
+        var s = item.usesealtype.split(",")
+        var q = this.data.section1.map(k => {
+          s.map((w) => {
+            if (w == k.text) {
+              k.show = true
+            }
+            return w
+          })
+          return k
+        })
         this.setData({
-          info: item
+          info: item,
+          section1: q
         })
         let info = this.data.info;
         if (!info.department || !info.Companytitle) {
@@ -240,52 +296,4 @@ Page({
     }
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    user = wx.getStorageSync("myInfo");
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

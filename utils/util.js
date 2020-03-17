@@ -100,11 +100,11 @@ const checkContent = (value, key) => {
   }
   var app = getApp();
   // // 请假类别
-  // app.globalData.Leavetypelist.forEach(res => {
-  //   if (value.leavetype == res.text) {
-  //     value.leavetype = res.value
-  //   }
-  // })
+  app.globalData.Leavetypelist.forEach(res => {
+    if (value.leavetype == res.text) {
+      value.leavetype = res.value
+    }
+  })
   // 分包合同类型
   app.globalData.contractType.forEach(res => {
     if (value.contractType == res.text) {
@@ -165,9 +165,9 @@ const checkContent = (value, key) => {
       value.projecttype = res.value
     }
   })
-  // 用章类别
+  // // 用章类别
   app.globalData.Usesealtype.forEach(res => {
-    if (value.usesealtype == res.text) {
+    if (value.usesealtype == res.text && !value.useInfo) {
       value.usesealtype = res.value;
     }
   })
@@ -376,6 +376,20 @@ const checkContent = (value, key) => {
     })
     value.receivedepartment = kinds.join(",");
   }
+  // 用章类型
+  if (value.usesealtype && value.useInfo) {
+    var kinds = [];
+    value.usesealtype.split(",").forEach(res => {
+      app.globalData.Usesealtype.forEach(depart => {
+        if (res == depart.text) {
+          if (kinds.indexOf(depart.value) == -1) {
+            kinds.push(depart.value)
+          }
+        }
+      })
+    })
+    value.usesealtype = kinds.join(",");
+  }
 };
 
 // 判断更改内容...
@@ -459,9 +473,9 @@ const checkChange = (value, key, dep) => {
       value.overtimeperiod = res.value
     }
   })
-  // 用章类别
+  // // 用章类别
   app.globalData.Usesealtype.forEach(res => {
-    if (value.usesealtype == res.text) {
+    if (value.usesealtype == res.text && !value.useInfo) {
       value.usesealtype = res.value;
     }
   })
@@ -679,6 +693,20 @@ const checkChange = (value, key, dep) => {
     })
     value.receivedepartment = kinds.join(",");
   }
+  // 用章类型
+  if (value.usesealtype  && value.useInfo) {
+    var kinds = [];
+    value.usesealtype.split(",").forEach(res => {
+      app.globalData.Usesealtype.forEach(depart => {
+        if (res == depart.text) {
+          if (kinds.indexOf(depart.value) == -1) {
+            kinds.push(depart.value)
+          }
+        }
+      })
+    })
+    value.usesealtype = kinds.join(",");
+  }
 };
 // 处理显示数据
 const handleData = (data, key, dep) => {
@@ -788,9 +816,9 @@ const handleData = (data, key, dep) => {
       })
     }
   })
-  // 用章类别
+  // // 用章类别
   app.globalData.Usesealtype.forEach(res => {
-    if (data.usesealtype == res.value) {
+    if (data.usesealtype == res.value && !data.useInfo) {
       data.usesealtype = res.text;
     }
   })
@@ -998,6 +1026,22 @@ const handleData = (data, key, dep) => {
       })
     })
   }
+  if (data.usesealtype && data.useInfo) {
+    var kinds = [];
+    data.usesealtype.split(",").forEach(res => {
+      app.globalData.Usesealtype.forEach(depart => {
+        if (res == depart.value) {
+          if (kinds.indexOf(depart.text) == -1) {
+            kinds.push(depart.text)
+          }
+          // if (value.mainprojecttype && value.mainprojecttype.split(",").length > kinds.length) {
+          //   kinds.push("**");
+          // }
+          data.usesealtype = kinds.join(",");
+        }
+      })
+    })
+  }
   if (data.amountPlan && data.amountQuantity) {
     let num = (data.amountPlan - data.amountQuantity) / data.amountPlan * 100;
     data.offset = num.toFixed(2) + "%";
@@ -1057,11 +1101,11 @@ const listData = (data, dep, page, list, key, billname) => {
       }
     })
     // // 请假类别
-    // app.globalData.Leavetypelist.forEach(depart => {
-    //   if (value.leavetype == depart.value) {
-    //     value.leavetype = depart.text
-    //   }
-    // })
+    app.globalData.Leavetypelist.forEach(depart => {
+      if (value.leavetype == depart.value) {
+        value.leavetype = depart.text
+      }
+    })
     // 分包合同类型
     app.globalData.contractType.forEach(res => {
       if (value.contractType == res.value) {
@@ -1164,9 +1208,9 @@ const listData = (data, dep, page, list, key, billname) => {
         value.ConstructCompany = res.text;
       }
     })
-    // 用章类别
+    // // 用章类别
     app.globalData.Usesealtype.forEach(res => {
-      if (value.usesealtype == res.value) {
+      if (value.usesealtype == res.value && !value.useInfo) {
         value.usesealtype = res.text;
       }
     })
@@ -1223,22 +1267,22 @@ const listData = (data, dep, page, list, key, billname) => {
       })
     }
 
-    if (value.leavetype) {
-      var kinds = [];
-      value.leavetype.split(",").forEach(res => {
-        app.globalData.Leavetypelist.forEach(depart => {
-          if (res == depart.value) {
-            if (kinds.indexOf(depart.text) == -1) {
-              kinds.push(depart.text)
-            }
-            // if (value.mainprojecttype && value.mainprojecttype.split(",").length > kinds.length) {
-            //   kinds.push("**");
-            // }
-            value.leavetype = kinds.join(",");
-          }
-        })
-      })
-    }
+    // if (value.leavetype) {
+    //   var kinds = [];
+    //   value.leavetype.split(",").forEach(res => {
+    //     app.globalData.Leavetypelist.forEach(depart => {
+    //       if (res == depart.value) {
+    //         if (kinds.indexOf(depart.text) == -1) {
+    //           kinds.push(depart.text)
+    //         }
+    //         // if (value.mainprojecttype && value.mainprojecttype.split(",").length > kinds.length) {
+    //         //   kinds.push("**");
+    //         // }
+    //         value.leavetype = kinds.join(",");
+    //       }
+    //     })
+    //   })
+    // }
     if (value.receivedepartment) {
       var kinds = [];
       value.receivedepartment.split(",").forEach(res => {
@@ -1251,6 +1295,22 @@ const listData = (data, dep, page, list, key, billname) => {
             //   kinds.push("**");
             // }
             value.receivedepartment = kinds.join(",");
+          }
+        })
+      })
+    }
+    if (value.usesealtype && value.useInfo) {
+      var kinds = [];
+      value.usesealtype.split(",").forEach(res => {
+        app.globalData.Usesealtype.forEach(depart => {
+          if (res == depart.value) {
+            if (kinds.indexOf(depart.text) == -1) {
+              kinds.push(depart.text)
+            }
+            // if (value.mainprojecttype && value.mainprojecttype.split(",").length > kinds.length) {
+            //   kinds.push("**");
+            // }
+            value.usesealtype = kinds.join(",");
           }
         })
       })
@@ -2417,9 +2477,9 @@ const intro = (data, that) => {
       data.debitnotetype = s.value
     }
   })
-  // 用章类型
+  // // 用章类型
   app.globalData.Usesealtype.forEach(s => {
-    if (s.text == data.usesealtype) {
+    if (s.text == data.usesealtype && !data.useInfo) {
       data.usesealtype = s.value
     }
   })
@@ -2676,9 +2736,9 @@ const outflow = (data, that) => {
       data.debitnotetype = s.text
     }
   })
-  // 用章类型
+  // // 用章类型
   app.globalData.Usesealtype.forEach(s => {
-    if (s.value == data.usesealtype) {
+    if (s.value == data.usesealtype && !data.useInfo) {
       data.usesealtype = s.text
     }
   })

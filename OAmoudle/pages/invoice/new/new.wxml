@@ -3,12 +3,12 @@
     <view class="header d_header" wx:if="{{info.ID}}">
         <icon class="iconfont icon-jiantou2 fl" bindtap="editreturn"></icon>
         <text class="fr newCreate" bindtap="editconfirm">确定</text>
-        <view class="apply">编辑发票</view>
+        <view class="apply">编辑开发票</view>
     </view>
     <view class="header d_header" wx:else>
         <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
         <text class="fr newCreate" bindtap="confirm">确定</text>
-        <view class="apply">新建发票</view>
+        <view class="apply">新建开发票</view>
     </view>
     <view class="main n_main">
         <van-toast id="van-toast" />
@@ -30,6 +30,14 @@
                 <van-field value="{{info.Companytitle}}" disabled />
             </van-cell-group>
         </view>
+          <view class="check_item">
+            <view class="kind require">
+                <text>对方公司</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="Othercompany" value="{{info.Othercompany}}" placeholder="请输入" bind:blur="invoicenameblur" />
+            </van-cell-group>
+        </view>
         <view class="check_item">
             <view class="kind require">
                 <text>发票名称</text>
@@ -39,7 +47,7 @@
                 <van-field data-name="invoicename" value="{{info.invoicename}}" placeholder="请输入" bind:blur="invoicenameblur" />
             </van-cell-group>
         </view>
-        <view class="check_item">
+        <!-- <view class="check_item">
             <view class="kind require">
                 <text>合同</text>
                 <text class="required">*</text>
@@ -71,7 +79,7 @@
             <van-cell-group>
                 <van-field data-name="projectaddress" value="{{info.projectaddress}}" placeholder="请输入" bind:blur="projectaddressblur" />
             </van-cell-group>
-        </view>
+        </view> -->
         <view class="check_item">
             <view class="kind require">
                 <text>开票类别</text>

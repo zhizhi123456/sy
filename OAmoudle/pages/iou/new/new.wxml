@@ -43,7 +43,7 @@
                 <van-picker data-name="debitnotetype" show-toolbar columns="{{section1}}" bind:cancel="onClose2" bind:confirm="onConfirm2" />
             </van-popup>
         </view>
-        <view class="check_item">
+        <view class="check_item"  wx:if="{{chapter}}">
             <view class="kind require">
                 <text>用章类别</text>
             </view>
@@ -54,7 +54,7 @@
                 <van-picker data-name="usesealtype" show-toolbar columns="{{section2}}" bind:cancel="onClose3" bind:confirm="onConfirm3" />
             </van-popup>
         </view>
-        <view class="check_item">
+        <!-- <view class="check_item">
             <view class="kind require">
                 <text>项目编号</text>
             </view>
@@ -64,8 +64,8 @@
             <van-popup show="{{ show6 }}" round position="bottom" bind:close="onClose6">
                 <van-picker data-name="projectcode" show-toolbar columns="{{section6}}" bind:cancel="onClose6" bind:confirm="onConfirm6" />
             </van-popup>
-        </view>
-        <view class="check_item">
+        </view> -->
+        <!-- <view class="check_item">
             <view class="kind require">
                 <text>分包项目编号</text>
             </view>
@@ -75,8 +75,8 @@
             <van-popup show="{{ show5 }}" round position="bottom" bind:close="onClose5">
                 <van-picker data-name="subprojectcode" show-toolbar columns="{{section5}}" bind:cancel="onClose5" bind:confirm="onConfirm5" />
             </van-popup>
-        </view>
-        <view class="check_item">
+        </view> -->
+        <view class="check_item" wx:if="{{money}}">
             <view class="kind require">
                 <text>金额</text>
             </view>

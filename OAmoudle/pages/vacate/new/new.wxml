@@ -99,7 +99,7 @@
                 <text class="required">*</text>
             </view>
             <van-cell-group>
-                <van-field data-name="leavedays" value="{{info.leavedays}}" placeholder="请输入" bind:blur="leavedaysblur" disabled />
+                <van-field data-name="leavedays" value="{{info.leavedays}}" placeholder="请输入" bind:blur="leavedaysblur"/>
             </van-cell-group>
         </view>
         <view class="check_item">
@@ -107,7 +107,7 @@
                 <text>请假小时</text>
             </view>
             <van-cell-group>
-                <van-field data-name="leavehours" value="{{info.leavehours}}" placeholder="请输入" bind:blur="leavedaysblur" disabled />
+                <van-field data-name="leavehours" value="{{info.leavehours}}" placeholder="请输入" bind:blur="leavedaysblur"/>
             </van-cell-group>
         </view>
         <view class="check_item">
