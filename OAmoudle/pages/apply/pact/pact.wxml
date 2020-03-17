@@ -52,12 +52,12 @@
                                 <van-picker data-name="department" show-toolbar columns="{{ section4 }}" bind:cancel="onClose4" bind:confirm="onConfirm4" />
                             </van-popup>
                         </view>
-                        <view class="seach_item">
+                        <!-- <view class="seach_item">
                             <van-field value="{{info.itemnumber}}" bind:focus="showPopup5" class="time1" title-class="time1" label="项目编号" placeholder="请选择" />
                             <van-popup show="{{show5}}" round position="bottom" bind:close="onClose5">
                                 <van-picker data-name="itemnumber" show-toolbar columns="{{ section5 }}" bind:cancel="onClose5" bind:confirm="onConfirm5" />
                             </van-popup>
-                        </view>
+                        </view> -->
                         <view class="seach_item">
                             <van-field value="{{info.begintime}}" bind:focus="showPopup_time" class="time1" label="进场日期开始时间" placeholder="请选择" />
                             <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
