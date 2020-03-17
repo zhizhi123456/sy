@@ -1,9 +1,9 @@
 import http from '../utils/request.js'
 // 基础类库各项数据
 // 部门
-export const department = () => http.get("/api/MethodOfDataService/Getdepartment");
+export const department = () => http.post("/api/MethodOfDataService/Getdepartment");
 // 公司抬头
-export const Companytitle = () => http.get("/api/MethodOfDataService/GetDictionary");
+export const Companytitle = () => http.post("/api/MethodOfDataService/GetDictionary");
 // 员工
 export const staff = () => http.get("/api/MethodOfDataService/GetMembernew");
 // 来源
@@ -17,7 +17,7 @@ export const Servcietype = () => http.get("/api/MethodOfDataService/GetServciety
 // 总包项目属性
 export const Projectprop = () => http.get("/api/MethodOfDataService/GetProjectprop");
 // 项目类型
-export const Projecttype = () => http.get("/api/MethodOfDataService/GetProjecttype");
+export const Projecttype = () => http.post("/api/MethodOfDataService/GetProjecttype");
 // 工程进度三/回款类型
 export const Progress3 = () => http.get("/api/MethodOfDataService/GetProgress3");
 // 工程进度二
@@ -35,7 +35,7 @@ export const InstallQuality = () => http.get("/api/MethodOfDataService/GetInstal
 // 公司单位
 export const Customer = () => http.get("/api/MethodOfDataService/GetCustomer");
 // 总包项目标题名称
-export const MainProject = () => http.get("/api/MethodOfDataService/GetMainProject");
+export const MainProject = () => http.post("/api/MethodOfDataService/GetMainProject");
 // 工程类别
 export const EngineerClass = () => http.get("/api/MethodOfDataService/GetEngineerClass");
 // 管线落地管道工程进度
@@ -45,27 +45,27 @@ export const Circuit = () => http.get("/api/MethodOfDataService/GetCircuitEngine
 // 用户平移工程进度
 export const Translation = () => http.get("/api/MethodOfDataService/GetTranslationEngineerProgress");
 // 分包项目标题名称
-export const MainSubproject = () => http.get("/api/MethodOfDataService/GetMainSubproject");
+export const MainSubproject = () => http.post("/api/MethodOfDataService/GetMainSubproject");
 // 仓库材料详细
 export const Goodsname = () => http.get("/api/MethodOfDataService/GetGoodsname");
 // 客户类别
 export const ClientType = () => http.get("/api/MethodOfDataService/GetClientType");
 // 供应商
-export const Supplier = () => http.get("/api/MethodOfDataService/GetSupplier");
+export const Supplier = () => http.post("/api/MethodOfDataService/GetSupplier");
 // 总包合同
-export const MaincontactAll = () => http.get("/api/MethodOfDataService/GetMaincontactAll");
+export const MaincontactAll = () => http.post("/api/MethodOfDataService/GetMaincontactAll");
 // 分包合同
-export const Subcontact = () => http.get("/api/MethodOfDataService/GetSubcontact");
+export const Subcontact = () => http.post("/api/MethodOfDataService/GetSubcontact");
 // 采购合同
-export const Purchasecontact = () => http.get("/api/MethodOfDataService/GetPurchasecontact");
+export const Purchasecontact = () => http.post("/api/MethodOfDataService/GetPurchasecontact");
 // 借条类型
-export const Debitnotetype = () => http.get("/api/MethodOfDataService/GetDebitnotetype");
+export const Debitnotetype = () => http.post("/api/MethodOfDataService/GetDebitnotetype");
 // 用章类型
-export const Usesealtype = () => http.get("/api/MethodOfDataService/GetUsesealtype");
+export const Usesealtype = () => http.post("/api/MethodOfDataService/GetUsesealtype");
 // 开票类别
-export const Invoicetype = () => http.get("/api/MethodOfDataService/GetInvoicetype");
+export const Invoicetype = () => http.post("/api/MethodOfDataService/GetInvoicetype");
 // 票率
-export const Invoicefeerate = () => http.get("/api/MethodOfDataService/GetInvoicefeerate");
+export const Invoicefeerate = () => http.post("/api/MethodOfDataService/GetInvoicefeerate");
 // 销售阶段
 export const MarketStage = () => http.get("/api/MethodOfDataService/GetMarketStage");
 // 回款方式
@@ -83,9 +83,9 @@ export const Role = () => http.get("/api/MethodOfDataService/GetRole");
 // 工作流名称
 export const WorkflowName = () => http.get("/api/MethodOfDataService/GetWorkflowName");
 //费用类型
-export const costkind = () => http.get("/api/MethodOfDataService/chargetypeList");
+export const costkind = () => http.post("/api/MethodOfDataService/chargetypeList");
 //费用对象
-export const costobj = () => http.get("/api/MethodOfDataService/usechargemanList");
+export const costobj = () => http.post("/api/MethodOfDataService/usechargemanList");
 //交底类别
 export const IntentionClass = () => http.get("/api/MethodOfDataService/TellIntentionClass");
 // 统计年月

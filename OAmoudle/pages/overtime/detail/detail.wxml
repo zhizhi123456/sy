@@ -162,7 +162,7 @@
         </view>
         <view bindtap="putin" wx:if="{{isnext&&returned}}" data-state='next'>
             <icon class="iconfont icon-tijiao"></icon>
-            <text>审核通过</text>
+             <text>{{info.formid?'审核通过':'确认提交'}}</text>   
         </view>
     </view>
      <view class="seach" wx:if="{{show}}">

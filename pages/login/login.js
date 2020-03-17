@@ -26,7 +26,9 @@ Page({
     hidepwd1: true
   },
   return () {
-    util.returnMenu();
+    wx.redirectTo({
+      url: '/pages/contracts/contracts?grading=2089&title=项目管理'
+    })
   },
   setUser(e) {
     if (!this.data.ifenter) {

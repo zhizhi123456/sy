@@ -66,6 +66,9 @@ Page({
     if (options.id || options.rid) {
       wx.setStorageSync('menus', options)
     }
+    if (options.source) {
+      wx.setStorageSync('carte', options)
+    }
     this.setData({
       'info.state': '所有',
       'info.UserName': userinfo.UserName
