@@ -836,6 +836,7 @@ button.van-button {
     border-radius: 20rpx;
     border: 1rpx solid #ccc;
     padding: 12rpx 10rpx;
+    /* margin-right: 50rpx; */
     background-color: white;
 }
 

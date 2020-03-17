@@ -27,6 +27,7 @@ Page({
     }, {
       name: "从相册选择"
     }],
+    seach: ''
   },
   formatNum(e) { //正则验证金额输入框格式
     e.detail = e.detail.replace(/^(\-)*(\d+)\.(\d{6}).*$/, '$1$2.$3')
@@ -58,64 +59,32 @@ Page({
     })
   },
   finditem() {
-    if (this.data.seach) {
-      let arr = util.findone(app.globalData.PayType, this.data.seach);
-      this.setData({
-        PayType: arr,
-        seach: ''
-      })
-    } else {
-      wx.showToast({
-        title: '请输入搜索内容',
-        icon: 'none',
-        duration: 3000
-      })
-    }
+    let arr = util.findone(app.globalData.PayType, this.data.seach);
+    this.setData({
+      PayType: arr,
+      seach: ''
+    })
   },
   finditem1() {
-    if (this.data.seach) {
-      let arr = util.findone(app.globalData.department, this.data.seach);
-      this.setData({
-        sections: arr,
-        seach: ''
-      })
-    } else {
-      wx.showToast({
-        title: '请输入搜索内容',
-        icon: 'none',
-        duration: 3000
-      })
-    }
+    let arr = util.findone(app.globalData.department, this.data.seach);
+    this.setData({
+      sections: arr,
+      seach: ''
+    })
   },
   finditem2() {
-    if (this.data.seach) {
-      let arr = util.findone(app.globalData.Purchasecontact, this.data.seach);
-      this.setData({
-        Purchasecontact: arr,
-        seach: ''
-      })
-    } else {
-      wx.showToast({
-        title: '请输入搜索内容',
-        icon: 'none',
-        duration: 3000
-      })
-    }
+    let arr = util.findone(app.globalData.Purchasecontact, this.data.seach);
+    this.setData({
+      Purchasecontact: arr,
+      seach: ''
+    })
   },
   finditem3() {
-    if (this.data.seach) {
-      let arr = util.findone(app.globalData.Supplier, this.data.seach);
-      this.setData({
-        Supplier: arr,
-        seach: ''
-      })
-    } else {
-      wx.showToast({
-        title: '请输入搜索内容',
-        icon: 'none',
-        duration: 3000
-      })
-    }
+    let arr = util.findone(app.globalData.Supplier, this.data.seach);
+    this.setData({
+      Supplier: arr,
+      seach: ''
+    })
   },
   // 签报名称
   payapproveformnameblur(e) {

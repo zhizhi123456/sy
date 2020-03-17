@@ -49,7 +49,8 @@ Page({
     materials: [],
     section5: ["红酒", "购物卡", "食品", "烟", "电脑"],
     section6: [],
-    ifpurchasetext: ''
+    ifpurchasetext: '',
+    seach: ''
   },
   setSeach(e) {
     this.setData({
@@ -57,34 +58,11 @@ Page({
     })
   },
   finditem() {
-    if (this.data.seach) {
-      let arr = util.findone(app.globalData.department, this.data.seach);
-      this.setData({
-        section3: arr,
-        seach: ''
-      })
-    } else {
-      wx.showToast({
-        title: '请输入搜索内容',
-        icon: 'none',
-        duration: 3000
-      })
-    }
-  },
-  finditem() {
-    if (this.data.seach) {
-      let arr = util.findone(app.globalData.department, this.data.seach);
-      this.setData({
-        section3: arr,
-        seach: ''
-      })
-    } else {
-      wx.showToast({
-        title: '请输入搜索内容',
-        icon: 'none',
-        duration: 3000
-      })
-    }
+    let arr = util.findone(app.globalData.department, this.data.seach);
+    this.setData({
+      section3: arr,
+      seach: ''
+    })
   },
   // 公司抬头
   showPopup_o() {
@@ -503,20 +481,14 @@ Page({
     }
     var user = wx.getStorageSync("myInfo");
     if (user) {
-      getdep({
-        UserName: user.UserName
-      }).then(res => {
-        console.log(res)
-          var s = JSON.parse(res)
-          if (s.length) {
-          let info = this.data.info;
-          info.department = s[0].techofficename
-          info.Companytitle = s[0].value
-          this.setData({
-            info,
-            departmenttext: s[0].techofficename,
-          })
-        }
+      var message = app.globalData.message
+      console.log(message)
+      let info = this.data.info;
+      info.department = message.departmenttext
+      info.Companytitle = message.Companytitletext
+      this.setData({
+        info,
+        departmenttext: message.departmenttext
       })
     }
   },

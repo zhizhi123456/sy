@@ -38,7 +38,8 @@ Page({
     show1: false,
     show2: false,
     show3: false,
-    show4: false
+    show4: false,
+    seach: ''
   },
   setSeach(e) {
     this.setData({
@@ -46,49 +47,25 @@ Page({
     })
   },
   finditem() {
-    if (this.data.seach) {
-      let arr = util.findone(app.globalData.department, this.data.seach);
-      this.setData({
-        sections: arr,
-        seach: ''
-      })
-    } else {
-      wx.showToast({
-        title: '请输入搜索内容',
-        icon: 'none',
-        duration: 3000
-      })
-    }
+    let arr = util.findone(app.globalData.department, this.data.seach);
+    this.setData({
+      sections: arr,
+      seach: ''
+    })
   },
   finditem1() {
-    if (this.data.seach) {
-      let arr = util.findone(app.globalData.costobj, this.data.seach);
-      this.setData({
-        section2: arr,
-        seach: ''
-      })
-    } else {
-      wx.showToast({
-        title: '请输入搜索内容',
-        icon: 'none',
-        duration: 3000
-      })
-    }
+    let arr = util.findone(app.globalData.costobj, this.data.seach);
+    this.setData({
+      section2: arr,
+      seach: ''
+    })
   },
   finditem2() {
-    if (this.data.seach) {
-      let arr = util.findone(app.globalData.costkind, this.data.seach);
-      this.setData({
-        section3: arr,
-        seach: ''
-      })
-    } else {
-      wx.showToast({
-        title: '请输入搜索内容',
-        icon: 'none',
-        duration: 3000
-      })
-    }
+    let arr = util.findone(app.globalData.costkind, this.data.seach);
+    this.setData({
+      section3: arr,
+      seach: ''
+    })
   },
   // 总包项目名称
   projectnameblur(e) {
@@ -274,7 +251,7 @@ Page({
     })
     var user = wx.getStorageSync("myInfo");
     if (user) {
-      var message = wx.getStorageSync("message");
+      var message = app.globalData.message
       console.log(message)
       let info = this.data.info;
       info.department = message.departmenttext

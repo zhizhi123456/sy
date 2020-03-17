@@ -49,7 +49,8 @@ Page({
     }],
     goods: true,
     money: true,
-    chapter: true
+    chapter: true,
+    seach: ''
   },
   setSeach(e) {
     this.setData({
@@ -57,49 +58,25 @@ Page({
     })
   },
   finditem() {
-    if (this.data.seach) {
-      let arr = util.findone(app.globalData.department, this.data.seach);
-      this.setData({
-        sections: arr,
-        seach: ''
-      })
-    } else {
-      wx.showToast({
-        title: '请输入搜索内容',
-        icon: 'none',
-        duration: 3000
-      })
-    }
+    let arr = util.findone(app.globalData.department, this.data.seach);
+    this.setData({
+      sections: arr,
+      seach: ''
+    })
   },
   finditem1() {
-    if (this.data.seach) {
-      let arr = util.findone(app.globalData.Debitnotetype, this.data.seach);
-      this.setData({
-        section1: arr,
-        seach: ''
-      })
-    } else {
-      wx.showToast({
-        title: '请输入搜索内容',
-        icon: 'none',
-        duration: 3000
-      })
-    }
+    let arr = util.findone(app.globalData.Debitnotetype, this.data.seach);
+    this.setData({
+      section1: arr,
+      seach: ''
+    })
   },
   finditem2() {
-    if (this.data.seach) {
-      let arr = util.findone(app.globalData.Usesealtype, this.data.seach);
-      this.setData({
-        section2: arr,
-        seach: ''
-      })
-    } else {
-      wx.showToast({
-        title: '请输入搜索内容',
-        icon: 'none',
-        duration: 3000
-      })
-    }
+    let arr = util.findone(app.globalData.Usesealtype, this.data.seach);
+    this.setData({
+      section2: arr,
+      seach: ''
+    })
   },
   // 图片
   showPopup_photo() {
@@ -361,7 +338,7 @@ Page({
     })
     var user = wx.getStorageSync("myInfo");
     if (user) {
-      var message = wx.getStorageSync("message");
+      var message = app.globalData.message
       console.log(message)
       let info = this.data.info;
       info.department = message.departmenttext

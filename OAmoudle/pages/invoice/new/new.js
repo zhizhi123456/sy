@@ -15,9 +15,9 @@ Page({
   data: {
     info: {
       API_Picurl: [],
-      contactid:'1',
-      projectid:'2',
-      projectaddress:'3'
+      contactid: '1',
+      projectid: '2',
+      projectaddress: '3'
     },
     show: false,
     firms: [],
@@ -28,6 +28,7 @@ Page({
     }, {
       name: "从相册选择"
     }],
+    seach: ''
   },
   setSeach(e) {
     this.setData({
@@ -35,70 +36,38 @@ Page({
     })
   },
   finditem() {
-    if (this.data.seach) {
-      let arr = util.findone(app.globalData.department, this.data.seach);
-      this.setData({
-        sections: arr,
-        seach: ''
-      })
-    } else {
-      wx.showToast({
-        title: '请输入搜索内容',
-        icon: 'none',
-        duration: 3000
-      })
-    }
+    let arr = util.findone(app.globalData.department, this.data.seach);
+    this.setData({
+      sections: arr,
+      seach: ''
+    })
   },
   finditem1() {
-    if (this.data.seach) {
-      let arr = util.findone(app.globalData.Invoicetype, this.data.seach);
-      this.setData({
-        Invoicetype: arr,
-        seach: ''
-      })
-    } else {
-      wx.showToast({
-        title: '请输入搜索内容',
-        icon: 'none',
-        duration: 3000
-      })
-    }
+    let arr = util.findone(app.globalData.Invoicetype, this.data.seach);
+    this.setData({
+      Invoicetype: arr,
+      seach: ''
+    })
   },
   finditem2() {
-    if (this.data.seach) {
-      let arr = util.findone(app.globalData.Invoicefeerate, this.data.seach);
-      this.setData({
-        Invoicefeerate: arr,
-        seach: ''
-      })
-    } else {
-      wx.showToast({
-        title: '请输入搜索内容',
-        icon: 'none',
-        duration: 3000
-      })
-    }
+    let arr = util.findone(app.globalData.Invoicefeerate, this.data.seach);
+    this.setData({
+      Invoicefeerate: arr,
+      seach: ''
+    })
   },
   finditem3() {
-    if (this.data.seach) {
-      let arr = util.findone(app.globalData.billing, this.data.seach);
-      this.setData({
-        billing: arr,
-        seach: ''
-      })
-    } else {
-      wx.showToast({
-        title: '请输入搜索内容',
-        icon: 'none',
-        duration: 3000
-      })
-    }
+    let arr = util.findone(app.globalData.billing, this.data.seach);
+    this.setData({
+      billing: arr,
+      seach: ''
+    })
   },
   // 部门
   showPopup_o() {
     this.setData({
       show_o: true,
-      seach:''
+      seach: ''
     });
   },
   onClose_o() {
@@ -195,7 +164,7 @@ Page({
   showPopup_3() {
     this.setData({
       show_3: true,
-      seach:''
+      seach: ''
     });
   },
   onClose_3() {
@@ -214,7 +183,7 @@ Page({
   showPopup_4() {
     this.setData({
       show_4: true,
-      seach:''
+      seach: ''
     });
   },
   onClose_4() {
@@ -240,7 +209,7 @@ Page({
   showPopup_5() {
     this.setData({
       show_5: true,
-      seach:''
+      seach: ''
     });
   },
   onClose_5() {
@@ -336,7 +305,7 @@ Page({
           icon: 'success',
           duration: 3000
         })
-        util.ModifyRecord(this.data.information,"invoice")
+        util.ModifyRecord(this.data.information, "invoice")
         util.OAreturn('invoice', this);
       }
     })
@@ -356,14 +325,14 @@ Page({
     })
     var user = wx.getStorageSync("myInfo");
     if (user) {
-      var message = wx.getStorageSync("message");
+      var message = app.globalData.message
       console.log(message)
       let info = this.data.info;
       info.department = message.department
       info.Companytitle = message.Companytitletext
       this.setData({
         info,
-        departmenttext:message.departmenttext
+        departmenttext: message.departmenttext
       })
     }
     if (options.id) {
@@ -372,11 +341,11 @@ Page({
       }).then(res => {
         // console.log(res)
         let item = res.Item;
-        var data1 =res.Item
+        var data1 = res.Item
         var b = JSON.stringify(data1)
-        var c  = JSON.parse(b)
+        var c = JSON.parse(b)
         this.setData({
-          information:c
+          information: c
         })
         util.handleData(item, this, app.globalData.department);
         this.setData({

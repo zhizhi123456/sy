@@ -175,27 +175,36 @@ Page({
           wx.setStorageSync("myInfo", res.Item)
           wx.setStorageSync("username", this.data.username)
           wx.setStorageSync("password", this.data.password)
-          // 跳转到首页
-          var user = wx.getStorageSync("myInfo");
-          if (user) {
+          // 跳转到首
+          if (this.data.username) {
             getdep({
-              UserName: user.UserName
+              UserName: this.data.username
             }).then(res => {
-              // console.log(res)
+              console.log(res)
               if (res) {
                 var s = JSON.parse(res)
-                var info = {
-                  Companytitle: s[0].company,
-                  Companytitletext: s[0].value,
-                  department: s[0].ID,
-                  departmenttext: s[0].techofficename,
-                  userId: s[0].userId
+                if(!(s.lengtn<1)){
+                  var info = {
+                    Companytitle: s[0].company,
+                    Companytitletext: s[0].value,
+                    department: s[0].ID,
+                    departmenttext: s[0].techofficename,
+                    userId: s[0].userId
+                  }
+                  app.globalData.message = info
+                  console.log(app.globalData.message)
+                }else{
+                  wx.showToast({
+                    title: '获取用户信息失败',
+                    icon: "none",
+                    duration: 2000
+                  })
                 }
-                wx.setStorageSync("message", info)
+               
               }
             })
-            util.sumup1(getstaff, app, 'getstaff', "name", "userId", user.UserName);
-            util.sumup1(getdept, app, 'getdept', "techofficename", "id", user.UserName);
+            util.sumup1(getstaff, app, 'getstaff', "name", "userId", this.data.username);
+            util.sumup1(getdept, app, 'getdept', "techofficename", "id", this.data.username);
           }
           wx.redirectTo({
             url: '/pages/contracts/contracts?grading=2089&title=项目管理'

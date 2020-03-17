@@ -64,7 +64,7 @@
             <van-popup show="{{ show_1 }}" round position="bottom" bind:close="onClose_1">
                 <view class="Cseach">
                     <input value="{{seach}}" bindinput="setSeach" placeholder="请输入搜索内容" />
-                    <button size="mini" bindtap="finditem">搜索</button>
+                    <button size="mini" bindtap="finditem1">搜索</button>
                 </view>
                 <van-picker data-name="leavetype" show-toolbar columns="{{ Leavetypelist }}" bind:cancel="onClose_1" bind:confirm="onConfirm_1" />
             </van-popup>

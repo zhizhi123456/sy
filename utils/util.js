@@ -694,7 +694,7 @@ const checkChange = (value, key, dep) => {
     value.receivedepartment = kinds.join(",");
   }
   // 用章类型
-  if (value.usesealtype  && value.useInfo) {
+  if (value.usesealtype && value.useInfo) {
     var kinds = [];
     value.usesealtype.split(",").forEach(res => {
       app.globalData.Usesealtype.forEach(depart => {
@@ -3342,10 +3342,10 @@ const formatNum = (k) => { //正则验证金额输入框格式
 
 const findone = (get, data, key) => {
   let newarr = [];
-  let reg = new RegExp(data, 'g');
-  // let newarr = reg.exec(get);
+  let reg = new RegExp(data);
   get.forEach((item, index) => {
-    if (reg.exec(JSON.stringify(item))) {
+    let str = JSON.stringify(item);
+    if (reg.test(str)) {
       newarr.push(get[index])
     }
   })
@@ -3361,6 +3361,7 @@ const findone = (get, data, key) => {
   }
 }
 module.exports = {
+
   formatNum,
   readRecordlist,
   multiple,

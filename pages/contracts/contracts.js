@@ -281,6 +281,7 @@ Page({
           // ////console.log('用户点击确定')
           wx.removeStorageSync("myInfo");
           wx.removeStorageSync("principal");
+          wx.clearStorage()
           wx.redirectTo({
             url: '/pages/login/login'
           })

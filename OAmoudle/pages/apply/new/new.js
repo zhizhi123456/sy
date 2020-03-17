@@ -58,7 +58,8 @@ Page({
     section4: [],
     materials: [],
     section5: [],
-    detailID: null
+    detailID: null,
+    seach: ''
   },
   setSeach(e) {
     this.setData({
@@ -66,19 +67,11 @@ Page({
     })
   },
   finditem() {
-    if (this.data.seach) {
-      let arr = util.findone(app.globalData.department, this.data.seach);
-      this.setData({
-        sections: arr,
-        seach: ''
-      })
-    } else {
-      wx.showToast({
-        title: '请输入搜索内容',
-        icon: 'none',
-        duration: 3000
-      })
-    }
+    let arr = util.findone(app.globalData.department, this.data.seach);
+    this.setData({
+      sections: arr,
+      seach: ''
+    })
   },
   // 项目编号
   showPopup1() {
@@ -680,7 +673,7 @@ Page({
     })
     var user = wx.getStorageSync("myInfo");
     if (user) {
-      var message = wx.getStorageSync("message");
+      var message = app.globalData.message
       console.log(message)
       let info = this.data.info;
       info.department = message.departmenttext

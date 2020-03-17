@@ -449,21 +449,14 @@ Page({
     }
     var user = wx.getStorageSync("myInfo");
     if (user) {
-      getdep({
-        UserName: user.UserName
-      }).then(res => {
-        console.log(res)
-        if (res) {
-          var s = JSON.parse(res)
-          console.log(s)
-          let info = this.data.info;
-          info.department = s[0].techofficename
-          info.Companytitle = s[0].value
-          this.setData({
-            info,
-            departmenttext: s[0].techofficename,
-          })
-        }
+      var message = app.globalData.message
+      console.log(message)
+      let info = this.data.info;
+      info.department = message.departmenttext
+      info.Companytitle = message.Companytitletext
+      this.setData({
+        info,
+        departmenttext:message.departmenttext
       })
     }
   },

@@ -32,7 +32,8 @@ Page({
     show_time: false,
     sections: [],
     firms: [],
-    totals: []
+    totals: [],
+    seach: ''
   },
   setSeach(e) {
     this.setData({
@@ -40,19 +41,11 @@ Page({
     })
   },
   finditem() {
-    if (this.data.seach) {
       let arr = util.findone(app.globalData.department, this.data.seach);
       this.setData({
         sections: arr,
         seach: ''
       })
-    } else {
-      wx.showToast({
-        title: '请输入搜索内容',
-        icon: 'none',
-        duration: 3000
-      })
-    }
   },
   // 部门
   showPopup_o() {
@@ -306,7 +299,7 @@ Page({
     // 固定部门及公司负责人
     var user = wx.getStorageSync("myInfo");
     if (user) {
-      var message = wx.getStorageSync("message");
+      var message = app.globalData.message
       let info = this.data.info;
       info.department = message.department
       info.Companytitle = message.Companytitletext

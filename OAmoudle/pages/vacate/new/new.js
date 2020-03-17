@@ -33,6 +33,7 @@ Page({
     leavetypetext: '',
     mindata: new Date().getTime(),
     maxdata: (new Date().getTime()) + 60 * 60 * 1000 * 24 * 30,
+    seach: ''
   },
   setSeach(e) {
     this.setData({
@@ -40,19 +41,18 @@ Page({
     })
   },
   finditem() {
-    if (this.data.seach) {
-      let arr = util.findone(app.globalData.Leavetypelist, this.data.seach);
-      this.setData({
-        Leavetypelist: arr,
-        seach: ''
-      })
-    } else {
-      wx.showToast({
-        title: '请输入搜索内容',
-        icon: 'none',
-        duration: 3000
-      })
-    }
+    let arr = util.findone(app.globalData.department, this.data.seach);
+    this.setData({
+      sections: arr,
+      seach: ''
+    })
+  },
+  finditem1() {
+    let arr = util.findone(app.globalData.Leavetypelist, this.data.seach);
+    this.setData({
+      Leavetypelist: arr,
+      seach: ''
+    })
   },
   // 请假事由
   leavereasonblur(e) {
@@ -118,7 +118,8 @@ Page({
   // 部门
   showPopup_o() {
     this.setData({
-      show_o: true
+      show_o: true,
+      seach: ''
     });
   },
   onClose_o() {
@@ -396,22 +397,16 @@ Page({
         })
       })
     }
-    user = wx.getStorageSync("myInfo");
+    var user = wx.getStorageSync("myInfo");
     if (user) {
-      getdep({
-        UserName: user.UserName
-      }).then(res => {
-        console.log(res)
-        if (res) {
-          var s = JSON.parse(res)
-          let info = this.data.info;
-          info.department = s[0].techofficename
-          info.Companytitle = s[0].value
-          this.setData({
-            info,
-            departmenttext: s[0].techofficename,
-          })
-        }
+      var message = app.globalData.message
+      console.log(message)
+      let info = this.data.info;
+      info.department = message.department
+      info.Companytitle = message.Companytitletext
+      this.setData({
+        info,
+        departmenttext: message.departmenttext
       })
     }
     let info = this.data.info;
