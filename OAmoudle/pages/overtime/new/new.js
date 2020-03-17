@@ -26,8 +26,9 @@ Page({
       name: "从相册选择"
     }],
     currentDate: new Date().getTime(),
-    mindata: (new Date().getTime())- 60 * 60 * 1000 * 24 * 7,
+    mindata: (new Date().getTime()) - 60 * 60 * 1000 * 24 * 7,
     maxdata: (new Date().getTime()) + 60 * 60 * 1000 * 24 * 30,
+    seach: ''
   },
   setSeach(e) {
     this.setData({
@@ -35,49 +36,25 @@ Page({
     })
   },
   finditem() {
-    if (this.data.seach) {
-      let arr = util.findone(app.globalData.department, this.data.seach);
-      this.setData({
-        sections: arr,
-        seach: ''
-      })
-    } else {
-      wx.showToast({
-        title: '请输入搜索内容',
-        icon: 'none',
-        duration: 3000
-      })
-    }
+    let arr = util.findone(app.globalData.department, this.data.seach);
+    this.setData({
+      sections: arr,
+      seach: ''
+    })
   },
   finditem1() {
-    if (this.data.seach) {
-      let arr = util.findone(app.globalData.GetOverworktype, this.data.seach);
-      this.setData({
-        GetOverworktype: arr,
-        seach: ''
-      })
-    } else {
-      wx.showToast({
-        title: '请输入搜索内容',
-        icon: 'none',
-        duration: 3000
-      })
-    }
+    let arr = util.findone(app.globalData.GetOverworktype, this.data.seach);
+    this.setData({
+      GetOverworktype: arr,
+      seach: ''
+    })
   },
   finditem2() {
-    if (this.data.seach) {
-      let arr = util.findone(app.globalData.GetOvertimeperiod, this.data.seach);
-      this.setData({
-        GetOvertimeperiod: arr,
-        seach: ''
-      })
-    } else {
-      wx.showToast({
-        title: '请输入搜索内容',
-        icon: 'none',
-        duration: 3000
-      })
-    }
+    let arr = util.findone(app.globalData.GetOvertimeperiod, this.data.seach);
+    this.setData({
+      GetOvertimeperiod: arr,
+      seach: ''
+    })
   },
   // 加班事由
   workoverreasonblur(e) {
@@ -90,7 +67,7 @@ Page({
   showPopup_o() {
     this.setData({
       show_o: true,
-      seach:''
+      seach: ''
     });
   },
   onClose_o() {
@@ -128,7 +105,7 @@ Page({
   showPopup_1() {
     this.setData({
       show_1: true,
-      seach:''
+      seach: ''
     });
   },
   onClose_1() {
@@ -190,11 +167,11 @@ Page({
           duration: 3000
         })
         this.setData({
-          "info.actovertime":'',
-          "info.overworkendtime":'',
+          "info.actovertime": '',
+          "info.overworkendtime": '',
           currentDate: new Date().getTime(),
-    mindata: (new Date().getTime())- 60 * 60 * 1000 * 24 * 7,
-    maxdata: (new Date().getTime()) + 60 * 60 * 1000 * 24 * 30,
+          mindata: (new Date().getTime()) - 60 * 60 * 1000 * 24 * 7,
+          maxdata: (new Date().getTime()) + 60 * 60 * 1000 * 24 * 30,
         })
         this.number()
       } else {
@@ -229,20 +206,20 @@ Page({
     // var day
     // if (hours < 24) {
     //   day = 0
-      this.setData({
-        "info.overtimehours": hours,
-      })
+    this.setData({
+      "info.overtimehours": hours,
+    })
     // } else {
     //   this.setData({
     //     "info.overtimehours": parseInt(hours / 24)+'天'+(hours % 24)+'小时',
     //   })
     // }
   },
-   // 加班时期
-   showPopup_2() {
+  // 加班时期
+  showPopup_2() {
     this.setData({
       show_2: true,
-      seach:''
+      seach: ''
     });
   },
   onClose_2() {
@@ -369,7 +346,7 @@ Page({
         util.handleData(item, this, app.globalData.department);
         this.setData({
           info: item
-        }) 
+        })
         let info = this.data.info;
         if (!info.department || !info.Companytitle) {
           util.userdep(user, this);
