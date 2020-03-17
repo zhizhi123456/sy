@@ -680,7 +680,7 @@ Page({
     })
     var user = wx.getStorageSync("myInfo");
     if (user) {
-      var message = wx.getStorageSync("message");
+      var message = app.globalData.message
       console.log(message)
       let info = this.data.info;
       info.department = message.departmenttext

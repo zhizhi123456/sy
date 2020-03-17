@@ -828,7 +828,7 @@ button.van-button {
     z-index: 999;
     background-color: teal;
     display: flex;
-    justify-content: space-around;
+    width: 100%;
     padding: 15rpx 70rpx;
 }
 
@@ -836,7 +836,7 @@ button.van-button {
     border-radius: 20rpx;
     border: 1rpx solid #ccc;
     padding: 12rpx 10rpx;
-    margin-right: 50rpx;
+    /* margin-right: 50rpx; */
     background-color: white;
 }
 

@@ -195,6 +195,7 @@ App({
     }
   },
   globalData: {
+    message:'',
     getdept:'',
     getstaff:'',
     mapadress: "",

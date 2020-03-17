@@ -185,7 +185,7 @@ Page({
     })
     var user = wx.getStorageSync("myInfo");
     if (user) {
-      var message = wx.getStorageSync("message");
+      var message = app.globalData.message
       console.log(message)
       let  materials = this.data.materials;
       materials[0].chargeman = message.userId

@@ -306,7 +306,7 @@ Page({
     // 固定部门及公司负责人
     var user = wx.getStorageSync("myInfo");
     if (user) {
-      var message = wx.getStorageSync("message");
+      var message = app.globalData.message
       let info = this.data.info;
       info.department = message.department
       info.Companytitle = message.Companytitletext
