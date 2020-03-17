@@ -34,6 +34,26 @@ Page({
     mindata: new Date().getTime(),
     maxdata: (new Date().getTime()) + 60 * 60 * 1000 * 24 * 30,
   },
+  setSeach(e) {
+    this.setData({
+      seach: e.detail.value
+    })
+  },
+  finditem() {
+    if (this.data.seach) {
+      let arr = util.findone(app.globalData.Leavetypelist, this.data.seach);
+      this.setData({
+        Leavetypelist: arr,
+        seach: ''
+      })
+    } else {
+      wx.showToast({
+        title: '请输入搜索内容',
+        icon: 'none',
+        duration: 3000
+      })
+    }
+  },
   // 请假事由
   leavereasonblur(e) {
     let info = util.editInfo(e, this, e.detail.value);
@@ -218,12 +238,12 @@ Page({
     if (hours < 24) {
       day = 0
       this.setData({
-        "info.leavedays": 0+1,
+        "info.leavedays": 0 + 1,
         "info.leavehours": hours,
       })
     } else {
       this.setData({
-        "info.leavedays": (parseInt(hours / 24))+1,
+        "info.leavedays": (parseInt(hours / 24)) + 1,
         "info.leavehours": hours % 24,
       })
     }

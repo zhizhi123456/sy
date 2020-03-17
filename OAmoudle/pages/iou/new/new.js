@@ -51,6 +51,56 @@ Page({
     money: true,
     chapter: true
   },
+  setSeach(e) {
+    this.setData({
+      seach: e.detail.value
+    })
+  },
+  finditem() {
+    if (this.data.seach) {
+      let arr = util.findone(app.globalData.department, this.data.seach);
+      this.setData({
+        sections: arr,
+        seach: ''
+      })
+    } else {
+      wx.showToast({
+        title: '请输入搜索内容',
+        icon: 'none',
+        duration: 3000
+      })
+    }
+  },
+  finditem1() {
+    if (this.data.seach) {
+      let arr = util.findone(app.globalData.Debitnotetype, this.data.seach);
+      this.setData({
+        section1: arr,
+        seach: ''
+      })
+    } else {
+      wx.showToast({
+        title: '请输入搜索内容',
+        icon: 'none',
+        duration: 3000
+      })
+    }
+  },
+  finditem2() {
+    if (this.data.seach) {
+      let arr = util.findone(app.globalData.Usesealtype, this.data.seach);
+      this.setData({
+        section2: arr,
+        seach: ''
+      })
+    } else {
+      wx.showToast({
+        title: '请输入搜索内容',
+        icon: 'none',
+        duration: 3000
+      })
+    }
+  },
   // 图片
   showPopup_photo() {
     this.setData({
@@ -109,7 +159,8 @@ Page({
   // 部门
   showPopup1() {
     this.setData({
-      show1: true
+      show1: true,
+      seach: ''
     })
   },
   onClose1() {
@@ -128,7 +179,8 @@ Page({
   // 所有人
   showPopup2() {
     this.setData({
-      show2: true
+      show2: true,
+      seach: ""
     })
   },
   onClose2() {
@@ -165,7 +217,8 @@ Page({
   // 用章类型
   showPopup3() {
     this.setData({
-      show3: true
+      show3: true,
+      seach: ''
     })
   },
   onClose3() {
@@ -352,7 +405,7 @@ Page({
             money: false,
           })
         }
-       
+
       })
     }
   },

@@ -17,11 +17,15 @@
                 <text>部门</text>
                 <text class="required">*</text>
             </view>
-             <van-field data-name="department" value="{{departmenttext}}" disabled />
-            <!-- <van-cell title="{{departmenttext}}" is-link bind:click="showPopup_o" />
+             <!-- <van-field data-name="department" value="{{departmenttext}}" disabled /> -->
+            <van-cell title="{{departmenttext}}" is-link bind:click="showPopup_o" />
             <van-popup show="{{show_o}}" round position="bottom" bind:close="onClose_o">
+                <view class="Cseach">
+                    <input value="{{seach}}" bindinput="setSeach" placeholder="请输入搜索内容" />
+                    <button size="mini" bindtap="finditem">搜索</button>
+                </view>
                 <van-picker data-name="department" show-toolbar columns="{{ sections }}" bind:cancel="onClose_o" bind:confirm="onConfirm_o" />
-            </van-popup> -->
+            </van-popup>
         </view>
         <view class="check_item">
             <view class="kind require">

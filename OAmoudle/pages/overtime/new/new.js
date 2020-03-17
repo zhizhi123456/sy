@@ -29,6 +29,56 @@ Page({
     mindata: (new Date().getTime())- 60 * 60 * 1000 * 24 * 7,
     maxdata: (new Date().getTime()) + 60 * 60 * 1000 * 24 * 30,
   },
+  setSeach(e) {
+    this.setData({
+      seach: e.detail.value
+    })
+  },
+  finditem() {
+    if (this.data.seach) {
+      let arr = util.findone(app.globalData.department, this.data.seach);
+      this.setData({
+        sections: arr,
+        seach: ''
+      })
+    } else {
+      wx.showToast({
+        title: '请输入搜索内容',
+        icon: 'none',
+        duration: 3000
+      })
+    }
+  },
+  finditem1() {
+    if (this.data.seach) {
+      let arr = util.findone(app.globalData.GetOverworktype, this.data.seach);
+      this.setData({
+        GetOverworktype: arr,
+        seach: ''
+      })
+    } else {
+      wx.showToast({
+        title: '请输入搜索内容',
+        icon: 'none',
+        duration: 3000
+      })
+    }
+  },
+  finditem2() {
+    if (this.data.seach) {
+      let arr = util.findone(app.globalData.GetOvertimeperiod, this.data.seach);
+      this.setData({
+        GetOvertimeperiod: arr,
+        seach: ''
+      })
+    } else {
+      wx.showToast({
+        title: '请输入搜索内容',
+        icon: 'none',
+        duration: 3000
+      })
+    }
+  },
   // 加班事由
   workoverreasonblur(e) {
     let info = util.editInfo(e, this, e.detail.value);
@@ -39,7 +89,8 @@ Page({
   // 部门
   showPopup_o() {
     this.setData({
-      show_o: true
+      show_o: true,
+      seach:''
     });
   },
   onClose_o() {
@@ -76,7 +127,8 @@ Page({
   // 加班类型
   showPopup_1() {
     this.setData({
-      show_1: true
+      show_1: true,
+      seach:''
     });
   },
   onClose_1() {
@@ -189,7 +241,8 @@ Page({
    // 加班时期
    showPopup_2() {
     this.setData({
-      show_2: true
+      show_2: true,
+      seach:''
     });
   },
   onClose_2() {

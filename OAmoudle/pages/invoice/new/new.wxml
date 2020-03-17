@@ -17,9 +17,17 @@
                 <text>部门</text>
                 <text class="required">*</text>
             </view>
-            <van-cell-group>
+            <!-- <van-cell-group>
                 <van-field value="{{departmenttext}}" disabled />
-            </van-cell-group>
+            </van-cell-group> -->
+            <van-cell title="{{departmenttext}}" bind:click="showPopup_o" />
+            <van-popup show="{{show_o}}" round position="bottom" bind:close="onClose_o">
+                <view class="Cseach">
+                    <input value="{{seach}}" bindinput="setSeach" placeholder="请输入搜索内容" />
+                    <button size="mini" bindtap="finditem">搜索</button>
+                </view>
+                <van-picker data-name="department" show-toolbar columns="{{ sections }}" bind:cancel="onClose_o" bind:confirm="onConfirm_o" />
+            </van-popup>
         </view>
         <view class="check_item">
             <view class="kind require">
@@ -30,7 +38,7 @@
                 <van-field value="{{info.Companytitle}}" disabled />
             </van-cell-group>
         </view>
-          <view class="check_item">
+        <view class="check_item">
             <view class="kind require">
                 <text>对方公司</text>
             </view>
@@ -89,6 +97,10 @@
                 <icon class="iconfont icon-jiantou" />
             </van-cell>
             <van-popup show="{{ show_3 }}" round position="bottom" bind:close="onClose_3">
+                <view class="Cseach">
+                    <input value="{{seach}}" bindinput="setSeach" placeholder="请输入搜索内容" />
+                    <button size="mini" bindtap="finditem1">搜索</button>
+                </view>
                 <van-picker data-name="invoicetype" show-toolbar columns="{{ Invoicetype }}" bind:cancel="onClose_3" bind:confirm="onConfirm_3" />
             </van-popup>
         </view>
@@ -101,6 +113,10 @@
                 <icon class="iconfont icon-jiantou" />
             </van-cell>
             <van-popup show="{{ show_4 }}" round position="bottom" bind:close="onClose_4">
+                <view class="Cseach">
+                    <input value="{{seach}}" bindinput="setSeach" placeholder="请输入搜索内容" />
+                    <button size="mini" bindtap="finditem2">搜索</button>
+                </view>
                 <van-picker data-name="invoicefeerate" show-toolbar columns="{{ Invoicefeerate }}" bind:cancel="onClose_4" bind:confirm="onConfirm_4" />
             </van-popup>
         </view>
@@ -119,6 +135,10 @@
                 <icon class="iconfont icon-jiantou" />
             </van-cell>
             <van-popup show="{{ show_5 }}" round position="bottom" bind:close="onClose_5">
+                <view class="Cseach">
+                    <input value="{{seach}}" bindinput="setSeach" placeholder="请输入搜索内容" />
+                    <button size="mini" bindtap="finditem3">搜索</button>
+                </view>
                 <van-picker data-name="invoiceinfo" show-toolbar columns="{{ billing }}" bind:cancel="onClose_5" bind:confirm="onConfirm_5" />
             </van-popup>
         </view>

@@ -72,7 +72,7 @@
                         <text class="required">*</text>
                     </view>
                     <van-cell-group>
-                        <van-field value="{{item.quantity}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' data-name='quantity'  bind:input="checknum"  />
+                        <van-field value="{{item.quantity}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' data-name='quantity' bind:input="checknum" />
                     </van-cell-group>
                 </view>
                 <view class="check_item">
@@ -110,7 +110,7 @@
                 <van-field data-name="purpose" value="{{info.purpose }}" placeholder="请输入" bind:blur="subprojectnameblur" />
             </van-cell-group>
         </view>
-         <view class="check_item">
+        <view class="check_item">
             <view class="kind require">
                 <text>申请人</text>
                 <text class="required">*</text>
@@ -119,7 +119,7 @@
                 <van-field value="{{info.applyman}}" disabled />
             </van-cell-group>
         </view>
-           <view class="check_item">
+        <view class="check_item">
             <view class="kind require">
                 <text>公司抬头</text>
                 <text class="required">*</text>
@@ -128,14 +128,22 @@
                 <van-field value="{{info.Companytitle}}" disabled />
             </van-cell-group>
         </view>
-         <view class="check_item">
+        <view class="check_item">
             <view class="kind require">
                 <text>部门</text>
                 <text class="required">*</text>
             </view>
-            <van-cell-group>
+            <!-- <van-cell-group>
                 <van-field value="{{info.department}}" disabled />
-            </van-cell-group>
+            </van-cell-group> -->
+            <van-cell title="{{info.department?info.department:'请选择'}}" bind:click="showPopup" />
+            <van-popup show="{{show}}" round position="bottom" bind:close="onClose">
+                <view class="Cseach">
+                    <input value="{{seach}}" bindinput="setSeach" placeholder="请输入搜索内容" />
+                    <button size="mini" bindtap="finditem">搜索</button>
+                </view>
+                <van-picker data-name="department" show-toolbar columns="{{ sections }}" bind:cancel="onClose" bind:confirm="onConfirm" />
+            </van-popup>
         </view>
         <view class="check_item">
             <view class="kind">
@@ -168,7 +176,7 @@
                 <van-field data-name="enterstate" value="{{info.enterstate}}" placeholder="请输入" bind:blur="subprojectnameblur" />
             </van-cell-group>
         </view>
-         <!-- <view class="check_item">
+        <!-- <view class="check_item">
             <view class="kind require">
                 <text>项目编号</text>
                 <text class="required">*</text>
@@ -253,7 +261,7 @@
                         <text class="required">*</text>
                     </view>
                     <van-cell-group>
-                        <van-field value="{{item.quantity}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' data-name='quantity'  bind:input="checknum"  />
+                        <van-field value="{{item.quantity}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' data-name='quantity' bind:input="checknum" />
                     </van-cell-group>
                 </view>
                 <view class="check_item">

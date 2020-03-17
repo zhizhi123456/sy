@@ -51,6 +51,41 @@ Page({
     section6: [],
     ifpurchasetext: ''
   },
+  setSeach(e) {
+    this.setData({
+      seach: e.detail.value
+    })
+  },
+  finditem() {
+    if (this.data.seach) {
+      let arr = util.findone(app.globalData.department, this.data.seach);
+      this.setData({
+        section3: arr,
+        seach: ''
+      })
+    } else {
+      wx.showToast({
+        title: '请输入搜索内容',
+        icon: 'none',
+        duration: 3000
+      })
+    }
+  },
+  finditem() {
+    if (this.data.seach) {
+      let arr = util.findone(app.globalData.department, this.data.seach);
+      this.setData({
+        section3: arr,
+        seach: ''
+      })
+    } else {
+      wx.showToast({
+        title: '请输入搜索内容',
+        icon: 'none',
+        duration: 3000
+      })
+    }
+  },
   // 公司抬头
   showPopup_o() {
     this.setData({
@@ -110,7 +145,8 @@ Page({
   // 部门
   showPopup() {
     this.setData({
-      show: true
+      show: true,
+      seach: ''
     });
   },
   onClose() {

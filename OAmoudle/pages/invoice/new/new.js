@@ -29,10 +29,76 @@ Page({
       name: "从相册选择"
     }],
   },
+  setSeach(e) {
+    this.setData({
+      seach: e.detail.value
+    })
+  },
+  finditem() {
+    if (this.data.seach) {
+      let arr = util.findone(app.globalData.department, this.data.seach);
+      this.setData({
+        sections: arr,
+        seach: ''
+      })
+    } else {
+      wx.showToast({
+        title: '请输入搜索内容',
+        icon: 'none',
+        duration: 3000
+      })
+    }
+  },
+  finditem1() {
+    if (this.data.seach) {
+      let arr = util.findone(app.globalData.Invoicetype, this.data.seach);
+      this.setData({
+        Invoicetype: arr,
+        seach: ''
+      })
+    } else {
+      wx.showToast({
+        title: '请输入搜索内容',
+        icon: 'none',
+        duration: 3000
+      })
+    }
+  },
+  finditem2() {
+    if (this.data.seach) {
+      let arr = util.findone(app.globalData.Invoicefeerate, this.data.seach);
+      this.setData({
+        Invoicefeerate: arr,
+        seach: ''
+      })
+    } else {
+      wx.showToast({
+        title: '请输入搜索内容',
+        icon: 'none',
+        duration: 3000
+      })
+    }
+  },
+  finditem3() {
+    if (this.data.seach) {
+      let arr = util.findone(app.globalData.billing, this.data.seach);
+      this.setData({
+        billing: arr,
+        seach: ''
+      })
+    } else {
+      wx.showToast({
+        title: '请输入搜索内容',
+        icon: 'none',
+        duration: 3000
+      })
+    }
+  },
   // 部门
   showPopup_o() {
     this.setData({
-      show_o: true
+      show_o: true,
+      seach:''
     });
   },
   onClose_o() {
@@ -128,7 +194,8 @@ Page({
   // 开票类别
   showPopup_3() {
     this.setData({
-      show_3: true
+      show_3: true,
+      seach:''
     });
   },
   onClose_3() {
@@ -146,7 +213,8 @@ Page({
   // 票率
   showPopup_4() {
     this.setData({
-      show_4: true
+      show_4: true,
+      seach:''
     });
   },
   onClose_4() {
@@ -171,7 +239,8 @@ Page({
   // 开票信息
   showPopup_5() {
     this.setData({
-      show_5: true
+      show_5: true,
+      seach:''
     });
   },
   onClose_5() {

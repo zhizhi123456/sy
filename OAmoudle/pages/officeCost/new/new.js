@@ -1,6 +1,6 @@
 // pages/new/new.js
 import Toast from 'vant-weapp/dist/toast/toast';
-import { 
+import {
   addofficeCost,
   detailofficeCost,
   updateofficeCost
@@ -40,6 +40,56 @@ Page({
     show3: false,
     show4: false
   },
+  setSeach(e) {
+    this.setData({
+      seach: e.detail.value
+    })
+  },
+  finditem() {
+    if (this.data.seach) {
+      let arr = util.findone(app.globalData.department, this.data.seach);
+      this.setData({
+        sections: arr,
+        seach: ''
+      })
+    } else {
+      wx.showToast({
+        title: '请输入搜索内容',
+        icon: 'none',
+        duration: 3000
+      })
+    }
+  },
+  finditem1() {
+    if (this.data.seach) {
+      let arr = util.findone(app.globalData.costobj, this.data.seach);
+      this.setData({
+        section2: arr,
+        seach: ''
+      })
+    } else {
+      wx.showToast({
+        title: '请输入搜索内容',
+        icon: 'none',
+        duration: 3000
+      })
+    }
+  },
+  finditem2() {
+    if (this.data.seach) {
+      let arr = util.findone(app.globalData.costkind, this.data.seach);
+      this.setData({
+        section3: arr,
+        seach: ''
+      })
+    } else {
+      wx.showToast({
+        title: '请输入搜索内容',
+        icon: 'none',
+        duration: 3000
+      })
+    }
+  },
   // 总包项目名称
   projectnameblur(e) {
     let info = util.editInfo(e, this, e.detail.value);
@@ -78,7 +128,8 @@ Page({
   // 部门
   showPopup1() {
     this.setData({
-      show1: true
+      show1: true,
+      seach: ''
     })
   },
   onClose1() {
@@ -116,7 +167,8 @@ Page({
   // 费用对象
   showPopup3() {
     this.setData({
-      show3: true
+      show3: true,
+      seach: ''
     })
   },
   onClose3() {
@@ -135,7 +187,8 @@ Page({
   // 费用类型
   showPopup4() {
     this.setData({
-      show4: true
+      show4: true,
+      seach: ''
     })
   },
   onClose4() {
@@ -153,9 +206,9 @@ Page({
   },
   confirm() {
     // //console.log(this.data.info)
-    if (this.data.info.chargename && this.data.info.Companytitle 
-      && this.data.info.department && this.data.info.belongtoman 
-      && this.data.info.usechargeman ) {
+    if (this.data.info.chargename && this.data.info.Companytitle &&
+      this.data.info.department && this.data.info.belongtoman &&
+      this.data.info.usechargeman) {
       let info = this.data.info;
       util.checkContent(info, this);
       util.intro(info, this)
@@ -203,7 +256,7 @@ Page({
           icon: 'success',
           duration: 3000
         })
-        util.ModifyRecord(this.data.information,"OfficeCharge")
+        util.ModifyRecord(this.data.information, "OfficeCharge")
         util.OAreturn('officeCost', this)
       }
     })
@@ -237,11 +290,11 @@ Page({
       }).then(res => {
         // //console.log(res)
         let item = res.Item;
-        var data1 =res.Item
+        var data1 = res.Item
         var b = JSON.stringify(data1)
-        var c  = JSON.parse(b)
+        var c = JSON.parse(b)
         this.setData({
-          information:c
+          information: c
         })
         util.handleData(item, this, app.globalData.department);
         util.outflow(item, this)
