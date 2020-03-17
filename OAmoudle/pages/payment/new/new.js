@@ -74,7 +74,7 @@ Page({
   },
   finditem1() {
     if (this.data.seach) {
-      let arr = util.findone(app.globalData.sections, this.data.seach);
+      let arr = util.findone(app.globalData.department, this.data.seach);
       this.setData({
         sections: arr,
         seach: ''

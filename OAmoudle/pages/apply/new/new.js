@@ -60,7 +60,26 @@ Page({
     section5: [],
     detailID: null
   },
-
+  setSeach(e) {
+    this.setData({
+      seach: e.detail.value
+    })
+  },
+  finditem() {
+    if (this.data.seach) {
+      let arr = util.findone(app.globalData.department, this.data.seach);
+      this.setData({
+        sections: arr,
+        seach: ''
+      })
+    } else {
+      wx.showToast({
+        title: '请输入搜索内容',
+        icon: 'none',
+        duration: 3000
+      })
+    }
+  },
   // 项目编号
   showPopup1() {
     this.setData({
@@ -656,7 +675,8 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      section2:app.globalData.MainProject1
+      section2: app.globalData.MainProject1,
+      sections: app.globalData.department,
     })
     var user = wx.getStorageSync("myInfo");
     if (user) {

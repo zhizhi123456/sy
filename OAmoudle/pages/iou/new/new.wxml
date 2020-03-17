@@ -17,9 +17,17 @@
                 <text>部门</text>
                 <text class="required">*</text>
             </view>
-            <van-cell-group>
+            <!-- <van-cell-group>
                 <van-field value="{{info.department}}" disabled />
-            </van-cell-group>
+            </van-cell-group> -->
+            <van-cell title="{{info.department?info.department:'请选择'}}" bind:click="showPopup1" />
+            <van-popup show="{{show1}}" round position="bottom" bind:close="onClose1">
+                <view class="Cseach">
+                    <input value="{{seach}}" bindinput="setSeach" placeholder="请输入搜索内容" />
+                    <button size="mini" bindtap="finditem">搜索</button>
+                </view>
+                <van-picker data-name="department" show-toolbar columns="{{ sections }}" bind:cancel="onClose1" bind:confirm="onConfirm1" />
+            </van-popup>
         </view>
         
            <view class="check_item">
@@ -40,6 +48,10 @@
                 <icon class="iconfont icon-jiantou" />
             </van-cell>
             <van-popup show="{{ show2 }}" round position="bottom" bind:close="onClose2">
+                <view class="Cseach">
+                    <input value="{{seach}}" bindinput="setSeach" placeholder="请输入搜索内容" />
+                    <button size="mini" bindtap="finditem1">搜索</button>
+                </view>
                 <van-picker data-name="debitnotetype" show-toolbar columns="{{section1}}" bind:cancel="onClose2" bind:confirm="onConfirm2" />
             </van-popup>
         </view>
@@ -51,6 +63,10 @@
                 <icon class="iconfont icon-jiantou" />
             </van-cell>
             <van-popup show="{{ show3 }}" round position="bottom" bind:close="onClose3">
+                <view class="Cseach">
+                    <input value="{{seach}}" bindinput="setSeach" placeholder="请输入搜索内容" />
+                    <button size="mini" bindtap="finditem2">搜索</button>
+                </view>
                 <van-picker data-name="usesealtype" show-toolbar columns="{{section2}}" bind:cancel="onClose3" bind:confirm="onConfirm3" />
             </van-popup>
         </view>

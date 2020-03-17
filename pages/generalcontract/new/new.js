@@ -34,10 +34,31 @@ Page({
     firms: [],
     totals: []
   },
+  setSeach(e) {
+    this.setData({
+      seach: e.detail.value
+    })
+  },
+  finditem() {
+    if (this.data.seach) {
+      let arr = util.findone(app.globalData.department, this.data.seach);
+      this.setData({
+        sections: arr,
+        seach: ''
+      })
+    } else {
+      wx.showToast({
+        title: '请输入搜索内容',
+        icon: 'none',
+        duration: 3000
+      })
+    }
+  },
   // 部门
   showPopup_o() {
     this.setData({
-      show_o: true
+      show_o: true,
+      seach:''
     });
   },
   onClose_o() {

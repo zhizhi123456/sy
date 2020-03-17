@@ -21,7 +21,7 @@
                 <van-field data-name="chargename" value="{{info.chargename}}" placeholder="请输入" bind:blur="projectnameblur" />
             </van-cell-group>
         </view>
-         <view class="check_item">
+        <view class="check_item">
             <view class="kind require">
                 <text>公司抬头</text>
                 <text class="required">*</text>
@@ -30,14 +30,22 @@
                 <van-field value="{{info.Companytitle}}" disabled />
             </van-cell-group>
         </view>
-          <view class="check_item">
+        <view class="check_item">
             <view class="kind require">
                 <text>部门</text>
                 <text class="required">*</text>
             </view>
-            <van-cell-group>
+            <!-- <van-cell-group>
                 <van-field value="{{info.department}}" disabled />
-            </van-cell-group>
+            </van-cell-group> -->
+            <van-cell title="{{info.department?info.department:'请选择'}}" bind:click="showPopup1" />
+            <van-popup show="{{show1}}" round position="bottom" bind:close="onClose1">
+                <view class="Cseach">
+                    <input value="{{seach}}" bindinput="setSeach" placeholder="请输入搜索内容" />
+                    <button size="mini" bindtap="finditem">搜索</button>
+                </view>
+                <van-picker data-name="department" show-toolbar columns="{{ sections }}" bind:cancel="onClose1" bind:confirm="onConfirm1" />
+            </van-popup>
         </view>
         <!-- <view class="check_item">
             <view class="kind require">
@@ -51,7 +59,7 @@
                 <van-picker data-name="belongtoman" show-toolbar columns="{{section1}}" bind:cancel="onClose2" bind:confirm="onConfirm2" />
             </van-popup>
         </view> -->
-         <view class="check_item">
+        <view class="check_item">
             <view class="kind require">
                 <text>所有人</text>
                 <text class="required">*</text>
@@ -63,12 +71,16 @@
         <view class="check_item">
             <view class="kind require">
                 <text>费用对象</text>
-                 <text class="required">*</text>
+                <text class="required">*</text>
             </view>
             <van-cell title="{{info.usechargeman?info.usechargeman:'请选择'}}" bind:click="showPopup3">
                 <icon class="iconfont icon-jiantou" />
             </van-cell>
             <van-popup show="{{ show3 }}" round position="bottom" bind:close="onClose3">
+                <view class="Cseach">
+                    <input value="{{seach}}" bindinput="setSeach" placeholder="请输入搜索内容" />
+                    <button size="mini" bindtap="finditem1">搜索</button>
+                </view>
                 <van-picker data-name="usechargeman" show-toolbar columns="{{section2}}" bind:cancel="onClose3" bind:confirm="onConfirm3" />
             </van-popup>
         </view>
@@ -86,6 +98,10 @@
                 <icon class="iconfont icon-jiantou" />
             </van-cell>
             <van-popup show="{{ show4 }}" round position="bottom" bind:close="onClose4">
+                <view class="Cseach">
+                    <input value="{{seach}}" bindinput="setSeach" placeholder="请输入搜索内容" />
+                    <button size="mini" bindtap="finditem2">搜索</button>
+                </view>
                 <van-picker data-name="chargetype" show-toolbar columns="{{section3}}" bind:cancel="onClose4" bind:confirm="onConfirm4" />
             </van-popup>
         </view>
