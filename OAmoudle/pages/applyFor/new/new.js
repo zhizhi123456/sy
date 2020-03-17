@@ -467,20 +467,14 @@ Page({
     }
     var user = wx.getStorageSync("myInfo");
     if (user) {
-      getdep({
-        UserName: user.UserName
-      }).then(res => {
-        console.log(res)
-          var s = JSON.parse(res)
-          if (s.length) {
-          let info = this.data.info;
-          info.department = s[0].techofficename
-          info.Companytitle = s[0].value
-          this.setData({
-            info,
-            departmenttext: s[0].techofficename,
-          })
-        }
+      var message = wx.getStorageSync("message");
+      console.log(message)
+      let info = this.data.info;
+      info.department = message.departmenttext
+      info.Companytitle = message.Companytitletext
+      this.setData({
+        info,
+        departmenttext:message.departmenttext
       })
     }
   },

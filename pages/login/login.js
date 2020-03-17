@@ -181,17 +181,26 @@ Page({
             getdep({
               UserName: user.UserName
             }).then(res => {
-              // console.log(res)
+              console.log(res)
               if (res) {
                 var s = JSON.parse(res)
-                var info = {
-                  Companytitle: s[0].company,
-                  Companytitletext: s[0].value,
-                  department: s[0].ID,
-                  departmenttext: s[0].techofficename,
-                  userId: s[0].userId
+                if(!(s.lengtn<1)){
+                  var info = {
+                    Companytitle: s[0].company,
+                    Companytitletext: s[0].value,
+                    department: s[0].ID,
+                    departmenttext: s[0].techofficename,
+                    userId: s[0].userId
+                  }
+                  wx.setStorageSync("message", info)
+                }else{
+                  wx.showToast({
+                    title: '获取用户信息失败',
+                    icon: "none",
+                    duration: 2000
+                  })
                 }
-                wx.setStorageSync("message", info)
+               
               }
             })
             util.sumup1(getstaff, app, 'getstaff', "name", "userId", user.UserName);
