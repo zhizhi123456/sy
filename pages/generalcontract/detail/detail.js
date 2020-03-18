@@ -56,7 +56,7 @@ Page({
     this.setData({
       history: options.history
     })
-    util.readRecordlist('maincontact', options.id, this, '总包合同')
+    util.readRecordlist('maincontact', options.id, this, '合同签报')
     if (options.id) {
       referId({
         ID: options.id

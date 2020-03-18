@@ -3,7 +3,9 @@ import Toast from 'vant-weapp/dist/toast/toast';
 import {
   addInvoice,
   referInvoice,
-  amendInvoice
+  amendInvoice,
+  Customer,
+  addcustomer
 } from "../../../../service/getData";
 var util = require("../../../../utils/util");
 var app = getApp();
@@ -60,6 +62,13 @@ Page({
     let arr = util.findone(app.globalData.billing, this.data.seach);
     this.setData({
       billing: arr,
+      seach: ''
+    })
+  },
+  finditem4() {
+    let arr = util.findone(app.globalData.Customer, this.data.seach);
+    this.setData({
+      Customer: arr,
       seach: ''
     })
   },
@@ -224,6 +233,25 @@ Page({
       show_5: false
     })
   },
+  // 对方公司
+  showPopupD() {
+    this.setData({
+      showD: true,
+      seach: ''
+    });
+  },
+  onCloseD() {
+    this.setData({
+      showD: false
+    });
+  },
+  onConfirmD(e) {
+    let info = util.editInfo(e, this, e.detail.value.text);
+    this.setData({
+      info,
+      showD: false
+    })
+  },
   // 含税金额
   includetaxamontblur(e) {
     let info = util.editInfo(e, this, e.detail.value);
@@ -329,7 +357,8 @@ Page({
       MaincontactAll: app.globalData.MaincontactAll,
       MainProject: app.globalData.MainProject,
       Invoicefeerate: app.globalData.Invoicefeerate,
-      billing: app.globalData.billing
+      billing: app.globalData.billing,
+      Customer:app.globalData.Customer
     })
     var user = wx.getStorageSync("myInfo");
     if (user) {
@@ -362,7 +391,41 @@ Page({
       })
     }
   },
-
+  onClosechoice() {
+    this.setData({
+      showchoice: false
+    })
+  },
+  Dictionaryblur(e) {
+    this.setData({
+      customername: e.detail
+    })
+  },
+  confirmchoice() {
+    var data = {
+      customername: this.data.customername,
+    }
+    addcustomer(data).then(res => {
+      if (res.code == 10000) {
+        Customer().then(res => {
+          console.log(res)
+          let result = util.getBase(res, 'customername', 'ID');
+          this.setData({
+            Customer: result
+          })
+          app.globalData.Customer = result;
+        })
+        this.setData({
+          showchoice: false,
+        })
+      }
+    })
+  },
+  newDictionary() {
+    this.setData({
+      showchoice: true
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

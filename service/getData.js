@@ -132,9 +132,9 @@ export const contractType = () => http.get("/api/MethodOfDataService/contractTyp
 // 框架协议编号及名称
 export const getframeProtocolCode = () => http.get("/api/MethodOfDataService/getframeProtocolCode");
 // 得到下属员工
-export const getstaff = (params) => http.post("/api/MethodOfDataService/GetSubordinateStaff",params);
+export const getstaff = (params) => http.post("/api/MethodOfDataService/GetSubordinateStaff", params);
 // 得到下属部门
-export const getdept = (params) => http.post("/api/MethodOfDataService/GetSubordinateDepartment",params);
+export const getdept = (params) => http.post("/api/MethodOfDataService/GetSubordinateDepartment", params);
 //=================================================================================================================================================================
 // 工作流接口
 // 工作流流转
@@ -1333,7 +1333,7 @@ export const updateapproval = (params) => http.post("/api/payapproval/Update", p
 // 删除
 export const delapproval = (params) => http.post("/api/payapproval/Delete", params);
 // 综合查询
-export const qgroupapproval = (params) => http.post("/api/payapproval/Querygroup", params);                                     
+export const qgroupapproval = (params) => http.post("/api/payapproval/Querygroup", params);
 // 查询
 export const queryapprovalsmall = (params) => http.post("/api/payappdetail/Query", params);
 // 添加
@@ -1383,3 +1383,7 @@ export const amendMembernew = (params) => http.post("/api/membernew/Update", par
 export const cancelMembernew = (params) => http.post("/api/membernew/Delete", params);
 // 添加字典类型
 export const addDictionary = (params) => http.post("/api/Dictionary/Insert", params);
+// 供应商
+export const addsupplier = (params) => http.post("/api/supplier/Insert", params);
+// 客户
+export const addcustomer = (params) => http.post("/api/customer/Insert", params);

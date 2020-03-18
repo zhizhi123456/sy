@@ -158,7 +158,7 @@
                 <view class="Cseach">
                     <input value="{{seach}}" bindinput="setSeach" placeholder="请输入搜索内容" />
                     <button size="mini" bindtap="finditem3">搜索</button>
-                    <button size="mini" bindtap="addnew">新增</button>
+                    <button size="mini" bindtap="newDictionary">新增</button>
                 </view>
                 <van-picker data-name="suppliercode" show-toolbar columns="{{ Supplier }}" bind:cancel="onClose_8" bind:confirm="onConfirm_8" />
             </van-popup>
@@ -199,6 +199,19 @@
                     </view>
                 </block>
             </view>
+        </view>
+        <view class="seach" wx:if="{{showchoice}}">
+            <van-popup show="{{ showchoice }}" bind:close="onClosechoice" round position="bottom" custom-style=" height: 50vh;color:#333">
+                <view class="seach_item">
+                    <van-cell-group>
+                        <van-field value="{{ suppliername }}" type="textarea" placeholder="请输入" autosize border="{{ false }}" bind:input="Dictionaryblur" label="供应商" input-class="idea_in" />
+                    </van-cell-group>
+                </view>
+                <view class="checkkind">
+                    <text bindtap="onClosechoice">取消</text>
+                    <text bindtap="confirmchoice">确认</text>
+                </view>
+            </van-popup>
         </view>
     </view>
 </view>
