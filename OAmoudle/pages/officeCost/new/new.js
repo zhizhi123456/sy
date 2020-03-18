@@ -13,19 +13,8 @@ Page({
    */
   data: {
     info: {
-      RecID: '',
-      ProjectIDName: '',
-      SubProjectIDName: "",
-      WorkPosition: '',
-      WorkContext: '',
-      TellIntentionClass: '',
-      TellIntentionDate: '',
-      TellIntentionContext: '',
-      TellIntenTechSign: '',
-      SpeciSafemanSign: '',
-      AcceptIntentChargeSign: '',
-      WorkManSign: '',
-      Remark: ''
+      chargename:util.titleTime(new Date()),
+      usechargeman:"1"
     },
     show_nature: false,
     nature: [],

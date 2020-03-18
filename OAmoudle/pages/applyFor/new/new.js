@@ -6,8 +6,8 @@ import {
   addapplyFor,
   updateapplyFor,
   addapplyForsmall,
-  staff,
-  getdep
+  addDictionary,
+  applytype
 } from "../../../../service/getData";
 var util = require("../../../../utils/util");
 var app = getApp();
@@ -47,10 +47,13 @@ Page({
     section3: [],
     section4: [],
     materials: [],
-    section5: ["红酒", "购物卡", "食品", "烟", "电脑"],
+    section5: app.globalData.applytype,
     section6: [],
     ifpurchasetext: '',
-    seach: ''
+    seach: '',
+    showchoice:false,
+    applyfortype:'',
+    seach1:'',
   },
   setSeach(e) {
     this.setData({
@@ -61,6 +64,18 @@ Page({
     let arr = util.findone(app.globalData.department, this.data.seach);
     this.setData({
       section3: arr,
+      seach: ''
+    })
+  },
+  setSeach1(e) {
+    this.setData({
+      seach1: e.detail.value
+    })
+  },
+  finditem1() {
+    let arr = util.findone(app.globalData.applytype, this.data.seach1);
+    this.setData({
+      section5: arr,
       seach: ''
     })
   },
@@ -238,14 +253,52 @@ Page({
     });
   },
   onConfirm6(e) {
-    let materials = util.updateValue(e, this);
-    // console.log(materials)
+    let name = e.currentTarget.dataset.name,
+      i = e.currentTarget.dataset.i;
+    let materials = this.data.materials;
+    // console.log(name, i, materials)
+    if (i) {
+      materials[i][name] = e.detail.value.text;
+    } else {
+      materials[0][name] = e.detail.value.text;
+    }
     this.setData({
       materials,
       show6: false
     })
   },
-
+  onClosechoice() {
+    this.setData({
+      showchoice: false
+    })
+  },
+  Dictionaryblur(e){
+    this.setData({
+      applyfortype: e.detail
+    })
+  },
+  confirmchoice(){
+    var num = app.globalData.applytype.length+1
+    var data = {
+      Key:"applyforminfoType"+num,
+      Value:this.data.applyfortype,
+      ParentId:'2070'
+    }
+    addDictionary(data).then(res=>{
+      if(res.code == 10000){
+       var s =  util.sumupdic(applytype, app, 'applytype', "Value", "Key",this)
+        this.setData({
+          showchoice: false,
+        })
+      }
+    })
+   
+  },
+  newDictionary(){
+    this.setData({
+      showchoice:true
+    })
+  },
   confirm() {
     let info = this.data.info;
     // console.log(this.data.info)
@@ -295,6 +348,7 @@ Page({
               materials.forEach(value => {
                 value.quantity = parseInt(value.quantity);
                 value.applyid = id;
+                util.introsmall(value)
               })
               this.setData({
                 materials

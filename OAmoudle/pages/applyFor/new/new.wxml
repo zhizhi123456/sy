@@ -109,6 +109,11 @@
                     </view>
                     <van-cell title="{{item.type?item.type:'请选择'}}" data-i='{{index}}' is-link data-name='projectType' bind:click="showPopup6" />
                     <van-popup show="{{show6}}" round position="bottom" bind:close="onClose6">
+                     <view class="Cseach">
+                    <input value="{{seach1}}" bindinput="setSeach1" placeholder="请输入搜索内容" />
+                    <button size="mini" bindtap="finditem1">搜索</button>
+                    <button size="mini" bindtap="newDictionary">新建</button>
+                    </view>
                         <van-picker data-name="type" show-toolbar columns="{{ section5 }}" bind:cancel="onClose6" bind:confirm="onConfirm6" />
                     </van-popup>
                 </view>
@@ -150,5 +155,18 @@
                 </view>
             </block>
         </block>
+        <view class="seach" wx:if="{{showchoice}}">
+            <van-popup show="{{ showchoice }}" bind:close="onClosechoice" round position="center" custom-style="width:80vh; height: 50vh;color:#333">
+                <view class="seach_item">
+                    <van-cell-group>
+                        <van-field value="{{ applyfortype }}" type="textarea" placeholder="请输入" autosize border="{{ false }}" bind:input="Dictionaryblur" label="申领类型" input-class="idea_in" />
+                    </van-cell-group>
+                </view>
+                <view class="checkkind">
+                    <text bindtap="onClosechoice">取消</text>
+                    <text bindtap="confirmchoice">确认</text>
+                </view>
+            </van-popup>
+        </view>
     </view>
 </view>

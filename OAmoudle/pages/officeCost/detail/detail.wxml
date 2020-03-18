@@ -28,10 +28,10 @@
                         <view class="kind">所有人</view>
                         <view class="check">{{info.belongtoman}}</view>
                     </view>
-                    <view class="c_item">
+                    <!-- <view class="c_item">
                         <view class="kind">费用对象</view>
                         <view class="check">{{info.usechargeman}}</view>
-                    </view>
+                    </view> -->
                     <view class="c_item">
                         <view class="kind">费用金额</view>
                         <view class="check">{{info.chargeamount}}</view>

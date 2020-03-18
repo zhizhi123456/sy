@@ -68,7 +68,7 @@
                 <van-field value="{{info.belongtoman}}" disabled />
             </van-cell-group>
         </view>
-        <view class="check_item">
+        <!-- <view class="check_item">
             <view class="kind require">
                 <text>费用对象</text>
                 <text class="required">*</text>
@@ -83,7 +83,7 @@
                 </view>
                 <van-picker data-name="usechargeman" show-toolbar columns="{{section2}}" bind:cancel="onClose3" bind:confirm="onConfirm3" />
             </van-popup>
-        </view>
+        </view> -->
         <view class="check_item">
             <text class="kind">费用金额</text>
             <van-cell-group>

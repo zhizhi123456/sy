@@ -59,7 +59,8 @@ import {
   getframeProtocolCode,
   getdep,
   getstaff,
-  getdept
+  getdept,
+  applytype
 } from "./service/getData";
 var util = require("./utils/util");
 App({
@@ -107,6 +108,7 @@ App({
         // console.log(this.globalData.Principal)
       })
       let userinfo = wx.getStorageSync("myInfo");
+      util.sumup(applytype, this, 'applytype', "Value", "Key");
       util.sumup1(getstaff, this, 'getstaff', "name", "userId",userinfo.UserName);
       util.sumup1(getdept, this, 'getdept', "techofficename", "id",userinfo.UserName);
       util.sumup(department, this, 'department', "techofficename", "ID");
@@ -223,6 +225,7 @@ App({
     }
   },
   globalData: {
+    applytype:'',
     message:'',
     getdept:'',
     getstaff:'',

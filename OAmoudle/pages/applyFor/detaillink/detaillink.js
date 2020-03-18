@@ -44,6 +44,7 @@ Page({
           // console.log(res)
           let item = res.Item;
           util.handleData(item, this, app.globalData.department)
+          util.outflowsmall(item)
           this.setData({
             info: item
           })

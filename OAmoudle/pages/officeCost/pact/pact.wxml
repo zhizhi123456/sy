@@ -48,12 +48,12 @@
                                 <van-picker data-name="department" show-toolbar columns="{{ section2 }}" bind:cancel="onClose2" bind:confirm="onConfirm2" />
                             </van-popup>
                         </view>
-                        <view class="seach_item">
+                        <!-- <view class="seach_item">
                             <van-field value="{{info.usechargeman}}" bind:focus="showPopup3" class="time1" title-class="time1" label="费用对象" placeholder="请选择" />
                             <van-popup show="{{show3}}" round position="bottom" bind:close="onClose3">
                                 <van-picker data-name="usechargeman" show-toolbar columns="{{ section3 }}" bind:cancel="onClose3" bind:confirm="onConfirm3" />
                             </van-popup>
-                        </view>
+                        </view> -->
                         <view class="seach_item">
                             <van-field value="{{info.chargetype}}" bind:focus="showPopup4" class="time1" title-class="time1" label="费用类型" placeholder="请选择" />
                             <van-popup show="{{show4}}" round position="bottom" bind:close="onClose4">
@@ -121,10 +121,10 @@
                     <text class="info">所有人</text>
                     <text>{{item.belongtoman}}</text>
                 </view>
-                <view>
+                <!-- <view>
                     <text class="info">费用对象</text>
                     <text>{{item.usechargeman}}</text>
-                </view>
+                </view> -->
                 <view>
                     <text class="info">费用金额</text>
                     <text>{{item.chargeamount}}</text>

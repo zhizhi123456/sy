@@ -73,71 +73,71 @@ Page({
       seach: ''
     })
   },
-  // 项目编号
-  showPopup1() {
-    this.setData({
-      show1: true
-    });
-  },
-  onClose1() {
-    this.setData({
-      show1: false
-    });
-  },
-  onConfirm1(e) {
-    let info = util.editInfo(e, this, e.detail.value.text);
-    this.setData({
-      show1: false,
-      info
-      // departmenttext: e.detail.value.text
-    })
-    console.log(e.detail.value.value)
-    querydeepsmall({
-      inwarehouseID: e.detail.value.value
-    }).then(res => {
-      console.log(res)
-      if (res.code == 10000) {
-        if (res.List) {
-          if ("p") {
-            // this.data.materials
-            var materials = res.List
-            var m = this.data.materials
-            materials.forEach((s, index) => {
-              s.num = index + this.data.materials.length
-              s.buyitemname = s.goodsname
-              s.ID = ''
-              var news = {}
-              news.applybuyid = this.data.detailID;
-              news.chargeman = userinfo.UserName
-              news.buyitemname = s.goodsname
-              news.specifications = s.specifications
-              news.brand = s.brand
-              news.unit = s.unit
-              news.quantity = s.quantity
-              news.demo = s.demo
-              m.push(news)
-            })
+  // // 项目编号
+  // showPopup1() {
+  //   this.setData({
+  //     show1: true
+  //   });
+  // },
+  // onClose1() {
+  //   this.setData({
+  //     show1: false
+  //   });
+  // },
+  // onConfirm1(e) {
+  //   let info = util.editInfo(e, this, e.detail.value.text);
+  //   this.setData({
+  //     show1: false,
+  //     info
+  //     // departmenttext: e.detail.value.text
+  //   })
+  //   console.log(e.detail.value.value)
+  //   querydeepsmall({
+  //     inwarehouseID: e.detail.value.value
+  //   }).then(res => {
+  //     console.log(res)
+  //     if (res.code == 10000) {
+  //       if (res.List) {
+  //         if ("p") {
+  //           // this.data.materials
+  //           var materials = res.List
+  //           var m = this.data.materials
+  //           materials.forEach((s, index) => {
+  //             s.num = index + this.data.materials.length
+  //             s.buyitemname = s.goodsname
+  //             s.ID = ''
+  //             var news = {}
+  //             news.applybuyid = this.data.detailID;
+  //             news.chargeman = userinfo.UserName
+  //             news.buyitemname = s.goodsname
+  //             news.specifications = s.specifications
+  //             news.brand = s.brand
+  //             news.unit = s.unit
+  //             news.quantity = s.quantity
+  //             news.demo = s.demo
+  //             m.push(news)
+  //           })
 
 
-            this.setData({
-              materials: m
-            })
-            // } else {
-            //   // this.data.materials
-            //   var materials = res.List
-            //   materials.forEach((s, index) => {
-            //     s.num = index + this.data.materials.length
-            //     s.buyitemname = s.goodsname
-            //   })
-            //   this.setData({
-            //     materials
-            //   })
-          }
+  //           this.setData({
+  //             materials: m
+  //           })
+  //           // } else {
+  //           //   // this.data.materials
+  //           //   var materials = res.List
+  //           //   materials.forEach((s, index) => {
+  //           //     s.num = index + this.data.materials.length
+  //           //     s.buyitemname = s.goodsname
+  //           //   })
+  //           //   this.setData({
+  //           //     materials
+  //           //   })
+  //         }
 
-        }
-      }
-    })
-  },
+  //       }
+  //     }
+  //   })
+  // },
   // 部门
   showPopup() {
     this.setData({
@@ -373,6 +373,8 @@ Page({
   editconfirm() {
     var materials = this.data.materials
     console.log(materials)
+    // 判断是否有明细表存在
+    // 判断所有明细表是否符合要求
     if (materials) {
       var gather = []
       materials.forEach(material => {
@@ -396,12 +398,14 @@ Page({
       var gathers = gather.some(d => {
         return d === true
       })
+      // 判断是否所有明细表符合要求
       if (gathers) {
         Toast({
           message: '请填写明细表必填项',
           mask: true
         });
       } else {
+        // 对主表进行筛选
         console.log("11")
         var assemble = []
         let info = this.data.info;
@@ -422,12 +426,14 @@ Page({
             assemble.push(false)
             // util.OAreturn('apply', this);
           } else {
+            // 判断所有接口是否请求成功
             assemble.push(true)
           }
           console.log(this.data.materials)
           if (this.data.materials) {
             var materials = this.data.materials
             materials.forEach(s => {
+              // 有id 修改
               if (s.ID) {
                 var arr = []
                 arr.push(s)
@@ -449,6 +455,7 @@ Page({
                 })
                 arr = []
               } else {
+                // 没有id新建
                 var news = {}
                 news.applybuyid = this.data.detailID;
                 news.chargeman = userinfo.UserName
@@ -488,10 +495,12 @@ Page({
         })
         var that = this
         var i = setInterval(function () {
+          // 判断所有接口是否请求成功 所有接口请求完毕后 执行下面的函数
           console.log(materials.length + 1 == assemble.length)
           if (materials.length + 1 == assemble.length) {
             console.log(assemble)
             console.log(assemble.length)
+            // 判断是否有一个true
             var assembles = assemble.some((p, l) => {
               return p
             })
@@ -516,6 +525,7 @@ Page({
 
 
     } else {
+      // 没有明细表的情况
       let info = this.data.info;
       util.checkChange(info, this, app.globalData.department);
       util.intro(info, this)
@@ -615,6 +625,7 @@ Page({
     console.log(e)
     var that = this
     if (e.currentTarget.dataset.id) {
+      // 有 id的情况
       wx.showModal({
         content: '确定删除吗？',
         success(res) {
@@ -648,6 +659,7 @@ Page({
       })
 
     } else {
+      // 没有id的情况
       let materials = this.data.materials,
         i = e.currentTarget.dataset.i;
       materials.splice(i, 1);
@@ -683,23 +695,23 @@ Page({
         info
       })
     }
-    qgroupdeep({
-
-    }).then(res => {
-      console.log(res)
-      if (res.code == 10000 && res.List) {
-        var res1 = JSON.stringify(res.List)
-        let bidlist = JSON.parse(res1.replace(/ID/g, 'value').replace(/projcectCode/g, 'text'));
-        this.setData({
-          section22: bidlist
-        })
-        console.log(this.data.section22)
-      } else {
-        this.setData({
-          section22: []
-        })
-      }
-    })
+    // 深化设计编号
+    // qgroupdeep({
+    // }).then(res => {
+    //   console.log(res)
+    //   if (res.code == 10000 && res.List) {
+    //     var res1 = JSON.stringify(res.List)
+    //     let bidlist = JSON.parse(res1.replace(/ID/g, 'value').replace(/projcectCode/g, 'text'));
+    //     this.setData({
+    //       section22: bidlist
+    //     })
+    //     console.log(this.data.section22)
+    //   } else {
+    //     this.setData({
+    //       section22: []
+    //     })
+    //   }
+    // })
     if (options.id) {
       this.setData({
         detailID: options.id
@@ -721,6 +733,7 @@ Page({
           info: item
         })
       })
+      // 明细表
       queryapplysmall({
         applybuyid: options.id
       }).then(res => {
