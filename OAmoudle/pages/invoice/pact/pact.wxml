@@ -113,10 +113,10 @@
                 <view>
                     <text class="caption">{{item.invoicename}}</text>
                 </view>
-                <view>
+                <!-- <view>
                     <text class="info">当前任务状态</text>
                     <text class="caution">{{Workstates[index]}}</text>
-                </view>
+                </view> -->
                 <view>
                     <text class="info">发票名称</text>
                     <text>{{item.invoicename}}</text>

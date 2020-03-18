@@ -103,8 +103,8 @@ Page({
   downF(e) {
     util.lookFileIDEA(e);
   },
-   // 文件上传
-   up_file() {
+  // 文件上传
+  up_file() {
     util.upFileIDEA(this);
   },
   //图片上传
@@ -142,8 +142,9 @@ Page({
   sendback(e) {
     // console.log(e)
     this.setData({
-      show:true,
-      state:e.currentTarget.dataset.state
+      show: true,
+      ApprovalOpinion: '',
+      state: e.currentTarget.dataset.state
     })
     // util.Triggerflow(this, 'return', 'workovertime', 'overtime', '', '', '', '', '', '', 'oa')
   },
@@ -151,8 +152,9 @@ Page({
   putin(e) {
     if (this.data.info.formid) {
       this.setData({
-        show:true,
-        state:e.currentTarget.dataset.state
+        show: true,
+        ApprovalOpinion: "同意。",
+        state: e.currentTarget.dataset.state
       })
     } else {
       util.Triggerflow(this, 'next', 'usesealform', 'chapter', '', '', '', '', '', '', 'oa')
@@ -161,9 +163,17 @@ Page({
     // util.Triggerflow(this, 'next', 'workovertime', 'overtime', '', '', '', '', '', '', 'oa')
   },
   sconfirm() {
-    if(this.data.state=='return'){
-      util.Triggerflow(this, 'return', 'usesealform', 'chapter', '', '', '', '', '', '', 'oa', this.data.ApprovalOpinion ? this.data.ApprovalOpinion : '同意。', JSON.stringify(this.data.idea.API_Picurl), JSON.stringify(this.data.idea.API_Fileurl))
-    }else{
+    if (this.data.state == 'return') {
+      if (this.data.ApprovalOpinion) {
+        util.Triggerflow(this, 'return', 'usesealform', 'chapter', '', '', '', '', '', '', 'oa', this.data.ApprovalOpinion ? this.data.ApprovalOpinion : '不同意。', JSON.stringify(this.data.idea.API_Picurl), JSON.stringify(this.data.idea.API_Fileurl))
+      } else {
+        wx.showToast({
+          title: '请输入审批意见',
+          icon: 'none',
+          duration: 3000
+        })
+      }
+    } else {
       util.Triggerflow(this, 'next', 'usesealform', 'chapter', '', '', '', '', '', '', 'oa', this.data.ApprovalOpinion ? this.data.ApprovalOpinion : '同意。', JSON.stringify(this.data.idea.API_Picurl), JSON.stringify(this.data.idea.API_Fileurl))
     }
   },

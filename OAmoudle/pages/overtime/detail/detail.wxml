@@ -198,7 +198,7 @@
             </view>
             <view class="checkkind">
                 <text bindtap="onClose">取消</text>
-                <text bindtap="sconfirm">{{state=='return'?'退回':'审核通过'}}</text>
+                <text bindtap="sconfirm">{{state=='return'?'退回':'确认'}}</text>
             </view>
         </van-popup>
     </view>

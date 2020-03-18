@@ -17,13 +17,13 @@
                         <view class="check">{{info.department}}</view>
                     </view>
                     <view class="c_item">
-                        <view class="kind">公司抬头</view>
+                        <view class="kind">公司名称</view>
                         <view class="check">{{info.Companytitle}}</view>
                     </view>
-                     <view class="c_item">
+                     <!-- <view class="c_item">
                         <view class="kind">总包项目</view>
                         <view class="check">{{info.projcectCode}}</view>
-                    </view>
+                    </view> -->
                     <view class="c_item">
                         <view class="kind">总包合同名称</view>
                         <view class="check">{{info.maincontactname}}</view>

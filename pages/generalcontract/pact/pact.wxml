@@ -105,13 +105,13 @@
                     <text>{{item.department}}</text>
                 </view>
                 <view>
-                    <text class="info">公司抬头</text>
+                    <text class="info">公司名称</text>
                     <text>{{item.Companytitle}}</text>
                 </view>
-                <view>
+                <!-- <view>
                     <text class="info">总包项目</text>
                     <text>{{item.projcectCode}}</text>
-                </view>
+                </view> -->
                 <view>
                     <text class="info">签订时间</text>
                     <text>{{item.signtime}}</text>

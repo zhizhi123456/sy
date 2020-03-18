@@ -2,7 +2,7 @@ import http from '../utils/request.js'
 // 基础类库各项数据
 // 部门
 export const department = () => http.post("/api/MethodOfDataService/Getdepartment");
-// 公司抬头
+// 公司名称
 export const Companytitle = () => http.post("/api/MethodOfDataService/GetDictionary");
 // 员工
 export const staff = () => http.get("/api/MethodOfDataService/GetMembernew");

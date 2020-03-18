@@ -31,7 +31,7 @@
         </view>
         <view class="check_item">
             <view class="kind require">
-                <text>公司抬头</text>
+                <text>公司名称</text>
                 <text class="required">*</text>
             </view>
             <van-cell-group>
@@ -146,6 +146,12 @@
             <text class="kind">含税金额</text>
             <van-cell-group>
                 <van-field data-name="includetaxamont" value="{{info.includetaxamont}}" placeholder="请输入" bind:blur="includetaxamontblur" bind:input="checknum" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">含税金额(大写)</text>
+            <van-cell-group>
+                <van-field data-name="Chinesenumerals" value="{{info.Chinesenumerals}}" placeholder="请输入" bind:blur="Chinesenumeralsblur" />
             </van-cell-group>
         </view>
         <view class="check_item">

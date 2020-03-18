@@ -64,7 +64,7 @@ Page({
       seach: ''
     })
   },
-  // 公司抬头
+  // 公司名称
   showPopup_o() {
     this.setData({
       show_o: true

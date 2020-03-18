@@ -49,6 +49,10 @@
                         <view class="check">{{info.includetaxamont}}</view>
                     </view>
                     <view class="c_item">
+                        <view class="kind">含税金额(大写)</view>
+                        <view class="check">{{info.Chinesenumerals}}</view>
+                    </view>
+                    <view class="c_item">
                         <view class="kind">票率</view>
                         <view class="check">{{info.invoicefeerate}}</view>
                     </view>

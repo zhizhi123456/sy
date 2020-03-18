@@ -67,7 +67,7 @@ Page({
       departmenttext: e.detail.value.text
     })
   },
-  // 公司抬头
+  // 公司名称
   showPopup() {
     this.setData({
       show: true
@@ -213,14 +213,16 @@ Page({
   },
   confirm() {
     // console.log(this.data.info)
-    if (this.data.info.maincontactname && this.data.info.projcectCode && this.data.info.demo) {
+    // if (this.data.info.maincontactname && this.data.info.projcectCode && this.data.info.demo) {
+    if (this.data.info.maincontactname&& this.data.info.demo) {
       let info = this.data.info;
       // console.log( util.checkContent)
       util.checkContent(info, this);
       util.intro(info,this)
       // console.log(info)
       this.setData({
-        info
+        info,
+        'info.projcectCode':'1'
       })
       // console.log(this.data.info)
       addPact(info).then(res => {
@@ -237,7 +239,7 @@ Page({
       })
     } else {
       Toast({
-        message: '请填写必填项（总包合同名称，总包项目，备注）',
+        message: '请填写必填项（总包合同名称，备注）',
         mask: true
       });
     }

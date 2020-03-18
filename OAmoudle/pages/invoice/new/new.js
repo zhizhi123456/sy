@@ -228,6 +228,14 @@ Page({
   includetaxamontblur(e) {
     let info = util.editInfo(e, this, e.detail.value);
     this.setData({
+      info,
+      'info.Chinesenumerals': util.Uppercase(e.detail.value)
+    })
+  },
+  // 大写金额
+  Chinesenumeralsblur(e) {
+    let info = util.editInfo(e, this, e.detail.value);
+    this.setData({
       info
     })
   },

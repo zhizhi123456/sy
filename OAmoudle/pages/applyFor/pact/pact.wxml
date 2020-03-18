@@ -30,7 +30,7 @@
                 <view class="seachif scroll-view" scroll-y="true">
                     <view>
                         <view class="seach_item">
-                            <van-field value="{{info.Companytitle}}" bind:focus="showPopup3" class="time1" title-class="time1" label="公司抬头" placeholder="请选择" />
+                            <van-field value="{{info.Companytitle}}" bind:focus="showPopup3" class="time1" title-class="time1" label="公司名称" placeholder="请选择" />
                             <van-popup show="{{show3}}" round position="bottom" bind:close="onClose3">
                                 <van-picker data-name="Companytitle" show-toolbar columns="{{ section3 }}" bind:cancel="onClose3" bind:confirm="onConfirm3" />
                             </van-popup>
@@ -102,7 +102,7 @@
                     <text>{{item.purpose}}</text>
                 </view>
                 <view>
-                    <text class="info">公司抬头</text>
+                    <text class="info">公司名称</text>
                     <text>{{item.Companytitle}}</text>
                 </view>
                 <view>

@@ -405,6 +405,7 @@ Page({
       Subcontact: app.globalData.Subcontact,
       Purchasecontact: app.globalData.Purchasecontact,
       Supplier: app.globalData.Supplier,
+      // Supplier: supplier,
       MainSubproject: app.globalData.MainSubproject,
       userdep: app.globalData.userdep
     })

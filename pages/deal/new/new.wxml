@@ -37,7 +37,7 @@
             </van-cell-group>
         </view>
         <view class="check_item">
-            <text class="kind">公司抬头</text>
+            <text class="kind">公司名称</text>
             <van-cell title="{{info.Companytitle?info.Companytitle:'请选择'}}" bind:click="showPopup">
                 <icon class="iconfont icon-jiantou" />
             </van-cell>

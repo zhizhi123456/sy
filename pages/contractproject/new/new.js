@@ -114,7 +114,7 @@ Page({
     section8: ["chengbeb@163.com9"], //成本核算部邮箱
     section9: ["gongchengbu@163.com1"], //工程部邮箱
     section10: [], //部门
-    section11: [], //公司抬头
+    section11: [], //公司名称
     section12: [], //主要联系人
     section13: [], //负责人
     section14: ["是", "否"], //材料是否进场
