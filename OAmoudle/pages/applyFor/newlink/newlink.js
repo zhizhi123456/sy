@@ -2,7 +2,9 @@
 import {
   addapplyForsmall,
   updateapplyForsmall,
-  detailapplyForsmall
+  detailapplyForsmall,
+  addDictionary,
+  applytype
 } from "../../../../service/getData";
 var util = require("../../../../utils/util");
 var app = getApp();
@@ -28,7 +30,22 @@ Page({
     show5: false,
     show4: false,
     show6: false,
-    section5: app.globalData.applytype
+    section5: '',
+    showchoice: false,
+    applyfortype: '',
+    seach1: '',
+  },
+  setSeach1(e) {
+    this.setData({
+      seach1: e.detail.value
+    })
+  },
+  finditem1() {
+    let arr = util.findone(app.globalData.applytype, this.data.seach1);
+    this.setData({
+      section5: arr,
+      seach: ''
+    })
   },
   // 返回
   return () {
@@ -102,7 +119,44 @@ Page({
       show6: false
     })
   },
+  onClosechoice() {
+    this.setData({
+      showchoice: false
+    })
+  },
+  Dictionaryblur(e) {
+    this.setData({
+      applyfortype: e.detail
+    })
+  },
+  confirmchoice() {
+    var num = Math.round(app.globalData.costkind.length) + 1
+    var data = {
+      Key: "applyforminfoType" + num,
+      Value: this.data.applyfortype,
+      ParentId: '2070'
+    }
+    addDictionary(data).then(res => {
+      if (res.code == 10000) {
+        applytype().then(res => {
+          let applytype = JSON.parse(res.replace(/Key/g, 'value').replace(/Value/g, 'text'));
+          app.globalData.applytype = applytype;
+          console.log(app.globalData.applytype)
+          this.setData({
+            section5: applytype,
+            showchoice: false,
+            applyfortype:''
+          })
+        })
+      }
+    })
 
+  },
+  newDictionary() {
+    this.setData({
+      showchoice: true
+    })
+  },
   // 新增领料单材料明细
   confirm() {
     let materials = this.data.materials;
@@ -196,6 +250,9 @@ Page({
         billid: options.id,
       })
     }
+    this.setData({
+      section5: app.globalData.applytype
+    })
     // 明细表id
     if (options.detailid) {
       detailapplyForsmall({

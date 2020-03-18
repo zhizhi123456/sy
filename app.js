@@ -97,7 +97,7 @@ App({
     if (!this.globalData.CountItem[0]) {
       //负责人
       Principal().then(res => {
-        // console.log(res)
+        console.log(res)
         let Principal = JSON.parse(res.replace(/userName/g, 'value').replace(/EmpName/g, 'text'));
         // console.log(Principal)
         var t = Principal.filter(s => {

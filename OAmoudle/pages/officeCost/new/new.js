@@ -3,7 +3,9 @@ import Toast from 'vant-weapp/dist/toast/toast';
 import {
   addofficeCost,
   detailofficeCost,
-  updateofficeCost
+  updateofficeCost,
+  addDictionary,
+  costkind
 } from "../../../../service/getData";
 var util = require("../../../../utils/util");
 var app = getApp();
@@ -13,8 +15,8 @@ Page({
    */
   data: {
     info: {
-      chargename:util.titleTime(new Date()),
-      usechargeman:"1"
+      chargename: util.titleTime(new Date()),
+      usechargeman: "1"
     },
     show_nature: false,
     nature: [],
@@ -28,7 +30,9 @@ Page({
     show2: false,
     show3: false,
     show4: false,
-    seach: ''
+    seach: '',
+    showchoice: false,
+    applyfortype: '',
   },
   setSeach(e) {
     this.setData({
@@ -168,6 +172,44 @@ Page({
     this.setData({
       info,
       show4: false
+    })
+  },
+  onClosechoice() {
+    this.setData({
+      showchoice: false
+    })
+  },
+  Dictionaryblur(e) {
+    this.setData({
+      applyfortype: e.detail
+    })
+  },
+  confirmchoice() {
+    var num = Math.round(app.globalData.costkind.length) + 1
+    var data = {
+      Key: "chargetype" + num,
+      Value: this.data.applyfortype,
+      ParentId: '3083'
+    }
+    addDictionary(data).then(res => {
+      if (res.code == 10000) {
+        costkind().then(res => {
+          let costkind = JSON.parse(res.replace(/Key/g, 'value').replace(/Value/g, 'text'));
+          app.globalData.costkind = costkind;
+          console.log(app.globalData.costkind)
+          this.setData({
+            section3: costkind,
+            showchoice: false,
+            applyfortype: ''
+          })
+        })
+      }
+    })
+
+  },
+  newDictionary() {
+    this.setData({
+      showchoice: true
     })
   },
   confirm() {

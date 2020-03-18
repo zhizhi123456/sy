@@ -47,13 +47,13 @@ Page({
     section3: [],
     section4: [],
     materials: [],
-    section5: app.globalData.applytype,
+    section5:[],
     section6: [],
     ifpurchasetext: '',
     seach: '',
-    showchoice:false,
-    applyfortype:'',
-    seach1:'',
+    showchoice: false,
+    applyfortype: '',
+    seach1: '',
   },
   setSeach(e) {
     this.setData({
@@ -272,31 +272,37 @@ Page({
       showchoice: false
     })
   },
-  Dictionaryblur(e){
+  Dictionaryblur(e) {
     this.setData({
       applyfortype: e.detail
     })
   },
-  confirmchoice(){
-    var num = app.globalData.applytype.length+1
+  confirmchoice() {
+    var num = Math.round(app.globalData.costkind.length) + 1
     var data = {
-      Key:"applyforminfoType"+num,
-      Value:this.data.applyfortype,
-      ParentId:'2070'
+      Key: "applyforminfoType" + num,
+      Value: this.data.applyfortype,
+      ParentId: '2070'
     }
-    addDictionary(data).then(res=>{
-      if(res.code == 10000){
-       var s =  util.sumupdic(applytype, app, 'applytype', "Value", "Key",this)
-        this.setData({
-          showchoice: false,
+    addDictionary(data).then(res => {
+      if (res.code == 10000) {
+        applytype().then(res => {
+          let applytype = JSON.parse(res.replace(/Key/g, 'value').replace(/Value/g, 'text'));
+          app.globalData.applytype = applytype;
+          console.log(app.globalData.applytype)
+          this.setData({
+            section5: applytype,
+            showchoice: false,
+            applyfortype:''
+          })
         })
       }
     })
-   
+
   },
-  newDictionary(){
+  newDictionary() {
     this.setData({
-      showchoice:true
+      showchoice: true
     })
   },
   confirm() {
@@ -509,7 +515,8 @@ Page({
       section2: app.globalData.Companytitle,
       section3: app.globalData.department,
       section4: app.globalData.MainProject1,
-      section6: app.globalData.YesOrNo1
+      section6: app.globalData.YesOrNo1,
+      section5: app.globalData.applytype
     })
     if (options.id) {
       detailapplyFor({

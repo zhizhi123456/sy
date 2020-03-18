@@ -101,6 +101,7 @@
                 <view class="Cseach">
                     <input value="{{seach}}" bindinput="setSeach" placeholder="请输入搜索内容" />
                     <button size="mini" bindtap="finditem2">搜索</button>
+                    <button size="mini" bindtap="newDictionary">新建</button>
                 </view>
                 <van-picker data-name="chargetype" show-toolbar columns="{{section3}}" bind:cancel="onClose4" bind:confirm="onConfirm4" />
             </van-popup>
@@ -110,6 +111,19 @@
             <van-cell-group>
                 <van-field data-name="demo" value="{{info.demo}}" placeholder="请输入" bind:blur="projectnameblur" />
             </van-cell-group>
+        </view>
+         <view class="seach" wx:if="{{showchoice}}">
+            <van-popup show="{{ showchoice }}" bind:close="onClosechoice" round position="bottom" custom-style="height: 50vh;color:#333">
+                <view class="seach_item">
+                    <van-cell-group>
+                        <van-field value="{{ applyfortype }}" type="textarea" placeholder="请输入" autosize border="{{ false }}" bind:input="Dictionaryblur" label="费用类型" input-class="idea_in" />
+                    </van-cell-group>
+                </view>
+                <view class="checkkind">
+                    <text bindtap="onClosechoice">取消</text>
+                    <text bindtap="confirmchoice">确认</text>
+                </view>
+            </van-popup>
         </view>
     </view>
 </view>
