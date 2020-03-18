@@ -48,7 +48,8 @@ const titleTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1 >= 10 ? date.getMonth() + 1 : "0" + (date.getMonth() + 1)
   const day = date.getDate() >= 10 ? date.getDate() : "0" + date.getDate()
-  return year + "" + month + "" + day;
+  // return year + "" + month + "" + day;
+  return year + "" + month;
 };
 // 格式化选择到的日期
 const datefomate = value => {
@@ -2082,6 +2083,17 @@ const sumup = (port, key, value, text, val) => {
     back(key, result);
   })
 }
+const sumupdic = (port, key, value, text, val,that) => {
+  port().then(res => {
+    let result = getBase(res, text, val);
+    key.globalData[value] = result;
+    that.setData({
+      section5:result
+    })
+    console.log(that.data.section5)
+    back(key, result);
+  })
+}
 const sumup1 = (port, key, value, text, val, UserName) => {
   port({
     UserName: UserName
@@ -2794,6 +2806,46 @@ const introlist = (list, that) => {
     })
   }
 }
+const introsmall = (data) => {
+  //开票类别
+  var app = getApp()
+  app.globalData.applytype.forEach(res => {
+    if (data.type == res.text) {
+      data.type = res.value;
+    }
+  })
+}
+const introsmalllist = (list, that) => {
+  // 合同签订情况
+  var that = this
+  if (list) {
+    list.forEach(data => {
+      // console.log(data)
+      introsmall(data)
+      // 
+    })
+  }
+}
+const outflowsmall = (data) => {
+  //开票类别
+  var app = getApp()
+  app.globalData.applytype.forEach(res => {
+    if (data.type == res.value) {
+      data.type = res.text;
+    }
+  })
+}
+const outflowsmalllist = (list, that) => {
+  // 合同签订情况
+  var that = this
+  if (list) {
+    list.forEach(data => {
+      // console.log(data)
+      outflowsmall(data)
+      // 
+    })
+  }
+}
 // 组合查询
 const qgroupdeliver = (funcname, that, hadNew, hadMy, fun) => {
   var app = getApp();
@@ -3392,7 +3444,10 @@ const Uppercase = (n) => {
     .replace(/^整$/, '零元整');
 };
 module.exports = {
-
+  outflowsmalllist,
+  outflowsmall,
+  introsmall,
+  introsmalllist,
   formatNum,
   readRecordlist,
   multiple,
@@ -3448,6 +3503,7 @@ module.exports = {
   back,
   sumup,
   sumup1,
+  sumupdic,
   qgroupdeliver,
   OAreturn,
   upFile,

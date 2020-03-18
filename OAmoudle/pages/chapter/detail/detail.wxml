@@ -33,7 +33,7 @@
                         <view class="check">{{info.useamount}}</view>
                     </view>
                     <view class="c_item">
-                        <view class="kind">数量</view>
+                        <view class="kind">用章份数</view>
                         <view class="check">{{info.usenumber}}</view>
                     </view>
                      <view class="c_item">

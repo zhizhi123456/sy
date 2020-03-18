@@ -28,7 +28,7 @@ Page({
     show5: false,
     show4: false,
     show6: false,
-    section5: ["红酒", "购物卡", "食品", "烟", "电脑"],
+    section5: app.globalData.applytype
   },
   // 返回
   return () {
@@ -88,8 +88,15 @@ Page({
     });
   },
   onConfirm6(e) {
-    let materials = util.updateValue(e, this);
-    // console.log(materials)
+    let name = e.currentTarget.dataset.name,
+      i = e.currentTarget.dataset.i;
+    let materials = this.data.materials;
+    // console.log(name, i, materials)
+    if (i) {
+      materials[i][name] = e.detail.value.text;
+    } else {
+      materials[0][name] = e.detail.value.text;
+    }
     this.setData({
       materials,
       show6: false
@@ -116,6 +123,7 @@ Page({
     } else {
       // console.log(this.data.billid)
       materials[0].applyid = this.data.billid;
+      util.introsmall(materials[0])
       this.setData({
         materials
       })
@@ -160,6 +168,7 @@ Page({
         }
       }
     }
+    util.introsmall(materials[0])
     updateapplyForsmall({
       ID: this.data.materials[0].ID,
       uptdate: JSON.stringify(this.data.materials)
@@ -195,6 +204,7 @@ Page({
         // console.log(res.Item)
         let materials = this.data.materials;
         materials[0] = res.Item;
+        util.outflowsmall(materials[0])
         this.setData({
           materials
         })

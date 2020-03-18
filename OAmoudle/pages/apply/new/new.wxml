@@ -86,7 +86,7 @@
                 </view>
             </block>
         </block>
-        <view class="check_item">
+        <!-- <view class="check_item">
             <text class="kind">项目深化设计项目编号</text>
             <van-cell title="{{info.itemnumbers?info.itemnumbers:'请选择'}}" bind:click="showPopup1">
                 <icon class="iconfont icon-jiantou" />
@@ -94,7 +94,7 @@
             <van-popup show="{{ show1 }}" round position="bottom" bind:close="onClose1">
                 <van-picker data-name="itemnumbers" show-toolbar columns="{{ section22 }}" bind:cancel="onClose1" bind:confirm="onConfirm1" />
             </van-popup>
-        </view>
+        </view> -->
         <view class="check_item">
             <view class="kind require">
                 <text>申购名</text>

@@ -86,6 +86,8 @@ export const WorkflowName = () => http.get("/api/MethodOfDataService/GetWorkflow
 export const costkind = () => http.post("/api/MethodOfDataService/chargetypeList");
 //费用对象
 export const costobj = () => http.post("/api/MethodOfDataService/usechargemanList");
+// 申领类型
+export const applytype = () => http.post("/api/MethodOfDataService/GetapplyformType");
 //交底类别
 export const IntentionClass = () => http.get("/api/MethodOfDataService/TellIntentionClass");
 // 统计年月
@@ -1379,3 +1381,5 @@ export const addMembernew = (params) => http.post("/api/membernew/Insert", param
 export const amendMembernew = (params) => http.post("/api/membernew/Update", params);
 // 删除
 export const cancelMembernew = (params) => http.post("/api/membernew/Delete", params);
+// 添加字典类型
+export const addDictionary = (params) => http.post("/api/Dictionary/Insert", params);

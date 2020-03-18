@@ -81,7 +81,7 @@
             </van-cell-group>
         </view>
         <view class="check_item">
-            <text class="kind">数量(个)</text>
+            <text class="kind">用章份数</text>
             <van-cell-group>
                 <van-field data-name="usenumber" value="{{info.usenumber}}" placeholder="请输入" bind:blur="usenumberblur" bind:input="checknum" />
             </van-cell-group>
