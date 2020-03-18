@@ -6,7 +6,7 @@ import {
   amendVacate,
   getdep,
   Leavetypelist,
-
+  getLeader
 } from "../../../../service/getData.js";
 var util = require("../../../../utils/util");
 var app = getApp();
@@ -292,7 +292,8 @@ Page({
       util.checkContent(info, this);
       util.intro(info, this)
       this.setData({
-        info
+        info,
+        'info.IsManager': this.data.Manager
       })
       console.log(this.data.info)
       addVacate(this.data.info).then(res => {
@@ -407,6 +408,19 @@ Page({
       this.setData({
         info,
         departmenttext: message.departmenttext
+      })
+      getLeader({
+        UserName: user.UserName
+      }).then(res => {
+        if (JSON.parse(res).length) {
+          this.setData({
+            Manager: true
+          })
+        } else {
+          this.setData({
+            Manager: false
+          })
+        }
       })
     }
     let info = this.data.info;
