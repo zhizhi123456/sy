@@ -25,7 +25,7 @@
                 <van-popup show="{{ show }}" bind:close="onClose" position="right" custom-style="height: 100vh;color:#333">
                     <view class="seach_item">
                         <van-cell-group>
-                            <van-field value="{{info.keyword}}" placeholder="请输入" bind:blur="keywordblur" data-name="keyword" label="总包合同名称" />
+                            <van-field value="{{info.keyword}}" placeholder="请输入" bind:blur="keywordblur" data-name="keyword" label="合同签报名称" />
                         </van-cell-group>
                     </view>
                     <view class="seach_item">
@@ -105,13 +105,13 @@
                     <text>{{item.department}}</text>
                 </view>
                 <view>
-                    <text class="info">公司抬头</text>
+                    <text class="info">公司名称</text>
                     <text>{{item.Companytitle}}</text>
                 </view>
-                <view>
+                <!-- <view>
                     <text class="info">总包项目</text>
                     <text>{{item.projcectCode}}</text>
-                </view>
+                </view> -->
                 <view>
                     <text class="info">签订时间</text>
                     <text>{{item.signtime}}</text>

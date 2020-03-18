@@ -77,7 +77,7 @@ Page({
       info
     })
   },
-  // 公司抬头
+  // 公司名称
   showPopup_4() {
     this.setData({
       show_nature: true
@@ -153,7 +153,7 @@ Page({
       show3: false
     })
   },
-  // 公司抬头
+  // 公司名称
   showPopup4() {
     this.setData({
       show4: true

@@ -157,7 +157,7 @@
         <van-popup show="{{ show }}" bind:close="onClose" round position="bottom" custom-style="height: 50vh;color:#333">
             <view class="seach_item">
                 <van-cell-group>
-                    <van-field value="{{ ApprovalOpinion }}" type="textarea" placeholder="同意。" autosize border="{{ false }}" bind:input="ApprovalOpinionblur" label="审批意见" input-class="idea_in" />
+                    <van-field value="{{ ApprovalOpinion }}" type="textarea" placeholder="请输入审批意见" autosize border="{{ false }}" bind:input="ApprovalOpinionblur" label="审批意见" input-class="idea_in" />
                 </van-cell-group>
             </view>
             <view class="seach_item">
@@ -186,7 +186,7 @@
             </view>
             <view class="checkkind">
                 <text bindtap="onClose">取消</text>
-                <text bindtap="sconfirm">{{state=='return'?'退回':'审核通过'}}</text>
+                <text bindtap="sconfirm">{{state=='return'?'退回':'确认'}}</text>
             </view>
         </van-popup>
     </view>

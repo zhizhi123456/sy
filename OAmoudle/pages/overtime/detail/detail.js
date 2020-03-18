@@ -140,9 +140,9 @@ Page({
   },
   // 退回
   sendback(e) {
-    console.log(e)
     this.setData({
       show:true,
+      ApprovalOpinion:'',
       state:e.currentTarget.dataset.state
     })
     // util.Triggerflow(this, 'return', 'workovertime', 'overtime', '', '', '', '', '', '', 'oa')
@@ -152,6 +152,7 @@ Page({
     if (this.data.info.formid) {
       this.setData({
         show:true,
+        ApprovalOpinion:'同意。',
         state:e.currentTarget.dataset.state
       })
     } else {
@@ -162,7 +163,15 @@ Page({
   },
   sconfirm() {
     if(this.data.state=='return'){
-      util.Triggerflow(this, 'return', 'workovertime', 'overtime', '', '', '', '', '', '', 'oa', this.data.ApprovalOpinion ? this.data.ApprovalOpinion : '同意。', JSON.stringify(this.data.idea.API_Picurl), JSON.stringify(this.data.idea.API_Fileurl))
+      if(this.data.ApprovalOpinion){
+        util.Triggerflow(this, 'return', 'workovertime', 'overtime', '', '', '', '', '', '', 'oa', this.data.ApprovalOpinion ? this.data.ApprovalOpinion : '不同意。', JSON.stringify(this.data.idea.API_Picurl), JSON.stringify(this.data.idea.API_Fileurl))
+      }else{
+        wx.showToast({
+          title: '请输入审批意见',
+          icon: 'none',
+          duration: 3000
+        })
+      }
     }else{
       util.Triggerflow(this, 'next', 'workovertime', 'overtime', '', '', '', '', '', '', 'oa', this.data.ApprovalOpinion ? this.data.ApprovalOpinion : '同意。', JSON.stringify(this.data.idea.API_Picurl), JSON.stringify(this.data.idea.API_Fileurl))
     }

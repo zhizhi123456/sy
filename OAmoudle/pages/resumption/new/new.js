@@ -49,7 +49,7 @@ Page({
       info
     })
   },
-  // 公司抬头
+  // 公司名称
   showPopup_4() {
     this.setData({
       show_nature: true

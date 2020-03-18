@@ -163,7 +163,15 @@ Page({
     })
   },
   tconfirm() {
-    util.Triggerflow(this, 'return', 'paymentapproval', 'payment', '', '', '', '', '', '', 'oa', this.data.ApprovalOpinion ? this.data.ApprovalOpinion : '不同意。', JSON.stringify(this.data.idea.API_Picurl), JSON.stringify(this.data.idea.API_Fileurl))
+    if (this.data.ApprovalOpinion) {
+      util.Triggerflow(this, 'return', 'paymentapproval', 'payment', '', '', '', '', '', '', 'oa', this.data.ApprovalOpinion ? this.data.ApprovalOpinion : '不同意。', JSON.stringify(this.data.idea.API_Picurl), JSON.stringify(this.data.idea.API_Fileurl))
+    } else {
+      wx.showToast({
+        title: '请输入审批意见',
+        icon: 'none',
+        duration: 3000
+      })
+    }
   },
   sconfirm() {
     util.Triggerflow(this, 'next', 'paymentapproval', 'payment', '', '', '', '', '', '', 'oa', this.data.ApprovalOpinion ? this.data.ApprovalOpinion : '同意。', JSON.stringify(this.data.idea.API_Picurl), JSON.stringify(this.data.idea.API_Fileurl))

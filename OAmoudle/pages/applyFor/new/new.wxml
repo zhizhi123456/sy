@@ -23,7 +23,7 @@
         </view>
         <view class="check_item">
             <view class="kind require">
-                <text>公司抬头</text>
+                <text>公司名称</text>
                 <text class="required">*</text>
             </view>
             <van-cell-group>
@@ -109,11 +109,11 @@
                     </view>
                     <van-cell title="{{item.type?item.type:'请选择'}}" data-i='{{index}}' is-link data-name='projectType' bind:click="showPopup6" />
                     <van-popup show="{{show6}}" round position="bottom" bind:close="onClose6">
-                     <view class="Cseach">
-                    <input value="{{seach1}}" bindinput="setSeach1" placeholder="请输入搜索内容" />
-                    <button size="mini" bindtap="finditem1">搜索</button>
-                    <button size="mini" bindtap="newDictionary">新建</button>
-                    </view>
+                        <view class="Cseach">
+                            <input value="{{seach1}}" bindinput="setSeach1" placeholder="请输入搜索内容" />
+                            <button size="mini" bindtap="finditem1">搜索</button>
+                            <button size="mini" bindtap="newDictionary">新建</button>
+                        </view>
                         <van-picker data-name="type" show-toolbar columns="{{ section5 }}" bind:cancel="onClose6" bind:confirm="onConfirm6" />
                     </van-popup>
                 </view>

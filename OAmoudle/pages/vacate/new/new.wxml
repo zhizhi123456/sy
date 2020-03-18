@@ -49,7 +49,7 @@
         </view>
         <view class="check_item">
             <view class="kind require">
-                <text>公司抬头</text>
+                <text>公司名称</text>
                 <text class="required">*</text>
             </view>
             <van-cell-group>

@@ -44,7 +44,7 @@
                                 </van-popup>
                             </view>
                             <view class="seach_item">
-                                <van-field value="{{info.keyword }}" bind:focus="showPopup5" class="time1" title-class="time1" label="公司抬头" placeholder="请选择" />
+                                <van-field value="{{info.keyword }}" bind:focus="showPopup5" class="time1" title-class="time1" label="公司名称" placeholder="请选择" />
                                 <van-popup show="{{show5}}" round position="bottom" bind:close="onClose5">
                                     <van-picker data-name="keyword" show-toolbar columns="{{ section5 }}" bind:cancel="onClose5" bind:confirm="onConfirm5" />
                                 </van-popup>

@@ -73,7 +73,7 @@ Page({
       departmenttext: e.detail.value.text
     })
   },
-  // 公司抬头
+  // 公司名称
   showPopup() {
     this.setData({
       show: true
@@ -290,7 +290,7 @@ Page({
       }
     } else {
       Toast({
-        message: '请填写必填项（退料单名称，申请人，部门，公司抬头，项目编号）',
+        message: '请填写必填项（退料单名称，申请人，部门，公司名称，项目编号）',
         mask: true
       });
     }

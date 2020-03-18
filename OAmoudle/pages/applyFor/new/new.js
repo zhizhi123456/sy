@@ -67,18 +67,6 @@ Page({
       seach: ''
     })
   },
-  setSeach1(e) {
-    this.setData({
-      seach1: e.detail.value
-    })
-  },
-  finditem1() {
-    let arr = util.findone(app.globalData.applytype, this.data.seach1);
-    this.setData({
-      section5: arr,
-      seach: ''
-    })
-  },
   // 公司抬头
   showPopup_o() {
     this.setData({

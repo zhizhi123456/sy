@@ -3,7 +3,9 @@ import Toast from 'vant-weapp/dist/toast/toast';
 import {
   addPayment,
   referPayment,
-  amendPayment
+  amendPayment,
+  addsupplier,
+  Supplier
 } from "../../../../service/getData";
 var util = require("../../../../utils/util");
 var app = getApp();
@@ -405,6 +407,7 @@ Page({
       Subcontact: app.globalData.Subcontact,
       Purchasecontact: app.globalData.Purchasecontact,
       Supplier: app.globalData.Supplier,
+      // Supplier: supplier,
       MainSubproject: app.globalData.MainSubproject,
       userdep: app.globalData.userdep
     })
@@ -435,7 +438,41 @@ Page({
       util.userdep(user, this);
     }
   },
-
+  onClosechoice() {
+    this.setData({
+      showchoice: false
+    })
+  },
+  Dictionaryblur(e) {
+    this.setData({
+      suppliername: e.detail
+    })
+  },
+  confirmchoice() {
+    var data = {
+      suppliername: this.data.suppliername,
+    }
+    addsupplier(data).then(res => {
+      if (res.code == 10000) {
+        Supplier().then(res => {
+          console.log(res)
+          let result = util.getBase(res, 'suppliername', 'ID');
+          this.setData({
+            Supplier: result
+          })
+          app.globalData.Supplier = result;
+        })
+        this.setData({
+          showchoice: false,
+        })
+      }
+    })
+  },
+  newDictionary() {
+    this.setData({
+      showchoice: true
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

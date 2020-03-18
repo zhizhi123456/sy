@@ -82,7 +82,7 @@
                     <text>{{item.projectname}}</text>
                 </view>
                 <view>
-                    <text class="info">公司抬头</text>
+                    <text class="info">公司名称</text>
                     <text>{{item.Companytitle}}</text>
                 </view>
                 <view>

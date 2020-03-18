@@ -57,7 +57,7 @@ Page({
       info
     })
   },
-  // 公司抬头
+  // 公司名称
   showPopup() {
     this.setData({
       show: true

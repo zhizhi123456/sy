@@ -17,19 +17,19 @@
                         <view class="check">{{info.department}}</view>
                     </view>
                     <view class="c_item">
-                        <view class="kind">公司抬头</view>
+                        <view class="kind">公司名称</view>
                         <view class="check">{{info.Companytitle}}</view>
                     </view>
-                     <view class="c_item">
+                     <!-- <view class="c_item">
                         <view class="kind">总包项目</view>
                         <view class="check">{{info.projcectCode}}</view>
-                    </view>
+                    </view> -->
                     <view class="c_item">
-                        <view class="kind">总包合同名称</view>
+                        <view class="kind">合同签报名称</view>
                         <view class="check">{{info.maincontactname}}</view>
                     </view>
                     <view class="c_item">
-                        <view class="kind">总包合同金额</view>
+                        <view class="kind">合同签报金额</view>
                         <view class="check">{{info.contcactamount}}</view>
                     </view>
                     <view class="c_item">
@@ -107,7 +107,7 @@
                                 <text>{{item.mainprojcectCode}}</text>
                             </view>
                             <view class="m_item">
-                                <text class="m_info">总包合同编号</text>
+                                <text class="m_info">合同签报编号</text>
                                 <text>{{item.maincontactcode}}</text>
                             </view>
                             <view class="m_item">

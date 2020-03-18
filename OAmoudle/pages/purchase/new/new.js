@@ -71,7 +71,7 @@ Page({
           item.API_Picurl = []
         }
         this.setData({
-          // 公司抬头
+          // 公司名称
           'info.Companytitle': item.Companytitle,
           'info.department': item.department,
           departmenttext: item.department,

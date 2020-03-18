@@ -56,7 +56,27 @@ Page({
     section5: ["红酒", "购物卡", "食品", "烟", "电脑"],
     section6: [],
     ifpurchasetext: '',
-    upimg1:false
+    upimg1:false,
+    seach:''
+  },
+  setSeach(e) {
+    this.setData({
+      seach: e.detail.value
+    })
+  },
+  finditem() {
+      let arr = util.findone(app.globalData.department, this.data.seach);
+      this.setData({
+        sections: arr,
+        seach: ''
+      })
+  },
+  finditem1() {
+      let arr = util.findone(app.globalData.PayType, this.data.seach);
+      this.setData({
+        section6: arr,
+        seach: ''
+      })
   },
   // 项目编号
   showPopup1() {
@@ -415,7 +435,8 @@ Page({
   onLoad: function (options) {
     this.setData({
       section4: app.globalData.MainProject1,
-      section6: app.globalData.PayType
+      section6: app.globalData.PayType,
+      sections: app.globalData.department,
     })
     if (options.id) {
       detailapproval({

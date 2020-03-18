@@ -17,7 +17,7 @@
                         <view class="check">{{info.department}}</view>
                     </view>
                     <view class="c_item">
-                        <view class="kind">公司抬头</view>
+                        <view class="kind">公司名称</view>
                         <view class="check">{{info.Companytitle}}</view>
                     </view>
                     <view class="c_item">
@@ -119,7 +119,7 @@
                                 <text>{{item.classname}}</text>
                             </view>
                             <view class="m_item">
-                                <text class="m_info">公司抬头</text>
+                                <text class="m_info">公司名称</text>
                                 <text>{{item.Companytitle}}</text>
                             </view>
                             <view class="m_item">

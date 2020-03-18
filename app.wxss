@@ -829,20 +829,25 @@ button.van-button {
     background-color: teal;
     display: flex;
     width: 100%;
-    padding: 15rpx 70rpx;
+    justify-content: space-around;
+    /* padding: 15rpx 40rpx; */
+    padding: 15rpx 0;
 }
 
 .Cseach input {
+    display: block;
     border-radius: 20rpx;
     border: 1rpx solid #ccc;
-    padding: 12rpx 10rpx;
+    padding: 12rpx 0;
     /* margin-right: 50rpx; */
     background-color: white;
 }
 
 .Cseach button {
+    display: block;
     border-radius: 20rpx;
     background-color: teal;
     color: white;
     border: 1rpx solid white;
+    margin: 0;
 }
