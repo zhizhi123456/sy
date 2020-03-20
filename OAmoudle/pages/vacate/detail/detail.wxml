@@ -105,7 +105,7 @@
                             <text class="ideatitle">{{item.createman}}({{item.stepname}})</text>
                         </view>
                         <view class="m_item ideatitle" wx:if="{{item.stepid!=1}}">
-                            {{item.stepid<item.nextstepid?'审核通过':'退回'}}
+                             {{item.nextstepid?(item.stepid>item.nextstepid?'退回':'审核通过'):'流程结束'}}
                         </view>
                         <view class="m_item">
                             <text>{{item.createtime}}</text>
@@ -163,7 +163,7 @@
         </view>
         <view bindtap="putin" wx:if="{{isnext&&returned}}" data-state='next'>
             <icon class="iconfont icon-tijiao"></icon>
-             <text>{{info.formid?'审核通过':'确认提交'}}</text>   
+             <text>{{msg}}</text>   
         </view>
     </view>
   <view class="seach" wx:if="{{show}}">
@@ -207,7 +207,7 @@
         <van-popup show="{{ show1 }}" bind:close="onClose1" round position="bottom" custom-style="height: 50vh;color:#333">
             <view class="seach_item">
                 <van-cell-group>
-                    <van-field value="{{ ApprovalOpinion }}" type="textarea" placeholder="同意。" autosize border="{{ false }}" bind:input="ApprovalOpinionblur" label="审批意见" input-class="idea_in" />
+                    <van-field value="{{ ApprovalOpinion }}" type="textarea" placeholder="请输入审批意见" autosize border="{{ false }}" bind:input="ApprovalOpinionblur" label="审批意见" input-class="idea_in" />
                 </van-cell-group>
             </view>
             <view class="seach_item">

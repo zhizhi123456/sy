@@ -5,7 +5,8 @@ import {
   referInvoice,
   amendInvoice,
   Customer,
-  addcustomer
+  addcustomer,
+  customerRepeat
 } from "../../../../service/getData";
 var util = require("../../../../utils/util");
 var app = getApp();
@@ -358,7 +359,7 @@ Page({
       MainProject: app.globalData.MainProject,
       Invoicefeerate: app.globalData.Invoicefeerate,
       billing: app.globalData.billing,
-      Customer:app.globalData.Customer
+      Customer: app.globalData.Customer
     })
     var user = wx.getStorageSync("myInfo");
     if (user) {
@@ -405,21 +406,37 @@ Page({
     var data = {
       customername: this.data.customername,
     }
-    addcustomer(data).then(res => {
+    customerRepeat(data).then(res => {
       if (res.code == 10000) {
-        Customer().then(res => {
-          console.log(res)
-          let result = util.getBase(res, 'customername', 'ID');
-          this.setData({
-            Customer: result
+        if (res.value) {
+          addcustomer(data).then(res => {
+            if (res.code == 10000) {
+              Customer().then(res => {
+                console.log(res)
+                let result = util.getBase(res, 'customername', 'ID');
+                this.setData({
+                  Customer: result
+                })
+                app.globalData.Customer = result;
+              })
+              this.setData({
+                showchoice: false,
+              })
+            }
           })
-          app.globalData.Customer = result;
-        })
-        this.setData({
-          showchoice: false,
-        })
+        } else {
+          wx.showToast({
+            title: '开票公司已存在',
+            icon: 'none',
+            duration: 3000
+          })
+          this.setData({
+            customername: ''
+          })
+        }
       }
     })
+
   },
   newDictionary() {
     this.setData({

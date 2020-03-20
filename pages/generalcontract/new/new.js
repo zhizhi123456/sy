@@ -239,7 +239,7 @@ Page({
       })
     } else {
       Toast({
-        message: '请填写必填项（合同签报名称，备注）',
+        message: '请填写必填项（签报主题，备注）',
         mask: true
       });
     }

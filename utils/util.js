@@ -10,7 +10,8 @@ import {
   referflow,
   unreferflow,
   contrastfile,
-  getdep
+  getdep,
+  ButtonConfirmed
 } from "../service/getData";
 let userinfo = wx.getStorageSync("myInfo");
 var app = getApp();
@@ -1374,6 +1375,18 @@ const updateCode = (e, key) => {
   }
   return materials;
 }
+// 实现材料明细编号的双向绑定
+const updateCode1 = (e, key) => {
+  let name = e.currentTarget.dataset.name,
+    i = e.currentTarget.dataset.i;
+  let materials = key.data.materials;
+  if (i) {
+    materials[i][name] = e.detail.value.value;
+  } else {
+    materials[0][name] = e.detail.value.value;
+  }
+  return materials;
+}
 //实现类似总包合同的数据绑定
 const editInfo = (e, key, val) => {
   let name = e.currentTarget.dataset.name;
@@ -1992,17 +2005,17 @@ const userdep = (user, key) => {
 // }, 1000);
 // }
 // 工作流流转
-const Triggerflow = (key, direction, sheet, piece, id, cap, dep, dert, rid, tit, oa, speak, pic, file) => {
+const Triggerflow = (key, direction, sheet, piece, id, cap, dep, dert, rid, tit, oa, speak, pic, file,depM) => {
   let userinfo = wx.getStorageSync("myInfo");
-  console.log({
-    ID: key.data.info.ID,
-    mark: direction,
-    userName: userinfo.UserName,
-    formName: sheet,
-    ApprovalOpinion: speak,
-    API_Picurl: pic,
-    API_Fileurl: file
-  })
+  // console.log({
+  //   ID: key.data.info.ID,
+  //   mark: direction,
+  //   userName: userinfo.UserName,
+  //   formName: sheet,
+  //   ApprovalOpinion: speak,
+  //   API_Picurl: pic,
+  //   API_Fileurl: file,
+  // })
   if (userinfo) {
     flow({
       ID: key.data.info.ID,
@@ -2011,7 +2024,8 @@ const Triggerflow = (key, direction, sheet, piece, id, cap, dep, dert, rid, tit,
       formName: sheet,
       ApprovalOpinion: speak,
       API_Picurl: pic,
-      API_Fileurl: file
+      API_Fileurl: file,
+      Department:depM
     }).then(res => {
       console.log(res)
       if (res.code == 10000) {
@@ -2083,12 +2097,12 @@ const sumup = (port, key, value, text, val) => {
     back(key, result);
   })
 }
-const sumupdic = (port, key, value, text, val,that) => {
+const sumupdic = (port, key, value, text, val, that) => {
   port().then(res => {
     let result = getBase(res, text, val);
     key.globalData[value] = result;
     that.setData({
-      section5:result
+      section5: result
     })
     console.log(that.data.section5)
     back(key, result);
@@ -3443,6 +3457,18 @@ const Uppercase = (n) => {
     .replace(/(零.)+/g, '零')
     .replace(/^整$/, '零元整');
 };
+const getbutton = (a, b, c, key) => {
+  ButtonConfirmed({
+    ID: a,
+    formName: b,
+    currowbh: c
+  }).then(res => {
+    console.log(res)
+    key.setData({
+      msg: res.sub_msg
+    })
+  })
+}
 module.exports = {
   outflowsmalllist,
   outflowsmall,
@@ -3516,5 +3542,7 @@ module.exports = {
   lookimgIDEA,
   deleteImgIDEA,
   findone,
-  Uppercase
+  Uppercase,
+  getbutton,
+  updateCode1
 }

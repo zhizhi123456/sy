@@ -91,7 +91,25 @@ Page({
       show6: false
     })
   },
-
+  // 合同（项目）编号
+  showPopupCode() {
+    this.setData({
+      showCode: true
+    });
+  },
+  onCloseCode() {
+    this.setData({
+      showCode: false
+    });
+  },
+  onConfirmCode(e) {
+    let materials = util.updateCode1(e, this);
+    // console.log(materials)
+    this.setData({
+      materials,
+      showCode: false,
+    })
+  },
   // 新增领料单材料明细
   confirm() {
     let materials = this.data.materials;
@@ -103,7 +121,7 @@ Page({
         }
       }
     }
-    if (!(materials[0].detailxh!='' && materials[0].detailcontext && materials[0].amount!='')) {
+    if (!(materials[0].detailxh != '' && materials[0].detailcontext && materials[0].amount != '')) {
       Toast({
         message: '请填写明细表必填项',
         mask: true
@@ -176,6 +194,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      section4: app.globalData.MainProject1,
+    })
     // 领料单id
     if (options.id) {
       this.setData({

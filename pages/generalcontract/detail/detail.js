@@ -56,18 +56,19 @@ Page({
     this.setData({
       history: options.history
     })
-    util.readRecordlist('maincontact', options.id, this, '合同签报')
+    util.readRecordlist('maincontact', options.id, this, '签报')
     if (options.id) {
       referId({
         ID: options.id
       }).then(res => {
-        console.log(res)
+        // console.log(res)
         if (res.code == 10000) {
           let item = res.Item;
           util.handleData(item, this, app.globalData.department);
           this.setData({
             info: item
           })
+          util.getbutton(item.ID, 'maincontact', item.CurStepbh, this);
           wx.hideLoading();
           let menus = wx.getStorageSync('menus');
           if (menus.caption == '我申请' && this.data.info.ApplygetNew) {
@@ -117,7 +118,7 @@ Page({
       info
     })
   },
- // 工作流流转
+  // 工作流流转
   // 删除
   delete() {
     util.OAexpurgate(this, cancel, 'generalcontract')
@@ -201,10 +202,18 @@ Page({
     })
   },
   tconfirm() {
-    util.Triggerflow(this, 'return',  'maincontact', 'generalcontract','', '', '', '', '', '', '', this.data.ApprovalOpinion ? this.data.ApprovalOpinion : '不同意。', JSON.stringify(this.data.idea.API_Picurl), JSON.stringify(this.data.idea.API_Fileurl))
+    if (this.data.ApprovalOpinion) {
+      util.Triggerflow(this, 'return', 'maincontact', 'generalcontract', '', '', '', '', '', '', '', this.data.ApprovalOpinion ? this.data.ApprovalOpinion : '不同意。', JSON.stringify(this.data.idea.API_Picurl), JSON.stringify(this.data.idea.API_Fileurl))
+    } else {
+      wx.showToast({
+        title: '请输入审批意见',
+        icon: 'none',
+        duration: 3000
+      })
+    }
   },
   sconfirm() {
-    util.Triggerflow(this, 'next',  'maincontact', 'generalcontract', '', '', '', '', '', '', '', this.data.ApprovalOpinion ? this.data.ApprovalOpinion : '同意。', JSON.stringify(this.data.idea.API_Picurl), JSON.stringify(this.data.idea.API_Fileurl))
+    util.Triggerflow(this, 'next', 'maincontact', 'generalcontract', '', '', '', '', '', '', '', this.data.ApprovalOpinion ? this.data.ApprovalOpinion : '同意。', JSON.stringify(this.data.idea.API_Picurl), JSON.stringify(this.data.idea.API_Fileurl))
   },
   // 审核通过
   putin() {
@@ -213,7 +222,7 @@ Page({
         show: true
       })
     } else {
-      util.Triggerflow(this, 'next',  'maincontact', 'generalcontract')
+      util.Triggerflow(this, 'next', 'maincontact', 'generalcontract')
     }
   },
   // 点击图片放大预览
@@ -226,5 +235,5 @@ Page({
       info
     })
   },
- 
+
 })

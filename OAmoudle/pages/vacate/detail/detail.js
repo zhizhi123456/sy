@@ -72,6 +72,7 @@ Page({
             info: item,
             applyT: Number(options.applyT)
           })
+          util.getbutton(item.ID, 'leaveapplyform', item.CurStepbh, this);
           // amendVacate
           if (this.data.applyT && this.data.info.ApplygetNew) {
             let info = this.data.info;
@@ -96,7 +97,7 @@ Page({
           util.workList(this, mid, 'leaveapplyform', options.id);
           //处理状态判断
           util.checkState(this, res.Item.formid || res.Item.Formid, 'leaveapplyform', item.CurStepbh, '');
-          console.log(this.data.info.formid,this.data.isnext,this.data.returned,this.data.isreturn)
+          console.log(this.data.info.formid, this.data.isnext, this.data.returned, this.data.isreturn)
         }
       })
     }
@@ -253,7 +254,15 @@ Page({
     })
   },
   tconfirm() {
-    util.Triggerflow(this, 'return', 'leaveapplyform', 'vacate', '', '', '', '', '', '', 'oa', this.data.ApprovalOpinion ? this.data.ApprovalOpinion : '不同意。', JSON.stringify(this.data.idea.API_Picurl), JSON.stringify(this.data.idea.API_Fileurl))
+    if (this.data.ApprovalOpinion) {
+      util.Triggerflow(this, 'return', 'leaveapplyform', 'vacate', '', '', '', '', '', '', 'oa', this.data.ApprovalOpinion ? this.data.ApprovalOpinion : '不同意。', JSON.stringify(this.data.idea.API_Picurl), JSON.stringify(this.data.idea.API_Fileurl))
+    } else {
+      wx.showToast({
+        title: '请输入审批意见',
+        icon: 'none',
+        duration: 3000
+      })
+    }
   },
   sconfirm() {
     util.Triggerflow(this, 'next', 'leaveapplyform', 'vacate', '', '', '', '', '', '', 'oa', this.data.ApprovalOpinion ? this.data.ApprovalOpinion : '同意。', JSON.stringify(this.data.idea.API_Picurl), JSON.stringify(this.data.idea.API_Fileurl))
@@ -268,14 +277,14 @@ Page({
       util.Triggerflow(this, 'next', 'leaveapplyform', 'vacate', '', '', '', '', '', '', 'oa')
     }
   },
-    // 点击图片放大预览
-    tap_pic(e) {
-      util.preview(this, e)
-    },
-    defaultimg(e) {
-      let info = util.defaultimg(e, this);
-      this.setData({
-        info
-      })
-    },
+  // 点击图片放大预览
+  tap_pic(e) {
+    util.preview(this, e)
+  },
+  defaultimg(e) {
+    let info = util.defaultimg(e, this);
+    this.setData({
+      info
+    })
+  },
 })
