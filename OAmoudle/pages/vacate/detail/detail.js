@@ -361,7 +361,7 @@ Page({
       this.setData({
         showdep: true
       })
-      console.log(this.data.showdep)
+      // console.log(this.data.showdep)
       // util.Triggerflow(this, 'next', 'leaveapplyform', 'vacate', '', '', '', '', '', '', 'oa')
     }
   },
