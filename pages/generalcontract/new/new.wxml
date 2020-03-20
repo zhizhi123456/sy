@@ -3,12 +3,12 @@
     <view class="header d_header" wx:if="{{info.ID}}">
         <icon class="iconfont icon-jiantou2 fl" bindtap="editreturn"></icon>
         <text class="fr newCreate" bindtap="editconfirm">确定</text>
-        <view class="apply">编辑合同签报</view>
+        <view class="apply">编辑签报</view>
     </view>
     <view class="header d_header" wx:else>
         <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
         <text class="fr newCreate" bindtap="confirm">确定</text>
-        <view class="apply">新建合同签报</view>
+        <view class="apply">新建签报</view>
     </view>
     <view class="main n_main">
         <van-toast id="van-toast" />
@@ -58,7 +58,7 @@
         </view>
         <view class="check_item">
             <view class="kind require">
-                <text>合同签报名称</text>
+                <text>签报主题</text>
                 <text class="required">*</text>
             </view>
             <van-cell-group>
@@ -66,7 +66,7 @@
             </van-cell-group>
         </view>
         <view class="check_item">
-            <text class="kind">合同签报金额(元)</text>
+            <text class="kind">签报金额(元)</text>
             <van-cell-group>
                 <van-field data-name="contcactamount" value="{{info.contcactamount}}" bind:input="checknum" placeholder="请输入" bind:blur="contcactamountblur" />
             </van-cell-group>
@@ -81,7 +81,7 @@
             </van-cell-group>
         </view>
         <view class="check_item">
-            <text class="kind">材料</text>
+            <text class="kind">签报事由</text>
             <van-cell-group>
                 <van-field data-name="material" value="{{info.material}}" placeholder="请输入" bind:blur="materialblur" />
             </van-cell-group>

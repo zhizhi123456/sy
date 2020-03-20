@@ -187,7 +187,7 @@
         </view>
         <view bindtap="putin" wx:if="{{isnext&&returned}}">
             <icon class="iconfont icon-tijiao"></icon>
-            <text>{{info.formid?'审核通过':'确认提交'}}</text>   
+            <text>{{msg}}</text>   
         </view>
     </view>
     <view class="seach" wx:if="{{show}}">

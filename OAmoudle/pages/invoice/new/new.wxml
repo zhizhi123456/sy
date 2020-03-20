@@ -198,7 +198,7 @@
             <van-popup show="{{ showchoice }}" bind:close="onClosechoice" round position="bottom" custom-style=" height: 50vh;color:#333">
                 <view class="seach_item">
                     <van-cell-group>
-                        <van-field value="{{ customername }}" type="textarea" placeholder="请输入" autosize border="{{ false }}" bind:input="Dictionaryblur" label="对方公司" input-class="idea_in" />
+                        <van-field value="{{ customername }}" type="textarea" placeholder="请输入" autosize border="{{ false }}" bind:input="Dictionaryblur" label="开票公司" input-class="idea_in" />
                     </van-cell-group>
                 </view>
                 <view class="checkkind">

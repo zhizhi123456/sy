@@ -14,7 +14,7 @@ Page({
     seach: '',
     loading: false,
     val: 0,
-    top: '合同签报',
+    top: '签报',
     InfoList: [],
     show_0: false,
     currentDate: new Date().getTime(),
@@ -93,15 +93,15 @@ Page({
         val: 0,
         ISconduct: 1,
         pact: [{
-            text: '未处理的合同签报',
+            text: '未处理的签报',
             value: 0
           },
           {
-            text: '已处理的合同签报',
+            text: '已处理的签报',
             value: 1
           },
           {
-            text: '已超时的合同签报',
+            text: '已超时的签报',
             value: 2
           }
         ],
@@ -112,7 +112,7 @@ Page({
         'info.state': '',
         applyT: 1,
         'info.UserName': userinfo.UserName,
-        top: '我申请的合同签报'
+        top: '我申请的签报'
       })
       util.qgroupdeliver(groupId, this, '', '1')
     } else {

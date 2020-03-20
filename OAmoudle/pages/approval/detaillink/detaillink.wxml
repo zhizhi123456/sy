@@ -6,7 +6,7 @@
         <view class="apply">资料详情</view>
     </view>
     <view class="card">
-        <van-card title="{{info.detailname}}"   />
+        <van-card title="{{info.detailname}}" />
     </view>
     <view class="main_nav">
         <view class="content">
@@ -15,12 +15,20 @@
                 <view class="check">{{info.detailxh}}</view>
             </view>
             <view class="c_item">
-                <view class="kind"> 支付审批明细内容 </view>
+                <view class="kind">支付审批明细内容</view>
                 <view class="check">{{info.detailcontext }}</view>
             </view>
             <view class="c_item">
                 <view class="kind">金额</view>
                 <view class="check">{{info.amount}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">合同（项目）编号</view>
+                <view class="check">{{info.projectcode}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">附件张数</view>
+                <view class="check">{{info.AppendicesNum}}</view>
             </view>
             <view class="c_item">
                 <view class="kind">创建人</view>
@@ -41,7 +49,7 @@
                     </view> -->
         </view>
     </view>
-    <view class="footer"  wx:if="{{!bill.formid}}">
+    <view class="footer" wx:if="{{!bill.formid}}">
         <view>
             <navigator open-type="redirect" url="/OAmoudle/pages/approval/newlink/newlink?detailid={{info.ID}}" hover-class="none">
                 <icon class="iconfont icon-bianji"></icon>

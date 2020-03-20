@@ -11,7 +11,7 @@
         <view class="apply">新建支付审批明细</view>
     </view>
     <view class="main n_main">
-     <van-toast id="van-toast" />
+        <van-toast id="van-toast" />
         <view class="check_item">
             <view class="kind">
                 <text>序号</text>
@@ -36,7 +36,27 @@
                 <text class="required">*</text>
             </view>
             <van-cell-group>
-                <van-field value="{{materials[0].amount}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}'   bind:input="checknum"  data-name='amount' />
+                <van-field value="{{materials[0].amount}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' bind:input="checknum" data-name='amount' />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>合同（项目）编号</text>
+            </view>
+            <van-cell title="{{materials[0].projectcode?materials[0].projectcode:'请选择'}}" bind:click="showPopupCode">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ showCode }}" round position="bottom" bind:close="onCloseCode">
+                <van-picker data-name="projectcode" data-i='{{index}}' show-toolbar columns="{{ section4 }}" bind:cancel="onCloseCode" bind:confirm="onConfirmCode" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <view class="kind">
+                <text>附件张数</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field value="{{materials[0].AppendicesNum}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' data-name='AppendicesNum' bind:input="checknum" />
             </van-cell-group>
         </view>
     </view>

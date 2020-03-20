@@ -3,6 +3,7 @@ import {
   referOvertime,
   cancelOvertime,
   amendOvertime,
+  GetSubDepartment
 } from '../../../../service/getData.js';
 var app = getApp();
 var util = require("../../../../utils/util");
@@ -36,6 +37,38 @@ Page({
       util.OAreturn('overtime');
     }
   },
+  // 部门多选
+  // showPopup_dep() {
+  //   this.setData({
+  //     show_dep: true
+  //   })
+  // },
+  onClose_dep() {
+    this.setData({
+      show_dep: false
+    })
+  },
+  onChangedep(e) {
+    this.setData({
+      result: e.detail
+    })
+    console.log(e.detail)
+  },
+  onConfirm_dep() {
+    if (this.data.result) {
+      this.setData({
+        depment: this.data.result.join(","),
+        show_dep: false
+      })
+      util.Triggerflow(this, 'next', 'workovertime', 'overtime', '', '', '', '', '', '', 'oa', '', '', '', this.data.depment)
+    } else {
+      wx.showToast({
+        title: '请选择流转部门',
+        icon: 'none',
+        duration: 3000
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -44,6 +77,14 @@ Page({
     wx.showLoading({
       title: '加载中',
     });
+    GetSubDepartment({
+      UserName: userinfo.UserName
+    }).then(res => {
+      let dep = util.getBase(res, 'techofficename', 'ID');
+      this.setData({
+        depM: dep
+      })
+    })
     if (!options.history) {
       wx.setStorageSync('history', '')
     }
@@ -67,6 +108,7 @@ Page({
           this.setData({
             info: item
           })
+          util.getbutton(item.ID, 'workovertime', item.CurStepbh, this);
           let menus = wx.getStorageSync('menus');
           if (menus.caption == '我申请' && this.data.info.ApplygetNew) {
             let info = this.data.info;
@@ -103,8 +145,8 @@ Page({
   downF(e) {
     util.lookFileIDEA(e);
   },
-   // 文件上传
-   up_file() {
+  // 文件上传
+  up_file() {
     util.upFileIDEA(this);
   },
   //图片上传
@@ -141,9 +183,9 @@ Page({
   // 退回
   sendback(e) {
     this.setData({
-      show:true,
-      ApprovalOpinion:'',
-      state:e.currentTarget.dataset.state
+      show: true,
+      ApprovalOpinion: '',
+      state: e.currentTarget.dataset.state
     })
     // util.Triggerflow(this, 'return', 'workovertime', 'overtime', '', '', '', '', '', '', 'oa')
   },
@@ -151,28 +193,30 @@ Page({
   putin(e) {
     if (this.data.info.formid) {
       this.setData({
-        show:true,
-        ApprovalOpinion:'同意。',
-        state:e.currentTarget.dataset.state
+        show: true,
+        ApprovalOpinion: '同意。',
+        state: e.currentTarget.dataset.state
       })
     } else {
-      util.Triggerflow(this, 'next', 'workovertime', 'overtime', '', '', '', '', '', '', 'oa')
+      this.setData({
+        show_dep: true
+      })
     }
     // e.currentTarget.dataset.state
     // util.Triggerflow(this, 'next', 'workovertime', 'overtime', '', '', '', '', '', '', 'oa')
   },
   sconfirm() {
-    if(this.data.state=='return'){
-      if(this.data.ApprovalOpinion){
+    if (this.data.state == 'return') {
+      if (this.data.ApprovalOpinion) {
         util.Triggerflow(this, 'return', 'workovertime', 'overtime', '', '', '', '', '', '', 'oa', this.data.ApprovalOpinion ? this.data.ApprovalOpinion : '不同意。', JSON.stringify(this.data.idea.API_Picurl), JSON.stringify(this.data.idea.API_Fileurl))
-      }else{
+      } else {
         wx.showToast({
           title: '请输入审批意见',
           icon: 'none',
           duration: 3000
         })
       }
-    }else{
+    } else {
       util.Triggerflow(this, 'next', 'workovertime', 'overtime', '', '', '', '', '', '', 'oa', this.data.ApprovalOpinion ? this.data.ApprovalOpinion : '同意。', JSON.stringify(this.data.idea.API_Picurl), JSON.stringify(this.data.idea.API_Fileurl))
     }
   },

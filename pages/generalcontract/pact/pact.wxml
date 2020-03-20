@@ -25,7 +25,7 @@
                 <van-popup show="{{ show }}" bind:close="onClose" position="right" custom-style="height: 100vh;color:#333">
                     <view class="seach_item">
                         <van-cell-group>
-                            <van-field value="{{info.keyword}}" placeholder="请输入" bind:blur="keywordblur" data-name="keyword" label="合同签报名称" />
+                            <van-field value="{{info.keyword}}" placeholder="请输入" bind:blur="keywordblur" data-name="keyword" label="签报主题" />
                         </van-cell-group>
                     </view>
                     <view class="seach_item">

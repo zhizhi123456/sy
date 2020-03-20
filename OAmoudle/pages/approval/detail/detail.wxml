@@ -30,6 +30,14 @@
                         <view class="kind">付款方式</view>
                         <view class="check">{{info.paytype}}</view>
                     </view>
+                    <view class="c_item">
+                        <view class="kind">总金额(元)</view>
+                        <view class="check">{{info.TotalSum}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">总金额(大写)</view>
+                        <view class="check">{{info.Chinesenumerals}}</view>
+                    </view>
                     <!-- <view class="c_item">
                         <view class="kind">项目编号</view>
                         <view class="check">{{info.projectcode}}</view>
@@ -129,7 +137,7 @@
                             <text class="ideatitle">{{item.createman}}({{item.stepname}})</text>
                         </view>
                         <view class="m_item ideatitle" wx:if="{{item.stepid!=1}}">
-                            {{item.stepid<item.nextstepid?'审核通过':'退回'}}
+                           {{item.nextstepid?(item.stepid>item.nextstepid?'退回':'审核通过'):'流程结束'}}
                         </view>
                         <view class="m_item">
                             <text>{{item.createtime}}</text>
@@ -177,14 +185,14 @@
         </view>
         <view bindtap="putin" wx:if="{{isnext&&returned}}">
             <icon class="iconfont icon-tijiao"></icon>
-            <text>审核通过</text>
+            <text>{{msg}}</text>
         </view>
     </view>
     <view class="seach" wx:if="{{show1}}">
         <van-popup show="{{ show1 }}" bind:close="onClose1" round position="bottom" custom-style="height: 50vh;color:#333">
             <view class="seach_item">
                 <van-cell-group>
-                    <van-field value="{{ ApprovalOpinion }}" type="textarea" placeholder="同意。" autosize border="{{ false }}" bind:input="ApprovalOpinionblur" label="审批意见" input-class="idea_in" />
+                    <van-field value="{{ ApprovalOpinion }}" type="textarea" placeholder="请输入审批意见" autosize border="{{ false }}" bind:input="ApprovalOpinionblur" label="审批意见" input-class="idea_in" />
                 </van-cell-group>
             </view>
             <view class="seach_item">

@@ -1389,5 +1389,13 @@ export const cancelMembernew = (params) => http.post("/api/membernew/Delete", pa
 export const addDictionary = (params) => http.post("/api/Dictionary/Insert", params);
 // 供应商
 export const addsupplier = (params) => http.post("/api/supplier/Insert", params);
+// 供应商判断重复
+export const supplierRepeat = (params) => http.post("/api/supplier/supplierRepeat", params);
 // 客户
 export const addcustomer = (params) => http.post("/api/customer/Insert", params);
+// 客户判断重复
+export const customerRepeat = (params) => http.post("/api/customer/customerRepeat", params);
+// 按钮内容
+export const ButtonConfirmed = (params) => http.post("/api/SubmitWorkFlowService/ButtonConfirmed", params);
+// 得到提交部门
+export const GetSubDepartment = (params) => http.post("/api/MethodOfDataService/GetSubDepartment", params);

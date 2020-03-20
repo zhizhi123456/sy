@@ -28,7 +28,7 @@
             </view>
             <!-- <van-cell-group>
                 <van-field value="{{info.department}}" disabled />
-            </van-cell-group> --> 
+            </van-cell-group> -->
             <van-cell title="{{info.department?info.department:'请选择'}}" bind:click="showPopup1" />
             <van-popup show="{{show1}}" round position="bottom" bind:close="onClose1">
                 <view class="Cseach">
@@ -77,6 +77,18 @@
                 </view>
                 <van-picker data-name="paytype" show-toolbar columns="{{ section6 }}" bind:cancel="onClose2" bind:confirm="onConfirm2" />
             </van-popup>
+        </view>
+        <view class="check_item">
+            <text class="kind">总金额(元)</text>
+            <van-cell-group>
+                <van-field data-name="TotalSum" value="{{info.TotalSum}}" placeholder="请输入" bind:blur="TotalSumblur" bind:input="checknum1" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">总金额(大写)</text>
+            <van-cell-group>
+                <van-field data-name="Chinesenumerals" value="{{info.Chinesenumerals}}" placeholder="请输入" bind:blur="Chinesenumeralsblur" />
+            </van-cell-group>
         </view>
         <!-- <view class="check_item">
             <view class="kind require">
@@ -151,12 +163,27 @@
                         <van-field value="{{item.amount}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' data-name='amount' bind:input="checknum" />
                     </van-cell-group>
                 </view>
-                  <!-- <view class="check_item">
-            <text class="kind">含税金额(大写)</text>
-            <van-cell-group>
-                <van-field data-name="Chinesenumerals" value="{{item.Chinesenumerals}}" placeholder="请输入" bind:blur="Chinesenumeralsblur" />
-            </van-cell-group>
-        </view> -->
+                <view class="check_item">
+                    <view class="kind require">
+                        <text>合同（项目）编号</text>
+                    </view>
+                    <van-cell title="{{item.projectcode?item.projectcode:'请选择'}}" bind:click="showPopupCode">
+                        <icon class="iconfont icon-jiantou" />
+                    </van-cell>
+                    <van-popup show="{{ showCode }}" round position="bottom" bind:close="onCloseCode">
+                        <van-picker data-name="projectcode" 
+                        data-i='{{index}}' show-toolbar columns="{{ section4 }}" bind:cancel="onCloseCode" bind:confirm="onConfirmCode" />
+                    </van-popup>
+                </view>
+                <view class="check_item">
+                    <view class="kind">
+                        <text>附件张数</text>
+                        <text class="required">*</text>
+                    </view>
+                    <van-cell-group>
+                        <van-field value="{{item.AppendicesNum}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' data-name='AppendicesNum' bind:input="checknum" />
+                    </van-cell-group>
+                </view>
             </block>
         </block>
     </view>

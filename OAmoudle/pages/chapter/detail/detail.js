@@ -67,6 +67,7 @@ Page({
           this.setData({
             info: item
           })
+          util.getbutton(item.ID, 'usesealform', item.CurStepbh, this);
           let menus = wx.getStorageSync('menus');
           if (menus.caption == '我申请' && this.data.info.ApplygetNew) {
             let info = this.data.info;

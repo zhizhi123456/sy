@@ -56,8 +56,8 @@ Page({
     section5: ["红酒", "购物卡", "食品", "烟", "电脑"],
     section6: [],
     ifpurchasetext: '',
-    upimg1:false,
-    seach:''
+    upimg1: false,
+    seach: ''
   },
   setSeach(e) {
     this.setData({
@@ -65,18 +65,18 @@ Page({
     })
   },
   finditem() {
-      let arr = util.findone(app.globalData.department, this.data.seach);
-      this.setData({
-        sections: arr,
-        seach: ''
-      })
+    let arr = util.findone(app.globalData.department, this.data.seach);
+    this.setData({
+      sections: arr,
+      seach: ''
+    })
   },
   finditem1() {
-      let arr = util.findone(app.globalData.PayType, this.data.seach);
-      this.setData({
-        section6: arr,
-        seach: ''
-      })
+    let arr = util.findone(app.globalData.PayType, this.data.seach);
+    this.setData({
+      section6: arr,
+      seach: ''
+    })
   },
   // 项目编号
   showPopup1() {
@@ -143,6 +143,30 @@ Page({
       info
     })
   },
+  // 数字筛选
+  checknum1(e) {
+    let info = this.data.info;
+    util.formatNum(e);
+    info.TotalSum = e.detail;
+    this.setData({
+      info
+    })
+  },
+  // 总金额
+  TotalSumblur(e) {
+    let info = util.editInfo(e, this, e.detail.value);
+    this.setData({
+      info,
+      'info.Chinesenumerals': util.Uppercase(e.detail.value)
+    })
+  },
+  // 大写金额
+  Chinesenumeralsblur(e) {
+    let info = util.editInfo(e, this, e.detail.value);
+    this.setData({
+      info
+    })
+  },
   // 照片
   showPopup_photo() {
     this.setData({
@@ -175,9 +199,9 @@ Page({
     })
   },
   onSelect_photo1(e) {
-    util.upImages(this, this.data.info.invoiceurl,'upimg1');
+    util.upImages(this, this.data.info.invoiceurl, 'upimg1');
     this.setData({
-      upimg1:true,
+      upimg1: true,
       show_photo1: false
     })
   },
@@ -240,6 +264,25 @@ finditem1() {
     seach1: ''
   })
 },
+  // 合同（项目）编号
+  showPopupCode() {
+    this.setData({
+      showCode: true
+    });
+  },
+  onCloseCode() {
+    this.setData({
+      showCode: false
+    });
+  },
+  onConfirmCode(e) {
+    let materials = util.updateCode1(e, this);
+    // console.log(materials)
+    this.setData({
+      materials,
+      showCode: false,
+    })
+  },
   confirm() {
     let info = this.data.info;
     // console.log(this.data.info)
@@ -508,7 +551,7 @@ finditem1() {
       info.Companytitle = message.Companytitletext
       this.setData({
         info,
-        departmenttext:message.departmenttext
+        departmenttext: message.departmenttext
       })
     }
   },

@@ -87,6 +87,7 @@ Page({
             info: item,
             applyT: Number(options.applyT)
           })
+          util.getbutton(item.ID, 'leaveapplyform', item.CurStepbh, this);
           // amendVacate
           if (this.data.applyT && this.data.info.ApplygetNew) {
             let info = this.data.info;
@@ -336,7 +337,15 @@ Page({
     })
   },
   tconfirm() {
-    util.Triggerflow(this, 'return', 'leaveapplyform', 'vacate', '', '', '', '', '', '', 'oa', this.data.ApprovalOpinion ? this.data.ApprovalOpinion : '不同意。', JSON.stringify(this.data.idea.API_Picurl), JSON.stringify(this.data.idea.API_Fileurl))
+    if (this.data.ApprovalOpinion) {
+      util.Triggerflow(this, 'return', 'leaveapplyform', 'vacate', '', '', '', '', '', '', 'oa', this.data.ApprovalOpinion ? this.data.ApprovalOpinion : '不同意。', JSON.stringify(this.data.idea.API_Picurl), JSON.stringify(this.data.idea.API_Fileurl))
+    } else {
+      wx.showToast({
+        title: '请输入审批意见',
+        icon: 'none',
+        duration: 3000
+      })
+    }
   },
   sconfirm() {
     util.Triggerflow(this, 'next', 'leaveapplyform', 'vacate', '', '', '', '', '', '', 'oa', this.data.ApprovalOpinion ? this.data.ApprovalOpinion : '同意。', JSON.stringify(this.data.idea.API_Picurl), JSON.stringify(this.data.idea.API_Fileurl))

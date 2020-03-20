@@ -6,7 +6,7 @@
         <view class="apply">资料详情</view>
     </view>
     <view class="card">
-        <van-card title="{{info.overworktype}}"   />
+        <van-card title="{{info.overworktype}}" />
     </view>
     <view class="main_nav">
         <van-tabs active="{{tab}}">
@@ -98,7 +98,7 @@
                 <van-cell title="动态({{Workstate}})" />
                 <van-steps steps="{{ steps }}" active="{{ actived }}" direction="vertical" active-color="#008080" inactive-icon="stop-circle" />
             </van-tab>
-             <van-tab title="具体动态" name="c" wx:if="{{!history}}">
+            <van-tab title="具体动态" name="c" wx:if="{{!history}}">
                 <view wx:if="{{stepLIst.length}}" class="ideainfo">
                     <view class="material" wx:for="{{stepLIst}}" wx:key="index">
                         <view class="m_item">
@@ -138,11 +138,11 @@
                 </view>
                 <view class="dynamic_state" wx:else>暂无内容</view>
             </van-tab>
-             <van-tab title="修改记录" name="d" wx:if="{{(!history)&&amendant.length}}">
+            <van-tab title="修改记录" name="d" wx:if="{{(!history)&&amendant.length}}">
                 <block wx:if="{{amendant}}">
                     <van-cell title="记录({{amendant.length}})" />
-                    <block wx:for="{{amendant}}" wx:key="index"> 
-                          <van-cell title="{{item.text}}" label="{{item.desc}}" data-i='{{item.oldcontext}}' bind:tap="change12"/>
+                    <block wx:for="{{amendant}}" wx:key="index">
+                        <van-cell title="{{item.text}}" label="{{item.desc}}" data-i='{{item.oldcontext}}' bind:tap="change12" />
                     </block>
                 </block>
                 <view class="dynamic_state" wx:else>暂无记录</view>
@@ -162,10 +162,10 @@
         </view>
         <view bindtap="putin" wx:if="{{isnext&&returned}}" data-state='next'>
             <icon class="iconfont icon-tijiao"></icon>
-             <text>{{info.formid?'审核通过':'确认提交'}}</text>   
+            <text>{{msg}}</text>
         </view>
     </view>
-     <view class="seach" wx:if="{{show}}">
+    <view class="seach" wx:if="{{show}}">
         <van-popup show="{{ show }}" bind:close="onClose" round position="bottom" custom-style="height: 50vh;color:#333">
             <view class="seach_item">
                 <van-cell-group>
@@ -200,6 +200,21 @@
                 <text bindtap="onClose">取消</text>
                 <text bindtap="sconfirm">{{state=='return'?'退回':'确认'}}</text>
             </view>
+        </van-popup>
+    </view>
+    <view class="check_item" wx:if="{{show_dep}}">
+        <!-- <text class="kind">总包项目类型</text> -->
+        <!-- <van-cell title="{{depment?depment:'请选择'}}" is-link bind:click="showPopup_dep" /> -->
+        <van-popup show="{{ show_dep }}" round position="bottom" bind:close="onClose_kind">
+            <van-checkbox-group value="{{ result }}" bind:change="onChangedep">
+                <view class="checkkind">
+                    <text bindtap="onClose_dep">取消</text>
+                    <text bindtap="onConfirm_dep">确定</text>
+                </view>
+                <block wx:for="{{depM}}" wx:key="index">
+                    <van-checkbox name="{{item.value}}">{{item.text}}</van-checkbox>
+                </block>
+            </van-checkbox-group>
         </van-popup>
     </view>
 </view>

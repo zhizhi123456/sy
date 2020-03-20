@@ -10,7 +10,8 @@ import {
   referflow,
   unreferflow,
   contrastfile,
-  getdep
+  getdep,
+  ButtonConfirmed
 } from "../service/getData";
 let userinfo = wx.getStorageSync("myInfo");
 var app = getApp();
@@ -1371,6 +1372,18 @@ const updateCode = (e, key) => {
     materials[0][name] = e.detail.value.text;
     materials[0].goodsname = e.detail.value.value;
     materials[0].specifications = e.detail.value.specifications;
+  }
+  return materials;
+}
+// 实现材料明细编号的双向绑定
+const updateCode1 = (e, key) => {
+  let name = e.currentTarget.dataset.name,
+    i = e.currentTarget.dataset.i;
+  let materials = key.data.materials;
+  if (i) {
+    materials[i][name] = e.detail.value.value;
+  } else {
+    materials[0][name] = e.detail.value.value;
   }
   return materials;
 }
@@ -3473,6 +3486,18 @@ const Uppercase = (n) => {
     .replace(/(零.)+/g, '零')
     .replace(/^整$/, '零元整');
 };
+const getbutton = (a, b, c, key) => {
+  ButtonConfirmed({
+    ID: a,
+    formName: b,
+    currowbh: c
+  }).then(res => {
+    console.log(res)
+    key.setData({
+      msg: res.sub_msg
+    })
+  })
+}
 module.exports = {
   outflowsmalllist,
   outflowsmall,
@@ -3546,5 +3571,7 @@ module.exports = {
   lookimgIDEA,
   deleteImgIDEA,
   findone,
-  Uppercase
+  Uppercase,
+  getbutton,
+  updateCode1
 }

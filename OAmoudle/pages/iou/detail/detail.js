@@ -73,7 +73,7 @@ Page({
     this.setData({
       history: options.history
     })
-    util.readRecordlist('debitnote', options.id, this,'借条')
+    util.readRecordlist('debitnote', options.id, this, '借条')
     if (options.id) {
       detailiou({
         ID: options.id
@@ -91,6 +91,7 @@ Page({
           this.setData({
             info: item
           })
+          util.getbutton(item.ID, 'debitnote', item.CurStepbh, this);
           let menus = wx.getStorageSync('menus');
           if (menus.caption == '我申请' && this.data.info.ApplygetNew) {
             let info = this.data.info;
@@ -106,12 +107,12 @@ Page({
             })
           }
           wx.hideLoading();
-     
+
           // 调取工作流记录
           //列表
           let mid = res.Item.formid;
-            util.workList(this, mid,'debitnote', options.id)
-            // //console.log(this.data.steps)
+          util.workList(this, mid, 'debitnote', options.id)
+          // //console.log(this.data.steps)
           //处理状态判断
           util.checkState(this, mid, 'debitnote', item.CurStepbh, '');
         }
@@ -194,7 +195,15 @@ Page({
     })
   },
   tconfirm() {
-    util.Triggerflow(this, 'return', 'debitnote', 'iou', '', '', '', '', '', '', 'oa', this.data.ApprovalOpinion ? this.data.ApprovalOpinion : '不同意。', JSON.stringify(this.data.idea.API_Picurl), JSON.stringify(this.data.idea.API_Fileurl))
+    if (this.data.ApprovalOpinion) {
+      util.Triggerflow(this, 'return', 'debitnote', 'iou', '', '', '', '', '', '', 'oa', this.data.ApprovalOpinion ? this.data.ApprovalOpinion : '不同意。', JSON.stringify(this.data.idea.API_Picurl), JSON.stringify(this.data.idea.API_Fileurl))
+    } else {
+      wx.showToast({
+        title: '请输入审批意见',
+        icon: 'none',
+        duration: 3000
+      })
+    }
   },
   sconfirm() {
     util.Triggerflow(this, 'next', 'debitnote', 'iou', '', '', '', '', '', '', 'oa', this.data.ApprovalOpinion ? this.data.ApprovalOpinion : '同意。', JSON.stringify(this.data.idea.API_Picurl), JSON.stringify(this.data.idea.API_Fileurl))

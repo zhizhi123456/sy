@@ -5,7 +5,8 @@ import {
   referPayment,
   amendPayment,
   addsupplier,
-  Supplier
+  Supplier,
+  supplierRepeat
 } from "../../../../service/getData";
 var util = require("../../../../utils/util");
 var app = getApp();
@@ -452,21 +453,37 @@ Page({
     var data = {
       suppliername: this.data.suppliername,
     }
-    addsupplier(data).then(res => {
+    supplierRepeat(data).then(res => {
       if (res.code == 10000) {
-        Supplier().then(res => {
-          console.log(res)
-          let result = util.getBase(res, 'suppliername', 'ID');
-          this.setData({
-            Supplier: result
+        if (res.value) {
+          addsupplier(data).then(res => {
+            if (res.code == 10000) {
+              Supplier().then(res => {
+                console.log(res)
+                let result = util.getBase(res, 'suppliername', 'ID');
+                this.setData({
+                  Supplier: result
+                })
+                app.globalData.Supplier = result;
+              })
+              this.setData({
+                showchoice: false,
+              })
+            }
           })
-          app.globalData.Supplier = result;
-        })
-        this.setData({
-          showchoice: false,
-        })
+        } else {
+          wx.showToast({
+            title: '供应商已存在',
+            icon: 'none',
+            duration: 3000
+          })
+          this.setData({
+            suppliername: ''
+          })
+        }
       }
     })
+
   },
   newDictionary() {
     this.setData({
