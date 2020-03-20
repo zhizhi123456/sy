@@ -7,7 +7,8 @@ import {
   updateapplyFor,
   addapplyForsmall,
   addDictionary,
-  applytype
+  applytype,
+  UnitType
 } from "../../../../service/getData";
 var util = require("../../../../utils/util");
 var app = getApp();
@@ -20,10 +21,11 @@ Page({
       purpose: "",
       Companytitle: '',
       department: '',
-      ifpurchase: "",
+      ifpurchase: "3105",
       itemnumber: '1',
       applynumber: "",
-      API_Picurl: []
+      API_Picurl: [],
+      TotalSum: 0
     },
     currentDate: new Date().getTime(),
     show: false,
@@ -47,13 +49,17 @@ Page({
     section3: [],
     section4: [],
     materials: [],
-    section5:[],
+    section5: [],
     section6: [],
-    ifpurchasetext: '',
+    ifpurchasetext: '否',
     seach: '',
     showchoice: false,
     applyfortype: '',
     seach1: '',
+    seach2: '',
+    unittype: '',
+    showchoice2: false,
+    length: 0
   },
   setSeach(e) {
     this.setData({
@@ -67,7 +73,38 @@ Page({
       seach: ''
     })
   },
-  // 公司抬头
+  setSeach1(e) {
+    this.setData({
+      seach1: e.detail.value
+    })
+  },
+  finditem1() {
+    let arr = util.findone(app.globalData.applytype, this.data.seach1);
+    this.setData({
+      section5: arr,
+      seach1: ''
+    })
+  },
+  setSeach2(e) {
+    this.setData({
+      seach2: e.detail.value
+    })
+  },
+  finditem2() {
+    let arr = util.findone(app.globalData.UnitType, this.data.seach2);
+    this.setData({
+      section7: arr,
+      seach2: ''
+    })
+  },
+  finditem3() {
+    let arr = util.findone(app.globalData.Companytitle, this.data.seach);
+    this.setData({
+      section2: arr,
+      seach: ''
+    })
+  },
+  // 公司名称
   showPopup_o() {
     this.setData({
       show_o: true
@@ -199,6 +236,13 @@ Page({
       info
     })
   },
+  purchasecblur(e) {
+    let info = util.editInfo(e, this, e.detail.value);
+    this.setData({
+      info,
+      'info.Chinesenumerals': util.Uppercase(this.data.info.TotalSum)
+    })
+  },
   // 采购合同金额
   contcactamountblur(e) {
     let info = util.editInfo(e, this, e.detail.value);
@@ -241,12 +285,18 @@ Page({
     });
   },
   onConfirm6(e) {
+    console.log(e)
     let name = e.currentTarget.dataset.name,
-      i = e.currentTarget.dataset.i;
+      i = e.currentTarget.dataset.i - 1;
     let materials = this.data.materials;
     // console.log(name, i, materials)
+    console.log(i)
     if (i) {
-      materials[i][name] = e.detail.value.text;
+      var w = materials.findIndex(s => {
+        return s.num = i
+      })
+      materials[w][name] = e.detail.value.text;
+      i = w
     } else {
       materials[0][name] = e.detail.value.text;
     }
@@ -254,6 +304,7 @@ Page({
       materials,
       show6: false
     })
+    this.repetition(e, i)
   },
   onClosechoice() {
     this.setData({
@@ -266,26 +317,38 @@ Page({
     })
   },
   confirmchoice() {
-    var num = Math.round(app.globalData.costkind.length) + 1
-    var data = {
-      Key: "applyforminfoType" + num,
-      Value: this.data.applyfortype,
-      ParentId: '2070'
-    }
-    addDictionary(data).then(res => {
-      if (res.code == 10000) {
-        applytype().then(res => {
-          let applytype = JSON.parse(res.replace(/Key/g, 'value').replace(/Value/g, 'text'));
-          app.globalData.applytype = applytype;
-          console.log(app.globalData.applytype)
-          this.setData({
-            section5: applytype,
-            showchoice: false,
-            applyfortype:''
-          })
-        })
-      }
+    var num = Math.round(app.globalData.applytype.length) + 1
+    var ifhave = app.globalData.applytype.some(s => {
+      return s.text == this.data.applyfortype
     })
+    if (ifhave) {
+      wx.showToast({
+        title: '已存在相同信息',
+        icon: 'none',
+        duration: 3000
+      })
+    } else {
+      var data = {
+        Key: "applyforminfoType" + num,
+        Value: this.data.applyfortype,
+        ParentId: '2070'
+      }
+      addDictionary(data).then(res => {
+        if (res.code == 10000) {
+          applytype().then(res => {
+            let applytype = JSON.parse(res.replace(/Key/g, 'value').replace(/Value/g, 'text'));
+            app.globalData.applytype = applytype;
+            console.log(app.globalData.applytype)
+            this.setData({
+              section5: applytype,
+              showchoice: false,
+              applyfortype: ''
+            })
+          })
+        }
+      })
+    }
+
 
   },
   newDictionary() {
@@ -293,6 +356,90 @@ Page({
       showchoice: true
     })
   },
+  newDictionary2() {
+    this.setData({
+      showchoice2: true
+    })
+  },
+  // 负责人
+  showPopup7() {
+    this.setData({
+      show7: true
+    });
+  },
+  onClose7() {
+    this.setData({
+      show7: false
+    });
+  },
+  onConfirm7(e) {
+    let name = e.currentTarget.dataset.name,
+      i = e.currentTarget.dataset.i - 1
+    let materials = this.data.materials;
+    // console.log(name, i, materials)
+    if (i) {
+      var w = materials.findIndex(s => {
+        return s.num = i
+      })
+      materials[w][name] = e.detail.value.text;
+
+    } else {
+      materials[0][name] = e.detail.value.text;
+    }
+    this.setData({
+      materials,
+      show7: false
+    })
+
+  },
+  onClosechoice2() {
+    this.setData({
+      showchoice2: false
+    })
+  },
+  Dictionaryblur2(e) {
+    this.setData({
+      unittype: e.detail
+    })
+  },
+  confirmchoice2() {
+    var num = Math.round(app.globalData.UnitType.length) + 1
+    var ifhave = app.globalData.UnitType.some(s => {
+      console.log(s.text)
+      return s.text == this.data.unittype
+    })
+    if (ifhave) {
+      wx.showToast({
+        title: '已存在相同信息',
+        icon: 'none',
+        duration: 3000
+      })
+    } else {
+      var data = {
+        Key: "UnitType" + num,
+        Value: this.data.unittype,
+        ParentId: '3375'
+      }
+      addDictionary(data).then(res => {
+        if (res.code == 10000) {
+          UnitType().then(res => {
+            let UnitType = JSON.parse(res.replace(/Key/g, 'value').replace(/Value/g, 'text'));
+            app.globalData.UnitType = UnitType;
+            console.log(app.globalData.UnitType)
+            this.setData({
+              section7: UnitType,
+              showchoice2: false,
+              unittype: ''
+            })
+          })
+        }
+      })
+    }
+
+
+
+  },
+
   confirm() {
     let info = this.data.info;
     // console.log(this.data.info)
@@ -307,7 +454,7 @@ Page({
       }
       // console.log("1")
       if (this.data.materials[0]) {
-        if (!(materials[0].type && materials[0].quantity && materials[0].unitprice &&
+        if (!(materials[0].type && materials[0].quantity && materials[0].unitprice != '' &&
             materials[0].detailname)) {
           Toast({
             message: '请填写明细表必填项',
@@ -426,23 +573,21 @@ Page({
     })
   },
   // 获取采购明细输入框中的数据并设置给data
-  getgcode(e) {
-    util.updateValue(e, this);
-  },
   getgname(e) {
     util.updateValue(e, this);
+    this.sum()
+    this.repetition(e)
   },
-  getSize(e) {
-    util.updateValue(e, this);
-  },
-  getUnit(e) {
-    util.updateValue(e, this);
-  },
-  getQuantity(e) {
-    util.updateValue(e, this);
-  },
-  getRecord(e) {
-    util.updateValue(e, this);
+  sum() {
+    let materials = this.data.materials;
+    var sum = 0
+    materials.forEach(s => {
+      sum = s.quantity * s.unitprice + sum
+    })
+    this.setData({
+      'info.TotalSum': sum,
+      'info.Chinesenumerals': util.Uppercase(sum),
+    })
   },
   // 数字筛选
   checknum(e) {
@@ -459,21 +604,55 @@ Page({
       materials
     })
   },
+  repetition(e, w) {
+    let materials = this.data.materials;
+    var i = e.currentTarget.dataset.i;
+    if (w || w == 0) {
+      i = w
+    }
+    let name = e.currentTarget.dataset.name
+    // console.log(name, i, materials)
+    var ifhave = ''
+    if (i) {
+      ifhave = materials.some((s, index) => {
+        if (index != i) {
+          return (s.type == materials[i].type) && (s.detailname == materials[i].detailname)
+        }
+      })
+    } else {
+      ifhave = materials.some((s, index) => {
+        if (index != i) {
+          return (s.type == materials[0].type) && (s.detailname == materials[0].detailname)
+        }
+
+      })
+      // materials[0][name] = e.detail && e.detail.value;
+    }
+    if (ifhave) {
+      wx.showToast({
+        title: "已经添加过此项!",
+        icon: 'none',
+        duration: 3000
+      })
+    }
+  },
   // 添加材料明细
   add_more() {
     let add_detail = {
-      num: this.data.materials.length + 1,
+      num: this.data.length + 1,
       applyid: '',
       type: '',
-      quantity: '',
-      unitprice: '',
+      quantity: 0,
+      unitprice: 0,
       detailname: '',
     };
     let materials = this.data.materials;
     materials.unshift(add_detail);
     this.setData({
-      materials
+      materials,
+      length: add_detail.num
     })
+    this.sum()
     // 页面滚动到底部
     if (this.data.materials.length < 2) {
       util.pageScrollToBottom1();
@@ -484,14 +663,16 @@ Page({
     let materials = this.data.materials,
       i = e.currentTarget.dataset.i;
     materials.splice(i, 1);
-    materials.forEach((item, index, arr) => {
-      if (i > index) {
-        item.num = item.num - 1
-      };
-    });
+    // materials.forEach((item, index, arr) => {
+    //   if (i > index) {
+    //     item.num = item.num - 1
+    //   };
+    // });
+
     this.setData({
       materials
     })
+    this.sum()
 
   },
   /**
@@ -504,7 +685,8 @@ Page({
       section3: app.globalData.department,
       section4: app.globalData.MainProject1,
       section6: app.globalData.YesOrNo1,
-      section5: app.globalData.applytype
+      section5: app.globalData.applytype,
+      section7: app.globalData.UnitType
     })
     if (options.id) {
       detailapplyFor({

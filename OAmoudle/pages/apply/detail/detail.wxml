@@ -37,17 +37,25 @@
                         <view class="check">{{info.receivephone}}</view>
                     </view>
                     <view class="c_item">
+                        <view class="kind">总金额</view>
+                        <view class="check">{{info.TotalSum}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">总金额(大写)</view>
+                        <view class="check">{{info.Chinesenumerals}}</view>
+                    </view>
+                    <!-- <view class="c_item">
                         <view class="kind">送货地址</view>
                         <view class="check">{{info.delievryaddress}}</view>
-                    </view>
-                    <view class="c_item">
+                    </view> -->
+                    <!-- <view class="c_item">
                         <view class="kind">进场日期</view>
                         <view class="check">{{info.enterdatetime}}</view>
-                    </view>
-                    <view class="c_item">
+                    </view> -->
+                    <!-- <view class="c_item">
                         <view class="kind">设备进场状态</view>
                         <view class="check">{{info.enterstate}}</view>
-                    </view>
+                    </view> -->
                     <view class="c_item">
                         <view class="kind">照片</view>
                         <view wx:if="{{info.API_Picurl}}" class="detpic_show">
@@ -156,10 +164,7 @@
                             <!-- <view>
                                 <text class="m_caption">{{item.caption}}</text>
                             </view> -->
-                            <view class="m_item">
-                                <text class="m_info">负责人</text>
-                                <text>{{item.chargeman}}</text>
-                            </view>
+                           
                             <view class="m_item">
                                 <text class="m_info">名称</text>
                                 <text>{{item.buyitemname}}</text>
@@ -167,6 +172,10 @@
                             <view class="m_item">
                                 <text class="m_info">规格型号</text>
                                 <text>{{item.specifications}}</text>
+                            </view>
+                             <view class="m_item">
+                                <text class="m_info">品牌</text>
+                                <text>{{item.brand}}</text>
                             </view>
                         </navigator>
                     </view>

@@ -71,6 +71,12 @@
                 </van-checkbox>
             </van-popup>
         </view>
+          <view class="check_item">
+            <text class="kind">其他</text>
+            <van-cell-group>
+                <van-field data-name="Other" value="{{info.Other}}" placeholder="请输入" bind:blur="useamountblur" />
+            </van-cell-group>
+        </view>
         <view class="check_item">
             <view class="kind require">
                 <text>用途</text>
@@ -92,12 +98,7 @@
                 <van-field data-name="useamount" value="{{info.useamount}}" placeholder="请输入" bind:blur="useamountblur" bind:input="checknum1" />
             </van-cell-group>
         </view>
-         <view class="check_item">
-            <text class="kind">其他</text>
-            <van-cell-group>
-                <van-field data-name="Other" value="{{info.Other}}" placeholder="请输入" bind:blur="useamountblur" />
-            </van-cell-group>
-        </view>
+       
         <view class="check_item">
             <text class="kind">图片</text>
             <van-cell title="请选择" is-link bind:click="showPopup_photo" />

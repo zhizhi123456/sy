@@ -21,7 +21,7 @@
                 <view class="add_detail detail_title">
                     <van-cell title="申购明细{{index+1}}" icon="close" data-i="{{index}}" bindtap="reduce_detail" data-ID="{{item.ID}}" />
                 </view>
-                <view class="check_item">
+                <!-- <view class="check_item">
                     <view class="kind require">
                         <text>负责人</text>
                         <text class="required">*</text>
@@ -29,7 +29,7 @@
                     <van-cell-group>
                         <van-field value="{{item.chargeman}}" disabled />
                     </van-cell-group>
-                </view>
+                </view> -->
                 <view class="check_item">
                     <view class="kind">
                         <text>名称</text>
@@ -62,9 +62,15 @@
                         <text>单位</text>
                         <text class="required">*</text>
                     </view>
-                    <van-cell-group>
-                        <van-field value="{{item.unit}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' data-name='unit' />
-                    </van-cell-group>
+                    <van-cell title="{{item.unit?item.unit:'请选择'}}" data-i='{{index}}' is-link data-name='unit' bind:click="showPopup7" />
+                    <van-popup show="{{show7}}" round position="bottom" bind:close="onClose7">
+                        <view class="Cseach">
+                            <input value="{{seach2}}" bindinput="setSeach2" placeholder="请输入搜索内容" />
+                            <button size="mini" bindtap="finditem2">搜索</button>
+                            <button size="mini" bindtap="newDictionary2">新建</button>
+                        </view>
+                        <van-picker data-name="unit" data-i='{{item.num}}' show-toolbar columns="{{ section7 }}" bind:cancel="onClose7" bind:confirm="onConfirm7" />
+                    </van-popup>
                 </view>
                 <view class="check_item">
                     <view class="kind">
@@ -73,6 +79,14 @@
                     </view>
                     <van-cell-group>
                         <van-field value="{{item.quantity}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' data-name='quantity' bind:input="checknum" />
+                    </van-cell-group>
+                </view>
+                 <view class="check_item">
+                    <view class="kind">
+                        <text>单价</text>
+                    </view>
+                    <van-cell-group>
+                        <van-field value="{{item.univalence}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' data-name='univalence' bind:input="checknum"/>
                     </van-cell-group>
                 </view>
                 <view class="check_item">
@@ -119,7 +133,7 @@
                 <van-field value="{{info.applyman}}" disabled />
             </van-cell-group>
         </view>
-        <view class="check_item">
+        <!-- <view class="check_item">
             <view class="kind require">
                 <text>公司名称</text>
                 <text class="required">*</text>
@@ -127,6 +141,20 @@
             <van-cell-group>
                 <van-field value="{{info.Companytitle}}" disabled />
             </van-cell-group>
+        </view> -->
+          <view class="check_item">
+            <view class="kind require">
+                <text>公司名称</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.Companytitle?info.Companytitle:'请选择'}}" is-link bind:click="showPopup_o" />
+            <van-popup show="{{show_o}}" round position="bottom" bind:close="onClose_o">
+             <view class="Cseach">
+                    <input value="{{seach}}" bindinput="setSeach" placeholder="请输入搜索内容" />
+                    <button size="mini" bindtap="finditem3">搜索</button>
+                </view>
+                <van-picker data-name="Companytitle" show-toolbar columns="{{ section3 }}" bind:cancel="onClose_o" bind:confirm="onConfirm_o" />
+            </van-popup>
         </view>
         <view class="check_item">
             <view class="kind require">
@@ -154,7 +182,23 @@
                 <van-field data-name="receivephone" value="{{info.receivephone}}" placeholder="请输入" bind:blur="purchasecontactCodeblur" bind:input="checknum1" />
             </van-cell-group>
         </view>
+         <view class="check_item">
+            <view class="kind require">
+                <text>总金额</text>
+            </view>
+            <van-cell-group>
+                <van-field value="{{info.TotalSum}}" data-name="TotalSum" placeholder="请输入" bind:blur="purchasecblur" />
+            </van-cell-group>
+        </view>
         <view class="check_item">
+            <view class="kind require">
+                <text>总金额(大写)</text>
+            </view>
+            <van-cell-group>
+                <van-field value="{{info.Chinesenumerals}}" data-name="Chinesenumerals" placeholder="请输入" bind:blur="purchasecontactCodeblur"/>
+            </van-cell-group>
+        </view>
+        <!-- <view class="check_item">
             <view class="kind">
                 <text>送货地址</text>
                 <text class="required">*</text>
@@ -162,20 +206,20 @@
             <van-cell-group>
                 <van-field data-name="delievryaddress" value="{{info.delievryaddress}}" placeholder="请输入" bind:blur="subprojectnameblur" />
             </van-cell-group>
-        </view>
-        <view class="check_item">
+        </view> -->
+        <!-- <view class="check_item">
             <text class="kind">进场日期</text>
             <van-cell title="{{info.enterdatetime?info.enterdatetime:'请选择'}}" is-link bind:click="showPopup_time" />
             <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
                 <van-datetime-picker data-name="enterdatetime" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
             </van-popup>
-        </view>
-        <view class="check_item">
+        </view> -->
+        <!-- <view class="check_item">
             <text class="kind">设备进场状态</text>
             <van-cell-group>
                 <van-field data-name="enterstate" value="{{info.enterstate}}" placeholder="请输入" bind:blur="subprojectnameblur" />
             </van-cell-group>
-        </view>
+        </view> -->
         <!-- <view class="check_item">
             <view class="kind require">
                 <text>项目编号</text>
@@ -210,7 +254,7 @@
                 <view class="add_detail detail_title">
                     <van-cell title="申购明细{{index+1}}" icon="close" data-i="{{index}}" bindtap="reduce_detail" />
                 </view>
-                <view class="check_item">
+                <!-- <view class="check_item">
                     <view class="kind">
                         <text>负责人</text>
                         <text class="required">*</text>
@@ -218,7 +262,7 @@
                     <van-cell-group>
                         <van-field value="{{item.chargeman}}" disabled bind:blur="getgname" data-i='{{index}}' data-name='chargeman' />
                     </van-cell-group>
-                </view>
+                </view> -->
                 <view class="check_item">
                     <view class="kind">
                         <text>名称</text>
@@ -240,19 +284,32 @@
                 <view class="check_item">
                     <view class="kind">
                         <text>品牌</text>
-                        <text class="required">*</text>
                     </view>
                     <van-cell-group>
                         <van-field value="{{item.brand}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' data-name='brand' />
                     </van-cell-group>
                 </view>
-                <view class="check_item">
+                 <view class="check_item">
                     <view class="kind">
                         <text>单位</text>
                         <text class="required">*</text>
                     </view>
+                    <van-cell title="{{item.unit?item.unit:'请选择'}}" data-i='{{index}}' is-link data-name='unit' bind:click="showPopup7" />
+                    <van-popup show="{{show7}}" round position="bottom" bind:close="onClose7">
+                        <view class="Cseach">
+                            <input value="{{seach2}}" bindinput="setSeach2" placeholder="请输入搜索内容" />
+                            <button size="mini" bindtap="finditem2">搜索</button>
+                            <button size="mini" bindtap="newDictionary2">新建</button>
+                        </view>
+                        <van-picker data-name="unit"  data-i='{{item.num}}'  show-toolbar columns="{{ section7 }}" bind:cancel="onClose7" bind:confirm="onConfirm7" />
+                    </van-popup>
+                </view>
+                <view class="check_item">
+                    <view class="kind">
+                        <text>单价</text>
+                    </view>
                     <van-cell-group>
-                        <van-field value="{{item.unit}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' data-name='unit' />
+                        <van-field value="{{item.univalence}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' data-name='univalence' bind:input="checknum" />
                     </van-cell-group>
                 </view>
                 <view class="check_item">
@@ -273,7 +330,21 @@
                         <van-field value="{{item.demo}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' data-name='demo' />
                     </van-cell-group>
                 </view>
+                
             </block>
         </block>
+         <view class="seach" wx:if="{{showchoice2}}">
+            <van-popup show="{{ showchoice2 }}" bind:close="onClosechoice2" round position="bottom" custom-style=" height: 50vh;color:#333">
+                <view class="seach_item">
+                    <van-cell-group>
+                        <van-field value="{{ unittype }}" type="textarea" placeholder="请输入" autosize border="{{ false }}" bind:input="Dictionaryblur2" label="单位类型" input-class="idea_in" />
+                    </van-cell-group>
+                </view>
+                <view class="checkkind">
+                    <text bindtap="onClosechoice2">取消</text>
+                    <text bindtap="confirmchoice2">确认</text>
+                </view>
+            </van-popup>
+        </view>
     </view>
 </view>

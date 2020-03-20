@@ -6,6 +6,7 @@ import {
 var app = getApp();
 var util = require("../../../utils/util");
 let item;
+let userinfo = wx.getStorageSync("myInfo");
 Page({
   /**
    * 页面的初始数据
@@ -36,7 +37,8 @@ Page({
     hadNew: 1,
     me: 0,
     constructionteam: 0,
-    show22:false
+    show22: false,
+    section1: ["正常", "请假", "迟到", "早退", "忘打卡"]
   },
   // 返回
   return () {
@@ -53,9 +55,6 @@ Page({
         url: "/pages/section/section2?name=" + this.data.caption + '&dep=' + this.data.dep + '&deptxt=' + this.data.deptxt + '&userid=' + this.data.userid
       })
     }
-
-
-
   },
   /**
    * 生命周期函数--监听页面加载
@@ -65,9 +64,19 @@ Page({
       wx.setStorageSync('carte', options)
     }
     console.log(options)
-    if(options.title!="后台管理"){
+    if (options.title != "后台管理") {
       this.setData({
-         show22:true
+        show22: true
+      })
+    }
+    var user = wx.getStorageSync("myInfo");
+    if (user) {
+      var message = app.globalData.message
+      console.log(message)
+      let info = this.data.info;
+      info.name = message.userId
+      this.setData({
+        info
       })
     }
     if (options.constructionteam) {
@@ -77,8 +86,8 @@ Page({
     }
     console.log(app.globalData.getdept)
     this.setData({
-      sections:app.globalData.getdept,
-      section7:app.globalData.getstaff
+      sections: app.globalData.getdept,
+      section7: app.globalData.getstaff
 
     })
     // 获取到  userid  token  tokrntype  开始时间 结束时间  设置给data
@@ -149,9 +158,7 @@ Page({
       })
     } else {
       var that = this
-     var userinfo = wx.getStorageSync("myInfo");
-
-
+      userinfo = wx.getStorageSync("myInfo");
       that.setData({
         top: '我的考勤打卡',
         Token: userinfo.Token,
@@ -163,9 +170,6 @@ Page({
         "info.TokenType": userinfo.TokenType,
         "info.UserID": userinfo.ID,
       })
-
-
-
       querysign({
         Token: this.data.Token,
         TokenType: this.data.TokenType,
@@ -215,6 +219,24 @@ Page({
       show_0: false,
       info,
       departmenttext: e.detail.value.text
+    })
+  },
+  showPopup1() {
+    this.setData({
+      show1: true
+    });
+  },
+  onClose1() {
+    this.setData({
+      show1: false
+    });
+  },
+  onConfirm1(e) {
+    let info = util.editInfo(e, this, e.detail.value);
+    this.setData({
+      info,
+      show1: false,
+      // departmenttext: e.detail.value.text
     })
   },
   // 创建人
@@ -299,7 +321,7 @@ Page({
     wx.showLoading({
       title: '加载中',
     });
-    if (this.data.info.department || this.data.info.name || this.data.info.startdate || this.data.info.enddate) {
+    if (this.data.info.department || this.data.info.name || this.data.info.startdate || this.data.info.enddate || this.data.info.state) {
       let info = this.data.info;
       util.checkContent(info, this);
       this.setData({
@@ -310,10 +332,12 @@ Page({
         if (res.code == 10000) {
           item = res.Lists;
           console.log(item)
+          var name = this.data.info.name
           this.setData({
             InfoList: item.reverse(),
             item,
             info: {},
+            'info.name': name,
             departmenttext: ""
           })
           if (!this.data.hadNew) {
@@ -339,5 +363,10 @@ Page({
       })
     )
   },
-
+  onShow: function () {
+    userinfo = wx.getStorageSync("myInfo");
+  },
+  onReady: function () {
+   userinfo = wx.getStorageSync("myInfo");
+  },
 })

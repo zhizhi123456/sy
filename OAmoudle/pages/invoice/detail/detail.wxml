@@ -21,7 +21,7 @@
                         <view class="check">{{info.Companytitle}}</view>
                     </view>
                     <view class="c_item">
-                        <view class="kind">对方公司</view>
+                        <view class="kind">开票公司</view>
                         <view class="check">{{info.Othercompany}}</view>
                     </view>
                     <view class="c_item">
@@ -36,10 +36,10 @@
                         <view class="kind">开票类别</view>
                         <view class="check">{{info.invoicetype}}</view>
                     </view>
-                    <view class="c_item">
+                    <!-- <view class="c_item">
                         <view class="kind">开票信息</view>
                         <view class="check">{{info.invoiceinfo}}</view>
-                    </view>
+                    </view> -->
                     <view class="c_item">
                         <view class="kind">发票内容</view>
                         <view class="check">{{info.invoicecontext}}</view>

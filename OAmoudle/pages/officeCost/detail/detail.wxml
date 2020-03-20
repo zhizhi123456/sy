@@ -45,6 +45,10 @@
                         <view class="check">{{info.demo}}</view>
                     </view>
                     <view class="c_item">
+                        <view class="kind">费用统计周期</view>
+                        <view class="check">{{info.StatisticalCycle}}</view>
+                    </view>
+                    <view class="c_item">
                         <view class="kind">创建人</view>
                         <view class="check">{{info.createman}}</view>
                     </view>

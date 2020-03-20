@@ -5,7 +5,8 @@ import {
   only,
   getdep,
   getstaff,
-  getdept
+  getdept,
+  moredep
 } from "../../service/getData";
 var app = getApp();
 var util = require("../../utils/util");
@@ -205,6 +206,7 @@ Page({
             })
             util.sumup1(getstaff, app, 'getstaff', "name", "userId", this.data.username);
             util.sumup1(getdept, app, 'getdept', "techofficename", "id", this.data.username);
+            util.sumup1(moredep, app, 'moredep', "techofficename", "ID",userinfo.UserName);
           }
           wx.redirectTo({
             url: '/pages/contracts/contracts?grading=2089&title=项目管理'

@@ -38,7 +38,23 @@
                 <van-picker data-name="department" show-toolbar columns="{{ sections }}" bind:cancel="onClose1" bind:confirm="onConfirm1" />
             </van-popup>
         </view>
-        <view class="check_item">
+         <view class="check_item">
+            <view class="kind require">
+                <text>公司名称</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.Companytitle?info.Companytitle:'请选择'}}" bind:click="showPopup_4">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show_nature }}" round position="bottom" bind:close="onClose_4">
+             <view class="Cseach">
+                    <input value="{{seach1}}" bindinput="setSeach1" placeholder="请输入搜索内容" />
+                    <button size="mini" bindtap="finditem1">搜索</button>
+                </view>
+                <van-picker data-name="Companytitle" show-toolbar columns="{{nature}}" bind:cancel="onClose_4" bind:confirm="onConfirm_4" />
+            </van-popup>
+        </view>
+        <!-- <view class="check_item">
             <view class="kind require">
                 <text>公司名称</text>
                 <text class="required">*</text>
@@ -46,7 +62,7 @@
             <van-cell-group>
                 <van-field value="{{info.Companytitle}}" disabled />
             </van-cell-group>
-        </view>
+        </view> -->
         <view class="check_item">
             <view class="kind require">
                 <text>付款方式</text>
@@ -135,6 +151,12 @@
                         <van-field value="{{item.amount}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' data-name='amount' bind:input="checknum" />
                     </van-cell-group>
                 </view>
+                  <!-- <view class="check_item">
+            <text class="kind">含税金额(大写)</text>
+            <van-cell-group>
+                <van-field data-name="Chinesenumerals" value="{{item.Chinesenumerals}}" placeholder="请输入" bind:blur="Chinesenumeralsblur" />
+            </van-cell-group>
+        </view> -->
             </block>
         </block>
     </view>

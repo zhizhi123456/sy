@@ -112,6 +112,10 @@ export const getLeader = (params) => http.post("/api/MethodOfDataService/GetDepa
 export const Leavetypelist = (params) => http.post("/api/MethodOfDataService/Leavetypelist", params);
 //加班类别
 export const GetOverworktype = (params) => http.post("/api/MethodOfDataService/GetOverworktype", params);
+// 单位类型
+export const UnitType = () => http.get("/api/MethodOfDataService/GetUnitType");
+// 多选部门
+export const moredep = (params) => http.post("/api/MethodOfDataService/GetSubDepartment",params);
 //加班时段
 export const GetOvertimeperiod = (params) => http.post("/api/MethodOfDataService/GetOvertimeperiod", params);
 //已提交流转

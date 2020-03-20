@@ -1,0 +1,4 @@
+.checkro2{
+    position: relative;
+    top: -100rpx;
+}

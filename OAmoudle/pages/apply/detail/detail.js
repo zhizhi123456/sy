@@ -121,6 +121,7 @@ Page({
         if (res.code == 10000) {
           let item = res.List;
           util.listData(item, app.globalData.department);
+          util.outflowsmalllist(item)
           this.setData({
             material_list: item.reverse()
           })

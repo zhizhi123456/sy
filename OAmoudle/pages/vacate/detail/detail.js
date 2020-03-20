@@ -3,7 +3,7 @@ import {
   referVacate,
   cancelVacate,
   amendVacate,
-  Leavetypelist
+  Leavetypelist,
 } from '../../../../service/getData.js';
 var app = getApp();
 var util = require("../../../../utils/util");
@@ -30,7 +30,11 @@ Page({
     idea: {
       API_Picurl: [],
       API_Fileurl: []
-    }
+    },
+    showdep: false,
+    department: '',
+    departmenttext:'',
+    deptext:''
   },
   // 返回
   return () {
@@ -41,6 +45,7 @@ Page({
       util.OAreturn('vacate');
     }
   },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -52,8 +57,18 @@ Page({
       wx.setStorageSync('history', '')
     }
     this.setData({
-      history: options.history
+      history: options.history,
     })
+    console.log(app.globalData.moredep)
+    var a = app.globalData.moredep.map(s => {
+      s.show = false
+      return s
+    })
+    this.setData({
+      sections: a,
+      departmenttext:''
+    })
+    console.log(app.globalData.sections)
     util.readRecordlist('leaveapplyform', options.id, this, '请假')
     if (options.id) {
       referVacate({
@@ -96,7 +111,7 @@ Page({
           util.workList(this, mid, 'leaveapplyform', options.id);
           //处理状态判断
           util.checkState(this, res.Item.formid || res.Item.Formid, 'leaveapplyform', item.CurStepbh, '');
-          console.log(this.data.info.formid,this.data.isnext,this.data.returned,this.data.isreturn)
+          console.log(this.data.info.formid, this.data.isnext, this.data.returned, this.data.isreturn)
         }
       })
     }
@@ -132,6 +147,74 @@ Page({
   //   }
   // },
   // 删除
+  showPopup_o() {
+    this.setData({
+      show_o: true,
+      seach: ''
+    });
+  },
+  onClose_o() {
+    this.setData({
+      show_o: false
+    });
+  },
+  onConfirm_o(e) {
+    var s = this.data.sections
+    var t = s.filter((y) => {
+      return y.show
+    })
+    var q = s.filter((y) => {
+      return y.show
+    })
+    t = t.map((x) => {
+      return x.text
+    })
+    q = q.map((x) => {
+      return x.value
+    })
+    t = t.join(",")
+    q = q.join(",")
+    //console.log(t)
+    this.setData({
+      department: q,
+      deptext: t,
+      show_o: false,
+    })
+    console.log(this.data.department, this.data.deptext)
+  },
+  onClosedep() {
+    this.setData({
+      showdep: false
+    })
+  },
+  confirmdep() {
+    //console.log("1")
+
+    console.log(this.data.department)
+    if(this.data.department){
+      util.Triggerflow(this, 'next', 'leaveapplyform', 'vacate', '', '', '', '', '', '', 'oa', '', '', '', this.data.department)
+    }else{
+      wx.showToast({
+        title: '请选择部门',
+        icon: 'none',
+        duration: 3000
+      })
+    }
+    // util.Triggerflow(this, 'next', 'leaveapplyform', 'vacate', '', '', '', '', '', '', 'oa')
+   
+
+  },
+  onChange(event) {
+    var s = this.data.sections
+    var y = s.findIndex((r) => {
+      return r.value == event.currentTarget.dataset.name
+    })
+    s[y].show = !s[y].show
+    this.setData({
+      sections: s
+    })
+
+  },
   delete() {
     let that = this;
     wx.showModal({
@@ -260,22 +343,27 @@ Page({
   },
   // 审核通过
   putin() {
+    console.log(this.data.info.formid)
     if (this.data.info.formid) {
       this.setData({
         show: true
       })
     } else {
-      util.Triggerflow(this, 'next', 'leaveapplyform', 'vacate', '', '', '', '', '', '', 'oa')
+      this.setData({
+        showdep: true
+      })
+      console.log(this.data.showdep)
+      // util.Triggerflow(this, 'next', 'leaveapplyform', 'vacate', '', '', '', '', '', '', 'oa')
     }
   },
-    // 点击图片放大预览
-    tap_pic(e) {
-      util.preview(this, e)
-    },
-    defaultimg(e) {
-      let info = util.defaultimg(e, this);
-      this.setData({
-        info
-      })
-    },
+  // 点击图片放大预览
+  tap_pic(e) {
+    util.preview(this, e)
+  },
+  defaultimg(e) {
+    let info = util.defaultimg(e, this);
+    this.setData({
+      info
+    })
+  },
 })

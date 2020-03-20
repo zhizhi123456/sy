@@ -109,18 +109,18 @@
                     <text class="info">部门</text>
                     <text>{{item.department}}</text>
                 </view>
-                <view>
+                <!-- <view>
                     <text class="info">是否需要采购</text>
                     <text>{{item.ifpurchase}}</text>
-                </view>
+                </view> -->
                  <!-- <view>
                     <text class="info">申领编号</text>
                     <text>{{item.applynumber}}</text>
                 </view> -->
-                 <view>
+                 <!-- <view>
                     <text class="info">项目编号</text>
                     <text>{{item.itemnumber}}</text>
-                </view>
+                </view> -->
                 <view>
                     <text class="info">创建人</text>
                     <text>{{item.createman}}</text>

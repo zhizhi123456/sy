@@ -25,9 +25,9 @@
         <view>签到</view>
         <view>{{date}}</view>
     </view>
-    <view class="reach">
+    <!-- <view class="reach">
         <icon type="success" color="green" class="ic" wx:if="{{getto}}" />
         <icon type="cancel" color="#F76260" class="ic" wx:else="{{getto}}" />
         <text>{{getto?'已到达':'未到达'}}考勤范围: {{WorkAreaName}}</text>
-    </view>
+    </view> -->
 </view>

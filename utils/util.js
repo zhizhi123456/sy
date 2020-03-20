@@ -1992,27 +1992,37 @@ const userdep = (user, key) => {
 // }, 1000);
 // }
 // 工作流流转
-const Triggerflow = (key, direction, sheet, piece, id, cap, dep, dert, rid, tit, oa, speak, pic, file) => {
+const Triggerflow = (key, direction, sheet, piece, id, cap, dep, dert, rid, tit, oa, speak, pic, file, dept) => {
   let userinfo = wx.getStorageSync("myInfo");
-  console.log({
-    ID: key.data.info.ID,
-    mark: direction,
-    userName: userinfo.UserName,
-    formName: sheet,
-    ApprovalOpinion: speak,
-    API_Picurl: pic,
-    API_Fileurl: file
-  })
-  if (userinfo) {
-    flow({
+  var s
+  console.log(dept)
+  if (dept) {
+      s = {
       ID: key.data.info.ID,
       mark: direction,
       userName: userinfo.UserName,
       formName: sheet,
       ApprovalOpinion: speak,
       API_Picurl: pic,
-      API_Fileurl: file
-    }).then(res => {
+      API_Fileurl: file,
+      Department: dept
+    }
+  } else {
+     s = {
+      ID: key.data.info.ID,
+      mark: direction,
+      userName: userinfo.UserName,
+      formName: sheet,
+      ApprovalOpinion: speak,
+      API_Picurl: pic,
+      API_Fileurl: file,
+    }
+  }
+  console.log(s)
+  if (userinfo) {
+    flow(
+      s
+    ).then(res => {
       console.log(res)
       if (res.code == 10000) {
         if (direction == "next") {
@@ -2083,12 +2093,12 @@ const sumup = (port, key, value, text, val) => {
     back(key, result);
   })
 }
-const sumupdic = (port, key, value, text, val,that) => {
+const sumupdic = (port, key, value, text, val, that) => {
   port().then(res => {
     let result = getBase(res, text, val);
     key.globalData[value] = result;
     that.setData({
-      section5:result
+      section5: result
     })
     console.log(that.data.section5)
     back(key, result);
@@ -2814,6 +2824,16 @@ const introsmall = (data) => {
       data.type = res.value;
     }
   })
+  app.globalData.UnitType.forEach(res => {
+    if (data.unit == res.text) {
+      data.unit = res.value;
+    }
+  })
+  app.globalData.UnitType.forEach(res => {
+    if (data.unitType == res.text) {
+      data.unitType = res.value;
+    }
+  })
 }
 const introsmalllist = (list, that) => {
   // 合同签订情况
@@ -2832,6 +2852,16 @@ const outflowsmall = (data) => {
   app.globalData.applytype.forEach(res => {
     if (data.type == res.value) {
       data.type = res.text;
+    }
+  })
+  app.globalData.UnitType.forEach(res => {
+    if (data.unit == res.value) {
+      data.unit = res.text;
+    }
+  })
+  app.globalData.UnitType.forEach(res => {
+    if (data.unitType == res.value) {
+      data.unitType = res.text;
     }
   })
 }

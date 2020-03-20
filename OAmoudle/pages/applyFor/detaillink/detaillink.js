@@ -2,7 +2,15 @@
 import {
   detailapplyForsmall,
   delapplyForsmall,
-  detailapplyFor
+  detailapplyFor,
+  addapplyForsmall,
+  updateapplyForsmall,
+  addDictionary,
+  applytype,
+  UnitType,
+  queryapplyForsmall,
+  delapplyFor,
+  updateapplyFor,
 } from '../../../../service/getData';
 var app = getApp();
 var util = require("../../../../utils/util");
@@ -26,7 +34,65 @@ Page({
     })
   },
   delete() {
-    util.OAexpurgateDetail(this,delapplyForsmall,'applyFor',this.data.info.applyid)
+    // util.OAexpurgateDetail(this, delapplyForsmall, 'applyFor', this.data.info.applyid)
+    var that = this
+    wx.showModal({
+      content: '确定删除吗？',
+      success(res) {
+        if (res.confirm) {
+          delapplyForsmall({
+            ID: that.data.info.ID
+          }).then(res => {
+            if (res.code == 10000) {
+              wx.showToast({
+                title: '删除成功',
+                icon: 'success',
+                duration: 3000
+              })
+              queryapplyForsmall({
+                applyid: that.data.info.applyid
+              }).then(res => {
+                // console.log(res)
+                if (res.code == 10000) {
+                  let item = res.List;
+                  var sum = 0
+                  item.forEach(s => {
+                    sum = s.quantity * s.unitprice + sum
+                  });
+                  console.log()
+                  detailapplyFor({
+                    ID: that.data.info.applyid
+                  }).then(res => {
+                    let item = res.Item;
+                    var data1 = res.Item
+                    var b = JSON.stringify(data1)
+                    var c = JSON.parse(b)
+                    util.ModifyRecord(c, "applyform")
+                    item.TotalSum = sum
+                    item.Chinesenumerals = util.Uppercase(sum)
+                    util.checkChange(item, that, app.globalData.department);
+                    util.intro(item, that)
+                    updateapplyFor(item).then(res => {
+                      if (res.code == 10000) {
+                        wx.showToast({
+                          title: '编辑成功',
+                          icon: 'success',
+                          duration: 3000
+                        })
+                        wx.redirectTo({
+                          url: "/OAmoudle/pages/applyFor/detail/detail?id=" + that.data.info.applyid + "&table=c"
+                        })
+                      }
+                    })
+                  })
+
+                }
+              })
+            }
+          })
+        }
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -37,6 +103,9 @@ Page({
     });
     if (options.detailid) {
       // 资料详情
+      this.setData({
+        billid:options.detailid
+      })
       detailapplyForsmall({
         ID: options.detailid
       }).then(res => {

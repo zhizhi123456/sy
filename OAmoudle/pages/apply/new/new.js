@@ -11,7 +11,9 @@ import {
   querydeepsmall,
   queryapplysmall,
   updateapplysmall,
-  delapplysmall
+  delapplysmall,
+  UnitType,
+  addDictionary
 } from "../../../../service/getData";
 var util = require("../../../../utils/util");
 var app = getApp();
@@ -22,17 +24,18 @@ Page({
    */
   data: {
     info: {
-      applybuyname: '',
+      applybuyname: '1',
       purpose: "",
       applyman: '',
       Companytitle: '',
       department: '',
       receivephone: '',
-      delievryaddress: '',
+      delievryaddress: '1',
       enterdatetime: '',
       enterstate: '',
       itemnumber: '1',
-      API_Picurl: []
+      API_Picurl: [],
+      unitprice: ''
     },
     currentDate: new Date().getTime(),
 
@@ -59,7 +62,11 @@ Page({
     materials: [],
     section5: [],
     detailID: null,
-    seach: ''
+    seach: '',
+    seach2: '',
+    unittype: '',
+    showchoice2: false,
+    length: 0
   },
   setSeach(e) {
     this.setData({
@@ -71,6 +78,43 @@ Page({
     this.setData({
       sections: arr,
       seach: ''
+    })
+  },
+  setSeach2(e) {
+    this.setData({
+      seach2: e.detail.value
+    })
+  },
+  finditem2() {
+    let arr = util.findone(app.globalData.UnitType, this.data.seach2);
+    this.setData({
+      section7: arr,
+      seach2: ''
+    })
+  },
+  finditem3() {
+    let arr = util.findone(app.globalData.Companytitle, this.data.seach);
+    this.setData({
+      section3: arr,
+      seach: ''
+    })
+  },
+  // 公司名称
+  showPopup_o() {
+    this.setData({
+      show_o: true
+    });
+  },
+  onClose_o() {
+    this.setData({
+      show_o: false
+    });
+  },
+  onConfirm_o(e) {
+    let info = util.editInfo(e, this, e.detail.value.text);
+    this.setData({
+      info,
+      show_o: false,
     })
   },
   // // 项目编号
@@ -181,6 +225,13 @@ Page({
       info
     })
   },
+  purchasecblur(e) {
+    let info = util.editInfo(e, this, e.detail.value);
+    this.setData({
+      info,
+      'info.Chinesenumerals': util.Uppercase(this.data.info.TotalSum)
+    })
+  },
   // 申请人
   showPopup_3() {
     this.setData({
@@ -238,6 +289,87 @@ Page({
       info
     })
   },
+  newDictionary2() {
+    this.setData({
+      showchoice2: true
+    })
+  },
+  // 负责人
+  showPopup7() {
+    this.setData({
+      show7: true
+    });
+  },
+  onClose7() {
+    this.setData({
+      show7: false
+    });
+  },
+  onConfirm7(e) {
+    let name = e.currentTarget.dataset.name,
+      i = e.currentTarget.dataset.i - 1;
+    let materials = this.data.materials;
+    // console.log(name, i, materials)
+    if (i) {
+      var w = materials.findIndex(s => {
+        return s.num = i
+      })
+      materials[w][name] = e.detail.value.text;
+    } else {
+      materials[0][name] = e.detail.value.text;
+    }
+    this.setData({
+      materials,
+      show7: false
+    })
+  },
+  onClosechoice2() {
+    this.setData({
+      showchoice2: false
+    })
+  },
+  Dictionaryblur2(e) {
+    this.setData({
+      unittype: e.detail
+    })
+  },
+  confirmchoice2() {
+    var num = Math.round(app.globalData.UnitType.length) + 1
+
+    var ifhave = app.globalData.UnitType.some(s => {
+      return s.text == this.data.unittype
+    })
+    if (ifhave) {
+      wx.showToast({
+        title: '已存在相同信息',
+        icon: 'none',
+        duration: 3000
+      })
+    } else {
+      var data = {
+        Key: "UnitType" + num,
+        Value: this.data.unittype,
+        ParentId: '3375'
+      }
+      addDictionary(data).then(res => {
+        if (res.code == 10000) {
+          UnitType().then(res => {
+            let UnitType = JSON.parse(res.replace(/Key/g, 'value').replace(/Value/g, 'text'));
+            app.globalData.UnitType = UnitType;
+            console.log(app.globalData.UnitType)
+            this.setData({
+              section7: UnitType,
+              showchoice2: false,
+              unittype: ''
+            })
+          })
+        }
+      })
+    }
+
+
+  },
+
   // 照片
   showPopup_photo() {
     this.setData({
@@ -307,6 +439,7 @@ Page({
               materials.forEach(value => {
                 value.quantity = parseInt(value.quantity);
                 value.applybuyid = id;
+                util.introsmall(value)
               })
               this.setData({
                 materials
@@ -379,7 +512,7 @@ Page({
       var gather = []
       materials.forEach(material => {
         console.log(material)
-        if (!(material.chargeman && material.buyitemname && material.specifications && material.brand &&
+        if (!(material.chargeman && material.buyitemname && material.specifications && material.brand != '' &&
             material.unit && material.quantity !== '' && material.demo)) {
           gather.push(true)
         } else {
@@ -437,6 +570,7 @@ Page({
               if (s.ID) {
                 var arr = []
                 arr.push(s)
+                util.introsmall(s)
                 updateapplysmall({
                   ID: s.ID,
                   uptdate: JSON.stringify(arr)
@@ -456,6 +590,7 @@ Page({
                 arr = []
               } else {
                 // 没有id新建
+                util.introsmall(s)
                 var news = {}
                 news.applybuyid = this.data.detailID;
                 news.chargeman = userinfo.UserName
@@ -556,6 +691,12 @@ Page({
   },
   getgname(e) {
     util.updateValue(e, this);
+    this.sum()
+    console.log(this.data.detailID)
+    if(!this.data.detailID){
+      this.repetition(e)
+    }
+   
   },
   getSize(e) {
     util.updateValue(e, this);
@@ -568,6 +709,46 @@ Page({
   },
   getRecord(e) {
     util.updateValue(e, this);
+  },
+  repetition(e) {
+    let materials = this.data.materials;
+    var i = e.currentTarget.dataset.i;
+    let name = e.currentTarget.dataset.name
+    // console.log(name, i, materials)
+    var ifhave = ''
+    if (i) {
+      ifhave = materials.some((s, index) => {
+        if (index != i) {
+          return (s.buyitemname == materials[i].buyitemname) && (s.specifications == materials[i].specifications) && (s.brand == materials[i].brand)
+        }
+      })
+    } else {
+      ifhave = materials.some((s, index) => {
+        if (index != i) {
+          return (s.buyitemname == materials[0].buyitemname) && (s.specifications == materials[0].specifications) && (s.brand == materials[0].brand)
+        }
+
+      })
+      // materials[0][name] = e.detail && e.detail.value;
+    }
+    if (ifhave) {
+      wx.showToast({
+        title: "已经添加过此项!",
+        icon: 'none',
+        duration: 3000
+      })
+    }
+  },
+  sum() {
+    let materials = this.data.materials;
+    var sum = 0
+    materials.forEach(s => {
+      sum = s.quantity * s.univalence + sum
+    })
+    this.setData({
+      'info.TotalSum': sum,
+      'info.Chinesenumerals': util.Uppercase(sum),
+    })
   },
   // 数字筛选
   checknum(e) {
@@ -597,20 +778,22 @@ Page({
   // 添加材料明细
   add_more() {
     let add_detail = {
-      num: this.data.materials.length,
-      chargeman: this.data.info.applyman,
+      num: this.data.length + 1,
+      chargeman: '1',
       buyitemname: '',
       specifications: '',
-      brand: '',
+      brand: 0,
       unit: '',
       quantity: '',
-      demo: ''
+      demo: '',
+      univalence: ''
     };
     let materials = this.data.materials;
     materials.unshift(add_detail);
     this.setData({
       materials
     })
+    this.sum()
     if (!this.data.detailID) {
       // 页面滚动到底部
       console.log("xinjian")
@@ -643,14 +826,15 @@ Page({
                 let materials = that.data.materials,
                   i = e.currentTarget.dataset.i;
                 materials.splice(i, 1);
-                materials.forEach((item, index, arr) => {
-                  if (i > index) {
-                    item.num = item.num - 1
-                  };
-                });
+                // materials.forEach((item, index, arr) => {
+                //   if (i > index) {
+                //     item.num = item.num - 1
+                //   };
+                // });
                 that.setData({
                   materials
                 })
+                that.sum()
               }
 
             })
@@ -663,15 +847,15 @@ Page({
       let materials = this.data.materials,
         i = e.currentTarget.dataset.i;
       materials.splice(i, 1);
-      materials.forEach((item, index, arr) => {
-        if (i > index) {
-          item.num = item.num - 1
-        };
-      });
+      // materials.forEach((item, index, arr) => {
+      //   if (i > index) {
+      //     item.num = item.num - 1
+      //   };
+      // });
       this.setData({
         materials
       })
-
+      this.sum()
     }
 
   },
@@ -682,6 +866,8 @@ Page({
     this.setData({
       section2: app.globalData.MainProject1,
       sections: app.globalData.department,
+      section7: app.globalData.UnitType,
+      section3: app.globalData.Companytitle,
     })
     var user = wx.getStorageSync("myInfo");
     if (user) {
@@ -742,8 +928,10 @@ Page({
           if (res.List) {
             // this.data.materials
             var materials = res.List
+
             materials.forEach((s, index) => {
               s.num = index + this.data.materials.length
+              util.outflowsmall(s)
             })
             this.setData({
               materials

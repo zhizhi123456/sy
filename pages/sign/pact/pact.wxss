@@ -1,3 +1,13 @@
 .data_list .Nonumber text {
     color: white;
 }
+
+.sign {
+    position: relative;
+    left: -25rpx;
+}
+
+.header .newCreate {
+    font-size: 35rpx;
+
+}

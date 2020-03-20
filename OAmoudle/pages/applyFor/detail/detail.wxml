@@ -25,9 +25,17 @@
                         <view class="check">{{info.department}}</view>
                     </view>
                      <view class="c_item">
+                        <view class="kind">总金额</view>
+                        <view class="check">{{info.TotalSum}}</view>
+                    </view>
+                     <view class="c_item">
+                        <view class="kind">总金额(大写)</view>
+                        <view class="check">{{info.Chinesenumerals}}</view>
+                    </view>
+                     <!-- <view class="c_item">
                         <view class="kind">是否需要采购</view>
                         <view class="check">{{info.ifpurchase}}</view>
-                    </view>
+                    </view> -->
 
                     <!-- <view class="c_item">
                         <view class="kind">申领编号</view>

@@ -21,7 +21,7 @@
                 <van-field data-name="chargename" value="{{info.chargename}}" placeholder="请输入" bind:blur="projectnameblur" />
             </van-cell-group>
         </view>
-        <view class="check_item">
+        <!-- <view class="check_item">
             <view class="kind require">
                 <text>公司名称</text>
                 <text class="required">*</text>
@@ -29,6 +29,22 @@
             <van-cell-group>
                 <van-field value="{{info.Companytitle}}" disabled />
             </van-cell-group>
+        </view> -->
+         <view class="check_item">
+            <view class="kind require">
+                <text>公司名称</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.Companytitle?info.Companytitle:'请选择'}}" bind:click="showPopup_4">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show_nature }}" round position="bottom" bind:close="onClose_4">
+             <view class="Cseach">
+                    <input value="{{seach1}}" bindinput="setSeach1" placeholder="请输入搜索内容" />
+                    <button size="mini" bindtap="finditem1">搜索</button>
+                </view>
+                <van-picker data-name="Companytitle" show-toolbar columns="{{nature}}" bind:cancel="onClose_4" bind:confirm="onConfirm_4" />
+            </van-popup>
         </view>
         <view class="check_item">
             <view class="kind require">
@@ -110,6 +126,12 @@
             <text class="kind">备注</text>
             <van-cell-group>
                 <van-field data-name="demo" value="{{info.demo}}" placeholder="请输入" bind:blur="projectnameblur" />
+            </van-cell-group>
+        </view>
+         <view class="check_item">
+            <text class="kind">费用统计周期</text>
+            <van-cell-group>
+                <van-field  value="{{info.StatisticalCycle}}"  disabled />
             </van-cell-group>
         </view>
          <view class="seach" wx:if="{{showchoice}}">

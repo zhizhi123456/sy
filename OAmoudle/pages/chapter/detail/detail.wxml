@@ -20,6 +20,10 @@
                         <view class="kind">用章类别</view>
                         <view class="check">{{info.usesealtype}}</view>
                     </view>
+                     <view class="c_item">
+                        <view class="kind">其他</view>
+                        <view class="check">{{info.Other}}</view>
+                    </view>
                     <view class="c_item">
                         <view class="kind">公司</view>
                         <view class="check">{{info.Companytitle}}</view>
@@ -36,10 +40,7 @@
                         <view class="kind">用章份数</view>
                         <view class="check">{{info.usenumber}}</view>
                     </view>
-                     <view class="c_item">
-                        <view class="kind">其他</view>
-                        <view class="check">{{info.Other}}</view>
-                    </view>
+                    
                     <view class="c_item">
                         <view class="kind">图片</view>
                         <view wx:if="{{info.API_Picurl}}" class="detpic_show">

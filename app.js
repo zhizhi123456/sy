@@ -60,7 +60,9 @@ import {
   getdep,
   getstaff,
   getdept,
-  applytype
+  applytype,
+  UnitType,
+  moredep
 } from "./service/getData";
 var util = require("./utils/util");
 App({
@@ -108,6 +110,8 @@ App({
         // console.log(this.globalData.Principal)
       })
       let userinfo = wx.getStorageSync("myInfo");
+      util.sumup1(moredep, this, 'moredep', "techofficename", "ID",userinfo.UserName);
+      util.sumup(UnitType, this, 'UnitType', "Value", "Key");
       util.sumup(applytype, this, 'applytype', "Value", "Key");
       util.sumup1(getstaff, this, 'getstaff', "name", "userId",userinfo.UserName);
       util.sumup1(getdept, this, 'getdept', "techofficename", "id",userinfo.UserName);
@@ -225,6 +229,8 @@ App({
     }
   },
   globalData: {
+    moredep:"",
+    UnitType:'',
     applytype:'',
     message:'',
     getdept:'',

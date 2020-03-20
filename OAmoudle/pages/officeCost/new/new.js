@@ -15,8 +15,8 @@ Page({
    */
   data: {
     info: {
-      chargename: util.titleTime(new Date()),
-      usechargeman: "1"
+      usechargeman: "1",
+      StatisticalCycle: util.titleTime(new Date())
     },
     show_nature: false,
     nature: [],
@@ -46,13 +46,25 @@ Page({
       seach: ''
     })
   },
-  finditem1() {
-    let arr = util.findone(app.globalData.costobj, this.data.seach);
+  setSeach1(e) {
     this.setData({
-      section2: arr,
-      seach: ''
+      seach1: e.detail.value
     })
   },
+  finditem1() {
+    let arr = util.findone(app.globalData.Companytitle, this.data.seach1);
+    this.setData({
+      nature: arr,
+      seach1: ''
+    })
+  },
+  // finditem1() {
+  //   let arr = util.findone(app.globalData.costobj, this.data.seach);
+  //   this.setData({
+  //     section2: arr,
+  //     seach: ''
+  //   })
+  // },
   finditem2() {
     let arr = util.findone(app.globalData.costkind, this.data.seach);
     this.setData({
@@ -186,25 +198,39 @@ Page({
   },
   confirmchoice() {
     var num = Math.round(app.globalData.costkind.length) + 1
-    var data = {
-      Key: "chargetype" + num,
-      Value: this.data.applyfortype,
-      ParentId: '3083'
-    }
-    addDictionary(data).then(res => {
-      if (res.code == 10000) {
-        costkind().then(res => {
-          let costkind = JSON.parse(res.replace(/Key/g, 'value').replace(/Value/g, 'text'));
-          app.globalData.costkind = costkind;
-          console.log(app.globalData.costkind)
-          this.setData({
-            section3: costkind,
-            showchoice: false,
-            applyfortype: ''
-          })
-        })
-      }
+
+    var ifhave = app.globalData.costkind.some(s => {
+      return s.text == this.data.applyfortype
     })
+    if (ifhave) {
+      wx.showToast({
+        title: '已存在相同信息',
+        icon: 'none',
+        duration: 3000
+      })
+    } else {
+      var data = {
+        Key: "chargetype" + num,
+        Value: this.data.applyfortype,
+        ParentId: '3083'
+      }
+      addDictionary(data).then(res => {
+        if (res.code == 10000) {
+          costkind().then(res => {
+            let costkind = JSON.parse(res.replace(/Key/g, 'value').replace(/Value/g, 'text'));
+            app.globalData.costkind = costkind;
+            console.log(app.globalData.costkind)
+            this.setData({
+              section3: costkind,
+              showchoice: false,
+              applyfortype: ''
+            })
+          })
+        }
+      })
+
+    }
+
 
   },
   newDictionary() {

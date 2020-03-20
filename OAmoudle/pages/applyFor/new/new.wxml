@@ -21,7 +21,7 @@
                 <van-field data-name="purpose" value="{{info.purpose }}" placeholder="请输入" bind:blur="subprojectnameblur" />
             </van-cell-group>
         </view>
-        <view class="check_item">
+        <!-- <view class="check_item">
             <view class="kind require">
                 <text>公司名称</text>
                 <text class="required">*</text>
@@ -29,6 +29,20 @@
             <van-cell-group>
                 <van-field value="{{info.Companytitle}}" disabled />
             </van-cell-group>
+        </view> -->
+         <view class="check_item">
+            <view class="kind require">
+                <text>公司名称</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.Companytitle?info.Companytitle:'请选择'}}" is-link bind:click="showPopup_o" />
+            <van-popup show="{{show_o}}" round position="bottom" bind:close="onClose_o">
+            <view class="Cseach">
+                    <input value="{{seach}}" bindinput="setSeach" placeholder="请输入搜索内容" />
+                    <button size="mini" bindtap="finditem3">搜索</button>
+                </view>
+                <van-picker data-name="Companytitle" show-toolbar columns="{{ section2 }}" bind:cancel="onClose_o" bind:confirm="onConfirm_o" />
+            </van-popup>
         </view>
         <view class="check_item">
             <view class="kind require">
@@ -47,7 +61,7 @@
                 <van-picker data-name="department" show-toolbar columns="{{ section3 }}" bind:cancel="onClose" bind:confirm="onConfirm" />
             </van-popup>
         </view>
-        <view class="check_item">
+        <!-- <view class="check_item">
             <view class="kind require">
                 <text>是否需要采购</text>
                 <text class="required">*</text>
@@ -58,7 +72,7 @@
             <van-popup show="{{ show2 }}" round position="bottom" bind:close="onClose2">
                 <van-picker data-name="ifpurchase" show-toolbar columns="{{ section6 }}" bind:cancel="onClose2" bind:confirm="onConfirm2" />
             </van-popup>
-        </view>
+        </view> -->
         <!-- 3.17 申领编号不需要 -->
         <!-- <view class="check_item">
             <view class="kind">
@@ -80,6 +94,22 @@
                 <van-picker data-name="itemnumber" show-toolbar columns="{{ section4 }}" bind:cancel="onClose1" bind:confirm="onConfirm1" />
             </van-popup>
         </view> -->
+         <view class="check_item">
+            <view class="kind require">
+                <text>总金额</text>
+            </view>
+            <van-cell-group>
+                <van-field value="{{info.TotalSum}}" data-name="TotalSum" placeholder="请输入" bind:blur="purchasecblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>总金额(大写)</text>
+            </view>
+            <van-cell-group>
+                <van-field value="{{info.Chinesenumerals}}" data-name="Chinesenumerals" placeholder="请输入" bind:blur="purchasecontactCodeblur"/>
+            </van-cell-group>
+        </view>
         <view class="check_item">
             <text class="kind">资料图片</text>
             <van-cell title="请选择" is-link bind:click="showPopup_photo" />
@@ -102,19 +132,19 @@
                 <view class="add_detail detail_title">
                     <van-cell title="申领明细{{item.num}}" icon="close" data-i="{{index}}" bindtap="reduce_detail" />
                 </view>
-                <view class="check_item">
+                <view class="check_item" >
                     <view class="kind">
                         <text>类型</text>
                         <text class="required">*</text>
                     </view>
                     <van-cell title="{{item.type?item.type:'请选择'}}" data-i='{{index}}' is-link data-name='projectType' bind:click="showPopup6" />
-                    <van-popup show="{{show6}}" round position="bottom" bind:close="onClose6">
+                    <van-popup show="{{show6}}" round position="bottom" bind:close="onClose6" data-i='{{index}}'>
                         <view class="Cseach">
                             <input value="{{seach1}}" bindinput="setSeach1" placeholder="请输入搜索内容" />
                             <button size="mini" bindtap="finditem1">搜索</button>
                             <button size="mini" bindtap="newDictionary">新建</button>
                         </view>
-                        <van-picker data-name="type" show-toolbar columns="{{ section5 }}" bind:cancel="onClose6" bind:confirm="onConfirm6" />
+                        <van-picker data-name="type" data-i='{{item.num}}' show-toolbar columns="{{ section5 }}" bind:cancel="onClose6" bind:confirm="onConfirm6" />
                     </van-popup>
                 </view>
                 <view class="check_item">
@@ -126,7 +156,21 @@
                         <van-field value="{{item.detailname}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' data-name='detailname' />
                     </van-cell-group>
                 </view>
-                <view class="check_item">
+                 <view class="check_item">
+                    <view class="kind">
+                        <text>单位</text>
+                    </view>
+                    <van-cell title="{{item.unitType?item.unitType:'请选择'}}" data-i='{{index}}' is-link data-name='unitType' bind:click="showPopup7" />
+                    <van-popup show="{{show7}}" round position="bottom" bind:close="onClose7" data-i='{{index}}'>
+                        <view class="Cseach">
+                            <input value="{{seach2}}" bindinput="setSeach2" placeholder="请输入搜索内容" />
+                            <button size="mini" bindtap="finditem2">搜索</button>
+                            <button size="mini" bindtap="newDictionary2">新建</button>
+                        </view>
+                        <van-picker data-name="unitType" data-i='{{item.num}}' show-toolbar columns="{{ section7 }}" bind:cancel="onClose7" bind:confirm="onConfirm7" />
+                    </van-popup>
+                </view>
+                <!-- <view class="check_item">
                     <view class="kind">
                         <text>单位</text>
                         <text class="required">*</text>
@@ -134,7 +178,7 @@
                     <van-cell-group>
                         <van-field value="{{item.unit}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' data-name='unit' />
                     </van-cell-group>
-                </view>
+                </view> -->
                 <view class="check_item">
                     <view class="kind">
                         <text>数量</text>
@@ -147,7 +191,6 @@
                 <view class="check_item">
                     <view class="kind">
                         <text>单价</text>
-                        <text class="required">*</text>
                     </view>
                     <van-cell-group>
                         <van-field value="{{item.unitprice}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' data-name='unitprice' bind:input="checknum" />
@@ -165,6 +208,19 @@
                 <view class="checkkind">
                     <text bindtap="onClosechoice">取消</text>
                     <text bindtap="confirmchoice">确认</text>
+                </view>
+            </van-popup>
+        </view>
+         <view class="seach" wx:if="{{showchoice2}}">
+            <van-popup show="{{ showchoice2 }}" bind:close="onClosechoice2" round position="bottom" custom-style=" height: 50vh;color:#333">
+                <view class="seach_item">
+                    <van-cell-group>
+                        <van-field value="{{ unittype }}" type="textarea" placeholder="请输入" autosize border="{{ false }}" bind:input="Dictionaryblur2" label="单位类型" input-class="idea_in" />
+                    </van-cell-group>
+                </view>
+                <view class="checkkind">
+                    <text bindtap="onClosechoice2">取消</text>
+                    <text bindtap="confirmchoice2">确认</text>
                 </view>
             </van-popup>
         </view>

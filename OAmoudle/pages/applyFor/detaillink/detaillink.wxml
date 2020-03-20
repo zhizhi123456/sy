@@ -18,6 +18,10 @@
                 <view class="kind"> 类型 </view>
                 <view class="check">{{info.type }}</view>
             </view>
+             <view class="c_item">
+                <view class="kind"> 单位 </view>
+                <view class="check">{{info.unitType }}</view>
+            </view>
             <view class="c_item">
                 <view class="kind">数量</view>
                 <view class="check">{{info.quantity}}</view>

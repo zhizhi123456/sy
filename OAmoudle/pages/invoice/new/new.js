@@ -72,6 +72,13 @@ Page({
       seach: ''
     })
   },
+  finditem5() {
+    let arr = util.findone(app.globalData.Companytitle, this.data.seach);
+    this.setData({
+      firms: arr,
+      seach: ''
+    })
+  },
   // 部门
   showPopup_o() {
     this.setData({

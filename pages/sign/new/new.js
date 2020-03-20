@@ -7,6 +7,7 @@ import {
 var util = require("../../../utils/util");
 var app = getApp();
 var QQMapWX = require('../../../utils/qqmap-wx-jssdk.min.js');
+let userinfo = wx.getStorageSync("myInfo");
 var qqmapsdk;
 Page({
   /**
@@ -137,8 +138,12 @@ Page({
       'info.Address': "",
       'info.Checkintime': util.datefomate(new Date()),
       "info.CheckinCentPosi": jd,
-      "info.ifeffective": true
+      "info.ifeffective": true,
+      "info.UserID": userinfo.ID,
+      "info.Token": userinfo.Token,
+      "info.TokenType": userinfo.TokenType,
     })
+    console.log(this.data.info)
     // var reach = this.arrive()
     var reach = true
     console.log(reach)
@@ -200,7 +205,7 @@ Page({
     // 计时器时间变化
     this.getdata()
     var that = this
-    var userinfo = wx.getStorageSync("myInfo");
+    userinfo = wx.getStorageSync("myInfo");
     that.setData({
       "info.Token": userinfo.Token,
       "info.TokenType": userinfo.TokenType,
@@ -331,5 +336,11 @@ Page({
         // console.log(res);
       }
     });
+  },
+  onShow: function () {
+    userinfo = wx.getStorageSync("myInfo");
+  },
+  onReady: function () {
+   userinfo = wx.getStorageSync("myInfo");
   },
 })

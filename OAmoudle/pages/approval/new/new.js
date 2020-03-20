@@ -209,7 +209,37 @@ Page({
       show6: false
     })
   },
-
+ // 公司名称
+ showPopup_4() {
+  this.setData({
+    show_nature: true
+  })
+},
+onClose_4() {
+  this.setData({
+    show_nature: false
+  })
+},
+onConfirm_4(e) {
+  // //console.log(e)
+  let info = util.editInfo(e, this, e.detail.value.text);
+  this.setData({
+    info,
+    show_nature: false
+  })
+},
+setSeach1(e) {
+  this.setData({
+    seach1: e.detail.value
+  })
+},
+finditem1() {
+  let arr = util.findone(app.globalData.Companytitle, this.data.seach1);
+  this.setData({
+    nature: arr,
+    seach1: ''
+  })
+},
   confirm() {
     let info = this.data.info;
     // console.log(this.data.info)
@@ -437,6 +467,7 @@ Page({
       section4: app.globalData.MainProject1,
       section6: app.globalData.PayType,
       sections: app.globalData.department,
+      nature: app.globalData.Companytitle
     })
     if (options.id) {
       detailapproval({

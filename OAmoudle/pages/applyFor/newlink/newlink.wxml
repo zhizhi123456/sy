@@ -46,15 +46,21 @@
                 <van-field value="{{materials[0].detailname}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' data-name='detailname' />
             </van-cell-group>
         </view>
-        <view class="check_item">
-            <view class="kind">
-                <text>单位</text>
-                <text class="required">*</text>
-            </view>
-            <van-cell-group>
-                <van-field value="{{materials[0].unit}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' data-name='unit' />
-            </van-cell-group>
-        </view>
+          <view class="check_item">
+                    <view class="kind">
+                        <text>单位</text>
+                        
+                    </view>
+                    <van-cell title="{{materials[0].unitType?materials[0].unitType:'请选择'}}" data-i='{{index}}' is-link data-name='unitType' bind:click="showPopup7" />
+                    <van-popup show="{{show7}}" round position="bottom" bind:close="onClose7">
+                        <view class="Cseach">
+                            <input value="{{seach2}}" bindinput="setSeach2" placeholder="请输入搜索内容" />
+                            <button size="mini" bindtap="finditem2">搜索</button>
+                            <button size="mini" bindtap="newDictionary2">新建</button>
+                        </view>
+                        <van-picker data-name="unitType" show-toolbar columns="{{ section7 }}" bind:cancel="onClose7" bind:confirm="onConfirm7" />
+                    </van-popup>
+                </view>
         <view class="check_item">
             <view class="kind">
                 <text>数量</text>
@@ -67,7 +73,6 @@
         <view class="check_item">
             <view class="kind">
                 <text>单价</text>
-                <text class="required">*</text>
             </view>
             <van-cell-group>
                 <van-field value="{{materials[0].unitprice}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}'  bind:input="checknum"  data-name='unitprice' />
@@ -84,6 +89,19 @@
                 <view class="checkkind">
                     <text bindtap="onClosechoice">取消</text>
                     <text bindtap="confirmchoice">确认</text>
+                </view>
+            </van-popup>
+        </view>
+        <view class="seach" wx:if="{{showchoice2}}">
+            <van-popup show="{{ showchoice2 }}" bind:close="onClosechoice2" round position="bottom" custom-style=" height: 50vh;color:#333">
+                <view class="seach_item">
+                    <van-cell-group>
+                        <van-field value="{{ unittype }}" type="textarea" placeholder="请输入" autosize border="{{ false }}" bind:input="Dictionaryblur2" label="单位类型" input-class="idea_in" />
+                    </van-cell-group>
+                </view>
+                <view class="checkkind">
+                    <text bindtap="onClosechoice2">取消</text>
+                    <text bindtap="confirmchoice2">确认</text>
                 </view>
             </van-popup>
         </view>
