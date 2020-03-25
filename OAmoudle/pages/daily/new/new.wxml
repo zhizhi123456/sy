@@ -56,7 +56,7 @@
                 <text>工作日志内容</text>
             </view>
             <van-cell-group>
-                <van-field data-name="dailylogContext" value="{{info.dailylogContext}}" placeholder="请输入" bind:blur="projectnameblur" />
+                <van-field data-name="dailylogContext" type="textarea"  autosize value="{{info.dailylogContext}}" placeholder="请输入" bind:blur="projectnameblur" />
             </van-cell-group>
         </view>
         <view class="check_item" wx:if="{{ifsame}}">
@@ -64,7 +64,7 @@
                 <text>特别说明</text>
             </view>
             <van-cell-group>
-                <van-field data-name="specialexplan" value="{{info.specialexplan}}" placeholder="请输入" bind:blur="projectnameblur" />
+                <van-field data-name="specialexplan" type="textarea"  autosize  value="{{info.specialexplan}}" placeholder="请输入" bind:blur="projectnameblur" />
             </van-cell-group>
         </view>
         <view class="check_item seach_item">

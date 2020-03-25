@@ -233,6 +233,9 @@ jian .apply .van-dropdown-menu__title {
 
 .c_item .check {
     font-size: 32rpx;
+    white-space: normal;
+    word-break: keep-all;
+    word-wrap: break-word;
 }
 
 .check image {

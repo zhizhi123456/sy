@@ -30,7 +30,7 @@
                     </view>
                     <view class="c_item">
                         <view class="kind">工作日志内容</view>
-                        <view class="check">{{info.dailylogContext}}</view>
+                        <view class="check" >{{info.dailylogContext}}</view>
                     </view>
                     <view class="c_item">
                         <view class="kind">特别说明</view>
