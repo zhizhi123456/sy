@@ -22,7 +22,8 @@ Page({
     hadNew: 1,
     info: {},
     applyT: 0,
-    leavetypetext:''
+    leavetypetext:'',
+    task:false
   },
   // 返回
   return () {
@@ -145,7 +146,8 @@ Page({
       info.state = '所有'
       this.setData({
         options,
-        info
+        info,
+        task:true
       })
     }
 

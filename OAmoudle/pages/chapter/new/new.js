@@ -38,6 +38,8 @@ Page({
   checknum(e) {
     let info = this.data.info;
     info.usenumber = e.detail.replace(/[^\d]/g, '');
+    
+    // info.usenumber = e.detail.replace(/^(\-)*(\d+)\.(\d).*$/, '$1$2.$3');
     this.setData({
       info
     })
@@ -45,6 +47,14 @@ Page({
   checknum1(e) {
     let info = this.data.info;
     this.formatNum(e);
+    info.useamount = e.detail;
+    this.setData({
+      info
+    })
+  },
+  checkmoney(e) {
+    let info = this.data.info;
+    util.formatmony(e);
     info.useamount = e.detail;
     this.setData({
       info
@@ -134,6 +144,7 @@ Page({
   },
   // 金额
   useamountblur(e) {
+    e.detail.value = Number(e.detail.value).toFixed(2)
     let info = util.editInfo(e, this, e.detail.value);
     this.setData({
       info

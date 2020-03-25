@@ -25,6 +25,16 @@ const formatTime = date => {
   return year + '年' + month + '月' + day + '日 ' + hour + ':' + minute + ':' + second;
   // return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 };
+const formatTime1 = date => {
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1 >= 10 ? date.getMonth() + 1 : "0" + (date.getMonth() + 1);
+  const day = date.getDate() >= 10 ? date.getDate() : "0" + date.getDate();
+  const hour = date.getHours() >= 10 ? date.getHours() : "0" + date.getHours();
+  const minute = date.getMinutes() >= 10 ? date.getMinutes() : "0" + date.getMinutes();
+  const second = date.getSeconds() >= 10 ? date.getSeconds() : "0" + date.getSeconds();
+  return year + '年' + month + '月' + day + '日'
+  // return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+};
 const format = date => {
   const year = date.getFullYear();
   const month = date.getMonth() + 1 >= 10 ? date.getMonth() + 1 : "0" + (date.getMonth() + 1);
@@ -364,20 +374,20 @@ const checkContent = (value, key) => {
     })
     value.mainprojecttype = kinds.join(",");
   }
-  // 项目类型
-  if (value.receivedepartment) {
-    var kinds = [];
-    value.receivedepartment.split(",").forEach(res => {
-      app.globalData.department.forEach(depart => {
-        if (res == depart.text) {
-          if (kinds.indexOf(depart.value) == -1) {
-            kinds.push(depart.value)
-          }
-        }
-      })
-    })
-    value.receivedepartment = kinds.join(",");
-  }
+  // // 项目类型
+  // if (value.receivedepartment) {
+  //   var kinds = [];
+  //   value.receivedepartment.split(",").forEach(res => {
+  //     app.globalData.department.forEach(depart => {
+  //       if (res == depart.text) {
+  //         if (kinds.indexOf(depart.value) == -1) {
+  //           kinds.push(depart.value)
+  //         }
+  //       }
+  //     })
+  //   })
+  //   value.receivedepartment = kinds.join(",");
+  // }
   // 用章类型
   if (value.usesealtype && value.useInfo) {
     var kinds = [];
@@ -682,19 +692,19 @@ const checkChange = (value, key, dep) => {
     value.mainprojecttype = kinds.join(",");
   }
   // 项目类型
-  if (value.receivedepartment) {
-    var kinds = [];
-    value.receivedepartment.split(",").forEach(res => {
-      app.globalData.department.forEach(depart => {
-        if (res == depart.text) {
-          if (kinds.indexOf(depart.value) == -1) {
-            kinds.push(depart.value)
-          }
-        }
-      })
-    })
-    value.receivedepartment = kinds.join(",");
-  }
+  // if (value.receivedepartment) {
+  //   var kinds = [];
+  //   value.receivedepartment.split(",").forEach(res => {
+  //     app.globalData.department.forEach(depart => {
+  //       if (res == depart.text) {
+  //         if (kinds.indexOf(depart.value) == -1) {
+  //           kinds.push(depart.value)
+  //         }
+  //       }
+  //     })
+  //   })
+  //   value.receivedepartment = kinds.join(",");
+  // }
   // 用章类型
   if (value.usesealtype && value.useInfo) {
     var kinds = [];
@@ -1012,22 +1022,22 @@ const handleData = (data, key, dep) => {
   //   }
   //   data.leavetype = kinds.join(",");
   // }
-  if (data.receivedepartment) {
-    var kinds = [];
-    data.receivedepartment.split(",").forEach(res => {
-      app.globalData.department.forEach(depart => {
-        if (res == depart.value) {
-          if (kinds.indexOf(depart.text) == -1) {
-            kinds.push(depart.text)
-          }
-          // if (value.mainprojecttype && value.mainprojecttype.split(",").length > kinds.length) {
-          //   kinds.push("**");
-          // }
-          data.receivedepartment = kinds.join(",");
-        }
-      })
-    })
-  }
+  // if (data.receivedepartment) {
+  //   var kinds = [];
+  //   data.receivedepartment.split(",").forEach(res => {
+  //     app.globalData.department.forEach(depart => {
+  //       if (res == depart.value) {
+  //         if (kinds.indexOf(depart.text) == -1) {
+  //           kinds.push(depart.text)
+  //         }
+  //         // if (value.mainprojecttype && value.mainprojecttype.split(",").length > kinds.length) {
+  //         //   kinds.push("**");
+  //         // }
+  //         data.receivedepartment = kinds.join(",");
+  //       }
+  //     })
+  //   })
+  // }
   if (data.usesealtype && data.useInfo) {
     var kinds = [];
     data.usesealtype.split(",").forEach(res => {
@@ -1285,22 +1295,22 @@ const listData = (data, dep, page, list, key, billname) => {
     //     })
     //   })
     // }
-    if (value.receivedepartment) {
-      var kinds = [];
-      value.receivedepartment.split(",").forEach(res => {
-        app.globalData.department.forEach(depart => {
-          if (res == depart.value) {
-            if (kinds.indexOf(depart.text) == -1) {
-              kinds.push(depart.text)
-            }
-            // if (value.mainprojecttype && value.mainprojecttype.split(",").length > kinds.length) {
-            //   kinds.push("**");
-            // }
-            value.receivedepartment = kinds.join(",");
-          }
-        })
-      })
-    }
+    // if (value.receivedepartment) {
+    //   var kinds = [];
+    //   value.receivedepartment.split(",").forEach(res => {
+    //     app.globalData.department.forEach(depart => {
+    //       if (res == depart.value) {
+    //         if (kinds.indexOf(depart.text) == -1) {
+    //           kinds.push(depart.text)
+    //         }
+    //         // if (value.mainprojecttype && value.mainprojecttype.split(",").length > kinds.length) {
+    //         //   kinds.push("**");
+    //         // }
+    //         value.receivedepartment = kinds.join(",");
+    //       }
+    //     })
+    //   })
+    // }
     if (value.usesealtype && value.useInfo) {
       var kinds = [];
       value.usesealtype.split(",").forEach(res => {
@@ -1721,6 +1731,76 @@ const upFile = (key) => {
     })
   }
 }
+//工作日志删除文件
+const delFillog = (key, e) => {
+  let info = key.data.info,
+    i = e.currentTarget.dataset.index;
+  info.fileurl.splice(i, 1);
+  key.setData({
+    info
+  })
+}
+// 工作日志上传文件
+const upFilelog = (key) => {
+  if (key.data.info.fileurl.length < 9) {
+    let that = key;
+    wx.chooseMessageFile({
+      count: 9, //能选择文件的数量
+      type: 'file',
+      success(res) {
+        // console.log(res)
+        let filedata = res.tempFiles;
+        filedata.forEach(element => {
+          if (element.size < 1024) {
+            element.size = element.size + 'B';
+          } else if (element.size < 1048576) {
+            element.size = ((element.size) / 1024).toFixed(2) + 'KB';
+          } else if (element.size < 1073741824) {
+            element.size = ((element.size) / 1048576).toFixed(2) + 'MB';
+          }
+        });
+        wx.showToast({
+          title: '正在上传...',
+          icon: 'loading',
+          mask: true,
+          duration: 10000
+        })
+        let info = that.data.info;
+        var uploadImgCount = 0;
+        for (let i = 0; i < filedata.length; i++) {
+          wx.uploadFile({
+            url: 'https://shangyongren.com:9098/api/record/Get_rec',
+            filePath: filedata[i].path,
+            name: 'file_data',
+            success(res) {
+              uploadImgCount++;
+              // console.log(res)
+              if (res.statusCode == 200) {
+                console.log(info)
+                info.fileurl.push({
+                  name: filedata[i].name,
+                  size: filedata[i].size,
+                  url: "https://shangyongren.com:9098" + res.data.replace(/"/g, "")
+                })
+                that.setData({
+                  info,
+                  up_F: true
+                })
+              }
+              //如果是最后一张,则隐藏等待中  
+              if (uploadImgCount == filedata.length) {
+                wx.hideToast();
+              }
+            },
+            fail: err => {
+              //console.log(err)
+            }
+          })
+        }
+      }
+    })
+  }
+}
 // 图片的删除
 const deleteImg = (key, e) => {
   let info = key.data.info,
@@ -2010,7 +2090,7 @@ const Triggerflow = (key, direction, sheet, piece, id, cap, dep, dert, rid, tit,
   var s
   console.log(dept)
   if (dept) {
-      s = {
+    s = {
       ID: key.data.info.ID,
       mark: direction,
       userName: userinfo.UserName,
@@ -2021,7 +2101,7 @@ const Triggerflow = (key, direction, sheet, piece, id, cap, dep, dert, rid, tit,
       Department: dept
     }
   } else {
-     s = {
+    s = {
       ID: key.data.info.ID,
       mark: direction,
       userName: userinfo.UserName,
@@ -2542,20 +2622,26 @@ const intro = (data, that) => {
       data.paytype = res.value;
     }
   })
-  // 项目类型
-  if (data.receivedepartment) {
-    var kinds = [];
-    data.receivedepartment.split(",").forEach(res => {
-      app.globalData.department.forEach(depart => {
-        if (res == depart.text) {
-          if (kinds.indexOf(depart.value) == -1) {
-            kinds.push(depart.value)
-          }
-        }
-      })
+  if (data.fileurl) {
+    that.setData({
+      fileshow: false
     })
-    data.receivedepartment = kinds.join(",");
+    data.fileurl = JSON.stringify(data.fileurl);
   }
+  // // 项目类型
+  // if (data.receivedepartment) {
+  //   var kinds = [];
+  //   data.receivedepartment.split(",").forEach(res => {
+  //     app.globalData.department.forEach(depart => {
+  //       if (res == depart.text) {
+  //         if (kinds.indexOf(depart.value) == -1) {
+  //           kinds.push(depart.value)
+  //         }
+  //       }
+  //     })
+  //   })
+  //   data.receivedepartment = kinds.join(",");
+  // }
   data.isstick = whether(data.isstick)
   data.issubdivision = whether(data.issubdivision)
 }
@@ -2801,6 +2887,9 @@ const outflow = (data, that) => {
       data.paytype = res.text;
     }
   })
+  if (data.fileurl) {
+    data.fileurl = JSON.parse(data.fileurl);
+  }
   data.isstick = whethercontent(data.isstick)
   data.issubdivision = whethercontent(data.issubdivision)
   data.IfWfComplete = whethercontent(data.IfWfComplete)
@@ -3426,14 +3515,23 @@ const multiple = (that, field, fieldtext) => {
   field = q
   // console.log(q)
 }
-const formatNum = (k) => { //正则验证金额输入框格式
+// value=value.replace(/[^/d]/g,'')
+// 正则验证正整数
+const formatNum = (k) => {
+  k.detail = k.detail.replace(/[^\d]/g, '')
+}
+// 金额的验证
+const formatmony = (k) => {
   k.detail = k.detail.replace(/^(\-)*(\d+)\.(\d{6}).*$/, '$1$2.$3')
   k.detail = k.detail.replace(/[\u4e00-\u9fa5]+/g, ""); //清除汉字
   k.detail = k.detail.replace(/[^\d.]/g, ""); //清楚非数字和小数点
   k.detail = k.detail.replace(/^\./g, ""); //验证第一个字符是数字 
   k.detail = k.detail.replace(".", "$#$").replace(/\./g, "").replace("$#$", "."); //只保留第一个小数点, 清除多余的 
-  k.detail = k.detail.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3');
+  // k.detail = k.detail.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3');
 }
+// const formatNum = (k) => { //正则验证金额输入框格式
+
+// }
 
 const findone = (get, data, key) => {
   let newarr = [];
@@ -3499,6 +3597,10 @@ const getbutton = (a, b, c, key) => {
   })
 }
 module.exports = {
+  formatmony,
+  formatTime1,
+  upFilelog,
+  delFillog,
   outflowsmalllist,
   outflowsmall,
   introsmall,

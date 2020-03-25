@@ -59,7 +59,7 @@ Page({
                   item.forEach(s => {
                     sum = s.quantity * s.unitprice + sum
                   });
-                  console.log()
+                  sum = Number(sum).toFixed(2)
                   detailapplyFor({
                     ID: that.data.info.applyid
                   }).then(res => {

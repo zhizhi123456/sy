@@ -56,7 +56,7 @@
         </view>
         <view class="check_item">
             <view class="kind require">
-                <text>开票公司</text>
+                <text>受票公司</text>
             </view>
             <!-- <van-cell-group>
                 <van-field data-name="Othercompany" value="{{info.Othercompany}}" placeholder="请输入" bind:blur="invoicenameblur" />
@@ -73,7 +73,7 @@
                 <van-picker data-name="Othercompany" show-toolbar columns="{{ Customer }}" bind:cancel="onCloseD" bind:confirm="onConfirmD" />
             </van-popup>
         </view>
-        <view class="check_item">
+        <!-- <view class="check_item">
             <view class="kind require">
                 <text>发票名称</text>
                 <text class="required">*</text>
@@ -81,7 +81,7 @@
             <van-cell-group>
                 <van-field data-name="invoicename" value="{{info.invoicename}}" placeholder="请输入" bind:blur="invoicenameblur" />
             </van-cell-group>
-        </view>
+        </view> -->
         <!-- <view class="check_item">
             <view class="kind require">
                 <text>合同</text>
@@ -172,7 +172,7 @@
         <view class="check_item">
             <text class="kind">含税金额</text>
             <van-cell-group>
-                <van-field data-name="includetaxamont" value="{{info.includetaxamont}}" placeholder="请输入" bind:blur="includetaxamontblur" bind:input="checknum" />
+                <van-field data-name="includetaxamont" value="{{info.includetaxamont}}" placeholder="请输入" bind:blur="includetaxamontblur" bind:input="checkmoney" />
             </van-cell-group>
         </view>
         <view class="check_item">
@@ -198,7 +198,7 @@
             <van-popup show="{{ showchoice }}" bind:close="onClosechoice" round position="bottom" custom-style=" height: 50vh;color:#333">
                 <view class="seach_item">
                     <van-cell-group>
-                        <van-field value="{{ customername }}" type="textarea" placeholder="请输入" autosize border="{{ false }}" bind:input="Dictionaryblur" label="开票公司" input-class="idea_in" />
+                        <van-field value="{{ customername }}" type="textarea" placeholder="请输入" autosize border="{{ false }}" bind:input="Dictionaryblur" label="受票公司" input-class="idea_in" />
                     </van-cell-group>
                 </view>
                 <view class="checkkind">

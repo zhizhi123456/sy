@@ -206,7 +206,7 @@ Page({
             })
             util.sumup1(getstaff, app, 'getstaff', "name", "userId", this.data.username);
             util.sumup1(getdept, app, 'getdept', "techofficename", "id", this.data.username);
-            util.sumup1(moredep, app, 'moredep', "techofficename", "ID",userinfo.UserName);
+            util.sumup1(moredep, app, 'moredep', "techofficename", "ID",this.data.username);
           }
           wx.redirectTo({
             url: '/pages/contracts/contracts?grading=2089&title=项目管理'

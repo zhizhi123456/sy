@@ -23,10 +23,10 @@ Page({
       chargeman: '',
       buyitemname: '',
       specifications: '',
-      brand: 0,
+      brand: '无',
       unit: '',
       quantity: '',
-      demo: '',
+      demo: '无',
       univalence: ''
     }],
     billid: 0,
@@ -84,6 +84,46 @@ Page({
       }
     })
    
+  },
+  getmoney(e) {
+    console.log(e)
+    e.detail.value = Number(e.detail.value).toFixed(2)
+    var materials = util.updateValue(e, this);
+    this.setData({
+      materials
+    })
+    if (!this.data.materials[0].ID) {
+      this.repetition(e)
+    }
+  },
+  // 数字筛选
+  checknum(e) {
+    let name = e.currentTarget.dataset.name,
+      i = e.currentTarget.dataset.i
+    let materials = this.data.materials;
+    util.formatNum(e);
+    if (i) {
+      materials[i][name] = e.detail;
+    } else {
+      materials[0][name] = e.detail;
+    }
+    this.setData({
+      materials
+    })
+  },
+  checkmoney1(e) {
+    let name = e.currentTarget.dataset.name,
+      i = e.currentTarget.dataset.i
+    let materials = this.data.materials;
+    util.formatmony(e);
+    if (i) {
+      materials[i][name] = e.detail;
+    } else {
+      materials[0][name] = e.detail;
+    }
+    this.setData({
+      materials
+    })
   },
   // 采购合同编号
   purchasecontactCodeblur(e) {
@@ -246,6 +286,7 @@ Page({
               item.forEach(s => {
                 sum = s.quantity * s.univalence + sum
               });
+              sum = Number(sum).toFixed(2)
               detailapply({
                 ID: this.data.billid
               }).then(res => {
@@ -329,6 +370,7 @@ Page({
             item.forEach(s => {
               sum = s.quantity * s.univalence + sum
             });
+            sum = Number(sum).toFixed(2)
             detailapply({
               ID: this.data.materials[0].applybuyid
             }).then(res => {

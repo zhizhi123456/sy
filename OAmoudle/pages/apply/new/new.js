@@ -226,10 +226,20 @@ Page({
     })
   },
   purchasecblur(e) {
+    e.detail.value = Number(e.detail.value).toFixed(2)
     let info = util.editInfo(e, this, e.detail.value);
     this.setData({
       info,
       'info.Chinesenumerals': util.Uppercase(this.data.info.TotalSum)
+    })
+  },
+
+  checkmoney(e) {
+    let info = this.data.info;
+    util.formatmony(e);
+    info.TotalSum = e.detail;
+    this.setData({
+      info
     })
   },
   // 申请人
@@ -693,11 +703,24 @@ Page({
     util.updateValue(e, this);
     this.sum()
     console.log(this.data.detailID)
-    if(!this.data.detailID){
+    if (!this.data.detailID) {
       this.repetition(e)
     }
-   
+
   },
+  getmoney(e) {
+    console.log(e)
+    e.detail.value = Number(e.detail.value).toFixed(2)
+    var materials = util.updateValue(e, this);
+    this.setData({
+      materials
+    })
+    this.sum()
+    if (!this.data.detailID) {
+      this.repetition(e)
+    }
+  },
+
   getSize(e) {
     util.updateValue(e, this);
   },
@@ -745,6 +768,7 @@ Page({
     materials.forEach(s => {
       sum = s.quantity * s.univalence + sum
     })
+    sum = Number(sum).toFixed(2)
     this.setData({
       'info.TotalSum': sum,
       'info.Chinesenumerals': util.Uppercase(sum),
@@ -765,6 +789,21 @@ Page({
       materials
     })
   },
+  checkmoney1(e) {
+    let name = e.currentTarget.dataset.name,
+      i = e.currentTarget.dataset.i
+    let materials = this.data.materials;
+    util.formatmony(e);
+    if (i) {
+      materials[i][name] = e.detail;
+    } else {
+      materials[0][name] = e.detail;
+    }
+    this.setData({
+      materials
+    })
+  },
+
   // 数字筛选
   checknum1(e) {
     let info = this.data.info;
@@ -782,10 +821,10 @@ Page({
       chargeman: '1',
       buyitemname: '',
       specifications: '',
-      brand: 0,
+      brand: '无',
       unit: '',
       quantity: '',
-      demo: '',
+      demo: '无',
       univalence: ''
     };
     let materials = this.data.materials;

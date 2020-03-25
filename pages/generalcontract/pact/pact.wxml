@@ -4,7 +4,7 @@
     <view class="header">
         <view class="title">
             <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
-            <navigator open-type="redirect" url="/pages/generalcontract/new/new" class="fr newCreate">新建</navigator>
+            <navigator open-type="redirect"wx:if="{{!ISconduct}}" url="/pages/generalcontract/new/new" class="fr newCreate">新建</navigator>
             <view class="apply" wx:if="{{ISconduct}}">
                 <van-dropdown-menu active-color="red">
                     <van-dropdown-item value="{{val}}" options="{{pact}}" bindchange="changeItem" />
@@ -52,7 +52,7 @@
                             <van-picker data-name="chargemanName" show-toolbar columns="{{ section1 }}" bind:cancel="onClose_5" bind:confirm="onConfirm_5" />
                         </van-popup>
                     </view>
-                    <view class="seach_item">
+                    <!-- <view class="seach_item">
                         <van-cell-group>
                             <van-field value="{{info.StartTime}}" placeholder="请选择" label="开始时间" bindtap="showPopup_time" disabled />
                         </van-cell-group>
@@ -67,7 +67,7 @@
                         <van-popup show="{{ show_endtime }}" round position="bottom" bind:close="onClose_endtime">
                             <van-datetime-picker data-name="EndTime" value="{{ currentDate }}" bind:cancel="onClose_endtime" bind:confirm="onConfirm_endtime" />
                         </van-popup>
-                    </view>
+                    </view> -->
                     <view class="seach_item">
                         <van-cell-group>
                             <van-field value="{{info.state}}" placeholder="请选择" bindtap="showPopup_3" label="状态" disabled />
@@ -112,10 +112,10 @@
                     <text class="info">总包项目</text>
                     <text>{{item.projcectCode}}</text>
                 </view> -->
-                <view>
+                <!-- <view>
                     <text class="info">签订时间</text>
                     <text>{{item.signtime}}</text>
-                </view>
+                </view> -->
                 <view>
                     <text class="info">合同总金额</text>
                     <text>{{item.contcactamount}}</text>

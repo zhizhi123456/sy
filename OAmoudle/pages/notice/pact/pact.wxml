@@ -8,7 +8,7 @@
                 新建
             </navigator>
             <view class="apply">
-                <text>公告</text>
+                <text>新闻公告</text>
             </view>
         </view>
         <view class="seach">
@@ -44,7 +44,7 @@
                             </van-popup>
                         </view> -->
                       
-                        <view class="seach_item checkro8">
+                        <!-- <view class="seach_item checkro8">
                             <van-field value="{{info.receivedepartment}}" bind:focus="showPopup1"  class="time1" title-class="time1" label="接收部门" placeholder="请选择"  />
                             <van-popup show="{{show1}}" round position="bottom" bind:close="onClose1">
                                 <view class="checkro10 checkro12">
@@ -58,7 +58,7 @@
                                     {{ item.text }}
                                 </van-checkbox>
                             </van-popup>
-                        </view>
+                        </view> -->
                         <!-- <view class="seach_item">
                             <van-field value="{{info.usesealtype}}" bind:focus="showPopup4" class="time1" title-class="time1" label="用章类别" placeholder="请选择" />
                             <van-popup show="{{show4}}" round position="bottom" bind:close="onClose4">

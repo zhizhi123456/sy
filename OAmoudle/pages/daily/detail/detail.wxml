@@ -1,0 +1,96 @@
+<!-- pages/detail/detail.wxml -->
+<view wx:if="{{info}}">
+    <view class="header d_header">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="delete" wx:if="{{!history}}">删除</text>
+        <view class="apply">资料详情</view>
+    </view>
+    <view class="card">
+        <van-card title="{{info.debitnotetype}}" />
+    </view>
+    <view class="main_nav">
+        <van-tabs active="a">
+            <van-tab title="详细资料" name="a">
+                <view class="content">
+                    <view class="c_item">
+                        <view class="kind">工作日志记录人</view>
+                        <view class="check">{{info.dailylogman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">所属部门</view>
+                        <view class="check">{{info.department}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">工作日志日期</view>
+                        <view class="check">{{info.dailylogdate}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">工作日志标题</view>
+                        <view class="check">{{info.dailylogTopic}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">工作日志内容</view>
+                        <view class="check">{{info.dailylogContext}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">特别说明</view>
+                        <view class="check">{{info.specialexplan}}</view>
+                    </view>
+                    <view class="c_item seach_item">
+                      <view class="kind">相关文件</view>
+                        <view wx:if="{{info.fileurl.length}}}" class="fileLIST">
+                            <block wx:for="{{info.fileurl}}" wx:key="index">
+                                <view class="cfile">
+                                    <text class="filename">{{item.name}}</text>
+                                    <text class="filesize">{{item.size}}</text>
+                                    <icon class="iconfont icon-shengou fr" bindtap="downF" data-index="{{index}}" data-url="{{item.url}}" />
+                                </view>
+                            </block>
+                        </view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">相关图片</view>
+                        <view wx:if="{{info.API_Picurl}}" class="detpic_show">
+                            <block wx:for="{{info.API_Picurl}}" wx:key="index">
+                                <image src="{{item}}" bindtap="tap_pic" data-index="{{index}}" binderror="defaultimg" />
+                            </block>
+                        </view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">创建人</view>
+                        <view class="check">{{info.createman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">创建时间</view>
+                        <view class="check">{{info.createtime}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">修改人</view>
+                        <view class="check">{{info.updateman}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">修改时间</view>
+                        <view class="check">{{info.updatetime}}</view>
+                    </view>
+                </view>
+            </van-tab>
+            <van-tab title="修改记录" name="d" wx:if="{{(!history)&&amendant.length}}">
+                <block wx:if="{{amendant}}">
+                    <van-cell title="记录({{amendant.length}})" />
+                    <block wx:for="{{amendant}}" wx:key="index">
+                        <van-cell title="{{item.text}}" label="{{item.desc}}" data-i='{{item.oldcontext}}' bind:tap="change12" />
+                    </block>
+                </block>
+                <view class="dynamic_state" wx:else>暂无记录</view>
+            </van-tab>
+        </van-tabs>
+    </view>
+    <view class="footer" wx:if="{{!history}}">
+        <view>
+            <navigator open-type="redirect" url="/OAmoudle/pages/daily/new/new?id={{info.ID}}" hover-class="none">
+                <icon class="iconfont icon-bianji"></icon>
+                <text>编辑</text>
+            </navigator>
+        </view>
+    </view>
+</view>

@@ -41,17 +41,17 @@ Page({
     })
   },
   finditem() {
-      let arr = util.findone(app.globalData.department, this.data.seach);
-      this.setData({
-        sections: arr,
-        seach: ''
-      })
+    let arr = util.findone(app.globalData.department, this.data.seach);
+    this.setData({
+      sections: arr,
+      seach: ''
+    })
   },
   // 部门
   showPopup_o() {
     this.setData({
       show_o: true,
-      seach:''
+      seach: ''
     });
   },
   onClose_o() {
@@ -94,6 +94,14 @@ Page({
       info
     })
   },
+  purchasecblur(e) {
+    e.detail.value = Number(e.detail.value).toFixed(2)
+    let info = util.editInfo(e, this, e.detail.value);
+    this.setData({
+      info,
+      'info.Chinesenumerals': util.Uppercase(this.data.info.contcactamount)
+    })
+  },
   // 总包项目
   showPopup_3() {
     this.setData({
@@ -127,12 +135,12 @@ Page({
           // 施工地点
           'info.workplace': item.workplace,
           // 施工地点
-          'info.planbegindate': item.planbegindate,// 计划开工时间
-          'info.planenddate': item.planenddate,// 计划完工时间
-          'info.demo': item.demo,// 备注
-          'info.mainbuildcontext': item.mainbuildcontext,//主要施工内容
-          'info.chiefcontactman': item.chiefcontactman,//主要联系人,
-          'info.projcectCode':e.detail.value.text
+          'info.planbegindate': item.planbegindate, // 计划开工时间
+          'info.planenddate': item.planenddate, // 计划完工时间
+          'info.demo': item.demo, // 备注
+          'info.mainbuildcontext': item.mainbuildcontext, //主要施工内容
+          'info.chiefcontactman': item.chiefcontactman, //主要联系人,
+          'info.projcectCode': e.detail.value.text
         })
         // console.log(item.API_Picurl)
       }
@@ -146,8 +154,17 @@ Page({
       info
     })
   },
-   // 数字筛选
-   checknum(e) {
+  // 数字筛选
+  checkmoney(e) {
+    let info = this.data.info;
+    util.formatmony(e);
+    info.contcactamount = e.detail;
+    this.setData({
+      info
+    })
+  },
+  // 数字筛选
+  checknum(e) {
     let info = this.data.info;
     util.formatNum(e);
     info.contcactamount = e.detail;
@@ -214,15 +231,15 @@ Page({
   confirm() {
     // console.log(this.data.info)
     // if (this.data.info.maincontactname && this.data.info.projcectCode && this.data.info.demo) {
-    if (this.data.info.maincontactname&& this.data.info.demo) {
+    if (this.data.info.maincontactname && this.data.info.demo) {
       let info = this.data.info;
       // console.log( util.checkContent)
       util.checkContent(info, this);
-      util.intro(info,this)
+      util.intro(info, this)
       // console.log(info)
       this.setData({
         info,
-        'info.projcectCode':'1'
+        'info.projcectCode': '1'
       })
       // console.log(this.data.info)
       addPact(info).then(res => {
@@ -233,7 +250,7 @@ Page({
             icon: 'success',
             duration: 3000
           })
-         
+
           util.returnPrev('generalcontract')
         }
       })
@@ -256,7 +273,7 @@ Page({
   editconfirm() {
     let info = this.data.info;
     util.checkChange(info, this, app.globalData.department);
-    util.intro(info,this)
+    util.intro(info, this)
     this.setData({
       info
     })
@@ -269,7 +286,7 @@ Page({
           icon: 'success',
           duration: 3000
         })
-        util.ModifyRecord(this.data.information,"maincontact")
+        util.ModifyRecord(this.data.information, "maincontact")
         util.returnPrev('generalcontract', this)
       }
     })
@@ -283,18 +300,18 @@ Page({
       firms: app.globalData.Companytitle,
       totals: app.globalData.MainProject,
     })
-    
-    qgroupproject().then(res=>{
-      if(res.code==10000&&res.List){
+
+    qgroupproject().then(res => {
+      if (res.code == 10000 && res.List) {
         var res1 = JSON.stringify(res.List)
         let bidlist = JSON.parse(res1.replace(/ID/g, 'value').replace(/projcectCode/g, 'text'));
         this.setData({
-          section22 : bidlist
+          section22: bidlist
         })
         console.log(this.data.section22)
-      }else{
+      } else {
         this.setData({
-          section22 :[]
+          section22: []
         })
       }
     })
@@ -307,7 +324,7 @@ Page({
       info.Companytitle = message.Companytitletext
       this.setData({
         info,
-        departmenttext:message.departmenttext
+        departmenttext: message.departmenttext
       })
     }
     if (options.id) {
@@ -315,11 +332,11 @@ Page({
         ID: options.id
       }).then(res => {
         let item = res.Item;
-        var data1 =res.Item
+        var data1 = res.Item
         var b = JSON.stringify(data1)
-        var c  = JSON.parse(b)
+        var c = JSON.parse(b)
         this.setData({
-          information:c
+          information: c
         })
         util.handleData(item, this, app.globalData.department);
         this.setData({

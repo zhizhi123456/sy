@@ -262,7 +262,10 @@
         "pages/organize/new/new",
         "pages/gmember/pact/pact",
         "pages/gmember/detail/detail",
-        "pages/gmember/new/new"
+        "pages/gmember/new/new",
+        "pages/daily/pact/pact",
+        "pages/daily/detail/detail",
+        "pages/daily/new/new"
       ]
     }
   ],

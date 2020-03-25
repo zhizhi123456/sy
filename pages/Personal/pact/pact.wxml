@@ -19,12 +19,12 @@
                 <!-- <van-cell title="密码" label="{{item.Password}}" border="{{ true}}" /> -->
                 <van-cell title="密码" label="*********" border="{{ true}}" />
                 <van-cell title="邮箱" label="{{item.Email}}" border="{{ true }}" />
-                <van-cell title="工号" label="{{item.EmpCode}}" border="{{ true }}" />
-                <van-cell title="职位" label="{{item.EmpName}}" border="{{ true }}" />
+                <van-cell title="员工号" label="{{item.EmpCode}}" border="{{ true }}" />
+                <van-cell title="员工名称" label="{{item.EmpName}}" border="{{ true }}" />
                 <van-cell title="电话" label="{{item.MobilePIN}}" border="{{ true }}" />
                 <van-cell title="密码问题" label="{{item.PasswordQuestion}}" border="{{ true }}" />
                  <van-cell title="密码答案" label="{{item.PasswordAnswer}}" border="{{ true }}" />
-                <van-cell title="锁定" label="{{item.IslockedOut}}" border="{{ true }}" />
+                <van-cell title="是否锁定" label="{{item.IslockedOut}}" border="{{ true }}" />
                 <van-cell title="最后登录时间" label="{{item.LastLoginDate}}" border="{{ true }}" />
                 <van-cell title="最后密码修改时间" label="{{item.LastPasswordChangedDate}}" border="{{ true }}" />
                 <van-cell title="最后锁定日期" label="{{item.LastLockoutDate}}" border="{{ true }}" />

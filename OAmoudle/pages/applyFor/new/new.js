@@ -25,7 +25,7 @@ Page({
       itemnumber: '1',
       applynumber: "",
       API_Picurl: [],
-      TotalSum: 0
+      TotalSum: ''
     },
     currentDate: new Date().getTime(),
     show: false,
@@ -60,6 +60,15 @@ Page({
     unittype: '',
     showchoice2: false,
     length: 0
+  },
+  // 数字筛选
+  checkmoney(e) {
+    let info = this.data.info;
+    util.formatmony(e);
+    info.TotalSum = e.detail;
+    this.setData({
+      info
+    })
   },
   setSeach(e) {
     this.setData({
@@ -237,6 +246,7 @@ Page({
     })
   },
   purchasecblur(e) {
+    e.detail.value = Number(e.detail.value).toFixed(2)
     let info = util.editInfo(e, this, e.detail.value);
     this.setData({
       info,
@@ -574,16 +584,30 @@ Page({
   },
   // 获取采购明细输入框中的数据并设置给data
   getgname(e) {
+
     util.updateValue(e, this);
+    this.sum()
+    this.repetition(e)
+  },
+  getmoney(e) {
+    console.log(e)
+    e.detail.value = Number(e.detail.value).toFixed(2)
+    var materials = util.updateValue(e, this);
+    this.setData({
+      materials
+    })
     this.sum()
     this.repetition(e)
   },
   sum() {
     let materials = this.data.materials;
     var sum = 0
+    console.log(materials)
     materials.forEach(s => {
-      sum = s.quantity * s.unitprice + sum
+      console.log(s)
+      sum = s.quantity * s.unitprice + sum;
     })
+    sum = Number(sum).toFixed(2)
     this.setData({
       'info.TotalSum': sum,
       'info.Chinesenumerals': util.Uppercase(sum),
@@ -595,6 +619,21 @@ Page({
       i = e.currentTarget.dataset.i
     let materials = this.data.materials;
     util.formatNum(e);
+    if (i) {
+      materials[i][name] = e.detail;
+    } else {
+      materials[0][name] = e.detail;
+    }
+    this.setData({
+      materials
+    })
+  },
+  // 金额筛选
+  checkmoney1(e) {
+    let name = e.currentTarget.dataset.name,
+      i = e.currentTarget.dataset.i
+    let materials = this.data.materials;
+    util.formatmony(e);
     if (i) {
       materials[i][name] = e.detail;
     } else {

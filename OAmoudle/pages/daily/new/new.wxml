@@ -1,0 +1,110 @@
+<!-- pages/new/new.wxml -->
+<view class="wraper">
+    <view class="header d_header" wx:if="{{info.ID}}">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="editreturn"></icon>
+        <text class="fr newCreate" bindtap="editconfirm">确定</text>
+        <view class="apply">编辑工作日志</view>
+    </view>
+    <view class="header d_header" wx:else>
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="confirm">确定</text>
+        <view class="apply">新建工作日志</view>
+    </view>
+    <view class="main n_main">
+        <van-toast id="van-toast" />
+        <view class="check_item" wx:if="{{ifsame}}">
+            <view class="kind require">
+                <text>工作日志记录人</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field value="{{info.dailylogman}}" disabled />
+            </van-cell-group>
+        </view>
+        <view class="check_item" wx:if="{{ifsame}}">
+            <view class="kind require">
+                <text>所属部门</text>
+            </view>
+            <van-cell title="{{info.department?info.department:'请选择'}}" bind:click="showPopup2">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show2 }}" round position="bottom" bind:close="onClose2">
+                <van-picker data-name="department" show-toolbar columns="{{section11}}" bind:cancel="onClose2" bind:confirm="onConfirm2" />
+            </van-popup>
+        </view>
+        <view class="check_item" wx:if="{{ifsame}}">
+            <view class="kind require">
+                <text>工作日志日期</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.dailylogdate?info.dailylogdate:'请选择'}}" is-link bind:click="showPopup_time" />
+            <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
+                <van-datetime-picker data-name="dailylogdate" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
+            </van-popup>
+        </view>
+        <view class="check_item" wx:if="{{ifsame}}">
+            <view class="kind require">
+                <text>工作日志标题</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="dailylogTopic" value="{{info.dailylogTopic}}" placeholder="请输入" bind:blur="projectnameblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item" wx:if="{{ifsame}}">
+            <view class="kind require">
+                <text>工作日志内容</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="dailylogContext" value="{{info.dailylogContext}}" placeholder="请输入" bind:blur="projectnameblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item" wx:if="{{ifsame}}">
+            <view class="kind require">
+                <text>特别说明</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="specialexplan" value="{{info.specialexplan}}" placeholder="请输入" bind:blur="projectnameblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item seach_item">
+            <view class="kind require">
+                <text>相关文件</text>
+            </view>
+            <van-cell title="文件" is-link bindtap="up_file" />
+            <view wx:if="{{(info.fileurl.length&&fileshow)}}" class="fileLIST">
+                <block wx:for="{{info.fileurl}}" wx:key="index">
+                    <view class="cfile">
+                        <text class="filename">{{item.name}}</text>
+                        <text class="filesize ">{{item.size}}</text>
+                        <!-- <icon class="iconfont icon-shengou fr" bindtap="downF" data-index="{{index}}" data-url="{{item.url}}" /> -->
+                        <icon class="iconfont icon-shanchu-tianchong fr" wx:if="{{up_F}}" bindtap="delF" data-index="{{index}}" />
+                    </view>
+                </block>
+            </view>
+        </view>
+        <!-- <view class="check_item">
+            <view class="kind require">
+                <text>相关文件</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="fileurl" value="{{info.fileurl}}" placeholder="请输入" bind:blur="projectnameblur" />
+            </van-cell-group>
+        </view> -->
+        <view class="check_item">
+            <view class="kind require">
+                <text>相关图片</text>
+            </view>
+            <van-cell title="请选择" is-link bind:click="showPopup_photo" />
+            <van-action-sheet show="{{ show_photo }}" actions="{{ check_photo }}" bind:cancel="onClose_photo" bind:click-overlay="onClose_photo" bind:select="onSelect_photo" cancel-text="取消" />
+            <view wx:if="{{upimg}}" class="datumimgbox">
+                <block wx:for="{{info.API_Picurl}}" wx:key="index">
+                    <view class="upimgbox">
+                        <image src="{{item}}" bindtap="tap_pic" data-index="{{index}}" />
+                        <icon class="iconfont icon-jianhao-tianchong delimg" data-i="{{index}}" bindtap="delimg" />
+                    </view>
+                </block>
+            </view>
+        </view>
+    </view>
+</view>

@@ -68,7 +68,7 @@
                 <text class="required">*</text>
             </view>
             <van-cell-group>
-                <van-field value="{{materials[0].quantity}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' data-name='quantity' />
+                <van-field value="{{materials[0].quantity}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' bind:input="checknum" data-name='quantity' />
             </van-cell-group>
         </view>
         <view class="check_item">
@@ -76,13 +76,12 @@
                 <text>单价</text>
             </view>
             <van-cell-group>
-                <van-field value="{{materials[0].univalence}}" placeholder="请输入" bind:blur="getRecord" data-i='{{index}}' data-name='univalence' bind:input="checknum" />
+                <van-field value="{{materials[0].univalence}}" placeholder="请输入" bind:blur="getmoney" data-i='{{index}}' data-name='univalence' bind:input="checkmoney1" />
             </van-cell-group>
         </view>
         <view class="check_item">
             <view class="kind">
                 <text>备注</text>
-                <text class="required">*</text>
             </view>
             <van-cell-group>
                 <van-field value="{{materials[0].demo}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' data-name='demo' />

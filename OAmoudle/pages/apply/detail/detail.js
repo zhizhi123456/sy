@@ -27,19 +27,9 @@ Page({
     idea: {
       API_Picurl: [],
       API_Fileurl: []
-    }
-  },
-  // 文件
-  up_photo() {
-    wx.chooseImage({
-      count: 9,
-      // sourceType:"camera",
-      success(res) {
-        // tempFilePath可以作为img标签的src属性显示图片
-        const tempFilePaths = res.tempFilePaths;
-        // console.log(tempFilePaths)
-      }
-    })
+    },
+   
+   
   },
   // 返回
   return () {

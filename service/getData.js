@@ -1399,3 +1399,17 @@ export const customerRepeat = (params) => http.post("/api/customer/customerRepea
 export const ButtonConfirmed = (params) => http.post("/api/SubmitWorkFlowService/ButtonConfirmed", params);
 // 得到提交部门
 export const GetSubDepartment = (params) => http.post("/api/MethodOfDataService/GetSubDepartment", params);
+
+// 工作日志
+// 查询
+export const querydaily = (params) => http.post("/api/dailylog/Query", params);
+// 添加
+export const adddaily = (params) => http.post("/api/dailylog/Insert", params);
+// 根据id查询
+export const detaildaily = (params) => http.post("/api/dailylog/Detail", params);
+// 更新
+export const updatedaily = (params) => http.post("/api/dailylog/Update", params);
+// 删除
+export const deldaily = (params) => http.post("/api/dailylog/Delete", params);
+// 综合查询
+export const qgroupdaily = (params) => http.post("/api/dailylog/Querygroup", params);

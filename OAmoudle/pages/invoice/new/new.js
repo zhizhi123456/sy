@@ -20,7 +20,8 @@ Page({
       API_Picurl: [],
       contactid: '1',
       projectid: '2',
-      projectaddress: '3'
+      projectaddress: '3',
+      invoicename: '1'
     },
     show: false,
     firms: [],
@@ -129,6 +130,14 @@ Page({
   checknum(e) {
     let info = this.data.info;
     util.formatNum(e);
+    info.includetaxamont = e.detail;
+    this.setData({
+      info
+    })
+  },
+  checkmoney(e) {
+    let info = this.data.info;
+    util.formatmony(e);
     info.includetaxamont = e.detail;
     this.setData({
       info
@@ -262,6 +271,7 @@ Page({
   },
   // 含税金额
   includetaxamontblur(e) {
+    e.detail.value = Number(e.detail.value).toFixed(2)
     let info = util.editInfo(e, this, e.detail.value);
     this.setData({
       info,
@@ -433,7 +443,7 @@ Page({
           })
         } else {
           wx.showToast({
-            title: '开票公司已存在',
+            title: '受票公司已存在',
             icon: 'none',
             duration: 3000
           })

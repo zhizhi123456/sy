@@ -79,6 +79,21 @@ Page({
       info
     })
   },
+  projectblur(e) {
+    e.detail.value = Number(e.detail.value).toFixed(2)
+    let info = util.editInfo(e, this, e.detail.value);
+    this.setData({
+      info
+    })
+  },
+  checkmoney(e) {
+    let info = this.data.info;
+    util.formatmony(e);
+    info.chargeamount = e.detail;
+    this.setData({
+      info
+    })
+  },
   // 数字筛选
   checknum(e) {
     let info = this.data.info;

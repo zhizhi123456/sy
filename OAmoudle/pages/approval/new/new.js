@@ -90,7 +90,7 @@ Page({
     });
   },
   onConfirm1(e) {
-    let info = util.editInfo(e, this, e.detail.value.value);
+    let info = util.editInfo(e, this, e.detail.value.text);
     this.setData({
       info,
       show1: false,

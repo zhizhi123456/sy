@@ -12,16 +12,16 @@
         <van-tabs active="{{tab}}">
             <van-tab title="详细资料" name="a">
                 <view class="content">
-                    <view class="c_item">
+                    <!-- <view class="c_item">
                         <view class="kind">发票名称</view>
                         <view class="check">{{info.invoicename}}</view>
-                    </view>
+                    </view> -->
                     <view class="c_item">
                         <view class="kind">公司</view>
                         <view class="check">{{info.Companytitle}}</view>
                     </view>
                     <view class="c_item">
-                        <view class="kind">开票公司</view>
+                        <view class="kind">受票公司</view>
                         <view class="check">{{info.Othercompany}}</view>
                     </view>
                     <view class="c_item">

@@ -99,15 +99,15 @@ App({
     if (!this.globalData.CountItem[0]) {
       //负责人
       Principal().then(res => {
-        console.log(res)
+        //console.log(res)
         let Principal = JSON.parse(res.replace(/userName/g, 'value').replace(/EmpName/g, 'text'));
-        // console.log(Principal)
+        // //console.log(Principal)
         var t = Principal.filter(s => {
           return s.text
         })
 
         this.globalData.Principal = t;
-        // console.log(this.globalData.Principal)
+        // //console.log(this.globalData.Principal)
       })
       let userinfo = wx.getStorageSync("myInfo");
       util.sumup1(moredep, this, 'moredep', "techofficename", "ID",userinfo.UserName);
@@ -202,7 +202,7 @@ App({
         getdep({
           UserName: userinfo.UserName
         }).then(res => {
-          console.log(res)
+          //console.log(res)
           if (res) {
             var s = JSON.parse(res)
             if(!(s.lengtn<1)){
@@ -214,7 +214,7 @@ App({
                 userId: s[0].userId
               }
               this.globalData.message = info
-              console.log(this.globalData.message)
+              //console.log(this.globalData.message)
             }else{
               wx.showToast({
                 title: '获取用户信息失败',

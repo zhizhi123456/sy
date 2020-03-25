@@ -1,9 +1,11 @@
 // pages/new/new.js
 import Toast from 'vant-weapp/dist/toast/toast';
 import {
-  addiou,
-  detailiou,
-  updateiou
+  adddaily,
+  detaildaily,
+  updatedaily,
+  department,
+  Principal
 } from "../../../../service/getData";
 var util = require("../../../../utils/util");
 var app = getApp();
@@ -13,70 +15,38 @@ Page({
    */
   data: {
     info: {
-      debitnotetype: '',
-      Companytitle: '',
-      department: "",
-      usesealtype: '',
-      projectcode: '',
-      subprojectcode: '',
-      amount: '',
-      leavereason: '',
       API_Picurl: [],
+      fileurl: [],
+      dailylogman:'',
+      department:'',
+      dailylogdate:'',
+      dailylogTopic:'',
+      dailylogContext:'',
+      specialexplan:''
+
     },
-    show_nature: false,
-    nature: [],
-    sections: [],
-    section1: [],
-    section2: [],
-    section3: [],
-    section4: [],
-    show: false,
-    show1: false,
     show2: false,
-    show3: false,
-    show4: false,
-    show5: false,
-    show6: false,
+    show_time: false,
     currentDate: new Date().getTime(),
-    currentDate1: new Date().getTime(),
-    currentDate3: new Date().getTime(),
-    currentDate4: new Date().getTime(),
     show_photo: false,
     check_photo: [{
       name: "拍照"
     }, {
       name: "从相册选择"
     }],
-    goods: true,
-    money: true,
-    chapter: true,
-    seach: ''
+    fileshow: true,
+    up_F: true,
+    ifsame:true
   },
-  setSeach(e) {
-    this.setData({
-      seach: e.detail.value
-    })
+  // 文件上传
+  up_file() {
+    util.upFilelog(this);
   },
-  finditem() {
-    let arr = util.findone(app.globalData.department, this.data.seach);
-    this.setData({
-      sections: arr,
-      seach: ''
-    })
+  delF(e) {
+    util.delFillog(this, e);
   },
-  finditem1() {
-    let arr = util.findone(app.globalData.Debitnotetype, this.data.seach);
-    this.setData({
-      section1: arr,
-      seach: ''
-    })
-  },
-  finditem2() {
-    let arr = util.findone(app.globalData.Usesealtype, this.data.seach);
-    this.setData({
-      section2: arr,
-      seach: ''
-    })
+  downF(e) {
+    util.lookFileIDEA(e);
   },
   // 图片
   showPopup_photo() {
@@ -92,6 +62,7 @@ Page({
   onSelect_photo(e) {
     util.upImage(this);
   },
+
   delimg(e) {
     util.deleteImg(this, e)
   },
@@ -100,30 +71,6 @@ Page({
   },
   // 总包项目名称
   projectnameblur(e) {
-    let info = util.editInfo(e, this, e.detail.value);
-    this.setData({
-      info
-    })
-  },
-  // 数字筛选
-  checknum(e) {
-    let info = this.data.info;
-    util.formatNum(e);
-    info.amount = e.detail;
-    this.setData({
-      info
-    })
-  },
-  checkmoney(e) {
-    let info = this.data.info;
-    util.formatmony(e);
-    info.amount = e.detail;
-    this.setData({
-      info
-    })
-  },
-  purchasecblur(e) {
-    e.detail.value = Number(e.detail.value).toFixed(2)
     let info = util.editInfo(e, this, e.detail.value);
     this.setData({
       info
@@ -141,7 +88,6 @@ Page({
     })
   },
   onConfirm_4(e) {
-    // //console.log(e)
     let info = util.editInfo(e, this, e.detail.value.text);
     this.setData({
       info,
@@ -151,8 +97,7 @@ Page({
   // 部门
   showPopup1() {
     this.setData({
-      show1: true,
-      seach: ''
+      show1: true
     })
   },
   onClose1() {
@@ -161,7 +106,6 @@ Page({
     })
   },
   onConfirm1(e) {
-    // //console.log(e)
     let info = util.editInfo(e, this, e.detail.value.text);
     this.setData({
       info,
@@ -171,8 +115,7 @@ Page({
   // 所有人
   showPopup2() {
     this.setData({
-      show2: true,
-      seach: ""
+      show2: true
     })
   },
   onClose2() {
@@ -181,49 +124,10 @@ Page({
     })
   },
   onConfirm2(e) {
-    // //console.log(e)
     let info = util.editInfo(e, this, e.detail.value.text);
     this.setData({
       info,
       show2: false
-    })
-    if (e.detail.value.text == '物类') {
-      this.setData({
-        chapter: false,
-        money: false,
-      })
-    }
-    if (e.detail.value.text == '钱类') {
-      this.setData({
-        chapter: false,
-        money: true,
-      })
-    }
-    if (e.detail.value.text == '章类') {
-      this.setData({
-        chapter: true,
-        money: false,
-      })
-    }
-  },
-  // 用章类型
-  showPopup3() {
-    this.setData({
-      show3: true,
-      seach: ''
-    })
-  },
-  onClose3() {
-    this.setData({
-      show3: false
-    })
-  },
-  onConfirm3(e) {
-    // //console.log(e)
-    let info = util.editInfo(e, this, e.detail.value.text);
-    this.setData({
-      info,
-      show3: false
     })
   },
   // 公司名称
@@ -238,7 +142,6 @@ Page({
     })
   },
   onConfirm4(e) {
-    // //console.log(e)
     let info = util.editInfo(e, this, e.detail.value.text);
     this.setData({
       info,
@@ -257,7 +160,7 @@ Page({
     })
   },
   onConfirm5(e) {
-    // //console.log(e)
+    // ////console.log(e)
     let info = util.editInfo(e, this, e.detail.value.value);
     this.setData({
       info,
@@ -276,32 +179,50 @@ Page({
     })
   },
   onConfirm6(e) {
-    // //console.log(e)
-    let info = util.editInfo(e, this, e.detail.value.value);
+    // ////console.log(e)
+    let info = util.editInfo(e, this, e.detail.value.text);
     this.setData({
       info,
       show6: false
     })
   },
+  // 进场日期
+  showPopup_time() {
+    this.setData({
+      show_time: true
+    })
+  },
+  onClose_time() {
+    this.setData({
+      show_time: false
+    })
+  },
+  onConfirm_time(e) {
+    let info = util.editInfo(e, this, util.datefomate(e.detail));
+    this.setData({
+      info,
+      show_time: false
+    })
+  },
   confirm() {
-    // //console.log(this.data.info)
-    if (this.data.info.debitnotetype && this.data.info.Companytitle &&
-      this.data.info.department) {
+    if (this.data.info.dailylogman && this.data.info.dailylogdate &&
+      this.data.info.dailylogTopic) {
       let info = this.data.info;
+
       util.checkContent(info, this);
       util.intro(info, this)
       this.setData({
         info
       })
-      addiou(this.data.info).then(res => {
-        // //console.log(res)
+      adddaily(this.data.info).then(res => {
+        console.log(res)
         if (res.code == 10000) {
           wx.showToast({
             title: '新建成功',
             icon: 'success',
             duration: 3000
           })
-          util.OAreturn('iou')
+          util.OAreturn('daily')
         }
       })
     } else {
@@ -313,29 +234,29 @@ Page({
   },
   // 返回
   return () {
-    util.OAreturn('iou')
+    util.OAreturn('daily')
   },
   // 编辑分包项目页面的确定和返回
   editreturn() {
-    util.OAreturn('iou', this)
+    util.OAreturn('daily', this)
   },
   editconfirm() {
-    let info = this.data.info;
+    let info = this.data.info
     util.checkChange(info, this, app.globalData.department);
     util.intro(info, this)
+    console.log((info.fileurl.length && this.data.fileshow))
     this.setData({
       info
     })
-    updateiou(this.data.info).then(res => {
-      // //console.log(res)
+    updatedaily(this.data.info).then(res => {
       if (res.code == 10000) {
         wx.showToast({
           title: '编辑成功',
           icon: 'success',
           duration: 3000
         })
-        util.ModifyRecord(this.data.information, "debitnote")
-        util.OAreturn('iou', this)
+        util.ModifyRecord(this.data.information, "dailylog")
+        util.OAreturn('daily', this)
       }
     })
   },
@@ -344,29 +265,27 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      nature: app.globalData.Companytitle,
-      sections: app.globalData.department,
-      section1: app.globalData.Debitnotetype,
-      section2: app.globalData.Usesealtype,
-      section6: app.globalData.MainProject1,
-      section5: app.globalData.MainSubproject
+      section11: app.globalData.moredep,
+
     })
     var user = wx.getStorageSync("myInfo");
     if (user) {
       var message = app.globalData.message
-      console.log(message)
+      console.log(app.globalData.message)
       let info = this.data.info;
+      info.dailylogman = message.userId
       info.department = message.departmenttext
-      info.Companytitle = message.Companytitletext
+      info.dailylogTopic = message.userId + '的' + util.formatTime1(new Date()) + '工作日志'
       this.setData({
         info
       })
     }
+    console.log(options)
     if (options.id) {
-      detailiou({
+      detaildaily({
         ID: options.id
       }).then(res => {
-        // //console.log(res)
+        console.log(res)
         let item = res.Item;
         var data1 = res.Item
         var b = JSON.stringify(data1)
@@ -379,27 +298,22 @@ Page({
         this.setData({
           info: item
         })
-        if (item.debitnotetype == '物类') {
+        if(item.dailylogdate.slice(0,10)==(util.format(new Date()).slice(0,10))){
+          console.log('同一天')
           this.setData({
-            chapter: false,
-            money: false,
-          })
-        }
-        if (item.debitnotetype == '钱类') {
+            ifsame:true
+          }) 
+        }else{
+          console.log('不是同一天')
           this.setData({
-            chapter: false,
-            money: true,
-          })
+            ifsame:false
+          }) 
         }
-        if (item.debitnotetype == '章类') {
-          this.setData({
-            chapter: true,
-            money: false,
-          })
-        }
-
       })
     }
+
+
+
   },
 
 

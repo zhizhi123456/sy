@@ -1,0 +1,10 @@
+.seach_item .cfile {
+    padding: 0rpx;
+}
+
+.fileLIST .cfile {
+
+    height: 65rpx;
+    line-height: 65rpx;
+
+}

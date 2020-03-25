@@ -33,7 +33,8 @@ Page({
     leavetypetext: '',
     mindata: new Date().getTime(),
     maxdata: (new Date().getTime()) + 60 * 60 * 1000 * 24 * 30,
-    seach: ''
+    seach: '',
+    mindata1:new Date().getTime()
   },
   setSeach(e) {
     this.setData({
@@ -189,20 +190,23 @@ Page({
       show_time: false
     })
     this.setData({
-      mindata: e.detail
+      mindata1: e.detail
     })
 
     if (this.data.info.leaveendtime && this.data.info.leavebegintime) {
       var duration = (new Date(this.data.info.leaveendtime).getTime()) - (new Date(this.data.info.leavebegintime).getTime())
       if (duration < 0) {
         wx.showToast({
-          title: '请假开始时间应小于请假结束时间',
+          title: '请假开始时间应小于请假结束时间!',
           icon: 'none',
           duration: 3000
         })
         this.setData({
-          "info.leavebegintime": util.datefomate(new Date().getTime()),
-          "info.leaveendtime": util.datefomate(new Date().getTime())
+          "info.leavebegintime":'',
+          "info.leaveendtime": '',
+          mindata: new Date().getTime(),
+          maxdata: (new Date().getTime()) + 60 * 60 * 1000 * 24 * 30,
+          mindata1: new Date().getTime(),
         })
         this.number()
       } else {
@@ -236,18 +240,53 @@ Page({
     var duration = (new Date(this.data.info.leaveendtime).getTime()) - (new Date(this.data.info.leavebegintime).getTime())
     var hours = Math.round((duration / (60 * 60 * 1000)))
     var day
-    if (hours < 24) {
-      day = 0
-      this.setData({
-        "info.leavedays": 0 + 1,
-        "info.leavehours": hours,
-      })
-    } else {
-      this.setData({
-        "info.leavedays": (parseInt(hours / 24)) + 1,
-        "info.leavehours": hours % 24,
-      })
+    var today = util.formatday(new Date())
+    // 今天的假期
+    if ((today == util.formatday(new Date(this.data.info.leaveendtime))) && (today == util.formatday(new Date(this.data.info.leavebegintime)))) {
+      if (hours < 8) {
+        this.setData({
+          "info.leavedays": 0,
+          "info.leavehours": hours,
+        })
+        console.log("今天的日期并且小于8小时")
+      } else {
+        this.setData({
+          "info.leavedays": 1,
+          "info.leavehours": 0,
+        })
+        console.log("今天的日期并且大于等于8小时")
+      }
+    } 
+    // 跨天的计算
+    else {
+      if (hours % 24 < 8) {
+        this.setData({
+          "info.leavedays": (parseInt(hours / 24)),
+          "info.leavehours": hours % 24,
+        })
+        console.log("跨天计算并且取余小于8小时")
+      } else {
+        this.setData({
+          "info.leavedays": (parseInt(hours / 24)) + 1,
+          "info.leavehours": 0,
+        })
+        console.log("跨天计算并且取余大于等于8小时")
+      }
+
+
     }
+    // if (hours < 24) {
+    //   day = 0
+    //   this.setData({
+    //     "info.leavedays": 0,
+    //     "info.leavehours": hours,
+    //   })
+    // } else {
+    //   this.setData({
+    //     "info.leavedays": (parseInt(hours / 24)) + 1,
+    //     "info.leavehours": hours % 24,
+    //   })
+    // }
   },
   // 请假天数
   leavedaysblur(e) {
@@ -349,7 +388,7 @@ Page({
   onLoad: function (options) {
     this.setData({
       firms: app.globalData.Companytitle,
-      sections: app.globalData.department,
+      sections: app.globalData.moredep,
       Leavetypelist: app.globalData.Leavetypelist,
     })
     // //项目类型请求

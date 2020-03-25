@@ -102,7 +102,7 @@
             </view>
             <van-cell title="{{info.leaveendtime?info.leaveendtime:'请选择'}}" is-link bind:click="showPopup_endtime" />
             <van-popup show="{{ show_endtime }}" round position="bottom" bind:close="onClose_endtime">
-                <van-datetime-picker min-date="{{ mindata }}" max-date="{{maxdata}}" data-name="leaveendtime" value="{{ currentDate }}" bind:cancel="onClose_endtime" bind:confirm="onConfirm_endtime" />
+                <van-datetime-picker min-date="{{ mindata1 }}" max-date="{{maxdata}}" data-name="leaveendtime" value="{{ currentDate }}" bind:cancel="onClose_endtime" bind:confirm="onConfirm_endtime" />
             </van-popup>
         </view>
         <view class="check_item">

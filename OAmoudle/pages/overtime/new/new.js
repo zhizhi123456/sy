@@ -327,7 +327,7 @@ Page({
     user = wx.getStorageSync("myInfo");
     this.setData({
       firms: app.globalData.Companytitle,
-      sections: app.globalData.department,
+      sections: app.globalData.moredep,
       GetOverworktype: app.globalData.GetOverworktype,
       GetOvertimeperiod: app.globalData.GetOvertimeperiod,
     })

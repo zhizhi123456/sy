@@ -57,6 +57,7 @@ Page({
                   item.forEach(s => {
                     sum = s.quantity * s.univalence + sum
                   });
+                  sum = Number(sum).toFixed(2)
                   detailapply({
                     ID: that.data.info.applybuyid
                   }).then(res => {

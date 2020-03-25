@@ -99,7 +99,7 @@
                 <text>总金额</text>
             </view>
             <van-cell-group>
-                <van-field value="{{info.TotalSum}}" data-name="TotalSum" placeholder="请输入" bind:blur="purchasecblur" />
+                <van-field value="{{info.TotalSum}}" data-name="TotalSum" placeholder="请先输入明细后自动计算" bind:blur="purchasecblur"  bind:input="checkmoney"/>
             </van-cell-group>
         </view>
         <view class="check_item">
@@ -107,7 +107,7 @@
                 <text>总金额(大写)</text>
             </view>
             <van-cell-group>
-                <van-field value="{{info.Chinesenumerals}}" data-name="Chinesenumerals" placeholder="请输入" bind:blur="purchasecontactCodeblur"/>
+                <van-field value="{{info.Chinesenumerals}}" data-name="Chinesenumerals" placeholder="请输入" bind:blur="purchasecontactCodeblur" />
             </van-cell-group>
         </view>
         <view class="check_item">
@@ -193,7 +193,7 @@
                         <text>单价</text>
                     </view>
                     <van-cell-group>
-                        <van-field value="{{item.unitprice}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' data-name='unitprice' bind:input="checknum" />
+                        <van-field value="{{item.unitprice}}" placeholder="请输入" bind:blur="getmoney" data-i='{{index}}' data-name='unitprice' bind:input="checkmoney1" />
                     </van-cell-group>
                 </view>
             </block>

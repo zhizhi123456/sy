@@ -75,11 +75,22 @@ Page({
   getgname(e) {
     util.updateValue(e, this);
     console.log(this.data.billid)
-    if(!this.data.materials[0].ID){
+    if (!this.data.materials[0].ID) {
       this.repetition(e)
     }
-  
   },
+  getmoney(e) {
+    console.log(e)
+    e.detail.value = Number(e.detail.value).toFixed(2)
+    var materials = util.updateValue(e, this);
+    this.setData({
+      materials
+    })
+    if (!this.data.materials[0].ID) {
+      this.repetition(e)
+    }
+  },
+
   getSize(e) {
     util.updateValue(e, this);
   },
@@ -114,6 +125,20 @@ Page({
       materials
     })
   },
+  checkmoney1(e) {
+    let name = e.currentTarget.dataset.name,
+      i = e.currentTarget.dataset.i
+    let materials = this.data.materials;
+    util.formatmony(e);
+    if (i) {
+      materials[i][name] = e.detail;
+    } else {
+      materials[0][name] = e.detail;
+    }
+    this.setData({
+      materials
+    })
+  },
   repetition(e) {
     let materials = this.data.materials;
     queryapplyForsmall({
@@ -125,10 +150,10 @@ Page({
         let mater = item;
         var ifhave = ''
         ifhave = mater.some((s) => {
-    
-            return (s.type == materials[0].type) && (s.detailname == materials[0].detailname)
-          
-          
+
+          return (s.type == materials[0].type) && (s.detailname == materials[0].detailname)
+
+
         })
         if (ifhave) {
           wx.showToast({
@@ -166,7 +191,7 @@ Page({
       materials,
       show6: false
     })
-    if(!this.data.materials[0].ID){
+    if (!this.data.materials[0].ID) {
       this.repetition(e)
     }
   },
@@ -344,6 +369,7 @@ Page({
               item.forEach(s => {
                 sum = s.quantity * s.unitprice + sum
               });
+              sum = Number(sum).toFixed(2)
               detailapplyFor({
                 ID: this.data.billid
               }).then(res => {
@@ -421,6 +447,7 @@ Page({
             item.forEach(s => {
               sum = s.quantity * s.unitprice + sum
             });
+            sum = Number(sum).toFixed(2)
             detailapplyFor({
               ID: this.data.materials[0].applyid
             }).then(res => {

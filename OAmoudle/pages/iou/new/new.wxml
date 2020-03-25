@@ -97,7 +97,7 @@
                 <text>金额</text>
             </view>
             <van-cell-group>
-                <van-field data-name="amount" value="{{info.amount}}" placeholder="请输入" bind:blur="projectnameblur" bind:input="checknum"  />
+                <van-field data-name="amount" value="{{info.amount}}" placeholder="请输入" bind:blur="purchasecblur" bind:input="checkmoney"  />
             </van-cell-group>
         </view>
         <view class="check_item">

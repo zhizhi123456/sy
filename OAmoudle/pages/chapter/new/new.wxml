@@ -17,7 +17,7 @@
                 <text>部门</text>
                 <text class="required">*</text>
             </view>
-             <!-- <van-field data-name="department" value="{{departmenttext}}" disabled /> -->
+            <!-- <van-field data-name="department" value="{{departmenttext}}" disabled /> -->
             <van-cell title="{{departmenttext}}" is-link bind:click="showPopup_o" />
             <van-popup show="{{show_o}}" round position="bottom" bind:close="onClose_o">
                 <view class="Cseach">
@@ -32,7 +32,7 @@
                 <text>公司名称</text>
                 <text class="required">*</text>
             </view>
-             <van-field data-name="Companytitle" value="{{info.Companytitle}}" disabled />
+            <van-field data-name="Companytitle" value="{{info.Companytitle}}" disabled />
             <!-- <van-cell title="{{info.Companytitle?info.Companytitle:'请选择'}}" bind:click="showPopup">
                 <icon class="iconfont icon-jiantou" />
             </van-cell>
@@ -71,7 +71,7 @@
                 </van-checkbox>
             </van-popup>
         </view>
-          <view class="check_item">
+        <view class="check_item">
             <text class="kind">其他</text>
             <van-cell-group>
                 <van-field data-name="Other" value="{{info.Other}}" placeholder="请输入" bind:blur="useamountblur" />
@@ -89,16 +89,15 @@
         <view class="check_item">
             <text class="kind">用章份数</text>
             <van-cell-group>
-                <van-field data-name="usenumber" value="{{info.usenumber}}" placeholder="请输入" bind:blur="usenumberblur" bind:input="checknum" />
+                <van-field data-name="usenumber" maxlength="{{1}}" value="{{info.usenumber}}" placeholder="请输入" bind:blur="usenumberblur" bind:input="checknum" />
             </van-cell-group>
         </view>
         <view class="check_item">
             <text class="kind">金额(元)</text>
             <van-cell-group>
-                <van-field data-name="useamount" value="{{info.useamount}}" placeholder="请输入" bind:blur="useamountblur" bind:input="checknum1" />
+                <van-field data-name="useamount" value="{{info.useamount}}" placeholder="请输入" bind:blur="useamountblur" bind:input="checkmoney" />
             </van-cell-group>
         </view>
-       
         <view class="check_item">
             <text class="kind">图片</text>
             <van-cell title="请选择" is-link bind:click="showPopup_photo" />
