@@ -128,10 +128,10 @@
                     <text class="info">创建人</text>
                     <text>{{item.createman}}</text>
                 </view>
-                <view>
+                <!-- <view>
                     <text class="info">备注</text>
                     <text>{{item.demo}}</text>
-                </view>
+                </view> -->
             </navigator>
         </view>
         <view wx:if="{{loading&&InfoList.length}}" class="end">加载中...</view>

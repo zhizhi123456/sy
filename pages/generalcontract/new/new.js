@@ -149,7 +149,7 @@ Page({
   },
   // 金额
   contcactamountblur(e) {
-    let info = util.editInfo(e, this, e.detail.value);
+    let info = util.editInfo(e, this, Number(e.detail.value).toFixed(2));
     this.setData({
       info
     })
@@ -231,9 +231,12 @@ Page({
   confirm() {
     // console.log(this.data.info)
     // if (this.data.info.maincontactname && this.data.info.projcectCode && this.data.info.demo) {
-    if (this.data.info.maincontactname && this.data.info.demo) {
+    if (this.data.info.maincontactname && this.data.info.material) {
       let info = this.data.info;
       // console.log( util.checkContent)
+      if (!info.demo) {
+        info.demo = '无';
+      }
       util.checkContent(info, this);
       util.intro(info, this)
       // console.log(info)

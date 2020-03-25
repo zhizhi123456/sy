@@ -1367,7 +1367,25 @@ const updateValue = (e, key) => {
   } else {
     materials[0][name] = e.detail && e.detail.value;
   }
-  return materials;
+  // return materials;
+  key.setData({
+    materials
+  })
+}
+// 实现材料明细部分的数据的双向绑定
+const updateValueM = (e, key) => {
+  let name = e.currentTarget.dataset.name,
+    i = e.currentTarget.dataset.i;
+  let materials = key.data.materials;
+  if (i) {
+    materials[i][name] = Number(e.detail).toFixed(2) && Number(e.detail.value).toFixed(2);
+  } else {
+    materials[0][name] = Number(e.detail).toFixed(2) && Number(e.detail.value).toFixed(2);
+  }
+  // return materials;
+  key.setData({
+    materials
+  })
 }
 // 实现材料明细编号的双向绑定
 const updateCode = (e, key) => {
@@ -3675,5 +3693,6 @@ module.exports = {
   findone,
   Uppercase,
   getbutton,
-  updateCode1
+  updateCode1,
+  updateValueM
 }

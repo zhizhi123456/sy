@@ -7,7 +7,9 @@ import {
   updateapproval,
   addapprovalsmall,
   staff,
-  getdep
+  getdep,
+  PayType,
+  addDictionary
 } from "../../../../service/getData";
 var util = require("../../../../utils/util");
 var app = getApp();
@@ -154,7 +156,7 @@ Page({
   },
   // 总金额
   TotalSumblur(e) {
-    let info = util.editInfo(e, this, e.detail.value);
+    let info = util.editInfo(e, this, Number(e.detail.value).toFixed(2));
     this.setData({
       info,
       'info.Chinesenumerals': util.Uppercase(e.detail.value)
@@ -233,37 +235,37 @@ Page({
       show6: false
     })
   },
- // 公司名称
- showPopup_4() {
-  this.setData({
-    show_nature: true
-  })
-},
-onClose_4() {
-  this.setData({
-    show_nature: false
-  })
-},
-onConfirm_4(e) {
-  // //console.log(e)
-  let info = util.editInfo(e, this, e.detail.value.text);
-  this.setData({
-    info,
-    show_nature: false
-  })
-},
-setSeach1(e) {
-  this.setData({
-    seach1: e.detail.value
-  })
-},
-finditem1() {
-  let arr = util.findone(app.globalData.Companytitle, this.data.seach1);
-  this.setData({
-    nature: arr,
-    seach1: ''
-  })
-},
+  // 公司名称
+  showPopup_4() {
+    this.setData({
+      show_nature: true
+    })
+  },
+  onClose_4() {
+    this.setData({
+      show_nature: false
+    })
+  },
+  onConfirm_4(e) {
+    // //console.log(e)
+    let info = util.editInfo(e, this, e.detail.value.text);
+    this.setData({
+      info,
+      show_nature: false
+    })
+  },
+  setSeach1(e) {
+    this.setData({
+      seach1: e.detail.value
+    })
+  },
+  finditem1() {
+    let arr = util.findone(app.globalData.Companytitle, this.data.seach1);
+    this.setData({
+      nature: arr,
+      seach1: ''
+    })
+  },
   // 合同（项目）编号
   showPopupCode() {
     this.setData({
@@ -439,7 +441,8 @@ finditem1() {
     util.updateValue(e, this);
   },
   getgname(e) {
-    util.updateValue(e, this);
+    util.updateValueM(e, this);
+    this.money();
   },
   getSize(e) {
     util.updateValue(e, this);
@@ -453,6 +456,17 @@ finditem1() {
   getRecord(e) {
     util.updateValue(e, this);
   },
+  money() {
+    let materials = this.data.materials;
+    var money = 0
+    materials.forEach(item => {
+      money += Number(item.amount);
+    })
+    this.setData({
+      'info.TotalSum': money,
+      'info.Chinesenumerals': util.Uppercase(money),
+    })
+  },
   // 数字筛选
   checknum(e) {
     let name = e.currentTarget.dataset.name,
@@ -461,8 +475,26 @@ finditem1() {
     util.formatNum(e);
     if (i) {
       materials[i][name] = e.detail;
+      // materials[i][name] = Number(e.detail).toFixed(2);
     } else {
       materials[0][name] = e.detail;
+      // materials[0][name] = Number(e.detail).toFixed(2);
+    }
+    this.setData({
+      materials
+    })
+  },
+  // 数字筛选
+  checknum2(e) {
+    let name = e.currentTarget.dataset.name,
+      i = e.currentTarget.dataset.i
+    let materials = this.data.materials;
+    if (i) {
+      materials[i][name] = e.detail.replace(/[^\d]/g, '');
+      // materials[i][name] = Number(e.detail).toFixed(2);
+    } else {
+      materials[0][name] = e.detail.replace(/[^\d]/g, '');
+      // materials[0][name] = Number(e.detail).toFixed(2);
     }
     this.setData({
       materials
@@ -470,18 +502,47 @@ finditem1() {
   },
   // 添加材料明细
   add_more() {
-    let add_detail = {
-      num: this.data.materials.length + 1,
-      payapproveid: '',
-      detailxh: '',
-      detailcontext: '',
-      amount: 0,
-    };
-    let materials = this.data.materials;
-    materials.unshift(add_detail);
-    this.setData({
-      materials
-    })
+    if (this.data.materials.length > 0) {
+      if (this.data.materials[0].projectcode) {
+        let add_detail = {
+          num: this.data.materials.length + 1,
+          payapproveid: '',
+          // detailxh: '',
+          detailxh: this.data.materials.length + 1,
+          detailcontext: '',
+          amount: 0,
+          projectcode: '',
+          AppendicesNum: 0
+        };
+        let materials = this.data.materials;
+        materials.unshift(add_detail);
+        this.setData({
+          materials
+        })
+      } else {
+        wx.showToast({
+          title: '请填写明细表',
+          icon: 'none',
+          duration: 3000
+        })
+      }
+    } else {
+      let add_detail = {
+        num: this.data.materials.length + 1,
+        payapproveid: '',
+        // detailxh: '',
+        detailxh: this.data.materials.length + 1,
+        detailcontext: '',
+        amount: 0,
+        projectcode: '',
+        AppendicesNum: 0
+      };
+      let materials = this.data.materials;
+      materials.unshift(add_detail);
+      this.setData({
+        materials
+      })
+    }
     // 页面滚动到底部
     if (this.data.materials.length < 2) {
       util.pageScrollToBottom1();
@@ -494,13 +555,60 @@ finditem1() {
     materials.splice(i, 1);
     materials.forEach((item, index, arr) => {
       if (i > index) {
-        item.num = item.num - 1
+        item.num = item.num - 1;
+        item.detailxh = item.detailxh - 1;
       };
     });
     this.setData({
       materials
     })
-
+  },
+  onClosechoice() {
+    this.setData({
+      showchoice: false
+    })
+  },
+  Dictionaryblur(e) {
+    this.setData({
+      paytap: e.detail
+    })
+  },
+  confirmchoice() {
+    // var num = app.globalData.PayType.length + 1;
+    var ifhave = app.globalData.PayType.some(s => {
+      return s.text == this.data.paytap
+    })
+    if (ifhave) {
+      wx.showToast({
+        title: '已存在相同信息',
+        icon: 'none',
+        duration: 3000
+      })
+    } else {
+      var data = {
+        Key: "PayType",
+        Value: this.data.paytap,
+        ParentId: 3401
+      }
+      addDictionary(data).then(res => {
+        if (res.code == 10000) {
+          PayType().then(res => {
+            let costkind = JSON.parse(res.replace(/Key/g, 'value').replace(/Value/g, 'text'));
+            app.globalData.PayType = costkind;
+            this.setData({
+              section6: costkind,
+              showchoice: false,
+              paytap: ''
+            })
+          })
+        }
+      })
+    }
+  },
+  newDictionary() {
+    this.setData({
+      showchoice: true
+    })
   },
   /**
    * 生命周期函数--监听页面加载

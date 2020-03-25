@@ -30,6 +30,14 @@ Page({
     maxdata: (new Date().getTime()) + 60 * 60 * 1000 * 24 * 30,
     seach: ''
   },
+  checknum(e) {
+    let info = this.data.info;
+    util.formatNum(e);
+    info.overtimehours = e.detail;
+    this.setData({
+      info
+    })
+  },
   setSeach(e) {
     this.setData({
       seach: e.detail.value
@@ -326,6 +334,7 @@ Page({
   onLoad: function (options) {
     user = wx.getStorageSync("myInfo");
     this.setData({
+      sections: app.globalData.getdept,
       firms: app.globalData.Companytitle,
       sections: app.globalData.moredep,
       GetOverworktype: app.globalData.GetOverworktype,

@@ -93,6 +93,7 @@
     "pages/ledger/new/new",
     "pages/ledger/detail/detail",
     "pages/sign/pact/pact",
+    "pages/sign/detail/detail",
     "pages/sign/new/new",
     "pages/deliver/pact/pact",
     "pages/deliver/new/new",

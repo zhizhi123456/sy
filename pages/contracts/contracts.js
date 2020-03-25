@@ -272,7 +272,7 @@ Page({
           // ////console.log('用户点击确定')
           wx.removeStorageSync("myInfo");
           wx.removeStorageSync("principal");
-          wx.clearStorage()
+          wx.clearStorageSync();
           wx.redirectTo({
             url: '/pages/login/login'
           })
@@ -391,7 +391,33 @@ Page({
   onShow: function () {
     userinfo = wx.getStorageSync("myInfo");
   },
-
+  clearData() {
+    // wx.clearStorageSync();
+    // wx.showToast({
+    //   title: '缓存已清除！',
+    //   icon: 'success',
+    //   duration: 2000
+    // })
+    // wx.redirectTo({
+    //   url: "/pages/login/login"
+    // })
+    wx.showModal({
+      content: '是否清除缓存？',
+      success(res) {
+        if (res.confirm) {
+          wx.clearStorageSync();
+          wx.showToast({
+            title: '缓存已清除！',
+            icon: 'success',
+            duration: 2000
+          })
+          wx.redirectTo({
+            url: '/pages/login/login'
+          })
+        }
+      }
+    })
+  },
   /**
    * 用户点击右上角分享
    */

@@ -28,6 +28,7 @@ Page({
       CheckinCentPosi: "",
       Checkintime: "",
       ifeffective: "",
+      CheckinPicurl: ''
     },
     WorkAreaName: "",
     getto: false,
@@ -127,58 +128,6 @@ Page({
         getto: true
       })
       return true
-    }
-  },
-  // 点击签到的时候
-  confirm() {
-    this.getYearMonth() // 获得考勤年月
-    this.getday() // 获取打卡日期
-    var jd = this.data.jd
-    this.setData({
-      'info.Address': "",
-      'info.Checkintime': util.datefomate(new Date()),
-      "info.CheckinCentPosi": jd,
-      "info.ifeffective": true,
-      "info.UserID": userinfo.ID,
-      "info.Token": userinfo.Token,
-      "info.TokenType": userinfo.TokenType,
-    })
-    console.log(this.data.info)
-    // var reach = this.arrive()
-    var reach = true
-    console.log(reach)
-    if (!reach) {
-      Toast({
-        message: '不在考勤区域',
-        mask: true
-      });
-    } else {
-      let info = this.data.info;
-      util.checkContent(info, this);
-      this.setData({
-        info
-      })
-      console.log(this.data.info)
-      addsign(this.data.info).then(res => {
-        console.log(res)
-        if (res.code == 10000) {
-          if (res.value) {
-            wx.showToast({
-              title: '打卡成功',
-              icon: 'success',
-              duration: 3000
-            })
-            util.returnPrev('sign', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
-              this.data.rid, this.data.title)
-          } else {
-            wx.showToast({
-              title: '打卡失败',
-              duration: 3000
-            })
-          }
-
-        }
-      })
     }
   },
   return () {
@@ -337,10 +286,159 @@ Page({
       }
     });
   },
+  checkimg() {
+    let that = this,
+      userinfo = wx.getStorageSync("myInfo");
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['original'],
+      sourceType: ['camera'],
+      success: res => {
+        let tempFilePaths = res.tempFilePaths;
+        wx.showToast({
+          title: '正在上传...',
+          icon: 'loading',
+          mask: true,
+          duration: 10000
+        })
+        wx.uploadFile({
+          url: 'https://shangyongren.com:9098/api/Check_in_onattendanceImage/Get_photo',
+          filePath: tempFilePaths[0],
+          name: 'img_data',
+          formData: {
+            addres: that.data.address,
+            datetime: util.datefomate(new Date()),
+            user: userinfo.UserName
+          },
+          success(res) {
+            if (res.statusCode == 200) {
+              that.setData({
+                'info.CheckinPicurl': "https://shangyongren.com:9098" + res.data.replace(/"/g, "")
+              })
+              wx.hideToast();
+              that.getYearMonth() // 获得考勤年月
+              that.getday() // 获取打卡日期
+              var jd = that.data.jd
+              that.setData({
+                'info.Address': "",
+                'info.Checkintime': util.datefomate(new Date()),
+                "info.CheckinCentPosi": jd,
+                "info.ifeffective": true,
+                "info.UserID": userinfo.ID,
+                "info.Token": userinfo.Token,
+                "info.TokenType": userinfo.TokenType,
+              })
+              console.log(that.data.info)
+              // var reach = this.arrive()
+              var reach = true
+              console.log(reach)
+              if (!reach) {
+                Toast({
+                  message: '不在考勤区域',
+                  mask: true
+                });
+              } else {
+                let info = that.data.info;
+                util.checkContent(info, that);
+                that.setData({
+                  info
+                })
+                console.log(that.data.info)
+                addsign(that.data.info).then(res => {
+                  console.log(res)
+                  if (res.code == 10000) {
+                    if (res.value) {
+                      wx.showToast({
+                        title: '打卡成功',
+                        icon: 'success',
+                        duration: 3000
+                      })
+                      util.returnPrev('sign', '', that.data.userid, that.data.caption, that.data.dep, that.data.deptxt,
+                        that.data.rid, that.data.title)
+                    } else {
+                      wx.showToast({
+                        title: '打卡失败',
+                        duration: 3000
+                      })
+                    }
+
+                  }
+                })
+              }
+            }
+          },
+          fail: err => {
+            console.log(err)
+          }
+        })
+      }
+    })
+  },
+  // 点击签到的时候
+  confirm() {
+    if (this.data.address) {
+      this.checkimg();
+    } else {
+      wx.showToast({
+        title: '请重新定位',
+        icon: 'none',
+        duration: 3000
+      })
+    }
+    // this.getYearMonth() // 获得考勤年月
+    // this.getday() // 获取打卡日期
+    // var jd = this.data.jd
+    // this.setData({
+    //   'info.Address': "",
+    //   'info.Checkintime': util.datefomate(new Date()),
+    //   "info.CheckinCentPosi": jd,
+    //   "info.ifeffective": true,
+    //   "info.UserID": userinfo.ID,
+    //   "info.Token": userinfo.Token,
+    //   "info.TokenType": userinfo.TokenType,
+    // })
+    // console.log(this.data.info)
+    // // var reach = this.arrive()
+    // var reach = true
+    // console.log(reach)
+    // if (!reach) {
+    //   Toast({
+    //     message: '不在考勤区域',
+    //     mask: true
+    //   });
+    // } else {
+    //   let info = this.data.info;
+    //   util.checkContent(info, this);
+    //   this.setData({
+    //     info
+    //   })
+    //   console.log(this.data.info)
+    //   addsign(this.data.info).then(res => {
+    //     console.log(res)
+    //     if (res.code == 10000) {
+    //       if (res.value) {
+    //         wx.showToast({
+    //           title: '打卡成功',
+    //           icon: 'success',
+    //           duration: 3000
+    //         })
+    //         util.returnPrev('sign', '', this.data.userid, this.data.caption, this.data.dep, this.data.deptxt,
+    //           this.data.rid, this.data.title)
+    //       } else {
+    //         wx.showToast({
+    //           title: '打卡失败',
+    //           duration: 3000
+    //         })
+    //       }
+
+    //     }
+    //   })
+    // }
+  },
   onShow: function () {
     userinfo = wx.getStorageSync("myInfo");
   },
   onReady: function () {
-   userinfo = wx.getStorageSync("myInfo");
+    userinfo = wx.getStorageSync("myInfo");
   },
 })
