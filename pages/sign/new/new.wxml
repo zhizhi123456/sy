@@ -20,11 +20,12 @@
             </van-cell-group>
         </view>   
     </view> -->
-     <van-toast id="van-toast" />
+    <van-toast id="van-toast" />
     <view class="box" bind:tap="confirm">
         <view>签到</view>
         <view>{{date}}</view>
     </view>
+    <image src="{{info.CheckinPicurl}}" wx:if="{{info.CheckinPicurl}}"/>
     <!-- <view class="reach">
         <icon type="success" color="green" class="ic" wx:if="{{getto}}" />
         <icon type="cancel" color="#F76260" class="ic" wx:else="{{getto}}" />

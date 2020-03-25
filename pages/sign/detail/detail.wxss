@@ -1,0 +1,4 @@
+/* pages/sign/detail/detail.wxss */
+.cimg image {
+    width: 100%;
+}

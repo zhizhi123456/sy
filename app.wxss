@@ -851,3 +851,7 @@ button.van-button {
     border: 1rpx solid white;
     margin: 0;
 }
+
+.c_item .redcheck {
+    color: red;
+}

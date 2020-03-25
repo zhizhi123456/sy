@@ -138,7 +138,7 @@
                         <text>商品编号</text>
                         <text class="required">*</text>
                     </view>
-                    <van-cell title="{{item.goodscode?item.goodscode:'请选择'}}" bind:click="showPopup_add">
+                    <van-cell title="{{item.goodscode?item.goodscode:'请选择'}}" bind:click="{{item.goodscode?'':'showPopup_add'}}">
                         <icon class="iconfont icon-jiantou" />
                     </van-cell>
                     <van-popup show="{{ show_add }}" round position="bottom" bind:close="onClose_add">

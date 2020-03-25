@@ -112,10 +112,10 @@
                     <text class="info">总包项目</text>
                     <text>{{item.projcectCode}}</text>
                 </view> -->
-                <view>
+                <!-- <view>
                     <text class="info">签订时间</text>
                     <text>{{item.signtime}}</text>
-                </view>
+                </view> -->
                 <view>
                     <text class="info">合同总金额</text>
                     <text>{{item.contcactamount}}</text>
@@ -128,10 +128,10 @@
                     <text class="info">创建人</text>
                     <text>{{item.createman}}</text>
                 </view>
-                <view>
+                <!-- <view>
                     <text class="info">备注</text>
                     <text>{{item.demo}}</text>
-                </view>
+                </view> -->
             </navigator>
         </view>
         <view wx:if="{{loading&&InfoList.length}}" class="end">加载中...</view>

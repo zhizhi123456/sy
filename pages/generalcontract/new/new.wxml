@@ -62,37 +62,42 @@
                 <text class="required">*</text>
             </view>
             <van-cell-group>
-                <van-field data-name="maincontactname" value="{{info.maincontactname}}" placeholder="请填写合同名称" bind:blur="maincontactnameblur" type="textarea" autosize />
+                <van-field data-name="maincontactname" value="{{info.maincontactname}}" placeholder="请输入" bind:blur="maincontactnameblur" type="textarea" autosize />
             </van-cell-group>
         </view>
         <view class="check_item">
-            <text class="kind">签报金额(元)</text>
-            <van-cell-group>
-                <van-field data-name="contcactamount" value="{{info.contcactamount}}" bind:input="checknum" placeholder="请输入" bind:blur="contcactamountblur" />
-            </van-cell-group>
-        </view>
-        <view class="check_item">
+            <!-- <text class="kind">签报事由</text> -->
             <view class="kind require">
-                <text>备注</text>
+                <text>签报事由</text>
                 <text class="required">*</text>
             </view>
-            <van-cell-group>
-                <van-field data-name="demo" value="{{info.demo}}" placeholder="请输入" bind:blur="demoblur" />
-            </van-cell-group>
-        </view>
-        <view class="check_item">
-            <text class="kind">签报事由</text>
             <van-cell-group>
                 <van-field data-name="material" value="{{info.material}}" placeholder="请输入" bind:blur="materialblur" />
             </van-cell-group>
         </view>
         <view class="check_item">
+            <text class="kind">签报金额(元)</text>
+            <van-cell-group>
+                <van-field data-name="contcactamount" value="{{info.contcactamount}}" bind:input="checknum" placeholder="请输入" type="digit" bind:blur="contcactamountblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <!-- <view class="kind require">
+                <text>备注</text>
+                <text class="required">*</text>
+            </view> -->
+            <text class="kind">备注</text> 
+            <van-cell-group>
+                <van-field data-name="demo" value="{{info.demo}}" placeholder="请输入" bind:blur="demoblur" />
+            </van-cell-group>
+        </view>
+        <!-- <view class="check_item">
             <text class="kind">签订时间</text>
             <van-cell title="{{info.signtime?info.signtime:'请选择'}}" is-link bind:click="showPopup_time" />
             <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
                 <van-datetime-picker data-name="signtime" value="{{ currentDate }}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
             </van-popup>
-        </view>
+        </view> -->
         <view class="check_item">
             <text class="kind">照片</text>
             <van-cell title="请选择" is-link bind:click="showPopup_photo" />

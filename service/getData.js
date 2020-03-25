@@ -126,6 +126,8 @@ export const referflow = (params) => http.post("/api/SubmitWorkFlowService/GetWo
 export const unreferflow = (params) => http.post("/api/SubmitWorkFlowService/GetWorkflowRecord3_1", params);
 // 公告类型
 export const AnnouncementType = (params) => http.post("/api/MethodOfDataService/AnnouncementType", params);
+// 付款方式
+export const PayType = () => http.get("/api/MethodOfDataService/GetPayType");
 // =================================================================================================================================================================
 //根据项目编号获取项目信息
 export const GetProjectInformation = (params) => http.post("/api/MethodOfDataService/GetProjectInformation", params);
@@ -572,6 +574,8 @@ export const querysign = (params) => http.post("/api/Check_in_onattendance/Query
 export const officeAddress = (params) => http.post("/api/officeareatime/Detail", params);
 //综合查询
 export const groupSign = (params) => http.post("/api/Check_in_onattendance/MulticonditionalQuery", params);
+//根据id查询
+export const detailSign = (params) => http.post("/api/Check_in_onattendance/Detail", params);
 
 // 建筑分布验收
 // 查询

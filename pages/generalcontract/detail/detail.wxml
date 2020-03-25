@@ -29,6 +29,10 @@
                         <view class="check">{{info.maincontactname}}</view>
                     </view>
                     <view class="c_item">
+                        <view class="kind">签报事由</view>
+                        <view class="check">{{info.material}}</view>
+                    </view>
+                    <view class="c_item">
                         <view class="kind">签报金额</view>
                         <view class="check">{{info.contcactamount}}</view>
                     </view>
@@ -36,14 +40,14 @@
                         <view class="kind">备注</view>
                         <view class="check">{{info.demo}}</view>
                     </view>
-                    <view class="c_item">
+                    <!-- <view class="c_item">
                         <view class="kind">材料</view>
                         <view class="check">{{info.material}}</view>
-                    </view>
-                    <view class="c_item">
+                    </view> -->
+                    <!-- <view class="c_item">
                         <view class="kind">签订时间</view>
                         <view class="check">{{info.signtime}}</view>
-                    </view>
+                    </view> -->
                     <view class="c_item">
                         <view class="kind">照片</view>
                         <view wx:if="{{info.API_Picurl}}" class="detpic_show">

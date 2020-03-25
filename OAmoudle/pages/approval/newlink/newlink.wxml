@@ -18,7 +18,7 @@
                 <text class="required">*</text>
             </view>
             <van-cell-group>
-                <van-field value="{{materials[0].detailxh}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' data-name='detailxh' />
+                <van-field value="{{materials[0].detailxh}}" placeholder="请输入" bind:blur="getgcode" data-i='{{index}}' data-name='detailxh' bind:input="checknum1" type="number"/>
             </van-cell-group>
         </view>
         <view class="check_item">
@@ -27,7 +27,7 @@
                 <text class="required">*</text>
             </view>
             <van-cell-group>
-                <van-field value="{{materials[0].detailcontext}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' data-name='detailcontext' />
+                <van-field value="{{materials[0].detailcontext}}" placeholder="请输入" bind:blur="getSize" data-i='{{index}}' data-name='detailcontext' />
             </van-cell-group>
         </view>
         <view class="check_item">
@@ -36,7 +36,7 @@
                 <text class="required">*</text>
             </view>
             <van-cell-group>
-                <van-field value="{{materials[0].amount}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' bind:input="checknum" data-name='amount' />
+                <van-field value="{{materials[0].amount}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' bind:input="checknum" data-name='amount' type="digit" />
             </van-cell-group>
         </view>
         <view class="check_item">
@@ -56,7 +56,7 @@
                 <text class="required">*</text>
             </view>
             <van-cell-group>
-                <van-field value="{{materials[0].AppendicesNum}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' data-name='AppendicesNum' bind:input="checknum" />
+                <van-field value="{{materials[0].AppendicesNum}}" placeholder="请输入" bind:blur="getUnit" data-i='{{index}}' data-name='AppendicesNum' bind:input="checknum1" type="number" />
             </van-cell-group>
         </view>
     </view>

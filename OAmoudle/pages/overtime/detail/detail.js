@@ -38,11 +38,11 @@ Page({
     }
   },
   // 部门多选
-  // showPopup_dep() {
-  //   this.setData({
-  //     show_dep: true
-  //   })
-  // },
+  showPopup_dep() {
+    this.setData({
+      show_dep: true
+    })
+  },
   onClose_dep() {
     this.setData({
       show_dep: false
@@ -198,12 +198,13 @@ Page({
         state: e.currentTarget.dataset.state
       })
     } else {
-      this.setData({
-        show_dep: true
-      })
-    }
-    // e.currentTarget.dataset.state
-    // util.Triggerflow(this, 'next', 'workovertime', 'overtime', '', '', '', '', '', '', 'oa')
+        this.setData({
+          show_dep: true
+        })
+      }
+      // e.currentTarget.dataset.state
+      // util.Triggerflow(this, 'next', 'workovertime', 'overtime', '', '', '', '', '', '', 'oa')
+    // }
   },
   sconfirm() {
     if (this.data.state == 'return') {

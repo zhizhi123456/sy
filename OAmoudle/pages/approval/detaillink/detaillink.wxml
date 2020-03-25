@@ -24,7 +24,7 @@
             </view>
             <view class="c_item">
                 <view class="kind">合同（项目）编号</view>
-                <view class="check">{{info.projectcode}}</view>
+                <view class="check">{{info.projectCode}}</view>
             </view>
             <view class="c_item">
                 <view class="kind">附件张数</view>

@@ -42,7 +42,7 @@
                     </view>
                     <view class="c_item">
                         <view class="kind">总金额(大写)</view>
-                        <view class="check">{{info.Chinesenumerals}}</view>
+                        <view class="check redcheck">{{info.Chinesenumerals}}</view>
                     </view>
                     <!-- <view class="c_item">
                         <view class="kind">送货地址</view>

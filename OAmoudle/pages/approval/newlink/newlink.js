@@ -36,7 +36,7 @@ Page({
     util.updateValue(e, this);
   },
   getgname(e) {
-    util.updateValue(e, this);
+    util.updateValueM(e, this);
   },
   getSize(e) {
     util.updateValue(e, this);
@@ -67,6 +67,22 @@ Page({
       materials[i][name] = e.detail;
     } else {
       materials[0][name] = e.detail;
+    }
+    this.setData({
+      materials
+    })
+  },
+  // 数字筛选
+  checknum1(e) {
+    let name = e.currentTarget.dataset.name,
+      i = e.currentTarget.dataset.i
+    let materials = this.data.materials;
+    if (i) {
+      materials[i][name] = e.detail.replace(/[^\d]/g, '');
+      // materials[i][name] = Number(e.detail).toFixed(2);
+    } else {
+      materials[0][name] = e.detail.replace(/[^\d]/g, '');
+      // materials[0][name] = Number(e.detail).toFixed(2);
     }
     this.setData({
       materials

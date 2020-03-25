@@ -1,0 +1,21 @@
+<!-- pages/sign/detail/detail.wxml -->
+<!-- pages/detail/detail.wxml -->
+<view wx:if="{{info}}">
+    <view class="header d_header">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <view class="apply">资料详情</view>
+    </view>
+    <view class="card">
+        <van-card title="{{info.Checkintime}}" />
+    </view>
+    <view class="main_nav">
+        <view class="content">
+            <view class="c_item cimg">
+                <view class="kind">照片</view>
+                <view wx:if="{{info.CheckinPicurl}}">
+                    <image src="{{info.CheckinPicurl}}" bindtap="tap_pic" />
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

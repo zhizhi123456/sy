@@ -39,6 +39,7 @@
   </view> -->
   <!-- <view wx:if="{{num==1001}}"><navigator open-type="redirect" url="/pages/ledger/pact/pact">测试</navigator></view> -->
   <view wx:if="{{entered&&num==2091}}" class="haDquit">
+    <view bindtap="clearData">清除缓存</view>
     <view bindtap="out">切换账号</view>
     <view bindtap="out">退出</view>
   </view>

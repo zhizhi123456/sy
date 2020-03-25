@@ -62,7 +62,7 @@ import {
   getdept,
   applytype,
   UnitType,
-  moredep
+  moredep,PayType
 } from "./service/getData";
 var util = require("./utils/util");
 App({
@@ -170,6 +170,7 @@ App({
       util.sumup(GetOvertimeperiod, this, 'GetOvertimeperiod', "Value", "ID");
       util.sumup(contractType, this, 'contractType', "Value", "Key");
       util.sumup(getframeProtocolCode, this, 'getframeProtocolCode', "frameProtocolCode", "frameProtocolname");
+      util.sumup(PayType, this, 'PayType', "Value", "Key");
       Engineer({
         ID: 3209
       }).then(res => {
@@ -349,14 +350,15 @@ App({
       text: '长城宽带',
       value: "2"
     }],
-    // 付款方式
-    PayType: [{
-      text: "转账",
-      value: "1"
-    }, {
-      text: "抵借条",
-      value: "2"
-    }],
+    PayType:'',
+    // // 付款方式
+    // PayType: [{
+    //   text: "转账",
+    //   value: "1"
+    // }, {
+    //   text: "抵借条",
+    //   value: "2"
+    // }],
     // 项目类型
     ItemType: [{
       text: "工程",
