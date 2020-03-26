@@ -81,7 +81,7 @@
                         <van-field value="{{item.quantity}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' data-name='quantity' bind:input="checknum" />
                     </van-cell-group>
                 </view>
-                 <view class="check_item">
+                <view class="check_item">
                     <view class="kind">
                         <text>单价</text>
                     </view>
@@ -252,7 +252,7 @@
             </view>
             <block wx:for="{{materials}}" wx:key="{{index}}" wx:if="{{materials.length}}">
                 <view class="add_detail detail_title">
-                    <van-cell title="申购明细{{index+1}}" icon="close" data-i="{{index}}" bindtap="reduce_detail" />
+                    <van-cell title="申购明细{{item.num}}" icon="close" data-i="{{index}}" bindtap="reduce_detail" />
                 </view>
                 <!-- <view class="check_item">
                     <view class="kind">

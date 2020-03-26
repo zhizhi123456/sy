@@ -677,25 +677,39 @@ Page({
   },
   // 添加材料明细
   add_more() {
-    let add_detail = {
-      num: this.data.length + 1,
-      applyid: '',
-      type: '',
-      quantity: 0,
-      unitprice: 0,
-      detailname: '',
-    };
     let materials = this.data.materials;
-    materials.unshift(add_detail);
-    this.setData({
-      materials,
-      length: add_detail.num
+    var ifhave=  materials.some(s => {
+      return !(s.type && s.detailname && s.unitType && s.quantity != '0')
     })
-    this.sum()
-    // 页面滚动到底部
-    if (this.data.materials.length < 2) {
-      util.pageScrollToBottom1();
+    if(ifhave){
+      wx.showToast({
+        title: "请填写必填项以及单位后再新增",
+        icon: 'none',
+        duration: 3000
+      })
     }
+    else{
+      let add_detail = {
+        num: this.data.length + 1,
+        applyid: '',
+        type: '',
+        quantity: 0,
+        unitprice: 0,
+        detailname: '',
+      };
+  
+      materials.unshift(add_detail);
+      this.setData({
+        materials,
+        length: add_detail.num
+      })
+      this.sum()
+      // 页面滚动到底部
+      if (this.data.materials.length < 2) {
+        util.pageScrollToBottom1();
+      }
+    }
+  
   },
   // 删除材料明细
   reduce_detail(e) {

@@ -1367,10 +1367,11 @@ const updateValue = (e, key) => {
   } else {
     materials[0][name] = e.detail && e.detail.value;
   }
-  // return materials;
+
   key.setData({
     materials
   })
+  return materials;
 }
 // 实现材料明细部分的数据的双向绑定
 const updateValueM = (e, key) => {
