@@ -294,7 +294,7 @@
                         <text>单位</text>
                         <text class="required">*</text>
                     </view>
-                    <van-cell title="{{item.unit?item.unit:'请选择'}}" data-i='{{index}}' is-link data-name='unit' bind:click="showPopup7" />
+                    <van-cell title="{{item.unit?item.unit:'请选择'}}" data-i='{{index}}' is-link data-name='unit' bind:click="{{index>0?'':'showPopup7'}}" />
                     <van-popup show="{{show7}}" round position="bottom" bind:close="onClose7">
                         <view class="Cseach">
                             <input value="{{seach2}}" bindinput="setSeach2" placeholder="请输入搜索内容" />
