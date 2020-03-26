@@ -338,8 +338,9 @@ Page({
                 }
               }
               materials.forEach(value => {
-                value.quantity = parseInt(value.quantity);
+                // value.quantity = parseInt(value.quantity);
                 value.payapproveid = id;
+                value.Chinesenumerals = '空';
               })
               this.setData({
                 materials
@@ -463,7 +464,7 @@ Page({
       money += Number(item.amount);
     })
     this.setData({
-      'info.TotalSum': money,
+      'info.TotalSum': money.toFixed(2),
       'info.Chinesenumerals': util.Uppercase(money),
     })
   },

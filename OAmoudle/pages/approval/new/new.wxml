@@ -82,7 +82,7 @@
         <view class="check_item">
             <text class="kind">总金额(元)</text>
             <van-cell-group>
-                <van-field data-name="TotalSum" value="{{info.TotalSum}}" placeholder="输入明细后自动统计" bind:blur="TotalSumblur" bind:input="checknum1" type="digit"/>
+                <van-field data-name="TotalSum" value="{{info.TotalSum}}" placeholder="输入明细后自动统计" bind:blur="TotalSumblur" bind:input="checknum1" type="digit" />
             </van-cell-group>
         </view>
         <view class="check_item">
@@ -161,14 +161,14 @@
                         <text class="required">*</text>
                     </view>
                     <van-cell-group>
-                        <van-field value="{{item.amount}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' data-name='amount' bind:input="checknum" type="digit"/>
+                        <van-field value="{{item.amount}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' data-name='amount' bind:input="checknum" type="digit" />
                     </van-cell-group>
                 </view>
                 <view class="check_item">
                     <view class="kind require">
                         <text>合同（项目）编号</text>
                     </view>
-                    <van-cell title="{{item.projectcode?item.projectcode:'请选择'}}" bind:click="{{item.projectcode?'':'showPopupCode'}}">
+                    <van-cell title="{{item.projectcode?item.projectcode:'请选择'}}" bind:click="{{index>0?'':'showPopupCode'}}">
                         <icon class="iconfont icon-jiantou" />
                     </van-cell>
                     <van-popup show="{{ showCode }}" round position="bottom" bind:close="onCloseCode">
@@ -181,7 +181,7 @@
                         <text class="required">*</text>
                     </view>
                     <van-cell-group>
-                        <van-field value="{{item.AppendicesNum}}" placeholder="请输入" bind:blur="getUnit" data-i='{{index}}' data-name='AppendicesNum' bind:input="checknum2" type="number"/>
+                        <van-field value="{{item.AppendicesNum}}" placeholder="请输入" bind:blur="getUnit" data-i='{{index}}' data-name='AppendicesNum' bind:input="checknum2" type="number" />
                     </van-cell-group>
                 </view>
             </block>
