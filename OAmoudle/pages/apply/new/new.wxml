@@ -12,7 +12,7 @@
     </view>
     <view class="main n_main">
         <van-toast id="van-toast" />
-        <block wx:if="{{info.ID}}">
+        <block wx:if="{{info.p}}">
             <view class="add_detail add_title">
                 <van-cell title="申购明细" icon="records" />
                 <icon class="iconfont icon-jia" bindtap="add_more"></icon>

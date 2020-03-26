@@ -414,6 +414,7 @@ Page({
       }
       console.log("1")
       if (this.data.materials[0]) {
+      // if (this.data.materials[0]) {
         if (!(materials[0].chargeman && materials[0].buyitemname && materials[0].specifications && materials[0].brand &&
             materials[0].unit && materials[0].quantity && materials[0].demo)) {
           Toast({
@@ -518,7 +519,7 @@ Page({
     console.log(materials)
     // 判断是否有明细表存在
     // 判断所有明细表是否符合要求
-    if (materials) {
+    if (false) {
       var gather = []
       materials.forEach(material => {
         console.log(material)
