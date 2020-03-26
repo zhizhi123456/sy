@@ -1,0 +1,83 @@
+<!-- pages/detail/detail.wxml -->
+<view wx:if="{{info}}">
+    <view class="header d_header">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="delete">删除</text>
+        <view class="apply">资料详情</view>
+    </view>
+    <view class="card">
+        <van-card title="{{info.projectname}}"  />
+    </view>
+    <view class="main_nav">
+        <view class="content">
+            <view class="c_item">
+                <view class="kind">项目编号</view>
+                <view class="check">{{info.projcectCode}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">项目名称</view>
+                <view class="check">{{info.projectname}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">部门</view>
+                <view class="check">{{info.Department}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">员工姓名</view>
+                <view class="check">{{info.DepartmentMan}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">员工级别</view>
+                <view class="check">{{info.MemberLevel}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">奖金种类</view>
+                <view class="check">{{info.BonusKind}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">奖金级别</view>
+                <view class="check">{{info.BonusLevel}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">奖金额</view>
+                <view class="check">{{info.Bounusamounts}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">占全部比例(%)</view>
+                <view class="check">{{info.Percenttoall}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">占部门员工比例(%)</view>
+                <view class="check">{{info.Percenttodept}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">是否独立操作</view>
+                <view class="check">{{info.Situation?"是":"否"}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">创建人</view>
+                <view class="check">{{info.createman}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">创建时间</view>
+                <view class="check">{{info.createtime}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">修改人</view>
+                <view class="check">{{info.updateman}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">修改时间</view>
+                <view class="check">{{info.updatetime}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="footer">
+        <view>
+            <navigator open-type="redirect" url="/OAmoudle/pages/bounus/new/new?id={{info.ID}}" hover-class="none">
+                <icon class="iconfont icon-bianji"></icon>
+                <text>编辑</text>
+            </navigator>
+        </view>
+    </view>
+</view>
