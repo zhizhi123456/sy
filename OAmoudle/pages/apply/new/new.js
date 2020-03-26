@@ -816,30 +816,44 @@ Page({
 
   // 添加材料明细
   add_more() {
-    let add_detail = {
-      num: this.data.length + 1,
-      chargeman: '1',
-      buyitemname: '',
-      specifications: '',
-      brand: '无',
-      unit: '',
-      quantity: '',
-      demo: '无',
-      univalence: ''
-    };
     let materials = this.data.materials;
-    materials.unshift(add_detail);
-    this.setData({
-      materials
+    var ifhave = materials.some(s => {
+      return !(s.buyitemname && s.specifications && s.unit && s.quantity)
     })
-    this.sum()
-    if (!this.data.detailID) {
-      // 页面滚动到底部
-      console.log("xinjian")
-      if (this.data.materials.length < 2) {
-        util.pageScrollToBottom1();
+    if (ifhave) {
+      wx.showToast({
+        title: "请填写必填项后再新增",
+        icon: 'none',
+        duration: 3000
+      })
+    } else {
+      let add_detail = {
+        num: this.data.length + 1,
+        chargeman: '1',
+        buyitemname: '',
+        specifications: '',
+        brand: '无',
+        unit: '',
+        quantity: '',
+        demo: '无',
+        univalence: ''
+      };
+
+      materials.unshift(add_detail);
+      this.setData({
+        materials,
+        length: add_detail.num
+      })
+      this.sum()
+      if (!this.data.detailID) {
+        // 页面滚动到底部
+        console.log("xinjian")
+        if (this.data.materials.length < 2) {
+          util.pageScrollToBottom1();
+        }
       }
     }
+
 
   },
   // 删除材料明细
