@@ -102,7 +102,7 @@
                 <van-cell title="动态({{Workstate}})" />
                 <van-steps steps="{{ steps }}" active="{{ actived }}" direction="vertical" active-color="#008080" inactive-icon="stop-circle" />
             </van-tab>
-            <van-tab title="具体动态" name="c" wx:if="{{!history}}">
+            <van-tab title="具体动态" name="d" wx:if="{{!history}}">
                 <view wx:if="{{stepLIst.length}}" class="ideainfo">
                     <view class="material" wx:for="{{stepLIst}}" wx:key="index">
                         <view class="m_item">
@@ -142,7 +142,7 @@
                 </view>
                 <view class="dynamic_state" wx:else>暂无内容</view>
             </van-tab>
-            <van-tab title="修改记录" name="d" wx:if="{{(!history)&&amendant.length}}">
+            <van-tab title="修改记录" name="e" wx:if="{{(!history)&&amendant.length}}">
                 <block wx:if="{{amendant}}">
                     <van-cell title="记录({{amendant.length}})" />
                     <!-- <van-steps steps="{{ amendant }}" active="{{ active }}" direction="vertical" bind:tap="change12" /> -->
@@ -152,7 +152,7 @@
                 </block>
                 <view class="dynamic_state" wx:else>暂无记录</view>
             </van-tab>
-            <van-tab title="申购明细" name="e" wx:if="{{!history}}">
+            <van-tab title="申购明细" name="c" wx:if="{{!history}}">
                 <van-cell title="申购明细({{material_list.length}})" bindtap="addndlink" wx:if="{{!info.formid}}">
                     <icon class="iconfont icon-icon-test"></icon>
                 </van-cell>

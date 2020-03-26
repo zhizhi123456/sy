@@ -24,7 +24,7 @@ Page({
    */
   data: {
     info: {
-      applybuyname: '1',
+      applybuyname: '',
       purpose: "",
       applyman: '',
       Companytitle: '',
