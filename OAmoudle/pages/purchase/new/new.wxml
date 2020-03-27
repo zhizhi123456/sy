@@ -120,7 +120,7 @@
                 <text class="required">*</text>
             </view>
             <van-cell-group>
-                <van-field data-name="remark" value="{{info.remark}}" placeholder="请输入" bind:blur="remarkblur" />
+                <van-field data-name="remark"   type="textarea" input-class ="textlarge"  autosize value="{{info.remark}}" placeholder="请输入" bind:blur="remarkblur" />
             </van-cell-group>
         </view>
         <block wx:if="{{!info.ID}}">

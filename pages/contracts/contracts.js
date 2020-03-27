@@ -207,6 +207,7 @@ Page({
                     var news = item.map(s => ({
                       name: s.name,
                       time: s.createtime.slice(5, 10),
+                      id: s.ID
                     }))
                     console.log()
                     if (news.length > 3) {
@@ -282,8 +283,17 @@ Page({
   },
   message() {
     wx.redirectTo({
-      url: `/OAmoudle/pages/notice/pact/pact?menuId=null&id=2113&title=新闻公告&num=2090&mtitle=公司oa项目&source=index`
+      url: `/OAmoudle/pages/notice/News/News?menuId=null&id=2113&title=新闻公告&num=2090&mtitle=公司oa项目&source=index`
     })
+  },
+  change1(e) {
+    console.log(e)
+    console.log(e.target.dataset.id)
+    if (e.target.dataset.id) {
+      wx.redirectTo({
+        url: `/OAmoudle/pages/notice/Newsdetail/Newsdetail?id=${e.target.dataset.id}&oa=1`
+      })
+    }
   },
   // 90
   /**

@@ -30,7 +30,7 @@
                   <text class="required">*</text>
             </view>
             <van-cell-group>
-                <van-field data-name="name" value="{{info.name}}" placeholder="请输入" bind:blur="projectnameblur" />
+                <van-field data-name="name"  input-class ='textlarge' value="{{info.name}}"   type="textarea"  autosize  placeholder="请输入" bind:blur="projectnameblur" />
             </van-cell-group>
         </view>
         <view class="check_item">
@@ -38,7 +38,7 @@
                 <text>内容</text>
             </view>
             <van-cell-group>
-                <van-field data-name="contenttext" value="{{info.contenttext}}" placeholder="请输入" bind:blur="projectnameblur" />
+                <van-field data-name="contenttext" type="textarea" input-class ="textlarge"  autosize  value="{{info.contenttext}}" placeholder="请输入" bind:blur="projectnameblur" />
             </van-cell-group>
         </view>
         <!-- <view class="check_item">
@@ -49,13 +49,13 @@
                 <van-field data-name="uplodfile" value="{{info.uplodfile}}" placeholder="请输入" bind:blur="projectnameblur" />
             </van-cell-group>
         </view> -->
-        <view class="check_item checkro8">
+        <!-- <view class="check_item checkro8">
             <view class="kind require">
                 <text>接收部门</text>
              
             </view>
             <van-cell title="{{info.receivedepartment?info.receivedepartment:'请选择'}}"  bind:click="showPopup1" />
-            <!-- <van-popup show="{{show1}}" round position="bottom" bind:close="onClose1">
+            <van-popup show="{{show1}}" round position="bottom" bind:close="onClose1">
                 <view class="checkro10">
                     <text bind:tap="onClose1">取消</text>
                     <text class="checkro2" bind:tap="onConfirm1" data-name="receivedepartment">
@@ -66,12 +66,12 @@
                 <van-checkbox wx:for="{{ section1 }}" wx:key="index" name="{{ item.Value }}" value="{{ item.show }}" bind:tap="onChange" data-name="{{item.Value}}" class="checkro">
                     {{ item.text }}
                 </van-checkbox>
-            </van-popup> -->
-        </view>
-        <view class="check_item checkro8">
+            </van-popup>
+        </view> -->
+        <!-- <view class="check_item checkro8">
             <text class="kind">接收员工</text>
             <van-cell title="{{info.receivestaff?info.receivestaff :'请选择'}}"  bind:click="showPopup3" />
-            <!-- <van-popup show="{{show3}}" round position="bottom" bind:close="onClose3">
+            <van-popup show="{{show3}}" round position="bottom" bind:close="onClose3">
                 <view class="checkro10">
                     <text bind:tap="onClose3">取消</text>
                     <text class="checkro2" bind:tap="onConfirm3" data-name="receivestaff">确认</text>
@@ -80,8 +80,8 @@
                 <van-checkbox wx:for="{{ section4 }}" wx:key="index" name="{{ item.EmpName }}" value="{{ item.show }}" bind:tap="onChange1" data-name="{{item.userName}}" class="checkro">
                     {{ item.EmpName }}
                 </van-checkbox>
-            </van-popup> -->
-        </view>
+            </van-popup>
+        </view> -->
         <view class="check_item">
             <view class="kind require">
                 <text>是否置顶</text>
@@ -94,7 +94,7 @@
                 <van-picker data-name="isstick" show-toolbar columns="{{nature}}" bind:cancel="onClose_4" bind:confirm="onConfirm_4" />
             </van-popup>
         </view>
-        <view class="check_item">
+        <!-- <view class="check_item">
             <view class="kind require">
                 <text>是否含子部门</text>
             </view>
@@ -104,8 +104,8 @@
             <van-popup show="{{ show6 }}" round position="bottom" bind:close="onClose6">
                 <van-picker data-name="issubdivision" show-toolbar columns="{{section6}}" bind:cancel="onClose6" bind:confirm="onConfirm6" />
             </van-popup>
-        </view>
-        <view class="check_item">
+        </view> -->
+        <!-- <view class="check_item">
             <text class="kind">封面</text>
             <van-cell title="请选择" is-link bind:click="showPopup_photo" />
             <van-action-sheet show="{{ show_photo }}" actions="{{ check_photo }}" bind:cancel="onClose_photo" bind:click-overlay="onClose_photo" bind:select="onSelect_photo" cancel-text="取消" />
@@ -117,6 +117,6 @@
                     </view>
                 </block>
             </view>
-        </view>
+        </view> -->
     </view>
 </view>

@@ -161,6 +161,9 @@ jian .apply .van-dropdown-menu__title {
 
 .info+text {
     max-width: 420rpx;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .end {
@@ -857,4 +860,8 @@ button.van-button {
 
 .c_item .redcheck {
     color: red;
+}
+.textlarge{
+    min-height: 200rpx !important;
+ 
 }

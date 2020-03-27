@@ -266,7 +266,9 @@
         "pages/daily/new/new",
         "pages/bounus/pact/pact",
         "pages/bounus/detail/detail",
-        "pages/bounus/new/new"
+        "pages/bounus/new/new",
+        "pages/notice/News/News",
+        "pages/notice/Newsdetail/Newsdetail"
       ]
     }
   ],
