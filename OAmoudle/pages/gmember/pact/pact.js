@@ -20,6 +20,25 @@ Page({
     hadNew: 1,
     info: {}
   },
+  setSeach(e) {
+    this.setData({
+      seach: e.detail.value
+    })
+  },
+  finditem() {
+    let arr = util.findone(app.globalData.GetPosition, this.data.seach);
+    this.setData({
+      GetPosition: arr,
+      seach: ''
+    })
+  },
+  finditem1() {
+    let arr = util.findone(app.globalData.department, this.data.seach);
+    this.setData({
+      sections: arr,
+      seach: ''
+    })
+  },
   // 返回
   return () {
     let menus = wx.getStorageSync('menus');
@@ -42,6 +61,7 @@ Page({
         util.listData(item, app.globalData.department);
         this.setData({
           InfoList: item.reverse(),
+          'info.name': ''
         })
         wx.hideLoading();
       }
@@ -63,6 +83,7 @@ Page({
       this.setData({
         sections: app.globalData.department,
         state: app.globalData.state,
+        GetPosition: app.globalData.GetPosition,
       })
     } else {
       app.DataCallback = employ => {
@@ -70,6 +91,7 @@ Page({
           this.setData({
             sections: app.globalData.department,
             state: app.globalData.state,
+            GetPosition: app.globalData.GetPosition,
           })
         }
       }
@@ -134,12 +156,29 @@ Page({
     })
   },
   // 职位
-  positionblur(e) {
-    let info = util.editInfo(e, this, e.detail.value);
+  showPopup_zw() {
     this.setData({
+      show_zw: true
+    })
+  },
+  onClose_zw() {
+    this.setData({
+      show_zw: false
+    })
+  },
+  onConfirm_zw(e) {
+    let info = util.editInfo(e, this, e.detail.value.text);
+    this.setData({
+      show_zw: false,
       info
     })
   },
+  // positionblur(e) {
+  //   let info = util.editInfo(e, this, e.detail.value);
+  //   this.setData({
+  //     info
+  //   })
+  // },
   // 状态
   showPopup_2() {
     this.setData({

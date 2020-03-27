@@ -78,6 +78,13 @@ Page({
       seach: ''
     })
   },
+  finditem3() {
+    let arr = util.findone(app.globalData.Companytitle, this.data.seach);
+    this.setData({
+      firms: arr,
+      seach: ''
+    })
+  },
   // 图片
   showPopup_photo() {
     this.setData({
@@ -129,25 +136,25 @@ Page({
       info
     })
   },
-  // 公司名称
-  showPopup_4() {
-    this.setData({
-      show_nature: true
-    })
-  },
-  onClose_4() {
-    this.setData({
-      show_nature: false
-    })
-  },
-  onConfirm_4(e) {
-    // //console.log(e)
-    let info = util.editInfo(e, this, e.detail.value.text);
-    this.setData({
-      info,
-      show_nature: false
-    })
-  },
+  // // 公司名称
+  // showPopup_4() {
+  //   this.setData({
+  //     show_nature: true
+  //   })
+  // },
+  // onClose_4() {
+  //   this.setData({
+  //     show_nature: false
+  //   })
+  // },
+  // onConfirm_4(e) {
+  //   // //console.log(e)
+  //   let info = util.editInfo(e, this, e.detail.value.text);
+  //   this.setData({
+  //     info,
+  //     show_nature: false
+  //   })
+  // },
   // 部门
   showPopup1() {
     this.setData({
@@ -344,7 +351,8 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      nature: app.globalData.Companytitle,
+      firms: app.globalData.Companytitle,
+      // nature: app.globalData.Companytitle,
       sections: app.globalData.department,
       section1: app.globalData.Debitnotetype,
       section2: app.globalData.Usesealtype,

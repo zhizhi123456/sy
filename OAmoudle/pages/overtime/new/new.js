@@ -17,7 +17,6 @@ Page({
       API_Picurl: [],
     },
     show: false,
-    firms: [],
     totals: [],
     departmenttext: "请选择",
     check_photo: [{
@@ -61,6 +60,13 @@ Page({
     let arr = util.findone(app.globalData.GetOvertimeperiod, this.data.seach);
     this.setData({
       GetOvertimeperiod: arr,
+      seach: ''
+    })
+  },
+  finditem3() {
+    let arr = util.findone(app.globalData.Companytitle, this.data.seach);
+    this.setData({
+      firms: arr,
       seach: ''
     })
   },

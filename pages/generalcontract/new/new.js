@@ -149,7 +149,7 @@ Page({
   },
   // 金额
   contcactamountblur(e) {
-    let info = util.editInfo(e, this, Number(e.detail.value).toFixed(2));
+    let info = util.editInfo(e, this,e.detail.value);
     this.setData({
       info
     })

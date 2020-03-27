@@ -21,7 +21,6 @@ Page({
     },
     show: false,
     departmenttext: '',
-    firms: [],
     totals: [],
     currentDate: new Date().getTime(),
     departmenttext: "请选择",
@@ -52,6 +51,13 @@ Page({
     let arr = util.findone(app.globalData.Leavetypelist, this.data.seach);
     this.setData({
       Leavetypelist: arr,
+      seach: ''
+    })
+  },
+  finditem3() {
+    let arr = util.findone(app.globalData.Companytitle, this.data.seach);
+    this.setData({
+      firms: arr,
       seach: ''
     })
   },

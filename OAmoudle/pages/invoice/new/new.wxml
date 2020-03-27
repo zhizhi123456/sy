@@ -14,6 +14,22 @@
         <van-toast id="van-toast" />
         <view class="check_item">
             <view class="kind require">
+                <text>公司名称</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.Companytitle?info.Companytitle:'请选择'}}" bind:click="showPopup">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show }}" round position="bottom" bind:close="onClose">
+                <view class="Cseach">
+                    <input value="{{seach}}" bindinput="setSeach" placeholder="请输入搜索内容" />
+                    <button size="mini" bindtap="finditem5">搜索</button>
+                </view>
+                <van-picker data-name="Companytitle" show-toolbar columns="{{ firms }}" bind:cancel="onClose" bind:confirm="onConfirm" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
                 <text>部门</text>
                 <text class="required">*</text>
             </view>
@@ -38,22 +54,6 @@
                 <van-field value="{{info.Companytitle}}" disabled />
             </van-cell-group>
         </view> -->
-         <view class="check_item">
-            <view class="kind require">
-                <text>公司名称</text>
-                <text class="required">*</text>
-            </view>
-            <van-cell title="{{info.Companytitle?info.Companytitle:'请选择'}}" bind:click="showPopup">
-                <icon class="iconfont icon-jiantou" />
-            </van-cell>
-            <van-popup show="{{ show }}" round position="bottom" bind:close="onClose">
-              <view class="Cseach">
-                    <input value="{{seach}}" bindinput="setSeach" placeholder="请输入搜索内容" />
-                    <button size="mini" bindtap="finditem5">搜索</button>
-                </view>
-                <van-picker data-name="Companytitle" show-toolbar columns="{{ firms }}" bind:cancel="onClose" bind:confirm="onConfirm" />
-            </van-popup>
-        </view>
         <view class="check_item">
             <view class="kind require">
                 <text>受票公司</text>

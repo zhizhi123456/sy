@@ -124,15 +124,6 @@
                 <van-field data-name="purpose" value="{{info.purpose }}" placeholder="请输入" bind:blur="subprojectnameblur" />
             </van-cell-group>
         </view>
-        <view class="check_item">
-            <view class="kind require">
-                <text>申请人</text>
-                <text class="required">*</text>
-            </view>
-            <van-cell-group>
-                <van-field value="{{info.applyman}}" disabled />
-            </van-cell-group>
-        </view>
         <!-- <view class="check_item">
             <view class="kind require">
                 <text>公司名称</text>
@@ -172,6 +163,15 @@
                 </view>
                 <van-picker data-name="department" show-toolbar columns="{{ sections }}" bind:cancel="onClose" bind:confirm="onConfirm" />
             </van-popup>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>申请人</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field value="{{info.applyman}}" disabled />
+            </van-cell-group>
         </view>
         <view class="check_item">
             <view class="kind">

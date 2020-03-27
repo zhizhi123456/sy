@@ -14,6 +14,22 @@
         <van-toast id="van-toast" />
         <view class="check_item">
             <view class="kind require">
+                <text>公司名称</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.Companytitle?info.Companytitle:'请选择'}}" bind:click="showPopup4">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show4 }}" round position="bottom" bind:close="onClose4">
+                <view class="Cseach">
+                    <input value="{{seach}}" bindinput="setSeach" placeholder="请输入搜索内容" />
+                    <button size="mini" bindtap="finditem3">搜索</button>
+                </view>
+                <van-picker data-name="Companytitle" show-toolbar columns="{{ firms }}" bind:cancel="onClose4" bind:confirm="onConfirm4" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
                 <text>部门</text>
                 <text class="required">*</text>
             </view>
@@ -28,16 +44,6 @@
                 </view>
                 <van-picker data-name="department" show-toolbar columns="{{ sections }}" bind:cancel="onClose1" bind:confirm="onConfirm1" />
             </van-popup>
-        </view>
-        
-           <view class="check_item">
-            <view class="kind require">
-                <text>公司名称</text>
-                <text class="required">*</text>
-            </view>
-            <van-cell-group>
-                <van-field value="{{info.Companytitle}}" disabled />
-            </van-cell-group>
         </view>
         <view class="check_item">
             <view class="kind require">
@@ -55,7 +61,7 @@
                 <van-picker data-name="debitnotetype" show-toolbar columns="{{section1}}" bind:cancel="onClose2" bind:confirm="onConfirm2" />
             </van-popup>
         </view>
-        <view class="check_item"  wx:if="{{chapter}}">
+        <view class="check_item" wx:if="{{chapter}}">
             <view class="kind require">
                 <text>用章类别</text>
             </view>
@@ -97,7 +103,7 @@
                 <text>金额</text>
             </view>
             <van-cell-group>
-                <van-field data-name="amount" value="{{info.amount}}" placeholder="请输入" bind:blur="purchasecblur" bind:input="checkmoney"  />
+                <van-field data-name="amount" value="{{info.amount}}" placeholder="请输入" bind:blur="purchasecblur" bind:input="checkmoney" />
             </van-cell-group>
         </view>
         <view class="check_item">

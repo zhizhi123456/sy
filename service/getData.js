@@ -128,6 +128,14 @@ export const unreferflow = (params) => http.post("/api/SubmitWorkFlowService/Get
 export const AnnouncementType = (params) => http.post("/api/MethodOfDataService/AnnouncementType", params);
 // 付款方式
 export const PayType = () => http.get("/api/MethodOfDataService/GetPayType");
+// 所有账户
+export const GetUser = () => http.get("/api/MethodOfDataService/GetUser");
+// 学历
+export const GetEducation = () => http.get("/api/MethodOfDataService/GetEducation");
+// 职位
+export const GetPosition = () => http.get("/api/MethodOfDataService/GetPosition");
+// 职称
+export const GetGradeTitle = () => http.get("/api/MethodOfDataService/GetGradeTitle");
 // =================================================================================================================================================================
 //根据项目编号获取项目信息
 export const GetProjectInformation = (params) => http.post("/api/MethodOfDataService/GetProjectInformation", params);

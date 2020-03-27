@@ -62,7 +62,12 @@ import {
   getdept,
   applytype,
   UnitType,
-  moredep,PayType
+  moredep,
+  PayType,
+  GetUser,
+  GetEducation,
+  GetPosition,
+  GetGradeTitle
 } from "./service/getData";
 var util = require("./utils/util");
 App({
@@ -110,11 +115,11 @@ App({
         // //console.log(this.globalData.Principal)
       })
       let userinfo = wx.getStorageSync("myInfo");
-      util.sumup1(moredep, this, 'moredep', "techofficename", "ID",userinfo.UserName);
+      util.sumup1(moredep, this, 'moredep', "techofficename", "ID", userinfo.UserName);
       util.sumup(UnitType, this, 'UnitType', "Value", "Key");
       util.sumup(applytype, this, 'applytype', "Value", "Key");
-      util.sumup1(getstaff, this, 'getstaff', "name", "userId",userinfo.UserName);
-      util.sumup1(getdept, this, 'getdept', "techofficename", "id",userinfo.UserName);
+      util.sumup1(getstaff, this, 'getstaff', "name", "userId", userinfo.UserName);
+      util.sumup1(getdept, this, 'getdept', "techofficename", "id", userinfo.UserName);
       util.sumup(department, this, 'department', "techofficename", "ID");
       util.sumup(Companytitle, this, 'Companytitle', "Value", "Key");
       util.sumup(staff, this, 'staff', "Name", "ID");
@@ -171,6 +176,10 @@ App({
       util.sumup(contractType, this, 'contractType', "Value", "Key");
       util.sumup(getframeProtocolCode, this, 'getframeProtocolCode', "frameProtocolCode", "frameProtocolname");
       util.sumup(PayType, this, 'PayType', "Value", "Key");
+      util.sumup(GetUser, this, 'GetUser', "UserName", "ID");
+      util.sumup(GetEducation, this, 'GetEducation', "Value", "Key");
+      util.sumup(GetPosition, this, 'GetPosition', "Value", "Key");
+      util.sumup(GetGradeTitle, this, 'GetGradeTitle', "Value", "Key");
       Engineer({
         ID: 3209
       }).then(res => {
@@ -206,7 +215,7 @@ App({
           //console.log(res)
           if (res) {
             var s = JSON.parse(res)
-            if(!(s.lengtn<1)){
+            if (!(s.lengtn < 1)) {
               var info = {
                 Companytitle: s[0].company,
                 Companytitletext: s[0].value,
@@ -216,26 +225,26 @@ App({
               }
               this.globalData.message = info
               //console.log(this.globalData.message)
-            }else{
+            } else {
               wx.showToast({
                 title: '获取用户信息失败',
                 icon: "none",
                 duration: 2000
               })
             }
-           
+
           }
         })
       }
     }
   },
   globalData: {
-    moredep:"",
-    UnitType:'',
-    applytype:'',
-    message:'',
-    getdept:'',
-    getstaff:'',
+    moredep: "",
+    UnitType: '',
+    applytype: '',
+    message: '',
+    getdept: '',
+    getstaff: '',
     mapadress: "",
     pic: [],
     time: util.format(new Date()),
@@ -330,6 +339,10 @@ App({
     AnnouncementType: '',
     contractType: '',
     getframeProtocolCode: '',
+    GetUser: '',
+    GetEducation: '',
+    GetPosition: '',
+    GetGradeTitle: '',
     states: [{
       text: '所有'
     }, {
@@ -350,7 +363,7 @@ App({
       text: '长城宽带',
       value: "2"
     }],
-    PayType:'',
+    PayType: '',
     // // 付款方式
     // PayType: [{
     //   text: "转账",
@@ -410,7 +423,7 @@ App({
       value: 'householdregister1'
     }, {
       text: '非农村户口',
-      value: 'householdregister1'
+      value: 'householdregister2'
     }],
     sexs: [{
       text: '男',

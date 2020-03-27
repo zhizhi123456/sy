@@ -21,9 +21,19 @@
                     </van-cell-group>
                 </view>
                 <view class="seach_item">
-                    <van-cell-group>
+                    <!-- <van-cell-group>
                         <van-field data-name="position" value="{{info.position}}" placeholder="请输入" bind:blur="positionblur" label="职位" />
+                    </van-cell-group> -->
+                    <van-cell-group>
+                        <van-field value="{{info.position}}" placeholder="请选择" bindtap="showPopup_zw" label="职位" disabled />
                     </van-cell-group>
+                    <van-popup show="{{ show_zw }}" round position="bottom" bind:close="onClose_zw">
+                        <view class="Cseach">
+                            <input value="{{seach}}" bindinput="setSeach" placeholder="请输入搜索内容" />
+                            <button size="mini" bindtap="finditem">搜索</button>
+                        </view>
+                        <van-picker data-name="position" show-toolbar columns="{{GetPosition}}" bind:cancel="onClose_zw" bind:confirm="onConfirm_zw" />
+                    </van-popup>
                 </view>
                 <view class="seach_item">
                     <van-cell-group>
@@ -38,6 +48,10 @@
                         <van-field value="{{departmenttext}}" placeholder="请选择" bindtap="showPopup_0" label="部门" disabled />
                     </van-cell-group>
                     <van-popup show="{{ show_0 }}" round position="bottom" bind:close="onClose_0">
+                        <view class="Cseach">
+                            <input value="{{seach}}" bindinput="setSeach" placeholder="请输入搜索内容" />
+                            <button size="mini" bindtap="finditem1">搜索</button>
+                        </view>
                         <van-picker data-name="department" show-toolbar columns="{{ sections }}" bind:cancel="onClose_0" bind:confirm="onConfirm_0" />
                     </van-popup>
                 </view>

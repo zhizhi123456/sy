@@ -19,12 +19,78 @@ Page({
     totals: [],
     departmenttext: "请选择",
     currentDate: new Date().getTime(),
+    mindata: new Date().getTime(),
   },
-  // 账户
-  userIdblur(e) {
-    let info = util.editInfo(e, this, e.detail.value);
+  setSeach(e) {
+    this.setData({
+      seach: e.detail.value
+    })
+  },
+  finditem() {
+    let arr = util.findone(app.globalData.GetUser, this.data.seach);
+    this.setData({
+      GetUser: arr,
+      seach: ''
+    })
+  },
+  finditem1() {
+    let arr = util.findone(app.globalData.GetPosition, this.data.seach);
+    this.setData({
+      GetPosition: arr,
+      seach: ''
+    })
+  },
+  finditem2() {
+    let arr = util.findone(app.globalData.department, this.data.seach);
+    this.setData({
+      sections: arr,
+      seach: ''
+    })
+  },
+  finditem3() {
+    let arr = util.findone(app.globalData.GetEducation, this.data.seach);
+    this.setData({
+      GetEducation: arr,
+      seach: ''
+    })
+  },
+  finditem4() {
+    let arr = util.findone(app.globalData.GetGradeTitle, this.data.seach);
+    this.setData({
+      GetGradeTitle: arr,
+      seach: ''
+    })
+  },
+  checknum(e) {
+    let info = this.data.info;
+    info.age = e.detail.replace(/[^\d]/g, '');
     this.setData({
       info
+    })
+  },
+  // 账户
+  // userIdblur(e) {
+  //   let info = util.editInfo(e, this, e.detail.value);
+  //   this.setData({
+  //     info
+  //   })
+  // },
+  showPopup_z() {
+    this.setData({
+      show_z: true
+    });
+  },
+  onClose_z() {
+    this.setData({
+      show_z: false
+    });
+  },
+  onConfirm_z(e) {
+    let info = util.editInfo(e, this, e.detail.value.text);
+    this.setData({
+      info,
+      'info.name': e.detail.value.text,
+      show_z: false
     })
   },
   // 姓名
@@ -35,10 +101,27 @@ Page({
     })
   },
   // 职位
-  positionblur(e) {
-    let info = util.editInfo(e, this, e.detail.value);
+  // positionblur(e) {
+  //   let info = util.editInfo(e, this, e.detail.value);
+  //   this.setData({
+  //     info
+  //   })
+  // },
+  showPopup_w() {
     this.setData({
-      info
+      show_w: true
+    });
+  },
+  onClose_w() {
+    this.setData({
+      show_w: false
+    });
+  },
+  onConfirm_w(e) {
+    let info = util.editInfo(e, this, e.detail.value.text);
+    this.setData({
+      info,
+      show_w: false
     })
   },
   // 性别
@@ -103,12 +186,29 @@ Page({
     })
   },
   // 学历
-  learnrecordblur(e) {
-    let info = util.editInfo(e, this, e.detail.value);
+  showPopup_x() {
     this.setData({
-      info
+      show_x: true
+    });
+  },
+  onClose_x() {
+    this.setData({
+      show_x: false
+    });
+  },
+  onConfirm_x(e) {
+    let info = util.editInfo(e, this, e.detail.value.text);
+    this.setData({
+      info,
+      show_x: false
     })
   },
+  // learnrecordblur(e) {
+  //   let info = util.editInfo(e, this, e.detail.value);
+  //   this.setData({
+  //     info
+  //   })
+  // },
   // 户籍类型
   showPopup_1() {
     this.setData({
@@ -144,6 +244,25 @@ Page({
       info,
       show_time: false
     })
+    this.getage(e);
+  },
+  getage(e) {
+    let Yeartime = new Date().getFullYear(),
+      Monthtime = new Date().getMonth() + 1,
+      Datetime = new Date().getDate(),
+      Yearbir = new Date(e.detail).getFullYear(),
+      Monthbir = new Date(e.detail).getMonth() + 1,
+      Datebir = new Date(e.detail).getDate(),
+      age;
+    if (Monthtime > Monthbir || (Monthtime == Monthbir && Datetime >= Datebir)) {
+      this.setData({
+        'info.age': Yeartime - Yearbir
+      })
+    } else {
+      this.setData({
+        'info.age': Yeartime - Yearbir - 1
+      })
+    }
   },
   // 民族
   nationblur(e) {
@@ -199,12 +318,29 @@ Page({
     })
   },
   // 职称
-  memberrankblur(e) {
-    let info = util.editInfo(e, this, e.detail.value);
+  showPopup_c() {
     this.setData({
-      info
+      show_c: true
+    });
+  },
+  onClose_c() {
+    this.setData({
+      show_c: false
+    });
+  },
+  onConfirm_c(e) {
+    let info = util.editInfo(e, this, e.detail.value.text);
+    this.setData({
+      info,
+      show_c: false
     })
   },
+  // memberrankblur(e) {
+  //   let info = util.editInfo(e, this, e.detail.value);
+  //   this.setData({
+  //     info
+  //   })
+  // },
   // 入职日期
   showPopup_endtime() {
     this.setData({
@@ -410,7 +546,11 @@ Page({
       sections: app.globalData.department,
       state: app.globalData.state,
       householdregister: app.globalData.householdregister,
-      sexs: app.globalData.sexs
+      sexs: app.globalData.sexs,
+      GetUser: app.globalData.GetUser,
+      GetEducation: app.globalData.GetEducation,
+      GetPosition: app.globalData.GetPosition,
+      GetGradeTitle: app.globalData.GetGradeTitle,
     })
     if (options.id) {
       referMembernew({

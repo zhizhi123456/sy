@@ -23,12 +23,22 @@
         </view>
         <view class="check_item">
             <view class="kind require">
-                <text>申请人</text>
+                <text>公司名称</text>
                 <text class="required">*</text>
             </view>
-            <van-cell-group>
-                <van-field value="{{info.applyman}}" disabled />
-            </van-cell-group>
+            <!-- <van-cell-group>
+                <van-field value="{{info.Companytitle}}" disabled />
+            </van-cell-group> -->
+            <van-cell title="{{info.Companytitle?info.Companytitle:'请选择'}}" bind:click="showPopup">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show }}" round position="bottom" bind:close="onClose">
+                <view class="Cseach">
+                    <input value="{{seach}}" bindinput="setSeach" placeholder="请输入搜索内容" />
+                    <button size="mini" bindtap="finditem3">搜索</button>
+                </view>
+                <van-picker data-name="Companytitle" show-toolbar columns="{{ firms }}" bind:cancel="onClose" bind:confirm="onConfirm" />
+            </van-popup>
         </view>
         <view class="check_item">
             <view class="kind require">
@@ -38,7 +48,7 @@
             <!-- <van-cell-group>
                 <van-field value="{{departmenttext}}" disabled />
             </van-cell-group> -->
-             <van-cell title="{{departmenttext}}" bind:click="showPopup_o" />
+            <van-cell title="{{departmenttext}}" bind:click="showPopup_o" />
             <van-popup show="{{show_o}}" round position="bottom" bind:close="onClose_o">
                 <view class="Cseach">
                     <input value="{{seach}}" bindinput="setSeach" placeholder="请输入搜索内容" />
@@ -49,11 +59,11 @@
         </view>
         <view class="check_item">
             <view class="kind require">
-                <text>公司名称</text>
+                <text>申请人</text>
                 <text class="required">*</text>
             </view>
             <van-cell-group>
-                <van-field value="{{info.Companytitle}}" disabled />
+                <van-field value="{{info.applyman}}" disabled />
             </van-cell-group>
         </view>
         <view class="check_item">
@@ -111,7 +121,7 @@
                 <text class="required">*</text>
             </view>
             <van-cell-group>
-                <van-field data-name="leavedays" value="{{info.leavedays}}" placeholder="请输入" bind:blur="leavedaysblur"/>
+                <van-field data-name="leavedays" value="{{info.leavedays}}" placeholder="请输入" bind:blur="leavedaysblur" />
             </van-cell-group>
         </view>
         <view class="check_item">
@@ -119,7 +129,7 @@
                 <text>请假小时</text>
             </view>
             <van-cell-group>
-                <van-field data-name="leavehours" value="{{info.leavehours}}" placeholder="请输入" bind:blur="leavedaysblur"/>
+                <van-field data-name="leavehours" value="{{info.leavehours}}" placeholder="请输入" bind:blur="leavedaysblur" />
             </van-cell-group>
         </view>
         <view class="check_item">

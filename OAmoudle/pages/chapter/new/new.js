@@ -17,7 +17,6 @@ Page({
       API_Picurl: [],
     },
     show: false,
-    firms: [],
     totals: [],
     departmenttext: "请选择",
     check_photo: [{
@@ -69,6 +68,13 @@ Page({
     let arr = util.findone(app.globalData.department, this.data.seach);
     this.setData({
       sections: arr,
+      seach: ''
+    })
+  },
+  finditem1() {
+    let arr = util.findone(app.globalData.Companytitle, this.data.seach);
+    this.setData({
+      firms: arr,
       seach: ''
     })
   },

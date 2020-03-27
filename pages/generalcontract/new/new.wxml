@@ -33,6 +33,15 @@
         </view> -->
         <view class="check_item">
             <view class="kind require">
+                <text>签报主题</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="maincontactname" value="{{info.maincontactname}}" placeholder="请填写合同名称" bind:blur="maincontactnameblur" type="textarea" autosize />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
                 <text>部门</text>
             </view>
             <!-- <van-cell-group>
@@ -48,27 +57,9 @@
             </van-popup>
         </view>
         <view class="check_item">
-            <view class="kind require">
-                <text>公司名称</text>
-                <text class="required">*</text>
-            </view>
-            <van-cell-group>
-                <van-field value="{{info.Companytitle}}" disabled />
-            </van-cell-group>
-        </view>
-        <view class="check_item">
-            <view class="kind require">
-                <text>签报主题</text>
-                <text class="required">*</text>
-            </view>
-            <van-cell-group>
-                <van-field data-name="maincontactname" value="{{info.maincontactname}}" placeholder="请填写合同名称" bind:blur="maincontactnameblur" type="textarea" autosize />
-            </van-cell-group>
-        </view>
-        <view class="check_item">
             <text class="kind">签报金额(元)</text>
             <van-cell-group>
-                <van-field data-name="contcactamount" value="{{info.contcactamount}}" bind:input="checkmoney" placeholder="请输入" bind:blur="purchasecblur" />
+                <van-field data-name="contcactamount" value="{{info.contcactamount}}" bind:input="checkmoney" placeholder="请输入" bind:blur="purchasecblur" type="digit" />
             </van-cell-group>
         </view>
          <view class="check_item">
@@ -89,12 +80,12 @@
                 <van-field data-name="material" value="{{info.material}}" placeholder="请输入" bind:blur="materialblur" />
             </van-cell-group>
         </view>
-        <view class="check_item">
+        <!-- <view class="check_item">
             <text class="kind">签报金额(元)</text>
             <van-cell-group>
                 <van-field data-name="contcactamount" value="{{info.contcactamount}}" bind:input="checknum" placeholder="请输入" type="digit" bind:blur="contcactamountblur" />
             </van-cell-group>
-        </view>
+        </view> -->
         <view class="check_item">
             <!-- <view class="kind require">
                 <text>备注</text>

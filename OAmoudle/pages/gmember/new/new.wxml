@@ -17,9 +17,19 @@
                 <text>账户</text>
                 <text class="required">*</text>
             </view>
-            <van-cell-group>
+            <van-cell title="{{info.userId?info.userId:'请选择'}}" bind:click="showPopup_z">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show_z }}" round position="bottom" bind:close="onClose_z">
+                <view class="Cseach">
+                    <input value="{{seach}}" bindinput="setSeach" placeholder="请输入搜索内容" />
+                    <button size="mini" bindtap="finditem">搜索</button>
+                </view>
+                <van-picker data-name="userId" show-toolbar columns="{{ GetUser }}" bind:cancel="onClose_z" bind:confirm="onConfirm_z" />
+            </van-popup>
+            <!-- <van-cell-group>
                 <van-field data-name="userId" value="{{info.userId}}" placeholder="请输入" bind:blur="userIdblur" />
-            </van-cell-group>
+            </van-cell-group> -->
         </view>
         <view class="check_item">
             <view class="kind require">
@@ -35,9 +45,19 @@
                 <text>职位</text>
                 <text class="required">*</text>
             </view>
-            <van-cell-group>
+            <van-cell title="{{info.position?info.position:'请选择'}}" bind:click="showPopup_w">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show_w }}" round position="bottom" bind:close="onClose_w">
+                <view class="Cseach">
+                    <input value="{{seach}}" bindinput="setSeach" placeholder="请输入搜索内容" />
+                    <button size="mini" bindtap="finditem1">搜索</button>
+                </view>
+                <van-picker data-name="position" show-toolbar columns="{{ GetPosition }}" bind:cancel="onClose_w" bind:confirm="onConfirm_w" />
+            </van-popup>
+            <!-- <van-cell-group>
                 <van-field data-name="position" value="{{info.position}}" placeholder="请输入" bind:blur="positionblur" />
-            </van-cell-group>
+            </van-cell-group> -->
         </view>
         <view class="check_item">
             <view class="kind require">
@@ -61,6 +81,10 @@
             </view>
             <van-cell title="{{departmenttext}}" is-link bind:click="showPopup_o" />
             <van-popup show="{{show_o}}" round position="bottom" bind:close="onClose_o">
+                <view class="Cseach">
+                    <input value="{{seach}}" bindinput="setSeach" placeholder="请输入搜索内容" />
+                    <button size="mini" bindtap="finditem2">搜索</button>
+                </view>
                 <van-picker data-name="department" show-toolbar columns="{{ sections }}" bind:cancel="onClose_o" bind:confirm="onConfirm_o" />
             </van-popup>
         </view>
@@ -78,9 +102,19 @@
         </view>
         <view class="check_item">
             <text class="kind">学历</text>
-            <van-cell-group>
-                <van-field data-name="learnrecord" value="{{info.learnrecord}}" placeholder="请输入" bind:blur="learnrecordblur"/>
-            </van-cell-group>
+            <van-cell title="{{info.learnrecord?info.learnrecord:'请选择'}}" bind:click="showPopup_x">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show_x }}" round position="bottom" bind:close="onClose_x">
+                <view class="Cseach">
+                    <input value="{{seach}}" bindinput="setSeach" placeholder="请输入搜索内容" />
+                    <button size="mini" bindtap="finditem3">搜索</button>
+                </view>
+                <van-picker data-name="learnrecord" show-toolbar columns="{{ GetEducation }}" bind:cancel="onClose_x" bind:confirm="onConfirm_x" />
+            </van-popup>
+            <!-- <van-cell-group>
+                <van-field data-name="learnrecord" value="{{info.learnrecord}}" placeholder="请输入" bind:blur="learnrecordblur" />
+            </van-cell-group> -->
         </view>
         <view class="check_item">
             <text class="kind">户籍类型</text>
@@ -98,8 +132,14 @@
             </view>
             <van-cell title="{{info.birthday?info.birthday:'请选择'}}" is-link bind:click="showPopup_time" />
             <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
-                <van-datetime-picker data-name="birthday" value="{{ currentDate }}" max-date="{{currentDate}}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" />
+                <van-datetime-picker data-name="birthday" value="{{ currentDate }}" max-date="{{currentDate}}" min-date="{{0}}"  bind:cancel="onClose_time" bind:confirm="onConfirm_time" type="date"/>
             </van-popup>
+        </view>
+        <view class="check_item">
+            <text class="kind">年龄</text>
+            <van-cell-group>
+                <van-field data-name="age" value="{{info.age}}" placeholder="请输入" bind:blur="ageblur" bind:input="checknum"/>
+            </van-cell-group>
         </view>
         <view class="check_item">
             <text class="kind">民族</text>
@@ -127,21 +167,31 @@
             </van-popup>
         </view>
         <view class="check_item">
+            <text class="kind">职称</text>
+            <van-cell title="{{info.memberrank?info.memberrank:'请选择'}}" bind:click="showPopup_c">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show_c }}" round position="bottom" bind:close="onClose_c">
+                <view class="Cseach">
+                    <input value="{{seach}}" bindinput="setSeach" placeholder="请输入搜索内容" />
+                    <button size="mini" bindtap="finditem4">搜索</button>
+                </view>
+                <van-picker data-name="memberrank" show-toolbar columns="{{ GetGradeTitle }}" bind:cancel="onClose_c" bind:confirm="onConfirm_c" />
+            </van-popup>
+            <!-- <van-cell-group>GetGradeTitle
+                <van-field data-name="memberrank" value="{{info.memberrank}}" placeholder="请输入" bind:blur="memberrankblur" />
+            </van-cell-group> -->
+        </view>
+        <view class="check_item">
             <text class="kind">职称证(详细记录)</text>
             <van-cell-group>
-                <van-field data-name="Titlecertificate" value="{{info.Titlecertificate}}" placeholder="请输入" bind:blur="Titlecertificateblur"/>
+                <van-field data-name="Titlecertificate" value="{{info.Titlecertificate}}" placeholder="请输入" bind:blur="Titlecertificateblur" />
             </van-cell-group>
         </view>
         <view class="check_item">
             <text class="kind">婚姻状况</text>
             <van-cell-group>
-                <van-field data-name="marriage" value="{{info.marriage}}" placeholder="请输入" bind:blur="marriageblur"/>
-            </van-cell-group>
-        </view>
-        <view class="check_item">
-            <text class="kind">职称</text>
-            <van-cell-group>
-                <van-field data-name="memberrank" value="{{info.memberrank}}" placeholder="请输入" bind:blur="memberrankblur"/>
+                <van-field data-name="marriage" value="{{info.marriage}}" placeholder="请输入" bind:blur="marriageblur" />
             </van-cell-group>
         </view>
         <view class="check_item">
@@ -161,55 +211,49 @@
         <view class="check_item">
             <text class="kind">身份证号码</text>
             <van-cell-group>
-                <van-field data-name="IDcardNo" value="{{info.IDcardNo}}" placeholder="请输入" bind:blur="IDcardNoblur"/>
-            </van-cell-group>
-        </view>
-        <view class="check_item">
-            <text class="kind">年龄</text>
-            <van-cell-group>
-                <van-field data-name="age" value="{{info.age}}" placeholder="请输入" bind:blur="ageblur"/>
-            </van-cell-group>
-        </view>
-        <view class="check_item">
-            <text class="kind">用工形式</text>
-            <van-cell-group>
-                <van-field data-name="employmentform" value="{{info.employmentform}}" placeholder="请输入" bind:blur="employmentformblur"/>
-            </van-cell-group>
-        </view>
-        <view class="check_item">
-            <text class="kind">手机号码</text>
-            <van-cell-group>
-                <van-field data-name="mobilephone" value="{{info.mobilephone}}" placeholder="请输入" bind:blur="mobilephoneblur"/>
+                <van-field data-name="IDcardNo" value="{{info.IDcardNo}}" placeholder="请输入" bind:blur="IDcardNoblur" />
             </van-cell-group>
         </view>
         <view class="check_item">
             <text class="kind">身份证地址</text>
             <van-cell-group>
-                <van-field data-name="IDcardNoAddress" value="{{info.IDcardNoAddress}}" placeholder="请输入" bind:blur="IDcardNoAddressblur"/>
+                <van-field data-name="IDcardNoAddress" value="{{info.IDcardNoAddress}}" placeholder="请输入" bind:blur="IDcardNoAddressblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">用工形式</text>
+            <van-cell-group>
+                <van-field data-name="employmentform" value="{{info.employmentform}}" placeholder="请输入" bind:blur="employmentformblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">手机号码</text>
+            <van-cell-group>
+                <van-field data-name="mobilephone" value="{{info.mobilephone}}" placeholder="请输入" bind:blur="mobilephoneblur" />
             </van-cell-group>
         </view>
         <view class="check_item">
             <text class="kind">紧急联系人</text>
             <van-cell-group>
-                <van-field data-name="urgentcontactman" value="{{info.urgentcontactman}}" placeholder="请输入" bind:blur="urgentcontactmanblur"/>
+                <van-field data-name="urgentcontactman" value="{{info.urgentcontactman}}" placeholder="请输入" bind:blur="urgentcontactmanblur" />
             </van-cell-group>
         </view>
         <view class="check_item">
             <text class="kind">紧急联系电话</text>
             <van-cell-group>
-                <van-field data-name="urgentcontactphone" value="{{info.urgentcontactphone}}" placeholder="请输入" bind:blur="urgentcontactphoneblur"/>
+                <van-field data-name="urgentcontactphone" value="{{info.urgentcontactphone}}" placeholder="请输入" bind:blur="urgentcontactphoneblur" />
             </van-cell-group>
         </view>
         <view class="check_item">
             <text class="kind">紧急联系人关系</text>
             <van-cell-group>
-                <van-field data-name="urgentcontmanrela" value="{{info.urgentcontmanrela}}" placeholder="请输入" bind:blur="urgentcontmanrelablur"/>
+                <van-field data-name="urgentcontmanrela" value="{{info.urgentcontmanrela}}" placeholder="请输入" bind:blur="urgentcontmanrelablur" />
             </van-cell-group>
         </view>
         <view class="check_item">
             <text class="kind">email</text>
             <van-cell-group>
-                <van-field data-name="email" value="{{info.email}}" placeholder="请输入" bind:blur="emailblur"/>
+                <van-field data-name="email" value="{{info.email}}" placeholder="请输入" bind:blur="emailblur" />
             </van-cell-group>
         </view>
         <view class="check_item">
@@ -221,19 +265,19 @@
         <view class="check_item">
             <text class="kind">入司前工作经历</text>
             <van-cell-group>
-                <van-field data-name="workexperience" value="{{info.workexperience}}" placeholder="请输入" bind:blur="workexperienceblur"/>
+                <van-field data-name="workexperience" value="{{info.workexperience}}" placeholder="请输入" bind:blur="workexperienceblur" />
             </van-cell-group>
         </view>
         <view class="check_item">
             <text class="kind">劳动手册相关</text>
             <van-cell-group>
-                <van-field data-name="labourmanual" value="{{info.labourmanual}}" placeholder="请输入" bind:blur="labourmanualblur"/>
+                <van-field data-name="labourmanual" value="{{info.labourmanual}}" placeholder="请输入" bind:blur="labourmanualblur" />
             </van-cell-group>
         </view>
         <view class="check_item">
             <text class="kind">公积金账号</text>
             <van-cell-group>
-                <van-field data-name="accumulatfundAccount" value="{{info.accumulatfundAccount}}" placeholder="请输入" bind:blur="accumulatfundAccountblur"/>
+                <van-field data-name="accumulatfundAccount" value="{{info.accumulatfundAccount}}" placeholder="请输入" bind:blur="accumulatfundAccountblur" />
             </van-cell-group>
         </view>
     </view>
