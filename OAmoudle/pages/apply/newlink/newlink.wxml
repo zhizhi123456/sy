@@ -84,7 +84,7 @@
                 <text>备注</text>
             </view>
             <van-cell-group>
-                <van-field value="{{materials[0].demo}}" placeholder="请输入" bind:blur="getgname" data-i='{{index}}' data-name='demo' />
+                <van-field value="{{materials[0].demo}}"  type="textarea" input-class ="textlarge"  autosize placeholder="请输入" bind:blur="getgname" data-i='{{index}}' data-name='demo' />
             </van-cell-group>
         </view>
     </view>

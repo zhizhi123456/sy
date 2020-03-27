@@ -1,0 +1,36 @@
+<!-- textages/textact/textact.wxml -->
+<view class="wraper">
+    <!-- 头部 -->
+    <view class="header">
+        <view class="title">
+            <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
+            <view class="apply">
+                <text>资讯中心</text>
+            </view>
+        </view>
+        <!-- <view class="seach">
+            <icon class="iconfont icon-fuxuananniu fl s-sort" bindtap="change"></icon>
+            <icon class="iconfont icon-sousuo fr" bindtap="seachInfo"></icon>
+            <view class="data_list">
+                <input value="{{seach}}" bindblur="setSeach" />
+                <view class="number" wx:if="{{!seach}}">
+                    <icon class="iconfont icon-sousuo"></icon>
+                    <text wx:if="{{InfoList.length}}">共{{InfoList.length}}条</text>
+                    <text wx:else>搜索</text>
+                </view>
+            </view>
+        </view> -->
+    </view>
+    <view class="news">
+        <view wx:for="{{InfoList}}" wx:key="{{index}}">
+            <view bind:tap="change1">
+                <van-notice-bar text="{{item.name}}" backgroundColor="teal" color="white" left-icon="volume-o" speed='70' data-id='{{item.ID}}'>
+                    <text slot="right-icon">{{item.time}}</text>
+                </van-notice-bar>
+            </view>
+        </view>
+        <view wx:if="{{loading&&InfoList.length}}" class="end">加载中...</view>
+        <view wx:if="{{!loading&&InfoList.length}}" class="end">已经到底了</view>
+        <view class="no_more" wx:if="{{!InfoList.length}}">暂无内容</view>
+    </view>
+</view>

@@ -28,30 +28,30 @@
                         <view class="kind">是否置顶</view>
                         <view class="check">{{info.isstick}}</view>
                     </view>
-                    <view class="c_item">
+                    <!-- <view class="c_item">
                         <view class="kind"> 接收部门</view>
                         <view class="check">{{info.receivedepartment}}</view>
-                    </view>
-                    <view class="c_item">
+                    </view> -->
+                    <!-- <view class="c_item">
                         <view class="kind">是否含子部门</view>
                         <view class="check">{{info.issubdivision}}</view>
-                    </view>
-                    <view class="c_item">
+                    </view> -->
+                    <!-- <view class="c_item">
                         <view class="kind">接收员工</view>
                         <view class="check">{{info.receivestaff}}</view>
-                    </view>
+                    </view> -->
                       <!-- <view class="c_item">
                         <view class="kind">文件</view>
                         <view class="check">{{info.uplodfile}}</view>
                     </view> -->
-                   <view class="c_item">
+                   <!-- <view class="c_item">
                         <view class="kind">封面</view>
                         <view wx:if="{{info.cover}}" class="detpic_show">
                             <block wx:for="{{info.cover}}" wx:key="index">
                                 <image src="{{item}}" bindtap="tap_pic" data-index="{{index}}" binderror="defaultimg" />
                             </block>
                         </view>
-                    </view>
+                    </view> -->
                     <view class="c_item">
                         <view class="kind">创建人</view>
                         <view class="check">{{info.createman}}</view>

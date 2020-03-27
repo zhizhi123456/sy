@@ -125,7 +125,7 @@
         <view class="check_item">
             <text class="kind">备注</text>
             <van-cell-group>
-                <van-field data-name="demo" value="{{info.demo}}" placeholder="请输入" bind:blur="projectnameblur" />
+                <van-field data-name="demo"   type="textarea" input-class ="textlarge"  autosize value="{{info.demo}}" placeholder="请输入" bind:blur="projectnameblur" />
             </van-cell-group>
         </view>
          <view class="check_item">
