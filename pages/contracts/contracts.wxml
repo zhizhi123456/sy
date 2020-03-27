@@ -5,9 +5,7 @@
     <navigator open-type="redirect" url='/pages/secondary/secondary?menuId=null&id=2129&title=后台管理&num=2091&mtitle=我的&source=index'>
       <icon wx:if="{{entered&&num==2091}}" class="iconfont icon-dianshi fl"></icon>
     </navigator>
-    <text wx:if="{{entered&&num==2091}}" class="fr newCreate iconfont icon-wode">
-      {{userinfo.UserName}}
-    </text>
+    <text wx:if="{{entered&&num==2091}}" class="fr newCreate iconfont icon-wode">{{userinfo.UserName}}</text>
     <view class="apply kapply">{{title}}</view>
     <!-- <van-icon name="orders-o" info="9" class="icon1" bind:click="task" /> -->
   </view>
