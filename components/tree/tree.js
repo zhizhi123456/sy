@@ -19,8 +19,16 @@ Component({
 
   ready: function () {
     this.setData({
-      treeData: this.data.tree
+
     })
+  },
+  observers: {
+    'tree': function () {
+      // 在 numberA 或者 numberB 被设置时，执行这个函数
+      this.setData({
+        treeData: this.data.tree
+      })
+    }
   },
   /**
    * 组件的方法列表

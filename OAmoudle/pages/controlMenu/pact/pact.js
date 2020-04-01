@@ -2,7 +2,9 @@
 import {
   getRoleMenu,
   queryrole,
-  addRoleMenu
+  addRoleMenu,
+  cancelRoleMenu,
+  amendRoleMenu
 } from '../../../../service/getData.js';
 var app = getApp();
 var util = require("../../../../utils/util");
@@ -20,7 +22,9 @@ Page({
     changedata: [],
     changelist: [],
     adddata: [],
-    deldata:[]
+    deldata: [],
+    RoleId: '',
+
   },
   // MenuList: Array(4)
   // 0:
@@ -99,15 +103,22 @@ Page({
       show2: false
     })
     console.log(e.detail.value.value)
+    this.setData({
+      RoleId: e.detail.value.value
+    })
     getRoleMenu({
       RoleId: e.detail.value.value
     }).then(res => {
       if (res.code == 10000) {
         let MenuList = res.MenuList;
+        this.setData({
+          userorgin: MenuList
+        })
         MenuList = this.isFolder(MenuList);
         this.setData({
           tree: MenuList
         })
+        console.log(this.data.tree)
         wx.hideLoading();
       }
     })
@@ -123,75 +134,96 @@ Page({
 
   },
   Confirm() {
-    var data2 = this.data.tree
-    this.filtrate(data2)
-    console.log(this.data.original)
-    var data3 = this.data.changelist
-    this.filtchangedata(data3)
-    console.log(this.data.changedata)
-    var original = this.data.original
-    var changedata = this.data.changedata
-    // 判断添加
+    if (!this.data.RoleId) {
+      wx.showToast({
+        title: '请选择员工',
+        icon: 'success',
+        duration: 2000
+      })
+    } else {
+      var data2 = this.data.tree
+      this.filtrate(data2)
+      console.log(this.data.original)
+      var data3 = this.data.changelist
+      this.filtchangedata(data3)
+      console.log(this.data.changedata)
+      var original = this.data.original
+      var changedata = this.data.changedata
+      // 判断添加
 
-    changedata.forEach(s => {
-      var add = []
-      original.forEach(u => {
-        if (s.id == u.id) {
-          add.push(true)
-        } else {
-          add.push(false)
+       // 判断删除
+       original.forEach(s => {
+        console.log(changedata)
+        console.log(s)
+        var ifhave = JSON.stringify(changedata).indexOf(s.ID);
+        console.log(ifhave)
+        var del = this.data.deldata
+        if (ifhave == -1) {
+          del.push(s.ID)
         }
-      })
-      var ifsame = add.some(p => {
-        return p
-      })
-      if (!ifsame) {
-        var adddata = this.data.adddata
-        adddata.push(s.ID)
         this.setData({
-          adddata
+          deldata: del
         })
-      }
-    })
-    // 判断删除
-    original.forEach(s => {
-      var del = []
-      changedata.forEach(u => {
-        if (s.id == u.id) {
-          del.push(true)
-        } else {
-          del.push(false)
+      })
+      // 判断删除
+      original.forEach(s => {
+        console.log(changedata)
+        console.log(s)
+        var ifhave = JSON.stringify(changedata).indexOf(s.ID);
+        console.log(ifhave)
+        var del = this.data.deldata
+        if (ifhave == -1) {
+          del.push(s.ID)
         }
-      })
-      var ifdel = del.some(p => {
-        return p
-      })
-      if (!ifdel) {
-        var deldata = this.data.deldata
-        deldata.push(s.ID)
         this.setData({
-          deldata
+          deldata: del
+        })
+      })
+      console.log(this.data.adddata)
+      console.log(this.data.deldata)
+      var adddata = this.data.adddata
+      adddata = adddata.join(";")
+      console.log(adddata)
+      if (this.data.adddata.length > 0) {
+        addRoleMenu({
+          RoleId: this.data.RoleId,
+          MenuId: adddata
+        }).then(res => {
+          if (res.code == 10000) {
+            wx.showToast({
+              title: '修改菜单权限成功',
+              icon: 'success',
+              duration: 2000
+            })
+          }
         })
       }
-    })
-    console.log(this.data.adddata)
-    console.log(this.data.deldata)
-    var adddata = this.data.adddata
-    adddata = adddata.join(";")
-    console.log(adddata)
-    addRoleMenu(adddata).then(res=>{
-      if(res.code == 10000){
-        wx.showToast({
-          title: '修改菜单权限成功',
-          icon: 'success',
-          duration: 2000
+      var deldata = this.data.deldata
+      deldata = deldata.join(";")
+      console.log(deldata)
+      if (this.data.deldata.length > 0) {
+        cancelRoleMenu({
+          RoleId: this.data.RoleId,
+          MenuId: deldata
+        }).then(res => {
+          if (res.code == 10000) {
+            wx.showToast({
+              title: '修改菜单权限成功',
+              icon: 'success',
+              duration: 2000
+            })
+
+          }
         })
-        // wx.reLaunch({
-        //   url: `/OAmoudle/pages/controlMenu/pact/pact`
-        // })
       }
-  
-    })
+      // setTimeout(
+      //   function () {
+      //     wx.reLaunch({
+      //       url: `/OAmoudle/pages/controlMenu/pact/pact`
+      //     })
+      //   }, 2300)
+
+    }
   },
   filtrate(data) {
     var original = this.data.original
@@ -225,7 +257,6 @@ Page({
         })
       }
       if (s.Submenu.length > 0) {
-        s
         this.filtrate(s.Submenu)
       }
       return s.IsEnabled
@@ -242,6 +273,7 @@ Page({
         this.setData({
           tree: MenuList
         })
+
         wx.hideLoading();
       }
     })

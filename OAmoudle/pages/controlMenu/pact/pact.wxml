@@ -3,8 +3,8 @@
     <view class="header">
         <view class="title">
             <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
+            <navigator hover-class="none" class="fr" catchtap="Confirm">确定</navigator>
             <view class="apply">权限管理</view>
-            <text hover-class="none" class="fr" catchtap="Confirm">确定</text>
         </view>
     </view>
     <view class="main">
