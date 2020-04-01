@@ -110,11 +110,9 @@ const checkContent = (value, key) => {
     })
     value.API_Picurl = value.API_Picurl.join(",")
   }
-  if (value.API_file.length) {
+  if (value.API_file) {
     // console.log("tupian")
-    value.API_file = JSON.stringify(value.API_file)
-  } else {
-    value.API_file = value.API_Picurl.join(",")
+    value.API_file = JSON.stringify(value.API_file) 
   }
   var app = getApp();
   // // 请假类别
@@ -440,10 +438,8 @@ const checkChange = (value, key, dep) => {
     })
     value.API_Picurl = value.API_Picurl.join(",")
   }
-  if (value.API_file.length) {
+  if (value.API_file) {
     value.API_file = JSON.stringify(value.API_file)
-  }else{
-    value.API_file = value.API_file.join(",")
   }
   if (value.Minutesofmeeting) {
     value.Minutesofmeeting = JSON.stringify(value.Minutesofmeeting);

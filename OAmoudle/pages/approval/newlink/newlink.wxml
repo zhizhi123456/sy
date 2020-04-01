@@ -43,12 +43,15 @@
             <view class="kind require">
                 <text>合同（项目）编号</text>
             </view>
-            <van-cell title="{{materials[0].projectcode?materials[0].projectcode:'请选择'}}" bind:click="showPopupCode">
+            <van-cell-group>
+                <van-field value="{{materials[0].projectcode}}" placeholder="请输入" bind:blur="getRecord" data-i='{{index}}' data-name='projectcode' />
+            </van-cell-group>
+            <!-- <van-cell title="{{materials[0].projectcode?materials[0].projectcode:'请选择'}}" bind:click="showPopupCode">
                 <icon class="iconfont icon-jiantou" />
             </van-cell>
             <van-popup show="{{ showCode }}" round position="bottom" bind:close="onCloseCode">
                 <van-picker data-name="projectcode" data-i='{{index}}' show-toolbar columns="{{ section4 }}" bind:cancel="onCloseCode" bind:confirm="onConfirmCode" />
-            </van-popup>
+            </van-popup> -->
         </view>
         <view class="check_item">
             <view class="kind">
