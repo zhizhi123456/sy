@@ -13,7 +13,7 @@
             <view class="c_item cimg">
                 <view class="kind">照片</view>
                 <view wx:if="{{info.CheckinPicurl}}">
-                    <image src="{{info.CheckinPicurl}}" bindtap="tap_pic" />
+                    <image mode="widthFix" src="{{info.CheckinPicurl}}" bindtap="tap_pic" />
                 </view>
             </view>
         </view>

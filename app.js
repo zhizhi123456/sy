@@ -67,7 +67,7 @@ import {
   GetUser,
   GetEducation,
   GetPosition,
-  GetGradeTitle
+  GetGradeTitle,GetRoles
 } from "./service/getData";
 var util = require("./utils/util");
 App({
@@ -180,6 +180,7 @@ App({
       util.sumup(GetEducation, this, 'GetEducation', "Value", "Key");
       util.sumup(GetPosition, this, 'GetPosition', "Value", "Key");
       util.sumup(GetGradeTitle, this, 'GetGradeTitle', "Value", "Key");
+      util.sumup(GetRoles, this, 'GetRoles', "Name", "ID");
       Engineer({
         ID: 3209
       }).then(res => {
@@ -343,6 +344,7 @@ App({
     GetEducation: '',
     GetPosition: '',
     GetGradeTitle: '',
+    GetRoles:'',
     states: [{
       text: '所有'
     }, {

@@ -61,6 +61,20 @@
                         </view>
                     </view>
                     <view class="c_item">
+                        <view class="kind">文件</view>
+                        <view wx:if="{{info.API_file}}" class="detpic_show">
+                           <view wx:if="{{info.API_file.length}}" class="fileLIST">
+                                <block wx:for="{{info.API_file}}" wx:key="index">
+                                    <view class="cfile">
+                                        <text class="filename">{{item.name}}</text>
+                                        <text class="filesize">{{item.size}}</text>
+                                        <icon class="iconfont icon-shengou fr" bindtap="downF" data-index="{{index}}" data-url="{{item.url}}" />
+                                    </view>
+                                </block>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="c_item">
                         <view class="kind">当前处理人</view>
                         <view class="check">{{info.CurDealer}}</view>
                     </view>

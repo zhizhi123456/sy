@@ -88,7 +88,7 @@
         <view class="check_item">
             <text class="kind">总金额(大写)</text>
             <van-cell-group>
-                <van-field data-name="Chinesenumerals" value="{{info.Chinesenumerals}}" placeholder="请输入" bind:blur="Chinesenumeralsblur" />
+                <van-field data-name="Chinesenumerals" value="{{info.Chinesenumerals}}" placeholder="根据总金额自动转换" bind:blur="Chinesenumeralsblur" />
             </van-cell-group>
         </view>
         <!-- <view class="check_item">

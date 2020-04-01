@@ -132,13 +132,13 @@
             </view>
             <van-cell title="{{info.birthday?info.birthday:'请选择'}}" is-link bind:click="showPopup_time" />
             <van-popup show="{{ show_time }}" round position="bottom" bind:close="onClose_time">
-                <van-datetime-picker data-name="birthday" value="{{ currentDate }}" max-date="{{currentDate}}" min-date="{{0}}"  bind:cancel="onClose_time" bind:confirm="onConfirm_time" type="date"/>
+                <van-datetime-picker data-name="birthday" value="{{ currentDate }}" max-date="{{currentDate}}" min-date="{{0}}" bind:cancel="onClose_time" bind:confirm="onConfirm_time" type="date" />
             </van-popup>
         </view>
         <view class="check_item">
             <text class="kind">年龄</text>
             <van-cell-group>
-                <van-field data-name="age" value="{{info.age}}" placeholder="请输入" bind:blur="ageblur" bind:input="checknum"/>
+                <van-field data-name="age" value="{{info.age}}" placeholder="请输入" bind:blur="ageblur" bind:input="checknum" />
             </van-cell-group>
         </view>
         <view class="check_item">
@@ -279,6 +279,21 @@
             <van-cell-group>
                 <van-field data-name="accumulatfundAccount" value="{{info.accumulatfundAccount}}" placeholder="请输入" bind:blur="accumulatfundAccountblur" />
             </van-cell-group>
+        </view>
+        <view class="check_item">
+            <text class="kind">角色</text>
+            <van-cell title="{{info.Roles?info.Roles:'请选择'}}" is-link bind:click="showPopup_kind" />
+            <van-popup show="{{ show_kind }}" round position="bottom" bind:close="onClose_kind">
+                <van-checkbox-group value="{{ result }}" bind:change="onChangekind">
+                    <view class="checkkind">
+                        <text bindtap="onClose_kind">取消</text>
+                        <text bindtap="onConfirm_kind">确定</text>
+                    </view>
+                    <block wx:for="{{GetRoles}}" wx:key="index">
+                        <van-checkbox name="{{item.text}}">{{item.text}}</van-checkbox>
+                    </block>
+                </van-checkbox-group>
+            </van-popup>
         </view>
     </view>
 </view>

@@ -291,7 +291,7 @@ Page({
       userinfo = wx.getStorageSync("myInfo");
     wx.chooseImage({
       count: 1,
-      sizeType: ['original'],
+      sizeType: ['compressed'],
       sourceType: ['camera'],
       success: res => {
         let tempFilePaths = res.tempFilePaths;
@@ -315,7 +315,6 @@ Page({
               that.setData({
                 'info.CheckinPicurl': "https://shangyongren.com:9098" + res.data.replace(/"/g, "")
               })
-              wx.hideToast();
               that.getYearMonth() // 获得考勤年月
               that.getday() // 获取打卡日期
               var jd = that.data.jd
@@ -344,26 +343,26 @@ Page({
                   info
                 })
                 console.log(that.data.info)
-                addsign(that.data.info).then(res => {
-                  console.log(res)
-                  if (res.code == 10000) {
-                    if (res.value) {
-                      wx.showToast({
-                        title: '打卡成功',
-                        icon: 'success',
-                        duration: 3000
-                      })
-                      util.returnPrev('sign', '', that.data.userid, that.data.caption, that.data.dep, that.data.deptxt,
-                        that.data.rid, that.data.title)
-                    } else {
-                      wx.showToast({
-                        title: '打卡失败',
-                        duration: 3000
-                      })
-                    }
-
-                  }
-                })
+                // addsign(that.data.info).then(res => {
+                //   console.log(res)
+                //   if (res.code == 10000) {
+                //     if (res.value) {
+                //       wx.showToast({
+                //         title: '打卡成功',
+                //         icon: 'success',
+                //         duration: 3000
+                //       })
+                //       wx.hideToast();
+                //       util.returnPrev('sign', '', that.data.userid, that.data.caption, that.data.dep, that.data.deptxt,
+                //         that.data.rid, that.data.title)
+                //     } else {
+                //       wx.showToast({
+                //         title: '打卡失败',
+                //         duration: 3000
+                //       })
+                //     }
+                //   }
+                // })
               }
             }
           },

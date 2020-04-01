@@ -1,0 +1,35 @@
+<!-- pages/detail/detail.wxml -->
+<view wx:if="{{info}}">
+    <view class="header d_header">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="delete">删除</text>
+        <view class="apply">资料详情</view>
+    </view>
+    <view class="card">
+        <van-card title="{{info.name}}" />
+    </view>
+    <view class="main_nav">
+        <view class="content">
+            <view class="c_item">
+                <view class="kind">上级编码</view>
+                <view class="check">{{info.PID}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">模块名称</view>
+                <view class="check">{{info.name}}</view>
+            </view>
+            <view class="c_item">
+                <view class="kind">icon图标</view>
+                <view class="check">{{info.icon}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="footer">
+        <view>
+            <navigator open-type="redirect" url="/OAmoudle/pages/checkMenu/new/new?id={{info.ID}}" hover-class="none">
+                <icon class="iconfont icon-bianji"></icon>
+                <text>编辑</text>
+            </navigator>
+        </view>
+    </view>
+</view>

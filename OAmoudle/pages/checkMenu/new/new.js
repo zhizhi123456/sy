@@ -1,9 +1,9 @@
 // pages/new/new.js
 import Toast from 'vant-weapp/dist/toast/toast';
 import {
-  addStruct,
-  referStruct,
-  amendStruct
+  addMenu,
+  amendMenu,
+  referMenu
 } from "../../../../service/getData";
 var util = require("../../../../utils/util");
 var app = getApp();
@@ -15,78 +15,46 @@ Page({
   data: {
     info: {},
   },
-  // ID: 10004
-  // 组织架构编码 OrganizStructCode: "11"
-  // 组织架构名称 OrganizStructName: "尚雍"
-  // 父组织架构 ParentCode: null
-  // 组织架构类型 StructKind: 0
-  // 组织架构层级 StructLevel: 1
-  // createman: "root3"
-  // createtime: "2020-03-10 14:25:46"
-  // 是否启用 ifenable: true
-  // updateman: null
-  // updatetime: null
-  checknum(e) {
-    let info = this.data.info;
-    info.OrganizStructCode = e.detail.replace(/[^\d]/g, '');
-    this.setData({
-      info
-    })
-  },
+  //   ID: 2093
+  // PID: 2088
+  // icon: "icon-keshihuajianguan
+  // ↵"
+  // menuId: null
+  // name: "工程监管"
+  // pageaddres: null
   // 组织架构编码
-  OrganizStructCodeblur(e) {
+  nameblur(e) {
     let info = util.editInfo(e, this, e.detail.value);
     this.setData({
       info
     })
   },
   // 组织架构名称
-  OrganizStructNameblur(e) {
-    let info = util.editInfo(e, this, e.detail.value);
-    this.setData({
-      info
-    })
-  },
-  // 上级组织架构层级
-  ParentCodeblur(e) {
-    let info = util.editInfo(e, this, e.detail.value);
-    this.setData({
-      info
-    })
-  },
-  // 本组织架构层级
-  StructLevelblur(e) {
+  iconblur(e) {
     let info = util.editInfo(e, this, e.detail.value);
     this.setData({
       info
     })
   },
   confirm() {
-    this.setData({
-      'info.createman': userinfo.UserName,
-      'info.createtime': util.format(new Date()),
-      'info.ifenable': 1
-    })
     if (this.data.next) {
       this.setData({
-        'info.StructLevel': this.data.pevInfo.StructLevel + 1,
-        'info.ParentCode': this.data.pevInfo.OrganizStructCode,
-        'info.OrganizStructCode': this.data.pevInfo.OrganizStructCode + this.data.info.OrganizStructCode
+        'info.PID': this.data.pevInfo.ID,
       })
-    } else {
+    }else{
       this.setData({
-        'info.StructLevel': 1,
+        'info.PID':1
       })
     }
-    if (this.data.info.OrganizStructCode && this.data.info.OrganizStructName) {
-      addStruct(this.data.info).then(res => {
+    if (this.data.info.name && this.data.info.icon) {
+      addMenu(this.data.info).then(res => {
         if (res.code == 10000) {
           wx.showToast({
             title: '新建成功',
             icon: 'success',
             duration: 3000
           })
-          util.OAreturn('organize');
+          util.OAreturn('checkMenu');
         }
       })
     } else {
@@ -98,26 +66,21 @@ Page({
   },
   // 返回
   return () {
-    util.OAreturn('organize');
+    util.OAreturn('checkMenu');
   },
   // 编辑页面的确定和返回
   editreturn() {
-    util.OAreturn('organize', this);
+    util.OAreturn('checkMenu', this);
   },
   editconfirm() {
-    this.setData({
-      'info.updateman': userinfo.UserName,
-      'info.updatetime': util.format(new Date()),
-      'info.OrganizStructCode': this.data.info.ParentCode ? (this.data.info.ParentCode + this.data.info.OrganizStructCode) : this.data.info.OrganizStructCode
-    })
-    amendStruct(this.data.info).then(res => {
+    amendMenu(this.data.info).then(res => {
       if (res.code == 10000) {
         wx.showToast({
           title: '编辑成功',
           icon: 'success',
           duration: 3000
         })
-        util.OAreturn('organize', this);
+        util.OAreturn('checkMenu', this);
       }
     })
   },
@@ -130,7 +93,7 @@ Page({
       this.setData({
         next: true
       })
-      referStruct({
+      referMenu({
         ID: options.id
       }).then(res => {
         let item = res.Item;
@@ -139,11 +102,10 @@ Page({
         })
       })
     } else if (options.id) {
-      referStruct({
+      referMenu({
         ID: options.id
       }).then(res => {
         let item = res.Item;
-        item.OrganizStructCode = item.OrganizStructCode.slice(-2);
         this.setData({
           info: item
         })

@@ -18,6 +18,7 @@ Page({
     departmenttext: "请选择",
     info: {
       API_Picurl: [],
+      API_file:[]
     },
     check_photo: [{
       name: "拍照"
@@ -263,7 +264,16 @@ Page({
         mask: true
       });
     }
-
+  },
+  delF(e) {
+    util.delFilenew(this, e);
+  },
+  downF(e) {
+    util.lookFileIDEA(e);
+  },
+  // 文件上传
+  up_file() {
+    util.upFilenew(this,this.data.info.API_file);
   },
   // 返回
   return () {

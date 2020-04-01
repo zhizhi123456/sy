@@ -1,0 +1,4 @@
+.cmain {
+    margin-top: 100rpx;
+    padding: 20rpx;
+}

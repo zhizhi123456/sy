@@ -1,0 +1,74 @@
+<!-- pages/new/new.wxml -->
+<view class="wraper">
+    <view class="header d_header" wx:if="{{info.ID}}">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="editreturn"></icon>
+        <text class="fr newCreate" bindtap="editconfirm">确定</text>
+        <view class="apply">编辑菜单</view>
+    </view>
+    <view class="header d_header" wx:else>
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="confirm">确定</text>
+        <view class="apply">新建菜单</view>
+    </view>
+    <view class="main n_main">
+        <van-toast id="van-toast" />
+        <block wx:if='{{next}}'>
+            <view class="check_item">
+                <text class="kind">上级编码</text>
+                <van-cell-group>
+                    <van-field value="{{pevInfo.ID}}" disabled />
+                </van-cell-group>
+            </view>
+            <view class="check_item">
+                <text class="kind">上级模块名称</text>
+                <van-cell-group>
+                    <van-field data-name="ParentCode" value="{{pevInfo.name}}" disabled />
+                </van-cell-group>
+            </view>
+            <view class="check_item">
+                <view class="kind require">
+                    <text>模块名称</text>
+                    <text class="required">*</text>
+                </view>
+                <van-cell-group>
+                    <van-field data-name="name" value="{{info.name}}" placeholder="请输入" bind:blur="nameblur" />
+                </van-cell-group>
+            </view>
+            <view class="check_item">
+                <view class="kind require">
+                    <text>icon图标</text>
+                    <text class="required">*</text>
+                </view>
+                <van-cell-group>
+                    <van-field data-name="icon" value="{{info.icon}}" placeholder="请输入" bind:blur="iconblur" />
+                </van-cell-group>
+            </view>
+        </block>
+        <block wx:else>
+            <view class="check_item">
+                <text class="kind">上级编码</text>
+                <van-cell-group>
+                    <van-field data-name="PID" disabled value="{{info.PID?info.PID:'1'}}" />
+                </van-cell-group>
+            </view>
+            <view class="check_item">
+                <view class="kind require">
+                    <text>模块名称</text>
+                    <text class="required">*</text>
+                </view>
+                <van-cell-group>
+                    <van-field data-name="name" value="{{info.name}}" placeholder="请输入" bind:blur="nameblur" />
+                </van-cell-group>
+            </view>
+            <view class="check_item">
+                <view class="kind require">
+                    <text>icon图标</text>
+                    <text class="required">*</text>
+                </view>
+                <van-cell-group>
+                    <van-field data-name="icon" value="{{info.icon}}" placeholder="请输入" bind:blur="iconblur" />
+                </van-cell-group>
+            </view>
+        </block>
+    </view>
+</view>

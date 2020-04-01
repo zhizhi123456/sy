@@ -130,6 +130,10 @@
                 <view class="kind">公积金账号</view>
                 <view class="check">{{info.accumulatfundAccount}}</view>
             </view>
+            <view class="c_item">
+                <view class="kind">角色</view>
+                <view class="check">{{info.Roles}}</view>
+            </view>
         </view>
     </view>
     <view class="footer">
