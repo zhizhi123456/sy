@@ -6,33 +6,25 @@
         <view class="apply">资料详情</view>
     </view>
     <view class="card">
-        <van-card title="{{info.OrganizStructName}}" />
+        <van-card title="{{info.ClassName}}" />
     </view>
     <view class="main_nav">
         <view class="content">
             <view class="c_item">
-                <view class="kind">组织架构名称</view>
-                <view class="check">{{info.OrganizStructName}}</view>
+                <view class="kind">办公物品类别名称</view>
+                <view class="check">{{info.ClassName}}</view>
             </view>
             <view class="c_item">
-                <view class="kind">组织架构层级</view>
-                <view class="check">{{info.StructLevel}}</view>
+                <view class="kind">办公物品类别层级</view>
+                <view class="check">{{info.ClassLevel}}</view>
             </view>
             <view class="c_item">
-                <view class="kind">组织架构编码</view>
-                <view class="check">{{info.OrganizStructCode}}</view>
+                <view class="kind">办公物品类别编码</view>
+                <view class="check">{{info.ClassCode}}</view>
             </view>
             <view class="c_item">
-                <view class="kind">父组织架构</view>
-                <view class="check">{{info.ParentCode}}</view>
-            </view>
-            <view class="c_item">
-                <view class="kind">组织架构类型</view>
-                <view class="check">{{info.StructKind?'部门':'公司'}}</view>
-            </view>
-              <view class="c_item">
-                <view class="kind">负责人</view>
-                <view class="check">{{info.chargeman}}</view>
+                <view class="kind">父办公物品类别</view>
+                <view class="check">{{info.ParentClass}}</view>
             </view>
             <view class="c_item">
                 <view class="kind">创建人</view>
@@ -54,7 +46,7 @@
     </view>
     <view class="footer">
         <view>
-            <navigator open-type="redirect" url="/OAmoudle/pages/organize/new/new?id={{info.ID}}" hover-class="none">
+            <navigator open-type="redirect" url="/OAmoudle/pages/warehouse/new/new?id={{info.ID}}" hover-class="none">
                 <icon class="iconfont icon-bianji"></icon>
                 <text>编辑</text>
             </navigator>

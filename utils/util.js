@@ -1045,6 +1045,7 @@ const handleData = (data, key, dep) => {
     }
     data.mainprojecttype = kinds.join(",");
   }
+  data.IslockedOut = whethercontent(data.IslockedOut)
   // if (data.leavetype) {
   //   var kinds = [];
   //   data.leavetype.split(",").forEach(res => {
@@ -2807,6 +2808,7 @@ const intro = (data, that) => {
   //   data.receivedepartment = kinds.join(",");
   // }
   data.isstick = whether(data.isstick)
+  data.IslockedOut = whether(data.IslockedOut)
   data.issubdivision = whether(data.issubdivision)
 }
 const outflow = (data, that) => {

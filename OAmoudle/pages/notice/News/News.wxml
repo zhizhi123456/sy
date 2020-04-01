@@ -24,7 +24,7 @@
     <view class="news">
         <view wx:for="{{InfoList}}" wx:key="{{index}}">
             <view bind:tap="change1">
-                <van-notice-bar text="{{item.name}}" backgroundColor="teal" color="white" left-icon="volume-o" speed='70' data-id='{{item.ID}}'>
+                <van-notice-bar text="{{item.name}}" backgroundColor="{{((index+1)%2 ==0)?'white':'#ECF9FF'}}" color="{{((index+1)%2 ==0)?'teal':'#1989FA'}}" left-icon="volume-o" speed='70' data-id='{{item.ID}}'>
                     <text slot="right-icon">{{item.time}}</text>
                 </van-notice-bar>
             </view>

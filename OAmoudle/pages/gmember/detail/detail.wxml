@@ -86,19 +86,19 @@
                 <view class="kind">年龄</view>
                 <view class="check">{{info.age}}</view>
             </view>
-            <view class="c_item">
+            <!-- <view class="c_item">
                 <view class="kind">用工形式</view>
                 <view class="check">{{info.employmentform}}</view>
-            </view>
+            </view> -->
             <view class="c_item">
                 <view class="kind">手机号码</view>
                 <view class="check">{{info.mobilephone}}</view>
             </view>
-            <view class="c_item">
+            <!-- <view class="c_item">
                 <view class="kind">身份证地址</view>
                 <view class="check">{{info.IDcardNoAddress}}</view>
-            </view>
-            <view class="c_item">
+            </view> -->
+            <!-- <view class="c_item">
                 <view class="kind">紧急联系人</view>
                 <view class="check">{{info.urgentcontactman}}</view>
             </view>
@@ -109,12 +109,12 @@
             <view class="c_item">
                 <view class="kind">紧急联系人关系</view>
                 <view class="check">{{info.urgentcontmanrela}}</view>
-            </view>
+            </view> -->
             <view class="c_item">
                 <view class="kind">email</view>
                 <view class="check">{{info.email}}</view>
             </view>
-            <view class="c_item">
+            <!-- <view class="c_item">
                 <view class="kind">持有资质证书</view>
                 <view class="check">{{info.qualicertifi}}</view>
             </view>
@@ -125,7 +125,7 @@
             <view class="c_item">
                 <view class="kind">劳动手册相关</view>
                 <view class="check">{{info.labourmanual}}</view>
-            </view>
+            </view> -->
             <view class="c_item">
                 <view class="kind">公积金账号</view>
                 <view class="check">{{info.accumulatfundAccount}}</view>

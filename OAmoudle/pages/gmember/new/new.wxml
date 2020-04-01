@@ -214,25 +214,25 @@
                 <van-field data-name="IDcardNo" value="{{info.IDcardNo}}" placeholder="请输入" bind:blur="IDcardNoblur" />
             </van-cell-group>
         </view>
-        <view class="check_item">
+        <!-- <view class="check_item">
             <text class="kind">身份证地址</text>
             <van-cell-group>
                 <van-field data-name="IDcardNoAddress" value="{{info.IDcardNoAddress}}" placeholder="请输入" bind:blur="IDcardNoAddressblur" />
             </van-cell-group>
-        </view>
-        <view class="check_item">
+        </view> -->
+        <!-- <view class="check_item">
             <text class="kind">用工形式</text>
             <van-cell-group>
                 <van-field data-name="employmentform" value="{{info.employmentform}}" placeholder="请输入" bind:blur="employmentformblur" />
             </van-cell-group>
-        </view>
+        </view> -->
         <view class="check_item">
             <text class="kind">手机号码</text>
             <van-cell-group>
                 <van-field data-name="mobilephone" value="{{info.mobilephone}}" placeholder="请输入" bind:blur="mobilephoneblur" />
             </van-cell-group>
         </view>
-        <view class="check_item">
+        <!-- <view class="check_item">
             <text class="kind">紧急联系人</text>
             <van-cell-group>
                 <van-field data-name="urgentcontactman" value="{{info.urgentcontactman}}" placeholder="请输入" bind:blur="urgentcontactmanblur" />
@@ -249,31 +249,31 @@
             <van-cell-group>
                 <van-field data-name="urgentcontmanrela" value="{{info.urgentcontmanrela}}" placeholder="请输入" bind:blur="urgentcontmanrelablur" />
             </van-cell-group>
-        </view>
+        </view> -->
         <view class="check_item">
             <text class="kind">email</text>
             <van-cell-group>
                 <van-field data-name="email" value="{{info.email}}" placeholder="请输入" bind:blur="emailblur" />
             </van-cell-group>
         </view>
-        <view class="check_item">
+        <!-- <view class="check_item">
             <text class="kind">持有资质证书</text>
             <van-cell-group>
                 <van-field data-name="qualicertifi" value="{{info.qualicertifi}}" placeholder="请输入" bind:blur="qualicertifiblur" />
             </van-cell-group>
-        </view>
-        <view class="check_item">
+        </view> -->
+        <!-- <view class="check_item">
             <text class="kind">入司前工作经历</text>
             <van-cell-group>
                 <van-field data-name="workexperience" value="{{info.workexperience}}" placeholder="请输入" bind:blur="workexperienceblur" />
             </van-cell-group>
-        </view>
-        <view class="check_item">
+        </view> -->
+        <!-- <view class="check_item">
             <text class="kind">劳动手册相关</text>
             <van-cell-group>
                 <van-field data-name="labourmanual" value="{{info.labourmanual}}" placeholder="请输入" bind:blur="labourmanualblur" />
             </van-cell-group>
-        </view>
+        </view> -->
         <view class="check_item">
             <text class="kind">公积金账号</text>
             <van-cell-group>

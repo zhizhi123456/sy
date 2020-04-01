@@ -1,9 +1,9 @@
 // pages/new/new.js
 import Toast from 'vant-weapp/dist/toast/toast';
 import {
-  addStruct,
-  referStruct,
-  amendStruct
+  addwarehouse,
+  referwarehouse,
+  amendwarehouse
 } from "../../../../service/getData";
 var util = require("../../../../utils/util");
 var app = getApp();
@@ -28,7 +28,7 @@ Page({
   // updatetime: null
   checknum(e) {
     let info = this.data.info;
-    info.OrganizStructCode = e.detail.replace(/[^\d]/g, '');
+    info.ClassCode = e.detail.replace(/[^\d]/g, '');
     this.setData({
       info
     })
@@ -61,37 +61,6 @@ Page({
       info
     })
   },
-  // 公司名称
-  showPopup_o() {
-    this.setData({
-      show_o: true
-    });
-  },
-  onClose_o() {
-    this.setData({
-      show_o: false
-    });
-  },
-  onConfirm_o(e) {
-    let info = util.editInfo(e, this, e.detail.value.text);
-    this.setData({
-      info,
-      show_o: false,
-    })
-  },
-  setSeach(e) {
-    this.setData({
-      seach: e.detail.value
-    })
-  },
-  // 
-  finditem3() {
-    let arr = util.findone(app.globalData.Principal, this.data.seach);
-    this.setData({
-      section: arr,
-      seach: ''
-    })
-  },
   confirm() {
     this.setData({
       'info.createman': userinfo.UserName,
@@ -99,25 +68,27 @@ Page({
       'info.ifenable': 1
     })
     if (this.data.next) {
+      console.log(this.data.pevInfo.ClassCode)
+      console.log(this.data.info.ClassCode)
       this.setData({
-        'info.StructLevel': this.data.pevInfo.StructLevel + 1,
-        'info.ParentCode': this.data.pevInfo.OrganizStructCode,
-        'info.OrganizStructCode': this.data.pevInfo.OrganizStructCode + this.data.info.OrganizStructCode
+        'info.ClassLevel': this.data.pevInfo.ClassLevel + 1,
+        'info.ParentClass': this.data.pevInfo.ClassCode,
+        'info.ClassCode': this.data.pevInfo.ClassCode + this.data.info.ClassCode
       })
     } else {
       this.setData({
-        'info.StructLevel': 1,
+        'info.ClassLevel': 1,
       })
     }
-    if (this.data.info.OrganizStructCode && this.data.info.OrganizStructName) {
-      addStruct(this.data.info).then(res => {
+    if (this.data.info.ClassCode && this.data.info.ClassName) {
+      addwarehouse(this.data.info).then(res => {
         if (res.code == 10000) {
           wx.showToast({
             title: '新建成功',
             icon: 'success',
             duration: 3000
           })
-          util.OAreturn('organize');
+          util.OAreturn('warehouse');
         }
       })
     } else {
@@ -129,35 +100,36 @@ Page({
   },
   // 返回
   return () {
-    util.OAreturn('organize');
+    util.OAreturn('warehouse');
   },
   // 编辑页面的确定和返回
   editreturn() {
-    util.OAreturn('organize', this);
+    util.OAreturn('warehouse', this);
   },
   editconfirm() {
-    if (this.data.info.StructLevel == '1') {
+
+    this.setData({
+
+      'info.updateman': userinfo.UserName,
+      'info.updatetime': util.format(new Date())
+    })
+    if (this.data.info.ClassLevel == '1') {
       this.setData({
-        'info.OrganizStructCode': this.data.info.OrganizStructCode,
+        'info.ClassCode': this.data.info.ClassCode,
       })
     } else {
       this.setData({
-        'info.OrganizStructCode': this.data.info.ParentCode + this.data.info.OrganizStructCode,
+        'info.ClassCode': this.data.info.ParentClass + this.data.info.ClassCode,
       })
     }
-    this.setData({
-      'info.updateman': userinfo.UserName,
-      'info.updatetime': util.format(new Date()),
-      'info.OrganizStructCode': this.data.info.ParentCode ? (this.data.info.ParentCode + this.data.info.OrganizStructCode) : this.data.info.OrganizStructCode
-    })
-    amendStruct(this.data.info).then(res => {
+    amendwarehouse(this.data.info).then(res => {
       if (res.code == 10000) {
         wx.showToast({
           title: '编辑成功',
           icon: 'success',
           duration: 3000
         })
-        util.OAreturn('organize', this);
+        util.OAreturn('warehouse', this);
       }
     })
   },
@@ -166,14 +138,11 @@ Page({
    */
   onLoad: function (options) {
     userinfo = wx.getStorageSync("myInfo");
-    this.setData({
-      section:app.globalData.Principal
-    })
     if (options.next && options.id) {
       this.setData({
         next: true
       })
-      referStruct({
+      referwarehouse({
         ID: options.id
       }).then(res => {
         let item = res.Item;
@@ -182,11 +151,13 @@ Page({
         })
       })
     } else if (options.id) {
-      referStruct({
+      referwarehouse({
         ID: options.id
       }).then(res => {
+        console.log(res)
         let item = res.Item;
-        item.OrganizStructCode = item.OrganizStructCode.slice(-2);
+        var str = item.ClassCode
+        item.ClassCode = str.slice(-2)
         this.setData({
           info: item
         })

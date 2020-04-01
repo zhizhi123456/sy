@@ -3,7 +3,7 @@
 <view wx:if="{{lists.length}}">
   <view class="header">
     <navigator open-type="redirect" url='/pages/secondary/secondary?menuId=null&id=2129&title=后台管理&num=2091&mtitle=我的&source=index'>
-      <icon wx:if="{{entered&&num==2091}}" class="iconfont icon-dianshi fl"></icon>
+      <icon wx:if="{{entered&&num==2091&&back}}" class="iconfont icon-dianshi fl"></icon>
     </navigator>
     <text wx:if="{{entered&&num==2091}}" class="fr newCreate iconfont icon-wode">{{userinfo.UserName}}</text>
     <view class="apply kapply">{{title}}</view>
@@ -62,7 +62,7 @@
     </view>
     <block wx:if="{{news}}">
       <view wx:for="{{news}}" wx:key="index">
-        <van-notice-bar text="{{item.name}}" backgroundColor="teal" color="white" left-icon="volume-o" speed='70' bind:tap="change1" data-id='{{item.id}}'>
+        <van-notice-bar text="{{item.name}}" backgroundColor="{{((index+1)%2 ==0)?'white':'#ECF9FF'}}" color="{{((index+1)%2 ==0)?'teal':'#1989FA'}}" left-icon="volume-o" speed='70' bind:tap="change1" data-id='{{item.id}}'>
           <text slot="right-icon">{{item.time}}</text>
         </van-notice-bar>
       </view>

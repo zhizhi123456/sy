@@ -1,0 +1,124 @@
+<!-- OAmoudle/pages/warehouse/pact/pact.wxml -->
+<view class="wraper">
+    <view class="header">
+        <view class="title">
+            <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
+            <view class="apply">物资仓库商品类别</view>
+        </view>
+        <view class="seach z_seach">
+            <text class="fl s-check">选择层级</text>
+            <navigator link-type="redirectTo" url="/OAmoudle/pages/warehouse/new/new"><text class="fr s-new">新建</text></navigator>
+            <view class="data_list">
+                <van-dropdown-menu active-color="teal">
+                    <van-dropdown-item value="{{val}}" options="{{tier}}" bindchange="changeItem" />
+                </van-dropdown-menu>
+            </view>
+        </view>
+        <view class="seach">
+            <text class="fl s-check">关键字</text>
+            <!-- <icon class="iconfont icon-sousuo fr" bindtap="seachInfo"></icon> -->
+            <text class="fr s-new" bindtap="addInfo" bindtap="seachInfo">搜索</text>
+            <view class="data_list">
+                <input value="{{info.ClassCode}}" bindblur="setSeach" placeholder="请输入物资仓库商品类别名称" />
+            </view>
+        </view>
+    </view>
+    <view class="main z_main">
+        <van-collapse value="{{ activeNames }}" accordion>
+            <block wx:for="{{InfoList}}" wx:key="index">
+                <van-collapse-item name="{{index+1}}" wx:if='{{item.ClassLevel<2}}' data-code='{{item.ClassCode}}' is-link="{{false}}" class="zlist">
+                    <view slot="title">
+                        <!-- <view class="fl">{{item.List[0].TableNameChinese}}</view> -->
+                        <view class="zitem">
+                            <text class="Ninfo">{{item.ClassName}}</text>
+                            <text>办公物品类别编码：{{item.ClassCode}}</text>
+                        </view>
+                        <view class="zitem">
+                           <text>办公物品类别层级：第{{item.ClassLevel}}级</text>
+                            <text>{{item.ParentClass?'办公物品类别：'+item.ClassLevel:''}}</text>
+                        </view>
+                        <view class="zitem Sbut">
+                             <navigator link-type="redirectTo" url="/OAmoudle/pages/warehouse/new/new?id={{item.ID}}&next=n"><text class="itext">新建下层</text></navigator>
+                            <text bindtap='lookItem' data-code='{{item.ClassCode}}' data-i="{{index+1}}">查看下层</text>
+                            <navigator link-type="redirectTo" url="/OAmoudle/pages/warehouse/new/new?id={{item.ID}}"><text class="itext">编辑</text></navigator>
+                            <text bindtap='delItem' data-i="{{item.ID}}">删除</text>
+                        </view>
+                    </view>
+                    <block wx:for="{{depLIst}}" wx:key="index">
+                        <van-cell title="{{item.ClassName}}" is-link link-type="redirectTo" url="/OAmoudle/pages/warehouse/detail/detail?id={{item.ID}}" />
+                    </block>
+                </van-collapse-item>
+            </block>
+        </van-collapse>
+        <van-collapse value="{{ activeNames }}" accordion>
+            <block wx:for="{{InfoList}}" wx:key="index">
+                <van-collapse-item name="{{index+1}}" wx:if="{{info.ClassLevel>1}}" data-code='{{item.ClassCode}}' is-link="{{false}}" class="zlist">
+                    <view slot="title">
+                        <!-- <view class="fl">{{item.List[0].TableNameChinese}}</view> -->
+                        <view class="zitem">
+                            <text class="Ninfo">{{item.ClassName}}</text>
+                            <text>办公物品类别编码：{{item.ClassCode}}</text>
+                        </view>
+                        <view class="zitem">
+                            <text>办公物品类别层级：第{{item.ClassLevel}}级</text>
+                            <text>{{item.ParentClass?'办公物品类别：'+item.ClassLevel:''}}</text>
+                        </view>
+                        <view class="zitem Sbut">
+                            <navigator link-type="redirectTo" url="/OAmoudle/pages/warehouse/new/new?id={{item.ID}}&next=n"><text class="itext">新建下层</text></navigator>
+                            <text bindtap='lookItem' data-code='{{item.ClassCode}}' data-i="{{index+1}}">查看下层</text>
+                            <navigator link-type="redirectTo" url="/OAmoudle/pages/warehouse/new/new?id={{item.ID}}"><text class="itext">编辑</text></navigator>
+                            <text bindtap='delItem' data-i="{{item.ID}}">删除</text>
+                        </view>
+                    </view>
+                    <block  wx:if="{{depLIst.length}}">
+                        <block wx:for="{{depLIst}}" wx:key="index">
+                            <van-cell title="{{item.ClassName}}" is-link link-type="redirectTo" url="/OAmoudle/pages/warehouse/detail/detail?id={{item.ID}}"/>
+                        </block>
+                    </block>
+                    <view wx:else>暂无内容</view>
+                </van-collapse-item>
+            </block>
+        </van-collapse>
+        <!-- <block wx:for="{{InfoList}}" wx:key="index">
+            <view class="list" wx:if='{{item.StructLevel<2}}' data-code='{{item.ClassCode}}'>
+                <navigator open-type="redirect" hover-class="none" url="/OAmoudle/pages/">
+                    <view>
+                        <text class="Ninfo">{{item.ClassCode}}</text>
+                        <text>组织架构编码：{{item.ClassCode}}</text>
+                    </view>
+                    <view>
+                        <text>办公物品类别层级：第{{item.StructLevel}}级</text>
+                        <text>{{item.ParentCode?'办公物品类别：'+item.StructLevel:''}}</text>
+                    </view> -->
+        <!-- <view class="Sbut">
+                        <text bindtap='newItem'>新建下层</text>
+                        <text bindtap='lookItem' data-code='{{item.ClassCode}}'>查看下层</text>
+                        <text bindtap='editItem'>编辑</text>
+                        <text bindtap='delItem'>删除</text>
+                    </view> -->
+        <!-- </navigator>
+            </view>
+        </block> -->
+        <!-- <block wx:if="{{info.StructLevel>1||info.ClassCode}}">
+            <view class="list" wx:for="{{InfoList}}" wx:key="index">
+                <view>
+                    <text class="Ninfo">{{item.ClassCode}}</text>
+                    <text>组织架构编码：{{item.ClassCode}}</text>
+                </view>
+                <view>
+                    <text>办公物品类别层级：第{{item.StructLevel}}级</text>
+                    <text>{{item.ParentCode?'办公物品类别：'+item.StructLevel:''}}</text>
+                </view>
+                <view class="Sbut"> -->
+        <!-- <text bindtap='newItem'>新建</text>
+                    <text bindtap='lookItem'>查看</text>
+                    <text bindtap='editItem'>编辑</text>
+                    <text bindtap='delItem'>删除</text> -->
+        <!-- </view>
+            </view>
+        </block> -->
+        <view wx:if="{{loading&&InfoList.length}}" class="end">加载中...</view>
+        <view wx:if="{{!loading&&InfoList.length}}" class="end">已经到底了</view>
+        <view class="no_more" wx:if="{{!InfoList.length}}">暂无内容</view>
+    </view>
+</view>

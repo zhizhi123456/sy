@@ -28,7 +28,8 @@ Page({
     exist: '',
     deng: '',
     dephot: false,
-    news: false
+    news: false,
+    back:false
   },
   deal() {
     // 请求一级菜单
@@ -90,7 +91,7 @@ Page({
           s.ANUm = true
         }
         // if (s.name == '我的申请') {
-        //   s.pageaddres = '/OAmoudle/pages/daily/pact/pact'
+        //   s.pageaddres = '/OAmoudle/pages/role/pact/pact'
         // }
         if (s.name == "招投标") {
           s.name = '投标'
@@ -133,6 +134,14 @@ Page({
             }
           }
         }
+        zong.forEach(s => {
+          if (s.name == '后台管理') {
+            console.log('后台管理')
+            this.setData({
+              back: s.control
+            })
+          }
+        })
         this.setData({
           lists: zong
         })

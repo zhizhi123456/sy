@@ -1,0 +1,88 @@
+<!-- pages/detail/detail.wxml -->
+<view wx:if="{{info}}">
+    <view class="header d_header">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="delete" wx:if="{{(!history)}}">删除</text>
+        <view class="apply">资料详情</view>
+    </view>
+    <view class="card">
+        <van-card title="{{info.debitnotetype}}" />
+    </view>
+    <view class="main_nav">
+        <van-tabs active="a">
+            <van-tab title="详细资料" name="a">
+                <view class="content">
+                    <view class="c_item">
+                        <view class="kind">用户名</view>
+                        <view class="check">{{info.UserName}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">密码</view>
+                        <view class="check">******</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">员工号</view>
+                        <view class="check">{{info.EmpCode}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">员工名称</view>
+                        <view class="check">{{info.EmpName}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">邮箱</view>
+                        <view class="check">{{info.Email}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">电话</view>
+                        <view class="check">{{info.MobilePIN}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">密码问题</view>
+                        <view class="check">{{info.PasswordQuestion}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">密码答案</view>
+                        <view class="check">{{info.PasswordAnswer}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">是否锁定</view>
+                        <view class="check">{{info.IslockedOut}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">备注</view>
+                        <view class="check">{{info.Memo}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">报告视图权限</view>
+                        <view class="check">{{info.ReportViewPermissions}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">创建日期</view>
+                        <view class="check">{{info.FCD}}</view>
+                    </view>
+                    <view class="c_item">
+                        <view class="kind">修改日期</view>
+                        <view class="check">{{info.LUD}}</view>
+                    </view>
+                </view>
+            </van-tab>
+            <!-- <van-tab title="修改记录" name="d" wx:if="{{(!history)&&amendant.length}}">
+                <block wx:if="{{amendant}}">
+                    <van-cell title="记录({{amendant.length}})" />
+                    <block wx:for="{{amendant}}" wx:key="index">
+                        <van-cell title="{{item.text}}" label="{{item.desc}}" data-i='{{item.oldcontext}}' bind:tap="change12" />
+                    </block>
+                </block>
+                <view class="dynamic_state" wx:else>暂无记录</view>
+            </van-tab> -->
+        </van-tabs>
+    </view>
+    <view class="footer" wx:if="{{(!history)}}">
+        <view>
+            <navigator open-type="redirect" url="/OAmoudle/pages/role/new/new?id={{info.ID}}" hover-class="none">
+                <icon class="iconfont icon-bianji"></icon>
+                <text>编辑</text>
+            </navigator>
+        </view>
+    </view>
+</view>

@@ -42,7 +42,7 @@ Page({
       }
     })
   },
-  tap_pic1(e) {
+  tap_pic2(e) {
     util.previews(this, e, this.data.info.invoiceurl)
   },
   defaultimg1(e) {
