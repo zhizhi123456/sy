@@ -109,6 +109,15 @@ Page({
         'info.StructLevel': 1,
       })
     }
+    if(this.data.info.StructKind=='公司'){
+      this.setData({
+        'info.StructKind':0
+      })
+    }else{
+      this.setData({
+        'info.StructKind':1
+      })
+    }
     if (this.data.info.OrganizStructCode && this.data.info.OrganizStructName) {
       addStruct(this.data.info).then(res => {
         if (res.code == 10000) {
@@ -143,6 +152,15 @@ Page({
     } else {
       this.setData({
         'info.OrganizStructCode': this.data.info.ParentCode + this.data.info.OrganizStructCode,
+      })
+    }
+    if(this.data.info.StructKind=='公司'){
+      this.setData({
+        'info.StructKind':0
+      })
+    }else{
+      this.setData({
+        'info.StructKind':1
       })
     }
     this.setData({
@@ -188,6 +206,11 @@ Page({
       }).then(res => {
         let item = res.Item;
         item.OrganizStructCode = item.OrganizStructCode.slice(-2);
+        if(item.StructKind==0){
+          item.StructKind='公司';
+        }else{
+          item.StructKind='部门';
+        }
         this.setData({
           info: item
         })
