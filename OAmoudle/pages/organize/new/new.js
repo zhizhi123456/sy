@@ -147,7 +147,8 @@ Page({
     }
     this.setData({
       'info.updateman': userinfo.UserName,
-      'info.updatetime': util.format(new Date())
+      'info.updatetime': util.format(new Date()),
+      'info.OrganizStructCode': this.data.info.ParentCode ? (this.data.info.ParentCode + this.data.info.OrganizStructCode) : this.data.info.OrganizStructCode
     })
     amendStruct(this.data.info).then(res => {
       if (res.code == 10000) {
@@ -185,8 +186,7 @@ Page({
         ID: options.id
       }).then(res => {
         let item = res.Item;
-        var str = item.OrganizStructCode
-        item.OrganizStructCode = str.slice(-2)
+        item.OrganizStructCode = item.OrganizStructCode.slice(-2);
         this.setData({
           info: item
         })

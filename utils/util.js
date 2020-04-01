@@ -374,6 +374,20 @@ const checkContent = (value, key) => {
     })
     value.mainprojecttype = kinds.join(",");
   }
+  // 角色
+  if (value.Roles) {
+    var kinds = [];
+    value.Roles.split(";").forEach(res => {
+      app.globalData.GetRoles.forEach(depart => {
+        if (res == depart.text) {
+          if (kinds.indexOf(depart.value.substr(-1)) == -1) {
+            kinds.push(depart.value.substr(-1))
+          }
+        }
+      })
+    })
+    value.Roles = kinds.join(";");
+  }
   // // 项目类型
   // if (value.receivedepartment) {
   //   var kinds = [];
@@ -690,6 +704,20 @@ const checkChange = (value, key, dep) => {
       })
     })
     value.mainprojecttype = kinds.join(",");
+  }
+  // 角色
+  if (value.Roles) {
+    var kinds = [];
+    value.Roles.split(";").forEach(res => {
+      app.globalData.GetRoles.forEach(depart => {
+        if (res == depart.text) {
+          if (kinds.indexOf(depart.value.substr(-1)) == -1) {
+            kinds.push(depart.value.substr(-1))
+          }
+        }
+      })
+    })
+    value.Roles = kinds.join(";");
   }
   // 项目类型
   // if (value.receivedepartment) {
@@ -1055,6 +1083,22 @@ const handleData = (data, key, dep) => {
       })
     })
   }
+  if (data.Roles) {
+    var kinds = [];
+    data.Roles.split(";").forEach(res => {
+      app.globalData.GetRoles.forEach(depart => {
+        if (res == depart.value) {
+          if (kinds.indexOf(depart.text) == -1) {
+            kinds.push(depart.text)
+          }
+          // if (value.mainprojecttype && value.mainprojecttype.split(",").length > kinds.length) {
+          //   kinds.push("**");
+          // }
+          data.Roles = kinds.join(";");
+        }
+      })
+    })
+  }
   if (data.amountPlan && data.amountQuantity) {
     let num = (data.amountPlan - data.amountQuantity) / data.amountPlan * 100;
     data.offset = num.toFixed(2) + "%";
@@ -1324,6 +1368,22 @@ const listData = (data, dep, page, list, key, billname) => {
             //   kinds.push("**");
             // }
             value.usesealtype = kinds.join(",");
+          }
+        })
+      })
+    }
+    if (value.Roles) {
+      var kinds = [];
+      value.Roles.split(";").forEach(res => {
+        app.globalData.GetRoles.forEach(depart => {
+          if (res == depart.value) {
+            if (kinds.indexOf(depart.text) == -1) {
+              kinds.push(depart.text)
+            }
+            // if (value.mainprojecttype && value.mainprojecttype.split(",").length > kinds.length) {
+            //   kinds.push("**");
+            // }
+            value.Roles = kinds.join(";");
           }
         })
       })
@@ -1728,6 +1788,75 @@ const upFile = (key) => {
               if (res.statusCode == 200) {
                 // console.log(res.data)
                 info.Minutesofmeeting.push({
+                  name: filedata[i].name,
+                  size: filedata[i].size,
+                  url: "https://shangyongren.com:9098" + res.data.replace(/"/g, "")
+                })
+                that.setData({
+                  info,
+                  up_F: true
+                })
+              }
+              //如果是最后一张,则隐藏等待中  
+              if (uploadImgCount == filedata.length) {
+                wx.hideToast();
+              }
+            },
+            fail: err => {
+              //console.log(err)
+            }
+          })
+        }
+      }
+    })
+  }
+}
+//工作流删除文件
+const delFilenew = (key, e) => {
+  let info = key.data.info,
+    i = e.currentTarget.dataset.index;
+  info.API_file.splice(i, 1);
+  key.setData({
+    info
+  })
+}
+// 上传文件
+const upFilenew = (key, data) => {
+  if (data.length < 9) {
+    let that = key;
+    wx.chooseMessageFile({
+      count: 9, //能选择文件的数量
+      type: 'file',
+      success(res) {
+        let filedata = res.tempFiles;
+        filedata.forEach(element => {
+          if (element.size < 1024) {
+            element.size = element.size + 'B';
+          } else if (element.size < 1048576) {
+            element.size = ((element.size) / 1024).toFixed(2) + 'KB';
+          } else if (element.size < 1073741824) {
+            element.size = ((element.size) / 1048576).toFixed(2) + 'MB';
+          }
+        });
+        wx.showToast({
+          title: '正在上传...',
+          icon: 'loading',
+          mask: true,
+          duration: 10000
+        })
+        let info = that.data.info;
+        var uploadImgCount = 0;
+        for (let i = 0; i < filedata.length; i++) {
+          wx.uploadFile({
+            url: 'https://shangyongren.com:9098/api/record/Get_rec',
+            filePath: filedata[i].path,
+            name: 'file_data',
+            success(res) {
+              uploadImgCount++;
+              // console.log(res)
+              if (res.statusCode == 200) {
+                // console.log(res.data)
+                data.push({
                   name: filedata[i].name,
                   size: filedata[i].size,
                   url: "https://shangyongren.com:9098" + res.data.replace(/"/g, "")
@@ -3697,5 +3826,7 @@ module.exports = {
   Uppercase,
   getbutton,
   updateCode1,
-  updateValueM
+  updateValueM,
+  upFilenew,
+  delFilenew
 }

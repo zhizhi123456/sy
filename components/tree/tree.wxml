@@ -1,0 +1,20 @@
+<!-- components/tree/tree.wxml -->
+<!-- <view>
+  <view>
+    <text wx:if='{{ isBranch }}' bindtap='toggle'>{{ open ? '[ - ]' : '[ + ]' }} </text>
+    <text wx:else>[ · ] </text>
+    <text bindtap='tapItem' data-itemid='{{ model.id }}'>{{ model.text }}</text>
+  </view>
+  <view style='padding-left: 50rpx;' wx:if='{{ isBranch }}' hidden='{{ !open }}'>
+    <mytree wx:for='{{ model.nodes }}' wx:key='id' model='{{ item }}'></mytree>
+  </view>
+</view> -->
+<block wx:for="{{treeData}}" wx:key="index">
+  <view class="citem" catchtap='toggle' data-id="{{item.ID}}" data-isFolder="{{item.isFolder}}">
+    <text wx:if="{{item.isFolder}}">{{item.isOpen?'[-]':'[+]'}}</text>
+    <text class="cname">{{item.Name}}</text>
+    <view wx:if="{{item.isFolder && item.isOpen}}" class='item'>
+      <tree tree="{{item.Submenu}}"></tree>
+    </view>
+  </view>
+</block>

@@ -34,9 +34,9 @@
       </view>
     </block>
   </view>
-  <!-- <view wx:if="{{num==2088}}">
-    <navigator open-type="redirect" url="/OAmoudle/pages/gmember/pact/pact">测试1</navigator>
-  </view> -->
+  <view wx:if="{{num==2088}}">
+    <navigator open-type="redirect" url="/OAmoudle/pages/controlMenu/pact/pact">测试1</navigator>
+  </view>
   <!-- <view wx:if="{{num==1001}}"><navigator open-type="redirect" url="/pages/ledger/pact/pact">测试</navigator></view> -->
   <view wx:if="{{entered&&num==2091}}" class="haDquit">
     <view bindtap="clearData">清除缓存</view>

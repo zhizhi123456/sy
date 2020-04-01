@@ -61,6 +61,14 @@ Page({
     upimg1: false,
     seach: ''
   },
+  formatNum(e) { //正则验证金额输入框格式
+    e.detail = e.detail.replace(/^(\-)*(\d+)\.(\d{6}).*$/, '$1$2.$3')
+    e.detail = e.detail.replace(/[\u4e00-\u9fa5]+/g, ""); //清除汉字
+    e.detail = e.detail.replace(/[^\d.]/g, ""); //清楚非数字和小数点
+    e.detail = e.detail.replace(/^\./g, ""); //验证第一个字符是数字 
+    e.detail = e.detail.replace(".", "$#$").replace(/\./g, "").replace("$#$", "."); //只保留第一个小数点, 清除多余的 
+    e.detail = e.detail.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3');
+  },
   setSeach(e) {
     this.setData({
       seach: e.detail.value
@@ -148,7 +156,7 @@ Page({
   // 数字筛选
   checknum1(e) {
     let info = this.data.info;
-    util.formatNum(e);
+    this.formatNum(e);
     info.TotalSum = e.detail;
     this.setData({
       info
@@ -473,7 +481,7 @@ Page({
     let name = e.currentTarget.dataset.name,
       i = e.currentTarget.dataset.i
     let materials = this.data.materials;
-    util.formatNum(e);
+    this.formatNum(e);
     if (i) {
       materials[i][name] = e.detail;
       // materials[i][name] = Number(e.detail).toFixed(2);

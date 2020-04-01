@@ -55,9 +55,6 @@
     "pages/deal/pact/pact",
     "pages/deal/detail/detail",
     "pages/deal/new/new",
-    "pages/adopt/pact/pact",
-    "pages/adopt/detail/detail",
-    "pages/adopt/new/new",
     "pages/close/pact/pact",
     "pages/close/detail/detail",
     "pages/close/new/new",
@@ -274,7 +271,13 @@
         "pages/warehouse/new/new",
         "pages/role/pact/pact",
         "pages/role/detail/detail",
-        "pages/role/new/new"
+        "pages/role/new/new",
+        "pages/checkMenu/pact/pact",
+        "pages/checkMenu/detail/detail",
+        "pages/checkMenu/new/new",
+        "pages/controlMenu/pact/pact",
+        "pages/controlMenu/detail/detail",
+        "pages/controlMenu/new/new"
       ]
     }
   ],

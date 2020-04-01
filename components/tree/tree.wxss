@@ -1,0 +1,15 @@
+/* components/tree/tree.wxss */
+.item {
+  padding-left: 20px;
+}
+
+.citem {
+  margin: 30rpx 0;
+}
+
+.cname {
+  background-color: teal;
+  color: white;
+  border-radius: 10rpx;
+  padding: 10rpx;
+}

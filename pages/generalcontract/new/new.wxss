@@ -1,0 +1,10 @@
+.check_item .cfile {
+    padding: 20rpx 30rpx;
+}
+
+.filename {
+    font-size: 32rpx;
+}
+.cfile .iconfont{
+    margin-top: -10rpx;
+}

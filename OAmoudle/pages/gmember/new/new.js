@@ -553,6 +553,7 @@ Page({
       GetEducation: app.globalData.GetEducation,
       GetPosition: app.globalData.GetPosition,
       GetGradeTitle: app.globalData.GetGradeTitle,
+      GetRoles: app.globalData.GetRoles,
     })
     if (options.id) {
       referMembernew({
@@ -566,7 +567,30 @@ Page({
       })
     }
   },
-
+ // 角色
+ showPopup_kind() {
+  this.setData({
+    show_kind: true
+  })
+},
+onClose_kind() {
+  this.setData({
+    show_kind: false
+  })
+},
+onChangekind(e) {
+  this.setData({
+    result: e.detail
+  })
+},
+onConfirm_kind() {
+  let info = this.data.info;
+  info.Roles = this.data.result.join(";");
+  this.setData({
+    info,
+    show_kind: false
+  })
+},
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

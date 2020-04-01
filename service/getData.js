@@ -115,7 +115,7 @@ export const GetOverworktype = (params) => http.post("/api/MethodOfDataService/G
 // 单位类型
 export const UnitType = () => http.get("/api/MethodOfDataService/GetUnitType");
 // 多选部门
-export const moredep = (params) => http.post("/api/MethodOfDataService/GetSubDepartment",params);
+export const moredep = (params) => http.post("/api/MethodOfDataService/GetSubDepartment", params);
 //加班时段
 export const GetOvertimeperiod = (params) => http.post("/api/MethodOfDataService/GetOvertimeperiod", params);
 //已提交流转
@@ -136,6 +136,8 @@ export const GetEducation = () => http.get("/api/MethodOfDataService/GetEducatio
 export const GetPosition = () => http.get("/api/MethodOfDataService/GetPosition");
 // 职称
 export const GetGradeTitle = () => http.get("/api/MethodOfDataService/GetGradeTitle");
+// 角色
+export const GetRoles = () => http.get("/api/MethodOfDataService/GetRoles");
 // =================================================================================================================================================================
 //根据项目编号获取项目信息
 export const GetProjectInformation = (params) => http.post("/api/MethodOfDataService/GetProjectInformation", params);
@@ -1452,3 +1454,31 @@ export const detailrole = (params) => http.post("/api/User/DetailID", params);
 export const updaterole = (params) => http.post("/api/User/Update", params);
 // 删除
 export const delrole = (params) => http.post("/api/User/Delete", params);
+// 组织机构
+// 查询
+export const getMenu = (params) => http.post("/api/MenuApp/QuerySearch", params);
+// 根据id查询
+export const referMenu = (params) => http.post("/api/MenuApp/Edit", params);
+// 添加
+export const addMenu = (params) => http.post("/api/MenuApp/Insert", params);
+// 修改
+export const amendMenu = (params) => http.post("/api/MenuApp/EditInfo", params);
+// 删除
+export const cancelMenu = (params) => http.post("/api/MenuApp/Delete", params);
+// 获取下级菜单
+export const getnextMenu = (params) => http.post("/api/MenuApp/Query", params);
+// 菜单id选择
+export const checkMenuID = (params) => http.post("/api/MethodOfDataService/GetMenu", params);
+// 菜单权限
+// 查询
+export const getRoleMenu = (params) => http.post("/api/RoleMenu/MenuList", params);
+// 查询
+export const checkRoleMenu = (params) => http.post("/api/RoleMenu/Query", params);
+// 根据id查询
+export const referRoleMenu = (params) => http.post("/api/RoleMenu/Edit", params);
+// 添加
+export const addRoleMenu = (params) => http.post("/api/RoleMenu/Insert", params);
+// 修改
+export const amendRoleMenu = (params) => http.post("/api/RoleMenu/EditInfo", params);
+// 删除
+export const cancelRoleMenu = (params) => http.post("/api/RoleMenu/Delete", params);
