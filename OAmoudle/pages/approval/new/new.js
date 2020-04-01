@@ -512,7 +512,7 @@ Page({
   // 添加材料明细
   add_more() {
     if (this.data.materials.length > 0) {
-      if (this.data.materials[0].projectcode) {
+      if (this.data.materials[0].detailxh&&this.data.materials[0].detailcontext&&this.data.materials[0].amount&&this.data.materials[0].AppendicesNum) {
         let add_detail = {
           num: this.data.materials.length + 1,
           payapproveid: '',
