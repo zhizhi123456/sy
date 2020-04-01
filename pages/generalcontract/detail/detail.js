@@ -124,7 +124,7 @@ Page({
   // 工作流流转
   // 删除
   delete() {
-    util.OAexpurgate(this, cancel, 'generalcontract')
+    util.expurgate(this, cancel, 'generalcontract')
   },
   // 点击图片放大预览
   tap_pic(e) {

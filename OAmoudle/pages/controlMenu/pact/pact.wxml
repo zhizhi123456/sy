@@ -3,7 +3,7 @@
     <view class="header">
         <view class="title">
             <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
-            <view class="apply">菜单管理</view>
+            <view class="apply">权限管理</view>
         </view>
     </view>
     <view class="cmain">

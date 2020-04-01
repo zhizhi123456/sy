@@ -290,7 +290,6 @@ Page({
     this.setData({
       info
     })
-    console.log(this.data.info)
     amend(this.data.info).then(res => {
       console.log(res)
       if (res.code == 10000) {

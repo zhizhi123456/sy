@@ -1,0 +1,13 @@
+.c_item .cfile {
+    overflow: hidden;
+    border-bottom: 1rpx solid white;
+    padding: 10rpx 0;
+}
+
+.c_item .filename {
+    font-size: 32rpx;
+}
+
+.c_item .icon-shengou {
+    margin-top: -10rpx;
+}

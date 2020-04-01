@@ -110,6 +110,12 @@ const checkContent = (value, key) => {
     })
     value.API_Picurl = value.API_Picurl.join(",")
   }
+  if (value.API_file.length) {
+    // console.log("tupian")
+    value.API_file = JSON.stringify(value.API_file)
+  } else {
+    value.API_file = value.API_Picurl.join(",")
+  }
   var app = getApp();
   // // 请假类别
   app.globalData.Leavetypelist.forEach(res => {
@@ -433,6 +439,11 @@ const checkChange = (value, key, dep) => {
       upimg: false
     })
     value.API_Picurl = value.API_Picurl.join(",")
+  }
+  if (value.API_file.length) {
+    value.API_file = JSON.stringify(value.API_file)
+  }else{
+    value.API_file = value.API_file.join(",")
   }
   if (value.Minutesofmeeting) {
     value.Minutesofmeeting = JSON.stringify(value.Minutesofmeeting);
@@ -1112,6 +1123,11 @@ const handleData = (data, key, dep) => {
     })
   } else {
     data.API_Picurl = [];
+  }
+  if (data.API_file) {
+    data.API_file = JSON.parse(data.API_file)
+  } else {
+    data.API_file = [];
   }
   if (data.Minutesofmeeting) {
     data.Minutesofmeeting = JSON.parse(data.Minutesofmeeting);

@@ -83,7 +83,6 @@ Page({
         this.setData({
           tree: MenuList
         })
-        console.log(this.data.tree)
         wx.hideLoading();
       }
     })
