@@ -2,7 +2,9 @@
 import {
   getRoleMenu,
   queryrole,
-  addRoleMenu
+  addRoleMenu,
+  cancelRoleMenu,
+  amendRoleMenu
 } from '../../../../service/getData.js';
 var app = getApp();
 var util = require("../../../../utils/util");
@@ -22,7 +24,7 @@ Page({
     adddata: [],
     deldata: [],
     RoleId: '',
-    
+
   },
   // MenuList: Array(4)
   // 0:
@@ -110,7 +112,7 @@ Page({
       if (res.code == 10000) {
         let MenuList = res.MenuList;
         this.setData({
-          userorgin:MenuList
+          userorgin: MenuList
         })
         MenuList = this.isFolder(MenuList);
         this.setData({
@@ -149,52 +151,33 @@ Page({
       var changedata = this.data.changedata
       // 判断添加
 
-      changedata.forEach(s => {
-        var add = []
-        original.forEach(u => {
-          if (s.id == u.id) {
-            add.push(true)
-          } else {
-            add.push(false)
-          }
-        })
-        var ifsame = add.some(p => {
-          return p
-        })
-        if (!ifsame) {
-          var adddata = this.data.adddata
-          adddata.push(s.ID)
-          this.setData({
-            adddata
-          })
+       // 判断删除
+       original.forEach(s => {
+        console.log(changedata)
+        console.log(s)
+        var ifhave = JSON.stringify(changedata).indexOf(s.ID);
+        console.log(ifhave)
+        var del = this.data.deldata
+        if (ifhave == -1) {
+          del.push(s.ID)
         }
+        this.setData({
+          deldata: del
+        })
       })
       // 判断删除
       original.forEach(s => {
-        console.log(original)
-        var del = []
-        console.log(s)
         console.log(changedata)
-        changedata.forEach(u => {
-          console.log(s.id)
-          console.log(u.id)
-          if (s.id == u.id) {
-            del.push(true)
-          } else {
-            del.push(false)
-          }
-        })
-        var ifdel = del.some(p => {
-          return p
-        })
-        console.log(del)
-        if (!ifdel) {
-          var deldata = this.data.deldata
-          deldata.push(s.ID)
-          this.setData({
-            deldata
-          })
+        console.log(s)
+        var ifhave = JSON.stringify(changedata).indexOf(s.ID);
+        console.log(ifhave)
+        var del = this.data.deldata
+        if (ifhave == -1) {
+          del.push(s.ID)
         }
+        this.setData({
+          deldata: del
+        })
       })
       console.log(this.data.adddata)
       console.log(this.data.deldata)
@@ -212,13 +195,33 @@ Page({
               icon: 'success',
               duration: 2000
             })
-            // wx.reLaunch({
-            //   url: `/OAmoudle/pages/controlMenu/pact/pact`
-            // })
           }
-
         })
       }
+      var deldata = this.data.deldata
+      deldata = deldata.join(";")
+      console.log(deldata)
+      if (this.data.deldata.length > 0) {
+        cancelRoleMenu({
+          RoleId: this.data.RoleId,
+          MenuId: deldata
+        }).then(res => {
+          if (res.code == 10000) {
+            wx.showToast({
+              title: '修改菜单权限成功',
+              icon: 'success',
+              duration: 2000
+            })
+
+          }
+        })
+      }
+      // setTimeout(
+      //   function () {
+      //     wx.reLaunch({
+      //       url: `/OAmoudle/pages/controlMenu/pact/pact`
+      //     })
+      //   }, 2300)
 
     }
   },
