@@ -1,0 +1,111 @@
+<!-- pages/new/new.wxml -->
+<view class="wraper">
+    <view class="header d_header" wx:if="{{info.ID}}">
+        <icon class="iconfont icon-jiantou2 fl" bindtap="editreturn"></icon>
+        <text class="fr newCreate" bindtap="editconfirm">确定</text>
+        <view class="apply">编辑角色管理</view>
+    </view>
+    <view class="header d_header" wx:else>
+        <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
+        <text class="fr newCreate" bindtap="confirm">确定</text>
+        <view class="apply">新建角色管理</view>
+    </view>
+    <view class="main n_main">
+        <van-toast id="van-toast" />
+        <view class="check_item">
+            <view class="kind require">
+                <text>用户名</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="UserName" value="{{info.UserName}}" type="textarea" autosize placeholder="请输入" bind:blur="projectnameblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>密码</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="Password" type="textarea" autosize value="{{info.Password}}" placeholder="{{info.ID?'请输入新密码':'请输入密码'}}" bind:blur="projectnameblur" />
+            </van-cell-group>
+        </view>
+
+        <view class="check_item">
+            <view class="kind require">
+                <text>员工号</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="EmpCode" value="{{info.EmpCode}}" type="textarea" autosize placeholder="请输入" bind:blur="projectnameblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>员工名称</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="EmpName" type="textarea" autosize value="{{info.EmpName}}" placeholder="请输入" bind:blur="projectnameblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>邮箱</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="Email" value="{{info.Email}}" placeholder="请输入" bind:blur="projectnameblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>电话</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="MobilePIN" value="{{info.MobilePIN}}" placeholder="请输入" bind:blur="projectnameblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>密码问题</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="PasswordQuestion" value="{{info.PasswordQuestion}}" placeholder="请输入" bind:blur="projectnameblur" />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>密码答案</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="PasswordAnswer" value="{{info.PasswordAnswer}}" placeholder="请输入" bind:blur="projectnameblur" />
+            </van-cell-group>
+        </view>
+          <view class="check_item">
+            <view class="kind require">
+                <text>是否锁定</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell title="{{info.IslockedOut?info.IslockedOut:'请选择'}}" bind:click="showPopup_4">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show_nature }}" round position="bottom" bind:close="onClose_4">
+                <van-picker data-name="IslockedOut" show-toolbar columns="{{nature}}" bind:cancel="onClose_4" bind:confirm="onConfirm_4" />
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>备注</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="Memo" value="{{info.Memo}}" placeholder="请输入" bind:blur="projectnameblur" type="textarea" input-class ="textlarge"  autosize />
+            </van-cell-group>
+        </view>
+       <view class="check_item">
+            <view class="kind require">
+                <text>报告视图权限</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="ReportViewPermissions" value="{{info.ReportViewPermissions}}" placeholder="请输入" bind:blur="projectnameblur" />
+            </van-cell-group>
+        </view>
+    </view>
+</view>

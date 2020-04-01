@@ -268,7 +268,13 @@
         "pages/bounus/detail/detail",
         "pages/bounus/new/new",
         "pages/notice/News/News",
-        "pages/notice/Newsdetail/Newsdetail"
+        "pages/notice/Newsdetail/Newsdetail",
+        "pages/warehouse/pact/pact",
+        "pages/warehouse/detail/detail",
+        "pages/warehouse/new/new",
+        "pages/role/pact/pact",
+        "pages/role/detail/detail",
+        "pages/role/new/new"
       ]
     }
   ],

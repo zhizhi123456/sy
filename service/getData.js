@@ -1425,3 +1425,30 @@ export const updatedaily = (params) => http.post("/api/dailylog/Update", params)
 export const deldaily = (params) => http.post("/api/dailylog/Delete", params);
 // 综合查询
 export const qgroupdaily = (params) => http.post("/api/dailylog/Querygroup", params);
+
+// 仓库类别
+// 查询
+export const getwarehouse = (params) => http.post("/api/OfficeitemsClass/Query", params);
+// 根据id查询
+export const referwarehouse = (params) => http.post("/api/OfficeitemsClass/Edit", params);
+// 添加
+export const addwarehouse = (params) => http.post("/api/OfficeitemsClass/Insert", params);
+// 修改
+export const amendwarehouse = (params) => http.post("/api/OfficeitemsClass/EditInfo", params);
+// 删除
+export const cancelwarehouse = (params) => http.post("/api/OfficeitemsClass/Delete", params);
+// 查询所有等级
+export const getwarehouseLevel = (params) => http.post("/api/OfficeitemsClass/QueryClassLevel", params);
+// 仓库类别获取下级
+export const getwarehouseCode = (params) => http.post("/api/OfficeitemsClass/QueryClassCode", params);  
+// 用户角色
+// 查询
+export const queryrole = (params) => http.post("/api/User/Query", params);
+// 添加
+export const addrole = (params) => http.post("/api/User/Insert", params);
+// 根据id查询
+export const detailrole = (params) => http.post("/api/User/DetailID", params);
+// 更新
+export const updaterole = (params) => http.post("/api/User/Update", params);
+// 删除
+export const delrole = (params) => http.post("/api/User/Delete", params);

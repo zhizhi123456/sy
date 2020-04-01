@@ -20,6 +20,7 @@ Page({
     departmenttext: "请选择",
     currentDate: new Date().getTime(),
     mindata: new Date().getTime(),
+    mindata1: (new Date().getTime()) - 60 * 60 * 1000 * 24 * 30 * 12 * 18
   },
   setSeach(e) {
     this.setData({
@@ -541,6 +542,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(this.data.mindata1)
     user = wx.getStorageSync("myInfo");
     this.setData({
       sections: app.globalData.department,

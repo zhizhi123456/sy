@@ -3,76 +3,63 @@
     <view class="header d_header" wx:if="{{info.ID}}">
         <icon class="iconfont icon-jiantou2 fl" bindtap="editreturn"></icon>
         <text class="fr newCreate" bindtap="editconfirm">确定</text>
-        <view class="apply">编辑组织机构</view>
+        <view class="apply">编辑物资仓库商品类别</view>
     </view>
     <view class="header d_header" wx:else>
         <icon class="iconfont icon-jiantou2 fl" bindtap="return"></icon>
         <text class="fr newCreate" bindtap="confirm">确定</text>
-        <view class="apply">新建组织机构</view>
+        <view class="apply">新建物资仓库商品类别</view>
     </view>
     <view class="main n_main">
         <van-toast id="van-toast" />
         <block wx:if='{{next}}'>
             <view class="check_item">
-                <text class="kind">上级组织架构编码</text>
+                <text class="kind">上级办公物品类别编码</text>
                 <van-cell-group>
-                    <van-field value="{{pevInfo.OrganizStructCode}}" disabled />
+                    <van-field value="{{pevInfo.ClassCode}}" disabled />
                 </van-cell-group>
             </view>
             <view class="check_item">
-                <text class="kind">上级组织架构名称</text>
+                <text class="kind">上级办公物品类别名称</text>
                 <van-cell-group>
-                    <van-field value="{{pevInfo.OrganizStructName}}" disabled />
+                    <van-field value="{{pevInfo.ClassName}}" disabled />
                 </van-cell-group>
             </view>
             <view class="check_item">
                 <view class="kind require">
-                    <text>上级组织架构层级</text>
+                    <text>上级办公物品类别层级</text>
                     <text class="required">*</text>
                 </view>
                 <van-cell-group>
-                    <van-field data-name="ParentCode" value="{{pevInfo.StructLevel}}" placeholder="请输入" bind:blur="ParentCodeblur" disabled />
+                    <van-field data-name="ParentClass" value="{{pevInfo.ClassLevel}}" placeholder="请输入" bind:blur="ParentCodeblur" disabled />
                 </van-cell-group>
             </view>
             <view class="check_item">
                 <view class="kind require">
-                    <text>本组织架构层级</text>
+                    <text>本办公物品类别层级</text>
                     <text class="required">*</text>
                 </view>
                 <van-cell-group>
-                    <van-field data-name="StructLevel" value="{{pevInfo.StructLevel+1}}" placeholder="请输入" bind:blur="StructLevelblur" disabled />
+                    <van-field data-name="ClassLevel" value="{{pevInfo.ClassLevel+1}}" placeholder="请输入" bind:blur="StructLevelblur" disabled />
                 </van-cell-group>
             </view>
             <view class="check_item">
                 <view class="kind require">
-                    <text>组织架构编码</text>
+                    <text>办公物品类别编码</text>
                     <text class="required">*</text>
                 </view>
                 <van-cell-group>
-                    <van-field data-name="OrganizStructCode" value="{{info.OrganizStructCode}}" placeholder="请输入" bind:blur="OrganizStructCodeblur" bind:input="checknum" maxlength="{{2}}" />
+                    <van-field data-name="ClassCode" value="{{info.ClassCode}}" placeholder="请输入" bind:blur="OrganizStructCodeblur" bind:input="checknum" maxlength="{{2}}" />
                 </van-cell-group>
             </view>
             <view class="check_item">
                 <view class="kind require">
-                    <text>组织架构名称</text>
+                    <text>办公物品类别名称</text>
                     <text class="required">*</text>
                 </view>
                 <van-cell-group>
-                    <van-field data-name="OrganizStructName" value="{{info.OrganizStructName}}" placeholder="请输入" bind:blur="OrganizStructNameblur" />
+                    <van-field data-name="ClassName" value="{{info.ClassName}}" placeholder="请输入" bind:blur="OrganizStructNameblur" />
                 </van-cell-group>
-            </view>
-            <view class="check_item">
-                <view class="kind require">
-                    <text>负责人</text>
-                </view>
-                <van-cell title="{{info.chargeman?info.chargeman:'请选择'}}" is-link bind:click="showPopup_o" />
-                <van-popup show="{{show_o}}" round position="bottom" bind:close="onClose_o">
-                    <view class="Cseach">
-                        <input value="{{seach}}" bindinput="setSeach" placeholder="请输入搜索内容" />
-                        <button size="mini" bindtap="finditem3">搜索</button>
-                    </view>
-                    <van-picker data-name="chargeman" show-toolbar columns="{{ section }}" bind:cancel="onClose_o" bind:confirm="onConfirm_o" />
-                </van-popup>
             </view>
             <!-- <view class="seach_item">
                 <van-cell-group>
@@ -98,52 +85,39 @@
         <block wx:else>
             <view class="check_item">
                 <view class="kind require">
-                    <text>组织架构编码</text>
+                    <text>办公物品类别编码</text>
                     <text class="required">*</text>
                 </view>
                 <van-cell-group>
-                    <van-field data-name="OrganizStructCode" value="{{info.OrganizStructCode}}" placeholder="请输入" bind:blur="OrganizStructCodeblur" bind:input="checknum" maxlength="{{2}}" />
+                    <van-field data-name="ClassCode" value="{{info.ClassCode}}" placeholder="请输入" bind:blur="OrganizStructCodeblur" bind:input="checknum" maxlength="{{2}}" />
                 </van-cell-group>
             </view>
             <view class="check_item">
                 <view class="kind require">
-                    <text>组织架构名称</text>
+                    <text>办公物品类别名称</text>
                     <text class="required">*</text>
                 </view>
                 <van-cell-group>
-                    <van-field data-name="OrganizStructName" value="{{info.OrganizStructName}}" placeholder="请输入" bind:blur="OrganizStructNameblur" />
+                    <van-field data-name="ClassName" value="{{info.ClassName}}" placeholder="请输入" bind:blur="OrganizStructNameblur" />
                 </van-cell-group>
             </view>
             <view class="check_item">
                 <view class="kind require">
-                    <text>上级组织架构层级</text>
+                    <text>上级办公物品类别层级</text>
                     <text class="required">*</text>
                 </view>
                 <van-cell-group>
-                    <van-field data-name="ParentCode" placeholder="" bind:blur="ParentCodeblur" disabled value="{{info.ParentCode?info.ParentCode:''}}" />
+                    <van-field data-name="ParentClass" placeholder="" bind:blur="ParentCodeblur" disabled value="{{info.ParentClass?info.ParentClass:''}}" />
                 </van-cell-group>
             </view>
             <view class="check_item">
                 <view class="kind require">
-                    <text>本组织架构层级</text>
+                    <text>办公物品类别层级</text>
                     <text class="required">*</text>
                 </view>
                 <van-cell-group>
-                    <van-field data-name="StructLevel" value="1" placeholder="请输入" bind:blur="StructLevelblur" disabled />
+                    <van-field data-name="ClassCode" value="1" placeholder="请输入" bind:blur="ClassCode" disabled />
                 </van-cell-group>
-            </view>
-           <view class="check_item">
-                <view class="kind require">
-                    <text>负责人</text>
-                </view>
-                <van-cell title="{{info.chargeman?info.chargeman:'请选择'}}" is-link bind:click="showPopup_o" />
-                <van-popup show="{{show_o}}" round position="bottom" bind:close="onClose_o">
-                    <view class="Cseach">
-                        <input value="{{seach}}" bindinput="setSeach" placeholder="请输入搜索内容" />
-                        <button size="mini" bindtap="finditem3">搜索</button>
-                    </view>
-                    <van-picker data-name="chargeman" show-toolbar columns="{{ section }}" bind:cancel="onClose_o" bind:confirm="onConfirm_o" />
-                </van-popup>
             </view>
             <!-- <view class="seach_item">
                 <van-cell-group>

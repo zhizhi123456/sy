@@ -52,7 +52,7 @@
                         <view class="kind">发票图片</view>
                         <view wx:if="{{info.invoiceurl}}" class="detpic_show">
                             <block wx:for="{{info.invoiceurl}}" wx:key="index">
-                                <image src="{{item}}" bindtap="tap_pic1" data-index="{{index}}" binderror="defaultimg1" />
+                                <image src="{{item}}" bindtap="tap_pic2" data-index="{{index}}" binderror="defaultimg1" />
                             </block>
                         </view>
                     </view>
