@@ -4,9 +4,23 @@
         <view class="title">
             <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
             <view class="apply">权限管理</view>
+            <text hover-class="none" class="fr" catchtap="Confirm">确定</text>
+        </view>
+    </view>
+    <view class="main">
+        <view class="check_item">
+            <view class="kind require">
+                <text>所属部门</text>
+            </view>
+            <van-cell title="{{user?user:'请选择员工'}}" bind:click="showPopup2">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show2 }}" round position="bottom" bind:close="onClose2">
+                <van-picker data-name="department" show-toolbar columns="{{section}}" bind:cancel="onClose2" bind:confirm="onConfirm2" />
+            </van-popup>
         </view>
     </view>
     <view class="cmain">
-        <tree wx:if="{{tree.length}}" tree="{{tree}}"></tree>
+        <tree wx:if="{{tree.length}}" tree="{{tree}}" bind:myevent="onMyEvent"></tree>
     </view>
 </view>

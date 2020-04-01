@@ -1,4 +1,9 @@
 .cmain {
-    margin-top: 100rpx;
+
     padding: 20rpx;
+}
+
+.main {
+    margin-top: 133rpx;
+    flex: 0;
 }

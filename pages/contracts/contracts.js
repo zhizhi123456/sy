@@ -91,7 +91,7 @@ Page({
           s.ANUm = true
         }
         // if (s.name == '我的申请') {
-        //   s.pageaddres = '/OAmoudle/pages/role/pact/pact'
+        //   s.pageaddres = '/OAmoudle/pages/controlMenu/pact/pact'
         // }
         if (s.name == "招投标") {
           s.name = '投标'

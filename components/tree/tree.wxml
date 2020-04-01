@@ -9,12 +9,16 @@
     <mytree wx:for='{{ model.nodes }}' wx:key='id' model='{{ item }}'></mytree>
   </view>
 </view> -->
+  <checkbox-group  wx:if="{{treeData}}">
 <block wx:for="{{treeData}}" wx:key="index">
-  <view class="citem" catchtap='toggle' data-id="{{item.ID}}" data-isFolder="{{item.isFolder}}">
-    <text wx:if="{{item.isFolder}}">{{item.isOpen?'[-]':'[+]'}}</text>
-    <text class="cname">{{item.Name}}</text>
+  <view class="citem" data-id="{{item.ID}}" data-isFolder="{{item.isFolder}}">
+    <text wx:if="{{item.isFolder}}" catch:tap='toggle' data-id="{{item.ID}}" data-isFolder="{{item.isFolder}}">{{item.isOpen?'[-]':'[+]'}}</text>
+    <checkbox checked="{{item.IsEnabled}}" value="{{item.ID}}" bind:tap="handleTap" data-id='{{item.ID}}' data-isenabled='{{item.IsEnabled}}'/>
+    <text class="cname" catch:tap='toggle' data-id="{{item.ID}}" data-isFolder="{{item.isFolder}}">{{item.Name}}</text>
     <view wx:if="{{item.isFolder && item.isOpen}}" class='item'>
       <tree tree="{{item.Submenu}}"></tree>
     </view>
   </view>
+ 
 </block>
+ </checkbox-group>
