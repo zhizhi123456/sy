@@ -121,6 +121,12 @@ const checkContent = (value, key) => {
       value.leavetype = res.value
     }
   })
+  // 组织机构类型
+  app.globalData.StructKind.forEach(res => {
+    if (value.StructKind == res.text) {
+      value.StructKind = res.value
+    }
+  })
   // 分包合同类型
   app.globalData.contractType.forEach(res => {
     if (value.contractType == res.text) {
@@ -458,6 +464,12 @@ const checkChange = (value, key, dep) => {
       value.leavetype = res.value
     }
   })
+  // 组织机构类型
+  app.globalData.StructKind.forEach(res => {
+    if (value.StructKind == res.text) {
+      value.StructKind = res.value
+    }
+  })
   // 分包合同类型
   app.globalData.contractType.forEach(res => {
     if (value.contractType == res.text) {
@@ -767,6 +779,12 @@ const handleData = (data, key, dep) => {
   app.globalData.Leavetypelist.forEach(depart => {
     if (data.leavetype == depart.value) {
       data.leavetype = depart.text
+    }
+  })
+  // 组织机构类型
+  app.globalData.StructKind.forEach(depart => {
+    if (data.StructKind == depart.value) {
+      data.StructKind = depart.text
     }
   })
   // 分包合同类型

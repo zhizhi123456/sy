@@ -433,6 +433,13 @@ App({
     }, {
       text: '女',
       value: 'true'
+    }],
+    StructKind:[{
+      text: '公司',
+      value: '0'
+    },{
+      text: '部门',
+      value: '1'
     }]
   }
 })

@@ -167,7 +167,8 @@ Page({
   onLoad: function (options) {
     userinfo = wx.getStorageSync("myInfo");
     this.setData({
-      section:app.globalData.Principal
+      section:app.globalData.Principal,
+      StructKind:app.globalData.StructKind,
     })
     if (options.next && options.id) {
       this.setData({
@@ -193,7 +194,23 @@ Page({
       })
     }
   },
-
+  showPopup_1() {
+    this.setData({
+      show_1: true
+    });
+  },
+  onClose_1() {
+    this.setData({
+      show_1: false
+    });
+  },
+  onConfirm_1(e) {
+    let info = util.editInfo(e, this, e.detail.value.text);
+    this.setData({
+      info,
+      show_1: false,
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

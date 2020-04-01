@@ -28,7 +28,7 @@
             </view>
             <view class="c_item">
                 <view class="kind">组织架构类型</view>
-                <view class="check">{{info.StructKind?'部门':'公司'}}</view>
+                <view class="check">{{info.StructKind}}</view>
             </view>
               <view class="c_item">
                 <view class="kind">负责人</view>
