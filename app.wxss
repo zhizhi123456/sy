@@ -53,7 +53,7 @@
     height: 100rpx;
 }
 
-jian .apply .van-dropdown-menu__title {
+ .apply .van-dropdown-menu__title {
     color: white;
     font-size: 36rpx;
 }
