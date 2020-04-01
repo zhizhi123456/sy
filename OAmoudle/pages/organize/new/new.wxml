@@ -74,6 +74,15 @@
                     <van-picker data-name="chargeman" show-toolbar columns="{{ section }}" bind:cancel="onClose_o" bind:confirm="onConfirm_o" />
                 </van-popup>
             </view>
+            <view class="check_item">
+                <view class="kind require">
+                    <text>组织架构类型</text>
+                </view>
+                <van-cell title="{{info.StructKind?info.StructKind:'请选择'}}" is-link bind:click="showPopup_1" />
+                <van-popup show="{{show_1}}" round position="bottom" bind:close="onClose_1">
+                    <van-picker data-name="StructKind" show-toolbar columns="{{ StructKind }}" bind:cancel="onClose_1" bind:confirm="onConfirm_1" />
+                </van-popup>
+            </view>
             <!-- <view class="seach_item">
                 <van-cell-group>
                     <van-field data-name="OrganizStructCode" value="{{info.OrganizStructCode}}" placeholder="请输入" bind:blur="OrganizStructCodeblur" label="组织架构编码" />
@@ -143,6 +152,15 @@
                         <button size="mini" bindtap="finditem3">搜索</button>
                     </view>
                     <van-picker data-name="chargeman" show-toolbar columns="{{ section }}" bind:cancel="onClose_o" bind:confirm="onConfirm_o" />
+                </van-popup>
+            </view>
+             <view class="check_item">
+                <view class="kind require">
+                    <text>组织架构类型</text>
+                </view>
+                <van-cell title="{{info.StructKind?info.StructKind:'请选择'}}" is-link bind:click="showPopup_1" />
+                <van-popup show="{{show_1}}" round position="bottom" bind:close="onClose_1">
+                    <van-picker data-name="StructKind" show-toolbar columns="{{ StructKind }}" bind:cancel="onClose_1" bind:confirm="onConfirm_1" />
                 </van-popup>
             </view>
             <!-- <view class="seach_item">
