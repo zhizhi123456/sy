@@ -102,7 +102,7 @@ Page({
       user: e.detail.value.text,
       show2: false
     })
-    console.log(e.detail.value.value)
+    //console.log(e.detail.value.value)
     this.setData({
       RoleId: e.detail.value.value
     })
@@ -118,7 +118,7 @@ Page({
         this.setData({
           tree: MenuList
         })
-        console.log(this.data.tree)
+        //console.log(this.data.tree)
         wx.hideLoading();
       }
     })
@@ -137,91 +137,117 @@ Page({
     if (!this.data.RoleId) {
       wx.showToast({
         title: '请选择员工',
-        icon: 'success',
+        icon: 'none',
         duration: 2000
       })
     } else {
-      var data2 = this.data.tree
-      this.filtrate(data2)
-      console.log(this.data.original)
-      var data3 = this.data.changelist
-      this.filtchangedata(data3)
-      console.log(this.data.changedata)
-      var original = this.data.original
-      var changedata = this.data.changedata
-      // 判断添加
 
-       // 判断删除
-       original.forEach(s => {
-        console.log(changedata)
-        console.log(s)
-        var ifhave = JSON.stringify(changedata).indexOf(s.ID);
-        console.log(ifhave)
-        var del = this.data.deldata
-        if (ifhave == -1) {
-          del.push(s.ID)
-        }
-        this.setData({
-          deldata: del
-        })
-      })
-      // 判断删除
-      original.forEach(s => {
-        console.log(changedata)
-        console.log(s)
-        var ifhave = JSON.stringify(changedata).indexOf(s.ID);
-        console.log(ifhave)
-        var del = this.data.deldata
-        if (ifhave == -1) {
-          del.push(s.ID)
-        }
-        this.setData({
-          deldata: del
-        })
-      })
-      console.log(this.data.adddata)
-      console.log(this.data.deldata)
-      var adddata = this.data.adddata
-      adddata = adddata.join(";")
-      console.log(adddata)
-      if (this.data.adddata.length > 0) {
-        addRoleMenu({
-          RoleId: this.data.RoleId,
-          MenuId: adddata
-        }).then(res => {
-          if (res.code == 10000) {
-            wx.showToast({
-              title: '修改菜单权限成功',
-              icon: 'success',
-              duration: 2000
-            })
-          }
-        })
-      }
-      var deldata = this.data.deldata
-      deldata = deldata.join(";")
-      console.log(deldata)
-      if (this.data.deldata.length > 0) {
-        cancelRoleMenu({
-          RoleId: this.data.RoleId,
-          MenuId: deldata
-        }).then(res => {
-          if (res.code == 10000) {
-            wx.showToast({
-              title: '修改菜单权限成功',
-              icon: 'success',
-              duration: 2000
-            })
+      //   var data2 = this.data.tree
+      //   this.filtrate(data2)
+      //   //console.log(this.data.original)
+      //   var data3 = this.data.changelist
+      //   this.filtchangedata(data3)
+      //   //console.log(this.data.changedata)
+      //   var original = this.data.original
+      //   var changedata = this.data.changedata
+      //   // 判断添加
 
-          }
-        })
-      }
-      // setTimeout(
-      //   function () {
-      //     wx.reLaunch({
-      //       url: `/OAmoudle/pages/controlMenu/pact/pact`
+      //    // 判断删除
+      //    original.forEach(s => {
+      //     //console.log(changedata)
+      //     //console.log(s)
+      //     var ifhave = JSON.stringify(changedata).indexOf(s.ID);
+      //     //console.log(ifhave)
+      //     var del = this.data.deldata
+      //     if (ifhave == -1) {
+      //       del.push(s.ID)
+      //     }
+      //     this.setData({
+      //       deldata: del
       //     })
-      //   }, 2300)
+      //   })
+      //   // 判断删除
+      //   original.forEach(s => {
+      //     //console.log(changedata)
+      //     //console.log(s)
+      //     var ifhave = JSON.stringify(changedata).indexOf(s.ID);
+      //     //console.log(ifhave)
+      //     var del = this.data.deldata
+      //     if (ifhave == -1) {
+      //       del.push(s.ID)
+      //     }
+      //     this.setData({
+      //       deldata: del
+      //     })
+      //   })
+      //   //console.log(this.data.adddata)
+      //   //console.log(this.data.deldata)
+      //   var adddata = this.data.adddata
+      //   adddata = adddata.join(";")
+      //   //console.log(adddata)
+      //   if (this.data.adddata.length > 0) {
+      //     addRoleMenu({
+      //       RoleId: this.data.RoleId,
+      //       MenuId: adddata
+      //     }).then(res => {
+      //       if (res.code == 10000) {
+      //         wx.showToast({
+      //           title: '修改菜单权限成功',
+      //           icon: 'success',
+      //           duration: 2000
+      //         })
+      //       }
+      //     })
+      //   }
+      //   var deldata = this.data.deldata
+      //   deldata = deldata.join(";")
+      //   //console.log(deldata)
+      //   if (this.data.deldata.length > 0) {
+      //     cancelRoleMenu({
+      //       RoleId: this.data.RoleId,
+      //       MenuId: deldata
+      //     }).then(res => {
+      //       if (res.code == 10000) {
+      //         wx.showToast({
+      //           title: '修改菜单权限成功',
+      //           icon: 'success',
+      //           duration: 2000
+      //         })
+
+      //       }
+      //     })
+      //   }
+
+      var data3 = this.data.changelist
+      // console.log(data3)
+      // this.filtchangedata(data3)
+      // console.log(this.data.changedata)
+      // var changedata = this.data.changedata
+      // var adddata = changedata.map(s => {
+      //   return s.ID
+      // })
+      data3 = data3.join(";")
+      console.log(data3)
+      addRoleMenu({
+        RoleId: this.data.RoleId,
+        MenuId: data3
+      }).then(res => {
+        if (res.code == 10000) {
+          wx.showToast({
+            title: '修改成功',
+            icon: 'success',
+            duration: 2000
+          })
+          setTimeout(
+            function () {
+              wx.reLaunch({
+                url: `/OAmoudle/pages/controlMenu/pact/pact`
+              })
+            }, 2000)
+        }
+      })
+
+
 
     }
   },
@@ -245,19 +271,24 @@ Page({
     })
   },
   filtchangedata(data) {
-    var changedata = this.data.changedata
+    var that = this
+    let changedata = this.data.changedata
+    console.log(changedata)
     data.filter(s => {
+      console.log(s)
       if (s.IsEnabled) {
         changedata.push({
           ID: s.ID,
           IsEnabled: s.IsEnabled
         })
-        this.setData({
+        that.setData({
           changedata
         })
       }
+      console.log(s.Submenu.length)
+      console.log(s.Submenu)
       if (s.Submenu.length > 0) {
-        this.filtrate(s.Submenu)
+        that.filtchangedata(s.Submenu)
       }
       return s.IsEnabled
     })
@@ -290,7 +321,7 @@ Page({
           duration: 2000
         })
       }
-      console.log(res)
+      //console.log(res)
     })
   },
 
@@ -305,7 +336,7 @@ Page({
       }
       arr[i].isOpen = false;
     }
-    console.log(arr)
+    //console.log(arr)
     return arr;
   }
 })

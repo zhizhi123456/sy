@@ -7,19 +7,22 @@ Component({
     tree: {
       type: Array,
       value: []
-    }
+    },
+
   },
 
   /**
    * 组件的初始数据
    */
   data: {
-    treeData: []
+    treeData: [],
+    num: 1,
+    index: []
   },
 
   ready: function () {
     this.setData({
-
+      treeData: this.data.tree
     })
   },
   observers: {
@@ -63,34 +66,90 @@ Component({
       return arr;
     },
     handleTap: function (e) {
+      this.setData({
+        index: []
+      })
       console.log(e.currentTarget.dataset.id)
       var original = this.data.treeData
-      var changedata = this.screen(this.data.treeData, e.currentTarget.dataset.id)
-      console.log(changedata)
-      if (changedata) {
-        console.log(changedata)
-        var myEventDetail = changedata // detail对象，提供给事件监听函数
-        var myEventOption = {}
-        this.triggerEvent('myevent', myEventDetail, myEventOption)
-      }
+      console.log(this.data.treeData)
+      // var changedata = this.screen(this.data.treeData, e.currentTarget.dataset.id)
+
+      // if (changedata) {
+      //   console.log(changedata)
+      //   var myEventDetail = changedata // detail对象，提供给事件监听函数
+      //   var myEventOption = {}
+      //   this.triggerEvent('myevent', myEventDetail, myEventOption)
+      // }
     },
     screen(data, id) {
       var that = this
-      data.forEach(s => {
+      // data.forEach(s => {
+      //   if (s.ID == id) {
+      //     s.IsEnabled = !s.IsEnabled
+      //     console.log('找到了！')
+      //     // console.log(JSON.stringify(this.data.treeData))
+      //     var original = JSON.stringify(this.data.treeData).indexOf(id)
+      //     console.log()
+      //     console.log(original)
+      //     return s
+      //   }
+      //   if (s.Submenu.length > 0) {
+      //     that.screen(s.Submenu)
+      //   }
+      // })
+      console.log(data)
+      console.log(id)
+      data.forEach((s, index) => {
+        console.log(s)
+        console.log(s.ID == id)
         if (s.ID == id) {
-          s.IsEnabled = !s.IsEnabled
-          console.log('找到了！')
-          return s
+          console.log("1级")
+          var arr0 = this.data.index
+          arr0.push(index)
+          this.setData({
+            index: arr0
+          })
+          return data
         }
+        console.log(s.Submenu.length)
+        console.log(s.Submenu)
         if (s.Submenu.length > 0) {
-          that.screen(s.Submenu)
+          s.Submenu.forEach((t, ts) => {
+            if (t.ID == id) {
+              console.log("2级")
+              var arr = this.data.index
+              arr.push(ts)
+              this.setData({
+                index: arr
+              })
+              return data
+            }
+            if (t.Submenu.length > 0) {
+              t.Submenu.forEach((p, ps) => {
+                if (p.ID == id) {
+                  console.log("3级")
+                  var arr1 = this.data.index
+                  arr.push(ps)
+                  this.setData({
+                    index: arr1
+                  })
+                  return data
+                }
+              })
+            }
+          })
         }
       })
-      return data
+
+      console.log(this.data.index)
     },
     checkboxChange: function (e) {
       console.log(e)
-
+     
+        var myEventDetail = e.detail.value // detail对象，提供给事件监听函数
+        var myEventOption = {}
+        this.triggerEvent('myevent', myEventDetail, myEventOption)
+      
     }
   },
 
