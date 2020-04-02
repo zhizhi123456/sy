@@ -240,6 +240,7 @@ App({
     }
   },
   globalData: {
+    num:1,
     moredep: "",
     UnitType: '',
     applytype: '',
