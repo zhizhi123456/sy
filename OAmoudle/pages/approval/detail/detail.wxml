@@ -16,14 +16,15 @@
                         <view class="kind">支付审批单名称</view>
                         <view class="check">{{info.payapproveformname}}</view>
                     </view>
+                     <view class="c_item">
+                        <view class="kind">公司名称</view>
+                        <view class="check">{{info.Companytitle}}</view>
+                    </view>
                     <view class="c_item">
                         <view class="kind">部门</view>
                         <view class="check">{{info.department}}</view>
                     </view>
-                    <view class="c_item">
-                        <view class="kind">公司名称</view>
-                        <view class="check">{{info.Companytitle}}</view>
-                    </view>
+                   
                     <view class="c_item">
                         <view class="kind">付款方式</view>
                         <view class="check">{{info.paytype}}</view>
