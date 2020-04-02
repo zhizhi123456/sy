@@ -164,6 +164,7 @@ Page({
     // util.Triggerflow(this, 'next', 'workovertime', 'overtime', '', '', '', '', '', '', 'oa')
   },
   sconfirm() {
+    console.log(this.data.state)
     if (this.data.state == 'return') {
       if (this.data.ApprovalOpinion) {
         util.Triggerflow(this, 'return', 'usesealform', 'chapter', '', '', '', '', '', '', 'oa', this.data.ApprovalOpinion ? this.data.ApprovalOpinion : '不同意。', JSON.stringify(this.data.idea.API_Picurl), JSON.stringify(this.data.idea.API_Fileurl))

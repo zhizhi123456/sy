@@ -6,7 +6,7 @@
         <view class="apply">资料详情</view>
     </view>
     <view class="card">
-        <van-card title="{{info.useInfo}}"   />
+        <van-card title="{{info.useInfo}}" />
     </view>
     <view class="main_nav">
         <van-tabs active="{{tab}}">
@@ -20,7 +20,7 @@
                         <view class="kind">用章类别</view>
                         <view class="check">{{info.usesealtype}}</view>
                     </view>
-                     <view class="c_item">
+                    <view class="c_item">
                         <view class="kind">其他</view>
                         <view class="check">{{info.Other}}</view>
                     </view>
@@ -40,7 +40,6 @@
                         <view class="kind">用章份数</view>
                         <view class="check">{{info.usenumber}}</view>
                     </view>
-                    
                     <view class="c_item">
                         <view class="kind">图片</view>
                         <view wx:if="{{info.API_Picurl}}" class="detpic_show">
@@ -87,14 +86,14 @@
                 <van-cell title="动态({{Workstate}})" />
                 <van-steps steps="{{ steps }}" active="{{ actived }}" direction="vertical" active-color="#008080" inactive-icon="stop-circle" />
             </van-tab>
-             <van-tab title="具体动态" name="c" wx:if="{{!history}}">
+            <van-tab title="具体动态" name="c" wx:if="{{!history}}">
                 <view wx:if="{{stepLIst.length}}" class="ideainfo">
                     <view class="material" wx:for="{{stepLIst}}" wx:key="index">
                         <view class="m_item">
                             <text class="ideatitle">{{item.createman}}({{item.stepname}})</text>
                         </view>
                         <view class="m_item ideatitle" wx:if="{{item.stepid!=1}}">
-                           {{item.nextstepid?(item.stepid>item.nextstepid?'退回':'审核通过'):'流程结束'}}
+                            {{item.nextstepid?(item.stepid>item.nextstepid?'退回':'审核通过'):'流程结束'}}
                         </view>
                         <view class="m_item">
                             <text>{{item.createtime}}</text>
@@ -127,11 +126,11 @@
                 </view>
                 <view class="dynamic_state" wx:else>暂无内容</view>
             </van-tab>
-             <van-tab title="修改记录" name="d" wx:if="{{(!history)&&amendant.length}}">
+            <van-tab title="修改记录" name="d" wx:if="{{(!history)&&amendant.length}}">
                 <block wx:if="{{amendant}}">
                     <van-cell title="记录({{amendant.length}})" />
-                    <block wx:for="{{amendant}}" wx:key="index"> 
-                          <van-cell title="{{item.text}}" label="{{item.desc}}" data-i='{{item.oldcontext}}' bind:tap="change12"/>
+                    <block wx:for="{{amendant}}" wx:key="index">
+                        <van-cell title="{{item.text}}" label="{{item.desc}}" data-i='{{item.oldcontext}}' bind:tap="change12" />
                     </block>
                 </block>
                 <view class="dynamic_state" wx:else>暂无记录</view>
@@ -139,7 +138,7 @@
         </van-tabs>
     </view>
     <view class="footer" wx:if="{{((info.formid&&isnext&&returned&&isreturn)||(!info.formid)||(isnext&&returned))&&(!history)}}">
-        <view bindtap="sendback" wx:if="{{info.formid&&isnext&&returned&&isreturn}}"data-state='return'>
+        <view bindtap="sendback" data-state='return' wx:if="{{info.formid&&isnext&&returned&&isreturn}}">
             <icon class="iconfont icon-wj-thwj"></icon>
             <text>退回</text>
         </view>
@@ -149,12 +148,12 @@
                 <text>编辑</text>
             </navigator>
         </view>
-        <view bindtap="putin" wx:if="{{isnext&&returned}}" data-state='next'>
+        <view bindtap="putin" wx:if="{{isnext&&returned}}" data-state='next' >
             <icon class="iconfont icon-tijiao"></icon>
-            <text>{{msg}}}</text>    
+            <text>{{msg}}</text>
         </view>
     </view>
-     <view class="seach" wx:if="{{show}}">
+    <view class="seach" wx:if="{{show}}">
         <van-popup show="{{ show }}" bind:close="onClose" round position="bottom" custom-style="height: 50vh;color:#333">
             <view class="seach_item">
                 <van-cell-group>
@@ -188,6 +187,43 @@
             <view class="checkkind">
                 <text bindtap="onClose">取消</text>
                 <text bindtap="sconfirm">{{state=='return'?'退回':'确认'}}</text>
+            </view>
+        </van-popup>
+    </view>
+    <view class="seach" wx:if="{{show1}}">
+        <van-popup show="{{ show1 }}" bind:close="onClose1" round position="bottom" custom-style="height: 50vh;color:#333">
+            <view class="seach_item">
+                <van-cell-group>
+                    <van-field value="{{ ApprovalOpinion }}" type="textarea" placeholder="请输入审批意见" autosize border="{{ false }}" bind:input="ApprovalOpinionblur" label="审批意见" input-class="idea_in" />
+                </van-cell-group>
+            </view>
+            <view class="seach_item">
+                <van-cell title="文件" is-link bindtap="up_file" />
+                <view wx:if="{{idea.API_Fileurl.length}}">
+                    <block wx:for="{{idea.API_Fileurl}}" wx:key="index">
+                        <view class="cfile">
+                            <text class="filename">{{item.name}}</text>
+                            <text class="filesize">{{item.size}}</text>
+                            <icon class="iconfont icon-shanchu-tianchong fr" wx:if="{{up_F}}" bindtap="delF" data-index="{{index}}" />
+                        </view>
+                    </block>
+                </view>
+            </view>
+            <view class="seach_item">
+                <van-cell title="上传图片" is-link bind:click="showPopup_photo" />
+                <van-action-sheet show="{{ show_photo }}" actions="{{ check_photo }}" bind:cancel="onClose_photo" bind:click-overlay="onClose_photo" bind:select="onSelect_photo" cancel-text="取消" />
+                <view wx:if="{{upimg}}" class="datumimgbox">
+                    <block wx:for="{{idea.API_Picurl}}" wx:key="index">
+                        <view class="upimgbox">
+                            <image src="{{item}}" bindtap="tap_pic1" data-index="{{index}}" />
+                            <icon class="iconfont icon-jianhao-tianchong delimg" data-i="{{index}}" bindtap="delimg" />
+                        </view>
+                    </block>
+                </view>
+            </view>
+            <view class="checkkind">
+                <text bindtap="onClose1">取消</text>
+                <text bindtap="tconfirm">退回</text>
             </view>
         </van-popup>
     </view>
