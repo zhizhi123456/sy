@@ -124,6 +124,21 @@ Page({
     })
 
   },
+  return () {
+    util.returnMenu2(2055, "日常办公")
+  },
+  setSeach2(e) {
+    this.setData({
+      seach2: e.detail.value
+    })
+  },
+  finditem2() {
+    let arr = util.findone(this.data.section, this.data.seach2);
+    this.setData({
+      section: arr,
+      seach2: ''
+    })
+  },
   onMyEvent(e) {
     console.log(e.detail)
     // 判断添加 以及删除
@@ -297,6 +312,9 @@ Page({
     wx.showLoading({
       title: '加载中',
     });
+    if (options.source) {
+      wx.setStorageSync('carte', options)
+    }
     getRoleMenu().then(res => {
       if (res.code == 10000) {
         let MenuList = res.MenuList;

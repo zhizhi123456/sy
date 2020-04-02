@@ -10,13 +10,17 @@
     <view class="main">
         <view class="check_item">
             <view class="kind require">
-                <text>所属部门</text>
+                <text>员工</text>
             </view>
             <van-cell title="{{user?user:'请选择员工'}}" bind:click="showPopup2">
                 <icon class="iconfont icon-jiantou" />
             </van-cell>
             <van-popup show="{{ show2 }}" round position="bottom" bind:close="onClose2">
                 <van-picker data-name="department" show-toolbar columns="{{section}}" bind:cancel="onClose2" bind:confirm="onConfirm2" />
+                <view class="Cseach">
+                    <input value="{{seach2}}" bindinput="setSeach2" placeholder="请输入搜索内容" />
+                    <button size="mini" bindtap="finditem2">搜索</button>
+                </view>
             </van-popup>
         </view>
     </view>

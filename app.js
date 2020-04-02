@@ -213,7 +213,7 @@ App({
         getdep({
           UserName: userinfo.UserName
         }).then(res => {
-          //console.log(res)
+          console.log(res)
           if (res) {
             var s = JSON.parse(res)
             if (!(s.lengtn < 1)) {
@@ -227,6 +227,7 @@ App({
               this.globalData.message = info
               //console.log(this.globalData.message)
             } else {
+              this.globalData.message = []
               wx.showToast({
                 title: '获取用户信息失败',
                 icon: "none",

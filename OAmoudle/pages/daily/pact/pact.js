@@ -15,7 +15,7 @@ Page({
     loading: false,
     InfoList: [],
     info: {
-    
+
     },
     sections: '',
     pull: false,
@@ -54,18 +54,29 @@ Page({
       })
     }
     console.log(this.data.info)
-    qgroupdaily(this.data.info).then(res => {
-      if (res.code == 10000) {
-        console.log(res)
-        let item = res.List;
-        util.listData(item, app.globalData.department);
-        this.setData({
-          InfoList: item.reverse(),
-          seach: ''
-        })
-        wx.hideLoading();
-      }
-    })
+    if (app.globalData.message) {
+      qgroupdaily(this.data.info).then(res => {
+        if (res.code == 10000) {
+          console.log(res)
+          let item = res.List;
+          util.listData(item, app.globalData.department);
+          this.setData({
+            InfoList: item.reverse(),
+            seach: ''
+          })
+          wx.hideLoading();
+        }
+      })
+    } else {
+      wx.hideLoading();
+      wx.showToast({
+        title: '部门及公司信息获取失败',
+        icon: 'none',
+        duration: 3000
+      })
+    }
+
+
   },
   /**
    * 生命周期函数--监听页面加载

@@ -182,6 +182,7 @@ Page({
               UserName: this.data.username
             }).then(res => {
               console.log(res)
+              console.log("请求部门")
               if (res) {
                 var s = JSON.parse(res)
                 if(!(s.lengtn<1)){
@@ -195,6 +196,7 @@ Page({
                   app.globalData.message = info
                   console.log(app.globalData.message)
                 }else{
+                  app.globalData.message = []
                   wx.showToast({
                     title: '获取用户信息失败',
                     icon: "none",

@@ -273,10 +273,9 @@
         "pages/role/detail/detail",
         "pages/role/new/new",
         "pages/checkMenu/pact/pact",
-      
-        "pages/controlMenu/pact/pact",
-        "pages/controlMenu/detail/detail",
-        "pages/controlMenu/new/new"
+        "pages/checkMenu/detail/detail",
+        "pages/checkMenu/new/new",
+        "pages/controlMenu/pact/pact"
       ]
     }
   ],
