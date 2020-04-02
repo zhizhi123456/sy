@@ -327,7 +327,7 @@ Page({
                 "info.Token": userinfo.Token,
                 "info.TokenType": userinfo.TokenType,
               })
-              console.log(that.data.info)
+              // console.log(that.data.info)
               // var reach = this.arrive()
               var reach = true
               console.log(reach)
@@ -342,27 +342,27 @@ Page({
                 that.setData({
                   info
                 })
-                console.log(that.data.info)
-                // addsign(that.data.info).then(res => {
-                //   console.log(res)
-                //   if (res.code == 10000) {
-                //     if (res.value) {
-                //       wx.showToast({
-                //         title: '打卡成功',
-                //         icon: 'success',
-                //         duration: 3000
-                //       })
-                //       wx.hideToast();
-                //       util.returnPrev('sign', '', that.data.userid, that.data.caption, that.data.dep, that.data.deptxt,
-                //         that.data.rid, that.data.title)
-                //     } else {
-                //       wx.showToast({
-                //         title: '打卡失败',
-                //         duration: 3000
-                //       })
-                //     }
-                //   }
-                // })
+                // console.log(that.data.info)
+                addsign(that.data.info).then(res => {
+                  console.log(res)
+                  if (res.code == 10000) {
+                    if (res.value) {
+                      wx.showToast({
+                        title: '打卡成功',
+                        icon: 'success',
+                        duration: 3000
+                      })
+                      wx.hideToast();
+                      util.returnPrev('sign', '', that.data.userid, that.data.caption, that.data.dep, that.data.deptxt,
+                        that.data.rid, that.data.title)
+                    } else {
+                      wx.showToast({
+                        title: '打卡失败',
+                        duration: 3000
+                      })
+                    }
+                  }
+                })
               }
             }
           },
