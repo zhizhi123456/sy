@@ -148,7 +148,7 @@ Page({
 
 
   },
-  del(){
+  del() {
     if (!this.data.RoleId) {
       wx.showToast({
         title: '请选择员工',
@@ -156,8 +156,36 @@ Page({
         duration: 2000
       })
     } else {
+      var that = this
+      wx.showModal({
+        content: '确定删除吗？',
+        success(res) {
+          // console.log(that.data.info.ID)
+          if (res.confirm) {
+            cancelRoleMenu({
+              RoleId: that.data.RoleId
+            }).then(res => {
+              if (res.code == 10000) {
+                wx.showToast({
+                  title: '删除成功',
+                  icon: 'success',
+                  duration: 2000
+                })
+                setTimeout(
+                  function () {
+                    wx.reLaunch({
+                      url: `/OAmoudle/pages/controlMenu/pact/pact`
+                    })
+                  }, 2000)
+              }
 
-      
+            })
+          }
+
+        }
+      })
+
+
     }
   },
   Confirm() {
