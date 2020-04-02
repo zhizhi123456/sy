@@ -280,48 +280,54 @@
       "pages/controlMenu/pact/pact"
     ]
   }],
-"window": {
-  "backgroundTextStyle": "dark",
-  "navigationBarBackgroundColor": "#fff",
-  "navigationBarTextStyle": "black"
-},
-"permission": {
-  "scope.userLocation": {
-    "desc": "你的位置信息将用于小程序位置接口的效果展示"
+  "preloadRule": {
+    "pages/contracts/contracts": {
+      "network": "all",
+      "packages": ["OAmoudle"]
+    }
+  },
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTextStyle": "black"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
+  "requiredBackgroundModes": [
+    "location"
+  ],
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "usingComponents": {
+    "van-dropdown-menu": "vant-weapp/dist/dropdown-menu/index",
+    "van-dropdown-item": "vant-weapp/dist/dropdown-item/index",
+    "van-cell": "vant-weapp/dist/cell/index",
+    "van-popup": "vant-weapp/dist/popup/index",
+    "van-picker": "vant-weapp/dist/picker/index",
+    "van-field": "vant-weapp/dist/field/index",
+    "van-datetime-picker": "vant-weapp/dist/datetime-picker/index",
+    "van-action-sheet": "vant-weapp/dist/action-sheet/index",
+    "van-uploader": "vant-weapp/dist/uploader/index",
+    "van-toast": "vant-weapp/dist/toast/index",
+    "van-card": "vant-weapp/dist/card/index",
+    "van-tab": "vant-weapp/dist/tab/index",
+    "van-tabs": "vant-weapp/dist/tabs/index",
+    "van-steps": "vant-weapp/dist/steps/index",
+    "van-dialog": "vant-weapp/dist/dialog/index",
+    "van-checkbox": "vant-weapp/dist/checkbox/index",
+    "van-checkbox-group": "vant-weapp/dist/checkbox-group/index",
+    "van-collapse": "vant-weapp/dist/collapse/index",
+    "van-collapse-item": "vant-weapp/dist/collapse-item/index",
+    "van-sidebar": "vant-weapp/dist/sidebar/index",
+    "van-sidebar-item": "vant-weapp/dist/sidebar-item/index",
+    "van-tag": "vant-weapp/dist/tag/index",
+    "van-divider": "vant-weapp/dist/divider/index",
+    "van-area": "vant-weapp/dist/area/index",
+    "van-notice-bar": "vant-weapp/dist/notice-bar/index",
+    "van-radio": "vant-weapp/dist/radio/index",
+    "van-radio-group": "vant-weapp/dist/radio-group/index"
   }
-},
-"requiredBackgroundModes": [
-  "location"
-],
-"style": "v2",
-"sitemapLocation": "sitemap.json",
-"usingComponents": {
-  "van-dropdown-menu": "vant-weapp/dist/dropdown-menu/index",
-  "van-dropdown-item": "vant-weapp/dist/dropdown-item/index",
-  "van-cell": "vant-weapp/dist/cell/index",
-  "van-popup": "vant-weapp/dist/popup/index",
-  "van-picker": "vant-weapp/dist/picker/index",
-  "van-field": "vant-weapp/dist/field/index",
-  "van-datetime-picker": "vant-weapp/dist/datetime-picker/index",
-  "van-action-sheet": "vant-weapp/dist/action-sheet/index",
-  "van-uploader": "vant-weapp/dist/uploader/index",
-  "van-toast": "vant-weapp/dist/toast/index",
-  "van-card": "vant-weapp/dist/card/index",
-  "van-tab": "vant-weapp/dist/tab/index",
-  "van-tabs": "vant-weapp/dist/tabs/index",
-  "van-steps": "vant-weapp/dist/steps/index",
-  "van-dialog": "vant-weapp/dist/dialog/index",
-  "van-checkbox": "vant-weapp/dist/checkbox/index",
-  "van-checkbox-group": "vant-weapp/dist/checkbox-group/index",
-  "van-collapse": "vant-weapp/dist/collapse/index",
-  "van-collapse-item": "vant-weapp/dist/collapse-item/index",
-  "van-sidebar": "vant-weapp/dist/sidebar/index",
-  "van-sidebar-item": "vant-weapp/dist/sidebar-item/index",
-  "van-tag": "vant-weapp/dist/tag/index",
-  "van-divider": "vant-weapp/dist/divider/index",
-  "van-area": "vant-weapp/dist/area/index",
-  "van-notice-bar": "vant-weapp/dist/notice-bar/index",
-  "van-radio": "vant-weapp/dist/radio/index",
-  "van-radio-group": "vant-weapp/dist/radio-group/index"
-}
 }
