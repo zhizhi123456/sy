@@ -7,3 +7,9 @@
     margin-top: 133rpx;
     flex: 0;
 }
+.cname {
+    background-color: teal;
+    color: white;
+    border-radius: 10rpx;
+    padding: 10rpx;
+  }

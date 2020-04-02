@@ -392,7 +392,11 @@ Page({
     })
   },
   onSelect_photo(e) {
-    util.upImage(this);
+    if (e.detail.name == "拍照") {
+      util.upImage(this, 1);
+    } else {
+      util.upImage(this, 0);
+    }
   },
   delimg(e) {
     util.deleteImg(this, e)
@@ -414,7 +418,7 @@ Page({
       }
       console.log("1")
       if (this.data.materials[0]) {
-      // if (this.data.materials[0]) {
+        // if (this.data.materials[0]) {
         if (!(materials[0].chargeman && materials[0].buyitemname && materials[0].specifications && materials[0].brand &&
             materials[0].unit && materials[0].quantity && materials[0].demo)) {
           Toast({

@@ -97,7 +97,11 @@ Page({
     })
   },
   onSelect_photo(e) {
-    util.upImage(this);
+    if (e.detail.name == "拍照") {
+      util.upImage(this, 1);
+    } else {
+      util.upImage(this, 0);
+    }
   },
   delimg(e) {
     util.deleteImg(this, e)

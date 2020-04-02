@@ -25,6 +25,7 @@
         </view>
     </view>
     <view class="cmain">
+        <text class="cname"bind:tap="del" >删除用户权限</text>
         <tree wx:if="{{tree.length}}" tree="{{tree}}" bind:myevent="onMyEvent"></tree>
     </view>
 </view>

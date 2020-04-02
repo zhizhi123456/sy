@@ -189,7 +189,11 @@ Page({
     })
   },
   onSelect_photo(e) {
-    util.upImage(this);
+    if (e.detail.name == "拍照") {
+      util.upImage(this, 1);
+    } else {
+      util.upImage(this, 0);
+    }
   },
   delimg(e) {
     util.deleteImg(this, e)
@@ -512,7 +516,7 @@ Page({
   // 添加材料明细
   add_more() {
     if (this.data.materials.length > 0) {
-      if (this.data.materials[0].detailxh&&this.data.materials[0].detailcontext&&this.data.materials[0].amount&&this.data.materials[0].AppendicesNum) {
+      if (this.data.materials[0].detailxh && this.data.materials[0].detailcontext && this.data.materials[0].amount && this.data.materials[0].AppendicesNum) {
         let add_detail = {
           num: this.data.materials.length + 1,
           payapproveid: '',

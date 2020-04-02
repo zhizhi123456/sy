@@ -148,6 +148,18 @@ Page({
 
 
   },
+  del(){
+    if (!this.data.RoleId) {
+      wx.showToast({
+        title: '请选择员工',
+        icon: 'none',
+        duration: 2000
+      })
+    } else {
+
+      
+    }
+  },
   Confirm() {
     if (!this.data.RoleId) {
       wx.showToast({
