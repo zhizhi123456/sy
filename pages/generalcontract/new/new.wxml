@@ -33,15 +33,6 @@
         </view> -->
         <view class="check_item">
             <view class="kind require">
-                <text>签报主题</text>
-                <text class="required">*</text>
-            </view>
-            <van-cell-group>
-                <van-field data-name="maincontactname" value="{{info.maincontactname}}" placeholder="请输入" bind:blur="maincontactnameblur" type="textarea" autosize />
-            </van-cell-group>
-        </view>
-        <view class="check_item">
-            <view class="kind require">
                 <text>部门</text>
             </view>
             <!-- <van-cell-group>
@@ -55,6 +46,15 @@
                 </view>
                 <van-picker data-name="department" show-toolbar columns="{{ sections }}" bind:cancel="onClose_o" bind:confirm="onConfirm_o" />
             </van-popup>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>签报主题</text>
+                <text class="required">*</text>
+            </view>
+            <van-cell-group>
+                <van-field data-name="maincontactname" value="{{info.maincontactname}}" placeholder="请输入" bind:blur="maincontactnameblur" type="textarea" autosize />
+            </van-cell-group>
         </view>
         <view class="check_item">
             <text class="kind">签报金额(元)</text>
