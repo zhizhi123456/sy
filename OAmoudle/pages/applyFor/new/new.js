@@ -272,7 +272,11 @@ Page({
     })
   },
   onSelect_photo(e) {
-    util.upImage(this);
+    if (e.detail.name == "拍照") {
+      util.upImage(this, 1);
+    } else {
+      util.upImage(this, 0);
+    }
   },
   delimg(e) {
     util.deleteImg(this, e)
@@ -678,17 +682,16 @@ Page({
   // 添加材料明细
   add_more() {
     let materials = this.data.materials;
-    var ifhave=  materials.some(s => {
+    var ifhave = materials.some(s => {
       return !(s.type && s.detailname && s.unitType && s.quantity != '0')
     })
-    if(ifhave){
+    if (ifhave) {
       wx.showToast({
         title: "请填写必填项以及单位后再新增",
         icon: 'none',
         duration: 3000
       })
-    }
-    else{
+    } else {
       let add_detail = {
         num: this.data.length + 1,
         applyid: '',
@@ -697,7 +700,7 @@ Page({
         unitprice: 0,
         detailname: '',
       };
-  
+
       materials.unshift(add_detail);
       this.setData({
         materials,
@@ -709,7 +712,7 @@ Page({
         util.pageScrollToBottom1();
       }
     }
-  
+
   },
   // 删除材料明细
   reduce_detail(e) {

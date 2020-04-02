@@ -17,12 +17,12 @@ Page({
     info: {
       API_Picurl: [],
       fileurl: [],
-      dailylogman:'',
-      department:'',
-      dailylogdate:'',
-      dailylogTopic:'',
-      dailylogContext:'',
-      specialexplan:''
+      dailylogman: '',
+      department: '',
+      dailylogdate: '',
+      dailylogTopic: '',
+      dailylogContext: '',
+      specialexplan: ''
 
     },
     show2: false,
@@ -36,7 +36,7 @@ Page({
     }],
     fileshow: true,
     up_F: true,
-    ifsame:true
+    ifsame: true
   },
   // 文件上传
   up_file() {
@@ -60,7 +60,11 @@ Page({
     })
   },
   onSelect_photo(e) {
-    util.upImage(this);
+    if (e.detail.name == "拍照") {
+      util.upImage(this, 1);
+    } else {
+      util.upImage(this, 0);
+    }
   },
 
   delimg(e) {
@@ -298,16 +302,16 @@ Page({
         this.setData({
           info: item
         })
-        if(item.dailylogdate.slice(0,10)==(util.format(new Date()).slice(0,10))){
+        if (item.dailylogdate.slice(0, 10) == (util.format(new Date()).slice(0, 10))) {
           console.log('同一天')
           this.setData({
-            ifsame:true
-          }) 
-        }else{
+            ifsame: true
+          })
+        } else {
           console.log('不是同一天')
           this.setData({
-            ifsame:false
-          }) 
+            ifsame: false
+          })
         }
       })
     }

@@ -28,9 +28,7 @@
     "pages/task/pact/pact",
     "pages/task/new/new",
     "pages/task/detail/detail",
-    "pages/adopt/pact/pact",
-    "pages/adopt/new/new",
-    "pages/adopt/detail/detail",
+    
     "pages/shelter/pact/pact",
     "pages/shelter/new/new",
     "pages/shelter/detail/detail",
