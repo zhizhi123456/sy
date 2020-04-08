@@ -153,7 +153,7 @@ Page({
   del() {
     if (!this.data.RoleId) {
       wx.showToast({
-        title: '请选择员工',
+        title: '请选择角色',
         icon: 'none',
         duration: 2000
       })
@@ -195,7 +195,7 @@ Page({
     console.log(!(this.data.RoleId && this.data.changelist))
     if (!(this.data.RoleId && this.data.changelist.length>0)) {
       wx.showToast({
-        title: '请选择员工或选择修改的菜单',
+        title: '请选择角色或选择修改的菜单',
         icon: 'none',
         duration: 2000
       })
@@ -370,26 +370,29 @@ Page({
         wx.hideLoading();
       }
     })
-    getMembernew().then(res => {
-      console.log(res)
-      if (res.code == 10000) {
-        var list = res.List
-        var lists = list.filter(s => {
-          return s.Roles
-        })
-        let section = JSON.parse(JSON.stringify(lists).replace(/Roles/g, 'value').replace(/userId/g, 'text'));
-        this.setData({
-          section
-        })
-      } else {
-        wx.showToast({
-          title: '用户请求失败',
-          icon: 'none',
-          duration: 2000
-        })
-      }
-      //console.log(res)
+    this.setData({
+      section:app.globalData.GetRoles
     })
+    // getMembernew().then(res => {
+    //   console.log(res)
+    //   if (res.code == 10000) {
+    //     var list = res.List
+    //     var lists = list.filter(s => {
+    //       return s.Roles
+    //     })
+    //     let section = JSON.parse(JSON.stringify(lists).replace(/Roles/g, 'value').replace(/userId/g, 'text'));
+    //     this.setData({
+    //       section
+    //     })
+    //   } else {
+    //     wx.showToast({
+    //       title: '用户请求失败',
+    //       icon: 'none',
+    //       duration: 2000
+    //     })
+    //   }
+    //   //console.log(res)
+    // })
   },
 
   isFolder: function (arr) {

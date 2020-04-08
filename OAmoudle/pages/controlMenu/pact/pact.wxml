@@ -10,9 +10,9 @@
     <view class="main">
         <view class="check_item">
             <view class="kind require">
-                <text>员工</text>
+                <text>角色</text>
             </view>
-            <van-cell title="{{user?user:'请选择员工'}}" bind:click="showPopup2">
+            <van-cell title="{{user?user:'请选择角色'}}" bind:click="showPopup2">
                 <icon class="iconfont icon-jiantou" />
             </van-cell>
             <van-popup show="{{ show2 }}" round position="bottom" bind:close="onClose2">
@@ -25,7 +25,7 @@
         </view>
     </view>
     <view class="cmain">
-        <text class="cname"bind:tap="del" >删除用户权限</text>
+        <text class="cname"bind:tap="del" >删除角色权限</text>
         <tree wx:if="{{tree.length}}" tree="{{tree}}" bind:myevent="onMyEvent"></tree>
     </view>
 </view>

@@ -280,7 +280,7 @@
                 <van-field data-name="accumulatfundAccount" value="{{info.accumulatfundAccount}}" placeholder="请输入" bind:blur="accumulatfundAccountblur" />
             </van-cell-group>
         </view>
-        <view class="check_item">
+        <!-- <view class="check_item">
             <text class="kind">角色</text>
             <van-cell title="{{info.Roles?info.Roles:'请选择'}}" is-link bind:click="showPopup_kind" />
             <van-popup show="{{ show_kind }}" round position="bottom" bind:close="onClose_kind">
@@ -293,6 +293,15 @@
                         <van-checkbox name="{{item.text}}">{{item.text}}</van-checkbox>
                     </block>
                 </van-checkbox-group>
+            </van-popup>
+        </view> -->
+        <view class="check_item">
+            <text class="kind">角色</text>
+            <van-cell title="{{info.Roles?info.Roles:'请选择'}}" bind:click="showPopup_2">
+                <icon class="iconfont icon-jiantou" />
+            </van-cell>
+            <van-popup show="{{ show_2}}" round position="bottom" bind:close="onClose_2">
+                <van-picker data-name="Roles" show-toolbar columns="{{ GetRoles }}" bind:cancel="onClose_2" bind:confirm="onConfirm_2" />
             </van-popup>
         </view>
     </view>
