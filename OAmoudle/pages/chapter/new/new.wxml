@@ -87,7 +87,7 @@
                 <text class="required">*</text>
             </view>
             <van-cell-group>
-                <van-field data-name="useInfo" value="{{info.useInfo}}" placeholder="请输入" bind:blur="useInfoblur" />
+                <van-field data-name="useInfo" type="textarea" input-class="textlarge" autosize value="{{info.useInfo}}" placeholder="请输入" bind:blur="useInfoblur" />
             </van-cell-group>
         </view>
         <view class="check_item">

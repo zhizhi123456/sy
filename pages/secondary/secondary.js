@@ -31,7 +31,7 @@ Page({
       pid: this.data.chuancan,
     }).then(res => {
       // 请求所有模块    不带uid
-      // console.log(res)
+      console.log(res)
       zong = res.List
       zong.forEach(s => {
         s.control = true
@@ -84,22 +84,25 @@ Page({
         pid: this.data.chuancan,
         UId: this.data.id
       }).then(ress => {
+        console.log(ress.List)
         fen = ress.List
         // 有用户的菜单
-        if (ress.List == 0) {
+        if (ress.List == 0 || !fen) {
           for (i in zong) {
-            if (zong[i].menuId === null) {
-              zong[i].control = true
-            } else {
-              zong[i].control = false
-            }
+            // if (zong[i].menuId === null) {
+            //   zong[i].control = true
+            // } else {
+              
+            // }
+            zong[i].control = false
 
           }
         } else {
           for (var i in zong) {
             if (fen.some(g => {
                 // 如果有用户的菜单  和无用户的菜单 重合  赋予权限control 为true
-                var c = (g.ID == zong[i].ID) || (zong[i].menuId === null)
+                var c = (g.ID == zong[i].ID)
+                // var c = (g.ID == zong[i].ID) || (zong[i].menuId === null)
                 return c
               })) {
               zong[i].control = true
@@ -182,7 +185,7 @@ Page({
     }
     // console.log(res.data.ID)
     this.setData({
-      id: userinfo.ID
+      id: userinfo.UserName
     })
     // console.log(options.title)
     // 页面初始加载 检测传入id 传入传参

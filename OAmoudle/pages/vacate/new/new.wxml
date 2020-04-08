@@ -18,7 +18,7 @@
                 <text class="required">*</text>
             </view>
             <van-cell-group>
-                <van-field data-name="leavereason" value="{{info.leavereason}}" placeholder="请输入" bind:blur="leavereasonblur" />
+                <van-field data-name="leavereason" type="textarea" type="textarea" input-class="textlarge" autosize input-class="textlarge" autosize  value="{{info.leavereason}}" placeholder="请输入" bind:blur="leavereasonblur" />
             </van-cell-group>
         </view>
         <view class="check_item">

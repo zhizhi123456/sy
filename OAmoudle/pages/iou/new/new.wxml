@@ -111,7 +111,7 @@
                 <text>事由</text>
             </view>
             <van-cell-group>
-                <van-field data-name="leavereason" value="{{info.leavereason}}" placeholder="请输入" bind:blur="projectnameblur" />
+                <van-field data-name="leavereason" type="textarea" input-class="textlarge" autosize value="{{info.leavereason}}" placeholder="请输入" bind:blur="projectnameblur" />
             </van-cell-group>
         </view>
         <view class="check_item">

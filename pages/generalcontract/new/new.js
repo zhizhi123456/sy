@@ -121,32 +121,49 @@ Page({
       show_3: false
     })
 
-    projectone({
-      ID: e.detail.value.value
-    }).then(res => {
-      if (res.code == 10000 && res.Item) {
-        var item = util.outflow(res.Item)
-        util.handleData(item, this, app.globalData.department);
-        // console.log(item)
-        this.setData({
-          // 合同照片
-          'info.API_Picurl': item.API_Picurl,
-          // 总包项目编号
-          'info.projcectCode': item.projcectCode,
-          // 施工地点
-          'info.workplace': item.workplace,
-          // 施工地点
-          'info.planbegindate': item.planbegindate, // 计划开工时间
-          'info.planenddate': item.planenddate, // 计划完工时间
-          'info.demo': item.demo, // 备注
-          'info.mainbuildcontext': item.mainbuildcontext, //主要施工内容
-          'info.chiefcontactman': item.chiefcontactman, //主要联系人,
-          'info.projcectCode': e.detail.value.text
-        })
-        // console.log(item.API_Picurl)
-      }
-    })
+    // projectone({
+    //   ID: e.detail.value.value
+    // }).then(res => {
+    //   if (res.code == 10000 && res.Item) {
+    //     var item = util.outflow(res.Item)
+    //     util.handleData(item, this, app.globalData.department);
+    //     // console.log(item)
+    //     this.setData({
+    //       // 合同照片
+    //       'info.API_Picurl': item.API_Picurl,
+    //       // 总包项目编号
+    //       'info.projcectCode': item.projcectCode,
+    //       // 施工地点
+    //       'info.workplace': item.workplace,
+    //       // 施工地点
+    //       'info.planbegindate': item.planbegindate, // 计划开工时间
+    //       'info.planenddate': item.planenddate, // 计划完工时间
+    //       'info.demo': item.demo, // 备注
+    //       'info.mainbuildcontext': item.mainbuildcontext, //主要施工内容
+    //       'info.chiefcontactman': item.chiefcontactman, //主要联系人,
+    //       'info.projcectCode': e.detail.value.text
+    //     })
+    //     // console.log(item.API_Picurl)
+    //   }
+    // })
 
+  },
+  showPopup_4() {
+    this.setData({
+      show_4: true
+    });
+  },
+  onClose_4() {
+    this.setData({
+      show_4: false
+    });
+  },
+  onConfirm_4(e) {
+    let info = util.editInfo(e, this, e.detail.value.text);
+    this.setData({
+      info,
+      show_4: false
+    })
   },
   // 金额
   contcactamountblur(e) {
@@ -311,6 +328,7 @@ Page({
       sections: app.globalData.department,
       firms: app.globalData.Companytitle,
       totals: app.globalData.MainProject,
+      section4:app.globalData.Companytitle
     })
 
     qgroupproject().then(res => {

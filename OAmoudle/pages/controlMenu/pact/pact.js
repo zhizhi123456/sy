@@ -4,7 +4,8 @@ import {
   queryrole,
   addRoleMenu,
   cancelRoleMenu,
-  amendRoleMenu
+  amendRoleMenu,
+  getMembernew
 } from '../../../../service/getData.js';
 var app = getApp();
 var util = require("../../../../utils/util");
@@ -116,7 +117,8 @@ Page({
         })
         MenuList = this.isFolder(MenuList);
         this.setData({
-          tree: MenuList
+          tree: MenuList,
+          changelist: []
         })
         //console.log(this.data.tree)
         wx.hideLoading();
@@ -189,9 +191,11 @@ Page({
     }
   },
   Confirm() {
-    if (!this.data.RoleId) {
+    console.log(this.data.changelist)
+    console.log(!(this.data.RoleId && this.data.changelist))
+    if (!(this.data.RoleId && this.data.changelist.length>0)) {
       wx.showToast({
-        title: '请选择员工',
+        title: '请选择员工或选择修改的菜单',
         icon: 'none',
         duration: 2000
       })
@@ -366,9 +370,14 @@ Page({
         wx.hideLoading();
       }
     })
-    queryrole().then(res => {
+    getMembernew().then(res => {
+      console.log(res)
       if (res.code == 10000) {
-        let section = JSON.parse(JSON.stringify(res.List).replace(/ID/g, 'value').replace(/UserName/g, 'text'));
+        var list = res.List
+        var lists = list.filter(s => {
+          return s.Roles
+        })
+        let section = JSON.parse(JSON.stringify(lists).replace(/Roles/g, 'value').replace(/userId/g, 'text'));
         this.setData({
           section
         })
@@ -393,6 +402,12 @@ Page({
         arr[i].isFolder = false;
       }
       arr[i].isOpen = false;
+      // if (arr[i].IsEnabled) {
+      //   arr[i].isOpen = true;
+      // } else {
+      //   arr[i].isOpen = false;
+      // }
+
     }
     //console.log(arr)
     return arr;

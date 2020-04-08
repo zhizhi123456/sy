@@ -153,7 +153,7 @@
                 <text class="required">*</text>
             </view>
             <van-cell-group>
-                <van-field data-name="invoicecontext" value="{{info.invoicecontext}}" placeholder="请输入" bind:blur="invoicecontextblur" />
+                <van-field data-name="invoicecontext" type="textarea" input-class="textlarge" autosize value="{{info.invoicecontext}}" placeholder="请输入" bind:blur="invoicecontextblur" />
             </van-cell-group>
         </view>
         <!-- <view class="check_item">

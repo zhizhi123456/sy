@@ -390,8 +390,8 @@ const checkContent = (value, key) => {
     value.Roles.split(";").forEach(res => {
       app.globalData.GetRoles.forEach(depart => {
         if (res == depart.text) {
-          if (kinds.indexOf(depart.value.substr(-1)) == -1) {
-            kinds.push(depart.value.substr(-1))
+          if (kinds.indexOf(depart.value) == -1) {
+            kinds.push(depart.value)
           }
         }
       })
@@ -730,8 +730,8 @@ const checkChange = (value, key, dep) => {
     value.Roles.split(";").forEach(res => {
       app.globalData.GetRoles.forEach(depart => {
         if (res == depart.text) {
-          if (kinds.indexOf(depart.value.substr(-1)) == -1) {
-            kinds.push(depart.value.substr(-1))
+          if (kinds.indexOf(depart.value) == -1) {
+            kinds.push(depart.value)
           }
         }
       })
@@ -889,6 +889,9 @@ const handleData = (data, key, dep) => {
   })
   // 公司
   app.globalData.Companytitle.forEach(depart => {
+    if (depart.value == data.OPcompany) {
+      data.OPcompany = depart.text
+    }
     if (data.Companytitle == depart.value) {
       data.Companytitle = depart.text
     }
@@ -2628,6 +2631,9 @@ const intro = (data, that) => {
   // accident
   // console.log(app.globalData.Companytitle)
   app.globalData.Companytitle.forEach(s => {
+    if (s.text == data.OPcompany) {
+      data.OPcompany = s.value
+    }
     if (s.text == data.architect) {
       data.architect = s.value
     }
@@ -2885,6 +2891,9 @@ const outflow = (data, that) => {
   })
   // accident
   app.globalData.Companytitle.forEach(s => {
+    if (s.value == data.OPcompany) {
+      data.OPcompany = s.text
+    }
     if (s.value == data.architect) {
       data.architect = s.text
     }

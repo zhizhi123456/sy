@@ -542,7 +542,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(this.data.mindata1)
+    console.log(app.globalData.GetRoles)
     user = wx.getStorageSync("myInfo");
     this.setData({
       sections: app.globalData.department,
@@ -585,6 +585,7 @@ onChangekind(e) {
 },
 onConfirm_kind() {
   let info = this.data.info;
+  console.log(this.data.result)
   info.Roles = this.data.result.join(";");
   this.setData({
     info,

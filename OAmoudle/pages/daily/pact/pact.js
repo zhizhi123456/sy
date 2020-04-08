@@ -75,6 +75,10 @@ Page({
         duration: 3000
       })
     }
+    this.setData({
+      seach: "",
+      "info.dailylogman": ""
+    })
 
 
   },

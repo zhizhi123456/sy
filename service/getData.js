@@ -294,7 +294,7 @@ export const cancelRecord = (params) => http.post("/api/AccompanyRecord/Delete",
 
 // 七辨
 // 查询权限
-export const queryMenu = (params) => http.post('/api/MenuApp/Query', params);
+export const queryMenu = (params) => http.post('/api/RoleMenu/MenuAppList', params);
 export const cancelProjectmeet = (params) => http.post("/api/projectweeklymeet/Delete", params);
 // 工程协调
 // 查询

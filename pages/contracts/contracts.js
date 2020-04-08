@@ -40,6 +40,7 @@ Page({
       Timestamp: app.globalData.time,
       pid: 1,
     }).then(res => {
+      console.log(res)
       var s = res.List
       var w = s[1]
       s[1] = s[0]
@@ -69,13 +70,13 @@ Page({
       Timestamp: app.globalData.time,
       pid: this.data.num,
     }).then(res => {
-      ////console.log(res)
+      console.log(res)
       zong = res.List
       zong.forEach(s => {
         s.control = true
 
         var path = s.pageaddres
-        // ////console.log(path)
+        // //////console.log(path)
         if (path) {
           var a = path.substring(0, 1)
           if (a != '/') {
@@ -107,25 +108,29 @@ Page({
         pid: this.data.num,
         UId: this.data.id,
       }).then(ress => {
+        console.log(ress)
         fen = ress.List
-        // ////console.log("用户菜单")
-        // ////console.log(fen)
+        console.log("用户菜单")
+        console.log(fen)
         // 有用户的菜单
-        if (ress.List == 0) {
+        if (ress.List == 0 || !ress.List) {
           for (i in zong) {
-            if (zong[i].menuId === null) {
-              zong[i].control = true
-            } else {
-              zong[i].control = false
-            }
+            // if (zong[i].menuId === null) {
+            //   zong[i].control = true
+            // } else {
+            //   zong[i].control = false
+            // }
+            zong[i].control = false
 
           }
         } else {
-          // console.log(zong)
+          // //console.log(zong)
           for (var i in zong) {
             if (fen.some(g => {
                 // 如果有用户的菜单  和无用户的菜单 重合  赋予权限control 为true
-                var c = (g.ID == zong[i].ID) || (zong[i].menuId === null)
+                // var c = (g.ID == zong[i].ID) || (zong[i].menuId === null)
+                var c = (g.ID == zong[i].ID)
+
                 return c
               })) {
               zong[i].control = true
@@ -136,7 +141,7 @@ Page({
         }
         zong.forEach(s => {
           if (s.name == '后台管理') {
-            console.log('后台管理')
+            //console.log('后台管理')
             this.setData({
               back: s.control
             })
@@ -158,7 +163,7 @@ Page({
           }
         }
         var that = this
-        // ////console.log(that.data.tags)
+        // //////console.log(that.data.tags)
         wx.getStorage({
           key: 'myInfo',
           success(res) {
@@ -206,10 +211,10 @@ Page({
                 }
               }
             }
-            console.log(that.data.num)
+            //console.log(that.data.num)
             if (that.data.num == '2090') {
               querynotice().then(res => {
-                console.log(res)
+                //console.log(res)
                 if (res.code == 10000) {
                   var item = res.List.reverse()
                   if (item) {
@@ -218,7 +223,7 @@ Page({
                       time: s.createtime.slice(5, 10),
                       id: s.ID
                     }))
-                    console.log()
+                    //console.log()
                     if (news.length > 3) {
                       news = news.slice(0, 3)
                     }
@@ -266,9 +271,9 @@ Page({
     wx.getStorage({
       key: 'myInfo',
       success(res) {
-        // ////console.log(res.data.ID)
+        // //////console.log(res.data.ID)
         that.setData({
-          id: res.data.ID,
+          id: res.data.UserName,
           deng: true
         })
       }
@@ -279,7 +284,7 @@ Page({
       content: '是否登出当前账号？',
       success(res) {
         if (res.confirm) {
-          // ////console.log('用户点击确定')
+          // //////console.log('用户点击确定')
           wx.removeStorageSync("myInfo");
           wx.removeStorageSync("principal");
           wx.clearStorageSync();
@@ -296,8 +301,8 @@ Page({
     })
   },
   change1(e) {
-    console.log(e)
-    console.log(e.target.dataset.id)
+    //console.log(e)
+    //console.log(e.target.dataset.id)
     if (e.target.dataset.id) {
       wx.redirectTo({
         url: `/OAmoudle/pages/notice/Newsdetail/Newsdetail?id=${e.target.dataset.id}&oa=1`
@@ -309,7 +314,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    ////console.log(options)
+    //////console.log(options)
+    console.log(app.globalData.GetRoles)
     userinfo = wx.getStorageSync("myInfo");
     this.setData({
       userinfo: userinfo
@@ -350,7 +356,7 @@ Page({
       getTaskTNUm({
         UserName: userinfo.UserName
       }).then(res => {
-        console.log(res)
+        //console.log(res)
         if (res.code == 10000) {
           let item = res.List,
             TaskTNUm = 0;

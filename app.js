@@ -114,6 +114,9 @@ App({
         this.globalData.Principal = t;
         // //console.log(this.globalData.Principal)
       })
+      GetRoles().then(res=>{
+        console.log(res)
+      })
       let userinfo = wx.getStorageSync("myInfo");
       util.sumup1(moredep, this, 'moredep', "techofficename", "ID", userinfo.UserName);
       util.sumup(UnitType, this, 'UnitType', "Value", "Key");
@@ -181,6 +184,7 @@ App({
       util.sumup(GetPosition, this, 'GetPosition', "Value", "Key");
       util.sumup(GetGradeTitle, this, 'GetGradeTitle', "Value", "Key");
       util.sumup(GetRoles, this, 'GetRoles', "Name", "ID");
+    
       Engineer({
         ID: 3209
       }).then(res => {

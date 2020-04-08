@@ -119,10 +119,10 @@
                     <text class="info">付款方式</text>
                     <text>{{item.paytype}}</text>
                 </view>
-                <!-- <view>
-                    <text class="info">项目编号</text>
-                    <text>{{item.projectcode}}</text>
-                </view> -->
+                <view>
+                    <text class="info">总金额</text>
+                    <text>{{item.TotalSum}}</text>
+                </view>
                 <view>
                     <text class="info">创建人</text>
                     <text>{{item.createman}}</text>

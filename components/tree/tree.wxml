@@ -1,35 +1,35 @@
 <!-- components/tree/tree.wxml -->
 <!-- <view>
   <view>
-    <text wx:if='{{ isBranch }}' bindtap='toggle'>{{ open ? '[ - ]' : '[ + ]' }} </text>
+    <text hidden='{{ isBranch }}' bindtap='toggle'>{{ open ? '[ - ]' : '[ + ]' }} </text>
     <text wx:else>[ · ] </text>
     <text bindtap='tapItem' data-itemid='{{ model.id }}'>{{ model.text }}</text>
   </view>
-  <view style='padding-left: 50rpx;' wx:if='{{ isBranch }}' hidden='{{ !open }}'>
+  <view style='padding-left: 50rpx;' hidden='{{ isBranch }}' hidden='{{ !open }}'>
     <mytree wx:for='{{ model.nodes }}' wx:key='id' model='{{ item }}'></mytree>
   </view>
 </view> -->
-  <checkbox-group  wx:if="{{treeData}}" bindchange="checkboxChange">
+  <checkbox-group   hidden="{{!treeData}}" bindchange="checkboxChange">
 <block wx:for="{{treeData}}" wx:key="index">
   <view class="citem" data-id="{{item.ID}}" data-isFolder="{{item.isFolder}}">
-    <text wx:if="{{item.isFolder}}" catch:tap='toggle' data-id="{{item.ID}}" data-isFolder="{{item.isFolder}}">{{item.isOpen?'[-]':'[+]'}}</text>
+    <text hidden="{{!item.isFolder}}" catch:tap='toggle' data-id="{{item.ID}}" data-isFolder="{{item.isFolder}}">{{item.isOpen?'[-]':'[+]'}}</text>
     <checkbox checked="{{item.IsEnabled}}" value="{{item.ID}}" bind:tap="handleTap" data-id='{{item.ID}}' data-isenabled='{{item.IsEnabled}}'/>
     <text class="cname" catch:tap='toggle' data-id="{{item.ID}}" data-isFolder="{{item.isFolder}}">{{item.Name}}</text>
-    <view wx:if="{{item.isFolder && item.isOpen}}" class='item'>
+    <view hidden="{{!(item.isFolder && item.isOpen)}}" class='item'>
       <!-- <tree tree="{{item.Submenu}}"></tree> -->
       <block wx:for="{{item.Submenu}}" wx:key="index">
   <view class="citem" data-id="{{item.ID}}" data-isFolder="{{item.isFolder}}">
-    <text wx:if="{{item.isFolder}}" catch:tap='toggle' data-id="{{item.ID}}" data-isFolder="{{item.isFolder}}">{{item.isOpen?'[-]':'[+]'}}</text>
+    <text hidden="{{!(item.isFolder)}}" catch:tap='toggle' data-id="{{item.ID}}" data-isFolder="{{item.isFolder}}">{{item.isOpen?'[-]':'[+]'}}</text>
     <checkbox checked="{{item.IsEnabled}}" value="{{item.ID}}" bind:tap="handleTap" data-id='{{item.ID}}' data-isenabled='{{item.IsEnabled}}'/>
     <text class="cname" catch:tap='toggle' data-id="{{item.ID}}" data-isFolder="{{item.isFolder}}">{{item.Name}}</text>
-    <view wx:if="{{item.isFolder && item.isOpen}}" class='item'>
+    <view hidden="{{!(item.isFolder && item.isOpen)}}" class='item'>
       <!-- <tree tree="{{item.Submenu}}"></tree> -->
       <block wx:for="{{item.Submenu}}" wx:key="index">
   <view class="citem" data-id="{{item.ID}}" data-isFolder="{{item.isFolder}}">
-    <text wx:if="{{item.isFolder}}" catch:tap='toggle' data-id="{{item.ID}}" data-isFolder="{{item.isFolder}}">{{item.isOpen?'[-]':'[+]'}}</text>
+    <text hidden="{{!(item.isFolder)}}" catch:tap='toggle' data-id="{{item.ID}}" data-isFolder="{{item.isFolder}}">{{item.isOpen?'[-]':'[+]'}}</text>
     <checkbox checked="{{item.IsEnabled}}" value="{{item.ID}}" bind:tap="handleTap" data-id='{{item.ID}}' data-isenabled='{{item.IsEnabled}}'/>
     <text class="cname" catch:tap='toggle' data-id="{{item.ID}}" data-isFolder="{{item.isFolder}}">{{item.Name}}</text>
-    <view wx:if="{{item.isFolder && item.isOpen}}" class='item'>
+    <view hidden="{{!(item.isFolder && item.isOpen)}}" class='item'>
       <!-- <tree tree="{{item.Submenu}}"></tree> -->
       
 

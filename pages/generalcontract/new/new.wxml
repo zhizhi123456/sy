@@ -18,7 +18,17 @@
             </view>
             <van-cell title="{{info.Companytitle?info.Companytitle:'请选择'}}" is-link bind:click="showPopup_3" />
             <van-popup show="{{ show_3 }}" round position="bottom" bind:close="onClose_3">
-                <van-picker  data-name="Companytitle" show-toolbar columns="{{firms }}" bind:cancel="onClose_3" bind:confirm="onConfirm_3" />
+                <van-picker data-name="Companytitle" show-toolbar columns="{{firms }}" bind:cancel="onClose_3" bind:confirm="onConfirm_3" />
+                <!-- <van-field wx:else data-name="Companytitle" value="{{info.Companytitle}}" placeholder="请填写" bind:blur="maincontactnameblur" type="textarea" autosize /> -->
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>对方公司</text>
+            </view>
+            <van-cell title="{{info.OPcompany?info.OPcompany:'请选择'}}" is-link bind:click="showPopup_4" />
+            <van-popup show="{{ show_4 }}" round position="bottom" bind:close="onClose_4">
+                <van-picker data-name="OPcompany" show-toolbar columns="{{section4 }}" bind:cancel="onClose_4" bind:confirm="onConfirm_4" />
                 <!-- <van-field wx:else data-name="Companytitle" value="{{info.Companytitle}}" placeholder="请填写" bind:blur="maincontactnameblur" type="textarea" autosize /> -->
             </van-popup>
         </view>
@@ -62,12 +72,12 @@
                 <van-field data-name="contcactamount" value="{{info.contcactamount}}" bind:input="checkmoney" placeholder="请输入" bind:blur="purchasecblur" type="digit" />
             </van-cell-group>
         </view>
-         <view class="check_item">
+        <view class="check_item">
             <view class="kind require">
                 <text>签报金额(大写)</text>
             </view>
             <van-cell-group>
-                <van-field value="{{info.Chinesenumerals}}" data-name="Chinesenumerals" placeholder="请输入" bind:blur="contcactamountblur"/>
+                <van-field value="{{info.Chinesenumerals}}" data-name="Chinesenumerals" placeholder="无需输入，自动转换" bind:blur="contcactamountblur" />
             </van-cell-group>
         </view>
         <view class="check_item">
@@ -77,7 +87,7 @@
                 <text class="required">*</text>
             </view>
             <van-cell-group>
-                <van-field data-name="material" value="{{info.material}}" placeholder="请输入" bind:blur="materialblur" />
+                <van-field data-name="material"type="textarea" input-class="textlarge" autosize value="{{info.material}}" placeholder="请输入" bind:blur="materialblur" />
             </van-cell-group>
         </view>
         <!-- <view class="check_item">
@@ -91,9 +101,9 @@
                 <text>备注</text>
                 <text class="required">*</text>
             </view> -->
-            <text class="kind">备注</text> 
+            <text class="kind">备注</text>
             <van-cell-group>
-                <van-field data-name="demo"   type="textarea" input-class ="textlarge"  autosize value="{{info.demo}}" placeholder="请输入" bind:blur="demoblur" />
+                <van-field data-name="demo" type="textarea" input-class="textlarge" autosize value="{{info.demo}}" placeholder="请输入" bind:blur="demoblur" />
             </van-cell-group>
         </view>
         <!-- <view class="check_item">
@@ -116,18 +126,18 @@
                 </block>
             </view>
         </view>
-         <view class="check_item">
+        <view class="check_item">
             <text class="kind">文件</text>
-                <van-cell title="请选择" is-link bindtap="up_file" />
-                <view wx:if="{{info.API_file.length}}">
-                    <block wx:for="{{info.API_file}}" wx:key="index">
-                        <view class="cfile">
-                            <text class="filename">{{item.name}}</text>
-                            <text class="filesize">{{item.size}}</text>
-                            <icon class="iconfont icon-shanchu-tianchong fr" wx:if="{{up_F}}" bindtap="delF" data-index="{{index}}" />
-                        </view>
-                    </block>
-                </view>
+            <van-cell title="请选择" is-link bindtap="up_file" />
+            <view wx:if="{{info.API_file.length}}">
+                <block wx:for="{{info.API_file}}" wx:key="index">
+                    <view class="cfile">
+                        <text class="filename">{{item.name}}</text>
+                        <text class="filesize">{{item.size}}</text>
+                        <icon class="iconfont icon-shanchu-tianchong fr" wx:if="{{up_F}}" bindtap="delF" data-index="{{index}}" />
+                    </view>
+                </block>
             </view>
+        </view>
     </view>
 </view>
