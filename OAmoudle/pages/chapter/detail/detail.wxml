@@ -138,7 +138,7 @@
         </van-tabs>
     </view>
     <view class="footer" wx:if="{{((info.formid&&isnext&&returned&&isreturn)||(!info.formid)||(isnext&&returned))&&(!history)}}">
-        <view bindtap="sendback"data-state='return' wx:if="{{info.formid&&isnext&&returned&&isreturn}}">
+        <view bindtap="sendback" data-state='return' wx:if="{{info.formid&&isnext&&returned&&isreturn}}">
             <icon class="iconfont icon-wj-thwj"></icon>
             <text>退回</text>
         </view>
@@ -148,7 +148,7 @@
                 <text>编辑</text>
             </navigator>
         </view>
-        <view bindtap="putin" wx:if="{{isnext&&returned}}"data-state='next' >
+        <view bindtap="putin" wx:if="{{isnext&&returned}}" data-state='next' >
             <icon class="iconfont icon-tijiao"></icon>
             <text>{{msg}}</text>
         </view>
