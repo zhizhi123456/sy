@@ -228,6 +228,23 @@ Page({
       show_1: false
     })
   },
+  showPopup_2() {
+    this.setData({
+      show_2: true
+    });
+  },
+  onClose_2() {
+    this.setData({
+      show_2: false
+    });
+  },
+  onConfirm_2(e) {
+    let info = util.editInfo(e, this, e.detail.value.text);
+    this.setData({
+      info,
+      show_2: false
+    })
+  },
   // 出生日期
   showPopup_time() {
     this.setData({

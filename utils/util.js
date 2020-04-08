@@ -112,7 +112,7 @@ const checkContent = (value, key) => {
   }
   if (value.API_file) {
     // console.log("tupian")
-    value.API_file = JSON.stringify(value.API_file) 
+    value.API_file = JSON.stringify(value.API_file)
   }
   var app = getApp();
   // // 请假类别
@@ -370,6 +370,12 @@ const checkContent = (value, key) => {
       value.goodscode = res.value;
     }
   })
+  //角色
+  app.globalData.GetRoles.forEach(res => {
+    if (value.Roles == res.text) {
+      value.Roles = res.value;
+    }
+  })
   // 项目类型
   if (value.mainprojecttype) {
     var kinds = [];
@@ -384,20 +390,20 @@ const checkContent = (value, key) => {
     })
     value.mainprojecttype = kinds.join(",");
   }
-  // 角色
-  if (value.Roles) {
-    var kinds = [];
-    value.Roles.split(";").forEach(res => {
-      app.globalData.GetRoles.forEach(depart => {
-        if (res == depart.text) {
-          if (kinds.indexOf(depart.value) == -1) {
-            kinds.push(depart.value)
-          }
-        }
-      })
-    })
-    value.Roles = kinds.join(";");
-  }
+  // // 角色
+  // if (value.Roles) {
+  //   var kinds = [];
+  //   value.Roles.split(";").forEach(res => {
+  //     app.globalData.GetRoles.forEach(depart => {
+  //       if (res == depart.text) {
+  //         if (kinds.indexOf(depart.value) == -1) {
+  //           kinds.push(depart.value)
+  //         }
+  //       }
+  //     })
+  //   })
+  //   value.Roles = kinds.join(";");
+  // }
   // // 项目类型
   // if (value.receivedepartment) {
   //   var kinds = [];
@@ -710,6 +716,12 @@ const checkChange = (value, key, dep) => {
       value.goodscode = res.value;
     }
   })
+  //角色
+  app.globalData.GetRoles.forEach(res => {
+    if (value.Roles == res.text) {
+      value.Roles = res.value;
+    }
+  })
   // 项目类型
   if (value.mainprojecttype) {
     var kinds = [];
@@ -724,20 +736,20 @@ const checkChange = (value, key, dep) => {
     })
     value.mainprojecttype = kinds.join(",");
   }
-  // 角色
-  if (value.Roles) {
-    var kinds = [];
-    value.Roles.split(";").forEach(res => {
-      app.globalData.GetRoles.forEach(depart => {
-        if (res == depart.text) {
-          if (kinds.indexOf(depart.value) == -1) {
-            kinds.push(depart.value)
-          }
-        }
-      })
-    })
-    value.Roles = kinds.join(";");
-  }
+  // // 角色
+  // if (value.Roles) {
+  //   var kinds = [];
+  //   value.Roles.split(";").forEach(res => {
+  //     app.globalData.GetRoles.forEach(depart => {
+  //       if (res == depart.text) {
+  //         if (kinds.indexOf(depart.value) == -1) {
+  //           kinds.push(depart.value)
+  //         }
+  //       }
+  //     })
+  //   })
+  //   value.Roles = kinds.join(";");
+  // }
   // 项目类型
   // if (value.receivedepartment) {
   //   var kinds = [];
@@ -1046,6 +1058,12 @@ const handleData = (data, key, dep) => {
       data.goodscode = res.text;
     }
   })
+  //角色
+  app.globalData.GetRoles.forEach(res => {
+    if (data.Roles == res.value) {
+      data.Roles = res.text;
+    }
+  })
   if (data.mainprojecttype) {
     var kinds = [];
     data.mainprojecttype.split(",").forEach(res => {
@@ -1111,22 +1129,22 @@ const handleData = (data, key, dep) => {
       })
     })
   }
-  if (data.Roles) {
-    var kinds = [];
-    data.Roles.split(";").forEach(res => {
-      app.globalData.GetRoles.forEach(depart => {
-        if (res == depart.value) {
-          if (kinds.indexOf(depart.text) == -1) {
-            kinds.push(depart.text)
-          }
-          // if (value.mainprojecttype && value.mainprojecttype.split(",").length > kinds.length) {
-          //   kinds.push("**");
-          // }
-          data.Roles = kinds.join(";");
-        }
-      })
-    })
-  }
+  // if (data.Roles) {
+  //   var kinds = [];
+  //   data.Roles.split(";").forEach(res => {
+  //     app.globalData.GetRoles.forEach(depart => {
+  //       if (res == depart.value) {
+  //         if (kinds.indexOf(depart.text) == -1) {
+  //           kinds.push(depart.text)
+  //         }
+  //         // if (value.mainprojecttype && value.mainprojecttype.split(",").length > kinds.length) {
+  //         //   kinds.push("**");
+  //         // }
+  //         data.Roles = kinds.join(";");
+  //       }
+  //     })
+  //   })
+  // }
   if (data.amountPlan && data.amountQuantity) {
     let num = (data.amountPlan - data.amountQuantity) / data.amountPlan * 100;
     data.offset = num.toFixed(2) + "%";
@@ -1325,6 +1343,12 @@ const listData = (data, dep, page, list, key, billname) => {
         value.mainprojectprop = res.text;
       }
     })
+    //角色
+    app.globalData.GetRoles.forEach(res => {
+      if (value.Roles == res.value) {
+        value.Roles = res.text;
+      }
+    })
     if (value.amountPlan && value.amountQuantity) {
       data[index].offset = ((value.amountPlan - value.amountQuantity) / value.amountPlan * 100).toFixed(2) + "%";
     }
@@ -1405,22 +1429,22 @@ const listData = (data, dep, page, list, key, billname) => {
         })
       })
     }
-    if (value.Roles) {
-      var kinds = [];
-      value.Roles.split(";").forEach(res => {
-        app.globalData.GetRoles.forEach(depart => {
-          if (res == depart.value) {
-            if (kinds.indexOf(depart.text) == -1) {
-              kinds.push(depart.text)
-            }
-            // if (value.mainprojecttype && value.mainprojecttype.split(",").length > kinds.length) {
-            //   kinds.push("**");
-            // }
-            value.Roles = kinds.join(";");
-          }
-        })
-      })
-    }
+    // if (value.Roles) {
+    //   var kinds = [];
+    //   value.Roles.split(";").forEach(res => {
+    //     app.globalData.GetRoles.forEach(depart => {
+    //       if (res == depart.value) {
+    //         if (kinds.indexOf(depart.text) == -1) {
+    //           kinds.push(depart.text)
+    //         }
+    //         // if (value.mainprojecttype && value.mainprojecttype.split(",").length > kinds.length) {
+    //         //   kinds.push("**");
+    //         // }
+    //         value.Roles = kinds.join(";");
+    //       }
+    //     })
+    //   })
+    // }
   });
   if (page) {
     let num = Math.ceil(data.length / 5);

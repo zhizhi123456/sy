@@ -29,7 +29,7 @@ Page({
     deng: '',
     dephot: false,
     news: false,
-    back:false
+    back: false
   },
   deal() {
     // 请求一级菜单
@@ -92,14 +92,14 @@ Page({
           s.ANUm = true
         }
         // if (s.name == '我的申请') {
-        //   s.pageaddres = '/OAmoudle/pages/controlMenu/pact/pact'
+        //   s.pageaddres = '/OAmoudle/pages/gmember/pact/pact'
         // }
         if (s.name == "招投标") {
           s.name = '投标'
         }
-        // if (s.name == "考勤") {
-        //   s.pageaddres = ''
-        // }
+        if (s.ID == "登录/注册") {
+          s.control = true
+        }
 
       })
       // 有用户限制的菜单 
@@ -120,7 +120,12 @@ Page({
             // } else {
             //   zong[i].control = false
             // }
-            zong[i].control = false
+            if ((zong[i].ID == '2121')) {
+              zong[i].control = true
+            } else {
+              zong[i].control = false
+            }
+
 
           }
         } else {
