@@ -1,10 +1,10 @@
 {
   "pages": [
     "pages/contracts/contracts",
+    "pages/login/login",
     "pages/hot/lead/lead",
     "pages/hot/mself/mself",
     "pages/secondary/secondary",
-    "pages/login/login",
     "pages/current/current/current",
     "pages/section/section",
     "pages/section/section2",

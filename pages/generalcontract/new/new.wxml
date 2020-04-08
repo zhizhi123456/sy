@@ -18,17 +18,11 @@
             </view>
             <van-cell title="{{info.Companytitle?info.Companytitle:'请选择'}}" is-link bind:click="showPopup_3" />
             <van-popup show="{{ show_3 }}" round position="bottom" bind:close="onClose_3">
+                <view class="Cseach">
+                    <input value="{{seach}}" bindinput="setSeach" placeholder="请输入搜索内容" />
+                    <button size="mini" bindtap="finditem1">搜索</button>
+                </view>
                 <van-picker data-name="Companytitle" show-toolbar columns="{{firms }}" bind:cancel="onClose_3" bind:confirm="onConfirm_3" />
-                <!-- <van-field wx:else data-name="Companytitle" value="{{info.Companytitle}}" placeholder="请填写" bind:blur="maincontactnameblur" type="textarea" autosize /> -->
-            </van-popup>
-        </view>
-        <view class="check_item">
-            <view class="kind require">
-                <text>对方公司</text>
-            </view>
-            <van-cell title="{{info.OPcompany?info.OPcompany:'请选择'}}" is-link bind:click="showPopup_4" />
-            <van-popup show="{{ show_4 }}" round position="bottom" bind:close="onClose_4">
-                <van-picker data-name="OPcompany" show-toolbar columns="{{section4 }}" bind:cancel="onClose_4" bind:confirm="onConfirm_4" />
                 <!-- <van-field wx:else data-name="Companytitle" value="{{info.Companytitle}}" placeholder="请填写" bind:blur="maincontactnameblur" type="textarea" autosize /> -->
             </van-popup>
         </view>
@@ -48,7 +42,7 @@
             <!-- <van-cell-group>
                 <van-field value="{{departmenttext}}" disabled />
             </van-cell-group> -->
-            <van-cell title="{{departmenttext}}" bind:click="showPopup_o" />
+            <van-cell title="{{departmenttext}}" bind:click="showPopup_o" is-link />
             <van-popup show="{{show_o}}" round position="bottom" bind:close="onClose_o">
                 <view class="Cseach">
                     <input value="{{seach}}" bindinput="setSeach" placeholder="请输入搜索内容" />
@@ -64,6 +58,26 @@
             </view>
             <van-cell-group>
                 <van-field data-name="maincontactname" value="{{info.maincontactname}}" placeholder="请输入" bind:blur="maincontactnameblur" type="textarea" autosize />
+            </van-cell-group>
+        </view>
+        <view class="check_item">
+            <view class="kind require">
+                <text>对方公司</text>
+            </view>
+            <van-cell title="{{info.OPcompany?info.OPcompany:'请选择'}}" is-link bind:click="showPopup_4" />
+            <van-popup show="{{ show_4 }}" round position="bottom" bind:close="onClose_4">
+                <view class="Cseach">
+                    <input value="{{seach}}" bindinput="setSeach" placeholder="请输入搜索内容" />
+                    <button size="mini" bindtap="finditem2">搜索</button>
+                </view>
+                <van-picker data-name="OPcompany" show-toolbar columns="{{Customer }}" bind:cancel="onClose_4" bind:confirm="onConfirm_4" />
+                <!-- <van-field wx:else data-name="Companytitle" value="{{info.Companytitle}}" placeholder="请填写" bind:blur="maincontactnameblur" type="textarea" autosize /> -->
+            </van-popup>
+        </view>
+        <view class="check_item">
+            <text class="kind">合同（项目）</text>
+            <van-cell-group>
+                <van-field data-name="projcectCode" type="textarea" autosize value="{{info.projcectCode}}" placeholder="请输入" bind:blur="projcectCodeblur" />
             </van-cell-group>
         </view>
         <view class="check_item">
@@ -87,7 +101,7 @@
                 <text class="required">*</text>
             </view>
             <van-cell-group>
-                <van-field data-name="material"type="textarea" input-class="textlarge" autosize value="{{info.material}}" placeholder="请输入" bind:blur="materialblur" />
+                <van-field data-name="material" type="textarea" input-class="textlarge" autosize value="{{info.material}}" placeholder="请输入" bind:blur="materialblur" />
             </van-cell-group>
         </view>
         <!-- <view class="check_item">

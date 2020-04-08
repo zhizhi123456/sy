@@ -863,5 +863,4 @@ button.van-button {
 }
 .textlarge{
     min-height: 200rpx !important;
- 
 }

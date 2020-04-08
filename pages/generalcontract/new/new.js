@@ -48,6 +48,20 @@ Page({
       seach: ''
     })
   },
+  finditem1() {
+    let arr = util.findone(app.globalData.Companytitle, this.data.seach);
+    this.setData({
+      firms: arr,
+      seach: ''
+    })
+  },
+  finditem2() {
+    let arr = util.findone(app.globalData.Customer, this.data.seach);
+    this.setData({
+      Customer: arr,
+      seach: ''
+    })
+  },
   // 部门
   showPopup_o() {
     this.setData({
@@ -260,7 +274,6 @@ Page({
       // console.log(info)
       this.setData({
         info,
-        'info.projcectCode': '1'
       })
       // console.log(this.data.info)
       addPact(info).then(res => {
@@ -277,7 +290,7 @@ Page({
       })
     } else {
       Toast({
-        message: '请填写必填项（签报主题，备注）',
+        message: '请填写必填项（签报主题，签报事由）',
         mask: true
       });
     }
@@ -320,6 +333,13 @@ Page({
       }
     })
   },
+  // 合同（项目）
+  projcectCodeblur(e) {
+    let info = util.editInfo(e, this, e.detail.value);
+    this.setData({
+      info
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -328,7 +348,7 @@ Page({
       sections: app.globalData.department,
       firms: app.globalData.Companytitle,
       totals: app.globalData.MainProject,
-      section4:app.globalData.Companytitle
+      Customer:app.globalData.Customer
     })
 
     qgroupproject().then(res => {

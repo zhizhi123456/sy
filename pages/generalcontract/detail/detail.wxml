@@ -25,6 +25,10 @@
                         <view class="check">{{info.OPcompany}}</view>
                     </view>
                     <view class="c_item">
+                        <view class="kind">合同（项目）</view>
+                        <view class="check">{{info.projcectCode}}</view>
+                    </view>
+                    <view class="c_item">
                         <view class="kind">签报主题</view>
                         <view class="check">{{info.maincontactname}}</view>
                     </view>
