@@ -32,7 +32,7 @@
         </view>
         <view class="check_item">
             <view class="kind">
-                <text>金额</text>
+                <text>金额(元)</text>
                 <text class="required">*</text>
             </view>
             <van-cell-group>
@@ -44,7 +44,7 @@
                 <text>合同（项目）编号</text>
             </view>
             <van-cell-group>
-                <van-field value="{{materials[0].projectcode}}" placeholder="请输入" bind:blur="getRecord" data-i='{{index}}' data-name='projectcode' />
+                <van-field value="{{materials[0].projectCode}}" placeholder="请输入" bind:blur="getRecord" data-i='{{index}}' data-name='projectCode' />
             </van-cell-group>
             <!-- <van-cell title="{{materials[0].projectcode?materials[0].projectcode:'请选择'}}" bind:click="showPopupCode">
                 <icon class="iconfont icon-jiantou" />

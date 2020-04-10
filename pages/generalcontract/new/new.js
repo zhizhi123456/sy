@@ -5,7 +5,10 @@ import {
   referId,
   amend,
   qgroupproject,
-  projectone
+  projectone,
+  Customer,
+  addcustomer,
+  customerRepeat
 } from "../../../service/getData";
 var util = require("../../../utils/util");
 var app = getApp();
@@ -18,7 +21,7 @@ Page({
     departmenttext: "请选择",
     info: {
       API_Picurl: [],
-      API_file:[]
+      API_file: []
     },
     check_photo: [{
       name: "拍照"
@@ -181,7 +184,7 @@ Page({
   },
   // 金额
   contcactamountblur(e) {
-    let info = util.editInfo(e, this,e.detail.value);
+    let info = util.editInfo(e, this, e.detail.value);
     this.setData({
       info
     })
@@ -303,7 +306,7 @@ Page({
   },
   // 文件上传
   up_file() {
-    util.upFilenew(this,this.data.info.API_file);
+    util.upFilenew(this, this.data.info.API_file);
   },
   // 返回
   return () {
@@ -348,7 +351,7 @@ Page({
       sections: app.globalData.department,
       firms: app.globalData.Companytitle,
       totals: app.globalData.MainProject,
-      Customer:app.globalData.Customer
+      Customer: app.globalData.Customer
     })
 
     qgroupproject().then(res => {
@@ -395,5 +398,55 @@ Page({
       })
     }
   },
+  onClosechoice() {
+    this.setData({
+      showchoice: false
+    })
+  },
+  Dictionaryblur(e) {
+    this.setData({
+      OPcompany: e.detail
+    })
+  },
+  confirmchoice() {
+    var data = {
+      customername: this.data.OPcompany,
+    }
+    customerRepeat(data).then(res => {
+      if (res.code == 10000) {
+        if (res.value) {
+          addcustomer(data).then(res => {
+            if (res.code == 10000) {
+              Customer().then(res => {
+                console.log(res)
+                let result = util.getBase(res, 'customername', 'ID');
+                this.setData({
+                  Customer: result
+                })
+                app.globalData.Customer = result;
+              })
+              this.setData({
+                showchoice: false,
+              })
+            }
+          })
+        } else {
+          wx.showToast({
+            title: '对方公司已存在',
+            icon: 'none',
+            duration: 3000
+          })
+          this.setData({
+            customername: ''
+          })
+        }
+      }
+    })
 
+  },
+  newDictionary() {
+    this.setData({
+      showchoice: true
+    })
+  },
 })

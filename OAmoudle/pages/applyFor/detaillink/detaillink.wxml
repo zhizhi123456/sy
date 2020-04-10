@@ -27,7 +27,7 @@
                 <view class="check">{{info.quantity}}</view>
             </view>
             <view class="c_item">
-                <view class="kind"> 单价</view>
+                <view class="kind"> 单价(元)</view>
                 <view class="check">{{info.unitprice}}</view>
             </view>
             <view class="c_item">

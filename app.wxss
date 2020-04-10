@@ -53,7 +53,7 @@
     height: 100rpx;
 }
 
- .apply .van-dropdown-menu__title {
+.apply .van-dropdown-menu__title {
     color: white;
     font-size: 36rpx;
 }
@@ -153,6 +153,9 @@
 .list text {
     margin-bottom: 20rpx;
     font-size: 28rpx;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .info {
@@ -161,9 +164,9 @@
 
 .info+text {
     max-width: 420rpx;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
+    min-width: 200rpx;
+    text-align: right;
+
 }
 
 .end {
@@ -312,12 +315,19 @@
 }
 
 .m_item text:nth-child(1) {
-    margin-right: 50rpx;
-    min-width: 52rpx;
+    margin-right: 30rpx;
+    max-width: 150rpx;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .m_item text:nth-child(2) {
     max-width: 400rpx;
+    color: teal;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 /* 新增 */
@@ -861,6 +871,7 @@ button.van-button {
 .c_item .redcheck {
     color: red;
 }
-.textlarge{
+
+.textlarge {
     min-height: 200rpx !important;
 }

@@ -33,7 +33,7 @@
                         <view class="check">{{info.department}}</view>
                     </view>
                     <view class="c_item">
-                        <view class="kind">金额</view>
+                        <view class="kind">金额(元)</view>
                         <view class="check">{{info.useamount}}</view>
                     </view>
                     <view class="c_item">

@@ -126,7 +126,7 @@
                     <text>{{item.usechargeman}}</text>
                 </view> -->
                 <view>
-                    <text class="info">费用金额</text>
+                    <text class="info">费用金额(元)</text>
                     <text>{{item.chargeamount}}</text>
                 </view>
                 <view>

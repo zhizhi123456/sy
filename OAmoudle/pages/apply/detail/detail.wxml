@@ -37,7 +37,7 @@
                         <view class="check">{{info.receivephone}}</view>
                     </view>
                     <view class="c_item">
-                        <view class="kind">总金额</view>
+                        <view class="kind">总金额(元)</view>
                         <view class="check">{{info.TotalSum}}</view>
                     </view>
                     <view class="c_item">

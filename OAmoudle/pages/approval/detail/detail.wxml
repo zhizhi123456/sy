@@ -118,11 +118,15 @@
                                 <text>{{item.detailxh}}</text>
                             </view>
                             <view class="m_item">
+                                <text class="m_info">合同（项目）编号</text>
+                                <text>{{item.projectCode}}</text>
+                            </view>
+                            <view class="m_item">
                                 <text class="m_info">支付审批明细内容</text>
                                 <text>{{item.detailcontext}}</text>
                             </view>
                             <view class="m_item">
-                                <text class="m_info">金额</text>
+                                <text class="m_info">金额(元)</text>
                                 <text>{{item.amount}}</text>
                             </view>
                         </navigator>

@@ -170,7 +170,7 @@
             </van-popup>
         </view> -->
         <view class="check_item">
-            <text class="kind">含税金额</text>
+            <text class="kind">含税金额(元)</text>
             <van-cell-group>
                 <van-field data-name="includetaxamont" value="{{info.includetaxamont}}" placeholder="请输入" bind:blur="includetaxamontblur" bind:input="checkmoney" />
             </van-cell-group>

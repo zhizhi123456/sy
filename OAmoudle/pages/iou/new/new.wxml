@@ -100,7 +100,7 @@
         </view> -->
         <view class="check_item" wx:if="{{money}}">
             <view class="kind require">
-                <text>金额</text>
+                <text>金额(元)</text>
             </view>
             <van-cell-group>
                 <van-field data-name="amount" value="{{info.amount}}" placeholder="请输入" bind:blur="purchasecblur" bind:input="checkmoney" />

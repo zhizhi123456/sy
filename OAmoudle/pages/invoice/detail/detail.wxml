@@ -45,7 +45,7 @@
                         <view class="check">{{info.invoicecontext}}</view>
                     </view>
                     <view class="c_item">
-                        <view class="kind">含税金额</view>
+                        <view class="kind">含税金额(元)</view>
                         <view class="check">{{info.includetaxamont}}</view>
                     </view>
                     <view class="c_item">

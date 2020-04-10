@@ -33,7 +33,7 @@
                         <view class="check">{{info.usechargeman}}</view>
                     </view> -->
                     <view class="c_item">
-                        <view class="kind">费用金额</view>
+                        <view class="kind">费用金额(元)</view>
                         <view class="check">{{info.chargeamount}}</view>
                     </view>
                     <view class="c_item">

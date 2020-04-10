@@ -96,7 +96,7 @@
         </view> -->
         <view class="check_item">
             <view class="kind require">
-                <text>总金额</text>
+                <text>总金额(元)</text>
             </view>
             <van-cell-group>
                 <van-field value="{{info.TotalSum}}" data-name="TotalSum" placeholder="请先输入明细后自动计算" bind:blur="purchasecblur" bind:input="checkmoney" />
@@ -190,7 +190,7 @@
                 </view>
                 <view class="check_item">
                     <view class="kind">
-                        <text>单价</text>
+                        <text>单价(元)</text>
                     </view>
                     <van-cell-group>
                         <van-field value="{{item.unitprice}}" placeholder="请输入" bind:blur="getmoney" data-i='{{index}}' data-name='unitprice' bind:input="checkmoney1" />
