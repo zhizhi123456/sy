@@ -107,7 +107,8 @@ Page({
         ],
       })
       util.qgroupdeliver(groupId, this, '', '1')
-    } else if (menus.caption == '我申请') {
+    } 
+     if (menus.caption == '我申请') {
       this.setData({
         'info.state': '',
         applyT: 1,
@@ -115,9 +116,9 @@ Page({
         top: '我申请的签报'
       })
       util.qgroupdeliver(groupId, this, '', '1')
-    } else {
-      this.seachInfo()
-    }
+    }  
+      this.seachInfo();
+    
     if (app.globalData.CountItem) {
       this.setData({
         sections: app.globalData.getdept,
@@ -160,7 +161,7 @@ Page({
   },
   onConfirm_seach() {
     var info = this.data.info
-    info.state = '所有'
+
     info.UserName = userinfo.UserName
     this.setData({
       info

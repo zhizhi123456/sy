@@ -166,6 +166,9 @@ Page({
             url: 'http://192.168.2.148:88/api/image/Get_photo',
             filePath: path,
             name: 'img_data',
+            formData: {
+              'userName':wx.getStorageSync("myInfo").UserName,
+            },
             success(res) {
           
               that.setData({

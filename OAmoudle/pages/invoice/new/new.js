@@ -128,6 +128,7 @@ Page({
   },
   // 数字筛选
   checknum(e) {
+    
     let info = this.data.info;
     util.formatNum(e);
     info.includetaxamont = e.detail;

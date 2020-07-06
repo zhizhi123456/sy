@@ -1598,6 +1598,9 @@ const upImage = (key, way) => {
             url: 'https://shangyongren.com:9098/api/image/Get_photo',
             filePath: tempFilePaths[i],
             name: 'img_data',
+            formData: {
+              'userName':wx.getStorageSync("myInfo").UserName,
+            },
             success(res) {
               uploadImgCount++;
               // console.log("https://shangyongren.com:9098" + res.data.replace(/"/g, ""))
@@ -1648,6 +1651,9 @@ const upImageIDEA = (key, way) => {
             url: 'https://shangyongren.com:9098/api/image/Get_photo',
             filePath: tempFilePaths[i],
             name: 'img_data',
+            formData: {
+              'userName':wx.getStorageSync("myInfo").UserName,
+            },
             success(res) {
               uploadImgCount++;
               // //console.log(res)
@@ -1729,6 +1735,9 @@ const upFileIDEA = (key) => {
             url: 'https://shangyongren.com:9098/api/record/Get_rec',
             filePath: filedata[i].path,
             name: 'file_data',
+            formData: {
+              'userName':wx.getStorageSync("myInfo").UserName,
+            },
             success(res) {
               uploadImgCount++;
               // console.log(res)
@@ -1839,6 +1848,9 @@ const upFile = (key) => {
             url: 'https://shangyongren.com:9098/api/record/Get_rec',
             filePath: filedata[i].path,
             name: 'file_data',
+            formData: {
+              'userName':wx.getStorageSync("myInfo").UserName,
+            },
             success(res) {
               uploadImgCount++;
               // console.log(res)
@@ -1908,6 +1920,9 @@ const upFilenew = (key, data) => {
             url: 'https://shangyongren.com:9098/api/record/Get_rec',
             filePath: filedata[i].path,
             name: 'file_data',
+            formData: {
+              'userName':wx.getStorageSync("myInfo").UserName,
+            },
             success(res) {
               uploadImgCount++;
               // console.log(res)
@@ -1978,6 +1993,9 @@ const upFilelog = (key) => {
             url: 'https://shangyongren.com:9098/api/record/Get_rec',
             filePath: filedata[i].path,
             name: 'file_data',
+            formData: {
+              'userName':wx.getStorageSync("myInfo").UserName,
+            },
             success(res) {
               uploadImgCount++;
               // console.log(res)
@@ -2466,6 +2484,9 @@ const upImages = (key, img) => {
             url: 'https://shangyongren.com:9098/api/image/Get_photo',
             filePath: tempFilePaths[i],
             name: 'img_data',
+            formData: {
+              'userName':wx.getStorageSync("myInfo").UserName,
+            },
             success(res) {
               uploadImgCount++;
               // console.log(res)

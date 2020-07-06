@@ -54,6 +54,9 @@ Page({
           url: 'https://shangyongren.com:9098/api/record/Get_rec', //仅为示例，非真实的接口地址
           filePath: tempFiles,
           name: 'file_data',
+          formData: {
+            'userName':wx.getStorageSync("myInfo").UserName,
+          },
           success(res) {
             console.log(res.data)
             if (res.statusCode == 200) {}
