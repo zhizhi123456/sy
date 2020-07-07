@@ -155,7 +155,7 @@
             <icon class="iconfont icon-wj-thwj"></icon>
             <text>退回</text>
         </view>
-        <view wx:if="{{!info.formid}}">
+        <view wx:if="{{(!info.formid)||(isnext&&returned)}}">
             <navigator open-type="redirect" url="/OAmoudle/pages/vacate/new/new?id={{info.ID}}" hover-class="none">
                 <icon class="iconfont icon-bianji"></icon>
                 <text>编辑</text>

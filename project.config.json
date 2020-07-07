@@ -7,11 +7,14 @@
 		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
+		"preloadBackgroundData": false,
 		"minified": true,
 		"newFeature": true,
 		"coverView": true,
 		"nodeModules": true,
 		"autoAudits": false,
+		"showShadowRootInWxmlPanel": true,
+		"scopeDataCheck": false,
 		"checkInvalidKey": true,
 		"checkSiteMap": false,
 		"uploadWithSourceMap": true,
@@ -19,12 +22,14 @@
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
-		}
+		},
+		"useCompilerModule": false,
+		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.10.4",
 	"appid": "wxca85817190fbcb2b",
-	"projectname": "%E5%B0%9A%E9%9B%8D%E5%B7%A5%E7%A8%8B%E5%BB%BA%E8%AE%BE",
+	"projectname": "sy",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},

@@ -16,6 +16,7 @@ Page({
   data: {
     info: {
       usechargeman: "1",
+      ApplygetNew: false,
       StatisticalCycle: util.titleTime(new Date())
     },
     show_nature: false,

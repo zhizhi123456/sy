@@ -46,12 +46,13 @@ Page({
       util.returnMenu2(menus.id, menus.title);
     }
   },
-  setSeach(e) {
-    // console.log(e)
-    this.setData({
-      seach: e.detail.value
+  setSeach: function (event) {
+    let that = this;
+    var inputSearch = event.detail.value;
+    that.setData({
+    seach: inputSearch
     })
-  },
+  },	
   // 模糊查询
   seachInfo() {
     var info = this.data.info

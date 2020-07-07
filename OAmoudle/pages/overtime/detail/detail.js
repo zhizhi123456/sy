@@ -207,19 +207,22 @@ Page({
     // }
   },
   sconfirm() {
-    if (this.data.state == 'return') {
-      if (this.data.ApprovalOpinion) {
-        util.Triggerflow(this, 'return', 'workovertime', 'overtime', '', '', '', '', '', '', 'oa', this.data.ApprovalOpinion ? this.data.ApprovalOpinion : '不同意。', JSON.stringify(this.data.idea.API_Picurl), JSON.stringify(this.data.idea.API_Fileurl))
+    var dangqiantime = (Date.parse(new Date()) / 1000);
+    if (util.Reclick(dangqiantime)) {
+      if (this.data.state == 'return') {
+        if (this.data.ApprovalOpinion) {
+          util.Triggerflow(this, 'return', 'workovertime', 'overtime', '', '', '', '', '', '', 'oa', this.data.ApprovalOpinion ? this.data.ApprovalOpinion : '不同意。', JSON.stringify(this.data.idea.API_Picurl), JSON.stringify(this.data.idea.API_Fileurl))
+        } else {
+          wx.showToast({
+            title: '请输入审批意见',
+            icon: 'none',
+            duration: 3000
+          })
+        }
       } else {
-        wx.showToast({
-          title: '请输入审批意见',
-          icon: 'none',
-          duration: 3000
-        })
+        util.Triggerflow(this, 'next', 'workovertime', 'overtime', '', '', '', '', '', '', 'oa', this.data.ApprovalOpinion ? this.data.ApprovalOpinion : '同意。', JSON.stringify(this.data.idea.API_Picurl), JSON.stringify(this.data.idea.API_Fileurl))
       }
-    } else {
-      util.Triggerflow(this, 'next', 'workovertime', 'overtime', '', '', '', '', '', '', 'oa', this.data.ApprovalOpinion ? this.data.ApprovalOpinion : '同意。', JSON.stringify(this.data.idea.API_Picurl), JSON.stringify(this.data.idea.API_Fileurl))
-    }
+    } 
   },
   // 删除
   delete() {

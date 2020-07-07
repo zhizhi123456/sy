@@ -25,6 +25,7 @@ Page({
       itemnumber: '1',
       applynumber: "",
       API_Picurl: [],
+      ApplygetNew: false,
       TotalSum: ''
     },
     currentDate: new Date().getTime(),

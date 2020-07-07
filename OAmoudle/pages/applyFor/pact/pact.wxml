@@ -18,7 +18,7 @@
             <icon class="iconfont icon-fuxuananniu fl s-sort" bindtap="change"></icon>
             <icon class="iconfont icon-sousuo fr" bindtap="seachInfo"></icon>
             <view class="data_list">
-                <input value="{{seach}}" bindblur="setSeach" />
+                <input value="{{seach}}" bindblur="setSeach" bindconfirm='setSeach' bindinput='setSeach'/>
                 <view class="number" wx:if="{{!seach}}">
                     <icon class="iconfont icon-sousuo"></icon>
                     <text wx:if="{{InfoList.length}}">共{{InfoList.length}}条</text>
@@ -97,6 +97,18 @@
                 <!-- <view>
                     <text class="caption">{{item.purchasecontactCode}}</text>
                 </view> -->
+                <view>
+                    <text class="info">当前任务状态</text>
+                    <text wx:if="{{util.inof(item.CurrentStatus,'等待')!=-1}}" > {{item.CurrentStatus}}</text>
+                    <text wx:elif="{{util.inof(item.CurrentStatus,'通过')!=-1}}" class="pass"> {{item.CurrentStatus}}</text>
+                    <text wx:else class="return"> {{item.CurrentStatus}}</text>
+                    <wxs module="util">
+                        var inof = function(val,pathval)  {
+                            return val.indexOf(pathval)
+                        }
+                        module.exports.inof = inof;
+                    </wxs>
+                </view>
                 <view>
                     <text class="info">用途</text>
                     <text>{{item.purpose}}</text>

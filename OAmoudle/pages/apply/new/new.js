@@ -35,6 +35,7 @@ Page({
       enterstate: '',
       itemnumber: '1',
       API_Picurl: [],
+      ApplygetNew:false,
       unitprice: ''
     },
     currentDate: new Date().getTime(),

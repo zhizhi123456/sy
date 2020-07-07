@@ -776,6 +776,18 @@ van-checkbox {
     color: teal;
 }
 
+/* 审核通过 #5673FF */
+.main .pass{
+    font-size: 30rpx;
+    color: #5673FF;
+}
+
+/* xx退回 #F56C6C */
+.main .return{
+    color: #F56C6C;
+    font-size: 30rpx;
+}
+
 .van-step__title view {
     word-spacing: 100000rpx;
     line-height: 1.5em;

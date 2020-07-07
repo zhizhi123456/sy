@@ -3305,7 +3305,7 @@ const qgroupdeliver = (funcname, that, hadNew, hadMy, fun) => {
             // console.log(item)
             for (let k of item) {
               for (let i in k) {
-                if (k[i] == null || k[i] == "null" || !k[i]) {
+                if (k[i] == null) {
                   k[i] = " "
                 }
               }
@@ -3829,7 +3829,24 @@ const getbutton = (a, b, c, key) => {
       msg: res.sub_msg
     })
   })
+};
+const Reclick = (dangqiantime) => {
+var daojishitime = wx.getStorageSync('m')
+
+var times = dangqiantime - daojishitime
+if (times >= 4) {
+console.log('可以执行')
+//把4秒数放到缓存
+wx.setStorageSync('m', dangqiantime)
+return true
+} else {
+//当发生了4秒以内多次点击等事件，弹窗提示
+console.log('不可以执行')
+return false
 }
+}
+
+
 module.exports = {
   formatmony,
   formatTime1,
@@ -3912,5 +3929,6 @@ module.exports = {
   updateCode1,
   updateValueM,
   upFilenew,
-  delFilenew
+  delFilenew,
+  Reclick
 }

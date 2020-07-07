@@ -23,6 +23,10 @@ Page({
     hadNew: 1,
     info: {}
   },
+
+  //状态颜色的判断
+
+  
   // 返回
   return () {
     let menus = wx.getStorageSync('menus');
@@ -34,10 +38,11 @@ Page({
       util.returnMenu2(menus.id, menus.title);
     }
   },
-  setSeach(e) {
-    // console.log(e)
-    this.setData({
-      seach: e.detail.value
+  setSeach: function (event) {
+    let that = this;
+    var inputSearch = event.detail.value;
+    that.setData({
+    seach: inputSearch
     })
   },
   findnew(e) {
@@ -126,7 +131,7 @@ Page({
       if (menus.caption == '我申请') {
         this.setData({
           applyT: 1,
-          'info.UserName': userinfo.UserName,
+          // 'info.UserName': userinfo.UserName,
           'info.applyman': userinfo.UserName,
           top:'我申请的加班'
         })

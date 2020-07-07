@@ -15,6 +15,7 @@ Page({
   data: {
     info: {
       API_Picurl: [],
+      ApplygetNew: false
     },
     show: false,
     totals: [],

@@ -106,11 +106,15 @@
             <text>退回</text>
         </view>
         <view>
-            <navigator open-type="redirect" url="/pages/variation/new/new?id={{info.ID}}" hover-class="none">
+            <navigator open-type="redirect"  url="/pages/variation/new/new?id={{info.ID}}" hover-class="none">
                 <icon class="iconfont icon-bianji"></icon>
                 <text>编辑</text>
             </navigator>
         </view>
+        <!-- <view bindtap="sendback" wx:if="{{info.Formid&&isnext&&returned&&isreturn}}">
+            <icon class="iconfont icon-bianji"></icon>
+            <text>编辑</text>
+        </view> -->
         <view bindtap="putin" wx:if="{{isnext&&returned}}">
             <icon class="iconfont icon-tijiao"></icon>
             <text>审核通过</text>

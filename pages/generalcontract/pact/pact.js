@@ -41,10 +41,11 @@ Page({
       util.returnMenu(1001);
     }
   },
-  setSeach(e) {
-    // console.log(e)
-    this.setData({
-      seach: e.detail.value
+  setSeach: function (event) {
+    let that = this;
+    var inputSearch = event.detail.value;
+    that.setData({
+    seach: inputSearch
     })
   },
   // 模糊查询
@@ -58,7 +59,7 @@ Page({
     info.keyword = this.data.seach
     var user = wx.getStorageSync("myInfo");
     info.UserName = user.UserName
-    info.state = '所有'
+    info.state = "所有"
     this.setData({
       info
     })
@@ -107,8 +108,7 @@ Page({
         ],
       })
       util.qgroupdeliver(groupId, this, '', '1')
-    } 
-     if (menus.caption == '我申请') {
+    }  if (menus.caption == '我申请') {
       this.setData({
         'info.state': '',
         applyT: 1,
@@ -116,7 +116,7 @@ Page({
         top: '我申请的签报'
       })
       util.qgroupdeliver(groupId, this, '', '1')
-    }  
+    } 
       this.seachInfo();
     
     if (app.globalData.CountItem) {
