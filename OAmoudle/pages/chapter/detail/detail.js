@@ -30,11 +30,12 @@ Page({
   },
   // 返回
   return () {
-    if (this.data.history) {
-      util.OAreturn('chapter', this);
-    } else {
-      util.OAreturn('chapter');
-    }
+    // if (this.data.history) {
+    //   util.OAreturn('chapter', this);
+    // } else {
+    //   util.OAreturn('chapter');
+    // }
+    wx.navigateBack()
   },
   /**
    * 生命周期函数--监听页面加载

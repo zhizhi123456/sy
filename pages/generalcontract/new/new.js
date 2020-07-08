@@ -310,11 +310,15 @@ Page({
   },
   // 返回
   return () {
-    util.returnPrev('generalcontract')
+    //util.Oreturn('generalcontract')
+    wx.navigateBack()
   },
   // 编辑合同页面的确定和返回
   editreturn() {
-    util.returnPrev('generalcontract', this)
+
+    //util.returnPrev('generalcontract', this)
+    wx.navigateBack()
+    
   },
   editconfirm() {
     let info = this.data.info;

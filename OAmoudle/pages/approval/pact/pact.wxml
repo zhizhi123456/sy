@@ -4,7 +4,7 @@
     <view class="header">
         <view class="title">
             <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
-            <navigator open-type="redirect"wx:if="{{!ISconduct}}" url="/OAmoudle/pages/approval/new/new" hover-class="none" class="fr newCreate">
+            <navigator open-type="navigate"wx:if="{{!ISconduct}}" url="/OAmoudle/pages/approval/new/new" hover-class="none" class="fr newCreate">
                 新建
             </navigator>
             <view class="apply" wx:if="{{ISconduct}}">
@@ -99,7 +99,7 @@
             <van-tag class="LThint" round type="danger" size="large" wx:if="{{(item.ApplygetNew&&item.ApplygetNew!=' ')&&applyT}}">
                 new
             </van-tag>
-            <navigator open-type="redirect" url="/OAmoudle/pages/approval/detail/detail?id={{item.ID}}&applyT={{applyT}}" hover-class="none">
+            <navigator open-type="navigate" url="/OAmoudle/pages/approval/detail/detail?id={{item.ID}}&applyT={{applyT}}" hover-class="none">
                 <!-- <view>
                     <text class="caption">{{item.purchasecontactCode}}</text>
                 </view> -->

@@ -31,11 +31,12 @@ Page({
   },
   // 返回
   return () {
-    if (this.data.history) {
-      util.OAreturn('overtime', this);
-    } else {
-      util.OAreturn('overtime');
-    }
+    // if (this.data.history) {
+    //   util.OAreturn('overtime', this);
+    // } else {
+    //   util.OAreturn('overtime');
+    // }
+    wx.navigateBack()
   },
   // 部门多选
   showPopup_dep() {

@@ -3259,11 +3259,11 @@ const qgroupdeliver = (funcname, that, hadNew, hadMy, fun) => {
       },
       success(res) {
         // 有状态时传递usernanme 当前用户 当传递UserName时不设置
-        if (info.state && (!info.UserName)) {
-          that.setData({
-            "info.UserName": res.data.UserName
-          })
-        }
+        // if (info.state && (!info.UserName)) {
+        //   that.setData({
+        //     "info.UserName": res.data.UserName
+        //   })
+        // }
         for (let i in info) {
           if (info[i] == "请选择" || !info[i] || info[i] == "" || info[i] == []) {
             info[i] = null

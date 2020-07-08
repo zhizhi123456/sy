@@ -4,7 +4,7 @@
     <view class="header">
         <view class="title">
             <icon class="iconfont icon-jiantou2 fl" catchtap="return"></icon>
-            <navigator open-type="redirect"wx:if="{{!ISconduct}}" url="/pages/generalcontract/new/new" class="fr newCreate">新建</navigator>
+            <navigator open-type="navigate" wx:if="{{!ISconduct}}" url="/pages/generalcontract/new/new" class="fr newCreate">新建</navigator>
             <view class="apply" wx:if="{{ISconduct}}">
                 <van-dropdown-menu active-color="red">
                     <van-dropdown-item value="{{val}}" options="{{pact}}" bindchange="changeItem" />
@@ -92,7 +92,7 @@
             <van-tag class="LThint" round type="danger" size="large" wx:if="{{(item.ApplygetNew&&applyT)}}">
                 new
             </van-tag>
-            <navigator open-type="redirect" url="/pages/generalcontract/detail/detail?id={{item.ID}}" hover-class="none">
+            <navigator open-type="navigate" url="/pages/generalcontract/detail/detail?id={{item.ID}}" hover-class="none">
                 <view>
                     <text class="caption">{{item.maincontactname}}</text>
                 </view>

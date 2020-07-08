@@ -53,11 +53,12 @@ Page({
   },
   // 返回
   return () {
-    if (this.data.history) {
-      util.OAreturn('approval', this);
-    } else {
-      util.OAreturn('approval');
-    }
+    // if (this.data.history) {
+    //   util.OAreturn('approval', this);
+    // } else {
+    //   util.OAreturn('approval');
+    // }
+    wx.navigateBack()
   },
   // 新增明细表
   addndlink() {

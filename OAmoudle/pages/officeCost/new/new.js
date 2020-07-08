@@ -285,11 +285,13 @@ Page({
   },
   // 返回
   return () {
-    util.OAreturn('officeCost')
+    // util.OAreturn('officeCost')
+    wx.navigateBack()
   },
   // 编辑分包项目页面的确定和返回
   editreturn() {
-    util.OAreturn('officeCost', this)
+    // util.OAreturn('officeCost', this)
+    wx.navigateBack()
   },
   editconfirm() {
     let info = this.data.info;

@@ -38,12 +38,12 @@ Page({
   },
   // 返回
   return () {
-
-    if (this.data.history) {
-      util.OAreturn('vacate', this);
-    } else {
-      util.OAreturn('vacate');
-    }
+    // if (this.data.history) {
+    //   util.OAreturn('vacate', this);
+    // } else {
+    //   util.OAreturn('vacate');
+    // }
+    wx.navigateBack()
   },
 
   /**

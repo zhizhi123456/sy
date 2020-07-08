@@ -34,11 +34,12 @@ Page({
   // 返回
   return () {
     // util.OAreturn('apply')
-    if (this.data.history) {
-      util.OAreturn('apply', this);
-    } else {
-      util.OAreturn('apply');
-    }
+    // if (this.data.history) {
+    //   util.OAreturn('apply', this);
+    // } else {
+    //   util.OAreturn('apply');
+    // }
+    wx.navigateBack()
   },
   // 新增明细表
   addndlink() {

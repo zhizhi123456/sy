@@ -513,11 +513,13 @@ Page({
   },
   // 返回
   return () {
-    util.OAreturn('apply');
+    //util.OAreturn('apply');
+    wx.navigateBack();
   },
   // 编辑页面的确定和返回
   editreturn() {
-    util.OAreturn('apply', this);
+    //util.OAreturn('apply', this);
+    wx.navigateBack()
   },
   editconfirm() {
     var materials = this.data.materials

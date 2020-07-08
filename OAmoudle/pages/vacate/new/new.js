@@ -361,11 +361,13 @@ Page({
   },
   // 返回
   return () {
-    util.OAreturn('vacate');
+    //util.OAreturn('vacate');
+    wx.navigateBack();
   },
   // 编辑页面的确定和返回
   editreturn() {
-    util.OAreturn('vacate', this);
+    //util.OAreturn('vacate', this);
+    wx.navigateBack();
   },
   editconfirm() {
     let info = this.data.info;

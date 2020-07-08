@@ -248,11 +248,13 @@ Page({
   },
   // 返回
   return () {
-    util.OAreturn('chapter');
+    //util.OAreturn('chapter');
+    wx.navigateBack()
   },
   // 编辑页面的确定和返回
   editreturn() {
-    util.OAreturn('chapter', this);
+    //util.OAreturn('chapter', this);
+    wx.navigateBack()
   },
   editconfirm() {
     let info = this.data.info;

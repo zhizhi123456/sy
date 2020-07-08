@@ -106,7 +106,7 @@
                 </van-cell>
                 <block wx:for="{{material_list}}" wx:key="{{index}}">
                     <view class="material">
-                        <navigator open-type="redirect" url="/OAmoudle/pages/applyFor/detaillink/detaillink?detailid={{item.ID}}" hover-class="none">
+                        <navigator open-type="navigate" url="/OAmoudle/pages/applyFor/detaillink/detaillink?detailid={{item.ID}}" hover-class="none">
                             <!-- <view>
                                 <text class="m_caption">{{item.caption}}</text>
                             </view> -->
@@ -174,7 +174,7 @@
             <text>退回</text>
         </view>
         <view wx:if="{{(!info.formid||(isnext&&returned))}}">
-            <navigator open-type="redirect" url="/OAmoudle/pages/applyFor/new/new?id={{info.ID}}" hover-class="none">
+            <navigator open-type="navigate" url="/OAmoudle/pages/applyFor/new/new?id={{info.ID}}" hover-class="none">
                 <icon class="iconfont icon-bianji"></icon>
                 <text>编辑</text>
             </navigator>

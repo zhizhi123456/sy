@@ -31,13 +31,13 @@ Page({
   },
   // 返回
   return () {
-    if (this.data.history) {
-      util.Oreturn('generalcontract', this);
-    } else {
-      util.Oreturn('generalcontract');
-    }
+    // if (this.data.history) {
+    //   util.Oreturn('generalcontract', this);
+    // } else {
+    //   util.Oreturn('generalcontract');
+    // }
 
-    
+    wx.navigateBack()
 
   },
   downF(e) {

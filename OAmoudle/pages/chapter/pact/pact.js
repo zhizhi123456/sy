@@ -48,7 +48,14 @@ Page({
     wx.showLoading({
       title: '加载中',
     });
-    groupChapter(this.data.info).then(res => {
+    var info = this.data.info
+    info.keyword = this.data.seach
+    
+    
+    this.setData({
+      info
+    });
+    groupChapter(info).then(res => {
       if (res.code == 10000) {
         let item = res.List;
         util.listData(item, app.globalData.department, '', '', this, 'usesealform');

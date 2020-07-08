@@ -90,7 +90,7 @@ Page({
     let info = this.data.info;
     info.state = StateStr;
     info.UserName=userinfo.UserName;
-    info.applyman=userinfo.UserName;
+    //info.applyman=userinfo.UserName;
     this.setData({
       info
     })

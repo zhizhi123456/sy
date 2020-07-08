@@ -29,11 +29,12 @@ Page({
   },
   // 返回
   return () {
-    if (this.data.history) {
-      util.OAreturn('invoice', this);
-    } else {
-      util.OAreturn('invoice');
-    }
+    // if (this.data.history) {
+    //   util.OAreturn('invoice', this);
+    // } else {
+    //   util.OAreturn('invoice');
+    // }
+    wx.navigateBack()
   },
   /**
    * 生命周期函数--监听页面加载

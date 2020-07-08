@@ -308,11 +308,13 @@ Page({
   },
   // 返回
   return () {
-    util.OAreturn('overtime');
+    //util.OAreturn('overtime');
+    wx.navigateBack()
   },
   // 编辑页面的确定和返回
   editreturn() {
-    util.OAreturn('overtime', this);
+    //util.OAreturn('overtime', this);
+    wx.navigateBack()
   },
   editconfirm() {
     let info = this.data.info;

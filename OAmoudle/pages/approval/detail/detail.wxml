@@ -109,7 +109,7 @@
                 </van-cell>
                 <block wx:for="{{material_list}}" wx:key="{{index}}">
                     <view class="material">
-                        <navigator open-type="redirect" url="/OAmoudle/pages/approval/detaillink/detaillink?detailid={{item.ID}}" hover-class="none">
+                        <navigator open-type="navigate" url="/OAmoudle/pages/approval/detaillink/detaillink?detailid={{item.ID}}" hover-class="none">
                             <!-- <view>
                                 <text class="m_caption">{{item.caption}}</text>
                             </view> -->

@@ -54,11 +54,12 @@ Page({
   },
   // 返回
   return () {
-    if (this.data.history) {
-      util.OAreturn('iou', this);
-    } else {
-      util.OAreturn('iou');
-    }
+    // if (this.data.history) {
+    //   util.OAreturn('iou', this);
+    // } else {
+    //   util.OAreturn('iou');
+    // }
+    wx.navigateBack()
   },
   /**
    * 生命周期函数--监听页面加载

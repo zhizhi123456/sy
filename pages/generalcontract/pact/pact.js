@@ -60,8 +60,19 @@ Page({
     var info = this.data.info
     info.keyword = this.data.seach
     var user = wx.getStorageSync("myInfo");
+    let  menus1  =  wx.getStorageSync('menus');
+    if (menus1.title == "我的任务")     {
+      info.state  =  '未处理'
+    }
+    else if (menus1.title == "我的申请")   {
+    info.chargemanName = user.UserName
+    info.state = '未申请'
+        }else{
+
     info.UserName = user.UserName
-    info.state = "所有"
+    info.state = '所有'
+    }
+    
     this.setData({
       info
     })
@@ -114,7 +125,7 @@ Page({
       this.setData({
         'info.state': '',
         applyT: 1,
-        'info.UserName': userinfo.UserName,
+        'info.chargemanName': userinfo.UserName,
         top: '我申请的签报'
       })
       util.qgroupdeliver(groupId, this, '', '1')

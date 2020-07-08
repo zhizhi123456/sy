@@ -44,11 +44,12 @@ Page({
   },
   // 返回
   return () {
-    if (this.data.history) {
-      util.OAreturn('applyFor', this);
-    } else {
-      util.OAreturn('applyFor');
-    }
+    // if (this.data.history) {
+    //   util.OAreturn('applyFor', this);
+    // } else {
+    //   util.OAreturn('applyFor');
+    // }
+    wx.navigateBack()
   },
   // 新增明细表
   addndlink() {

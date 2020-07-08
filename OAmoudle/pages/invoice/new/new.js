@@ -339,11 +339,15 @@ Page({
   },
   // 返回
   return () {
-    util.OAreturn('invoice');
+    //util.OAreturn('invoice');
+    wx.navigateBack()
+
   },
   // 编辑页面的确定和返回
   editreturn() {
-    util.OAreturn('invoice', this);
+    //util.OAreturn('invoice', this);
+    wx.navigateBack()
+
   },
   editconfirm() {
     let info = this.data.info;

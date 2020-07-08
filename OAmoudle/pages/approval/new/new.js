@@ -415,11 +415,13 @@ Page({
   },
   // 返回
   return () {
-    util.OAreturn('approval');
+    //util.OAreturn('approval');
+    wx.navigateBack()
   },
   // 编辑页面的确定和返回
   editreturn() {
-    util.OAreturn('approval', this);
+    //util.OAreturn('approval', this);
+    wx.navigateBack()
   },
   editconfirm() {
     let info = this.data.info;
