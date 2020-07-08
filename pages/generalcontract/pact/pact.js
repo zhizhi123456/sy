@@ -156,6 +156,7 @@ Page({
     let StateStr = (this.data.pact[e.detail].text).slice(0, 3);
     let info = this.data.info;
     info.state = StateStr;
+    info.UserName = userinfo.UserName;//新添加的，
     this.setData({
       info
     })
