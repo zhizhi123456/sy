@@ -32,9 +32,9 @@ Page({
   // 返回
   return () {
     if (this.data.history) {
-      util.returnPrev('generalcontract', this);
+      util.Oreturn('generalcontract', this);
     } else {
-      util.returnPrev('generalcontract');
+      util.Oreturn('generalcontract');
     }
 
     

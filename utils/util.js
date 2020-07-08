@@ -1562,6 +1562,17 @@ const OAreturn = (kind, key, id, cap, dep, dert) => {
     })
   }
 }
+const Oreturn = (kind, key, id, cap, dep, dert) => {
+  if (key) {
+    wx.redirectTo({
+      url: `/pages/${kind}/detail/detail?id=${key.data.info.ID}${id?'&userid='+id+'&caption='+cap+'&dep='+dep+'&deptxt='+dert:""}`
+    })
+  } else {
+    wx.redirectTo({
+      url: `/pages/${kind}/pact/pact?${id?'userid='+id+'&caption='+cap+'&dep='+dep+'&deptxt='+dert:""}`
+    })
+  }
+}
 // 返回
 const returnPrev = (kind, key, id, cap, dep, dert, rid, tit) => {
   if (key) {
@@ -3930,5 +3941,6 @@ module.exports = {
   updateValueM,
   upFilenew,
   delFilenew,
-  Reclick
+  Reclick,
+  Oreturn
 }

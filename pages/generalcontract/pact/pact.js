@@ -36,8 +36,10 @@ Page({
     if (menus.title == '我的申请' || menus.title == '我的任务') {
       wx.redirectTo({
         url: "/pages/current/current/current?title=" + menus.title + '&id=' + (menus.id || menus.rid)
+        
       });
     } else {
+     
       util.returnMenu(1001);
     }
   },
