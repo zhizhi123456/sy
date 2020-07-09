@@ -1,5 +1,6 @@
 // pages/new/new.js
 import Toast from 'vant-weapp/dist/toast/toast';
+import Transform from '../../../../utils/num2upper.js';
 import {
   queryapplyFor,
   detailapplyFor,
@@ -249,9 +250,11 @@ Page({
   purchasecblur(e) {
     e.detail.value = Number(e.detail.value).toFixed(2)
     let info = util.editInfo(e, this, e.detail.value);
+    var tsf = new Transform()
+    var result = tsf.toUpper(this.data.info.TotalSum)
     this.setData({
       info,
-      'info.Chinesenumerals': util.Uppercase(this.data.info.TotalSum)
+      'info.Chinesenumerals': result
     })
   },
   // 采购合同金额
@@ -615,9 +618,11 @@ Page({
       sum = s.quantity * s.unitprice + sum;
     })
     sum = Number(sum).toFixed(2)
+    var tsf = new Transform()
+    var result = tsf.toUpper(sum)
     this.setData({
       'info.TotalSum': sum,
-      'info.Chinesenumerals': util.Uppercase(sum),
+      'info.Chinesenumerals': result,
     })
   },
   // 数字筛选

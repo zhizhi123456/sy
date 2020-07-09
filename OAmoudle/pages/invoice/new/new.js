@@ -1,5 +1,6 @@
 // pages/new/new.js
 import Toast from 'vant-weapp/dist/toast/toast';
+import Transform from '../../../../utils/num2upper.js';
 import {
   addInvoice,
   referInvoice,
@@ -9,6 +10,7 @@ import {
   customerRepeat
 } from "../../../../service/getData";
 var util = require("../../../../utils/util");
+
 var app = getApp();
 let userinfo = wx.getStorageSync("myInfo");
 Page({
@@ -274,9 +276,11 @@ Page({
   includetaxamontblur(e) {
     e.detail.value = Number(e.detail.value).toFixed(2)
     let info = util.editInfo(e, this, e.detail.value);
+    var tsf = new Transform()
+    var result = tsf.toUpper(e.detail.value)
     this.setData({
       info,
-      'info.Chinesenumerals': util.Uppercase(e.detail.value)
+      'info.Chinesenumerals': result
     })
   },
   // 大写金额

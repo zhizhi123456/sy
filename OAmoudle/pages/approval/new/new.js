@@ -1,5 +1,6 @@
 // pages/new/new.js
 import Toast from 'vant-weapp/dist/toast/toast';
+import Transform from '../../../../utils/num2upper.js';
 import {
   queryapproval,
   detailapproval,
@@ -165,9 +166,11 @@ Page({
   // 总金额
   TotalSumblur(e) {
     let info = util.editInfo(e, this, Number(e.detail.value).toFixed(2));
+    var tsf = new Transform()
+    var result = tsf.toUpper(e.detail.value)
     this.setData({
       info,
-      'info.Chinesenumerals': util.Uppercase(e.detail.value)
+      'info.Chinesenumerals':result
     })
   },
   // 大写金额
@@ -473,13 +476,14 @@ Page({
   },
   money() {
     let materials = this.data.materials;
+    var tsf = new Transform()
     var money = 0
     materials.forEach(item => {
       money += Number(item.amount);
     })
     this.setData({
       'info.TotalSum': money.toFixed(2),
-      'info.Chinesenumerals': util.Uppercase(money),
+      'info.Chinesenumerals': tsf.toUpper(money.toString()),
     })
   },
   // 数字筛选

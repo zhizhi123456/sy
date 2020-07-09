@@ -1,5 +1,6 @@
 // pages/new/new.js
 import Toast from 'vant-weapp/dist/toast/toast';
+import Transform from '../../../utils/num2upper.js';
 import {
   addPact,
   referId,
@@ -115,9 +116,11 @@ Page({
   purchasecblur(e) {
     e.detail.value = Number(e.detail.value).toFixed(2)
     let info = util.editInfo(e, this, e.detail.value);
+    var tsf = new Transform()
+    var result = tsf.toUpper(this.data.info.contcactamount)
     this.setData({
       info,
-      'info.Chinesenumerals': util.Uppercase(this.data.info.contcactamount)
+      'info.Chinesenumerals': result
     })
   },
   // 总包项目
