@@ -486,6 +486,7 @@ Page({
       'info.Chinesenumerals': tsf.toUpper(money.toString()),
     })
   },
+  
   // 数字筛选
   checknum(e) {
     let name = e.currentTarget.dataset.name,

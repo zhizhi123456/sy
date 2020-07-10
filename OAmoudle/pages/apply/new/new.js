@@ -786,6 +786,7 @@ Page({
       'info.Chinesenumerals':tsf.toUpper(sum),
     })
   },
+  
   // 数字筛选
   checknum(e) {
     let name = e.currentTarget.dataset.name,

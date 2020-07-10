@@ -14,6 +14,7 @@ var util = require("../../../../utils/util");
 var app = getApp();
 let userinfo = wx.getStorageSync("myInfo");
 Page({
+  
   /**
    * 页面的初始数据
    */

@@ -100,6 +100,7 @@ export default class Currency {
         result.push(restr)
       }
 
+      
       result = result.reverse()
       result.push('元')
 
