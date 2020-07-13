@@ -482,7 +482,8 @@ Page({
           util.checkContent(info, this);
           util.intro(info, this)
           this.setData({
-            info
+            info,
+            'info.ApplygetNew':true
           })
           // if (this.data.materials[0]) {
           addapplyFor(this.data.info).then(res => {
@@ -525,7 +526,7 @@ Page({
                 icon: 'success',
                 duration: 3000
               })
-              util.OAreturn('applyFor');
+              util.OAreturn('applyFor','',2);
             } else {
               Toast({
                 message: '请输入正确的内容',
@@ -550,7 +551,7 @@ Page({
               icon: 'success',
               duration: 3000
             })
-            util.OAreturn('applyFor');
+            util.OAreturn('applyFor','',2);
           }
         })
       }

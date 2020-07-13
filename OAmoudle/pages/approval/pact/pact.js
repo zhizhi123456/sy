@@ -87,6 +87,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (option) {
+    console.log(33333)
+    console.log(option)
+    this.setData({
+      status:option.status
+    })
+    if(this.data.status==1){
+      this.data.info.ApplygetNew=true
+    }else{
+      this.data.info.ApplygetNew=false
+    }
     console.log(option)
     if (option.source) {
       wx.setStorageSync('carte', option)

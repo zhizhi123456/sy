@@ -119,7 +119,7 @@
             <van-tab title="费用单" name="c" wx:if="{{!history}}">
                 <block wx:if="{{InfoList.length}}">
                     <view class="material" wx:for="{{InfoList}}" wx:key="index">
-                        <navigator open-type="redirect" url="/pages/cost/detail/detail?nape=generalcontract&returnid={{info.ID}}&id={{item.ID}}" hover-class="none">
+                        <navigator open-type="navigate" url="/pages/cost/detail/detail?nape=generalcontract&returnid={{info.ID}}&id={{item.ID}}" hover-class="none">
                             <view class="m_item">
                                 <text class="m_info">费用名称</text>
                                 <text>{{item.chargename}}</text>
@@ -219,18 +219,18 @@
             </van-tab>
         </van-tabs>
     </view>
-    <view class="footer" wx:if="{{((info.formid&&isnext&&returned&&isreturn)||(!info.formid)||(isnext&&returned))&&(!history)}}">
-        <view bindtap="sendback" wx:if="{{info.formid&&isnext&&returned&&isreturn}}" data-state='return'>
+    <view class="footer" wx:if="{{(returned)||(AudiEdit)}}">
+        <view bindtap="sendback" wx:if="{{returned}}" data-state='return'>
             <icon class="iconfont icon-wj-thwj"></icon>
             <text>退回</text>
         </view>
-        <view wx:if="{{(!info.formid)||(isnext&&returned)}}">
-            <navigator open-type="redirect" url="/pages/generalcontract/new/new?id={{info.ID}}" hover-class="none">
+        <view wx:if="{{AudiEdit}}">
+            <navigator open-type="navigate" url="/pages/generalcontract/new/new?id={{info.ID}}" hover-class="none">
                 <icon class="iconfont icon-bianji"></icon>
                 <text>编辑</text>
             </navigator>
         </view>
-        <view bindtap="putin" wx:if="{{isnext&&returned}}">
+        <view bindtap="putin" wx:if="{{AudiEdit}}">
             <icon class="iconfont icon-tijiao"></icon>
             <text>{{msg}}</text>
         </view>

@@ -330,7 +330,8 @@ Page({
           util.checkContent(info, this);
           util.intro(info, this)
           this.setData({
-            info
+            info,
+            'info.ApplygetNew':true
           })
           // if (this.data.materials[0]) {
           addapproval(this.data.info).then(res => {

@@ -183,18 +183,18 @@
             </van-tab>
         </van-tabs>
     </view>
-    <view class="footer" wx:if="{{((info.formid&&isnext&&returned&&isreturn)||(!info.formid)||(isnext&&returned))&&(!history)}}">
+    <view class="footer" wx:if="{{(returned)||(AudiEdit)}}">
         <view bindtap="sendback" wx:if="{{info.formid&&isnext&&returned&&isreturn}}">
             <icon class="iconfont icon-wj-thwj"></icon>
             <text>退回</text>
         </view>
-        <view wx:if="{{(!info.formid)||(isnext&&returned)}}">
+        <view wx:if="{{AudiEdit}}">
             <navigator open-type="navigate" url="/OAmoudle/pages/apply/new/new?id={{info.ID}}" hover-class="none">
                 <icon class="iconfont icon-bianji"></icon>
                 <text>编辑</text>
             </navigator>
         </view>
-        <view bindtap="putin" wx:if="{{isnext&&returned}}">
+        <view bindtap="putin" wx:if="{{AudiEdit}}">
             <icon class="iconfont icon-tijiao"></icon>
             <text>{{msg}}</text>   
         </view>

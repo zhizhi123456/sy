@@ -16,7 +16,6 @@ Page({
   data: {
     info: {
       usechargeman: "1",
-      ApplygetNew: false,
       StatisticalCycle: util.titleTime(new Date())
     },
     show_nature: false,
@@ -263,7 +262,8 @@ Page({
       util.checkContent(info, this);
       util.intro(info, this)
       this.setData({
-        info
+        info,
+        'info.ApplygetNew':true
       })
       addofficeCost(this.data.info).then(res => {
         console.log(res)
@@ -286,6 +286,7 @@ Page({
   // 返回
   return () {
     // util.OAreturn('officeCost')
+    
     wx.navigateBack()
   },
   // 编辑分包项目页面的确定和返回

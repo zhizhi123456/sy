@@ -163,6 +163,8 @@ export const valid = (params) => http.post("/api/SubmitWorkFlowService/GetWorkfl
 export const past = (params) => http.post("/api/SubmitWorkFlowService/ConvertUseridToName", params);
 // 工作流可回退
 export const returned = (params) => http.post("/api/SubmitWorkFlowService/returned", params);
+// 工作流可审核编辑
+export const AudiEdit = (params) => http.post("/api/SubmitWorkFlowService/AudiEdit", params);//*1
 // =================================================================================================================================================================
 // 总包合同
 // 查询列表

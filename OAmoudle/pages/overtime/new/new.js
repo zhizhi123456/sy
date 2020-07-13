@@ -286,7 +286,8 @@ Page({
       let info = this.data.info;
       util.checkContent(info, this);
       this.setData({
-        info
+        info,
+        'info.ApplygetNew':true
       })
       addOvertime(this.data.info).then(res => {
         // console.log(res)

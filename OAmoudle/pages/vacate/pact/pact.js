@@ -13,6 +13,7 @@ Page({
    */
   data: {
     seach: '',
+    count:0,
     loading: false,
     top: '请假',
     currentDate: new Date().getTime(),
@@ -40,7 +41,8 @@ Page({
     let that = this;
     var inputSearch = event.detail.value;
     that.setData({
-    seach: inputSearch
+    seach: inputSearch,
+    count:1
     })
   },
   // 模糊查询
@@ -81,6 +83,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (option) {
+    console.log(33333)
+    console.log(option)
+    this.setData({
+      status:option.status
+    })
+    if(this.data.status==1){
+      this.data.info.ApplygetNew=true
+    }else{
+      this.data.info.ApplygetNew=false
+    }
     userinfo = wx.getStorageSync("myInfo");
     if (option.id || option.caption) {
       wx.setStorageSync('menus', option)

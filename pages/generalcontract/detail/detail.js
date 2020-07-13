@@ -36,9 +36,16 @@ Page({
     // } else {
     //   util.Oreturn('generalcontract');
     // }
+    // if(this.data.a){
 
-    wx.navigateBack()
-
+    // }
+    
+    if(this.data.a==1){      
+      wx.navigateBack()
+    }else{
+      util.Oreturn('generalcontract');
+    }
+    
   },
   downF(e) {
     util.lookFileIDEA(e);
@@ -47,6 +54,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(111111222)
+    console.log(options)
+    this.setData({
+      count:options.id,
+      a:options.count
+    })
     if (options.tab) {
       this.setData({
         tab: options.tab

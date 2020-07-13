@@ -322,7 +322,8 @@ Page({
       let info = this.data.info;
       util.checkContent(info, this);
       this.setData({
-        info
+        info,
+        'info.ApplygetNew':true
       })
       addInvoice(this.data.info).then(res => {
         // console.log(res)

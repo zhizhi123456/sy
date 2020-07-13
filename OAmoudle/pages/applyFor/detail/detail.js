@@ -17,7 +17,8 @@ Page({
     steps: [],
     material_list: [],
     table: "a",
-    returned: true,
+    returned: false,//*1
+    AudiEdit: false,//*1
     isreturn: true,
     check_photo: [{
       name: "拍照"
@@ -49,7 +50,12 @@ Page({
     // } else {
     //   util.OAreturn('applyFor');
     // }
-    wx.navigateBack()
+    if(this.data.a==1){      
+      wx.navigateBack()
+    }else{
+      util.OAreturn('applyFor');
+    }
+    //wx.navigateBack()
   },
   // 新增明细表
   addndlink() {
@@ -61,6 +67,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(22222)
+    console.log(options)
+    this.setData({
+      status:options.status
+    })
+    if(this.data.status==1){
+      this.data.info.ApplygetNew=false
+    }
     if (options.table) {
       this.setData({
         table: options.table

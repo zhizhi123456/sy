@@ -338,7 +338,8 @@ Page({
       util.intro(info, this)
       this.setData({
         info,
-        'info.IsManager': this.data.Manager
+        'info.IsManager': this.data.Manager,
+        'info.ApplygetNew':true
       })
       console.log(this.data.info)
       addVacate(this.data.info).then(res => {

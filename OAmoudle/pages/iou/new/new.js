@@ -302,7 +302,8 @@ Page({
       util.checkContent(info, this);
       util.intro(info, this)
       this.setData({
-        info
+        info,
+        'info.ApplygetNew':true
       })
       addiou(this.data.info).then(res => {
         // //console.log(res)

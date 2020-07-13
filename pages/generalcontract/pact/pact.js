@@ -6,12 +6,14 @@ import {
 var app = getApp();
 var util = require("../../../utils/util");
 let userinfo = wx.getStorageSync("myInfo");
+let userName_zy = userinfo.UserName;
 Page({
   /**
    * 页面的初始数据
    */
   data: {
     seach: '',
+    count:0,
     loading: false,
     val: 0,
     top: '签报',
@@ -47,7 +49,8 @@ Page({
     let that = this;
     var inputSearch = event.detail.value;
     that.setData({
-    seach: inputSearch
+    seach: inputSearch,
+    count:1
     })
   },
   // 模糊查询
@@ -62,6 +65,8 @@ Page({
     var user = wx.getStorageSync("myInfo");
     let  menus1  =  wx.getStorageSync('menus');
     if (menus1.title == "我的任务")     {
+    info.UserName = user.UserName
+    userName_zy = user.UserName;
       info.state  =  '未处理'
     }
     else if (menus1.title == "我的申请")   {
@@ -156,7 +161,9 @@ Page({
     let StateStr = (this.data.pact[e.detail].text).slice(0, 3);
     let info = this.data.info;
     info.state = StateStr;
-    info.UserName = userinfo.UserName;//新添加的，
+    console.log('124133424:'+userinfo.UserName)
+    console.log(userName_zy)
+    info.UserName = userName_zy;//新添加的，
     this.setData({
       info
     })

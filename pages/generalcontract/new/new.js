@@ -20,6 +20,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    a:1,
     departmenttext: "请选择",
     info: {
       API_Picurl: [],
@@ -292,7 +293,7 @@ Page({
             duration: 3000
           })
 
-          util.returnPrev('generalcontract')
+          util.returnPrev('generalcontract/pact/pact?state=1')
         }
       })
     } else {

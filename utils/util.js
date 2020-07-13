@@ -4,6 +4,7 @@ import {
   Projecttype,
   valid,
   returned,
+  AudiEdit,//*1
   querysign,
   fileRecord,
   qgroupfile,
@@ -2283,18 +2284,25 @@ const checkState = (key, id, chart, bh, Workstates) => {
           formid: id,
           ID: key.data.info.ID
         })
-        returned({
+        returned({//*1
           formName: chart,
           userName: userinfo.UserName,
           formid: id,
           ID: key.data.info.ID
         }).then(rtn => {
-          console.log(rtn)
-          if (!rtn.value) {
-            key.setData({
-              isreturn: false
-            })
-          }
+          key.setData({
+            returned: rtn.value
+          })
+        })
+        AudiEdit({//*1
+          formName: chart,
+          userName: userinfo.UserName,
+          formid: id,
+          ID: key.data.info.ID
+        }).then(rtn => {
+          key.setData({
+            AudiEdit: rtn.value
+          })
         })
       }
       // console.log()

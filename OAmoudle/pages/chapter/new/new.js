@@ -14,8 +14,7 @@ Page({
    */
   data: {
     info: {
-      API_Picurl: [],
-      ApplygetNew: false
+      API_Picurl: []  
     },
     show: false,
     totals: [],
@@ -226,7 +225,8 @@ Page({
       let info = this.data.info;
       util.checkContent(info, this);
       this.setData({
-        info
+        info,
+        'info.ApplygetNew':true
       })
       addChapter(this.data.info).then(res => {
         // console.log(res)
