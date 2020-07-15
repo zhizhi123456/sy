@@ -12,6 +12,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    shows:false,
     edit: false,
     info: {},
     active: 0,
@@ -96,7 +97,7 @@ Page({
       referId({
         ID: options.id
       }).then(res => {
-        // console.log(res)
+        console.log(res)
         if (res.code == 10000) {
           let item = res.Item;
           util.handleData(item, this, app.globalData.department);
@@ -124,6 +125,11 @@ Page({
           //列表
           let mid = res.Item.formid;
           util.workList(this, mid, 'maincontact', options.id);
+          setTimeout(() => {
+            //代码
+            console.log(this.data.steps)
+            console.log(this.data.actived)
+          }, 1000);
           //处理状态判断
           util.checkState(this, mid, 'maincontact', item.CurStepbh, '');
           // 查询项目相关的费用列表
@@ -256,6 +262,56 @@ Page({
       util.Triggerflow(this, 'next', 'maincontact', 'generalcontract', '', '', '', '', '', '', '', this.data.ApprovalOpinion ? this.data.ApprovalOpinion : '同意。', JSON.stringify(this.data.idea.API_Picurl), JSON.stringify(this.data.idea.API_Fileurl))
     }
   },
+  //标记
+   signs(e){
+    wx.showToast({
+      title: '标记成功',
+      icon: 'success',
+      duration: 1000
+    })
+    let info = this.data.info;
+    if(e.currentTarget.dataset.id==1){
+      info.signColor="red"
+    }
+    if(e.currentTarget.dataset.id==2){
+      info.signColor="blue"
+    }
+    if(e.currentTarget.dataset.id==3){
+      info.signColor="yellow"
+    }
+    if(e.currentTarget.dataset.id==4){
+      info.signColor="green"
+    }
+    if(info.sign==1 && e.currentTarget.dataset.id==5){
+      info.sign=""
+    }else{
+      info.sign=1
+    }
+    this.setData({
+      info,
+    })
+    util.checkChange(info, this, app.globalData.department);
+    util.intro(info, this)
+    this.setData({
+      info
+    })
+    amend(this.data.info).then(res => {
+      console.log(1111111)
+      console.log(res)
+  
+        util.returnPrev('generalcontract')
+
+    })
+  },
+  //颜色展示
+  shows111(){
+    var that = this;
+    var sh = that.data.shows;
+    that.setData({
+      shows: !sh
+    })
+  },
+
   // 审核通过
   putin() {
     if (this.data.info.formid) {

@@ -12,6 +12,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    sign:"",
     seach: '',
     count:0,
     loading: false,
@@ -31,6 +32,7 @@ Page({
     show_endtime: false,
     item: [],
     pages: 1,
+    colors:["red","blue","yellow","green"]
   },
   // 返回
   return () {
@@ -87,7 +89,29 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     console.log(options.source);
+    console.log(this.data.info);
+    if(options.rid==1){
+      this.setData({
+        i:0
+      })
+    }
+    if(options.rid==2){
+      this.setData({
+        i:1
+      })
+    }
+    if(options.rid==3){
+      this.setData({
+        i:2
+      })
+    }
+    if(options.rid==4){
+      this.setData({
+        i:3
+      })
+    }
     if (options.source) {
       wx.setStorageSync('carte', options)
     }

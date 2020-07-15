@@ -108,7 +108,21 @@
             </van-tab>
             <van-tab title="动态" name="b" wx:if="{{!history}}">
                 <van-cell title="动态({{Workstate}})" />
-                <van-steps steps="{{ steps }}" active="{{ actived }}" direction="vertical" active-color="#008080" inactive-icon="stop-circle" />
+                <!-- <van-steps steps="{{ steps }}" active="{{ actived }}" direction="vertical" active-color="#008080" inactive-icon="stop-circle" /> -->
+                <view wx:for="{{steps}}" wx:key="index" wx:if="{{item.state}}">
+                <view style="margin-left:10rpx;margin-top:30rpx">
+                    <view>
+                    <icon class="iconfont1 {{item.icon}}" style="color:{{item.fcolor}}"></icon>
+                    <!-- <image style="float:left;width:32rpx;height:32rpx" src="{{item.img}}">
+                    </image> -->
+                    </view> 
+                    <view style="color:{{item.fcolor}};font-size:24rpx; padding-left:60rpx;margin-top:-34rpx">
+                        <view><font>{{item.text}}</font></view>
+                        <view style="padding-top:10rpx"><font>{{item.desc}}</font></view>
+                        <view style="padding-top:10rpx"><font>{{item.time}}</font></view>
+                    </view>
+                </view>
+                </view> 
             </van-tab>
             <van-tab title="修改记录" name="d" wx:if="{{(!history)&&amendant.length}}">
                 <block wx:if="{{amendant}}">
@@ -169,6 +183,7 @@
         </view>
         <view wx:if="{{AudiEdit}}">
             <navigator open-type="navigate" url="/OAmoudle/pages/invoice/new/new?id={{info.ID}}&count1={{count1}}&a={{a}}" hover-class="none">
+
                 <icon class="iconfont icon-bianji"></icon>
                 <text>编辑</text>
             </navigator>
@@ -176,6 +191,10 @@
         <view bindtap="putin" wx:if="{{AudiEdit}}">
             <icon class="iconfont icon-tijiao"></icon>
             <text>{{msg}}</text>
+        </view>
+        <view wx:if="{{AudiEdit}}" bindtap="shows111" >
+                <icon class="iconfont1 icon-biaoji"></icon>
+                <text>标记</text>
         </view>
     </view>
     <view class="seach" wx:if="{{show}}">
@@ -252,4 +271,12 @@
             </view>
         </van-popup>
     </view>
+</view>
+
+<view class="fix" wx:if="{{shows}}">
+    <view class="fix_1" bindtap="signs" data-id="1"></view>
+    <view class="fix_2" bindtap="signs" data-id="2"></view>
+    <view class="fix_3" bindtap="signs" data-id="3"></view>       
+    <view class="fix_4" bindtap="signs" data-id="4"></view>
+    <view class="fix_5" bindtap="signs" data-id="5"></view>
 </view>

@@ -109,7 +109,7 @@ Page({
   // 合同名称
   maincontactnameblur(e) {
     // 输入的内容
-    // console.log(e.detail.value)
+    // console.log(e)
     let info = util.editInfo(e, this, e.detail.value);
     this.setData({
       info
@@ -327,6 +327,9 @@ Page({
   },
   editconfirm() {
     let info = this.data.info;
+    console.log("abcd")
+    console.log(info)
+    console.log(this.data.info.maincontactname)
     util.checkChange(info, this, app.globalData.department);
     util.intro(info, this)
     this.setData({

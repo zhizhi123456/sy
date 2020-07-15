@@ -2130,24 +2130,70 @@ const workList = (key, id, billname, bID) => {
         if (result && result.length) {
           let steps = key.data.steps,
             longlength = result.length + 1;
+            let i =longlength-1;
           result.forEach(res => {
             if (res.ApplyTime) {
               longlength--;
             }
+            if(res.state=="Green"){
+              var icon = "icon-lujing"
+              var color = "#22df72"
+            }
+            if(res.state=="Blue"){
+              var icon = "icon-chuli"
+              var color = "#57b8fa"
+            }
+            if(res.state=="Red"){
+              var icon = "icon-cuowu"
+              var color = "#d81e06"
+            }
+            if(res.state=="Black"){
+              var icon = "icon-circleyuanquan"
+              var color = "#707070"
+            }
+
             steps.push({
-              text: (res.state ? res.state : '') + ' ' + res.NewApplyStats,
-              desc: (res.ApplyTime ? (res.Curdealuser ? ('●处理人:' + res.Curdealuser) : '') : '') + ' ' + (res.ApplyTime ? res.ApplyTime.replace(/[ ]/g, "-") : '')
+              i:i--,
+              icon:icon,
+              state:res.state,
+              fcolor:color,
+              text: (res.state ? '' : res.state) + ' ' + res.NewApplyStats,
+              desc: (res.ApplyTime ? (res.Curdealuser ? ('●处理人:' + res.Curdealuser) : '') : '') ,
+              time: (res.ApplyTime ? res.ApplyTime.replace(/[ ]/g, "-") : '')
             })
             if (steps.length == result.length) {
               steps.push({
+                i:i--,
+                state:res.state,
                 text: res.NextApplyStats,
-                desc: ""
+                desc: "",
+                icon:icon,
+                fcolor:color,
               })
             }
+
+
+            // steps.push({
+            //   i:i--,
+            //   img:img,
+            //   state:res.state,
+            //   text: (res.state ? '' : res.state) + ' ' + res.NewApplyStats,
+            //   desc: (res.ApplyTime ? (res.Curdealuser ? ('●处理人:' + res.Curdealuser) : '') : '') + ' ' + (res.ApplyTime ? res.ApplyTime.replace(/[ ]/g, "-") : '')
+            // })
+            // if (steps.length == result.length) {
+            //   steps.push({
+            //     i:i--,
+            //     state:res.state,
+            //     text: res.NextApplyStats,
+            //     desc: ""
+            //   })
+            // }
           })
           // console.log(steps,longlength)
           // console.log(longlength)
           // console.log(steps.reverse())
+          // let arr = steps.reverse()
+          // let newArr = arr.slice(longlength,result.length + 1)
           key.setData({
             steps: steps.reverse(),
             actived: longlength == 1 ? 0 : longlength
@@ -2222,11 +2268,13 @@ const workList = (key, id, billname, bID) => {
           let steps = key.data.steps;
           result.forEach(res => {
             steps.push({
+              state:res.state,
               text: res.NewApplyStats,
               desc: ""
             })
             if (steps.length == result.length) {
               steps.push({
+                state:res.state,
                 text: res.NextApplyStats,
                 desc: ""
               })
@@ -2336,6 +2384,7 @@ const userdep = (user, key) => {
 // 工作流流转
 const Triggerflow = (key, direction, sheet, piece, id, cap, dep, dert, rid, tit, oa, speak, pic, file, dept) => {
   let userinfo = wx.getStorageSync("myInfo");
+  console.log(userinfo)
   var s
   console.log(dept)
   if (dept) {

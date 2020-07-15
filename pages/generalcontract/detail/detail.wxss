@@ -11,3 +11,53 @@
 .c_item .icon-shengou {
     margin-top: -10rpx;
 }
+/* .fix{
+    position: fixed;
+    bottom: 120rpx;
+    left: 200rpx;
+    
+    width:530rpx;
+    height:120rpx;
+    box-shadow:2rpx 2rpx 4rpx 4rpx #dbdada;
+}
+.fix_1{
+    margin-left: 20rpx;
+    margin-top: 20rpx;
+    background: red;
+    width: 80rpx;
+    height: 80rpx;
+    float: left;
+}
+.fix_2{
+    margin-left: 20rpx;
+    margin-top: 20rpx;
+    background: blue;
+    width: 80rpx;
+    height: 80rpx;
+    float: left;
+}
+.fix_3{
+    margin-left: 20rpx;
+    margin-top: 20rpx;
+    background: yellow;
+    width: 80rpx;
+    height: 80rpx;
+    float: left;
+}
+.fix_4{
+    margin-left: 20rpx;
+    margin-top: 20rpx;
+    background: green;
+    width: 80rpx;
+    height: 80rpx;
+    float: left;
+}
+.fix_5{
+    margin-left: 20rpx;
+    margin-top: 20rpx;
+    background: white;
+    border: 1px solid rgb(206, 201, 201);
+    width: 80rpx;
+    height: 80rpx;
+    float: left;
+} */

@@ -12,6 +12,7 @@ Page({
    */
   data: {
     count1:2,
+    shows:false,
     edit: false,
     info: {},
     steps: [],
@@ -263,6 +264,55 @@ Page({
     let info = util.defaultimg(e, this);
     this.setData({
       info
+    })
+  },
+  //标记
+  signs(e){
+    wx.showToast({
+      title: '标记成功',
+      icon: 'success',
+      duration: 1000
+    })
+    let info = this.data.info;
+    if(e.currentTarget.dataset.id==1){
+      info.signColor="red"
+    }
+    if(e.currentTarget.dataset.id==2){
+      info.signColor="blue"
+    }
+    if(e.currentTarget.dataset.id==3){
+      info.signColor="yellow"
+    }
+    if(e.currentTarget.dataset.id==4){
+      info.signColor="green"
+    }
+    if(info.sign==1 && e.currentTarget.dataset.id==5){
+      info.sign=""
+    }else{
+      info.sign=1
+    }
+    this.setData({
+      info,
+    })
+    util.checkChange(info, this, app.globalData.department);
+    util.intro(info, this)
+    this.setData({
+      info
+    })
+    updateiou(this.data.info).then(res => {
+      console.log(1111111)
+      console.log(res)
+  
+        util.OAreturn('iou')
+
+    })
+  },
+  //颜色展示
+  shows111(){
+    var that = this;
+    var sh = that.data.shows;
+    that.setData({
+      shows: !sh
     })
   },
 })

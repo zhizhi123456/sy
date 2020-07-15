@@ -13,6 +13,7 @@ Page({
    */
   data: {
     count1:2,
+    shows:false,
     edit: false,
     info: {},
     steps: [],
@@ -265,5 +266,53 @@ Page({
     } else {
       util.Triggerflow(this, 'next', 'applybuyform', 'apply', '', '', '', '', '', '', 'oa')
     }
+  },
+  //标记
+  signs(e){
+    wx.showToast({
+      title: '标记成功',
+      icon: 'success',
+      duration: 1000
+    })
+    let info = this.data.info;
+    if(e.currentTarget.dataset.id==1){
+      info.signColor="red"
+    }
+    if(e.currentTarget.dataset.id==2){
+      info.signColor="blue"
+    }
+    if(e.currentTarget.dataset.id==3){
+      info.signColor="yellow"
+    }
+    if(e.currentTarget.dataset.id==4){
+      info.signColor="green"
+    }
+    if(info.sign==1 && e.currentTarget.dataset.id==5){
+      info.sign=""
+    }else{
+      info.sign=1
+    }
+    this.setData({
+      info,
+    })
+    util.checkChange(info, this, app.globalData.department);
+    util.intro(info, this)
+    this.setData({
+      info
+    })
+    updateapply(this.data.info).then(res => {
+      console.log(res)
+   
+        util.OAreturn('apply')
+
+    })
+  },
+  //颜色展示
+  shows111(){
+    var that = this;
+    var sh = that.data.shows;
+    that.setData({
+      shows: !sh
+    })
   },
 })

@@ -14,6 +14,7 @@ Page({
    */
   data: {
     count1:2,
+    shows:false,
     edit: false,
     info: {},
     steps: [],
@@ -39,7 +40,6 @@ Page({
     //   util.OAreturn('overtime');
     // }
     //wx.navigateBack()
-
     // if(this.data.a==1){      
     //   wx.navigateBack()
     // }else{
@@ -305,6 +305,52 @@ Page({
         url: '/OAmoudle/pages/overtime/detail/detail?history=5&id=' + JSON.parse(e.currentTarget.dataset.i).ID
       })
     }
+  },
+
+
+   //标记
+   signs(e){
+    wx.showToast({
+      title: '标记成功',
+      icon: 'success',
+      duration: 1000
+    })
+    let info = this.data.info;
+    if(e.currentTarget.dataset.id==1){
+      info.signColor="red"
+    }
+    if(e.currentTarget.dataset.id==2){
+      info.signColor="blue"
+    }
+    if(e.currentTarget.dataset.id==3){
+      info.signColor="yellow"
+    }
+    if(e.currentTarget.dataset.id==4){
+      info.signColor="green"
+    }
+    if(info.sign==1 && e.currentTarget.dataset.id==5){
+      info.sign=""
+    }else{
+      info.sign=1
+    }
+    this.setData({
+      info,
+    })
+    util.checkChange(info, this, app.globalData.department);
+    this.setData({
+      info
+    })
+    amendOvertime(this.data.info).then(res => {
+        util.OAreturn('overtime')
+    })
+  },
+  //颜色展示
+  shows111(){
+    var that = this;
+    var sh = that.data.shows;
+    that.setData({
+      shows: !sh
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

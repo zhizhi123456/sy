@@ -109,7 +109,9 @@
             <van-tag class="LThint" round type="danger" size="large" wx:if="{{(item.ApplygetNew&&applyT)}}">
                 new
             </van-tag>
+            <view class="signss" wx:if="{{item.sign==1?true:false}}" style="background:{{item.signColor}}"></view>
             <navigator open-type="navigate" url="/OAmoudle/pages/invoice/detail/detail?id={{item.ID}}&count={{count}}" hover-class="none">
+
                 <!-- <view>
                     <text class="caption">{{item.invoicename}}</text>
                 </view> -->
