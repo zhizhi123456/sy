@@ -139,10 +139,7 @@
     "pages/corps/section2",
     "pages/design/pact/pact",
     "pages/design/new/new",
-    "pages/design/detail/detail",
-    "pages/bid/pact/pact",
-    "pages/bid/new/new",
-    "pages/bid/detail/detail"
+    "pages/design/detail/detail"
   ],
   "subpackages": [{
     "root": "OAmoudle",
@@ -274,7 +271,10 @@
       "pages/checkMenu/pact/pact",
       "pages/checkMenu/detail/detail",
       "pages/checkMenu/new/new",
-      "pages/controlMenu/pact/pact"
+      "pages/controlMenu/pact/pact",
+      "pages/bid/pact/pact",
+      "pages/bid/new/new",
+      "pages/bid/detail/detail"
     ]
   }],
   "preloadRule": {

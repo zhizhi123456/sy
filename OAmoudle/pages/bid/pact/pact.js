@@ -2,9 +2,9 @@
 import {
   querybid,
   qgroupbid
-} from '../../../service/getData.js';
+} from '../../../../service/getData.js';
 var app = getApp();
-var util = require("../../../utils/util");
+var util = require("../../../../utils/util");
 let userinfo = wx.getStorageSync("myInfo");
 let item, list;
 Page({

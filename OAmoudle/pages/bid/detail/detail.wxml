@@ -121,7 +121,7 @@
             <text>退回</text>
         </view>
         <view wx:if="{{!info.formid}}">
-            <navigator open-type="redirect" url="/pages/bid/new/new?id={{info.ID}}" hover-class="none">
+            <navigator open-type="redirect" url="/OAmoudle/pages/bid/new/new?id={{info.ID}}" hover-class="none">
                 <icon class="iconfont icon-bianji"></icon>
                 <text>编辑</text>
             </navigator>
