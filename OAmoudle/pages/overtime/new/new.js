@@ -13,6 +13,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    a:1,
     info: {
       API_Picurl: [],
     },
@@ -286,8 +287,8 @@ Page({
       let info = this.data.info;
       util.checkContent(info, this);
       this.setData({
-        info,
-        'info.ApplygetNew':true
+        info
+        //'info.ApplygetNew':true
       })
       addOvertime(this.data.info).then(res => {
         // console.log(res)
@@ -333,7 +334,7 @@ Page({
           duration: 3000
         })
         util.ModifyRecord(this.data.information, "workovertime")
-        util.OAreturn('overtime', this);
+        util.OAreturn('overtime', this,2,this.data.a,this.data.b);
       }
     })
   },
@@ -343,6 +344,8 @@ Page({
   onLoad: function (options) {
     user = wx.getStorageSync("myInfo");
     this.setData({
+      b:options.a,
+      a:options.count1,
       sections: app.globalData.getdept,
       firms: app.globalData.Companytitle,
       sections: app.globalData.moredep,

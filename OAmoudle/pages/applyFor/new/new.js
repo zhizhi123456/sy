@@ -482,8 +482,8 @@ Page({
           util.checkContent(info, this);
           util.intro(info, this)
           this.setData({
-            info,
-            'info.ApplygetNew':true
+            info
+            //'info.ApplygetNew':true
           })
           // if (this.data.materials[0]) {
           addapplyFor(this.data.info).then(res => {
@@ -589,7 +589,7 @@ Page({
           duration: 3000
         })
         util.ModifyRecord(this.data.information, "applyform")
-        util.OAreturn('applyFor', this);
+        util.OAreturn('applyFor', this,2,this.data.a,this.data.b);
       }
     })
   },
@@ -746,6 +746,8 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
+      b:options.a,
+      a:options.count1,
       section1: app.globalData.Principal,
       section2: app.globalData.Companytitle,
       section3: app.globalData.department,

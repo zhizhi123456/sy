@@ -35,6 +35,7 @@ Page({
     }
   },
   return () {
+    
     util.returnMenu(1002);
   },
   /**
@@ -44,7 +45,6 @@ Page({
     if (options.source) {
       wx.setStorageSync('carte', options)
     }
-    console.log(options)
     wx.showLoading({
       title: '加载中',
     });

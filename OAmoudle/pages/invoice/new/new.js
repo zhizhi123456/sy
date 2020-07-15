@@ -322,8 +322,8 @@ Page({
       let info = this.data.info;
       util.checkContent(info, this);
       this.setData({
-        info,
-        'info.ApplygetNew':true
+        info
+        //'info.ApplygetNew':true
       })
       addInvoice(this.data.info).then(res => {
         // console.log(res)
@@ -371,7 +371,7 @@ Page({
           duration: 3000
         })
         util.ModifyRecord(this.data.information, "invoice")
-        util.OAreturn('invoice', this);
+        util.OAreturn('invoice', this,2,this.data.a,this.data.b);
       }
     })
   },
@@ -380,6 +380,8 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
+      b:options.a,
+      a:options.count1,
       firms: app.globalData.Companytitle,
       sections: app.globalData.department,
       Invoicetype: app.globalData.Invoicetype,

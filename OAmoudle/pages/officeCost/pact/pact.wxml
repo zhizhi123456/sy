@@ -95,13 +95,13 @@
     </view>
     <view class="main">
         <view class="list" wx:for="{{InfoList}}" wx:key="{{index}}">
-            <van-tag class="linkLThint" round type="danger" size="large" wx:if="{{(item.ApplygetNew&&item.ApplygetNew!=' ')&&applyT&&(index>1)}}" bindtap="findnew" data-index="{{index}}">
+            <van-tag class="linkLThint" round type="danger" size="large" wx:if="{{item.ApplygetNew&&applyT&&(index>1)}}" bindtap="findnew" data-index="{{index}}">
                 ↓↓
             </van-tag>
             <van-tag class="LThint" round type="danger" size="large" wx:if="{{(item.ApplygetNew&&applyT)}}">
                 new
             </van-tag>
-            <navigator open-type="navigate" url="/OAmoudle/pages/officeCost/detail/detail?id={{item.ID}}&applyT={{applyT}}&new={{item.ApplygetNew}}&status={{status}}&count={{count}}" hover-class="none">
+            <navigator open-type="navigate" url="/OAmoudle/pages/officeCost/detail/detail?id={{item.ID}}&count={{count}}" hover-class="none">
                 <!-- <view>
                     <text class="caption">{{item.verifysubprocode}}</text>
                 </view> -->

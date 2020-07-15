@@ -12,6 +12,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    count1:2,
     edit: false,
     info: {},
     steps: [],
@@ -50,10 +51,21 @@ Page({
     // } else {
     //   util.OAreturn('applyFor');
     // }
-    if(this.data.a==1){      
-      wx.navigateBack()
-    }else{
+    if(this.data.a==0){
       util.OAreturn('applyFor');
+    }
+    if(this.data.a==1){
+      wx.navigateBack({
+        delta:2
+      })  
+    }
+    if(this.data.c==2 && this.data.b==0){
+      util.OAreturn('applyFor');
+    }
+    if(this.data.c==2 && this.data.b==1){
+      wx.navigateBack({
+        delta:2
+      })
     }
     //wx.navigateBack()
   },
@@ -70,11 +82,15 @@ Page({
     console.log(22222)
     console.log(options)
     this.setData({
-      status:options.status
+      count:options.id,
+      a:options.count,
+      c:options.caption,
+      b:options.dep
+      //status:options.status
     })
-    if(this.data.status==1){
-      this.data.info.ApplygetNew=false
-    }
+    // if(this.data.status==1){
+    //   this.data.info.ApplygetNew=false
+    // }
     if (options.table) {
       this.setData({
         table: options.table

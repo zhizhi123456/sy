@@ -11,6 +11,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    count1:2,
     edit: false,
     info: {},
     steps: [],
@@ -35,10 +36,21 @@ Page({
     // } else {
     //   util.OAreturn('invoice');
     // }
-    if(this.data.a==1){      
-      wx.navigateBack()
-    }else{
+    if(this.data.a==0){
       util.OAreturn('invoice');
+    }
+    if(this.data.a==1){
+      wx.navigateBack({
+        delta:2
+      })  
+    }
+    if(this.data.c==2 && this.data.b==0){
+      util.OAreturn('invoice');
+    }
+    if(this.data.c==2 && this.data.b==1){
+      wx.navigateBack({
+        delta:2
+      })
     }
     //wx.navigateBack()
   },
@@ -51,11 +63,13 @@ Page({
     this.setData({
       count:options.id,
       a:options.count,
-      status:options.status
+      c:options.caption,
+      b:options.dep
+      //status:options.status
     })
-    if(this.data.status==1){
-      this.data.info.ApplygetNew=false
-    }
+    // if(this.data.status==1){
+    //   this.data.info.ApplygetNew=false
+    // }
     wx.showLoading({
       title: '加载中',
     });

@@ -225,8 +225,8 @@ Page({
       let info = this.data.info;
       util.checkContent(info, this);
       this.setData({
-        info,
-        'info.ApplygetNew':true
+        info
+        //'info.ApplygetNew':true
       })
       addChapter(this.data.info).then(res => {
         // console.log(res)
@@ -272,7 +272,7 @@ Page({
           duration: 3000
         })
         util.ModifyRecord(this.data.information, "usesealform")
-        util.OAreturn('chapter', this);
+        util.OAreturn('chapter', this,2,this.data.a,this.data.b);
       }
     })
   },
@@ -281,6 +281,8 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
+      b:options.a,
+      a:options.count1,
       firms: app.globalData.Companytitle,
       sections: app.globalData.department,
       Usesealtype: app.globalData.Usesealtype

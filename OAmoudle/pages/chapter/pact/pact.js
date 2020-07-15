@@ -15,6 +15,7 @@ Page({
    */
   data: {
     seach: '',
+    count:0,
     loading: false,
     top: '用章',
     currentDate: new Date().getTime(),
@@ -40,7 +41,8 @@ Page({
     let that = this;
     var inputSearch = event.detail.value;
     that.setData({
-    seach: inputSearch
+    seach: inputSearch,
+    count:1
     })
   },
   // 模糊查询
@@ -73,14 +75,14 @@ Page({
   onLoad: function (options) {
     console.log(33333)
     console.log(options)
-    this.setData({
-      status:options.status
-    })
-    if(this.data.status==1){
-      this.data.info.ApplygetNew=true
-    }else{
-      this.data.info.ApplygetNew=false
-    }
+    // this.setData({
+    //   status:options.status
+    // })
+    // if(this.data.status==1){
+    //   this.data.info.ApplygetNew=true
+    // }else{
+    //   this.data.info.ApplygetNew=false
+    // }
     userinfo = wx.getStorageSync("myInfo");
     if (options.id || options.rid) {
       wx.setStorageSync('menus', options)

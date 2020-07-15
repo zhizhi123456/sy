@@ -29,7 +29,8 @@ Page({
     deng: '',
     dephot: false,
     news: false,
-    back: false
+    back: false,
+    ApplygetNew:false
   },
   deal() {
     // 请求一级菜单
@@ -319,6 +320,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(11111111)
+    console.log(options)
     //////console.log(options)
     console.log(app.globalData.GetRoles)
     userinfo = wx.getStorageSync("myInfo");

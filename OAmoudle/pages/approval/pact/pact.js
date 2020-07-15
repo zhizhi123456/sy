@@ -11,6 +11,7 @@ Page({
    */
   data: {
     seach: '',
+    count:0,
     loading: false,
     show: false,
     show_time: false,
@@ -45,7 +46,8 @@ Page({
     let that = this;
     var inputSearch = event.detail.value;
     that.setData({
-    seach: inputSearch
+    seach: inputSearch,
+    count:1
     })
   },
   // 模糊查询

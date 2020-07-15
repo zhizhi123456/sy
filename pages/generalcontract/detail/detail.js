@@ -40,9 +40,23 @@ Page({
 
     // }
     
-    if(this.data.a==1){      
-      wx.navigateBack()
-    }else{
+    // if(this.data.a==1){   
+    //   wx.navigateBack()
+    // }else{
+    //   util.Oreturn('generalcontract');
+    // }
+
+    if(this.data.a==1){
+        wx.navigateBack({
+          delta:2
+        })    
+    }
+     if(this.data.c==1 && this.data.status==2){
+      wx.navigateBack({
+        delta:2
+      })
+    }
+    if(this.data.c==0 && this.data.status==2){
       util.Oreturn('generalcontract');
     }
     
@@ -58,8 +72,11 @@ Page({
     console.log(options)
     this.setData({
       count:options.id,
-      a:options.count
+      a:options.count,
+      status:options.userid,
+      c:options.caption
     })
+    
     if (options.tab) {
       this.setData({
         tab: options.tab

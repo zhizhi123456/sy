@@ -174,7 +174,7 @@
             <text>退回</text>
         </view>
         <view wx:if="{{AudiEdit}}">
-            <navigator open-type="navigate" url="/OAmoudle/pages/applyFor/new/new?id={{info.ID}}" hover-class="none">
+            <navigator open-type="navigate" url="/OAmoudle/pages/applyFor/new/new?id={{info.ID}}&count1={{count1}}&a={{a}}" hover-class="none">
                 <icon class="iconfont icon-bianji"></icon>
                 <text>编辑</text>
             </navigator>

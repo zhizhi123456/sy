@@ -262,8 +262,8 @@ Page({
       util.checkContent(info, this);
       util.intro(info, this)
       this.setData({
-        info,
-        'info.ApplygetNew':true
+        info
+        //'info.ApplygetNew':true
       })
       addofficeCost(this.data.info).then(res => {
         console.log(res)
@@ -310,7 +310,7 @@ Page({
           duration: 3000
         })
         util.ModifyRecord(this.data.information, "OfficeCharge")
-        util.OAreturn('officeCost', this)
+        util.OAreturn('officeCost', this,2,this.data.a,this.data.b)
       }
     })
   },
@@ -319,6 +319,8 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
+      b:options.a,
+      a:options.count1,
       nature: app.globalData.Companytitle,
       sections: app.globalData.department,
       section1: app.globalData.Principal,

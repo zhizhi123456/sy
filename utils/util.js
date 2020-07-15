@@ -2060,9 +2060,14 @@ const preview = (key, e) => {
 }
 // 图片加载失败时显示的默认图片
 const defaultimg = (e, key) => {
+  console.log("55555555555555555555555")
   let i = e.currentTarget.dataset.index,
     info = key.data.info;
   info.API_Picurl[i] = "/img/default-pic.png";
+  console.log("aaaaaaaaaaaaaaaa")
+  console.log(info);
+
+
   return info;
 }
 //返回菜单页面
@@ -2070,11 +2075,12 @@ const defaultimg = (e, key) => {
 // 1001  项目合同
 // 1002  我的
 const returnMenu = (id) => {
+  console.log(id)
   let carte = wx.getStorageSync('carte');
   if (carte) {
     if (carte.source == 'index') {
       wx.reLaunch({
-        url: `/pages/contracts/contracts?grading=${carte.num}&title=${carte.mtitle}`
+        url: `/pages/contracts/contracts?grading=${carte.num}&title=${carte.mtitle}&id=${id}`
       })
     }
   }

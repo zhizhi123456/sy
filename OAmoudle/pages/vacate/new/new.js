@@ -16,6 +16,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    a:1,
     info: {
       API_Picurl: [],
     },
@@ -387,7 +388,7 @@ Page({
           duration: 3000
         })
         util.ModifyRecord(this.data.information, "leaveapplyform")
-        util.OAreturn('vacate', this);
+        util.OAreturn('vacate', this,2,this.data.a,this.data.b);
       }
     })
   },
@@ -395,7 +396,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     this.setData({
+      b:options.a,
+      a:options.count1,
       firms: app.globalData.Companytitle,
       sections: app.globalData.moredep,
       Leavetypelist: app.globalData.Leavetypelist,

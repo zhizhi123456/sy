@@ -97,14 +97,14 @@ Page({
   onLoad: function (options) {
     console.log(33333)
     console.log(options)
-    this.setData({
-      status:options.status
-    })
-    if(this.data.status==1){
-      this.data.info.ApplygetNew=true
-    }else{
-      this.data.info.ApplygetNew=false
-    }
+    // this.setData({
+    //   status:options.status
+    // })
+    // if(this.data.status==1){
+    //   this.data.info.ApplygetNew=true
+    // }else{
+    //   this.data.info.ApplygetNew=false
+    // }
     userinfo = wx.getStorageSync("myInfo");
     console.log(options)
     if (options.source) {

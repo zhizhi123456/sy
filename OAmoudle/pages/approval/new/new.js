@@ -19,6 +19,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    a:1,
     info: {
       payapproveformname: "",
       department: '',
@@ -451,7 +452,7 @@ Page({
           duration: 3000
         })
         util.ModifyRecord(this.data.information, "payapproval")
-        util.OAreturn('approval', this);
+        util.OAreturn('approval', this,2,this.data.a,this.data.b);
       }
     })
   },
@@ -636,6 +637,8 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
+      b:options.a,
+      a:options.count1,
       section4: app.globalData.MainProject1,
       section6: app.globalData.PayType,
       sections: app.globalData.department,

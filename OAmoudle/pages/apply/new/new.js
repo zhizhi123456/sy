@@ -433,8 +433,8 @@ Page({
           util.checkContent(info, this);
           util.intro(info, this)
           this.setData({
-            info,
-            'info.ApplygetNew':true
+            info
+            //'info.ApplygetNew':true
           })
           // if (this.data.materials[0]) {
           addapply(this.data.info).then(res => {
@@ -698,7 +698,7 @@ Page({
             duration: 3000
           })
           util.ModifyRecord(this.data.information, "applybuyform")
-          util.OAreturn('apply', this);
+          util.OAreturn('apply', this,2,this.data.a,this.data.b);
         }
       })
     }
@@ -931,6 +931,8 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
+      b:options.a,
+      a:options.count1,
       section2: app.globalData.MainProject1,
       sections: app.globalData.department,
       section7: app.globalData.UnitType,

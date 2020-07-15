@@ -341,7 +341,8 @@ Page({
           duration: 3000
         })
         util.ModifyRecord(this.data.information, "maincontact")
-        util.returnPrev('generalcontract', this)
+        //util.returnPrev('generalcontract', this)
+        util.returnPrev('generalcontract', this,2,this.data.a)
       }
     })
   },
@@ -356,7 +357,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     this.setData({
+      a:options.count,
       sections: app.globalData.department,
       firms: app.globalData.Companytitle,
       totals: app.globalData.MainProject,
@@ -370,6 +373,7 @@ Page({
         this.setData({
           section22: bidlist
         })
+        console.log('这是section22呀')
         console.log(this.data.section22)
       } else {
         this.setData({

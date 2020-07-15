@@ -12,6 +12,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    count1:2,
     edit: false,
     info: {},
     steps: [],
@@ -45,12 +46,33 @@ Page({
     //   util.OAreturn('vacate');
     // }
     //wx.navigateBack()
-    if(this.data.a==1){      
-      wx.navigateBack()
-    }else{
+
+    // if(this.data.a==1){      
+    //   wx.navigateBack()
+    // }else{
+    //   util.OAreturn('vacate');
+    // }
+
+    if(this.data.a==0){
+      util.OAreturn('vacate');   
+    }
+    if(this.data.a==1){
+      wx.navigateBack({
+        delta:2
+      })  
+    }
+    if(this.data.c==2 && this.data.b==0){
       util.OAreturn('vacate');
     }
+    if(this.data.c==2 && this.data.b==1){
+      wx.navigateBack({
+        delta:2
+      })
+    }
+    
+    
   },
+  
 
   /**
    * 生命周期函数--监听页面加载
@@ -61,7 +83,9 @@ Page({
     this.setData({
       count:options.id,
       a:options.count,
-      status:options.status
+      status:options.status,
+      c:options.caption,
+      b:options.dep
     })
     if(this.data.status==1){
       this.data.info.ApplygetNew=false
@@ -109,7 +133,7 @@ Page({
           if (this.data.applyT && this.data.info.ApplygetNew) {
             let info = this.data.info;
             info.ApplygetNew = false;
-            util.checkContent(info, this);
+            //util.checkContent(info, this);
             this.setData({
               info
             })

@@ -47,7 +47,7 @@
   <view class="tabarcontent">
     <view class="tabar">
       <view class="{{'box'+ (num==item.ID?' active':'')}}" wx:for="{{tags}}" wx:key='index' catchtap="change" data-change="{{item.ID}}">
-        <van-tag wx:if="{{item.ID==2091&&(TaskTNUm||applyNUM)}}" round type="danger" class="HINT">
+        <van-tag wx:if="{{(item.ID==2091&&(TaskTNUm||applyNUM))}}" round type="danger" class="HINT">
           new
         </van-tag>
         <icon class="{{'tab iconfont '+ item.icon+(num==item.ID?' active':'') }}"></icon>

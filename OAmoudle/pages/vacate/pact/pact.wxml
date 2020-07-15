@@ -99,7 +99,7 @@
             <van-tag class="LThint" round type="danger" size="large" wx:if="{{(item.ApplygetNew&&item.ApplygetNew!=' ')&&applyT}}">
                 new
             </van-tag>
-            <navigator open-type="navigate" url="/OAmoudle/pages/vacate/detail/detail?id={{item.ID}}&applyT={{applyT}}&new={{item.ApplygetNew}}&status={{status}}&count={{count}}" hover-class="none">
+            <navigator open-type="navigate" url="/OAmoudle/pages/vacate/detail/detail?id={{item.ID}}&count={{count}}" hover-class="none">
                 <view id="{{'new'+index}}">
                     <text class="caption">{{item.leavetype}}</text>
                 </view>
