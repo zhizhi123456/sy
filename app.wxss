@@ -427,7 +427,7 @@
 }
 
 .footer view {
-    padding: 0 50rpx;
+    padding: 0 30rpx;
 }
 
 .footer .iconfont {

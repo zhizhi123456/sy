@@ -201,7 +201,7 @@
                 <text>编辑</text>
             </navigator>
         </view>
-        <view bindtap="putin" wx:if="{{AudiEdit}}">
+        <view bindtap="putin" data-id="{{info.departmentId}}" wx:if="{{AudiEdit}}">
             <icon class="iconfont icon-tijiao"></icon>
             <text>{{msg}}</text>
         </view>

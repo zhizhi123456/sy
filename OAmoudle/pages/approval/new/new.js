@@ -336,11 +336,13 @@ Page({
           })
           // if (this.data.materials[0]) {
           addapproval(this.data.info).then(res => {
+           
             if (res.code == 10000) {
               return queryapproval()
             }
           }).then(res => {
-            // console.log(res)
+            // console.log('---------------',res)
+            // console.log('---------------res.code:',res.code)
             if (res.code == 10000) {
               let billlist = res.List;
               let id = billlist[billlist.length - 1].ID

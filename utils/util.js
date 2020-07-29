@@ -1299,6 +1299,7 @@ const listData = (data, dep, page, list, key, billname) => {
         value.Department = depart.text
       }
     })
+    
     //公司
     app.globalData.Companytitle.forEach(res => {
       if (value.Companytitle == res.value) {
@@ -2406,10 +2407,11 @@ const Triggerflow = (key, direction, sheet, piece, id, cap, dep, dert, rid, tit,
       formName: sheet,
       ApprovalOpinion: speak,
       API_Picurl: pic,
-      API_Fileurl: file,
+      API_Fileurl: file
+      
     }
   }
-  console.log(s)
+ 
   if (userinfo) {
     flow(
       s
@@ -2617,7 +2619,7 @@ const defaultimgs = (e, key, img) => {
 // 是否
 
 const whether = (content) => {
-  console.log(content)
+  //console.log(content)
   if (content == "是") {
     var c = true
     return c
@@ -3350,7 +3352,7 @@ const qgroupdeliver = (funcname, that, hadNew, hadMy, fun) => {
           Timestamp: app.globalData.time,
           ...that.data.info
         }
-        console.log(infodata)
+        //console.log(infodata)
         funcname(
           infodata
         ).then(res => {

@@ -50,10 +50,13 @@ Page({
     wx.showLoading({
       title: '加载中',
     });
-    if(this.data.seach){
+   
+    if(this.data.seach.length>0){
      this.setData({
        'info.leavereason':this.data.seach
      })
+    }else{
+      this.data.seach = ''
     }
     groupVacate(this.data.info).then(res => {
       if (res.code == 10000) {
@@ -68,7 +71,7 @@ Page({
     })
   },
   changeItem(e) {
-    console.log(e)
+    //console.log(e)
     let StateStr = (this.data.pact[e.detail].text).slice(0, 3);
     let info = this.data.info;
     info = {}
@@ -83,8 +86,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (option) {
-    console.log(33333)
-    console.log(option)
+    // console.log(33333)
+    // console.log(option)
     this.setData({
       status:option.status
     })

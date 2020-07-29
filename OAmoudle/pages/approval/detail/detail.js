@@ -61,21 +61,16 @@ Page({
     // } else {
     //   util.OAreturn('approval');
     // }
-    if(this.data.a==0){
-      util.OAreturn('approval');
-    }
     if(this.data.a==1){
       wx.navigateBack({
-        delta:2
+        delta:1
       })  
-    }
-    if(this.data.c==2 && this.data.b==0){
-      util.OAreturn('approval');
-    }
-    if(this.data.c==2 && this.data.b==1){
+    }else if(this.data.c==2 && this.data.b==1){
       wx.navigateBack({
         delta:2
       })
+    }else{
+      util.OAreturn('approval');
     }
     //wx.navigateBack()
   },
@@ -89,8 +84,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(22222)
-    console.log(options)
+    // console.log(22222)
+    // console.log(options)
     this.setData({
       count:options.id,
       a:options.count,
@@ -121,7 +116,7 @@ Page({
       detailapproval({
         ID: options.id
       }).then(res => {
-        console.log(res)
+        console.log('++++++++++++++++++++++',app.globalData.department)
         if (res.code == 10000) {
           var history = wx.getStorageSync("history")
           console.log(history)
@@ -292,15 +287,23 @@ Page({
     }
   },
   // 审核通过
-  putin() {
-    console.log("1")
-    console.log(this.data.info.formid)
+  putin(e) {
+    
+    var dep = e.currentTarget.dataset.id;
+    
+    for(let i=0;i<app.globalData.department.length;i++){
+      
+      if(app.globalData.department[i].text == dep){
+        var depname = app.globalData.department[i].value
+      }
+    }
+   
     if (this.data.info.formid) {
       this.setData({
         show: true
       })
     } else {
-      util.Triggerflow(this, 'next', 'payapproval', 'approval', '', '', '', '', '', '', 'oa')
+      util.Triggerflow(this, 'next', 'payapproval', 'approval', '', '', '', '', '', '', 'oa','','','',depname)
     }
   },
   // 点击图片放大预览

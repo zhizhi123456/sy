@@ -52,21 +52,16 @@ Page({
     // } else {
     //   util.OAreturn('applyFor');
     // }
-    if(this.data.a==0){
-      util.OAreturn('applyFor');
-    }
     if(this.data.a==1){
       wx.navigateBack({
-        delta:2
+        delta:1
       })  
-    }
-    if(this.data.c==2 && this.data.b==0){
-      util.OAreturn('applyFor');
-    }
-    if(this.data.c==2 && this.data.b==1){
+    }else if(this.data.c==2 && this.data.b==1){
       wx.navigateBack({
         delta:2
       })
+    }else{
+      util.OAreturn('applyFor');
     }
     //wx.navigateBack()
   },

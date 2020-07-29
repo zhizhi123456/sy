@@ -43,6 +43,7 @@ Page({
     }
   },
   setSeach: function (event) {
+    console.log('----------',event);
     let that = this;
     var inputSearch = event.detail.value;
     that.setData({
@@ -52,12 +53,16 @@ Page({
   },
   // 模糊查询
   seachInfo() {
-    if (this.data.seach) {
+    console.log(this.data.seach.length)
+    if (this.data.seach.length>0) {
+
       var info = this.data.info
       info.payapproveformname = this.data.seach
       this.setData({
         info
       })
+    }else{
+      this.data.info.payapproveformname = ''
     }
 
     qgroupapproval(this.data.info).then(res => {
